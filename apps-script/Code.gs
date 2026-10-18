@@ -142,7 +142,7 @@ function chamar_(tipo, p) {
       try {
         const texto = s.tipo === 'gemini' ? gemini_(chave, modelo, p) : openai_(s.url, chave, modelo, p);
         registrar_(tipo, nome, modelo, true, Date.now() - t0);
-        return { texto: texto, provedor: nome + ':' + modelo };
+        return { texto: String(texto).replace(/[\u2010\u2011]/g, '-').replace(/\u202f/g, ' '), provedor: nome + ':' + modelo };
       } catch (err) {
         const msg = String(err && err.message || err);
         registrar_(tipo, nome, modelo, false, Date.now() - t0, msg);
