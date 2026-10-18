@@ -98,7 +98,8 @@ const ROTAS = {
   redacao:  ['gemini', 'github', 'groq', 'geminiLeve'],
   pronunciaTexto: ['groq', 'geminiLeve', 'github', 'gemini'],
   conversa:       ['groq', 'geminiLeve', 'github', 'gemini'],
-  conversaResumo: ['groq', 'geminiLeve', 'github', 'gemini']
+  conversaResumo: ['groq', 'geminiLeve', 'github', 'gemini'],
+  revisao:        ['groq', 'geminiLeve', 'github', 'gemini']
 };
 const IDIOMA = { en: 'inglês', fr: 'francês' };
 
@@ -111,6 +112,7 @@ function ia_(tipo, d) {
   if (tipo === 'pronuncia') return pronuncia_(d);
   if (tipo === 'conversa') return conversa_(d);
   if (tipo === 'conversaResumo') return conversaResumo_(d);
+  if (tipo === 'revisao') return revisao_(d);
   if (!ROTAS[tipo]) throw new Error('tipo');
   const idioma = IDIOMA[d.idioma] || 'inglês';
   let p;
@@ -394,6 +396,34 @@ function conversaResumo_(d) {
     erros: (o.erros || []).slice(0, 5).filter(function (e) { return e && e.voce && e.melhor; }).map(function (e) { return [String(e.voce), String(e.melhor), String(e.explicacao || '')]; }),
     palavras: (o.palavras || []).slice(0, 6).filter(function (w) { return w && w.palavra; }).map(function (w) { return [String(w.palavra), String(w.traducao || '')]; }),
     provedor: r.provedor };
+}
+
+
+/* =====================================================================
+ * Revisão personalizada: exercícios novos sobre os erros da pessoa.
+ * ===================================================================== */
+function revisao_(d) {
+  const lang = d.idioma === 'fr' ? 'fr' : 'en', idioma = IDIOMA[lang];
+  const erros = (Array.isArray(d.erros) ? d.erros : []).slice(0, 8);
+  if (!erros.length) return { exercicios: [] };
+  const lista = erros.map(function (e, i) { return i + ') [' + (e.fonte || 'licao') + '] ' + (e.frase ? 'frase: ' + String(e.frase).slice(0, 200) + ' | ' : '') + 'certo: ' + String(e.correta || '').slice(0, 200) + (e.dada ? ' | o aluno respondeu: ' + String(e.dada).slice(0, 200) : '') + (e.nota ? ' | obs: ' + String(e.nota).slice(0, 120) : ''); }).join('\n');
+  const sistema = 'Você é o Eco, professor de ' + idioma + ' para brasileiros, nível ' + (d.nivel || 'A1') + '. A partir dos erros do aluno, crie exercícios NOVOS (não copie as frases) que treinem exatamente o mesmo ponto. ' +
+    'Responda SOMENTE com JSON: {"exercicios": [ ... ]}, com 8 itens, cada um num destes formatos:\n' +
+    '{"tipo": "escolha", "ref": número do erro que ele treina, "enunciado": "instrução curta em português (ex.: Complete a frase)", "frase": "frase no idioma, com ___ no lugar da resposta quando for completar", "opcoes": ["a", "b", "c"], "correta": índice 0, 1 ou 2, "pt": false}\n' +
+    '{"tipo": "escolha", "ref": n, "enunciado": "Como se diz isto?", "frase": "frase em português", "opcoes": ["três opções no idioma"], "correta": índice, "pt": true}\n' +
+    '{"tipo": "montar", "ref": n, "frase": "frase curta no idioma (4 a 10 palavras)", "traducao": "tradução natural em português"}\n' +
+    'Use 6 do tipo escolha (variando o formato e a posição da certa) e 2 do tipo montar. Só UMA opção pode estar certa; as erradas devem ser plausíveis. Tudo 100% correto no idioma.';
+  const r = chamar_('revisao', { sistema: sistema, usuario: 'Erros do aluno:\n' + lista, json: true });
+  const o = jsonDe_(r.texto);
+  const ex = (Array.isArray(o.exercicios) ? o.exercicios : []).map(function (x) {
+    const ref = Math.max(0, Math.min(erros.length - 1, Number(x.ref) || 0));
+    if (x.tipo === 'montar') return x.frase && x.traducao ? { tipo: 'montar', ref: ref, frase: String(x.frase).slice(0, 200), traducao: String(x.traducao).slice(0, 200) } : null;
+    const op = (Array.isArray(x.opcoes) ? x.opcoes : []).map(String).filter(function (v, i, a) { return v && a.indexOf(v) === i; }).slice(0, 4);
+    const c = Number(x.correta);
+    if (op.length < 2 || !(c >= 0 && c < op.length)) return null;
+    return { tipo: 'escolha', ref: ref, enunciado: String(x.enunciado || 'Escolha a opção certa').slice(0, 120), frase: String(x.frase || '').slice(0, 250), opcoes: op, correta: c, pt: !!x.pt };
+  }).filter(Boolean);
+  return { exercicios: ex, provedor: r.provedor };
 }
 
 /* ---------- uso por dia (aba "Uso") ---------- */
