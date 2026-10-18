@@ -24,6 +24,12 @@ Textos do app e conversas com o usuário: português do Brasil, linguagem simple
   - `elevenlabs/` — script PowerShell que gera o áudio no PC do usuário (a chave fica em `chave.txt` no PC; nunca pedir).
 - Kits de conteúdo e áudio ficam no PC: `Downloads\APP - IDIOMAS\` (kit-a2…kit-c1, audio-curso\elevenlabs).
 
+## Montar e publicar
+- Na raiz do repositório: `sh fonte/montar.sh` (python3 + Pillow + node). Gera `index.html` e `sw.js` a partir de `fonte/`.
+- Mudanças no app = mudar arquivos em `fonte/` (nunca só o `index.html`), rodar o montar, testar e dar `git push` na `main`.
+  O GitHub Pages publica o site e o workflow publica o Apps Script sozinhos.
+- Se um design novo quebrar um encaixe, o build para com AssertionError mostrando o trecho: ajustar o `rep(...)` em `fonte/src/build-app.py`.
+
 ## Fluxos
 - Conteúdo novo: GPT escreve (3 unidades por vez) → Gemini revisa → conferir formato → manifest → áudio no PC
   (ElevenLabs eleven_v4_turbo, mp3_24000_48; vozes em `fonte/elevenlabs/config.json`; Claire/Inès/Lucas/Antoine no

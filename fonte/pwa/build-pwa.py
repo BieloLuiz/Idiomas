@@ -1,7 +1,9 @@
 import os,re,json,shutil,hashlib,subprocess,sys
-D=os.path.dirname(os.path.abspath(__file__)); R=os.path.dirname(D); O=os.path.join(R,"pwa-saida")
+# Uso: python3 fonte/pwa/build-pwa.py <app montado.html> <pasta do site (raiz do repositório)> [pasta com os mp3]
+D=os.path.dirname(os.path.abspath(__file__))
+APP=sys.argv[1]; O=sys.argv[2]; AUD=sys.argv[3] if len(sys.argv)>3 else None
 os.makedirs(os.path.join(O,'audio'),exist_ok=True)
-s=open(os.path.join(R,'app-idiomas.html'),encoding='utf-8').read()
+s=open(APP,encoding='utf-8').read()
 head=('<link rel="manifest" href="manifest.webmanifest">\n<link rel="apple-touch-icon" href="icon-192.png">\n'
  '<meta name="apple-mobile-web-app-capable" content="yes">\n<meta name="mobile-web-app-capable" content="yes">\n'
  '<meta name="apple-mobile-web-app-title" content="Idiomas">\n<script src="config.js"></script>\n<script src="sync.js"></script>\n')
@@ -18,9 +20,10 @@ json.dump({"name":"Idiomas","short_name":"Idiomas","description":"Inglês e fran
  "start_url":"./","scope":"./","display":"standalone","orientation":"portrait","background_color":"#F3F7F1","theme_color":"#115346",
  "icons":[{"src":"icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icon-512.png","sizes":"512x512","type":"image/png"},{"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}]},
  open(os.path.join(O,'manifest.webmanifest'),'w'),ensure_ascii=False,indent=1)
-for f in os.listdir(os.path.join(R,'audio-out')):
-    if f.endswith('.mp3'):
-        d=os.path.join(O,'audio',f)
-        if not os.path.exists(d) or os.path.getsize(d)!=os.path.getsize(os.path.join(R,'audio-out',f)): shutil.copy(os.path.join(R,'audio-out',f),d)
+if AUD:
+    for f in os.listdir(AUD):
+        if f.endswith('.mp3'):
+            d=os.path.join(O,'audio',f)
+            if not os.path.exists(d) or os.path.getsize(d)!=os.path.getsize(os.path.join(AUD,f)): shutil.copy(os.path.join(AUD,f),d)
 open(os.path.join(O,'.nojekyll'),'w').write('')
 print('pwa ok', ver, len(os.listdir(os.path.join(O,'audio'))),'audios')
