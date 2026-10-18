@@ -113,6 +113,7 @@ function ia_(tipo, d) {
   if (tipo === 'conversa') return conversa_(d);
   if (tipo === 'conversaResumo') return conversaResumo_(d);
   if (tipo === 'revisao') return revisao_(d);
+  if (tipo === 'liveToken') return liveToken_(d);
   if (!ROTAS[tipo]) throw new Error('tipo');
   const idioma = IDIOMA[d.idioma] || 'inglês';
   let p;
@@ -424,6 +425,26 @@ function revisao_(d) {
     return { tipo: 'escolha', ref: ref, enunciado: String(x.enunciado || 'Escolha a opção certa').slice(0, 120), frase: String(x.frase || '').slice(0, 250), opcoes: op, correta: c, pt: !!x.pt };
   }).filter(Boolean);
   return { exercicios: ex, provedor: r.provedor };
+}
+
+
+/* =====================================================================
+ * Conversa ao vivo: token temporário para o navegador falar direto com o Gemini Live.
+ * A chave nunca sai daqui; o token vale para 1 sessão e expira em 30 minutos.
+ * ===================================================================== */
+function liveToken_(d) {
+  const props = PropertiesService.getScriptProperties(), chave = props.getProperty('GEMINI_API_KEY');
+  if (!chave) throw new Error('sem_chave');
+  const modelo = props.getProperty('GEMINI_LIVE') || 'gemini-3.8-live';
+  const agora = Date.now(), iso = function (ms) { return new Date(ms).toISOString().replace(/\.\d{3}Z$/, 'Z'); };
+  const t0 = Date.now();
+  const r = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/auth_tokens', { method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+    headers: { 'x-goog-api-key': chave }, payload: JSON.stringify({ uses: 1, expireTime: iso(agora + 30 * 60000), newSessionExpireTime: iso(agora + 2 * 60000) }) });
+  const code = r.getResponseCode(), txt = r.getContentText();
+  registrar_('liveToken', 'gemini', modelo, code === 200, Date.now() - t0, code === 200 ? '' : txt.slice(0, 160));
+  if (code !== 200) throw new Error('limite: token ' + code + ' ' + txt.slice(0, 120));
+  const o = JSON.parse(txt);
+  return { token: o.name, modelo: modelo };
 }
 
 /* ---------- uso por dia (aba "Uso") ---------- */
