@@ -6,3 +6,9 @@ Curso de inglês e francês (A1 a C1) para estudar a dois. App web instalável (
 - `audio/`: uma gravação por unidade (ElevenLabs).
 - `config.js`: endereço do Apps Script que guarda perfis e progresso na planilha.
 - `sync.js`: envia e traz os perfis da planilha. `sw.js`: deixa o app abrir sem internet.
+
+## Servidor (Apps Script)
+
+O código em `apps-script/` é publicado sozinho no Google Apps Script a cada mudança na branch `main`
+(veja `.github/workflows/publicar.yml`). O link `/exec` continua o mesmo.
+Precisa do segredo `CLASPRC_JSON` no repositório (o mesmo usado no Cofrinho).
