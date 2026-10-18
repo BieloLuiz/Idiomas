@@ -1,0 +1,26 @@
+import pw from '/home/claude/.npm-global/lib/node_modules/playwright/index.js';
+const b=await pw.chromium.launch({args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}); const errs=[]; const U='http://127.0.0.1:8766/index.html';
+const c=await b.newContext({viewport:{width:390,height:844},permissions:['microphone']}); const p=await c.newPage(); p.on('pageerror',e=>errs.push(e.message));
+await p.goto(U); await p.waitForTimeout(1500);
+await p.evaluate(()=>{ const S=JSON.parse(localStorage.getItem('idiomas-app-v2')); S.perfis=[{id:'t1',nome:'Teste',pin:'1111',idioma:'fr',idiomas:['en','fr'],desde:'out 2026',sequencia:0,melhorSequencia:0,xp:0,hojeFeito:false,ultimoDia:'',semana:[0,0,0,0,0,0,0],xpSemana:[0,0,0,0,0,0,0],minutosHoje:0,palavras:0,progresso:{fr:22,en:0},metasHoje:{licoes:0,revisadas:0},motivos:[]}]; S.ativo='t1'; S.visto=true; localStorage.setItem('idiomas-app-v2',JSON.stringify(S)); });
+await p.reload(); await p.waitForTimeout(1500);
+if(!(await p.getByText('Continuar lição').count())){ if(await p.getByText('Já tenho perfil').count()) await p.getByText('Já tenho perfil').click(); await p.waitForTimeout(300); if(!(await p.$('.ui-keypad'))) await p.getByText('Teste').first().click(); for (const d of '1111') await p.keyboard.press(d); await p.waitForTimeout(800); }
+await p.evaluate(()=>document.querySelector('.studio-nav')?.click()); await p.waitForTimeout(600);
+await p.getByRole('button',{name:'Escolher conversa'}).first().click(); await p.waitForTimeout(500);
+console.log('cenários:', await p.$$eval('.studio-scenario h2',x=>x.map(e=>e.textContent)), '|', await p.$eval('.studio-scenario p',e=>e.textContent));
+await p.getByRole('button',{name:'Escolher este cenário'}).first().click(); await p.waitForTimeout(500);
+await p.getByText('Por turnos',{exact:true}).first().click({timeout:5000}); await p.getByRole('button',{name:'Permitir microfone'}).click(); await p.waitForTimeout(800);
+console.log('mic:', await p.$eval('.studio-mic-status',e=>e.textContent));
+await p.getByRole('button',{name:'Começar conversa'}).click(); await p.waitForTimeout(1500);
+console.log('legendas 1:', await p.$eval('.studio-subtitles',e=>e.textContent), '| estado:', await p.$eval('.studio-state',e=>e.textContent));
+const v=await p.$('.studio-voice-button'); const bb=await v.boundingBox();
+await p.mouse.move(bb.x+bb.width/2,bb.y+bb.height/2); await p.mouse.down(); await p.waitForTimeout(1800);
+console.log('gravando:', await p.$eval('.studio-state',e=>e.textContent)); await p.mouse.up(); await p.waitForTimeout(2000);
+console.log('legendas 2:', await p.$eval('.studio-subtitles',e=>e.textContent)); console.log('correção:', await p.$eval('.studio-correction',e=>e.hidden?'(oculta)':e.textContent));
+await p.getByRole('button',{name:'Me ajuda'}).click(); console.log('ajuda:', await p.$eval('.studio-help',e=>e.textContent));
+await p.screenshot({path:'conv.png'});
+await p.getByRole('button',{name:'Encerrar'}).click(); await p.waitForTimeout(1500);
+console.log('resumo:', await p.$eval('.studio-heading',e=>e.textContent), '|', await p.$$eval('.studio-error-card',x=>x.map(e=>e.textContent)), '|', await p.$$eval('.studio-word',x=>x.map(e=>e.textContent)));
+await p.screenshot({path:'conv2.png',fullPage:true});
+console.log('servidor:', JSON.stringify((await (await fetch('http://127.0.0.1:8790/')).json()).log.filter(x=>x.startsWith('ia'))));
+console.log('erros', errs); await b.close();

@@ -1,0 +1,996 @@
+{
+ "en": {
+  "name": "Inglês",
+  "tts": "en-US",
+  "flag": "English",
+  "map": [
+   [
+    "Hello!",
+    "Cumprimentar e se apresentar",
+    "I'm · you're · Where are you from?"
+   ],
+   [
+    "Countries and nationalities",
+    "Dizer nacionalidade e falar de outras pessoas",
+    "to be: he, she, we, they"
+   ],
+   [
+    "Questions and answers",
+    "Perguntar e responder sobre dados pessoais",
+    "to be: negativa e perguntas · números até 100"
+   ],
+   [
+    "My family",
+    "Falar da família",
+    "my, your, his, her, our, their · 's"
+   ],
+   [
+    "Things around me",
+    "Nomear objetos do dia a dia",
+    "a / an · plural · this, that, these, those"
+   ],
+   [
+    "My day",
+    "Contar a rotina",
+    "present simple (I, you, we, they) · horas"
+   ],
+   [
+    "Jobs",
+    "Falar de trabalho e estudo",
+    "present simple: he / she / it"
+   ],
+   [
+    "Free time",
+    "Falar de gostos e frequência",
+    "like + -ing · always, usually, never"
+   ],
+   [
+    "Food and drink",
+    "Pedir num café ou restaurante",
+    "some / any · Can I have…?"
+   ],
+   [
+    "My city",
+    "Descrever lugares e dar direções",
+    "there is / there are · preposições de lugar"
+   ],
+   [
+    "I can do it",
+    "Falar de habilidades e pedir permissão",
+    "can / can't"
+   ],
+   [
+    "Right now",
+    "Descrever o que está acontecendo",
+    "present continuous · roupas e clima"
+   ]
+  ],
+  "unit": {
+   "title": "Hello!",
+   "goal": "Cumprimentar, dizer seu nome e de onde você é, e fazer as mesmas perguntas a outra pessoa.",
+   "speakers": {
+    "Sarah": "f",
+    "Lucas": "m"
+   },
+   "setting": "Primeiro dia de um curso. Sarah, do Canadá, conhece Lucas, do Brasil.",
+   "lines": [
+    [
+     "Sarah",
+     "Hi! I'm Sarah.",
+     "Oi! Eu sou a Sarah."
+    ],
+    [
+     "Lucas",
+     "Hello, Sarah. My name's Lucas.",
+     "Olá, Sarah. Meu nome é Lucas."
+    ],
+    [
+     "Sarah",
+     "Nice to meet you, Lucas.",
+     "Prazer em te conhecer, Lucas."
+    ],
+    [
+     "Lucas",
+     "Nice to meet you, too.",
+     "Prazer em te conhecer também."
+    ],
+    [
+     "Sarah",
+     "Where are you from?",
+     "De onde você é?"
+    ],
+    [
+     "Lucas",
+     "I'm from Brazil. And you?",
+     "Eu sou do Brasil. E você?"
+    ],
+    [
+     "Sarah",
+     "I'm from Canada.",
+     "Eu sou do Canadá."
+    ],
+    [
+     "Lucas",
+     "Oh, cool!",
+     "Ah, que legal!"
+    ],
+    [
+     "Sarah",
+     "See you later, Lucas!",
+     "Até mais, Lucas!"
+    ],
+    [
+     "Lucas",
+     "Bye, Sarah!",
+     "Tchau, Sarah!"
+    ]
+   ],
+   "grammar": [
+    {
+     "h": "I'm = I am: o verbo to be",
+     "p": [
+      "<i>To be</i> quer dizer ser e estar ao mesmo tempo. Nesta unidade você usa só duas formas: <b>I am</b> (eu sou, eu estou) e <b>you are</b> (você é, você está).",
+      "Na conversa quase sempre se usa a forma curta: <b>I'm</b> e <b>you're</b>."
+     ],
+     "ex": [
+      [
+       "I'm Sarah.",
+       "Eu sou a Sarah."
+      ],
+      [
+       "I'm from Brazil.",
+       "Eu sou do Brasil."
+      ],
+      [
+       "You're from Canada.",
+       "Você é do Canadá."
+      ]
+     ],
+     "tip": "Em português dá para dizer só “Sou do Brasil”. Em inglês o sujeito é obrigatório: diga <b>I'm from Brazil</b>, nunca “Am from Brazil”."
+    },
+    {
+     "h": "My name's… = My name is…",
+     "p": [
+      "<b>My name's</b> é a forma curta de <b>My name is</b>. As duas estão certas, e a curta soa mais natural. <b>I'm Lucas</b> e <b>My name's Lucas</b> dizem a mesma coisa."
+     ],
+     "ex": [
+      [
+       "My name's Lucas.",
+       "Meu nome é Lucas."
+      ],
+      [
+       "What's your name?",
+       "Qual é o seu nome?"
+      ]
+     ]
+    },
+    {
+     "h": "Where are you from? A preposição vai para o fim",
+     "p": [
+      "Em português a preposição vem antes: <i>De</i> onde você é? Em inglês, <b>from</b> fica no final da pergunta. Na resposta, <b>from</b> volta para antes do país."
+     ],
+     "ex": [
+      [
+       "Where are you from?",
+       "De onde você é?"
+      ],
+      [
+       "I'm from Brazil.",
+       "Eu sou do Brasil."
+      ]
+     ],
+     "tip": "Evite “From where are you?”. A frase é entendida, mas soa estranha para um nativo."
+    },
+    {
+     "h": "And you? Devolvendo a pergunta",
+     "p": [
+      "Para fazer a mesma pergunta de volta, basta <b>And you?</b>. Para responder a <b>Nice to meet you</b>, acrescente <b>too</b> no fim."
+     ],
+     "ex": [
+      [
+       "I'm from Brazil. And you?",
+       "Eu sou do Brasil. E você?"
+      ],
+      [
+       "Nice to meet you, too.",
+       "Prazer em te conhecer também."
+      ]
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "h": "Cumprimentos",
+     "items": [
+      [
+       "Hi",
+       "oi (informal)"
+      ],
+      [
+       "Hello",
+       "olá"
+      ],
+      [
+       "Nice to meet you",
+       "prazer em te conhecer"
+      ],
+      [
+       "See you later",
+       "até mais"
+      ],
+      [
+       "Bye",
+       "tchau"
+      ],
+      [
+       "Goodbye",
+       "tchau, adeus (mais formal)"
+      ]
+     ]
+    },
+    {
+     "h": "Países",
+     "items": [
+      [
+       "Brazil",
+       "Brasil"
+      ],
+      [
+       "Canada",
+       "Canadá"
+      ],
+      [
+       "the United States",
+       "os Estados Unidos (com the)"
+      ],
+      [
+       "England",
+       "Inglaterra"
+      ],
+      [
+       "Portugal",
+       "Portugal"
+      ],
+      [
+       "France",
+       "França"
+      ],
+      [
+       "Mexico",
+       "México"
+      ],
+      [
+       "Japan",
+       "Japão"
+      ]
+     ]
+    }
+   ],
+   "numbers": [
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten"
+   ],
+   "pron": [
+    {
+     "h": "Sem vogal extra no fim",
+     "p": "Quem fala português costuma pôr um “i” no fim das palavras: “naici”, “fáivi”. Em inglês a palavra termina na consoante: <b>nice</b> acaba em s, <b>five</b> acaba em v.",
+     "w": [
+      "nice",
+      "five",
+      "name's"
+     ]
+    },
+    {
+     "h": "Brazil tem a força no fim",
+     "p": "Diz-se algo como “br-ZIL”: o primeiro a quase some e a força cai em ZIL, com som de z. Já <b>Canada</b> tem a força no começo: CA-na-da.",
+     "w": [
+      "Brazil",
+      "Canada",
+      "Japan"
+     ]
+    },
+    {
+     "h": "O th de three",
+     "p": "Ponha a ponta da língua entre os dentes e sopre o ar. Não é “tri” nem “fri”.",
+     "w": [
+      "three",
+      "thank you"
+     ]
+    },
+    {
+     "h": "I'm soa “aim”",
+     "p": "A letra <b>I</b> sozinha soa como “ai”. O mesmo som aparece em <b>Hi</b>, <b>five</b> e <b>nine</b>.",
+     "w": [
+      "I'm",
+      "Hi",
+      "nine"
+     ]
+    }
+   ],
+   "mc": [
+    {
+     "q": "De onde a Sarah é?",
+     "o": [
+      "Brazil",
+      "Canada",
+      "England"
+     ],
+     "a": 1,
+     "e": "Ela diz: I'm from Canada."
+    },
+    {
+     "q": "Alguém diz “Nice to meet you.” O que você responde?",
+     "o": [
+      "Nice to meet you, too.",
+      "I'm from Brazil.",
+      "See you later."
+     ],
+     "a": 0,
+     "e": "Acrescente too para devolver o “prazer”."
+    },
+    {
+     "q": "Qual frase está certa?",
+     "o": [
+      "Am from Brazil.",
+      "I from Brazil.",
+      "I'm from Brazil."
+     ],
+     "a": 2,
+     "e": "O sujeito I e o verbo am são obrigatórios: I'm."
+    },
+    {
+     "q": "Como perguntar a origem de alguém?",
+     "o": [
+      "From where are you?",
+      "Where you are from?",
+      "Where are you from?"
+     ],
+     "a": 2,
+     "e": "A pergunta começa com Where, o verbo are vem antes de you, e from fica no fim."
+    }
+   ],
+   "gaps": [
+    {
+     "s": "___ Lucas.",
+     "a": [
+      "I'm",
+      "I am"
+     ],
+     "h": "Eu sou o Lucas."
+    },
+    {
+     "s": "Where ___ you from?",
+     "a": [
+      "are"
+     ],
+     "h": "De onde você é?"
+    },
+    {
+     "s": "I'm ___ Brazil.",
+     "a": [
+      "from"
+     ],
+     "h": "Eu sou do Brasil."
+    },
+    {
+     "s": "Nice to ___ you.",
+     "a": [
+      "meet"
+     ],
+     "h": "Prazer em te conhecer."
+    },
+    {
+     "s": "My ___ Sarah.",
+     "a": [
+      "name's",
+      "name is"
+     ],
+     "h": "Meu nome é Sarah."
+    }
+   ],
+   "order": [
+    {
+     "t": [
+      "Where",
+      "are",
+      "you",
+      "from?"
+     ],
+     "h": "De onde você é?"
+    },
+    {
+     "t": [
+      "My",
+      "name's",
+      "Lucas."
+     ],
+     "h": "Meu nome é Lucas."
+    },
+    {
+     "t": [
+      "Nice",
+      "to",
+      "meet",
+      "you,",
+      "too."
+     ],
+     "h": "Prazer em te conhecer também."
+    }
+   ],
+   "dict": [
+    {
+     "t": "I'm from Brazil."
+    },
+    {
+     "t": "Where are you from?"
+    },
+    {
+     "t": "Nice to meet you."
+    },
+    {
+     "t": "three"
+    },
+    {
+     "t": "seven"
+    }
+   ],
+   "shadow": [
+    "Hi! I'm Sarah.",
+    "Nice to meet you, too.",
+    "Where are you from?",
+    "I'm from Brazil. And you?"
+   ],
+   "write": {
+    "task": "Apresente-se em inglês em 2 ou 3 frases: cumprimente, diga seu nome e de onde você é. Se quiser, termine com uma pergunta.",
+    "ph": "Hi! I'm …"
+   },
+   "cards": [
+    [
+     "Meu nome é Lucas.",
+     "My name's Lucas."
+    ],
+    [
+     "Qual é o seu nome?",
+     "What's your name?"
+    ],
+    [
+     "De onde você é?",
+     "Where are you from?"
+    ],
+    [
+     "Eu sou do Brasil.",
+     "I'm from Brazil."
+    ],
+    [
+     "Eu sou dos Estados Unidos.",
+     "I'm from the United States."
+    ],
+    [
+     "Prazer em te conhecer.",
+     "Nice to meet you."
+    ],
+    [
+     "Prazer em te conhecer também.",
+     "Nice to meet you, too."
+    ],
+    [
+     "E você?",
+     "And you?"
+    ],
+    [
+     "Até mais!",
+     "See you later!"
+    ]
+   ]
+  }
+ },
+ "fr": {
+  "name": "Francês",
+  "tts": "fr-FR",
+  "flag": "Français",
+  "map": [
+   [
+    "Bonjour !",
+    "Cumprimentar e se apresentar",
+    "je m'appelle · tu / vous · je suis"
+   ],
+   [
+    "D'où viens-tu ?",
+    "Dizer nacionalidade e país",
+    "être completo · masculino e feminino · au, en"
+   ],
+   [
+    "Questions",
+    "Perguntar e responder sobre dados pessoais",
+    "ne… pas · est-ce que · avoir · idade"
+   ],
+   [
+    "Ma famille",
+    "Falar da família",
+    "le, la, les, un, une · mon, ma, mes"
+   ],
+   [
+    "Les objets",
+    "Nomear objetos e lugares",
+    "gênero e plural · il y a · c'est"
+   ],
+   [
+    "Ma journée",
+    "Contar a rotina",
+    "verbos em -er no presente · horas"
+   ],
+   [
+    "Les métiers",
+    "Falar de trabalho",
+    "faire · profissões no masculino e feminino"
+   ],
+   [
+    "Loisirs",
+    "Falar de gostos",
+    "aimer, adorer, détester + infinitivo"
+   ],
+   [
+    "À table",
+    "Pedir num café ou restaurante",
+    "du, de la, des · je voudrais"
+   ],
+   [
+    "En ville",
+    "Ir a lugares e dar direções",
+    "aller · au, à la · preposições de lugar"
+   ],
+   [
+    "Je peux, je veux",
+    "Falar de vontade, poder e dever",
+    "pouvoir, vouloir, devoir"
+   ],
+   [
+    "Mes projets",
+    "Falar de planos",
+    "futur proche: aller + infinitivo · dias e meses"
+   ]
+  ],
+  "unit": {
+   "title": "Bonjour !",
+   "goal": "Cumprimentar, dizer seu nome e de onde você é, e fazer as mesmas perguntas a outra pessoa.",
+   "speakers": {
+    "Claire": "f",
+    "Lucas": "m"
+   },
+   "setting": "Num café em Lyon, Claire conhece Lucas, que acabou de chegar do Brasil.",
+   "lines": [
+    [
+     "Claire",
+     "Bonjour ! Je m'appelle Claire. Et toi ?",
+     "Olá! Eu me chamo Claire. E você?"
+    ],
+    [
+     "Lucas",
+     "Salut, Claire ! Moi, c'est Lucas.",
+     "Oi, Claire! Eu sou o Lucas."
+    ],
+    [
+     "Claire",
+     "Enchantée, Lucas.",
+     "Prazer, Lucas."
+    ],
+    [
+     "Lucas",
+     "Enchanté.",
+     "Prazer."
+    ],
+    [
+     "Claire",
+     "Tu viens d'où ?",
+     "De onde você vem?"
+    ],
+    [
+     "Lucas",
+     "Je viens du Brésil. Je suis brésilien. Et toi ?",
+     "Eu venho do Brasil. Sou brasileiro. E você?"
+    ],
+    [
+     "Claire",
+     "Moi, je suis française. Je suis de Lyon.",
+     "Eu sou francesa. Sou de Lyon."
+    ],
+    [
+     "Lucas",
+     "Super !",
+     "Que legal!"
+    ],
+    [
+     "Claire",
+     "Bon, à bientôt, Lucas !",
+     "Bom, até logo, Lucas!"
+    ],
+    [
+     "Lucas",
+     "Au revoir, Claire !",
+     "Tchau, Claire!"
+    ]
+   ],
+   "grammar": [
+    {
+     "h": "Je m'appelle… e Moi, c'est…",
+     "p": [
+      "<b>Je m'appelle Claire</b> quer dizer, ao pé da letra, “eu me chamo Claire”. <b>Moi, c'est Lucas</b> é mais informal, como “e eu sou o Lucas”.",
+      "Para perguntar o nome: <b>Tu t'appelles comment ?</b> (informal) ou <b>Vous vous appelez comment ?</b> (formal)."
+     ],
+     "ex": [
+      [
+       "Je m'appelle Claire.",
+       "Eu me chamo Claire."
+      ],
+      [
+       "Moi, c'est Lucas.",
+       "Eu sou o Lucas."
+      ],
+      [
+       "Tu t'appelles comment ?",
+       "Como você se chama?"
+      ]
+     ]
+    },
+    {
+     "h": "Tu ou vous?",
+     "p": [
+      "<b>Tu</b> é para amigos, família e gente da sua idade em situação informal. <b>Vous</b> é para desconhecidos, situações formais e para falar com mais de uma pessoa. É parecido com “você” e “o senhor”.",
+      "Depois de <b>et</b>, tu vira <b>toi</b>: <b>Et toi ?</b> Com vous, nada muda: <b>Et vous ?</b>"
+     ],
+     "ex": [
+      [
+       "Et toi ?",
+       "E você? (informal)"
+      ],
+      [
+       "Et vous ?",
+       "E o senhor? E a senhora? E vocês?"
+      ]
+     ],
+     "tip": "Na dúvida com um adulto que você não conhece, use <b>vous</b>. Ninguém se ofende com o formal."
+    },
+    {
+     "h": "Je suis: o verbo être",
+     "p": [
+      "<b>Être</b> quer dizer ser e estar. Nesta unidade: <b>je suis</b> (eu sou) e <b>tu es</b> (você é). Para falar da origem, use <b>je suis de</b> + cidade, ou <b>je viens du Brésil</b>."
+     ],
+     "ex": [
+      [
+       "Je suis brésilien.",
+       "Eu sou brasileiro."
+      ],
+      [
+       "Je suis de Lyon.",
+       "Eu sou de Lyon."
+      ],
+      [
+       "Je viens du Brésil.",
+       "Eu venho do Brasil."
+      ]
+     ],
+     "tip": "Guarde <b>du Brésil</b> como um bloco pronto. Por que é “du” e não “de” você vê na Unidade 2, junto com os outros países."
+    },
+    {
+     "h": "Masculino e feminino",
+     "p": [
+      "A nacionalidade muda conforme quem fala. Em geral, acrescenta-se <b>-e</b> no feminino: <b>brésilien</b> vira <b>brésilienne</b>, <b>français</b> vira <b>française</b>.",
+      "O mesmo vale para <b>enchanté</b>: a Claire escreve <b>enchantée</b> porque é mulher."
+     ],
+     "ex": [
+      [
+       "Il est brésilien.",
+       "Ele é brasileiro."
+      ],
+      [
+       "Elle est brésilienne.",
+       "Ela é brasileira."
+      ],
+      [
+       "Elle est française.",
+       "Ela é francesa."
+      ]
+     ],
+     "tip": "<b>Enchanté</b> e <b>enchantée</b> soam iguais. Já em <b>française</b> o s passa a ser pronunciado, com som de z, e em <b>brésilienne</b> o n final aparece."
+    }
+   ],
+   "vocab": [
+    {
+     "h": "Cumprimentos",
+     "items": [
+      [
+       "Bonjour",
+       "bom dia, olá (de dia)"
+      ],
+      [
+       "Bonsoir",
+       "boa noite (ao chegar)"
+      ],
+      [
+       "Salut",
+       "oi, tchau (informal)"
+      ],
+      [
+       "Enchanté",
+       "prazer (quem fala é homem)"
+      ],
+      [
+       "Enchantée",
+       "prazer (quem fala é mulher)"
+      ],
+      [
+       "À bientôt",
+       "até logo"
+      ],
+      [
+       "Au revoir",
+       "tchau, até logo"
+      ],
+      [
+       "Merci",
+       "obrigado, obrigada"
+      ]
+     ]
+    },
+    {
+     "h": "Nacionalidades",
+     "items": [
+      [
+       "brésilien, brésilienne",
+       "brasileiro, brasileira"
+      ],
+      [
+       "français, française",
+       "francês, francesa"
+      ],
+      [
+       "portugais, portugaise",
+       "português, portuguesa"
+      ],
+      [
+       "canadien, canadienne",
+       "canadense"
+      ],
+      [
+       "américain, américaine",
+       "americano, americana"
+      ]
+     ]
+    }
+   ],
+   "numbers": [
+    "zéro",
+    "un",
+    "deux",
+    "trois",
+    "quatre",
+    "cinq",
+    "six",
+    "sept",
+    "huit",
+    "neuf",
+    "dix"
+   ],
+   "pron": [
+    {
+     "h": "O final quase sempre some",
+     "p": "A maioria das consoantes finais não é pronunciada: <b>salut</b> soa “salü”, <b>français</b> soa “franssé”, <b>deux</b> soa “dö”. Exceções desta unidade: <b>cinq</b>, <b>sept</b> e <b>neuf</b> pronunciam o final.",
+     "w": [
+      "salut",
+      "français",
+      "deux",
+      "sept"
+     ]
+    },
+    {
+     "h": "O u de salut e tu",
+     "p": "Diga “i”, mantenha a língua parada e arredonde os lábios como para dizer “u”. Esse som não existe em português.",
+     "w": [
+      "salut",
+      "tu",
+      "du"
+     ]
+    },
+    {
+     "h": "O r francês",
+     "p": "Sai do fundo da garganta, parecido com o r de “carro” em boa parte do Brasil, só que mais suave.",
+     "w": [
+      "bonjour",
+      "merci",
+      "au revoir"
+     ]
+    },
+    {
+     "h": "Sons nasais e o é",
+     "p": "<b>Bonjour</b> começa com um “on” nasal, parecido com o “om” de “bom”. O <b>é</b> com acento soa como o “ê” de “você”.",
+     "w": [
+      "bonjour",
+      "enchanté",
+      "brésilien"
+     ]
+    }
+   ],
+   "mc": [
+    {
+     "q": "De onde a Claire é?",
+     "o": [
+      "Paris",
+      "Lyon",
+      "Montréal"
+     ],
+     "a": 1,
+     "e": "Ela diz: Je suis de Lyon."
+    },
+    {
+     "q": "A Claire é mulher. Como ela escreve “prazer”?",
+     "o": [
+      "Enchanté.",
+      "Enchantée."
+     ],
+     "a": 1,
+     "e": "No feminino acrescenta-se -e. Na fala, as duas formas soam iguais."
+    },
+    {
+     "q": "Você fala com um senhor que não conhece. Como pergunta “e o senhor?”",
+     "o": [
+      "Et toi ?",
+      "Et vous ?"
+     ],
+     "a": 1,
+     "e": "Vous é o formal."
+    },
+    {
+     "q": "A Ana é brasileira. Elle est…",
+     "o": [
+      "brésilien",
+      "brésilienne"
+     ],
+     "a": 1,
+     "e": "No feminino: brésilienne."
+    }
+   ],
+   "gaps": [
+    {
+     "s": "Je ___ Claire.",
+     "a": [
+      "m'appelle"
+     ],
+     "h": "Eu me chamo Claire."
+    },
+    {
+     "s": "Je ___ brésilien.",
+     "a": [
+      "suis"
+     ],
+     "h": "Eu sou brasileiro."
+    },
+    {
+     "s": "Tu ___ d'où ?",
+     "a": [
+      "viens"
+     ],
+     "h": "De onde você vem?"
+    },
+    {
+     "s": "Je viens ___ Brésil.",
+     "a": [
+      "du"
+     ],
+     "h": "Eu venho do Brasil."
+    },
+    {
+     "s": "Elle est ___.",
+     "a": [
+      "française"
+     ],
+     "h": "Ela é francesa."
+    }
+   ],
+   "order": [
+    {
+     "t": [
+      "Tu",
+      "viens",
+      "d'où ?"
+     ],
+     "h": "De onde você vem?"
+    },
+    {
+     "t": [
+      "Je",
+      "m'appelle",
+      "Lucas."
+     ],
+     "h": "Eu me chamo Lucas."
+    },
+    {
+     "t": [
+      "Moi,",
+      "je",
+      "suis",
+      "française."
+     ],
+     "h": "Eu sou francesa."
+    }
+   ],
+   "dict": [
+    {
+     "t": "Bonjour !"
+    },
+    {
+     "t": "Je suis brésilien."
+    },
+    {
+     "t": "Tu viens d'où ?"
+    },
+    {
+     "t": "Enchanté.",
+     "alt": [
+      "Enchantée."
+     ],
+     "note": "Enchanté e enchantée soam iguais: as duas respostas estão certas."
+    },
+    {
+     "t": "trois"
+    }
+   ],
+   "shadow": [
+    "Bonjour ! Je m'appelle Claire.",
+    "Enchantée.",
+    "Tu viens d'où ?",
+    "Je viens du Brésil. Je suis brésilien."
+   ],
+   "write": {
+    "task": "Apresente-se em francês em 2 ou 3 frases: cumprimente, diga seu nome, sua nacionalidade e de onde você é.",
+    "ph": "Bonjour ! Je m'appelle …"
+   },
+   "cards": [
+    [
+     "Eu me chamo Lucas.",
+     "Je m'appelle Lucas."
+    ],
+    [
+     "Como você se chama?",
+     "Tu t'appelles comment ?"
+    ],
+    [
+     "De onde você vem?",
+     "Tu viens d'où ?"
+    ],
+    [
+     "Eu venho do Brasil.",
+     "Je viens du Brésil."
+    ],
+    [
+     "Sou brasileiro. / Sou brasileira.",
+     "Je suis brésilien. / Je suis brésilienne."
+    ],
+    [
+     "Prazer! (homem / mulher)",
+     "Enchanté ! / Enchantée !"
+    ],
+    [
+     "E você? (informal)",
+     "Et toi ?"
+    ],
+    [
+     "E o senhor? (formal)",
+     "Et vous ?"
+    ],
+    [
+     "Até logo!",
+     "À bientôt !"
+    ]
+   ]
+  }
+ }
+}

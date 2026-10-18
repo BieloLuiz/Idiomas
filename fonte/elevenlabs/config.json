@@ -1,0 +1,15 @@
+{
+  "modelo": "eleven_v4_turbo",
+  "formato": "mp3_24000_48",
+  "vozes": {
+    "en_sarah": "EXAVITQu4vr4xnSDxMaL",
+    "en_lucas": "bIHbv24MWmeRgasZH58o",
+    "en_narradora": "hpp4J3VqNfWAUOO0d1Us",
+    "en_vendedor": "iP95p4xoKVk53GoZ742B",
+    "fr_claire": "5OnMHwgTFgvPVwE8jP6B",
+    "fr_lucas": "TGAegA0zNRi8I6nUdq3i",
+    "fr_ines": "UaGvaD7NWzU5mJNoUqoY",
+    "fr_antoine": "0igQGE0lbNpTaWsexf1r"
+  },
+  "_ajuda": "Cole o voice_id de cada papel entre as aspas. Claude preenche isto depois de ver a lista de vozes."
+}

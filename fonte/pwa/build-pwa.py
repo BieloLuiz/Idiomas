@@ -1,0 +1,26 @@
+import os,re,json,shutil,hashlib,subprocess,sys
+D=os.path.dirname(os.path.abspath(__file__)); R=os.path.dirname(D); O=os.path.join(R,"pwa-saida")
+os.makedirs(os.path.join(O,'audio'),exist_ok=True)
+s=open(os.path.join(R,'app-idiomas.html'),encoding='utf-8').read()
+head=('<link rel="manifest" href="manifest.webmanifest">\n<link rel="apple-touch-icon" href="icon-192.png">\n'
+ '<meta name="apple-mobile-web-app-capable" content="yes">\n<meta name="mobile-web-app-capable" content="yes">\n'
+ '<meta name="apple-mobile-web-app-title" content="Idiomas">\n<script src="config.js"></script>\n<script src="sync.js"></script>\n')
+assert s.count('</head>')==1; s=s.replace('</head>',head+'</head>')
+tail="<script>if('serviceWorker' in navigator) addEventListener('load',function(){navigator.serviceWorker.register('sw.js');});</script>\n"
+i=s.rindex('</body>'); s=s[:i]+tail+s[i:]
+open(os.path.join(O,'index.html'),'w',encoding='utf-8').write(s)
+ver=hashlib.sha1(s.encode()).hexdigest()[:10]
+open(os.path.join(O,'sw.js'),'w').write(open(os.path.join(D,'sw.js')).read().replace('__VERSAO__',ver))
+shutil.copy(os.path.join(D,'sync.js'),O)
+if not os.path.exists(os.path.join(O,'config.js')):
+    open(os.path.join(O,'config.js'),'w').write("/* Endereço do Apps Script (termina em /exec). Vazio = só neste aparelho. */\nwindow.IDIOMAS_API = '';\n")
+json.dump({"name":"Idiomas","short_name":"Idiomas","description":"Inglês e francês do A1 ao C1, para estudar a dois.","lang":"pt-BR",
+ "start_url":"./","scope":"./","display":"standalone","orientation":"portrait","background_color":"#F3F7F1","theme_color":"#115346",
+ "icons":[{"src":"icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icon-512.png","sizes":"512x512","type":"image/png"},{"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}]},
+ open(os.path.join(O,'manifest.webmanifest'),'w'),ensure_ascii=False,indent=1)
+for f in os.listdir(os.path.join(R,'audio-out')):
+    if f.endswith('.mp3'):
+        d=os.path.join(O,'audio',f)
+        if not os.path.exists(d) or os.path.getsize(d)!=os.path.getsize(os.path.join(R,'audio-out',f)): shutil.copy(os.path.join(R,'audio-out',f),d)
+open(os.path.join(O,'.nojekyll'),'w').write('')
+print('pwa ok', ver, len(os.listdir(os.path.join(O,'audio'))),'audios')

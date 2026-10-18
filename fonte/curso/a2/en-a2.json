@@ -1,0 +1,6007 @@
+[
+  {
+    "title": "Last weekend",
+    "goal": "Contar o que aconteceu no fim de semana, dizer onde você estava e como se sentiu, usando was/were e verbos regulares no passado.",
+    "speakers": {
+      "Sarah": "f",
+      "Lucas": "m"
+    },
+    "setting": "Na segunda-feira, Sarah e Lucas conversam durante o intervalo do trabalho sobre o fim de semana.",
+    "lines": [
+      [
+        "Sarah",
+        "Hey, Lucas! How was your weekend?",
+        "Oi, Lucas! Como foi seu fim de semana?"
+      ],
+      [
+        "Lucas",
+        "It was great! I visited my sister on Saturday.",
+        "Foi ótimo! Visitei minha irmã no sábado."
+      ],
+      [
+        "Sarah",
+        "Nice! Was she happy to see you?",
+        "Que legal! Ela ficou feliz em te ver?"
+      ],
+      [
+        "Lucas",
+        "Yes, she was. We cooked dinner and watched a movie.",
+        "Ficou, sim. Fizemos o jantar e assistimos a um filme."
+      ],
+      [
+        "Sarah",
+        "Sounds fun! What about Sunday?",
+        "Parece divertido! E no domingo?"
+      ],
+      [
+        "Lucas",
+        "I stayed home and cleaned my apartment.",
+        "Fiquei em casa e limpei meu apartamento."
+      ],
+      [
+        "Sarah",
+        "A busy weekend! Were you tired?",
+        "Um fim de semana cheio! Você estava cansado?"
+      ],
+      [
+        "Lucas",
+        "A little, but I was happy. How was yours?",
+        "Um pouco, mas eu estava feliz. E como foi o seu?"
+      ],
+      [
+        "Sarah",
+        "It was good! I walked in the park with Emma.",
+        "Foi bom! Caminhei no parque com a Emma."
+      ],
+      [
+        "Lucas",
+        "Was the weather nice?",
+        "O tempo estava bom?"
+      ],
+      [
+        "Sarah",
+        "Yes, it was sunny. Later, I called my parents.",
+        "Sim, estava ensolarado. Depois, liguei para os meus pais."
+      ],
+      [
+        "Lucas",
+        "That's a nice weekend!",
+        "Esse foi um fim de semana legal!"
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Was e were: o passado de to be",
+        "p": [
+          "Para falar de como alguém estava, onde estava ou como alguma coisa era no passado, usamos <b>was</b> ou <b>were</b>. Os dois significam “era”, “estava” ou “foi”, dependendo da frase.",
+          "Use <b>was</b> com I, he, she e it. Use <b>were</b> com you, we e they. No passado, não usamos am, is ou are."
+        ],
+        "ex": [
+          [
+            "I was tired on Sunday.",
+            "Eu estava cansado no domingo."
+          ],
+          [
+            "She was at home yesterday.",
+            "Ela estava em casa ontem."
+          ],
+          [
+            "We were at the park last weekend.",
+            "Estávamos no parque no fim de semana passado."
+          ],
+          [
+            "They were happy after the concert.",
+            "Eles estavam felizes depois do show."
+          ]
+        ],
+        "tip": "Mesmo com I, usamos <b>was</b>: I was happy. Com you, sempre usamos <b>were</b>: You were happy."
+      },
+      {
+        "h": "Perguntas e negativas com was/were",
+        "p": [
+          "Para fazer perguntas, coloque <b>was</b> ou <b>were</b> antes da pessoa: <b>Was she happy?</b> (Ela estava feliz?). Para responder, use Yes, she was ou No, she wasn't.",
+          "Na negativa, use <b>wasn't</b> (was not) ou <b>weren't</b> (were not). Não precisamos de outro verbo auxiliar."
+        ],
+        "ex": [
+          [
+            "Was your weekend busy?",
+            "Seu fim de semana foi corrido?"
+          ],
+          [
+            "Were you at home last night?",
+            "Você estava em casa ontem à noite?"
+          ],
+          [
+            "He wasn't tired after work.",
+            "Ele não estava cansado depois do trabalho."
+          ],
+          [
+            "They weren't at the party.",
+            "Eles não estavam na festa."
+          ]
+        ],
+        "tip": "Atenção: <b>Were you tired?</b> está certo. Não use “Did you were tired?”."
+      },
+      {
+        "h": "Past simple: verbos regulares com -ed",
+        "p": [
+          "Para contar ações concluídas no passado, muitos verbos recebem <b>-ed</b>. Por exemplo, visit vira visited, watch vira watched e clean vira cleaned.",
+          "O passado é igual para todas as pessoas: I visited, she visited, we visited. É comum usar expressões como yesterday, last weekend e last night para indicar quando algo aconteceu."
+        ],
+        "ex": [
+          [
+            "I visited my sister on Saturday.",
+            "Visitei minha irmã no sábado."
+          ],
+          [
+            "We watched a movie at home.",
+            "Assistimos a um filme em casa."
+          ],
+          [
+            "She cleaned her apartment yesterday.",
+            "Ela limpou o apartamento ontem."
+          ],
+          [
+            "They relaxed all afternoon.",
+            "Eles descansaram a tarde inteira."
+          ]
+        ],
+        "tip": "O verbo não muda com he, she ou it: <b>She worked</b>, e não “She workeds”."
+      },
+      {
+        "h": "Como escrever o passado regular",
+        "p": [
+          "A regra geral é acrescentar <b>-ed</b>: work → worked. Se o verbo já termina em e, acrescente apenas <b>-d</b>: like → liked.",
+          "Se termina em consoante + y, troque y por <b>-ied</b>: study → studied. Alguns verbos curtos dobram a consoante final: stop → stopped."
+        ],
+        "ex": [
+          [
+            "I worked on Friday.",
+            "Trabalhei na sexta-feira."
+          ],
+          [
+            "She liked the movie.",
+            "Ela gostou do filme."
+          ],
+          [
+            "He studied English last night.",
+            "Ele estudou inglês ontem à noite."
+          ],
+          [
+            "We stopped for coffee.",
+            "Paramos para tomar café."
+          ]
+        ],
+        "tip": "Nem todo verbo segue essas regras. Verbos como go e eat são irregulares e serão estudados na próxima unidade."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Atividades no fim de semana",
+        "items": [
+          [
+            "visited",
+            "visitou, visitei"
+          ],
+          [
+            "cooked",
+            "cozinhou, cozinhei"
+          ],
+          [
+            "watched",
+            "assistiu, assisti"
+          ],
+          [
+            "walked",
+            "caminhou, caminhei"
+          ],
+          [
+            "cleaned",
+            "limpou, limpei"
+          ],
+          [
+            "called",
+            "ligou, liguei"
+          ],
+          [
+            "stayed",
+            "ficou, fiquei"
+          ],
+          [
+            "relaxed",
+            "descansou, descansei"
+          ]
+        ]
+      },
+      {
+        "h": "Expressões de tempo e sentimentos",
+        "items": [
+          [
+            "last weekend",
+            "fim de semana passado"
+          ],
+          [
+            "on Saturday",
+            "no sábado"
+          ],
+          [
+            "on Sunday",
+            "no domingo"
+          ],
+          [
+            "yesterday",
+            "ontem"
+          ],
+          [
+            "last night",
+            "ontem à noite"
+          ],
+          [
+            "in the afternoon",
+            "à tarde"
+          ],
+          [
+            "great",
+            "ótimo"
+          ],
+          [
+            "tired",
+            "cansado"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "-ed com som de T",
+        "p": "Depois de sons surdos, como K, P e CH, o final <b>-ed</b> tem som de T. Por exemplo, watched soa aproximadamente “uótcht” e walked soa “uókt”. Não acrescente uma sílaba extra.",
+        "w": [
+          "watched",
+          "walked",
+          "cooked",
+          "worked"
+        ]
+      },
+      {
+        "h": "-ed com som de D",
+        "p": "Depois de sons sonoros, exceto D, o <b>-ed</b> soa como D. Cleaned soa aproximadamente “klínd”, e stayed soa “stêid”. O final não forma uma sílaba separada.",
+        "w": [
+          "cleaned",
+          "called",
+          "stayed",
+          "played"
+        ]
+      },
+      {
+        "h": "-ed com uma sílaba extra",
+        "p": "Quando o verbo termina com som de T ou D, o <b>-ed</b> cria uma sílaba extra, com som de “id”. Wanted soa aproximadamente “uón-tid”, e needed soa “ní-did”.",
+        "w": [
+          "wanted",
+          "needed",
+          "visited",
+          "started"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "O que o Lucas fez no sábado?",
+        "o": [
+          "Visitou a irmã",
+          "Limpou o apartamento",
+          "Caminhou no parque"
+        ],
+        "a": 0,
+        "e": "I visited my sister on Saturday."
+      },
+      {
+        "q": "Como Lucas passou o domingo?",
+        "o": [
+          "Visitou os pais",
+          "Ficou em casa e limpou o apartamento",
+          "Foi ao cinema"
+        ],
+        "a": 1,
+        "e": "I stayed home and cleaned my apartment."
+      },
+      {
+        "q": "Com quem Sarah caminhou no parque?",
+        "o": [
+          "Com Emma",
+          "Com a irmã",
+          "Com os pais"
+        ],
+        "a": 0,
+        "e": "I walked in the park with Emma."
+      },
+      {
+        "q": "Como estava o tempo no domingo da Sarah?",
+        "o": [
+          "Nevando",
+          "Chuvoso",
+          "Ensolarado"
+        ],
+        "a": 2,
+        "e": "Yes, it was sunny. Later, I called my parents."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Last weekend, I ___ at home.",
+        "a": [
+          "was"
+        ],
+        "h": "No fim de semana passado, eu estava em casa."
+      },
+      {
+        "s": "___ you tired on Sunday?",
+        "a": [
+          "Were"
+        ],
+        "h": "Você estava cansado no domingo?"
+      },
+      {
+        "s": "She ___ happy to see me yesterday.",
+        "a": [
+          "was"
+        ],
+        "h": "Ela estava feliz em me ver ontem."
+      },
+      {
+        "s": "I ___ my sister on Saturday.",
+        "a": [
+          "visited"
+        ],
+        "h": "Visitei minha irmã no sábado."
+      },
+      {
+        "s": "We ___ a movie last night.",
+        "a": [
+          "watched"
+        ],
+        "h": "Assistimos a um filme ontem à noite."
+      },
+      {
+        "s": "I ___ my apartment yesterday.",
+        "a": [
+          "cleaned"
+        ],
+        "h": "Limpei meu apartamento ontem."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "My",
+          "weekend",
+          "was",
+          "really",
+          "good."
+        ],
+        "h": "Meu fim de semana foi muito bom."
+      },
+      {
+        "t": [
+          "We",
+          "watched",
+          "a",
+          "movie",
+          "on",
+          "Saturday."
+        ],
+        "h": "Assistimos a um filme no sábado."
+      },
+      {
+        "t": [
+          "Were",
+          "you",
+          "tired",
+          "last",
+          "night?"
+        ],
+        "h": "Você estava cansado ontem à noite?"
+      }
+    ],
+    "dict": [
+      {
+        "t": "How was your weekend?"
+      },
+      {
+        "t": "I visited my sister on Saturday."
+      },
+      {
+        "t": "We cooked dinner and watched a movie."
+      },
+      {
+        "t": "I stayed home and cleaned my apartment."
+      },
+      {
+        "t": "Were you tired?"
+      }
+    ],
+    "shadow": [
+      "How was your weekend?",
+      "It was great! I visited my sister on Saturday.",
+      "I stayed home and cleaned my apartment.",
+      "A little, but I was happy. How was yours?"
+    ],
+    "write": {
+      "task": "Conte como foi seu último fim de semana em 3 ou 4 frases. Diga como ele foi, onde você estava e duas atividades que fez. Use was/were e verbos regulares no passado.",
+      "ph": "Last weekend was … I was … On Saturday, I … On Sunday, I …"
+    },
+    "cards": [
+      [
+        "Eu estava cansado depois do trabalho ontem.",
+        "I was tired after work yesterday."
+      ],
+      [
+        "O filme foi ótimo ontem à noite.",
+        "The movie was great last night."
+      ],
+      [
+        "Estávamos em casa no domingo.",
+        "We were at home on Sunday."
+      ],
+      [
+        "Ela não estava ocupada ontem à tarde.",
+        "She wasn't busy yesterday afternoon."
+      ],
+      [
+        "Você estava no parque no sábado?",
+        "Were you at the park on Saturday?"
+      ],
+      [
+        "Visitei meus avós no fim de semana passado.",
+        "I visited my grandparents last weekend."
+      ],
+      [
+        "Jogamos tênis no domingo à tarde.",
+        "We played tennis on Sunday afternoon."
+      ],
+      [
+        "Ele trabalhou até tarde na sexta-feira.",
+        "He worked late on Friday night."
+      ],
+      [
+        "Fiquei em casa e descansei a noite inteira.",
+        "I stayed home and relaxed all evening."
+      ],
+      [
+        "Ela estudou inglês por uma hora ontem à noite.",
+        "She studied English for an hour last night."
+      ]
+    ]
+  },
+  {
+    "title": "A trip",
+    "goal": "Contar como foi uma viagem, falar sobre transporte, passeios e experiências no passado, usando verbos irregulares e fazendo perguntas e negativas com did.",
+    "speakers": {
+      "Emma": "f",
+      "Daniel": "m"
+    },
+    "setting": "Na segunda-feira, Emma e Daniel conversam durante o almoço sobre a viagem que Daniel fez a Chicago no fim de semana.",
+    "lines": [
+      [
+        "Emma",
+        "Hey, Daniel! How was your trip to Chicago?",
+        "Oi, Daniel! Como foi sua viagem a Chicago?"
+      ],
+      [
+        "Daniel",
+        "It was amazing! I went there with my brother.",
+        "Foi incrível! Fui para lá com meu irmão."
+      ],
+      [
+        "Emma",
+        "Nice! Did you fly or take the train?",
+        "Que legal! Vocês foram de avião ou de trem?"
+      ],
+      [
+        "Daniel",
+        "We flew on Friday morning. The flight was short.",
+        "Fomos de avião na sexta de manhã. O voo foi curto."
+      ],
+      [
+        "Emma",
+        "What did you do on Saturday?",
+        "O que vocês fizeram no sábado?"
+      ],
+      [
+        "Daniel",
+        "We took a boat tour and saw the city from the river.",
+        "Fizemos um passeio de barco e vimos a cidade do rio."
+      ],
+      [
+        "Emma",
+        "That sounds great! Did you eat anything special?",
+        "Parece ótimo! Vocês comeram alguma coisa diferente?"
+      ],
+      [
+        "Daniel",
+        "Yes, we ate deep-dish pizza. It was delicious!",
+        "Sim, comemos pizza de massa grossa. Estava deliciosa!"
+      ],
+      [
+        "Emma",
+        "Did you buy any souvenirs?",
+        "Vocês compraram alguma lembrancinha?"
+      ],
+      [
+        "Daniel",
+        "No, I didn't. I didn't have much time.",
+        "Não, eu não comprei. Não tive muito tempo."
+      ],
+      [
+        "Emma",
+        "Where did you stay?",
+        "Onde vocês ficaram hospedados?"
+      ],
+      [
+        "Daniel",
+        "We stayed at a small hotel downtown.",
+        "Ficamos em um hotel pequeno no centro."
+      ],
+      [
+        "Emma",
+        "When did you come back?",
+        "Quando vocês voltaram?"
+      ],
+      [
+        "Daniel",
+        "We came back on Sunday night. I was tired, but happy.",
+        "Voltamos no domingo à noite. Eu estava cansado, mas feliz."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Past simple: verbos irregulares",
+        "p": [
+          "Na unidade anterior, vimos verbos regulares, que geralmente recebem <b>-ed</b> no passado: work → worked, visit → visited. Mas muitos verbos comuns são <b>irregulares</b> e mudam de forma.",
+          "Por exemplo, go vira <b>went</b>, see vira <b>saw</b> e eat vira <b>ate</b>. Não existe uma regra única para essas mudanças: você precisa aprender as formas mais frequentes.",
+          "Assim como nos verbos regulares, a forma do passado é igual para todas as pessoas: I went, she went, we went."
+        ],
+        "ex": [
+          [
+            "I went to Chicago last weekend.",
+            "Fui a Chicago no fim de semana passado."
+          ],
+          [
+            "We saw the city from the river.",
+            "Vimos a cidade do rio."
+          ],
+          [
+            "She ate pizza for dinner.",
+            "Ela comeu pizza no jantar."
+          ],
+          [
+            "They took the train yesterday.",
+            "Eles pegaram o trem ontem."
+          ]
+        ],
+        "tip": "Não acrescente <b>-ed</b> a um verbo que já tem forma irregular. O passado de go é went, nunca “goed”."
+      },
+      {
+        "h": "Perguntas no passado com did",
+        "p": [
+          "Para fazer perguntas sobre ações no passado, use <b>did</b> antes da pessoa e coloque o verbo principal na <b>forma base</b>, sem to.",
+          "A estrutura é: <b>Did + pessoa + verbo base?</b> Para perguntas com what, where, when ou how, coloque essa palavra no começo.",
+          "O did já indica o passado. Por isso, o verbo principal volta à forma base: <b>Did you go?</b>, e não “Did you went?”."
+        ],
+        "ex": [
+          [
+            "Did you fly to Chicago?",
+            "Você foi de avião para Chicago?"
+          ],
+          [
+            "What did you do on Saturday?",
+            "O que você fez no sábado?"
+          ],
+          [
+            "Where did she stay?",
+            "Onde ela ficou hospedada?"
+          ],
+          [
+            "When did they come back?",
+            "Quando eles voltaram?"
+          ]
+        ],
+        "tip": "Com <b>did</b>, use sempre a forma base do verbo: did + go, did + eat, did + see."
+      },
+      {
+        "h": "Negativas e respostas curtas com didn't",
+        "p": [
+          "Para dizer que uma ação não aconteceu, usamos <b>did not</b>, geralmente contraído para <b>didn't</b>, seguido do verbo na forma base.",
+          "A estrutura é: <b>Pessoa + didn't + verbo base</b>. Por exemplo, I didn't go significa “Eu não fui”.",
+          "Para responder a perguntas com did, use <b>Yes, I did</b> ou <b>No, I didn't</b>, ajustando a pessoa conforme necessário."
+        ],
+        "ex": [
+          [
+            "I didn't buy any souvenirs.",
+            "Não comprei nenhuma lembrancinha."
+          ],
+          [
+            "We didn't go by bus.",
+            "Não fomos de ônibus."
+          ],
+          [
+            "Did you eat breakfast? Yes, I did.",
+            "Você tomou café da manhã? Sim."
+          ],
+          [
+            "Did she fly? No, she didn't.",
+            "Ela foi de avião? Não."
+          ]
+        ],
+        "tip": "Não diga “I didn't bought”. O correto é <b>I didn't buy</b>. O didn't já coloca a frase no passado."
+      },
+      {
+        "h": "Did ou was/were?",
+        "p": [
+          "Use <b>did</b> para fazer perguntas sobre ações, como go, eat, buy e visit. Use <b>was/were</b> quando o verbo principal da frase for to be.",
+          "Compare: <b>Did you visit Chicago?</b> pergunta se a pessoa visitou a cidade. <b>Were you in Chicago?</b> pergunta se ela estava lá.",
+          "Nas negativas, a diferença continua: I didn't visit Chicago e I wasn't in Chicago."
+        ],
+        "ex": [
+          [
+            "Did you enjoy the trip?",
+            "Você gostou da viagem?"
+          ],
+          [
+            "Was the hotel comfortable?",
+            "O hotel era confortável?"
+          ],
+          [
+            "We didn't visit the museum.",
+            "Não visitamos o museu."
+          ],
+          [
+            "The flight wasn't long.",
+            "O voo não foi longo."
+          ]
+        ],
+        "tip": "Nunca misture did com was ou were na mesma estrutura: <b>Were you tired?</b>, e não “Did you were tired?”."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Verbos irregulares: presente e passado",
+        "items": [
+          [
+            "go → went",
+            "ir → foi, fui"
+          ],
+          [
+            "fly → flew",
+            "voar → voou, voei"
+          ],
+          [
+            "take → took",
+            "pegar, levar → pegou, levou"
+          ],
+          [
+            "see → saw",
+            "ver → viu, vi"
+          ],
+          [
+            "eat → ate",
+            "comer → comeu, comi"
+          ],
+          [
+            "buy → bought",
+            "comprar → comprou, comprei"
+          ],
+          [
+            "have → had",
+            "ter → teve, tive"
+          ],
+          [
+            "come → came",
+            "vir, voltar → veio, voltou"
+          ],
+          [
+            "get → got",
+            "conseguir, chegar → conseguiu, chegou"
+          ],
+          [
+            "make → made",
+            "fazer, criar → fez, criou"
+          ]
+        ]
+      },
+      {
+        "h": "Viagens, transporte e passeios",
+        "items": [
+          [
+            "trip",
+            "viagem"
+          ],
+          [
+            "flight",
+            "voo"
+          ],
+          [
+            "train",
+            "trem"
+          ],
+          [
+            "boat tour",
+            "passeio de barco"
+          ],
+          [
+            "river",
+            "rio"
+          ],
+          [
+            "hotel",
+            "hotel"
+          ],
+          [
+            "downtown",
+            "centro da cidade"
+          ],
+          [
+            "souvenir",
+            "lembrancinha de viagem"
+          ],
+          [
+            "airport",
+            "aeroporto"
+          ],
+          [
+            "ticket",
+            "passagem, ingresso"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "Did you: a pronúncia natural",
+        "p": "Na fala rápida, <b>did you</b> costuma soar como “dídju”. Isso acontece porque o D final de did se junta ao som de Y em you. Em <b>Did you go?</b>, você pode ouvir algo próximo de “dídju gôu?”.",
+        "w": [
+          "did you",
+          "Did you go?",
+          "Did you eat?"
+        ]
+      },
+      {
+        "h": "Flew e flight",
+        "p": "<b>Flew</b>, passado de fly, soa aproximadamente “flú”, com um U longo. Já <b>flight</b> tem o som de “ai”: “fláit”. São palavras relacionadas, mas com sons diferentes.",
+        "w": [
+          "fly",
+          "flew",
+          "flight"
+        ]
+      },
+      {
+        "h": "Ate e eight",
+        "p": "No inglês americano, <b>ate</b>, passado de eat, geralmente soa “êit”. Tem a mesma pronúncia de <b>eight</b>, o número oito. Já <b>eat</b> soa aproximadamente “íit”, com um I longo.",
+        "w": [
+          "eat",
+          "ate",
+          "eight"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Como Daniel e o irmão viajaram para Chicago?",
+        "o": [
+          "De trem",
+          "De ônibus",
+          "De avião"
+        ],
+        "a": 2,
+        "e": "We flew on Friday morning. The flight was short."
+      },
+      {
+        "q": "O que Daniel e o irmão fizeram no sábado?",
+        "o": [
+          "Um passeio de barco",
+          "Uma visita a um museu",
+          "Um passeio de trem"
+        ],
+        "a": 0,
+        "e": "We took a boat tour and saw the city from the river."
+      },
+      {
+        "q": "O que Daniel comeu durante a viagem?",
+        "o": [
+          "Hambúrguer",
+          "Pizza de massa grossa",
+          "Sanduíche de frango"
+        ],
+        "a": 1,
+        "e": "Yes, we ate deep-dish pizza. It was delicious!"
+      },
+      {
+        "q": "Por que Daniel não comprou lembrancinhas?",
+        "o": [
+          "Porque eram muito caras",
+          "Porque não encontrou nenhuma",
+          "Porque não teve muito tempo"
+        ],
+        "a": 2,
+        "e": "No, I didn't. I didn't have much time."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Last weekend, I ___ to Chicago.",
+        "a": [
+          "went"
+        ],
+        "h": "No fim de semana passado, fui a Chicago."
+      },
+      {
+        "s": "Did you ___ any souvenirs?",
+        "a": [
+          "buy"
+        ],
+        "h": "Você comprou alguma lembrancinha?"
+      },
+      {
+        "s": "We ___ a boat tour on Saturday.",
+        "a": [
+          "took"
+        ],
+        "h": "Fizemos um passeio de barco no sábado."
+      },
+      {
+        "s": "I didn't ___ much time to shop.",
+        "a": [
+          "have"
+        ],
+        "h": "Não tive muito tempo para fazer compras."
+      },
+      {
+        "s": "What ___ you do on Saturday?",
+        "a": [
+          "did"
+        ],
+        "h": "O que você fez no sábado?"
+      },
+      {
+        "s": "She didn't ___ to Chicago last year.",
+        "a": [
+          "go"
+        ],
+        "h": "Ela não foi a Chicago no ano passado."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "Did",
+          "you",
+          "take",
+          "the",
+          "train?"
+        ],
+        "h": "Você pegou o trem?"
+      },
+      {
+        "t": [
+          "We",
+          "ate",
+          "pizza",
+          "on",
+          "Saturday",
+          "night."
+        ],
+        "h": "Comemos pizza no sábado à noite."
+      },
+      {
+        "t": [
+          "I",
+          "didn't",
+          "buy",
+          "any",
+          "souvenirs."
+        ],
+        "h": "Não comprei nenhuma lembrancinha."
+      }
+    ],
+    "dict": [
+      {
+        "t": "I went there with my brother."
+      },
+      {
+        "t": "Did you fly or take the train?"
+      },
+      {
+        "t": "We took a boat tour.",
+        "note": "Atenção ao passado irregular de take."
+      },
+      {
+        "t": "I didn't have much time.",
+        "alt": [
+          "I did not have much time."
+        ]
+      },
+      {
+        "t": "We came back on Sunday night."
+      }
+    ],
+    "shadow": [
+      "Hey, Daniel! How was your trip to Chicago?",
+      "We took a boat tour and saw the city from the river.",
+      "Did you buy any souvenirs?",
+      "We came back on Sunday night. I was tired, but happy."
+    ],
+    "write": {
+      "task": "Conte sobre uma viagem que você fez. Escreva de 4 a 5 frases dizendo para onde foi, como viajou, o que viu ou comeu e se gostou da experiência. Use pelo menos três verbos irregulares no passado e uma frase negativa com didn't.",
+      "ph": "Last year, I went to … I traveled by … I saw … I ate … I didn't …"
+    },
+    "cards": [
+      [
+        "Fui a Chicago no mês passado.",
+        "I went to Chicago last month."
+      ],
+      [
+        "Fomos de avião na sexta-feira.",
+        "We flew on Friday."
+      ],
+      [
+        "Você pegou o trem?",
+        "Did you take the train?"
+      ],
+      [
+        "Vimos a cidade do barco.",
+        "We saw the city from the boat."
+      ],
+      [
+        "Comi pizza no jantar.",
+        "I ate pizza for dinner."
+      ],
+      [
+        "Onde você ficou hospedado?",
+        "Where did you stay?"
+      ],
+      [
+        "Não compramos nenhuma lembrancinha.",
+        "We didn't buy any souvenirs."
+      ],
+      [
+        "Você gostou da viagem?",
+        "Did you enjoy the trip?"
+      ],
+      [
+        "Voltei para casa no domingo.",
+        "I came home on Sunday."
+      ],
+      [
+        "Não tive muito tempo.",
+        "I didn't have much time."
+      ]
+    ]
+  },
+  {
+    "title": "Life stories",
+    "goal": "Contar uma biografia curta, falar sobre acontecimentos importantes da vida e dizer quando algo aconteceu usando ago, when, in + ano e verbos no passado.",
+    "speakers": {
+      "Sarah": "f",
+      "Emma": "f"
+    },
+    "setting": "Sarah visita Emma em uma tarde de sábado. Enquanto olham um álbum de fotos, Emma conta a história de vida de sua avó.",
+    "lines": [
+      [
+        "Sarah",
+        "Who's that in the old photo?",
+        "Quem é aquela na foto antiga?"
+      ],
+      [
+        "Emma",
+        "That's my grandma. She was born in 1958.",
+        "É minha avó. Ela nasceu em 1958."
+      ],
+      [
+        "Sarah",
+        "Really? Where did she grow up?",
+        "Sério? Onde ela cresceu?"
+      ],
+      [
+        "Emma",
+        "She grew up in a small town in Ohio.",
+        "Ela cresceu em uma cidade pequena em Ohio."
+      ],
+      [
+        "Sarah",
+        "When did she move to Boston?",
+        "Quando ela se mudou para Boston?"
+      ],
+      [
+        "Emma",
+        "She moved there in 1980, when she was 22.",
+        "Ela se mudou para lá em 1980, quando tinha 22 anos."
+      ],
+      [
+        "Sarah",
+        "What did she do in Boston?",
+        "O que ela fez em Boston?"
+      ],
+      [
+        "Emma",
+        "She studied nursing and started working at a hospital.",
+        "Ela estudou enfermagem e começou a trabalhar em um hospital."
+      ],
+      [
+        "Sarah",
+        "Did she meet your grandpa there?",
+        "Ela conheceu seu avô lá?"
+      ],
+      [
+        "Emma",
+        "Yes, they met in 1983 and got married two years later.",
+        "Sim, eles se conheceram em 1983 e se casaram dois anos depois."
+      ],
+      [
+        "Sarah",
+        "Did she work there for a long time?",
+        "Ela trabalhou lá por muito tempo?"
+      ],
+      [
+        "Emma",
+        "Yes, for 35 years. She retired five years ago.",
+        "Sim, por 35 anos. Ela se aposentou há cinco anos."
+      ],
+      [
+        "Sarah",
+        "Does she still live in Boston?",
+        "Ela ainda mora em Boston?"
+      ],
+      [
+        "Emma",
+        "No, she moved to Florida last year. She loves the beach.",
+        "Não, ela se mudou para a Flórida no ano passado. Ela adora a praia."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "In + ano: quando algo aconteceu",
+        "p": [
+          "Para dizer em que ano um acontecimento ocorreu, usamos <b>in + ano</b>. Essa estrutura é muito comum ao contar histórias de vida.",
+          "Use o verbo no passado para ações concluídas: <b>She moved in 1980</b> (Ela se mudou em 1980).",
+          "Para dizer quando alguém nasceu, usamos <b>was born</b> ou <b>were born</b>. A expressão born não muda."
+        ],
+        "ex": [
+          [
+            "My mother was born in 1965.",
+            "Minha mãe nasceu em 1965."
+          ],
+          [
+            "He moved to New York in 2010.",
+            "Ele se mudou para Nova York em 2010."
+          ],
+          [
+            "They met in 1998.",
+            "Eles se conheceram em 1998."
+          ],
+          [
+            "We were born in 2001.",
+            "Nós nascemos em 2001."
+          ]
+        ],
+        "tip": "Use <b>in</b> com anos: in 1990, in 2015. Não use on ou at antes de um ano isolado."
+      },
+      {
+        "h": "Ago: há quanto tempo",
+        "p": [
+          "Usamos <b>ago</b> para dizer quanto tempo se passou desde um acontecimento. Em português, geralmente corresponde a “há” ou “atrás”.",
+          "A estrutura é <b>quantidade de tempo + ago</b>: two days ago, five years ago, a month ago.",
+          "O ago aparece depois da expressão de tempo. Ele conta o tempo para trás a partir de agora e costuma acompanhar o past simple."
+        ],
+        "ex": [
+          [
+            "I started this job three years ago.",
+            "Comecei neste emprego há três anos."
+          ],
+          [
+            "She called me two hours ago.",
+            "Ela me ligou há duas horas."
+          ],
+          [
+            "We moved here a month ago.",
+            "Nós nos mudamos para cá há um mês."
+          ],
+          [
+            "He retired ten years ago.",
+            "Ele se aposentou há dez anos."
+          ]
+        ],
+        "tip": "Não confunda <b>ago</b> com <b>for</b>: three years ago indica quando algo aconteceu; for three years indica uma duração."
+      },
+      {
+        "h": "When: quando aconteceu?",
+        "p": [
+          "Usamos <b>when</b> para perguntar quando um acontecimento ocorreu. No past simple, a estrutura é <b>When + did + pessoa + verbo base?</b>.",
+          "Também usamos when para conectar dois fatos do passado. Nesse caso, significa “quando” e pode aparecer no meio ou no começo da frase.",
+          "Para indicar a idade em que algo aconteceu, use <b>when I was</b>, <b>when she was</b> ou <b>when they were</b>."
+        ],
+        "ex": [
+          [
+            "When did you finish school?",
+            "Quando você terminou a escola?"
+          ],
+          [
+            "When did they get married?",
+            "Quando eles se casaram?"
+          ],
+          [
+            "I moved when I was 20.",
+            "Eu me mudei quando tinha 20 anos."
+          ],
+          [
+            "When she was young, she lived in Ohio.",
+            "Quando era jovem, ela morava em Ohio."
+          ]
+        ],
+        "tip": "Em perguntas, use <b>When did she move?</b>. Em frases afirmativas, não use did: <b>She moved when she was 22.</b>"
+      },
+      {
+        "h": "Contando uma biografia em ordem",
+        "p": [
+          "Para contar uma história de vida, organize os fatos do mais antigo para o mais recente. Você pode começar com <b>was born</b> (nasceu) e <b>grew up</b> (cresceu).",
+          "Depois, conte os acontecimentos importantes com verbos no passado, como studied, moved, met, started e worked.",
+          "Use <b>then</b> (então, depois), <b>later</b> (mais tarde) e <b>after that</b> (depois disso) para organizar a sequência. A expressão two years later significa “dois anos depois” de um acontecimento já mencionado."
+        ],
+        "ex": [
+          [
+            "She was born in a small town.",
+            "Ela nasceu em uma cidade pequena."
+          ],
+          [
+            "He grew up near the beach.",
+            "Ele cresceu perto da praia."
+          ],
+          [
+            "She studied English and then moved abroad.",
+            "Ela estudou inglês e depois se mudou para o exterior."
+          ],
+          [
+            "They met in 2005 and married three years later.",
+            "Eles se conheceram em 2005 e se casaram três anos depois."
+          ]
+        ],
+        "tip": "<b>Ago</b> conta o tempo a partir de agora. <b>Later</b> indica um momento posterior a outro acontecimento da história."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Acontecimentos importantes da vida",
+        "items": [
+          [
+            "be born → was/were born",
+            "nascer → nasceu, nasci"
+          ],
+          [
+            "grow up → grew up",
+            "crescer → cresceu, cresci"
+          ],
+          [
+            "move → moved",
+            "mudar-se → mudou-se"
+          ],
+          [
+            "study → studied",
+            "estudar → estudou"
+          ],
+          [
+            "meet → met",
+            "conhecer alguém → conheceu"
+          ],
+          [
+            "get married → got married",
+            "casar-se → casou-se"
+          ],
+          [
+            "start → started",
+            "começar → começou"
+          ],
+          [
+            "retire → retired",
+            "aposentar-se → aposentou-se"
+          ],
+          [
+            "graduate → graduated",
+            "formar-se → formou-se"
+          ],
+          [
+            "live → lived",
+            "morar → morou"
+          ]
+        ]
+      },
+      {
+        "h": "Tempo e fases da vida",
+        "items": [
+          [
+            "a year ago",
+            "há um ano"
+          ],
+          [
+            "five years ago",
+            "há cinco anos"
+          ],
+          [
+            "two years later",
+            "dois anos depois"
+          ],
+          [
+            "when I was young",
+            "quando eu era jovem"
+          ],
+          [
+            "in 1995",
+            "em 1995"
+          ],
+          [
+            "childhood",
+            "infância"
+          ],
+          [
+            "teenager",
+            "adolescente"
+          ],
+          [
+            "adult",
+            "adulto"
+          ],
+          [
+            "after that",
+            "depois disso"
+          ],
+          [
+            "a long time ago",
+            "há muito tempo"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "Born",
+        "p": "Em <b>born</b>, o R é pronunciado no inglês americano. A palavra soa aproximadamente “bórn”, com a língua se curvando para produzir o R. Não pronuncie como “bón”.",
+        "w": [
+          "born",
+          "was born",
+          "were born"
+        ]
+      },
+      {
+        "h": "Grew up",
+        "p": "<b>Grew</b>, passado de grow, soa aproximadamente “grú”, com U longo. Na expressão <b>grew up</b>, as duas palavras se conectam naturalmente na fala: “grú-âp”.",
+        "w": [
+          "grow",
+          "grew",
+          "grew up"
+        ]
+      },
+      {
+        "h": "Ago: a sílaba forte",
+        "p": "Em <b>ago</b>, a segunda sílaba é a mais forte: “a-GÔU”. A primeira é curta e fraca. Em <b>years ago</b>, a expressão soa aproximadamente “yírz a-GÔU”.",
+        "w": [
+          "ago",
+          "years ago",
+          "a month ago"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Em que ano a avó de Emma nasceu?",
+        "o": [
+          "Em 1980",
+          "Em 1958",
+          "Em 1983"
+        ],
+        "a": 1,
+        "e": "That's my grandma. She was born in 1958."
+      },
+      {
+        "q": "Onde a avó de Emma cresceu?",
+        "o": [
+          "Em uma cidade pequena em Ohio",
+          "No centro de Boston",
+          "Na Flórida"
+        ],
+        "a": 0,
+        "e": "She grew up in a small town in Ohio."
+      },
+      {
+        "q": "Quando os avós de Emma se conheceram?",
+        "o": [
+          "Em 1980",
+          "Em 1985",
+          "Em 1983"
+        ],
+        "a": 2,
+        "e": "Yes, they met in 1983 and got married two years later."
+      },
+      {
+        "q": "Há quanto tempo a avó de Emma se aposentou?",
+        "o": [
+          "Há 35 anos",
+          "Há cinco anos",
+          "Há um ano"
+        ],
+        "a": 1,
+        "e": "Yes, for 35 years. She retired five years ago."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "My grandfather was born ___ 1948.",
+        "a": [
+          "in"
+        ],
+        "h": "Meu avô nasceu em 1948."
+      },
+      {
+        "s": "She retired five years ___.",
+        "a": [
+          "ago"
+        ],
+        "h": "Ela se aposentou há cinco anos."
+      },
+      {
+        "s": "___ did your parents get married?",
+        "a": [
+          "When"
+        ],
+        "h": "Quando seus pais se casaram?"
+      },
+      {
+        "s": "He ___ up in a small town.",
+        "a": [
+          "grew"
+        ],
+        "h": "Ele cresceu em uma cidade pequena."
+      },
+      {
+        "s": "I moved to Boston when I ___ 20.",
+        "a": [
+          "was"
+        ],
+        "h": "Eu me mudei para Boston quando tinha 20 anos."
+      },
+      {
+        "s": "They met in 2000 and married two years ___.",
+        "a": [
+          "later"
+        ],
+        "h": "Eles se conheceram em 2000 e se casaram dois anos depois."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "She",
+          "was",
+          "born",
+          "in",
+          "1985."
+        ],
+        "h": "Ela nasceu em 1985."
+      },
+      {
+        "t": [
+          "When",
+          "did",
+          "you",
+          "move",
+          "here?"
+        ],
+        "h": "Quando você se mudou para cá?"
+      },
+      {
+        "t": [
+          "He",
+          "retired",
+          "five",
+          "years",
+          "ago."
+        ],
+        "h": "Ele se aposentou há cinco anos."
+      }
+    ],
+    "dict": [
+      {
+        "t": "She was born in 1958."
+      },
+      {
+        "t": "She grew up in a small town in Ohio.",
+        "note": "Atenção à forma irregular grew, passado de grow."
+      },
+      {
+        "t": "When did she move to Boston?"
+      },
+      {
+        "t": "They met in 1983 and got married two years later."
+      },
+      {
+        "t": "She retired five years ago."
+      }
+    ],
+    "shadow": [
+      "That's my grandma. She was born in 1958.",
+      "She moved there in 1980, when she was 22.",
+      "Yes, they met in 1983 and got married two years later.",
+      "No, she moved to Florida last year. She loves the beach."
+    ],
+    "write": {
+      "task": "Escreva uma biografia curta de alguém da sua família ou de uma pessoa que você admira. Use de 4 a 5 frases. Conte quando e onde a pessoa nasceu, onde cresceu e dois acontecimentos importantes da vida dela. Inclua in + ano, when e ago, se possível.",
+      "ph": "My … was born in … in … She/He grew up in … When she/he was …, … A few years ago, …"
+    },
+    "cards": [
+      [
+        "Meu pai nasceu em 1970.",
+        "My father was born in 1970."
+      ],
+      [
+        "Ela cresceu perto do mar.",
+        "She grew up near the ocean."
+      ],
+      [
+        "Meus pais se conheceram em 1995.",
+        "My parents met in 1995."
+      ],
+      [
+        "Quando você terminou a escola?",
+        "When did you finish school?"
+      ],
+      [
+        "Comecei meu primeiro emprego em 2019.",
+        "I started my first job in 2019."
+      ],
+      [
+        "Ele se mudou para cá há seis meses.",
+        "He moved here six months ago."
+      ],
+      [
+        "Conheci minha melhor amiga há três anos.",
+        "I met my best friend three years ago."
+      ],
+      [
+        "Eles se casaram em 2010.",
+        "They got married in 2010."
+      ],
+      [
+        "Ela se aposentou no ano passado.",
+        "She retired last year."
+      ],
+      [
+        "Nós nos mudamos para outra cidade quando eu tinha dez anos.",
+        "We moved to another city when I was ten."
+      ]
+    ]
+  },
+  {
+    "title": "Shopping",
+    "goal": "Comparar roupas, preços e tamanhos, dizer quando algo é grande ou pequeno demais e explicar se uma peça é confortável ou adequada usando comparativos, as...as, too e enough.",
+    "speakers": {
+      "Sarah": "f",
+      "Emma": "f"
+    },
+    "setting": "Sarah e Emma estão em uma loja de roupas no shopping, em uma tarde de sábado. Sarah procura uma jaqueta nova e aproveita para experimentar algumas peças.",
+    "lines": [
+      [
+        "Sarah",
+        "Hey, Emma! What do you think of this blue jacket?",
+        "Ei, Emma! O que você acha desta jaqueta azul?"
+      ],
+      [
+        "Emma",
+        "It looks nice, but is it the right size?",
+        "Ela é bonita, mas é do tamanho certo?"
+      ],
+      [
+        "Sarah",
+        "No, it's too small. The black one is bigger.",
+        "Não, é pequena demais. A preta é maior."
+      ],
+      [
+        "Emma",
+        "Try it on. It looks more comfortable, too.",
+        "Experimenta. Ela também parece mais confortável."
+      ],
+      [
+        "Sarah",
+        "It is, but it's more expensive than the blue one.",
+        "É mesmo, mas é mais cara que a azul."
+      ],
+      [
+        "Emma",
+        "How much are they?",
+        "Quanto custam?"
+      ],
+      [
+        "Sarah",
+        "The black one is $85, and the blue one is $60.",
+        "A preta custa 85 dólares, e a azul custa 60."
+      ],
+      [
+        "Emma",
+        "Is the black one warmer?",
+        "A preta é mais quente?"
+      ],
+      [
+        "Sarah",
+        "Yes, but it isn't as light as the blue one.",
+        "Sim, mas não é tão leve quanto a azul."
+      ],
+      [
+        "Emma",
+        "Your old jacket isn't warm enough, right?",
+        "Sua jaqueta antiga não esquenta o suficiente, né?"
+      ],
+      [
+        "Sarah",
+        "Right. The black one is better for winter.",
+        "Isso. A preta é melhor para o inverno."
+      ],
+      [
+        "Emma",
+        "What about these jeans? They're cheaper than those.",
+        "E esta calça jeans? É mais barata que aquela."
+      ],
+      [
+        "Sarah",
+        "They're nice, but they're too long for me.",
+        "É bonita, mas é comprida demais para mim."
+      ],
+      [
+        "Emma",
+        "Let's find a shorter pair in your size.",
+        "Vamos procurar uma calça mais curta do seu tamanho."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Comparativos com -er",
+        "p": [
+          "Para comparar duas coisas, usamos o <b>comparativo</b>. Com adjetivos curtos, geralmente acrescentamos <b>-er</b>: cheap → cheaper (mais barato), small → smaller (menor), warm → warmer (mais quente).",
+          "Para dizer com o que estamos comparando, usamos <b>than</b> (do que): This jacket is cheaper than that one.",
+          "Alguns adjetivos mudam a escrita: big → bigger (dobra a consoante final), nice → nicer (só acrescenta -r) e easy → easier (troca y por -ier)."
+        ],
+        "ex": [
+          [
+            "The black jacket is bigger.",
+            "A jaqueta preta é maior."
+          ],
+          [
+            "These jeans are shorter than those.",
+            "Esta calça jeans é mais curta que aquela."
+          ],
+          [
+            "This T-shirt is cheaper than that one.",
+            "Esta camiseta é mais barata que aquela."
+          ],
+          [
+            "The blue shirt is nicer than the green one.",
+            "A camisa azul é mais bonita que a verde."
+          ]
+        ],
+        "tip": "Para comparar duas peças, use <b>than</b>, não then. Than significa “do que”; then significa “então” ou “depois”."
+      },
+      {
+        "h": "More + adjetivo e comparativos irregulares",
+        "p": [
+          "Com adjetivos mais longos, normalmente usamos <b>more + adjetivo</b>: more expensive (mais caro), more comfortable (mais confortável). Não acrescentamos -er nesses casos.",
+          "Alguns comparativos são irregulares: <b>good → better</b> (bom → melhor) e <b>bad → worse</b> (ruim → pior).",
+          "Para não repetir o nome de uma peça, podemos usar <b>one</b> no singular e <b>ones</b> no plural: the black one (a preta), the cheaper ones (os mais baratos)."
+        ],
+        "ex": [
+          [
+            "This coat is more expensive than that one.",
+            "Este casaco é mais caro que aquele."
+          ],
+          [
+            "These shoes are more comfortable.",
+            "Estes sapatos são mais confortáveis."
+          ],
+          [
+            "The black jacket is better for winter.",
+            "A jaqueta preta é melhor para o inverno."
+          ],
+          [
+            "These jeans are worse than my old ones.",
+            "Esta calça jeans é pior que a minha antiga."
+          ]
+        ],
+        "tip": "Não diga “more cheaper” nem “more better”. Use apenas <b>cheaper</b> e <b>better</b>."
+      },
+      {
+        "h": "As...as: tão...quanto",
+        "p": [
+          "Para dizer que duas coisas têm a mesma característica, usamos <b>as + adjetivo + as</b>. Essa estrutura corresponde a “tão...quanto”.",
+          "Para dizer que uma coisa não tem a mesma característica da outra, usamos <b>not as + adjetivo + as</b>: It isn't as light as the blue one (Não é tão leve quanto a azul).",
+          "Podemos acrescentar <b>just</b> antes do primeiro as para reforçar a igualdade: just as comfortable (tão confortável quanto)."
+        ],
+        "ex": [
+          [
+            "This shirt is as nice as that one.",
+            "Esta camisa é tão bonita quanto aquela."
+          ],
+          [
+            "The black jacket isn't as light as the blue one.",
+            "A jaqueta preta não é tão leve quanto a azul."
+          ],
+          [
+            "These shoes are just as comfortable as those.",
+            "Estes sapatos são tão confortáveis quanto aqueles."
+          ]
+        ],
+        "tip": "Na estrutura <b>as...as</b>, o adjetivo fica na forma normal: as cheap as, não “as cheaper as”."
+      },
+      {
+        "h": "Too e enough: demais ou suficiente",
+        "p": [
+          "Usamos <b>too + adjetivo</b> quando algo ultrapassa o limite desejado: too small (pequeno demais), too expensive (caro demais). Geralmente indica um problema.",
+          "Usamos <b>adjetivo + enough</b> para dizer que algo tem uma característica na medida necessária: warm enough (quente o suficiente). Na negativa, indica que não é suficiente.",
+          "Com substantivos, a ordem muda: <b>enough + substantivo</b>, como enough money (dinheiro suficiente) ou enough time (tempo suficiente)."
+        ],
+        "ex": [
+          [
+            "These jeans are too long.",
+            "Esta calça jeans é comprida demais."
+          ],
+          [
+            "My jacket isn't warm enough.",
+            "Minha jaqueta não esquenta o suficiente."
+          ],
+          [
+            "These shoes are comfortable enough.",
+            "Estes sapatos são confortáveis o suficiente."
+          ],
+          [
+            "I don't have enough money for that coat.",
+            "Não tenho dinheiro suficiente para aquele casaco."
+          ]
+        ],
+        "tip": "A posição importa: <b>too small</b>, mas <b>small enough</b>. Enough vem depois do adjetivo e antes do substantivo."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Roupas e acessórios",
+        "items": [
+          [
+            "jacket",
+            "jaqueta"
+          ],
+          [
+            "coat",
+            "casaco"
+          ],
+          [
+            "sweater",
+            "suéter, blusa de frio"
+          ],
+          [
+            "T-shirt",
+            "camiseta"
+          ],
+          [
+            "shirt",
+            "camisa"
+          ],
+          [
+            "jeans",
+            "calça jeans"
+          ],
+          [
+            "pants",
+            "calça"
+          ],
+          [
+            "dress",
+            "vestido"
+          ],
+          [
+            "sneakers",
+            "tênis"
+          ],
+          [
+            "fitting room",
+            "provador"
+          ]
+        ]
+      },
+      {
+        "h": "Tamanhos, caimento e compras",
+        "items": [
+          [
+            "size",
+            "tamanho"
+          ],
+          [
+            "small",
+            "pequeno, tamanho P"
+          ],
+          [
+            "medium",
+            "médio, tamanho M"
+          ],
+          [
+            "large",
+            "grande, tamanho G"
+          ],
+          [
+            "tight",
+            "apertado, justo"
+          ],
+          [
+            "loose",
+            "folgado, largo"
+          ],
+          [
+            "long",
+            "comprido"
+          ],
+          [
+            "short",
+            "curto"
+          ],
+          [
+            "on sale",
+            "em promoção"
+          ],
+          [
+            "try on",
+            "experimentar uma roupa"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "Than: o som do TH",
+        "p": "Em <b>than</b>, o TH é sonoro: coloque a ponta da língua levemente entre os dentes e produza o som com a voz. Em uma fala cuidadosa, a palavra soa aproximadamente “dhén”; na fala rápida, a vogal costuma ficar mais fraca, como em “dhân”.",
+        "w": [
+          "than",
+          "cheaper than",
+          "bigger than",
+          "better than"
+        ]
+      },
+      {
+        "h": "Comfortable",
+        "p": "No inglês americano, <b>comfortable</b> costuma ter três sílabas na fala natural, aproximadamente “CÂMF-ter-bol”. A primeira sílaba é a mais forte. Evite pronunciar todas as letras separadamente.",
+        "w": [
+          "comfortable",
+          "more comfortable",
+          "comfortable enough"
+        ]
+      },
+      {
+        "h": "Size e sizes",
+        "p": "<b>Size</b> soa aproximadamente “sáiz”, com Z no final. No plural, <b>sizes</b> soa “SÁI-ziz”, com uma sílaba extra. Lembre que o S entre vogais costuma ter som de Z nessas palavras.",
+        "w": [
+          "size",
+          "sizes",
+          "right size",
+          "larger size"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Por que Sarah não quer a jaqueta azul?",
+        "o": [
+          "Porque é cara demais",
+          "Porque é pequena demais",
+          "Porque não gosta da cor"
+        ],
+        "a": 1,
+        "e": "No, it's too small. The black one is bigger."
+      },
+      {
+        "q": "Quanto custa a jaqueta preta?",
+        "o": [
+          "60 dólares",
+          "75 dólares",
+          "85 dólares"
+        ],
+        "a": 2,
+        "e": "The black one is $85, and the blue one is $60."
+      },
+      {
+        "q": "Por que Sarah considera a jaqueta preta melhor para o inverno?",
+        "o": [
+          "Porque ela é mais quente",
+          "Porque ela é mais leve",
+          "Porque ela é mais barata"
+        ],
+        "a": 0,
+        "e": "Yes, but it isn't as light as the blue one."
+      },
+      {
+        "q": "Qual é o problema com a calça jeans que Sarah experimenta?",
+        "o": [
+          "É apertada demais",
+          "É comprida demais",
+          "É pequena demais"
+        ],
+        "a": 1,
+        "e": "They're nice, but they're too long for me."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "These jeans are ___ than those.",
+        "a": [
+          "shorter"
+        ],
+        "h": "Esta calça jeans é mais curta que aquela."
+      },
+      {
+        "s": "The black jacket is ___ expensive than the blue one.",
+        "a": [
+          "more"
+        ],
+        "h": "A jaqueta preta é mais cara que a azul."
+      },
+      {
+        "s": "This sweater isn't as warm ___ that coat.",
+        "a": [
+          "as"
+        ],
+        "h": "Este suéter não é tão quente quanto aquele casaco."
+      },
+      {
+        "s": "This shirt is ___ tight for me.",
+        "a": [
+          "too"
+        ],
+        "h": "Esta camisa é apertada demais para mim."
+      },
+      {
+        "s": "My old jacket isn't warm ___.",
+        "a": [
+          "enough"
+        ],
+        "h": "Minha jaqueta antiga não esquenta o suficiente."
+      },
+      {
+        "s": "This dress is ___ than that one.",
+        "a": [
+          "better"
+        ],
+        "h": "Este vestido é melhor que aquele."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "This",
+          "jacket",
+          "is",
+          "cheaper",
+          "than",
+          "that",
+          "one."
+        ],
+        "h": "Esta jaqueta é mais barata que aquela."
+      },
+      {
+        "t": [
+          "These",
+          "pants",
+          "are",
+          "too",
+          "tight."
+        ],
+        "h": "Esta calça é apertada demais."
+      },
+      {
+        "t": [
+          "My",
+          "coat",
+          "isn't",
+          "warm",
+          "enough."
+        ],
+        "h": "Meu casaco não esquenta o suficiente."
+      }
+    ],
+    "dict": [
+      {
+        "t": "The black one is bigger."
+      },
+      {
+        "t": "It looks more comfortable, too."
+      },
+      {
+        "t": "The black jacket is more expensive than the blue one."
+      },
+      {
+        "t": "Your old jacket isn't warm enough, right?",
+        "alt": [
+          "Your old jacket is not warm enough, right?"
+        ]
+      },
+      {
+        "t": "Let's find a shorter pair in your size."
+      }
+    ],
+    "shadow": [
+      "No, it's too small. The black one is bigger.",
+      "It is, but it's more expensive than the blue one.",
+      "Yes, but it isn't as light as the blue one.",
+      "Let's find a shorter pair in your size."
+    ],
+    "write": {
+      "task": "Imagine que você está comprando roupas. Compare duas peças em 4 ou 5 frases. Diga qual é mais barata, mais confortável e melhor para você. Inclua uma comparação com as...as e uma frase com too ou enough.",
+      "ph": "I'm looking for a … The blue one is … than the black one. It's as … as … But it's too … I think …"
+    },
+    "cards": [
+      [
+        "Você tem esta camiseta no tamanho M?",
+        "Do you have this T-shirt in a medium?"
+      ],
+      [
+        "Estou procurando um tamanho menor.",
+        "I'm looking for a smaller size."
+      ],
+      [
+        "Este vestido é mais barato que aquele.",
+        "This dress is cheaper than that one."
+      ],
+      [
+        "Onde fica o provador?",
+        "Where is the fitting room?"
+      ],
+      [
+        "Esta calça é apertada demais.",
+        "These pants are too tight."
+      ],
+      [
+        "Este vestido não é comprido o suficiente.",
+        "This dress isn't long enough."
+      ],
+      [
+        "O suéter verde é tão quente quanto o cinza.",
+        "The green sweater is as warm as the gray one."
+      ],
+      [
+        "Posso experimentar estes?",
+        "Can I try these on?"
+      ],
+      [
+        "Esta jaqueta é mais confortável.",
+        "This jacket is more comfortable."
+      ],
+      [
+        "Você tem um tamanho maior?",
+        "Do you have a larger size?"
+      ]
+    ]
+  },
+  {
+    "title": "The best",
+    "goal": "Descrever e comparar cidades, bairros e lugares, usando superlativos para falar do maior, do mais bonito, do melhor e do pior. Aprender a usar -est, most, the best e the worst.",
+    "speakers": {
+      "Emma": "f",
+      "Daniel": "m"
+    },
+    "setting": "Na segunda-feira, Emma conversa com Daniel durante o intervalo do trabalho. Ele acabou de voltar de uma viagem a Nova York e Boston e conta quais lugares mais gostou de visitar.",
+    "lines": [
+      [
+        "Emma",
+        "How was your trip to New York and Boston?",
+        "Como foi sua viagem a Nova York e Boston?"
+      ],
+      [
+        "Daniel",
+        "Great! New York was the most exciting city on our trip.",
+        "Ótima! Nova York foi a cidade mais empolgante da nossa viagem."
+      ],
+      [
+        "Emma",
+        "What was the best part of New York?",
+        "Qual foi a melhor parte de Nova York?"
+      ],
+      [
+        "Daniel",
+        "Central Park. It was the most beautiful place we saw.",
+        "O Central Park. Foi o lugar mais bonito que vimos."
+      ],
+      [
+        "Emma",
+        "Was it bigger than the parks in Boston?",
+        "Era maior que os parques de Boston?"
+      ],
+      [
+        "Daniel",
+        "Yes! It was also one of the quietest places we visited.",
+        "Sim! Também foi um dos lugares mais tranquilos que visitamos."
+      ],
+      [
+        "Emma",
+        "And what about Times Square?",
+        "E a Times Square?"
+      ],
+      [
+        "Daniel",
+        "That was the busiest place. There were so many people!",
+        "Foi o lugar mais movimentado. Tinha muita gente!"
+      ],
+      [
+        "Emma",
+        "Did you find a good place to eat?",
+        "Você encontrou um lugar bom para comer?"
+      ],
+      [
+        "Daniel",
+        "Yes! A small pizza place had the best food.",
+        "Sim! Uma pizzaria pequena tinha a melhor comida."
+      ],
+      [
+        "Emma",
+        "Was it expensive?",
+        "Era caro?"
+      ],
+      [
+        "Daniel",
+        "No, it was the cheapest meal of the trip.",
+        "Não, foi a refeição mais barata da viagem."
+      ],
+      [
+        "Emma",
+        "What was the worst part?",
+        "Qual foi a pior parte?"
+      ],
+      [
+        "Daniel",
+        "The subway. It was crowded, and we waited a long time.",
+        "O metrô. Estava lotado, e esperamos muito tempo."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Superlativos com -est",
+        "p": [
+          "Na unidade anterior, aprendemos a comparar duas coisas usando <b>-er</b>: bigger (maior), cheaper (mais barato). Agora, usamos o <b>superlativo</b> para destacar uma coisa entre todas as outras de um grupo.",
+          "Com adjetivos curtos, normalmente usamos <b>the + adjetivo + -est</b>: small → the smallest (o menor), tall → the tallest (o mais alto).",
+          "As regras de escrita são parecidas com as dos comparativos: big → biggest (dobra a consoante), nice → nicest (acrescenta -st) e busy → busiest (troca y por -iest)."
+        ],
+        "ex": [
+          [
+            "This is the tallest building in town.",
+            "Este é o prédio mais alto da cidade."
+          ],
+          [
+            "It's the cheapest restaurant on this street.",
+            "É o restaurante mais barato desta rua."
+          ],
+          [
+            "Times Square was the busiest place.",
+            "A Times Square foi o lugar mais movimentado."
+          ]
+        ],
+        "tip": "Na maioria das frases, o superlativo vem acompanhado de <b>the</b>: the biggest, the cheapest, the oldest."
+      },
+      {
+        "h": "Superlativos com the most",
+        "p": [
+          "Com adjetivos mais longos, geralmente usamos <b>the most + adjetivo</b>. Não acrescentamos -est.",
+          "Por exemplo: beautiful → the most beautiful (o mais bonito), expensive → the most expensive (o mais caro), exciting → the most exciting (o mais empolgante).",
+          "O superlativo pode descrever lugares, pessoas ou experiências. O adjetivo continua na forma normal depois de most."
+        ],
+        "ex": [
+          [
+            "It's the most beautiful park in the city.",
+            "É o parque mais bonito da cidade."
+          ],
+          [
+            "That was the most exciting trip of my life.",
+            "Aquela foi a viagem mais empolgante da minha vida."
+          ],
+          [
+            "This is the most expensive hotel downtown.",
+            "Este é o hotel mais caro do centro."
+          ]
+        ],
+        "tip": "Não diga “the most beautifulest”. Use apenas <b>the most beautiful</b>."
+      },
+      {
+        "h": "The best e the worst",
+        "p": [
+          "Alguns adjetivos têm formas irregulares. O superlativo de <b>good</b> (bom) é <b>the best</b> (o melhor). O de <b>bad</b> (ruim) é <b>the worst</b> (o pior).",
+          "Compare as três formas: good → better → the best; bad → worse → the worst.",
+          "Usamos essas expressões para falar de experiências, hotéis, comidas, lugares e muito mais."
+        ],
+        "ex": [
+          [
+            "This is the best pizza in town.",
+            "Esta é a melhor pizza da cidade."
+          ],
+          [
+            "That was the worst day of our trip.",
+            "Aquele foi o pior dia da nossa viagem."
+          ],
+          [
+            "What's the best place to visit here?",
+            "Qual é o melhor lugar para visitar aqui?"
+          ]
+        ],
+        "tip": "Não use “the goodest” nem “the baddest” como superlativos comuns. As formas corretas são <b>the best</b> e <b>the worst</b>."
+      },
+      {
+        "h": "Comparativo ou superlativo?",
+        "p": [
+          "Use o <b>comparativo</b> para comparar duas coisas: Boston is smaller than New York (Boston é menor que Nova York).",
+          "Use o <b>superlativo</b> para destacar uma coisa dentro de um grupo: It's the biggest city on our trip (É a maior cidade da nossa viagem).",
+          "Depois do superlativo, usamos frequentemente <b>in</b> para indicar um lugar ou grupo e <b>of</b> para indicar um conjunto ou período. Também podemos usar <b>one of the + superlativo + substantivo plural</b> para dizer “um dos mais...”."
+        ],
+        "ex": [
+          [
+            "This park is bigger than that one.",
+            "Este parque é maior que aquele."
+          ],
+          [
+            "It's the biggest park in the city.",
+            "É o maior parque da cidade."
+          ],
+          [
+            "It was the best day of the trip.",
+            "Foi o melhor dia da viagem."
+          ],
+          [
+            "It's one of the oldest buildings here.",
+            "É um dos prédios mais antigos daqui."
+          ]
+        ],
+        "tip": "Lembre-se: <b>bigger than</b> compara duas coisas; <b>the biggest</b> destaca uma entre várias."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Lugares e pontos da cidade",
+        "items": [
+          [
+            "neighborhood",
+            "bairro"
+          ],
+          [
+            "square",
+            "praça"
+          ],
+          [
+            "bridge",
+            "ponte"
+          ],
+          [
+            "museum",
+            "museu"
+          ],
+          [
+            "building",
+            "prédio, edifício"
+          ],
+          [
+            "subway",
+            "metrô"
+          ],
+          [
+            "downtown",
+            "centro da cidade"
+          ],
+          [
+            "view",
+            "vista, paisagem"
+          ],
+          [
+            "street",
+            "rua"
+          ],
+          [
+            "tourist attraction",
+            "atração turística"
+          ]
+        ]
+      },
+      {
+        "h": "Adjetivos para descrever cidades",
+        "items": [
+          [
+            "busy",
+            "movimentado"
+          ],
+          [
+            "crowded",
+            "lotado, cheio de gente"
+          ],
+          [
+            "quiet",
+            "tranquilo, silencioso"
+          ],
+          [
+            "noisy",
+            "barulhento"
+          ],
+          [
+            "exciting",
+            "empolgante"
+          ],
+          [
+            "peaceful",
+            "tranquilo, sossegado"
+          ],
+          [
+            "popular",
+            "popular"
+          ],
+          [
+            "beautiful",
+            "bonito"
+          ],
+          [
+            "modern",
+            "moderno"
+          ],
+          [
+            "safe",
+            "seguro"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "O final -est",
+        "p": "Nos superlativos curtos, o final <b>-est</b> geralmente acrescenta uma sílaba, com som próximo de “ist”. Tallest soa aproximadamente “TÓ-list”, e biggest soa “BÍ-guist”.",
+        "w": [
+          "tallest",
+          "biggest",
+          "smallest",
+          "cheapest"
+        ]
+      },
+      {
+        "h": "Busy e busiest",
+        "p": "<b>Busy</b> soa aproximadamente “BÍ-zi”. Já <b>busiest</b> tem três sílabas e soa “BÍ-zi-ist”. A primeira sílaba continua sendo a mais forte.",
+        "w": [
+          "busy",
+          "busier",
+          "busiest"
+        ]
+      },
+      {
+        "h": "Best e worst",
+        "p": "<b>Best</b> soa aproximadamente “bést”, com E aberto. <b>Worst</b> soa “uârst”, com o R americano bem marcado. Não confunda worst (o pior) com first (primeiro).",
+        "w": [
+          "best",
+          "worst",
+          "first",
+          "the best",
+          "the worst"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Qual cidade Daniel considerou a mais empolgante da viagem?",
+        "o": [
+          "Boston",
+          "Nova York",
+          "Chicago"
+        ],
+        "a": 1,
+        "e": "Great! New York was the most exciting city on our trip."
+      },
+      {
+        "q": "Qual foi o lugar mais bonito que Daniel visitou?",
+        "o": [
+          "Central Park",
+          "Times Square",
+          "O metrô"
+        ],
+        "a": 0,
+        "e": "Central Park. It was the most beautiful place we saw."
+      },
+      {
+        "q": "Como Daniel descreveu a Times Square?",
+        "o": [
+          "O lugar mais tranquilo",
+          "O lugar mais barato",
+          "O lugar mais movimentado"
+        ],
+        "a": 2,
+        "e": "That was the busiest place. There were so many people!"
+      },
+      {
+        "q": "Qual foi a pior parte da viagem para Daniel?",
+        "o": [
+          "A comida",
+          "O metrô",
+          "O parque"
+        ],
+        "a": 1,
+        "e": "The subway. It was crowded, and we waited a long time."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "This is the ___ (tall) building in town.",
+        "a": [
+          "tallest"
+        ],
+        "h": "Este é o prédio mais alto da cidade."
+      },
+      {
+        "s": "It's the ___ beautiful park in the city.",
+        "a": [
+          "most"
+        ],
+        "h": "É o parque mais bonito da cidade."
+      },
+      {
+        "s": "That was the ___ (good) day of our trip.",
+        "a": [
+          "best"
+        ],
+        "h": "Aquele foi o melhor dia da nossa viagem."
+      },
+      {
+        "s": "The subway was the ___ (bad) part of the trip.",
+        "a": [
+          "worst"
+        ],
+        "h": "O metrô foi a pior parte da viagem."
+      },
+      {
+        "s": "This is the ___ (big) square in town.",
+        "a": [
+          "biggest"
+        ],
+        "h": "Esta é a maior praça da cidade."
+      },
+      {
+        "s": "It's one of the ___ popular museums here.",
+        "a": [
+          "most"
+        ],
+        "h": "É um dos museus mais populares daqui."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "It's",
+          "the",
+          "oldest",
+          "building",
+          "here."
+        ],
+        "h": "É o prédio mais antigo daqui."
+      },
+      {
+        "t": [
+          "What's",
+          "the",
+          "best",
+          "restaurant",
+          "in",
+          "town?"
+        ],
+        "h": "Qual é o melhor restaurante da cidade?"
+      },
+      {
+        "t": [
+          "This",
+          "is",
+          "the",
+          "most",
+          "beautiful",
+          "view."
+        ],
+        "h": "Esta é a vista mais bonita."
+      }
+    ],
+    "dict": [
+      {
+        "t": "New York was the most exciting city on our trip."
+      },
+      {
+        "t": "It was the most beautiful place we saw."
+      },
+      {
+        "t": "That was the busiest place.",
+        "note": "Atenção à escrita de busiest: busy perde o Y e recebe -iest."
+      },
+      {
+        "t": "It was the cheapest meal of the trip."
+      },
+      {
+        "t": "What was the worst part?"
+      }
+    ],
+    "shadow": [
+      "Great! New York was the most exciting city on our trip.",
+      "Yes! It was also one of the quietest places we visited.",
+      "No, it was the cheapest meal of the trip.",
+      "The subway. It was crowded, and we waited a long time."
+    ],
+    "write": {
+      "task": "Descreva uma cidade que você conhece em 4 ou 5 frases. Diga qual é o lugar mais bonito, o bairro mais movimentado, a melhor atração e algo de que você não gosta. Use pelo menos três superlativos diferentes.",
+      "ph": "I think … is a great city. The most beautiful place is … The busiest area is … The best thing about this city is …"
+    },
+    "cards": [
+      [
+        "Este é o maior parque da região.",
+        "This is the biggest park in the area."
+      ],
+      [
+        "Qual é o bairro mais tranquilo?",
+        "What's the quietest neighborhood?"
+      ],
+      [
+        "É a rua mais movimentada da cidade.",
+        "It's the busiest street in the city."
+      ],
+      [
+        "Este é o prédio mais antigo daqui.",
+        "This is the oldest building here."
+      ],
+      [
+        "Foi o hotel mais confortável da viagem.",
+        "It was the most comfortable hotel on our trip."
+      ],
+      [
+        "Qual é o melhor lugar para tirar fotos?",
+        "What's the best place to take pictures?"
+      ],
+      [
+        "Essa foi a pior parte do passeio.",
+        "That was the worst part of the tour."
+      ],
+      [
+        "É a atração mais popular da cidade.",
+        "It's the most popular attraction in the city."
+      ],
+      [
+        "Este é um dos museus mais interessantes daqui.",
+        "This is one of the most interesting museums here."
+      ],
+      [
+        "Aquela foi a vista mais incrível da viagem.",
+        "That was the most amazing view of the trip."
+      ]
+    ]
+  },
+  {
+    "title": "Plans",
+    "goal": "Falar sobre planos e intenções para o futuro, contar o que pretende fazer e conversar sobre compromissos já marcados, usando be going to, present continuous e expressões de tempo futuro.",
+    "speakers": {
+      "Sarah": "f",
+      "Lucas": "m"
+    },
+    "setting": "Na sexta-feira, Sarah e Lucas conversam durante o intervalo do trabalho sobre seus planos para o fim de semana.",
+    "lines": [
+      [
+        "Sarah",
+        "Hey, Lucas! What are you doing this weekend?",
+        "Oi, Lucas! O que você vai fazer neste fim de semana?"
+      ],
+      [
+        "Lucas",
+        "I'm going to visit my cousin in Boston.",
+        "Vou visitar minha prima em Boston."
+      ],
+      [
+        "Sarah",
+        "Nice! When are you leaving?",
+        "Que legal! Quando você vai partir?"
+      ],
+      [
+        "Lucas",
+        "I'm taking the train on Saturday morning.",
+        "Vou pegar o trem no sábado de manhã."
+      ],
+      [
+        "Sarah",
+        "Are you staying with your cousin?",
+        "Você vai ficar na casa da sua prima?"
+      ],
+      [
+        "Lucas",
+        "Yes, and we're having dinner with some friends on Saturday.",
+        "Sim, e vamos jantar com alguns amigos no sábado."
+      ],
+      [
+        "Sarah",
+        "Sounds fun! What are you going to do on Sunday?",
+        "Parece divertido! O que você pretende fazer no domingo?"
+      ],
+      [
+        "Lucas",
+        "We're going to explore the city and visit a museum.",
+        "Vamos explorar a cidade e visitar um museu."
+      ],
+      [
+        "Sarah",
+        "Are you coming back on Sunday night?",
+        "Você vai voltar no domingo à noite?"
+      ],
+      [
+        "Lucas",
+        "No, I'm coming back on Monday morning. What about you?",
+        "Não, vou voltar na segunda de manhã. E você?"
+      ],
+      [
+        "Sarah",
+        "I'm going to relax, but I'm meeting Emma for coffee on Sunday.",
+        "Vou descansar, mas marquei de tomar café com a Emma no domingo."
+      ],
+      [
+        "Lucas",
+        "Where are you meeting?",
+        "Onde vocês vão se encontrar?"
+      ],
+      [
+        "Sarah",
+        "At the cafe near the park, at 10 a.m.",
+        "No café perto do parque, às dez da manhã."
+      ],
+      [
+        "Lucas",
+        "Sounds great! Enjoy your weekend!",
+        "Parece ótimo! Aproveite seu fim de semana!"
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Be going to: planos e intenções",
+        "p": [
+          "Usamos <b>be going to</b> para falar de algo que já temos a intenção de fazer no futuro. É muito comum ao conversar sobre viagens, estudos e planos para o fim de semana.",
+          "A estrutura é <b>am/is/are + going to + verbo base</b>. A forma de to be muda conforme a pessoa: I'm going to, she's going to, we're going to.",
+          "Na fala e na escrita informal, é natural contrair o verbo to be: <b>I'm</b>, <b>he's</b>, <b>they're</b>."
+        ],
+        "ex": [
+          [
+            "I'm going to visit my cousin tomorrow.",
+            "Vou visitar minha prima amanhã."
+          ],
+          [
+            "She's going to study tonight.",
+            "Ela vai estudar hoje à noite."
+          ],
+          [
+            "We're going to explore the city.",
+            "Vamos explorar a cidade."
+          ]
+        ],
+        "tip": "Depois de <b>going to</b>, use o verbo na forma base: going to visit, going to study. Não diga “going to visiting”."
+      },
+      {
+        "h": "Perguntas e negativas com going to",
+        "p": [
+          "Para fazer perguntas, coloque <b>am, is ou are</b> antes da pessoa: <b>Are you going to travel?</b> (Você vai viajar?).",
+          "Para formar a negativa, use <b>am not, isn't ou aren't + going to</b>. Por exemplo: I'm not going to work tomorrow (Não vou trabalhar amanhã).",
+          "Para perguntar sobre planos específicos, use expressões como <b>What are you going to do?</b> e <b>Where are you going to stay?</b>."
+        ],
+        "ex": [
+          [
+            "Are you going to travel next month?",
+            "Você vai viajar no mês que vem?"
+          ],
+          [
+            "What are they going to do tomorrow?",
+            "O que eles vão fazer amanhã?"
+          ],
+          [
+            "He isn't going to work on Sunday.",
+            "Ele não vai trabalhar no domingo."
+          ],
+          [
+            "No, I'm not going to buy tickets.",
+            "Não, não vou comprar ingressos."
+          ]
+        ],
+        "tip": "Não use do ou does com going to. O próprio <b>am/is/are</b> forma perguntas e negativas."
+      },
+      {
+        "h": "Present continuous para compromissos marcados",
+        "p": [
+          "Na unidade A1, aprendemos que o present continuous descreve ações acontecendo agora. Ele também pode falar do futuro quando existe um <b>compromisso ou plano já combinado</b>.",
+          "A estrutura continua igual: <b>am/is/are + verbo com -ing</b>. Normalmente, acrescentamos uma expressão de tempo futuro para deixar claro quando a ação acontecerá.",
+          "Compare: <b>I'm going to visit Boston</b> apresenta uma intenção. <b>I'm taking the train at 8 a.m.</b> apresenta um plano específico, com horário definido."
+        ],
+        "ex": [
+          [
+            "I'm meeting Emma on Sunday.",
+            "Vou encontrar a Emma no domingo."
+          ],
+          [
+            "We're having dinner with friends tonight.",
+            "Vamos jantar com amigos hoje à noite."
+          ],
+          [
+            "She's leaving on Friday morning.",
+            "Ela vai partir na sexta de manhã."
+          ],
+          [
+            "Are you coming back on Monday?",
+            "Você vai voltar na segunda-feira?"
+          ]
+        ],
+        "tip": "O contexto indica o tempo: <b>I'm meeting her now</b> é uma ação atual; <b>I'm meeting her tomorrow</b> é um compromisso futuro."
+      },
+      {
+        "h": "Expressões de futuro e escolha da estrutura",
+        "p": [
+          "Para indicar quando algo acontecerá, usamos expressões como <b>tomorrow</b> (amanhã), <b>this weekend</b> (neste fim de semana), <b>next week</b> (na próxima semana) e <b>next month</b> (no próximo mês).",
+          "Com dias específicos, use <b>on</b>: on Saturday, on Monday morning. Com horários, use <b>at</b>: at 10 a.m., at 7 p.m.",
+          "Tanto going to quanto present continuous podem descrever planos futuros. Em geral, <b>going to</b> destaca a intenção e <b>present continuous</b> destaca algo já organizado ou combinado."
+        ],
+        "ex": [
+          [
+            "I'm going to relax this weekend.",
+            "Vou descansar neste fim de semana."
+          ],
+          [
+            "We're visiting our friends next week.",
+            "Vamos visitar nossos amigos na próxima semana."
+          ],
+          [
+            "I'm meeting Daniel at 6 p.m.",
+            "Vou encontrar o Daniel às seis da tarde."
+          ]
+        ],
+        "tip": "Não use in antes de <b>next week</b> ou <b>tomorrow</b>. Diga simplesmente next week e tomorrow."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Planos e atividades",
+        "items": [
+          [
+            "make plans",
+            "fazer planos"
+          ],
+          [
+            "visit relatives",
+            "visitar parentes"
+          ],
+          [
+            "explore the city",
+            "explorar a cidade"
+          ],
+          [
+            "book tickets",
+            "reservar passagens ou ingressos"
+          ],
+          [
+            "take the train",
+            "pegar o trem"
+          ],
+          [
+            "meet friends",
+            "encontrar amigos"
+          ],
+          [
+            "have dinner",
+            "jantar"
+          ],
+          [
+            "relax",
+            "descansar, relaxar"
+          ],
+          [
+            "leave",
+            "partir, sair"
+          ],
+          [
+            "come back",
+            "voltar"
+          ],
+          [
+            "tomorrow",
+            "amanhã"
+          ],
+          [
+            "this weekend",
+            "neste fim de semana"
+          ]
+        ]
+      },
+      {
+        "h": "Expressões de tempo futuro",
+        "items": [
+          [
+            "tomorrow",
+            "amanhã"
+          ],
+          [
+            "tomorrow morning",
+            "amanhã de manhã"
+          ],
+          [
+            "tomorrow night",
+            "amanhã à noite"
+          ],
+          [
+            "this weekend",
+            "neste fim de semana"
+          ],
+          [
+            "next weekend",
+            "no próximo fim de semana"
+          ],
+          [
+            "next week",
+            "na próxima semana"
+          ],
+          [
+            "next month",
+            "no próximo mês"
+          ],
+          [
+            "on Saturday morning",
+            "no sábado de manhã"
+          ],
+          [
+            "on Monday night",
+            "na segunda-feira à noite"
+          ],
+          [
+            "at 10 a.m.",
+            "às dez da manhã"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "Going to e gonna",
+        "p": "Na fala informal, <b>going to</b> frequentemente soa como “GÂ-na”, escrito <b>gonna</b> em contextos informais. Por exemplo, I'm going to visit pode soar “aim GÂ-na ví-zit”. Em exercícios de escrita, prefira going to.",
+        "w": [
+          "going to",
+          "I'm going to visit",
+          "We're going to explore"
+        ]
+      },
+      {
+        "h": "What are you e are you",
+        "p": "Na fala natural, as palavras se conectam. <b>What are you</b> pode soar aproximadamente “uó-der-yu”, enquanto <b>are you</b> frequentemente soa “ar-yu”. Não é necessário pronunciar cada palavra separadamente.",
+        "w": [
+          "What are you doing?",
+          "Are you leaving?",
+          "Where are you staying?"
+        ]
+      },
+      {
+        "h": "Leaving e living",
+        "p": "<b>Leaving</b> (partindo) tem um I longo, aproximadamente “LÍI-ving”. Já <b>living</b> (morando) tem um I curto, “LÍ-ving”. Alongar um pouco a vogal ajuda a diferenciar as palavras.",
+        "w": [
+          "leaving",
+          "living",
+          "I'm leaving",
+          "I'm living"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Como Lucas pretende viajar para Boston?",
+        "o": [
+          "De trem",
+          "De avião",
+          "De ônibus"
+        ],
+        "a": 0,
+        "e": "I'm taking the train on Saturday morning."
+      },
+      {
+        "q": "Quando Lucas vai voltar da viagem?",
+        "o": [
+          "No sábado à noite",
+          "No domingo à noite",
+          "Na segunda de manhã"
+        ],
+        "a": 2,
+        "e": "No, I'm coming back on Monday morning. What about you?"
+      },
+      {
+        "q": "Qual compromisso Sarah tem no domingo?",
+        "o": [
+          "Visitar um museu",
+          "Encontrar Emma para tomar café",
+          "Pegar um trem"
+        ],
+        "a": 1,
+        "e": "I'm going to relax, but I'm meeting Emma for coffee on Sunday."
+      },
+      {
+        "q": "Onde Sarah vai encontrar Emma?",
+        "o": [
+          "No café perto do parque",
+          "Na estação de trem",
+          "No shopping"
+        ],
+        "a": 0,
+        "e": "At the cafe near the park, at 10 a.m."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "I'm ___ to visit my cousin tomorrow.",
+        "a": [
+          "going"
+        ],
+        "h": "Vou visitar minha prima amanhã."
+      },
+      {
+        "s": "___ you taking the train on Saturday?",
+        "a": [
+          "Are"
+        ],
+        "h": "Você vai pegar o trem no sábado?"
+      },
+      {
+        "s": "We're ___ (have) dinner with friends tonight.",
+        "a": [
+          "having"
+        ],
+        "h": "Vamos jantar com amigos hoje à noite."
+      },
+      {
+        "s": "I'm ___ going to work tomorrow.",
+        "a": [
+          "not"
+        ],
+        "h": "Não vou trabalhar amanhã."
+      },
+      {
+        "s": "What are you going ___ do on Sunday?",
+        "a": [
+          "to"
+        ],
+        "h": "O que você vai fazer no domingo?"
+      },
+      {
+        "s": "She's ___ (leave) on Friday morning.",
+        "a": [
+          "leaving"
+        ],
+        "h": "Ela vai partir na sexta de manhã."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "I'm",
+          "taking",
+          "the",
+          "train",
+          "on",
+          "Saturday."
+        ],
+        "h": "Vou pegar o trem no sábado."
+      },
+      {
+        "t": [
+          "What",
+          "are",
+          "you",
+          "going",
+          "to",
+          "do?"
+        ],
+        "h": "O que você vai fazer?"
+      },
+      {
+        "t": [
+          "We're",
+          "meeting",
+          "at",
+          "the",
+          "cafe",
+          "tomorrow."
+        ],
+        "h": "Vamos nos encontrar no café amanhã."
+      }
+    ],
+    "dict": [
+      {
+        "t": "I'm going to visit my cousin in Boston."
+      },
+      {
+        "t": "I'm taking the train on Saturday morning."
+      },
+      {
+        "t": "We're having dinner with some friends on Saturday."
+      },
+      {
+        "t": "I'm coming back on Monday morning."
+      },
+      {
+        "t": "I'm meeting Emma for coffee on Sunday."
+      }
+    ],
+    "shadow": [
+      "Hey, Lucas! What are you doing this weekend?",
+      "I'm taking the train on Saturday morning.",
+      "We're going to explore the city and visit a museum.",
+      "I'm going to relax, but I'm meeting Emma for coffee on Sunday."
+    ],
+    "write": {
+      "task": "Conte seus planos para o próximo fim de semana em 4 ou 5 frases. Diga o que pretende fazer, se tem algum compromisso marcado, com quem vai se encontrar e quando. Use going to e present continuous pelo menos uma vez cada.",
+      "ph": "Next weekend, I'm going to … On Saturday, I'm … I'm meeting … at … On Sunday, I'm going to …"
+    },
+    "cards": [
+      [
+        "Vou visitar minha tia no próximo fim de semana.",
+        "I'm going to visit my aunt next weekend."
+      ],
+      [
+        "Não vou trabalhar amanhã.",
+        "I'm not going to work tomorrow."
+      ],
+      [
+        "Você vai viajar no mês que vem?",
+        "Are you going to travel next month?"
+      ],
+      [
+        "Vamos passar o domingo em casa.",
+        "We're going to spend Sunday at home."
+      ],
+      [
+        "Tenho uma consulta no dentista na terça-feira.",
+        "I'm seeing the dentist on Tuesday."
+      ],
+      [
+        "Vou almoçar com a Emma amanhã.",
+        "I'm having lunch with Emma tomorrow."
+      ],
+      [
+        "Que horas você vai sair?",
+        "What time are you leaving?"
+      ],
+      [
+        "Vou voltar na segunda à noite.",
+        "I'm coming back on Monday night."
+      ],
+      [
+        "Eles vão ficar em um hotel.",
+        "They're going to stay at a hotel."
+      ],
+      [
+        "Vamos ao cinema na sexta-feira.",
+        "We're going to the movies on Friday."
+      ]
+    ]
+  },
+  {
+    "title": "Predictions and offers",
+    "goal": "Fazer previsões sobre o futuro, falar de possibilidades, tomar decisões na hora e oferecer ajuda usando will, won't, I'll e might.",
+    "speakers": {
+      "Sarah": "f",
+      "Daniel": "m"
+    },
+    "setting": "Na sexta-feira à tarde, Sarah e Daniel conversam no escritório sobre um piquenique que estão organizando para o dia seguinte. O tempo parece mudar, e eles precisam decidir alguns detalhes.",
+    "lines": [
+      [
+        "Sarah",
+        "The sky looks dark. Do you think it'll rain tomorrow?",
+        "O céu está escuro. Você acha que vai chover amanhã?"
+      ],
+      [
+        "Daniel",
+        "It might. I think the morning will be cloudy.",
+        "Talvez. Acho que a manhã vai ser nublada."
+      ],
+      [
+        "Sarah",
+        "Oh no! Our picnic is at the park.",
+        "Ah, não! Nosso piquenique é no parque."
+      ],
+      [
+        "Daniel",
+        "Don't worry. We can have it at my place.",
+        "Não se preocupe. Podemos fazer lá em casa."
+      ],
+      [
+        "Sarah",
+        "Good idea! I'll text Emma and Lucas now.",
+        "Boa ideia! Vou mandar mensagem para a Emma e o Lucas agora."
+      ],
+      [
+        "Daniel",
+        "Great. I'll buy some drinks after work.",
+        "Ótimo. Vou comprar algumas bebidas depois do trabalho."
+      ],
+      [
+        "Sarah",
+        "That's a lot to carry. I'll help you.",
+        "É muita coisa para carregar. Eu te ajudo."
+      ],
+      [
+        "Daniel",
+        "Thanks! Can you also bring some cups?",
+        "Obrigado! Você também pode levar alguns copos?"
+      ],
+      [
+        "Sarah",
+        "Sure. I'll bring cups and napkins.",
+        "Claro. Vou levar copos e guardanapos."
+      ],
+      [
+        "Daniel",
+        "I think everyone will enjoy the picnic.",
+        "Acho que todo mundo vai gostar do piquenique."
+      ],
+      [
+        "Sarah",
+        "Maybe! But we might need more chairs.",
+        "Talvez! Mas pode ser que precisemos de mais cadeiras."
+      ],
+      [
+        "Daniel",
+        "You're right. I'll ask my neighbor.",
+        "Você tem razão. Vou perguntar ao meu vizinho."
+      ],
+      [
+        "Sarah",
+        "Do you think it'll be cold tomorrow evening?",
+        "Você acha que vai fazer frio amanhã à noite?"
+      ],
+      [
+        "Daniel",
+        "I don't think so. But I won't forget the blankets!",
+        "Acho que não. Mas não vou esquecer os cobertores!"
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Will e won't: previsões sobre o futuro",
+        "p": [
+          "Usamos <b>will</b> para fazer previsões sobre o futuro, ou seja, dizer o que achamos que vai acontecer. É comum usar expressões como <b>I think</b> (acho que) e <b>I don't think</b> (acho que não).",
+          "A estrutura é <b>pessoa + will + verbo base</b>. Will não muda com a pessoa: I will, she will, they will. A forma contraída é <b>'ll</b>: I'll, she'll, they'll.",
+          "A negativa é <b>will not</b>, geralmente contraída para <b>won't</b>. Para fazer perguntas, coloque will antes da pessoa: Will it rain?"
+        ],
+        "ex": [
+          [
+            "I think it'll rain tomorrow.",
+            "Acho que vai chover amanhã."
+          ],
+          [
+            "Everyone will enjoy the party.",
+            "Todo mundo vai gostar da festa."
+          ],
+          [
+            "It won't be cold tonight.",
+            "Não vai fazer frio hoje à noite."
+          ],
+          [
+            "Will the weather improve?",
+            "O tempo vai melhorar?"
+          ]
+        ],
+        "tip": "Depois de <b>will</b> ou <b>won't</b>, use o verbo base: will rain, won't rain. Não diga “will rains” nem “will to rain”."
+      },
+      {
+        "h": "I'll: decisões tomadas na hora",
+        "p": [
+          "Também usamos <b>will</b> quando decidimos fazer alguma coisa no momento em que estamos falando, sem ter planejado isso antes.",
+          "Nessas situações, a contração <b>I'll</b> (I will) é muito comum na fala. Por exemplo, alguém diz que precisa de bebidas e você decide naquele instante: I'll buy some.",
+          "Compare com <b>going to</b>, estudado na unidade anterior: I'm going to buy a jacket indica uma intenção anterior. I'll take this jacket pode indicar uma decisão tomada naquele momento."
+        ],
+        "ex": [
+          [
+            "I'll text her now.",
+            "Vou mandar mensagem para ela agora."
+          ],
+          [
+            "The phone's ringing. I'll answer it.",
+            "O telefone está tocando. Eu atendo."
+          ],
+          [
+            "I'll take the blue one.",
+            "Vou ficar com a azul."
+          ]
+        ],
+        "tip": "Uma diferença útil: <b>going to</b> costuma destacar uma intenção já existente; <b>I'll</b> é muito usado para uma decisão tomada na hora."
+      },
+      {
+        "h": "I'll para oferecer ajuda",
+        "p": [
+          "Usamos <b>I'll + verbo base</b> para oferecer ajuda ou fazer algo por outra pessoa. É uma maneira natural e educada de se oferecer para uma tarefa.",
+          "Por exemplo, se alguém está carregando muitas sacolas, você pode dizer <b>I'll help you</b> (Eu te ajudo).",
+          "Também usamos will e won't para fazer promessas: I'll be there (Vou estar lá) ou I won't forget (Não vou esquecer)."
+        ],
+        "ex": [
+          [
+            "I'll help you with the bags.",
+            "Eu te ajudo com as sacolas."
+          ],
+          [
+            "I'll carry the chairs.",
+            "Eu carrego as cadeiras."
+          ],
+          [
+            "I'll get you some water.",
+            "Vou pegar um pouco de água para você."
+          ],
+          [
+            "I won't forget your book.",
+            "Não vou esquecer seu livro."
+          ]
+        ],
+        "tip": "<b>I'll</b> pode significar “eu vou” ou “eu faço”, dependendo do contexto. Nem sempre precisamos traduzir literalmente."
+      },
+      {
+        "h": "Might: talvez, pode ser que",
+        "p": [
+          "Usamos <b>might</b> quando algo é possível, mas não temos certeza de que vai acontecer. Em português, pode significar “talvez”, “pode ser que” ou “é possível que”.",
+          "A estrutura é <b>pessoa + might + verbo base</b>. Assim como will, might não muda com he, she ou it e não exige to antes do verbo.",
+          "Na negativa, usamos <b>might not</b> para indicar que algo talvez não aconteça. Compare: It won't rain expressa uma previsão negativa; It might not rain indica apenas uma possibilidade."
+        ],
+        "ex": [
+          [
+            "It might rain this afternoon.",
+            "Talvez chova hoje à tarde."
+          ],
+          [
+            "We might need more chairs.",
+            "Pode ser que precisemos de mais cadeiras."
+          ],
+          [
+            "She might come to the party.",
+            "Talvez ela venha à festa."
+          ],
+          [
+            "He might not be home tonight.",
+            "Talvez ele não esteja em casa hoje à noite."
+          ]
+        ],
+        "tip": "Não use to depois de <b>might</b>. Diga <b>might rain</b>, nunca “might to rain”."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Previsões e possibilidades",
+        "items": [
+          [
+            "I think",
+            "acho que"
+          ],
+          [
+            "I don't think so",
+            "acho que não"
+          ],
+          [
+            "maybe",
+            "talvez"
+          ],
+          [
+            "probably",
+            "provavelmente"
+          ],
+          [
+            "might",
+            "talvez, pode ser que"
+          ],
+          [
+            "definitely",
+            "com certeza"
+          ],
+          [
+            "I'm not sure",
+            "não tenho certeza"
+          ],
+          [
+            "weather forecast",
+            "previsão do tempo"
+          ],
+          [
+            "improve",
+            "melhorar"
+          ],
+          [
+            "happen",
+            "acontecer"
+          ]
+        ]
+      },
+      {
+        "h": "Organizando um encontro",
+        "items": [
+          [
+            "picnic",
+            "piquenique"
+          ],
+          [
+            "drinks",
+            "bebidas"
+          ],
+          [
+            "cups",
+            "copos"
+          ],
+          [
+            "napkins",
+            "guardanapos"
+          ],
+          [
+            "blanket",
+            "cobertor, manta"
+          ],
+          [
+            "chairs",
+            "cadeiras"
+          ],
+          [
+            "carry",
+            "carregar"
+          ],
+          [
+            "bring",
+            "trazer, levar"
+          ],
+          [
+            "neighbor",
+            "vizinho"
+          ],
+          [
+            "cancel",
+            "cancelar"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "Will e I'll",
+        "p": "<b>Will</b> soa aproximadamente “uíl”. A contração <b>I'll</b> soa como “áil”, juntando o som de I com o L final. Em I'll help you, as palavras se conectam naturalmente: “áil hélp yu”.",
+        "w": [
+          "will",
+          "I'll",
+          "I'll help",
+          "I'll bring"
+        ]
+      },
+      {
+        "h": "Won't e want",
+        "p": "<b>Won't</b> tem um som de OU, aproximadamente “uôunt”. Já <b>want</b> tem uma vogal mais aberta, próxima de “uánt” no inglês americano. É importante diferenciá-las porque won't significa “não vai”, enquanto want significa “querer”.",
+        "w": [
+          "won't",
+          "want",
+          "I won't",
+          "I want"
+        ]
+      },
+      {
+        "h": "Might: GH silencioso",
+        "p": "Em <b>might</b>, as letras GH não são pronunciadas. A palavra soa aproximadamente “máit”, rimando com night e right. O T final é curto, sem acrescentar uma vogal depois dele.",
+        "w": [
+          "might",
+          "night",
+          "right",
+          "might rain"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "O que preocupa Sarah sobre o piquenique?",
+        "o": [
+          "O preço das bebidas",
+          "A possibilidade de chuva",
+          "A falta de comida"
+        ],
+        "a": 1,
+        "e": "The sky looks dark. Do you think it'll rain tomorrow?"
+      },
+      {
+        "q": "Onde Daniel sugere fazer o piquenique?",
+        "o": [
+          "No escritório",
+          "No parque",
+          "Na casa dele"
+        ],
+        "a": 2,
+        "e": "Don't worry. We can have it at my place."
+      },
+      {
+        "q": "O que Sarah oferece quando Daniel fala das bebidas?",
+        "o": [
+          "Ajudar a carregar",
+          "Comprar um bolo",
+          "Ligar para o vizinho"
+        ],
+        "a": 0,
+        "e": "That's a lot to carry. I'll help you."
+      },
+      {
+        "q": "O que Sarah diz que vai levar para o piquenique?",
+        "o": [
+          "Cobertores e cadeiras",
+          "Copos e guardanapos",
+          "Sanduíches e frutas"
+        ],
+        "a": 1,
+        "e": "Sure. I'll bring cups and napkins."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "I think it ___ be sunny tomorrow.",
+        "a": [
+          "will",
+          "'ll"
+        ],
+        "h": "Acho que vai fazer sol amanhã."
+      },
+      {
+        "s": "I ___ forget the blankets. I promise!",
+        "a": [
+          "won't",
+          "will not"
+        ],
+        "h": "Não vou esquecer os cobertores. Eu prometo!"
+      },
+      {
+        "s": "We ___ need more chairs. (Use might para expressar possibilidade.)",
+        "a": [
+          "might"
+        ],
+        "h": "Talvez precisemos de mais cadeiras."
+      },
+      {
+        "s": "I'll ___ you carry those bags.",
+        "a": [
+          "help"
+        ],
+        "h": "Eu te ajudo a carregar aquelas sacolas."
+      },
+      {
+        "s": "She ___ be late tonight, but she isn't sure. (Use might.)",
+        "a": [
+          "might"
+        ],
+        "h": "Talvez ela se atrase hoje à noite, mas não tem certeza."
+      },
+      {
+        "s": "I don't think it ___ rain tomorrow.",
+        "a": [
+          "will",
+          "'ll"
+        ],
+        "h": "Acho que não vai chover amanhã."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "I",
+          "think",
+          "it'll",
+          "rain",
+          "tomorrow."
+        ],
+        "h": "Acho que vai chover amanhã."
+      },
+      {
+        "t": [
+          "I'll",
+          "help",
+          "you",
+          "carry",
+          "the",
+          "bags."
+        ],
+        "h": "Eu te ajudo a carregar as sacolas."
+      },
+      {
+        "t": [
+          "We",
+          "might",
+          "need",
+          "more",
+          "chairs."
+        ],
+        "h": "Talvez precisemos de mais cadeiras."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Do you think it'll rain tomorrow?",
+        "alt": [
+          "Do you think it will rain tomorrow?"
+        ]
+      },
+      {
+        "t": "I'll text Emma and Lucas now.",
+        "alt": [
+          "I will text Emma and Lucas now."
+        ]
+      },
+      {
+        "t": "I think everyone will enjoy the picnic."
+      },
+      {
+        "t": "We might need more chairs.",
+        "note": "Atenção: might tem GH silencioso."
+      },
+      {
+        "t": "I won't forget the blankets!",
+        "alt": [
+          "I will not forget the blankets!"
+        ]
+      }
+    ],
+    "shadow": [
+      "It might. I think the morning will be cloudy.",
+      "Good idea! I'll text Emma and Lucas now.",
+      "That's a lot to carry. I'll help you.",
+      "I don't think so. But I won't forget the blankets!"
+    ],
+    "write": {
+      "task": "Imagine que você vai organizar um encontro com amigos. Escreva 4 ou 5 frases. Faça uma previsão sobre o encontro, diga algo que talvez aconteça, ofereça ajuda e faça uma promessa. Use will, won't, I'll e might.",
+      "ph": "I think the party will … It might … I'll help with … I won't forget …"
+    },
+    "cards": [
+      [
+        "Acho que vai chover hoje à noite.",
+        "I think it'll rain tonight."
+      ],
+      [
+        "Não vai ser difícil.",
+        "It won't be difficult."
+      ],
+      [
+        "Talvez a Emma chegue mais tarde.",
+        "Emma might arrive later."
+      ],
+      [
+        "Eu carrego as sacolas.",
+        "I'll carry the bags."
+      ],
+      [
+        "Eu te ajudo com as cadeiras.",
+        "I'll help you with the chairs."
+      ],
+      [
+        "Você acha que vai fazer frio?",
+        "Do you think it'll be cold?"
+      ],
+      [
+        "Talvez precisemos de mais tempo.",
+        "We might need more time."
+      ],
+      [
+        "Não vou esquecer os ingressos.",
+        "I won't forget the tickets."
+      ],
+      [
+        "Eu atendo o telefone.",
+        "I'll answer the phone."
+      ],
+      [
+        "Acho que todo mundo vai gostar.",
+        "I think everyone will like it."
+      ]
+    ]
+  },
+  {
+    "title": "Experiences",
+    "goal": "Falar sobre experiências de vida, perguntar se alguém já fez alguma coisa e contar o que nunca fez, usando present perfect com ever e never. Entender a diferença entre been e gone e saber quando usar o past simple.",
+    "speakers": {
+      "Sarah": "f",
+      "Lucas": "m"
+    },
+    "setting": "Sarah e Lucas conversam em uma cafeteria sobre viagens, lugares que conheceram e experiências que tiveram. Durante a conversa, Lucas comenta sobre uma viagem recente de sua irmã.",
+    "lines": [
+      [
+        "Sarah",
+        "Have you ever been to California, Lucas?",
+        "Você já foi à Califórnia, Lucas?"
+      ],
+      [
+        "Lucas",
+        "Yes, I have. I went to San Diego with my parents last summer.",
+        "Já. Fui a San Diego com meus pais no verão passado."
+      ],
+      [
+        "Sarah",
+        "Nice! Did you go to the beach?",
+        "Que legal! Você foi à praia?"
+      ],
+      [
+        "Lucas",
+        "Yes, I did. I swam in the ocean for the first time, and it was great!",
+        "Fui, sim. Nadei no mar pela primeira vez, e foi ótimo!"
+      ],
+      [
+        "Sarah",
+        "I've never swum in the ocean. Was the water cold?",
+        "Nunca nadei no mar. A água estava fria?"
+      ],
+      [
+        "Lucas",
+        "A little! Have you ever tried surfing?",
+        "Um pouco! Você já experimentou surfar?"
+      ],
+      [
+        "Sarah",
+        "No, I haven't, but I've tried kayaking.",
+        "Não, mas já experimentei andar de caiaque."
+      ],
+      [
+        "Lucas",
+        "Really? When did you try it?",
+        "Sério? Quando você experimentou?"
+      ],
+      [
+        "Sarah",
+        "I tried it in Florida two years ago.",
+        "Experimentei na Flórida há dois anos."
+      ],
+      [
+        "Lucas",
+        "Was it difficult?",
+        "Foi difícil?"
+      ],
+      [
+        "Sarah",
+        "At first, yes, but I loved it. The weather was perfect.",
+        "No começo, sim, mas adorei. O tempo estava perfeito."
+      ],
+      [
+        "Lucas",
+        "By the way, my sister Emma has gone to Florida for a few days.",
+        "A propósito, minha irmã Emma foi para a Flórida passar alguns dias."
+      ],
+      [
+        "Sarah",
+        "Oh, so she's there now?",
+        "Ah, então ela está lá agora?"
+      ],
+      [
+        "Lucas",
+        "Exactly. She's never been there before.",
+        "Exatamente. Ela nunca tinha ido lá antes."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Present perfect: experiências de vida",
+        "p": [
+          "Usamos o <b>present perfect</b> para falar de experiências que tivemos ou não tivemos até agora, sem dizer exatamente quando aconteceram.",
+          "A estrutura é <b>have/has + past participle</b> (particípio passado). Use <b>have</b> com I, you, we e they. Use <b>has</b> com he, she e it.",
+          "Nos verbos regulares, o particípio geralmente termina em <b>-ed</b>: visit → visited, try → tried. Nos irregulares, precisamos aprender a forma: eat → eaten, see → seen, swim → swum.",
+          "Na fala, usamos frequentemente as contrações <b>I've</b>, <b>you've</b>, <b>we've</b>, <b>he's</b> e <b>she's</b>."
+        ],
+        "ex": [
+          [
+            "I've visited California.",
+            "Já visitei a Califórnia."
+          ],
+          [
+            "She's tried surfing.",
+            "Ela já experimentou surfar."
+          ],
+          [
+            "We've eaten sushi.",
+            "Já comemos sushi."
+          ],
+          [
+            "He's seen that movie.",
+            "Ele já viu aquele filme."
+          ]
+        ],
+        "tip": "O particípio nem sempre é igual ao passado simples: swim → <b>swam</b> (passado simples) → <b>swum</b> (particípio)."
+      },
+      {
+        "h": "Ever e never: já fez ou nunca fez?",
+        "p": [
+          "Usamos <b>ever</b> em perguntas sobre experiências. Ele corresponde a “já” em frases como <b>Have you ever tried surfing?</b> (Você já experimentou surfar?).",
+          "Para fazer perguntas, coloque <b>have/has</b> antes da pessoa. Nas respostas curtas, use <b>Yes, I have</b> ou <b>No, I haven't</b>.",
+          "Usamos <b>never</b> para dizer que nunca tivemos uma experiência. Ele aparece depois de have/has e antes do particípio: <b>I've never traveled alone</b>.",
+          "Como never já tem sentido negativo, não precisamos acrescentar not."
+        ],
+        "ex": [
+          [
+            "Have you ever tried surfing?",
+            "Você já experimentou surfar?"
+          ],
+          [
+            "No, I haven't.",
+            "Não, nunca experimentei."
+          ],
+          [
+            "I've never traveled alone.",
+            "Nunca viajei sozinho."
+          ],
+          [
+            "She has never eaten sushi.",
+            "Ela nunca comeu sushi."
+          ]
+        ],
+        "tip": "Diga <b>I've never been there</b>, não “I haven't never been there”. Evite usar duas negativas na mesma estrutura."
+      },
+      {
+        "h": "Been e gone: qual é a diferença?",
+        "p": [
+          "As duas palavras são particípios e aparecem frequentemente com lugares, mas têm sentidos diferentes.",
+          "Usamos <b>have/has been to</b> quando alguém foi a um lugar e já voltou. É muito comum para falar de experiências de viagem.",
+          "Usamos <b>have/has gone to</b> quando alguém foi para um lugar e ainda está lá ou continua fora, sem ter retornado.",
+          "Por exemplo, se Emma has been to Florida, ela já visitou a Flórida. Se Emma has gone to Florida, ela foi para lá e ainda não voltou."
+        ],
+        "ex": [
+          [
+            "Emma has gone to Florida.",
+            "Emma foi para a Flórida e ainda está lá."
+          ],
+          [
+            "Emma has been to Florida.",
+            "Emma já foi à Flórida e voltou."
+          ],
+          [
+            "Have you ever been to New York?",
+            "Você já foi a Nova York?"
+          ],
+          [
+            "Our friends have gone to the beach.",
+            "Nossos amigos foram à praia e ainda não voltaram."
+          ]
+        ],
+        "tip": "Para perguntar se alguém já visitou um lugar, normalmente usamos <b>Have you ever been to...?</b>, e não gone to."
+      },
+      {
+        "h": "Present perfect ou past simple?",
+        "p": [
+          "O <b>present perfect</b> é usado quando queremos saber se uma experiência aconteceu em algum momento da vida, sem indicar uma data específica.",
+          "O <b>past simple</b> é usado quando falamos de uma ação concluída em um momento definido do passado: yesterday, last summer, in 2020 ou two years ago.",
+          "É muito natural começar uma conversa com present perfect e depois usar past simple para pedir detalhes.",
+          "Compare: <b>Have you ever been to San Diego?</b> pergunta sobre a experiência. <b>When did you go?</b> pergunta quando a viagem aconteceu."
+        ],
+        "ex": [
+          [
+            "I've been to San Diego.",
+            "Já fui a San Diego."
+          ],
+          [
+            "I went there last summer.",
+            "Fui para lá no verão passado."
+          ],
+          [
+            "When did you go?",
+            "Quando você foi?"
+          ],
+          [
+            "I swam in the ocean last year.",
+            "Nadei no mar no ano passado."
+          ]
+        ],
+        "tip": "Para uma experiência sem data, use <b>I've been there</b>. Com um momento passado definido, use <b>I went there in 2022</b>, não “I've been there in 2022”."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Experiências e aventuras",
+        "items": [
+          [
+            "try surfing",
+            "experimentar surfar"
+          ],
+          [
+            "go kayaking",
+            "andar de caiaque"
+          ],
+          [
+            "swim in the ocean",
+            "nadar no mar"
+          ],
+          [
+            "travel alone",
+            "viajar sozinho"
+          ],
+          [
+            "go abroad",
+            "viajar para o exterior"
+          ],
+          [
+            "visit another country",
+            "visitar outro país"
+          ],
+          [
+            "stay in a hostel",
+            "ficar hospedado em um hostel"
+          ],
+          [
+            "go camping",
+            "acampar"
+          ],
+          [
+            "for the first time",
+            "pela primeira vez"
+          ]
+        ]
+      },
+      {
+        "h": "Particípios importantes",
+        "items": [
+          [
+            "be → been",
+            "ser, estar → sido, estado"
+          ],
+          [
+            "go → gone",
+            "ir → ido"
+          ],
+          [
+            "do → done",
+            "fazer → feito"
+          ],
+          [
+            "see → seen",
+            "ver → visto"
+          ],
+          [
+            "eat → eaten",
+            "comer → comido"
+          ],
+          [
+            "swim → swum",
+            "nadar → nadado"
+          ],
+          [
+            "take → taken",
+            "pegar, levar → pego, levado"
+          ],
+          [
+            "fly → flown",
+            "voar → voado"
+          ],
+          [
+            "write → written",
+            "escrever → escrito"
+          ],
+          [
+            "try → tried",
+            "experimentar → experimentado"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "Been",
+        "p": "No inglês americano, <b>been</b> geralmente soa como “bin”, com um I curto. Não confunda com bean, que tem um I mais longo. Em <b>I've been</b>, as palavras se conectam naturalmente: “áiv bin”.",
+        "w": [
+          "been",
+          "I've been",
+          "Have you been?",
+          "never been"
+        ]
+      },
+      {
+        "h": "Swam e swum",
+        "p": "<b>Swam</b>, passado de swim, tem uma vogal aberta, próxima de “suém”. Já <b>swum</b>, o particípio, soa aproximadamente “suâm”, com uma vogal curta. Essa diferença ajuda a identificar os dois tempos verbais.",
+        "w": [
+          "swim",
+          "swam",
+          "swum",
+          "I've swum"
+        ]
+      },
+      {
+        "h": "Ever e never",
+        "p": "<b>Ever</b> soa aproximadamente “É-ver”, com a primeira sílaba forte e o R americano no final. <b>Never</b> segue o mesmo padrão: “NÉ-ver”. Em <b>Have you ever...?</b>, a fala costuma ligar as palavras naturalmente.",
+        "w": [
+          "ever",
+          "never",
+          "Have you ever?",
+          "I've never"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Qual cidade Lucas visitou no verão passado?",
+        "o": [
+          "Los Angeles",
+          "San Diego",
+          "Miami"
+        ],
+        "a": 1,
+        "e": "Yes, I have. I went to San Diego with my parents last summer."
+      },
+      {
+        "q": "O que Lucas fez pela primeira vez nessa viagem?",
+        "o": [
+          "Nadou no mar",
+          "Andou de caiaque",
+          "Experimentou surfar"
+        ],
+        "a": 0,
+        "e": "Yes, I did. I swam in the ocean for the first time, and it was great!"
+      },
+      {
+        "q": "Qual atividade Sarah já experimentou?",
+        "o": [
+          "Surfar",
+          "Mergulhar",
+          "Andar de caiaque"
+        ],
+        "a": 2,
+        "e": "No, I haven't, but I've tried kayaking."
+      },
+      {
+        "q": "Onde Emma está no momento da conversa?",
+        "o": [
+          "Em San Diego",
+          "Na Flórida",
+          "Na casa de Lucas"
+        ],
+        "a": 1,
+        "e": "By the way, my sister Emma has gone to Florida for a few days."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Have you ___ been to California?",
+        "a": [
+          "ever"
+        ],
+        "h": "Você já foi à Califórnia?"
+      },
+      {
+        "s": "I've never ___ in the ocean. (Particípio de swim.)",
+        "a": [
+          "swum"
+        ],
+        "h": "Nunca nadei no mar."
+      },
+      {
+        "s": "She ___ gone to Florida, and she's still there.",
+        "a": [
+          "has",
+          "'s"
+        ],
+        "h": "Ela foi para a Flórida e ainda está lá."
+      },
+      {
+        "s": "Lucas has ___ to San Diego, and he's back home now.",
+        "a": [
+          "been"
+        ],
+        "h": "Lucas já foi a San Diego e agora está de volta em casa."
+      },
+      {
+        "s": "Have you ever ___ surfing? (Particípio de try.)",
+        "a": [
+          "tried"
+        ],
+        "h": "Você já experimentou surfar?"
+      },
+      {
+        "s": "I ___ kayaking two years ago. (Passado de try.)",
+        "a": [
+          "tried"
+        ],
+        "h": "Experimentei andar de caiaque há dois anos."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "Have",
+          "you",
+          "ever",
+          "tried",
+          "surfing?"
+        ],
+        "h": "Você já experimentou surfar?"
+      },
+      {
+        "t": [
+          "I've",
+          "never",
+          "been",
+          "to",
+          "Florida."
+        ],
+        "h": "Nunca fui à Flórida."
+      },
+      {
+        "t": [
+          "She",
+          "has",
+          "gone",
+          "to",
+          "California."
+        ],
+        "h": "Ela foi para a Califórnia e ainda está lá."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Have you ever been to California?"
+      },
+      {
+        "t": "I've never swum in the ocean.",
+        "alt": [
+          "I have never swum in the ocean."
+        ],
+        "note": "Atenção: swum é o particípio de swim."
+      },
+      {
+        "t": "No, I haven't, but I've tried kayaking.",
+        "alt": [
+          "No, I have not, but I have tried kayaking."
+        ]
+      },
+      {
+        "t": "When did you try it?"
+      },
+      {
+        "t": "My sister Emma has gone to Florida for a few days.",
+        "note": "Gone indica que Emma ainda não voltou."
+      }
+    ],
+    "shadow": [
+      "Have you ever been to California, Lucas?",
+      "I've never swum in the ocean. Was the water cold?",
+      "No, I haven't, but I've tried kayaking.",
+      "Exactly. She's never been there before."
+    ],
+    "write": {
+      "task": "Escreva 4 ou 5 frases sobre suas experiências de vida. Conte duas coisas que você já fez, uma que nunca fez e quando aconteceu uma dessas experiências. Use present perfect com ever ou never e past simple para indicar um momento específico.",
+      "ph": "I've been to … I've tried … I've never … I went to … in …"
+    },
+    "cards": [
+      [
+        "Você já fez uma viagem sozinho?",
+        "Have you ever taken a trip alone?"
+      ],
+      [
+        "Nunca comi comida tailandesa.",
+        "I've never eaten Thai food."
+      ],
+      [
+        "Ela já foi ao Canadá.",
+        "She's been to Canada."
+      ],
+      [
+        "Meu irmão foi para o Japão e ainda está lá.",
+        "My brother has gone to Japan, and he's still there."
+      ],
+      [
+        "Você já viu neve?",
+        "Have you ever seen snow?"
+      ],
+      [
+        "Já tentei surfar uma vez, mas foi difícil.",
+        "I've tried surfing once, but it was difficult."
+      ],
+      [
+        "Quando você visitou o México?",
+        "When did you visit Mexico?"
+      ],
+      [
+        "Fui para lá com meus pais em 2021.",
+        "I went there with my parents in 2021."
+      ],
+      [
+        "Eles nunca viajaram de avião.",
+        "They've never flown on a plane before."
+      ],
+      [
+        "Ela já esteve em Nova York duas vezes.",
+        "She's been to New York twice."
+      ]
+    ]
+  },
+  {
+    "title": "Health",
+    "goal": "Explicar sintomas em uma consulta, falar sobre obrigações e ausência de obrigação com have to e don't have to e dar conselhos simples usando should e shouldn't.",
+    "speakers": {
+      "Sarah": "f",
+      "Daniel": "m"
+    },
+    "setting": "Na terça-feira de manhã, Sarah vai a uma clínica porque não está se sentindo bem. Daniel é o médico que a atende.",
+    "lines": [
+      [
+        "Daniel",
+        "Good morning, Sarah. What's wrong?",
+        "Bom dia, Sarah. O que houve?"
+      ],
+      [
+        "Sarah",
+        "I have a headache and a sore throat.",
+        "Estou com dor de cabeça e dor de garganta."
+      ],
+      [
+        "Daniel",
+        "Do you have a fever?",
+        "Você está com febre?"
+      ],
+      [
+        "Sarah",
+        "Yes, and my back hurts a little.",
+        "Sim, e minhas costas também doem um pouco."
+      ],
+      [
+        "Daniel",
+        "Let me check your temperature. It's a little high.",
+        "Vou medir sua temperatura. Está um pouco alta."
+      ],
+      [
+        "Sarah",
+        "Do I have to take any medicine?",
+        "Preciso tomar algum remédio?"
+      ],
+      [
+        "Daniel",
+        "Not right now. You should rest and drink plenty of water.",
+        "Agora não. Você deve descansar e beber bastante água."
+      ],
+      [
+        "Sarah",
+        "Do I have to stay in bed all day?",
+        "Preciso ficar na cama o dia inteiro?"
+      ],
+      [
+        "Daniel",
+        "No, you don't have to. But you shouldn't exercise today.",
+        "Não precisa. Mas você não deveria fazer exercícios hoje."
+      ],
+      [
+        "Sarah",
+        "I have an important meeting tomorrow.",
+        "Tenho uma reunião importante amanhã."
+      ],
+      [
+        "Daniel",
+        "You should stay home if you still have a fever.",
+        "Você deveria ficar em casa se ainda estiver com febre."
+      ],
+      [
+        "Sarah",
+        "Should I call the clinic if I feel worse?",
+        "Devo ligar para a clínica se eu piorar?"
+      ],
+      [
+        "Daniel",
+        "Yes, please. And you have to get enough sleep.",
+        "Sim, por favor. E você precisa dormir o suficiente."
+      ],
+      [
+        "Sarah",
+        "Okay, thank you. I'll take it easy today.",
+        "Certo, obrigada. Vou pegar leve hoje."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Have to: obrigação ou necessidade",
+        "p": [
+          "Use <b>have to + verbo base</b> para falar de algo necessário ou obrigatório. Muitas vezes corresponde a “ter que” ou “precisar”.",
+          "No presente, usamos <b>have to</b> com I, you, we e they; com he, she e it, usamos <b>has to</b>.",
+          "Para perguntas, use <b>Do/Does + pessoa + have to + verbo base?</b>. Mesmo com he ou she, depois de does a forma é have to."
+        ],
+        "ex": [
+          [
+            "I have to get enough sleep.",
+            "Preciso dormir o suficiente."
+          ],
+          [
+            "She has to take her medicine.",
+            "Ela tem que tomar o remédio dela."
+          ],
+          [
+            "Do you have to stay in bed?",
+            "Você precisa ficar na cama?"
+          ],
+          [
+            "Does he have to see a doctor?",
+            "Ele precisa ir ao médico?"
+          ]
+        ],
+        "tip": "Diga <b>Does she have to rest?</b>, não “Does she has to rest?”."
+      },
+      {
+        "h": "Don't have to: não é necessário",
+        "p": [
+          "Use <b>don't have to</b> ou <b>doesn't have to</b> quando algo <b>não é obrigatório</b>. Isso não significa que a ação é proibida; significa que a pessoa pode escolher.",
+          "Na negativa, a estrutura é <b>don't/doesn't have to + verbo base</b>. A forma have não muda depois de doesn't.",
+          "É diferente de um conselho negativo: <b>You don't have to stay home</b> significa que ficar em casa não é obrigatório; <b>You shouldn't go out</b> é um conselho para não sair."
+        ],
+        "ex": [
+          [
+            "You don't have to stay in bed all day.",
+            "Você não precisa ficar na cama o dia inteiro."
+          ],
+          [
+            "He doesn't have to work tomorrow.",
+            "Ele não precisa trabalhar amanhã."
+          ],
+          [
+            "We don't have to leave now.",
+            "Não precisamos sair agora."
+          ]
+        ],
+        "tip": "<b>Don't have to</b> significa “não precisa”. Não significa “não pode”."
+      },
+      {
+        "h": "Should e shouldn't: conselhos",
+        "p": [
+          "Usamos <b>should + verbo base</b> para dar recomendações: You should rest (Você deveria descansar). Para aconselhar alguém a evitar algo, usamos <b>shouldn't + verbo base</b>.",
+          "Should é igual para todas as pessoas: I should, she should, they should. Não usamos to nem acrescentamos -s ao verbo seguinte.",
+          "São conselhos, não ordens. Em situações de saúde, o contexto importa: recomendações gerais não substituem a orientação de um profissional que examinou a pessoa."
+        ],
+        "ex": [
+          [
+            "You should drink more water.",
+            "Você deveria beber mais água."
+          ],
+          [
+            "She should get some rest.",
+            "Ela deveria descansar um pouco."
+          ],
+          [
+            "You shouldn't exercise with a fever.",
+            "Você não deveria fazer exercícios com febre."
+          ],
+          [
+            "He shouldn't skip meals.",
+            "Ele não deveria pular refeições."
+          ]
+        ],
+        "tip": "O correto é <b>She should rest</b>, e não “She should rests” ou “She should to rest”."
+      },
+      {
+        "h": "Perguntas com should e diferença de sentido",
+        "p": [
+          "Para pedir conselho, colocamos <b>should</b> antes da pessoa: <b>Should I call the clinic?</b> (Devo ligar para a clínica?). Respostas curtas são Yes, you should e No, you shouldn't.",
+          "Compare: <b>Do I have to go?</b> pergunta se existe necessidade ou obrigação. <b>Should I go?</b> pergunta se é uma boa ideia.",
+          "Para descrever sintomas, você pode usar <b>I have a...</b> para algumas queixas e <b>My ... hurts</b> para uma parte do corpo que dói."
+        ],
+        "ex": [
+          [
+            "Should I see a doctor?",
+            "Eu deveria ir ao médico?"
+          ],
+          [
+            "Should we leave early?",
+            "Deveríamos sair cedo?"
+          ],
+          [
+            "I have a sore throat.",
+            "Estou com dor de garganta."
+          ],
+          [
+            "My stomach hurts.",
+            "Estou com dor de estômago."
+          ]
+        ],
+        "tip": "Lembre: <b>have to</b> expressa necessidade; <b>should</b> apresenta uma recomendação."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Partes do corpo",
+        "items": [
+          [
+            "head",
+            "cabeça"
+          ],
+          [
+            "throat",
+            "garganta"
+          ],
+          [
+            "back",
+            "costas"
+          ],
+          [
+            "stomach",
+            "estômago, barriga"
+          ],
+          [
+            "arm",
+            "braço"
+          ],
+          [
+            "leg",
+            "perna"
+          ],
+          [
+            "knee",
+            "joelho"
+          ],
+          [
+            "shoulder",
+            "ombro"
+          ],
+          [
+            "neck",
+            "pescoço"
+          ],
+          [
+            "eye",
+            "olho"
+          ]
+        ]
+      },
+      {
+        "h": "Sintomas e cuidados",
+        "items": [
+          [
+            "headache",
+            "dor de cabeça"
+          ],
+          [
+            "sore throat",
+            "dor de garganta"
+          ],
+          [
+            "fever",
+            "febre"
+          ],
+          [
+            "cough",
+            "tosse"
+          ],
+          [
+            "cold",
+            "resfriado"
+          ],
+          [
+            "dizzy",
+            "tonto"
+          ],
+          [
+            "medicine",
+            "remédio, medicamento"
+          ],
+          [
+            "rest",
+            "descansar"
+          ],
+          [
+            "appointment",
+            "consulta marcada"
+          ],
+          [
+            "clinic",
+            "clínica"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "Should e shouldn't",
+        "p": "<b>Should</b> soa aproximadamente “shud”, com uma vogal curta e L silencioso. <b>Shouldn't</b> soa perto de “SHUD-ent”; a primeira sílaba é mais forte.",
+        "w": [
+          "should",
+          "shouldn't",
+          "You should rest"
+        ]
+      },
+      {
+        "h": "Have to e has to",
+        "p": "Em uma fala natural, <b>have to</b> costuma soar “HÉF-tu”, com som de F. <b>Has to</b> frequentemente soa “HÉS-tu”, com S. Isso é diferente de have isolado.",
+        "w": [
+          "have to",
+          "has to",
+          "Do I have to?"
+        ]
+      },
+      {
+        "h": "Throat e headache",
+        "p": "<b>Throat</b> começa com TH sem voz, com a língua entre os dentes, e soa aproximadamente “thRÔUT”. <b>Headache</b> soa “HÉD-eik”; o final ache tem som de “eik”.",
+        "w": [
+          "throat",
+          "sore throat",
+          "headache"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Quais são as principais queixas de Sarah?",
+        "o": [
+          "Dor de cabeça e dor de garganta",
+          "Dor no joelho e tosse",
+          "Dor de ouvido e enjoo"
+        ],
+        "a": 0,
+        "e": "I have a headache and a sore throat."
+      },
+      {
+        "q": "O que Daniel diz sobre a temperatura de Sarah?",
+        "o": [
+          "Está normal",
+          "Está um pouco alta",
+          "Está muito baixa"
+        ],
+        "a": 1,
+        "e": "Let me check your temperature. It's a little high."
+      },
+      {
+        "q": "O que Sarah não deveria fazer hoje?",
+        "o": [
+          "Beber água",
+          "Dormir cedo",
+          "Fazer exercícios"
+        ],
+        "a": 2,
+        "e": "No, you don't have to. But you shouldn't exercise today."
+      },
+      {
+        "q": "Qual é a orientação de Daniel se Sarah ainda estiver com febre?",
+        "o": [
+          "Ir à reunião normalmente",
+          "Ficar em casa",
+          "Tomar café forte"
+        ],
+        "a": 1,
+        "e": "You should stay home if you still have a fever."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "She ___ to take her medicine every morning.",
+        "a": [
+          "has"
+        ],
+        "h": "Ela precisa tomar o remédio toda manhã."
+      },
+      {
+        "s": "Do I ___ to stay in bed all day?",
+        "a": [
+          "have"
+        ],
+        "h": "Preciso ficar na cama o dia inteiro?"
+      },
+      {
+        "s": "You ___ have to work tomorrow. (Não é obrigatório.)",
+        "a": [
+          "don't",
+          "do not"
+        ],
+        "h": "Você não precisa trabalhar amanhã."
+      },
+      {
+        "s": "You ___ drink plenty of water. (Conselho.)",
+        "a": [
+          "should"
+        ],
+        "h": "Você deveria beber bastante água."
+      },
+      {
+        "s": "You ___ exercise when you have a fever. (Conselho negativo.)",
+        "a": [
+          "shouldn't",
+          "should not"
+        ],
+        "h": "Você não deveria fazer exercícios quando está com febre."
+      },
+      {
+        "s": "___ I call the clinic? (Pedido de conselho.)",
+        "a": [
+          "Should"
+        ],
+        "h": "Devo ligar para a clínica?"
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "You",
+          "should",
+          "get",
+          "some",
+          "rest."
+        ],
+        "h": "Você deveria descansar um pouco."
+      },
+      {
+        "t": [
+          "He",
+          "doesn't",
+          "have",
+          "to",
+          "work",
+          "today."
+        ],
+        "h": "Ele não precisa trabalhar hoje."
+      },
+      {
+        "t": [
+          "Should",
+          "I",
+          "see",
+          "a",
+          "doctor?"
+        ],
+        "h": "Devo ir ao médico?"
+      }
+    ],
+    "dict": [
+      {
+        "t": "I have a headache and a sore throat."
+      },
+      {
+        "t": "Do I have to take any medicine?"
+      },
+      {
+        "t": "You should rest and drink plenty of water."
+      },
+      {
+        "t": "No, you don't have to.",
+        "alt": [
+          "No, you do not have to."
+        ]
+      },
+      {
+        "t": "You shouldn't exercise today.",
+        "alt": [
+          "You should not exercise today."
+        ]
+      }
+    ],
+    "shadow": [
+      "I have a headache and a sore throat.",
+      "Do I have to take any medicine?",
+      "No, you don't have to. But you shouldn't exercise today.",
+      "Should I call the clinic if I feel worse?"
+    ],
+    "write": {
+      "task": "Imagine uma consulta médica. Escreva 4 ou 5 frases dizendo como você se sente, um sintoma que tem, uma obrigação e dois conselhos para descansar ou se cuidar. Use have to, don't have to, should ou shouldn't.",
+      "ph": "I have a … My … hurts. I have to … I don't have to … I should …"
+    },
+    "cards": [
+      [
+        "Estou com muita dor de cabeça.",
+        "I have a terrible headache."
+      ],
+      [
+        "Minha garganta dói quando falo.",
+        "My throat hurts when I talk."
+      ],
+      [
+        "Você está com febre?",
+        "Do you have a fever?"
+      ],
+      [
+        "Você deveria dormir um pouco.",
+        "You should get some sleep."
+      ],
+      [
+        "Preciso ir ao médico amanhã.",
+        "I have to see the doctor tomorrow."
+      ],
+      [
+        "Você não precisa chegar cedo.",
+        "You don't have to come early."
+      ],
+      [
+        "Eu deveria tirar um dia de folga?",
+        "Should I take a day off?"
+      ],
+      [
+        "Meu joelho dói depois de caminhar.",
+        "My knee hurts after walking."
+      ],
+      [
+        "Ela não deveria pular o café da manhã.",
+        "She shouldn't skip breakfast."
+      ],
+      [
+        "Ele precisa marcar uma consulta?",
+        "Does he have to make an appointment?"
+      ]
+    ]
+  },
+  {
+    "title": "Around the house",
+    "goal": "Explicar regras dentro de casa e do prédio com must, mustn't e can't, localizar objetos com preposições de lugar e falar sobre tarefas domésticas.",
+    "speakers": {
+      "Sarah": "f",
+      "Lucas": "m"
+    },
+    "setting": "No sábado de manhã, Sarah ajuda Lucas a organizar o apartamento novo. Eles conferem onde colocar os objetos e as regras do prédio antes de começar a limpeza.",
+    "lines": [
+      [
+        "Sarah",
+        "Your new apartment looks great, Lucas!",
+        "Seu apartamento novo está ótimo, Lucas!"
+      ],
+      [
+        "Lucas",
+        "Thanks! But we have to clean the kitchen today.",
+        "Obrigado! Mas precisamos limpar a cozinha hoje."
+      ],
+      [
+        "Sarah",
+        "Where should I put these boxes?",
+        "Onde eu deveria colocar estas caixas?"
+      ],
+      [
+        "Lucas",
+        "Put them next to the sofa, behind the table.",
+        "Coloque-as ao lado do sofá, atrás da mesa."
+      ],
+      [
+        "Sarah",
+        "Okay. Is the broom in the closet?",
+        "Certo. A vassoura está no armário?"
+      ],
+      [
+        "Lucas",
+        "No, it's between the fridge and the wall.",
+        "Não, está entre a geladeira e a parede."
+      ],
+      [
+        "Sarah",
+        "And where are the cleaning supplies?",
+        "E onde estão os produtos de limpeza?"
+      ],
+      [
+        "Lucas",
+        "They're under the sink, below the shelf.",
+        "Estão embaixo da pia, abaixo da prateleira."
+      ],
+      [
+        "Sarah",
+        "Can we leave these boxes in the hallway?",
+        "Podemos deixar estas caixas no corredor?"
+      ],
+      [
+        "Lucas",
+        "No, we can't. We must keep the hallway clear.",
+        "Não podemos. Precisamos manter o corredor livre."
+      ],
+      [
+        "Sarah",
+        "There's a sign near the elevator, too.",
+        "Também tem uma placa perto do elevador."
+      ],
+      [
+        "Lucas",
+        "Yes. We mustn't leave trash outside our door.",
+        "Sim. Não podemos deixar lixo do lado de fora da nossa porta."
+      ],
+      [
+        "Sarah",
+        "Got it. I'll take out the trash, then.",
+        "Entendi. Então vou levar o lixo para fora."
+      ],
+      [
+        "Lucas",
+        "Great! I'll wash the dishes and mop the floor.",
+        "Ótimo! Vou lavar a louça e passar pano no chão."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Must: regras e obrigações fortes",
+        "p": [
+          "Usamos <b>must + verbo base</b> quando uma regra exige alguma coisa ou quando é muito importante fazer algo. Em português, muitas vezes corresponde a “deve”, “precisa” ou “tem que”.",
+          "Must não muda com a pessoa: I must, she must, we must. Não usamos to depois de must e não acrescentamos -s ao verbo seguinte.",
+          "Em avisos de condomínio ou instruções, must pode soar mais formal e firme do que have to, visto na unidade anterior."
+        ],
+        "ex": [
+          [
+            "We must keep the hallway clear.",
+            "Precisamos manter o corredor livre."
+          ],
+          [
+            "You must close the door at night.",
+            "Você deve fechar a porta à noite."
+          ],
+          [
+            "Residents must use the trash bins.",
+            "Os moradores devem usar as lixeiras."
+          ]
+        ],
+        "tip": "Diga <b>She must clean</b>, não “She must cleans” ou “She must to clean”."
+      },
+      {
+        "h": "Mustn't e can't: o que é proibido",
+        "p": [
+          "<b>Mustn't</b> (must not) indica uma proibição ou regra negativa. <b>Can't</b> também pode indicar que algo não é permitido, especialmente em conversas do dia a dia.",
+          "Por exemplo, <b>We mustn't leave trash here</b> e <b>We can't leave trash here</b> comunicam que não é permitido deixar lixo naquele lugar.",
+          "Compare com <b>don't have to</b> da unidade anterior: essa expressão significa “não é necessário”, enquanto mustn't e can't podem significar “é proibido”."
+        ],
+        "ex": [
+          [
+            "You mustn't leave boxes in the hallway.",
+            "Você não pode deixar caixas no corredor."
+          ],
+          [
+            "We can't park bikes here.",
+            "Não podemos estacionar bicicletas aqui."
+          ],
+          [
+            "Visitors mustn't use this entrance.",
+            "Visitantes não podem usar esta entrada."
+          ]
+        ],
+        "tip": "<b>Mustn't</b> é proibição; <b>don't have to</b> é ausência de obrigação. Não confunda."
+      },
+      {
+        "h": "Preposições de lugar",
+        "p": [
+          "Para localizar objetos, use <b>next to</b> (ao lado de), <b>between</b> (entre dois elementos), <b>behind</b> (atrás de), <b>in front of</b> (na frente de) e <b>under</b> (embaixo de).",
+          "<b>Above</b> e <b>below</b> indicam posições mais altas ou mais baixas. <b>On</b> geralmente indica contato com uma superfície; under indica posição inferior.",
+          "As preposições geralmente aparecem depois de is ou are: The keys are on the table. Para dar instruções, use um verbo como put: Put the box under the desk."
+        ],
+        "ex": [
+          [
+            "The broom is behind the door.",
+            "A vassoura está atrás da porta."
+          ],
+          [
+            "The boxes are next to the sofa.",
+            "As caixas estão ao lado do sofá."
+          ],
+          [
+            "The lamp is above the table.",
+            "A luminária está acima da mesa."
+          ],
+          [
+            "The trash can is between the sink and the fridge.",
+            "A lixeira está entre a pia e a geladeira."
+          ]
+        ],
+        "tip": "<b>Between</b> normalmente aparece com os dois elementos: between the sofa and the table."
+      },
+      {
+        "h": "Tarefas domésticas e regras na prática",
+        "p": [
+          "Para descrever tarefas domésticas, use verbos como <b>wash</b>, <b>clean</b>, <b>mop</b> e <b>take out</b>. Com tarefas habituais, o present simple também é útil.",
+          "Você pode combinar obrigações e localizações na mesma frase: We must put the bins outside (Precisamos colocar as lixeiras lá fora).",
+          "Para oferecer ajuda imediatamente, use <b>I'll</b>, estudado na Unidade 7: I'll wash the dishes. E para fazer pedidos educados, use Can you...?"
+        ],
+        "ex": [
+          [
+            "I wash the dishes after dinner.",
+            "Lavo a louça depois do jantar."
+          ],
+          [
+            "We must take out the trash tonight.",
+            "Precisamos levar o lixo para fora hoje à noite."
+          ],
+          [
+            "I'll mop the kitchen floor.",
+            "Vou passar pano no chão da cozinha."
+          ],
+          [
+            "Can you put the towels on the shelf?",
+            "Você pode colocar as toalhas na prateleira?"
+          ]
+        ],
+        "tip": "<b>Take out the trash</b> significa “levar o lixo para fora”; <b>do the laundry</b> significa “lavar roupa”."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Tarefas de casa",
+        "items": [
+          [
+            "wash the dishes",
+            "lavar a louça"
+          ],
+          [
+            "mop the floor",
+            "passar pano no chão"
+          ],
+          [
+            "sweep the floor",
+            "varrer o chão"
+          ],
+          [
+            "take out the trash",
+            "levar o lixo para fora"
+          ],
+          [
+            "do the laundry",
+            "lavar roupa"
+          ],
+          [
+            "make the bed",
+            "arrumar a cama"
+          ],
+          [
+            "clean the kitchen",
+            "limpar a cozinha"
+          ],
+          [
+            "dust the shelves",
+            "tirar o pó das prateleiras"
+          ],
+          [
+            "vacuum the carpet",
+            "aspirar o tapete"
+          ],
+          [
+            "put things away",
+            "guardar as coisas"
+          ]
+        ]
+      },
+      {
+        "h": "Cômodos e posições",
+        "items": [
+          [
+            "hallway",
+            "corredor"
+          ],
+          [
+            "closet",
+            "armário embutido"
+          ],
+          [
+            "shelf",
+            "prateleira"
+          ],
+          [
+            "sink",
+            "pia"
+          ],
+          [
+            "broom",
+            "vassoura"
+          ],
+          [
+            "next to",
+            "ao lado de"
+          ],
+          [
+            "between",
+            "entre"
+          ],
+          [
+            "behind",
+            "atrás de"
+          ],
+          [
+            "in front of",
+            "na frente de"
+          ],
+          [
+            "under",
+            "embaixo de"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "Must e mustn't",
+        "p": "<b>Must</b> soa aproximadamente “mâst”, com uma vogal curta. <b>Mustn't</b> pode soar “MÂS-ent” na fala americana; o T pode quase desaparecer antes do N.",
+        "w": [
+          "must",
+          "mustn't",
+          "We must clean"
+        ]
+      },
+      {
+        "h": "Closet",
+        "p": "<b>Closet</b> soa aproximadamente “KLÓ-zit”, com S de som Z na primeira sílaba. Não confunda com close, usado para “fechar”.",
+        "w": [
+          "closet",
+          "in the closet",
+          "clean the closet"
+        ]
+      },
+      {
+        "h": "Under e behind",
+        "p": "<b>Under</b> soa aproximadamente “ÂN-der”, com a primeira sílaba forte. <b>Behind</b> soa “bi-HÁIND”, com a segunda sílaba forte e som de AI.",
+        "w": [
+          "under",
+          "under the sink",
+          "behind",
+          "behind the door"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Onde Lucas pede que Sarah coloque as caixas?",
+        "o": [
+          "Embaixo da pia",
+          "Ao lado do sofá, atrás da mesa",
+          "Dentro do armário"
+        ],
+        "a": 1,
+        "e": "Put them next to the sofa, behind the table."
+      },
+      {
+        "q": "Onde está a vassoura?",
+        "o": [
+          "Entre a geladeira e a parede",
+          "Atrás da porta",
+          "Ao lado do elevador"
+        ],
+        "a": 0,
+        "e": "No, it's between the fridge and the wall."
+      },
+      {
+        "q": "Por que não podem deixar as caixas no corredor?",
+        "o": [
+          "Porque vão pintar o corredor",
+          "Porque as caixas estão molhadas",
+          "Porque o corredor precisa ficar livre"
+        ],
+        "a": 2,
+        "e": "No, we can't. We must keep the hallway clear."
+      },
+      {
+        "q": "Qual tarefa Lucas diz que vai fazer?",
+        "o": [
+          "Arrumar a cama e varrer",
+          "Lavar a louça e passar pano",
+          "Lavar roupa e tirar pó"
+        ],
+        "a": 1,
+        "e": "Great! I'll wash the dishes and mop the floor."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Residents ___ keep the hallway clear. (Obrigação forte.)",
+        "a": [
+          "must"
+        ],
+        "h": "Os moradores devem manter o corredor livre."
+      },
+      {
+        "s": "You ___ leave trash here. It's prohibited. (Use mustn't.)",
+        "a": [
+          "mustn't",
+          "must not"
+        ],
+        "h": "Você não pode deixar lixo aqui. É proibido."
+      },
+      {
+        "s": "We ___ park our bikes here. The sign says no bikes. (Use can't.)",
+        "a": [
+          "can't",
+          "cannot"
+        ],
+        "h": "Não podemos estacionar nossas bicicletas aqui. A placa proíbe bicicletas."
+      },
+      {
+        "s": "The broom is ___ the door. (Atrás da porta.)",
+        "a": [
+          "behind"
+        ],
+        "h": "A vassoura está atrás da porta."
+      },
+      {
+        "s": "The keys are ___ the table and the lamp. (Entre.)",
+        "a": [
+          "between"
+        ],
+        "h": "As chaves estão entre a mesa e a luminária."
+      },
+      {
+        "s": "Put the towels ___ the shelf. (Em cima da prateleira.)",
+        "a": [
+          "on"
+        ],
+        "h": "Coloque as toalhas sobre a prateleira."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "We",
+          "must",
+          "keep",
+          "the",
+          "hallway",
+          "clear."
+        ],
+        "h": "Precisamos manter o corredor livre."
+      },
+      {
+        "t": [
+          "You",
+          "can't",
+          "leave",
+          "boxes",
+          "in",
+          "the",
+          "hallway."
+        ],
+        "h": "Você não pode deixar caixas no corredor."
+      },
+      {
+        "t": [
+          "The",
+          "broom",
+          "is",
+          "behind",
+          "the",
+          "door."
+        ],
+        "h": "A vassoura está atrás da porta."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Put them next to the sofa, behind the table."
+      },
+      {
+        "t": "It's between the fridge and the wall."
+      },
+      {
+        "t": "We must keep the hallway clear."
+      },
+      {
+        "t": "We mustn't leave trash outside our door.",
+        "alt": [
+          "We must not leave trash outside our door."
+        ]
+      },
+      {
+        "t": "I'll wash the dishes and mop the floor."
+      }
+    ],
+    "shadow": [
+      "Put them next to the sofa, behind the table.",
+      "No, it's between the fridge and the wall.",
+      "No, we can't. We must keep the hallway clear.",
+      "Great! I'll wash the dishes and mop the floor."
+    ],
+    "write": {
+      "task": "Descreva regras e tarefas da sua casa em 4 ou 5 frases. Inclua uma regra obrigatória, uma proibição e a posição de dois objetos. Use must, mustn't ou can't e preposições de lugar.",
+      "ph": "At home, we must … We mustn't … The … is next to … I usually …"
+    },
+    "cards": [
+      [
+        "Precisamos fechar o portão à noite.",
+        "We must close the gate at night."
+      ],
+      [
+        "Você não pode deixar sapatos no corredor.",
+        "You can't leave shoes in the hallway."
+      ],
+      [
+        "O aspirador de pó está no armário.",
+        "The vacuum cleaner is in the closet."
+      ],
+      [
+        "Coloque a bolsa embaixo da cadeira.",
+        "Put the bag under the chair."
+      ],
+      [
+        "O espelho fica acima da pia.",
+        "The mirror is above the sink."
+      ],
+      [
+        "O cesto de roupa está atrás da porta.",
+        "The laundry basket is behind the door."
+      ],
+      [
+        "Preciso lavar roupa hoje.",
+        "I have to do the laundry today."
+      ],
+      [
+        "Não podemos bloquear as escadas.",
+        "We mustn't block the stairs."
+      ],
+      [
+        "A mesa está na frente da janela.",
+        "The table is in front of the window."
+      ],
+      [
+        "Você pode levar o lixo para fora hoje à noite?",
+        "Can you take out the trash tonight?"
+      ]
+    ]
+  },
+  {
+    "title": "What were you doing?",
+    "goal": "Descrever ações em andamento no passado com was/were + -ing e contar imprevistos, relacionando acontecimentos com when e while.",
+    "speakers": {
+      "Emma": "f",
+      "Lucas": "m"
+    },
+    "setting": "Na manhã seguinte a uma queda de energia no prédio, Emma encontra Lucas em uma cafeteria. Ele conta como uma noite tranquila acabou se tornando confusa.",
+    "lines": [
+      [
+        "Emma",
+        "You look tired, Lucas. What happened last night?",
+        "Você parece cansado, Lucas. O que aconteceu ontem à noite?"
+      ],
+      [
+        "Lucas",
+        "I was cooking dinner when the lights went out.",
+        "Eu estava fazendo o jantar quando a luz acabou."
+      ],
+      [
+        "Emma",
+        "Oh no! What were you making?",
+        "Nossa! O que você estava preparando?"
+      ],
+      [
+        "Lucas",
+        "I was making pasta, and my roommate was working in the living room.",
+        "Eu estava fazendo macarrão, e meu colega de apartamento estava trabalhando na sala."
+      ],
+      [
+        "Emma",
+        "Did you have a flashlight?",
+        "Você tinha uma lanterna?"
+      ],
+      [
+        "Lucas",
+        "No. While I was looking for my phone, I dropped a glass.",
+        "Não. Enquanto procurava meu celular, deixei um copo cair."
+      ],
+      [
+        "Emma",
+        "Were you hurt?",
+        "Você se machucou?"
+      ],
+      [
+        "Lucas",
+        "No, but I was cleaning the floor when my neighbor knocked on the door.",
+        "Não, mas eu estava limpando o chão quando minha vizinha bateu à porta."
+      ],
+      [
+        "Emma",
+        "What did she want?",
+        "O que ela queria?"
+      ],
+      [
+        "Lucas",
+        "She said the whole building was dark.",
+        "Ela disse que o prédio inteiro estava sem luz."
+      ],
+      [
+        "Emma",
+        "What happened to your dinner?",
+        "E o que aconteceu com seu jantar?"
+      ],
+      [
+        "Lucas",
+        "We were waiting for the power to come back, but it didn't.",
+        "Estávamos esperando a energia voltar, mas ela não voltou."
+      ],
+      [
+        "Emma",
+        "So what did you eat?",
+        "Então o que vocês comeram?"
+      ],
+      [
+        "Lucas",
+        "We ordered pizza. The lights came back at ten.",
+        "Pedimos pizza. A luz voltou às dez."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Past continuous: ações em andamento no passado",
+        "p": [
+          "Usamos o <b>past continuous</b> para mostrar que uma ação estava acontecendo em determinado momento do passado. A estrutura é <b>was/were + verbo com -ing</b>.",
+          "Use <b>was</b> com I, he, she e it; use <b>were</b> com you, we e they. A terminação -ing segue as regras já vistas no present continuous.",
+          "O past simple apresenta uma ação concluída; o past continuous destaca o que estava em andamento naquele momento."
+        ],
+        "ex": [
+          [
+            "I was cooking dinner at eight.",
+            "Eu estava fazendo o jantar às oito."
+          ],
+          [
+            "She was studying last night.",
+            "Ela estava estudando ontem à noite."
+          ],
+          [
+            "We were waiting outside.",
+            "Estávamos esperando lá fora."
+          ],
+          [
+            "They were watching TV at nine.",
+            "Eles estavam vendo TV às nove."
+          ]
+        ],
+        "tip": "Não diga “I were cooking”. Com I, use <b>was</b>: I was cooking."
+      },
+      {
+        "h": "Perguntas e negativas no past continuous",
+        "p": [
+          "Para fazer perguntas, coloque <b>was</b> ou <b>were</b> antes da pessoa: <b>Were you sleeping?</b>. Com palavras como what e where, coloque-as no início.",
+          "Para formar a negativa, use <b>wasn't</b> ou <b>weren't</b> antes do verbo com -ing.",
+          "Nas respostas curtas, não repita o verbo principal: Yes, I was ou No, I wasn't."
+        ],
+        "ex": [
+          [
+            "What were you doing at nine?",
+            "O que você estava fazendo às nove?"
+          ],
+          [
+            "Was he working last night?",
+            "Ele estava trabalhando ontem à noite?"
+          ],
+          [
+            "I wasn't sleeping at that time.",
+            "Eu não estava dormindo naquela hora."
+          ],
+          [
+            "They weren't watching the game.",
+            "Eles não estavam assistindo ao jogo."
+          ]
+        ],
+        "tip": "Para perguntas sobre uma ação em andamento, use <b>Were you cooking?</b>, não “Did you were cooking?”."
+      },
+      {
+        "h": "When: uma ação interrompe outra",
+        "p": [
+          "Usamos <b>when</b> (quando) para ligar uma ação que estava acontecendo a um acontecimento mais curto que ocorreu naquele momento.",
+          "Um padrão muito frequente é <b>past continuous + when + past simple</b>. Por exemplo: I was cooking when the phone rang. A ação de cozinhar já estava em andamento; o telefone tocou depois.",
+          "Também podemos começar a frase com when, sem mudar a ideia principal."
+        ],
+        "ex": [
+          [
+            "I was walking home when it started raining.",
+            "Eu estava voltando a pé para casa quando começou a chover."
+          ],
+          [
+            "She was sleeping when the phone rang.",
+            "Ela estava dormindo quando o telefone tocou."
+          ],
+          [
+            "When the lights went out, we were eating.",
+            "Quando a luz acabou, estávamos comendo."
+          ]
+        ],
+        "tip": "O verbo depois de <b>when</b> costuma aparecer no past simple quando indica a interrupção."
+      },
+      {
+        "h": "While: enquanto duas ações aconteciam",
+        "p": [
+          "<b>While</b> significa “enquanto” e frequentemente introduz uma ação em andamento no passado. É muito útil para descrever o contexto de um imprevisto.",
+          "Podemos combinar <b>while + past continuous</b> com um acontecimento no past simple ou com outra ação também em andamento.",
+          "Compare: While I was cooking, he was cleaning descreve duas ações simultâneas; While I was cooking, the lights went out apresenta um imprevisto."
+        ],
+        "ex": [
+          [
+            "While I was cooking, Lucas was setting the table.",
+            "Enquanto eu cozinhava, Lucas estava arrumando a mesa."
+          ],
+          [
+            "While she was walking, her phone rang.",
+            "Enquanto ela caminhava, o celular tocou."
+          ],
+          [
+            "He was reading while I was studying.",
+            "Ele estava lendo enquanto eu estudava."
+          ]
+        ],
+        "tip": "<b>When</b> destaca frequentemente o acontecimento pontual; <b>while</b> destaca a atividade que estava em andamento."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Imprevistos do dia a dia",
+        "items": [
+          [
+            "power outage",
+            "queda de energia"
+          ],
+          [
+            "lights went out",
+            "a luz acabou"
+          ],
+          [
+            "flashlight",
+            "lanterna"
+          ],
+          [
+            "phone rang",
+            "o telefone tocou"
+          ],
+          [
+            "drop a glass",
+            "deixar um copo cair"
+          ],
+          [
+            "knock on the door",
+            "bater à porta"
+          ],
+          [
+            "get hurt",
+            "se machucar"
+          ],
+          [
+            "come back",
+            "voltar"
+          ],
+          [
+            "wait",
+            "esperar"
+          ],
+          [
+            "order pizza",
+            "pedir pizza"
+          ]
+        ]
+      },
+      {
+        "h": "Atividades em andamento",
+        "items": [
+          [
+            "cook dinner",
+            "fazer o jantar"
+          ],
+          [
+            "make pasta",
+            "fazer macarrão"
+          ],
+          [
+            "look for",
+            "procurar"
+          ],
+          [
+            "clean the floor",
+            "limpar o chão"
+          ],
+          [
+            "work from home",
+            "trabalhar de casa"
+          ],
+          [
+            "read a book",
+            "ler um livro"
+          ],
+          [
+            "watch TV",
+            "assistir à televisão"
+          ],
+          [
+            "sleep",
+            "dormir"
+          ],
+          [
+            "take a shower",
+            "tomar banho"
+          ],
+          [
+            "walk home",
+            "voltar para casa a pé"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "Was e were na fala",
+        "p": "<b>Was</b> normalmente soa “uâz” em uma fala cuidadosa e fica mais fraco quando não recebe ênfase. <b>Were</b> tem o R americano, aproximadamente “uâr”.",
+        "w": [
+          "was",
+          "were",
+          "I was cooking",
+          "We were waiting"
+        ]
+      },
+      {
+        "h": "While e when",
+        "p": "<b>While</b> soa aproximadamente “uáil”, com som de AI. <b>When</b> soa “uén”, com E aberto. As duas começam com o mesmo som de W, mas têm vogais diferentes.",
+        "w": [
+          "while",
+          "when",
+          "while I was walking"
+        ]
+      },
+      {
+        "h": "Cooking e looking",
+        "p": "O final <b>-ing</b> termina com um som nasal posterior, sem pronunciar um G forte separado. <b>Cooking</b> soa aproximadamente “KÚ-king” e <b>looking</b> soa “LÚ-king”.",
+        "w": [
+          "cooking",
+          "looking",
+          "waiting",
+          "working"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "O que Lucas estava fazendo quando a luz acabou?",
+        "o": [
+          "Dormindo",
+          "Fazendo o jantar",
+          "Lendo um livro"
+        ],
+        "a": 1,
+        "e": "I was cooking dinner when the lights went out."
+      },
+      {
+        "q": "O que Lucas derrubou enquanto procurava o celular?",
+        "o": [
+          "Um copo",
+          "Uma lanterna",
+          "Um prato"
+        ],
+        "a": 0,
+        "e": "No. While I was looking for my phone, I dropped a glass."
+      },
+      {
+        "q": "Quem bateu à porta enquanto Lucas limpava o chão?",
+        "o": [
+          "Seu colega de apartamento",
+          "O entregador de pizza",
+          "Sua vizinha"
+        ],
+        "a": 2,
+        "e": "No, but I was cleaning the floor when my neighbor knocked on the door."
+      },
+      {
+        "q": "Como Lucas resolveu o problema do jantar?",
+        "o": [
+          "Cozinhou no escuro",
+          "Pediu pizza",
+          "Foi a um restaurante"
+        ],
+        "a": 1,
+        "e": "We ordered pizza. The lights came back at ten."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "I ___ cooking when the lights went out.",
+        "a": [
+          "was"
+        ],
+        "h": "Eu estava cozinhando quando a luz acabou."
+      },
+      {
+        "s": "They ___ watching TV at nine.",
+        "a": [
+          "were"
+        ],
+        "h": "Eles estavam assistindo à TV às nove."
+      },
+      {
+        "s": "What ___ you doing at eight?",
+        "a": [
+          "were"
+        ],
+        "h": "O que você estava fazendo às oito?"
+      },
+      {
+        "s": "She ___ sleeping at that time. (Use wasn't.)",
+        "a": [
+          "wasn't",
+          "was not"
+        ],
+        "h": "Ela não estava dormindo naquela hora."
+      },
+      {
+        "s": "I was walking home ___ it started raining.",
+        "a": [
+          "when"
+        ],
+        "h": "Eu estava voltando para casa quando começou a chover."
+      },
+      {
+        "s": "___ I was cooking, Daniel was cleaning.",
+        "a": [
+          "While"
+        ],
+        "h": "Enquanto eu cozinhava, Daniel estava limpando."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "I",
+          "was",
+          "cooking",
+          "when",
+          "you",
+          "called."
+        ],
+        "h": "Eu estava cozinhando quando você ligou."
+      },
+      {
+        "t": [
+          "What",
+          "were",
+          "you",
+          "doing",
+          "last",
+          "night?"
+        ],
+        "h": "O que você estava fazendo ontem à noite?"
+      },
+      {
+        "t": [
+          "I",
+          "was",
+          "working",
+          "while",
+          "she",
+          "was",
+          "reading."
+        ],
+        "h": "Eu estava trabalhando enquanto ela lia."
+      }
+    ],
+    "dict": [
+      {
+        "t": "I was cooking dinner when the lights went out."
+      },
+      {
+        "t": "What were you making?"
+      },
+      {
+        "t": "While I was looking for my phone, I dropped a glass."
+      },
+      {
+        "t": "We were waiting for the power to come back."
+      },
+      {
+        "t": "I wasn't sleeping when you called.",
+        "alt": [
+          "I was not sleeping when you called."
+        ]
+      }
+    ],
+    "shadow": [
+      "I was cooking dinner when the lights went out.",
+      "No. While I was looking for my phone, I dropped a glass.",
+      "No, but I was cleaning the floor when my neighbor knocked on the door.",
+      "We were waiting for the power to come back, but it didn't."
+    ],
+    "write": {
+      "task": "Conte um pequeno imprevisto que aconteceu enquanto você fazia alguma coisa. Escreva 4 ou 5 frases dizendo o que estava fazendo, o que aconteceu e como terminou. Use past continuous, past simple, when e while.",
+      "ph": "Yesterday, I was … when … While I was …, … After that, I …"
+    },
+    "cards": [
+      [
+        "Eu estava tomando banho quando o telefone tocou.",
+        "I was taking a shower when the phone rang."
+      ],
+      [
+        "O que você estava fazendo às sete?",
+        "What were you doing at seven?"
+      ],
+      [
+        "Estávamos jantando quando ela chegou.",
+        "We were having dinner when she arrived."
+      ],
+      [
+        "Enquanto eu dirigia, começou a chover.",
+        "While I was driving, it started raining."
+      ],
+      [
+        "Ele não estava prestando atenção quando o chamei.",
+        "He wasn't listening when I called him."
+      ],
+      [
+        "Eles estavam dormindo durante a tempestade.",
+        "They were sleeping during the storm."
+      ],
+      [
+        "A luz acabou enquanto eu estudava.",
+        "The lights went out while I was studying."
+      ],
+      [
+        "Eu estava procurando minhas chaves quando você chegou.",
+        "I was looking for my keys when you arrived."
+      ],
+      [
+        "Você estava trabalhando quando mandei mensagem?",
+        "Were you working when I texted you?"
+      ],
+      [
+        "Meu café derramou enquanto eu caminhava.",
+        "My coffee spilled while I was walking."
+      ]
+    ]
+  },
+  {
+    "title": "Keeping in touch",
+    "goal": "Falar sobre mensagens, telefonemas e e-mails recentes com present perfect, usando just para algo que acabou de acontecer, already para algo que já foi feito e yet em perguntas e negativas.",
+    "speakers": {
+      "Sarah": "f",
+      "Emma": "f"
+    },
+    "setting": "Na quinta-feira à tarde, Sarah e Emma organizam um jantar entre amigos pelo celular. Elas conferem convites, respostas e informações que ainda precisam enviar.",
+    "lines": [
+      [
+        "Sarah",
+        "Have you sent the invitation to Daniel yet?",
+        "Você já mandou o convite para o Daniel?"
+      ],
+      [
+        "Emma",
+        "Yes, I've just emailed it to him.",
+        "Sim, acabei de mandar por e-mail para ele."
+      ],
+      [
+        "Sarah",
+        "Great. Has he replied yet?",
+        "Ótimo. Ele já respondeu?"
+      ],
+      [
+        "Emma",
+        "Not yet, but Lucas has already confirmed.",
+        "Ainda não, mas o Lucas já confirmou."
+      ],
+      [
+        "Sarah",
+        "Did you check the group chat?",
+        "Você olhou a conversa do grupo?"
+      ],
+      [
+        "Emma",
+        "Yes, I've already read all the messages.",
+        "Sim, já li todas as mensagens."
+      ],
+      [
+        "Sarah",
+        "I haven't seen the new address yet.",
+        "Ainda não vi o endereço novo."
+      ],
+      [
+        "Emma",
+        "I've just sent it to you. Check your phone.",
+        "Acabei de mandar para você. Olhe o celular."
+      ],
+      [
+        "Sarah",
+        "Got it! Have you called the restaurant yet?",
+        "Recebi! Você já ligou para o restaurante?"
+      ],
+      [
+        "Emma",
+        "Yes, I have. I called this morning.",
+        "Já. Liguei hoje de manhã."
+      ],
+      [
+        "Sarah",
+        "And have you shared the meeting time?",
+        "E você já compartilhou o horário do encontro?"
+      ],
+      [
+        "Emma",
+        "Not yet. I'll post it in the group now.",
+        "Ainda não. Vou postar no grupo agora."
+      ],
+      [
+        "Sarah",
+        "Perfect. Daniel has just replied!",
+        "Perfeito. O Daniel acabou de responder!"
+      ],
+      [
+        "Emma",
+        "Great! Now everyone has the details.",
+        "Ótimo! Agora todo mundo tem as informações."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Present perfect com just: acabou de acontecer",
+        "p": [
+          "Usamos <b>have/has + just + particípio passado</b> para falar de algo que aconteceu há pouquíssimo tempo e é importante agora. <b>Just</b> costuma significar “acabei de” ou “acabou de”.",
+          "A posição mais comum é entre have/has e o particípio: <b>I've just sent</b>, <b>she's just called</b>.",
+          "O particípio dos verbos regulares termina geralmente em -ed, como replied e emailed; alguns irregulares são sent (send), read (read) e written (write)."
+        ],
+        "ex": [
+          [
+            "I've just sent the address.",
+            "Acabei de mandar o endereço."
+          ],
+          [
+            "She's just called me.",
+            "Ela acabou de me ligar."
+          ],
+          [
+            "Daniel has just replied.",
+            "Daniel acabou de responder."
+          ]
+        ],
+        "tip": "Não diga “I have sent just the email” quando quiser dizer “acabei de enviar”. Prefira <b>I've just sent the email</b>."
+      },
+      {
+        "h": "Already: algo que já foi feito",
+        "p": [
+          "Usamos <b>already</b> para mostrar que algo já aconteceu, muitas vezes antes do esperado ou antes de outra pessoa perguntar.",
+          "No present perfect, already geralmente fica <b>entre have/has e o particípio</b>: I've already read it (Já li). Também pode aparecer no fim em linguagem informal.",
+          "Em conversas, a resposta com already pode indicar que uma tarefa está concluída e não precisa ser repetida."
+        ],
+        "ex": [
+          [
+            "I've already read your message.",
+            "Já li sua mensagem."
+          ],
+          [
+            "He's already confirmed the time.",
+            "Ele já confirmou o horário."
+          ],
+          [
+            "We've already emailed the details.",
+            "Já enviamos as informações por e-mail."
+          ]
+        ],
+        "tip": "A ordem mais comum é <b>have/has + already + particípio</b>: She has already replied."
+      },
+      {
+        "h": "Yet: já? e ainda não",
+        "p": [
+          "Usamos <b>yet</b> principalmente no final de perguntas e negativas com present perfect. Nas perguntas, pode significar “já”; nas negativas, significa “ainda não”.",
+          "Para perguntar, use <b>Have/Has + pessoa + particípio + yet?</b>. Na negativa, use <b>haven't/hasn't + particípio + yet</b>.",
+          "A resposta curta <b>Not yet</b> significa “Ainda não”. Compare: Have you called yet? / No, I haven't called yet."
+        ],
+        "ex": [
+          [
+            "Have you sent the email yet?",
+            "Você já enviou o e-mail?"
+          ],
+          [
+            "He hasn't replied yet.",
+            "Ele ainda não respondeu."
+          ],
+          [
+            "I haven't checked my inbox yet.",
+            "Ainda não olhei minha caixa de entrada."
+          ],
+          [
+            "Not yet. I'll send it now.",
+            "Ainda não. Vou mandar agora."
+          ]
+        ],
+        "tip": "Não coloque yet entre have e o particípio nesse uso. Diga <b>I haven't sent it yet</b>."
+      },
+      {
+        "h": "Just, already, yet e past simple na conversa",
+        "p": [
+          "As três palavras ajudam a situar uma ação recente: <b>just</b> destaca algo que acabou de acontecer, <b>already</b> destaca que já foi feito e <b>yet</b> pergunta ou indica que ainda não foi feito.",
+          "Use o <b>past simple</b> quando disser exatamente quando uma ação terminou: <b>I called this morning</b>. Use o present perfect quando o foco está na informação atual, sem mencionar um momento passado concluído: <b>I've already called</b>.",
+          "Para não repetir uma frase inteira, responda com <b>Yes, I have</b> ou <b>No, I haven't</b>."
+        ],
+        "ex": [
+          [
+            "I've just emailed Daniel.",
+            "Acabei de mandar e-mail para Daniel."
+          ],
+          [
+            "I've already called the restaurant.",
+            "Já liguei para o restaurante."
+          ],
+          [
+            "Have you checked the address yet?",
+            "Você já conferiu o endereço?"
+          ],
+          [
+            "I called at nine this morning.",
+            "Liguei às nove de hoje de manhã."
+          ]
+        ],
+        "tip": "Com um horário passado definido, prefira <b>I called at nine</b>, não “I've called at nine”."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Mensagens e e-mails",
+        "items": [
+          [
+            "send a message",
+            "mandar uma mensagem"
+          ],
+          [
+            "reply",
+            "responder"
+          ],
+          [
+            "forward an email",
+            "encaminhar um e-mail"
+          ],
+          [
+            "attachment",
+            "anexo"
+          ],
+          [
+            "inbox",
+            "caixa de entrada"
+          ],
+          [
+            "subject line",
+            "assunto do e-mail"
+          ],
+          [
+            "group chat",
+            "conversa em grupo"
+          ],
+          [
+            "notification",
+            "notificação"
+          ],
+          [
+            "confirm",
+            "confirmar"
+          ],
+          [
+            "share a link",
+            "compartilhar um link"
+          ]
+        ]
+      },
+      {
+        "h": "Telefone e contato",
+        "items": [
+          [
+            "missed call",
+            "chamada perdida"
+          ],
+          [
+            "voicemail",
+            "correio de voz"
+          ],
+          [
+            "call back",
+            "retornar a ligação"
+          ],
+          [
+            "text someone",
+            "mandar mensagem para alguém"
+          ],
+          [
+            "contact",
+            "contato"
+          ],
+          [
+            "phone number",
+            "número de telefone"
+          ],
+          [
+            "address",
+            "endereço"
+          ],
+          [
+            "meeting time",
+            "horário do encontro"
+          ],
+          [
+            "read a message",
+            "ler uma mensagem"
+          ],
+          [
+            "post in the group",
+            "publicar no grupo"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "Just e yet",
+        "p": "<b>Just</b> soa aproximadamente “djâst”, com o J de “dj”. <b>Yet</b> soa “iét”, com E aberto. Em frases rápidas, o T final pode ser bem curto.",
+        "w": [
+          "just",
+          "yet",
+          "just sent",
+          "not yet"
+        ]
+      },
+      {
+        "h": "Already",
+        "p": "<b>Already</b> costuma ter três sílabas: “ól-RÉ-di”, com a segunda mais forte. O R americano aparece claramente. Evite separar em “all” e “ready” na fala.",
+        "w": [
+          "already",
+          "already sent",
+          "I've already read it"
+        ]
+      },
+      {
+        "h": "Replied e emailed",
+        "p": "<b>Replied</b> soa aproximadamente “ri-PLÁID”, com ênfase na última sílaba. <b>Emailed</b> soa “Í-meild”, com duas sílabas. O final -ed de emailed tem som de D, sem sílaba extra.",
+        "w": [
+          "replied",
+          "emailed",
+          "I've replied"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "O que Emma acabou de fazer no início do diálogo?",
+        "o": [
+          "Ligou para o restaurante",
+          "Mandou o convite a Daniel por e-mail",
+          "Enviou fotos para Lucas"
+        ],
+        "a": 1,
+        "e": "Yes, I've just emailed it to him."
+      },
+      {
+        "q": "Quem já confirmou presença?",
+        "o": [
+          "Lucas",
+          "Daniel",
+          "Sarah"
+        ],
+        "a": 0,
+        "e": "Not yet, but Lucas has already confirmed."
+      },
+      {
+        "q": "Qual informação Sarah ainda não tinha visto?",
+        "o": [
+          "O cardápio",
+          "O horário do jantar",
+          "O endereço novo"
+        ],
+        "a": 2,
+        "e": "I haven't seen the new address yet."
+      },
+      {
+        "q": "O que Emma ainda precisava fazer?",
+        "o": [
+          "Ligar para o restaurante",
+          "Publicar o horário no grupo",
+          "Ler as mensagens antigas"
+        ],
+        "a": 1,
+        "e": "Not yet. I'll post it in the group now."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "I've ___ sent the address. (Acabei de enviar.)",
+        "a": [
+          "just"
+        ],
+        "h": "Acabei de enviar o endereço."
+      },
+      {
+        "s": "She's ___ read your message. (Ela já leu.)",
+        "a": [
+          "already"
+        ],
+        "h": "Ela já leu sua mensagem."
+      },
+      {
+        "s": "Have you called him ___?",
+        "a": [
+          "yet"
+        ],
+        "h": "Você já ligou para ele?"
+      },
+      {
+        "s": "I haven't checked my inbox ___.",
+        "a": [
+          "yet"
+        ],
+        "h": "Ainda não olhei minha caixa de entrada."
+      },
+      {
+        "s": "He ___ just replied to the email.",
+        "a": [
+          "has",
+          "'s"
+        ],
+        "h": "Ele acabou de responder ao e-mail."
+      },
+      {
+        "s": "We ___ already sent the invitation.",
+        "a": [
+          "have",
+          "'ve"
+        ],
+        "h": "Já enviamos o convite."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "I've",
+          "just",
+          "sent",
+          "the",
+          "email."
+        ],
+        "h": "Acabei de enviar o e-mail."
+      },
+      {
+        "t": [
+          "Have",
+          "you",
+          "checked",
+          "the",
+          "address",
+          "yet?"
+        ],
+        "h": "Você já conferiu o endereço?"
+      },
+      {
+        "t": [
+          "She",
+          "hasn't",
+          "called",
+          "me",
+          "yet."
+        ],
+        "h": "Ela ainda não me ligou."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Have you sent the invitation to Daniel yet?"
+      },
+      {
+        "t": "I've just emailed it to him.",
+        "alt": [
+          "I have just emailed it to him."
+        ]
+      },
+      {
+        "t": "Lucas has already confirmed."
+      },
+      {
+        "t": "I haven't seen the new address yet.",
+        "alt": [
+          "I have not seen the new address yet."
+        ]
+      },
+      {
+        "t": "Daniel has just replied!"
+      }
+    ],
+    "shadow": [
+      "Have you sent the invitation to Daniel yet?",
+      "Not yet, but Lucas has already confirmed.",
+      "I've just sent it to you. Check your phone.",
+      "Perfect. Daniel has just replied!"
+    ],
+    "write": {
+      "task": "Imagine que você está organizando um encontro por mensagem. Escreva 4 ou 5 frases dizendo o que acabou de enviar, o que já confirmou e o que ainda não fez. Inclua just, already e yet.",
+      "ph": "I've just … I've already … I haven't … yet. Have you … yet?"
+    },
+    "cards": [
+      [
+        "Acabei de receber seu e-mail.",
+        "I've just received your email."
+      ],
+      [
+        "Você já abriu o anexo?",
+        "Have you opened the attachment yet?"
+      ],
+      [
+        "Ela ainda não respondeu à minha mensagem.",
+        "She hasn't answered my message yet."
+      ],
+      [
+        "Já compartilhamos o link.",
+        "We've already shared the link."
+      ],
+      [
+        "Acabei de perder sua ligação.",
+        "I've just missed your call."
+      ],
+      [
+        "O Daniel já olhou o grupo?",
+        "Has Daniel checked the group chat yet?"
+      ],
+      [
+        "As informações do encontro já chegaram.",
+        "The meeting details have already arrived."
+      ],
+      [
+        "Ainda não salvei seu número.",
+        "I haven't saved your number yet."
+      ],
+      [
+        "Ele acabou de deixar uma mensagem de voz.",
+        "He's just left a voicemail."
+      ],
+      [
+        "Eles já confirmaram o endereço?",
+        "Have they confirmed the address yet?"
+      ]
+    ]
+  }
+]

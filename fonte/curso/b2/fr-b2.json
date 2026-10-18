@@ -1,0 +1,5584 @@
+[
+  {
+    "title": "Il était une fois",
+    "goal": "Contar acontecimentos passados alternando passé composé, imparfait e plus-que-parfait e reconhecer o passé simple.",
+    "speakers": {
+      "Claire": "f",
+      "Lucas": "m"
+    },
+    "setting": "Em Lyon, Claire conta a Lucas como reencontrou uma livraria onde trabalhava.",
+    "lines": [
+      [
+        "Lucas",
+        "Tu as l'air de bonne humeur ce matin. Il s'est passé quelque chose de spécial pendant ton week-end ?",
+        "Você parece bem-humorada hoje. Aconteceu algo especial no seu fim de semana?"
+      ],
+      [
+        "Claire",
+        "Samedi, je suis retournée par hasard dans une librairie où je travaillais quand j'étais étudiante. Je n'y avais pas mis les pieds depuis dix ans.",
+        "No sábado, voltei por acaso a uma livraria onde trabalhava quando era estudante. Eu não pisava lá havia dez anos."
+      ],
+      [
+        "Lucas",
+        "Elle existe encore ? Je croyais que presque toutes les petites librairies du quartier avaient fermé.",
+        "Ela ainda existe? Achava que quase todas as pequenas livrarias tinham fechado."
+      ],
+      [
+        "Claire",
+        "Celle-ci a résisté. À l'époque, j'y passais mes après-midi et le propriétaire me recommandait toujours des romans que je n'aurais jamais choisis seule.",
+        "Essa resistiu. Na época, eu passava as tardes lá e o dono sempre recomendava romances que eu nunca teria escolhido sozinha."
+      ],
+      [
+        "Lucas",
+        "Et qu'est-ce qui t'a poussée à entrer après toutes ces années ? Tu cherchais un livre en particulier ?",
+        "O que fez você entrar depois de tantos anos? Estava procurando algum livro específico?"
+      ],
+      [
+        "Claire",
+        "Pas du tout. Il pleuvait à verse, j'avais oublié mon parapluie et j'ai aperçu la vitrine en traversant la rue.",
+        "Nada disso. Chovia muito, eu tinha esquecido meu guarda-chuva e vi a vitrine ao atravessar a rua."
+      ],
+      [
+        "Lucas",
+        "Le propriétaire était là ? Ça devait lui faire drôle de te revoir après si longtemps.",
+        "O dono estava lá? Deve ter sido estranho para ele rever você depois de tanto tempo."
+      ],
+      [
+        "Claire",
+        "Oui. Il avait déjà fermé la caisse, mais il rangeait encore des livres qu'il avait reçus la veille. Au début, il ne m'a pas reconnue.",
+        "Sim. Já tinha fechado o caixa, mas ainda arrumava livros recebidos na véspera. No começo não me reconheceu."
+      ],
+      [
+        "Lucas",
+        "Je comprends. Vous aviez sûrement tous les deux beaucoup changé. Comment as-tu réussi à lui rafraîchir la mémoire ?",
+        "Imagino. Vocês tinham mudado bastante. Como você refrescou a memória dele?"
+      ],
+      [
+        "Claire",
+        "Je lui ai rappelé les lectures du jeudi qu'on organisait autrefois. Dès que j'ai parlé du vieux fauteuil rouge, il a éclaté de rire.",
+        "Lembrei das leituras de quinta-feira que organizávamos. Ao mencionar a velha poltrona vermelha, ele caiu na risada."
+      ],
+      [
+        "Lucas",
+        "C'est incroyable qu'il se souvienne encore de ce détail. Il t'a raconté ce qui s'était passé depuis ton départ ?",
+        "Incrível que ele ainda se lembre disso. Contou o que aconteceu desde sua saída?"
+      ],
+      [
+        "Claire",
+        "Mieux que ça : il a sorti un cahier que j'avais laissé derrière moi. Je pensais l'avoir perdu pendant mon déménagement.",
+        "Melhor: pegou um caderno que eu tinha deixado lá. Eu achava que o perdera na mudança."
+      ],
+      [
+        "Lucas",
+        "Un cahier de cours ? Ou bien tu écrivais déjà des histoires à cette époque ?",
+        "Um caderno de aula? Ou você já escrevia histórias?"
+      ],
+      [
+        "Claire",
+        "J'y avais dessiné un projet de club de lecture pour les habitants du quartier. J'étais persuadée que personne ne lirait ces notes.",
+        "Eu tinha esboçado um clube de leitura para moradores. Achava que ninguém leria as anotações."
+      ],
+      [
+        "Lucas",
+        "Ne me dis pas qu'il s'en est inspiré ! Ce serait une sacrée coïncidence, après tout ce temps.",
+        "Não me diga que ele se inspirou nisso! Seria uma coincidência e tanto."
+      ],
+      [
+        "Claire",
+        "Si ! Il avait lancé un club l'année suivante. Quand je suis sortie, la pluie s'était arrêtée et j'ai décidé de participer à leur prochaine rencontre.",
+        "Sim! Ele tinha criado um clube no ano seguinte. Quando saí, a chuva tinha parado e decidi participar do próximo encontro."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Passé composé: acontecimentos concluídos",
+        "p": [
+          "O <b>passé composé</b> indica acontecimentos completos que fazem o relato avançar e frequentemente se combina com marcadores de sequência temporal."
+        ],
+        "ex": [
+          [
+            "Samedi, je suis retournée dans mon ancienne librairie.",
+            "No sábado, voltei à minha antiga livraria."
+          ],
+          [
+            "J'ai aperçu la vitrine et je suis entrée.",
+            "Vi a vitrine e entrei."
+          ],
+          [
+            "Le libraire a sorti un vieux cahier.",
+            "O livreiro tirou um caderno antigo."
+          ]
+        ],
+        "tip": "Identifique cada ação pontual que move a história."
+      },
+      {
+        "h": "Imparfait: cenário e hábitos",
+        "p": [
+          "O <b>imparfait</b> descreve situações em curso, estados e hábitos, enquanto o passé composé apresenta o evento que ocorre nesse cenário."
+        ],
+        "ex": [
+          [
+            "Il pleuvait quand j'ai traversé la rue.",
+            "Chovia quando atravessei a rua."
+          ],
+          [
+            "À l'époque, je travaillais tous les samedis.",
+            "Na época, trabalhava aos sábados."
+          ],
+          [
+            "Il rangeait les livres quand je suis arrivée.",
+            "Arrumava os livros quando cheguei."
+          ]
+        ],
+        "tip": "Pense em uma fotografia do passado."
+      },
+      {
+        "h": "Plus-que-parfait: anterioridade",
+        "p": [
+          "Forme o plus-que-parfait com avoir ou être no imparfait mais o particípio passado: <b>j'avais oublié</b>, <b>elle était partie</b>."
+        ],
+        "ex": [
+          [
+            "J'avais oublié mon parapluie.",
+            "Eu tinha esquecido meu guarda-chuva."
+          ],
+          [
+            "Il avait fermé la caisse avant mon arrivée.",
+            "Ele tinha fechado o caixa antes de eu chegar."
+          ],
+          [
+            "Elle était partie depuis une heure.",
+            "Ela tinha saído havia uma hora."
+          ]
+        ],
+        "tip": "Relacione dois momentos do passado."
+      },
+      {
+        "h": "Passé simple na escrita",
+        "p": [
+          "O <b>passé simple</b> aparece principalmente em romances e narrativas históricas e substitui o passé composé no primeiro plano narrativo."
+        ],
+        "ex": [
+          [
+            "Elle entra et découvrit une lettre.",
+            "Ela entrou e descobriu uma carta."
+          ],
+          [
+            "Il vit le cahier et sourit.",
+            "Ele viu o caderno e sorriu."
+          ],
+          [
+            "Elle comprit enfin la vérité.",
+            "Ela finalmente entendeu a verdade."
+          ]
+        ],
+        "tip": "Reconheça esse tempo, sem tentar usá-lo na conversa."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Livraria e lembranças",
+        "items": [
+          [
+            "une librairie",
+            "uma livraria"
+          ],
+          [
+            "un libraire",
+            "um livreiro"
+          ],
+          [
+            "une vitrine",
+            "uma vitrine"
+          ],
+          [
+            "un cahier",
+            "um caderno"
+          ],
+          [
+            "un roman",
+            "um romance"
+          ],
+          [
+            "un fauteuil",
+            "uma poltrona"
+          ],
+          [
+            "un déménagement",
+            "uma mudança de casa"
+          ],
+          [
+            "un club de lecture",
+            "um clube de leitura"
+          ]
+        ]
+      },
+      {
+        "h": "Relatos e marcadores temporais",
+        "items": [
+          [
+            "par hasard",
+            "por acaso"
+          ],
+          [
+            "autrefois",
+            "antigamente"
+          ],
+          [
+            "à l'époque",
+            "na época"
+          ],
+          [
+            "la veille",
+            "na véspera"
+          ],
+          [
+            "apercevoir",
+            "avistar"
+          ],
+          [
+            "se souvenir de",
+            "lembrar-se de"
+          ],
+          [
+            "rafraîchir la mémoire",
+            "refrescar a memória"
+          ],
+          [
+            "éclater de rire",
+            "cair na risada"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "plus-que-parfait",
+        "p": "Em plus-que-parfait, o s de plus é mudo; a pronúncia aproximada é “plü-ke-par-fé”.",
+        "w": [
+          "plus-que-parfait",
+          "j'avais oublié",
+          "il avait reçu"
+        ]
+      },
+      {
+        "h": "avais e avait",
+        "p": "As duas formas têm pronúncia igual em francês padrão, aproximadamente “avè”, com som e aberto.",
+        "w": [
+          "j'avais",
+          "il avait",
+          "elle avait fermé"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Há quanto tempo Claire não visitava a livraria?",
+        "o": [
+          "Desde a semana anterior",
+          "Havia dez anos",
+          "Havia dois meses"
+        ],
+        "a": 1,
+        "e": "Samedi, je suis retournée par hasard dans une librairie où je travaillais quand j'étais étudiante. Je n'y avais pas mis les pieds depuis dix ans."
+      },
+      {
+        "q": "Por que Claire entrou na livraria naquele sábado?",
+        "o": [
+          "Porque viu um anúncio de emprego",
+          "Porque precisava de um romance",
+          "Porque chovia e ela estava sem guarda-chuva"
+        ],
+        "a": 2,
+        "e": "Pas du tout. Il pleuvait à verse, j'avais oublié mon parapluie et j'ai aperçu la vitrine en traversant la rue."
+      },
+      {
+        "q": "O que o livreiro encontrou e mostrou a Claire?",
+        "o": [
+          "Um caderno que ela tinha deixado lá",
+          "Uma fotografia de família",
+          "Uma carta que chegou naquela manhã"
+        ],
+        "a": 0,
+        "e": "Mieux que ça : il a sorti un cahier que j'avais laissé derrière moi. Je pensais l'avoir perdu pendant mon déménagement."
+      },
+      {
+        "q": "O que Claire decidiu fazer ao final da visita?",
+        "o": [
+          "Trabalhar novamente na livraria",
+          "Participar de um encontro do clube",
+          "Organizar uma mudança"
+        ],
+        "a": 1,
+        "e": "Si ! Il avait lancé un club l'année suivante. Quand je suis sortie, la pluie s'était arrêtée et j'ai décidé de participer à leur prochaine rencontre."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Hier, je ___ (retrouver, passé composé) mon ancien cahier.",
+        "a": [
+          "ai retrouvé"
+        ],
+        "h": "Ontem encontrei meu caderno antigo."
+      },
+      {
+        "s": "Quand j'étais étudiante, je ___ (lire, imparfait) dans ce café.",
+        "a": [
+          "lisais"
+        ],
+        "h": "Quando era estudante, lia naquele café."
+      },
+      {
+        "s": "Le libraire l'___ (fermer, plus-que-parfait) avant mon arrivée.",
+        "a": [
+          "avait fermée"
+        ],
+        "h": "O livreiro já a tinha fechado antes de eu chegar."
+      },
+      {
+        "s": "Il ___ (pleuvoir, imparfait) quand je suis entrée.",
+        "a": [
+          "pleuvait"
+        ],
+        "h": "Chovia quando entrei."
+      },
+      {
+        "s": "Elle ___ (partir, plus-que-parfait) avant le début.",
+        "a": [
+          "était partie"
+        ],
+        "h": "Ela tinha saído antes do início."
+      },
+      {
+        "s": "Soudain, le propriétaire ___ (reconnaître, passé composé) ma voix.",
+        "a": [
+          "a reconnu"
+        ],
+        "h": "De repente, o dono reconheceu minha voz."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "J'y",
+          "suis",
+          "retournée",
+          "par",
+          "hasard."
+        ],
+        "h": "Voltei lá por acaso."
+      },
+      {
+        "t": [
+          "J'avais",
+          "déjà",
+          "perdu",
+          "ce",
+          "cahier."
+        ],
+        "h": "Eu já tinha perdido aquele caderno."
+      },
+      {
+        "t": [
+          "Je",
+          "lui",
+          "ai",
+          "rappelé",
+          "une",
+          "vieille",
+          "histoire."
+        ],
+        "h": "Lembrei a ele de uma história antiga."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Samedi, je suis retournée par hasard dans une librairie où je travaillais quand j'étais étudiante. Je n'y avais pas mis les pieds depuis dix ans."
+      },
+      {
+        "t": "Et qu'est-ce qui t'a poussée à entrer après toutes ces années ? Tu cherchais un livre en particulier ?"
+      },
+      {
+        "t": "Oui. Il avait déjà fermé la caisse, mais il rangeait encore des livres qu'il avait reçus la veille. Au début, il ne m'a pas reconnue."
+      },
+      {
+        "t": "C'est incroyable qu'il se souvienne encore de ce détail. Il t'a raconté ce qui s'était passé depuis ton départ ?"
+      },
+      {
+        "t": "Ne me dis pas qu'il s'en est inspiré ! Ce serait une sacrée coïncidence, après tout ce temps."
+      }
+    ],
+    "shadow": [
+      "Samedi, je suis retournée par hasard dans une librairie où je travaillais quand j'étais étudiante. Je n'y avais pas mis les pieds depuis dix ans.",
+      "Pas du tout. Il pleuvait à verse, j'avais oublié mon parapluie et j'ai aperçu la vitrine en traversant la rue.",
+      "C'est incroyable qu'il se souvienne encore de ce détail. Il t'a raconté ce qui s'était passé depuis ton départ ?",
+      "Si ! Il avait lancé un club l'année suivante. Quand je suis sortie, la pluie s'était arrêtée et j'ai décidé de participer à leur prochaine rencontre."
+    ],
+    "write": {
+      "task": "Conte uma lembrança de uma visita inesperada em cinco a sete frases com passé composé, imparfait e plus-que-parfait.",
+      "ph": "L'autre jour, je suis retourné(e) … . Il faisait …"
+    },
+    "cards": [
+      [
+        "Voltei lá por acaso.",
+        "J'y suis retournée par hasard."
+      ],
+      [
+        "Fazia tempo que eu não entrava ali.",
+        "Cela faisait longtemps que je n'y étais pas entrée."
+      ],
+      [
+        "Na época, eu morava perto.",
+        "À l'époque, j'habitais tout près."
+      ],
+      [
+        "Chovia quando cheguei.",
+        "Il pleuvait quand je suis arrivée."
+      ],
+      [
+        "Eu já tinha perdido aquele caderno.",
+        "J'avais déjà perdu ce cahier."
+      ],
+      [
+        "Ele não me reconheceu imediatamente.",
+        "Il ne m'a pas reconnue tout de suite."
+      ],
+      [
+        "Nós nos encontrávamos toda quinta-feira.",
+        "Nous nous retrouvions tous les jeudis."
+      ],
+      [
+        "Ela tinha saído um pouco antes.",
+        "Elle était partie un peu plus tôt."
+      ],
+      [
+        "Lembrei a ele de uma história antiga.",
+        "Je lui ai rappelé une vieille histoire."
+      ],
+      [
+        "Aquela visita me fez mudar de ideia.",
+        "Cette visite m'a fait changer d'avis."
+      ]
+    ]
+  },
+  {
+    "title": "Quand j'aurai fini...",
+    "goal": "Planejar prazos e projetos usando futur antérieur para fatos concluídos antes de uma etapa futura e para suposições sobre o passado.",
+    "speakers": {
+      "Inès": "f",
+      "Antoine": "m"
+    },
+    "setting": "Inès e Antoine organizam o lançamento de um site para um festival.",
+    "lines": [
+      [
+        "Inès",
+        "On a enfin fixé la mise en ligne du site du festival à vendredi, dix-huit heures. Tu penses qu'on tiendra le délai ?",
+        "Marcamos a publicação do site para sexta, às dezoito horas. Você acha que cumpriremos o prazo?"
+      ],
+      [
+        "Antoine",
+        "Oui, mais il faut garder une marge pour les imprévus. Quand j'aurai intégré les dernières images, je lancerai les tests sur mobile.",
+        "Sim, mas precisamos de uma margem para imprevistos. Quando inserir as imagens, começarei os testes no celular."
+      ],
+      [
+        "Inès",
+        "Parfait. Dès que j'aurai reçu les textes définitifs des organisateurs, je te transmettrai la version corrigée.",
+        "Ótimo. Assim que receber os textos definitivos, vou enviar a versão corrigida."
+      ],
+      [
+        "Antoine",
+        "Tu sais quand ils nous répondront ? Sans leurs descriptions, je ne peux pas terminer les pages des artistes.",
+        "Sabe quando responderão? Sem as descrições, não consigo terminar as páginas dos artistas."
+      ],
+      [
+        "Inès",
+        "Ils m'ont promis une réponse demain matin. D'ici mercredi soir, nous aurons normalement validé tout le contenu.",
+        "Prometeram responder amanhã de manhã. Até quarta à noite, teremos aprovado o conteúdo."
+      ],
+      [
+        "Antoine",
+        "De mon côté, j'aurai terminé la version mobile avant la réunion de jeudi. Il restera seulement à vérifier les liens et les formulaires.",
+        "Terei terminado a versão móvel antes da reunião de quinta. Restará conferir links e formulários."
+      ],
+      [
+        "Inès",
+        "Et l'accessibilité ? On doit s'assurer que les images auront des descriptions et que les contrastes seront suffisants.",
+        "E a acessibilidade? Precisamos garantir descrições nas imagens e contraste suficiente."
+      ],
+      [
+        "Antoine",
+        "J'y travaille. Une fois que j'aurai ajouté les textes alternatifs, Claire pourra contrôler chaque page avec son lecteur d'écran.",
+        "Estou cuidando disso. Quando acrescentar os textos alternativos, Claire poderá conferir cada página com o leitor de tela."
+      ],
+      [
+        "Inès",
+        "Très bien. Quand elle aura terminé ses vérifications, demande-lui de nous envoyer une liste précise des problèmes.",
+        "Muito bem. Quando terminar as verificações, peça uma lista precisa de problemas."
+      ],
+      [
+        "Antoine",
+        "C'est prévu. Dès que nous aurons corrigé les derniers défauts, je préparerai une sauvegarde complète du site.",
+        "Já está previsto. Assim que corrigirmos as falhas, farei um backup completo."
+      ],
+      [
+        "Inès",
+        "N'attends pas vendredi pour la sauvegarde. Si un souci technique survient, il faudra pouvoir revenir à la version précédente.",
+        "Não espere até sexta para o backup. Se houver problemas técnicos, precisaremos voltar à versão anterior."
+      ],
+      [
+        "Antoine",
+        "Tu as raison. Je ferai aussi une copie jeudi. Quand le site sera en ligne, on surveillera les messages des visiteurs.",
+        "Você tem razão. Farei uma cópia na quinta. Quando estiver no ar, acompanharemos as mensagens dos visitantes."
+      ],
+      [
+        "Inès",
+        "Au fait, le partenaire principal n'a toujours pas envoyé son logo. Tu crois qu'il a changé d'avis ?",
+        "Aliás, o patrocinador ainda não enviou o logo. Acha que mudou de ideia?"
+      ],
+      [
+        "Antoine",
+        "Il aura simplement oublié notre dernier message. Je peux le relancer aujourd'hui, sans lui mettre trop de pression.",
+        "Provavelmente só esqueceu nossa mensagem. Posso cobrar uma resposta hoje, sem pressionar demais."
+      ],
+      [
+        "Inès",
+        "Bonne idée. Et une fois que tout aura été vérifié, on pourra annoncer officiellement le lancement sur nos réseaux.",
+        "Boa ideia. Quando tudo tiver sido conferido, poderemos anunciar o lançamento nas redes."
+      ],
+      [
+        "Antoine",
+        "Entendu. D'ici jeudi soir, nous aurons bouclé l'essentiel. Vendredi, on se concentrera sur les derniers détails, pas sur les urgences.",
+        "Combinado. Até quinta, concluiremos o essencial. Na sexta, cuidaremos dos detalhes, não das urgências."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Formation du futur antérieur",
+        "p": [
+          "Forme com <b>avoir</b> ou <b>être</b> no futur simple mais o particípio passado. O auxiliar determina a concordância habitual."
+        ],
+        "ex": [
+          [
+            "J'aurai terminé le dossier avant jeudi.",
+            "Terei terminado o relatório antes de quinta."
+          ],
+          [
+            "Nous aurons reçu les textes demain.",
+            "Teremos recebido os textos amanhã."
+          ],
+          [
+            "Inès sera arrivée avant la réunion.",
+            "Inès terá chegado antes da reunião."
+          ]
+        ],
+        "tip": "O futuro está no auxiliar: aurai, auras, aura, aurons, aurez, auront."
+      },
+      {
+        "h": "Quand, dès que, une fois que",
+        "p": [
+          "O futur antérieur indica uma etapa concluída antes de outra ação futura, geralmente com futur simple na oração seguinte."
+        ],
+        "ex": [
+          [
+            "Quand j'aurai fini, je t'appellerai.",
+            "Quando eu terminar, ligarei."
+          ],
+          [
+            "Dès qu'elle aura répondu, nous déciderons.",
+            "Assim que ela responder, decidiremos."
+          ],
+          [
+            "Une fois que vous aurez relu, on publiera.",
+            "Depois que vocês revisarem, publicaremos."
+          ]
+        ],
+        "tip": "Essas expressões pedem futuro em francês quando se referem ao futuro."
+      },
+      {
+        "h": "D'ici e antes de um prazo",
+        "p": [
+          "O futur antérieur apresenta resultados concluídos até um momento determinado; para indicar apenas um estado futuro, use futur simple."
+        ],
+        "ex": [
+          [
+            "D'ici vendredi, nous aurons tout validé.",
+            "Até sexta, teremos aprovado tudo."
+          ],
+          [
+            "Elle aura préparé la sauvegarde.",
+            "Ela terá preparado o backup."
+          ],
+          [
+            "Le site sera en ligne vendredi.",
+            "O site estará no ar na sexta."
+          ]
+        ],
+        "tip": "D'ici marca um limite de tempo."
+      },
+      {
+        "h": "Suposição sobre o passado",
+        "p": [
+          "O futur antérieur também expressa uma hipótese plausível sobre um fato passado sem afirmar certeza."
+        ],
+        "ex": [
+          [
+            "Il aura oublié notre message.",
+            "Ele provavelmente esqueceu nossa mensagem."
+          ],
+          [
+            "Ils auront rencontré un problème.",
+            "Eles devem ter encontrado um problema."
+          ],
+          [
+            "Elle aura pris le mauvais train.",
+            "Ela deve ter pegado o trem errado."
+          ]
+        ],
+        "tip": "O contexto diferencia prazo de suposição."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Projetos e prazos",
+        "items": [
+          [
+            "une mise en ligne",
+            "uma publicação online"
+          ],
+          [
+            "un délai",
+            "um prazo"
+          ],
+          [
+            "un imprévu",
+            "um imprevisto"
+          ],
+          [
+            "une marge",
+            "uma margem"
+          ],
+          [
+            "une version définitive",
+            "uma versão definitiva"
+          ],
+          [
+            "valider",
+            "aprovar"
+          ],
+          [
+            "boucler un projet",
+            "concluir um projeto"
+          ],
+          [
+            "une sauvegarde",
+            "um backup"
+          ]
+        ]
+      },
+      {
+        "h": "Desenvolvimento e comunicação",
+        "items": [
+          [
+            "un lien",
+            "um link"
+          ],
+          [
+            "un formulaire",
+            "um formulário"
+          ],
+          [
+            "un texte alternatif",
+            "um texto alternativo"
+          ],
+          [
+            "un lecteur d'écran",
+            "um leitor de tela"
+          ],
+          [
+            "un défaut",
+            "uma falha"
+          ],
+          [
+            "corriger",
+            "corrigir"
+          ],
+          [
+            "relancer quelqu'un",
+            "cobrar uma resposta"
+          ],
+          [
+            "tenir le délai",
+            "cumprir o prazo"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "j'aurai e j'aurais",
+        "p": "O final de j'aurai pode ter e mais fechado; j'aurais pode ter e aberto. Na fala, a diferença muitas vezes desaparece: “jorê”.",
+        "w": [
+          "j'aurai fini",
+          "j'aurais fini",
+          "nous aurons fini"
+        ]
+      },
+      {
+        "h": "vous aurez",
+        "p": "A ligação de vous aurez produz som z, aproximadamente “vu-zo-rê”.",
+        "w": [
+          "vous aurez reçu",
+          "nous aurons fini",
+          "ils auront répondu"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Para quando está prevista a publicação do site?",
+        "o": [
+          "Para quinta-feira de manhã",
+          "Para sábado ao meio-dia",
+          "Para sexta-feira às dezoito horas"
+        ],
+        "a": 2,
+        "e": "On a enfin fixé la mise en ligne du site du festival à vendredi, dix-huit heures. Tu penses qu'on tiendra le délai ?"
+      },
+      {
+        "q": "O que Antoine fará depois de incluir as últimas imagens?",
+        "o": [
+          "Iniciará os testes no celular",
+          "Mandará um contrato",
+          "Publicará o site imediatamente"
+        ],
+        "a": 0,
+        "e": "Oui, mais il faut garder une marge pour les imprévus. Quand j'aurai intégré les dernières images, je lancerai les tests sur mobile."
+      },
+      {
+        "q": "Quem verificará a acessibilidade com um leitor de tela?",
+        "o": [
+          "O patrocinador principal",
+          "Claire",
+          "Os organizadores do festival"
+        ],
+        "a": 1,
+        "e": "J'y travaille. Une fois que j'aurai ajouté les textes alternatifs, Claire pourra contrôler chaque page avec son lecteur d'écran."
+      },
+      {
+        "q": "Por que Antoine acha que o logotipo não chegou?",
+        "o": [
+          "O patrocinador cancelou",
+          "O arquivo foi apagado",
+          "O patrocinador esqueceu a mensagem"
+        ],
+        "a": 2,
+        "e": "Il aura simplement oublié notre dernier message. Je peux le relancer aujourd'hui, sans lui mettre trop de pression."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Quand tu ___ (finir, futur antérieur) les tests, tu m'enverras le rapport.",
+        "a": [
+          "auras fini"
+        ],
+        "h": "Quando terminar os testes, enviará o relatório."
+      },
+      {
+        "s": "D'ici jeudi, nous ___ (valider, futur antérieur) tout le contenu.",
+        "a": [
+          "aurons validé"
+        ],
+        "h": "Até quinta teremos aprovado tudo."
+      },
+      {
+        "s": "Une fois que vous ___ (recevoir, futur antérieur) le dossier, appelez-moi.",
+        "a": [
+          "aurez reçu"
+        ],
+        "h": "Depois que receberem o documento, liguem."
+      },
+      {
+        "s": "Quand Inès ___ (arriver, futur antérieur), nous commencerons.",
+        "a": [
+          "sera arrivée"
+        ],
+        "h": "Quando Inès chegar, começaremos."
+      },
+      {
+        "s": "Dès que nous aurons corrigé les erreurs, nous ___ (publier, futur simple) le site.",
+        "a": [
+          "publierons"
+        ],
+        "h": "Assim que corrigirmos os erros, publicaremos o site."
+      },
+      {
+        "s": "Il ne répond pas ; il ___ (oublier, futur antérieur) notre rendez-vous.",
+        "a": [
+          "aura oublié"
+        ],
+        "h": "Ele não responde; provavelmente esqueceu nosso encontro."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "Quand",
+          "j'aurai",
+          "fini,",
+          "je",
+          "te",
+          "préviendrai."
+        ],
+        "h": "Quando eu terminar, aviso você."
+      },
+      {
+        "t": [
+          "Une",
+          "fois",
+          "que",
+          "tu",
+          "auras",
+          "vérifié,",
+          "nous",
+          "publierons."
+        ],
+        "h": "Depois que você conferir, publicaremos."
+      },
+      {
+        "t": [
+          "Je",
+          "relancerai",
+          "mon",
+          "contact",
+          "aujourd'hui",
+          "même."
+        ],
+        "h": "Vou cobrar uma resposta ainda hoje."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Oui, mais il faut garder une marge pour les imprévus. Quand j'aurai intégré les dernières images, je lancerai les tests sur mobile."
+      },
+      {
+        "t": "Ils m'ont promis une réponse demain matin. D'ici mercredi soir, nous aurons normalement validé tout le contenu."
+      },
+      {
+        "t": "J'y travaille. Une fois que j'aurai ajouté les textes alternatifs, Claire pourra contrôler chaque page avec son lecteur d'écran."
+      },
+      {
+        "t": "N'attends pas vendredi pour la sauvegarde. Si un souci technique survient, il faudra pouvoir revenir à la version précédente."
+      },
+      {
+        "t": "Bonne idée. Et une fois que tout aura été vérifié, on pourra annoncer officiellement le lancement sur nos réseaux."
+      }
+    ],
+    "shadow": [
+      "Oui, mais il faut garder une marge pour les imprévus. Quand j'aurai intégré les dernières images, je lancerai les tests sur mobile.",
+      "De mon côté, j'aurai terminé la version mobile avant la réunion de jeudi. Il restera seulement à vérifier les liens et les formulaires.",
+      "N'attends pas vendredi pour la sauvegarde. Si un souci technique survient, il faudra pouvoir revenir à la version précédente.",
+      "Entendu. D'ici jeudi soir, nous aurons bouclé l'essentiel. Vendredi, on se concentrera sur les derniers détails, pas sur les urgences."
+    ],
+    "write": {
+      "task": "Planeje um projeto pessoal e escreva seis frases indicando resultados alcançados até uma data e próximas etapas.",
+      "ph": "D'ici la fin du mois, j'aurai … . Dès que j'aurai …"
+    },
+    "cards": [
+      [
+        "Quando eu terminar, aviso você.",
+        "Quand j'aurai fini, je te préviendrai."
+      ],
+      [
+        "Teremos terminado até quinta-feira.",
+        "Nous aurons terminé d'ici jeudi."
+      ],
+      [
+        "Assim que ela responder, decidiremos.",
+        "Dès qu'elle aura répondu, nous déciderons."
+      ],
+      [
+        "Até amanhã, já terei enviado o arquivo.",
+        "D'ici demain, j'aurai envoyé le fichier."
+      ],
+      [
+        "Depois que você conferir, publicaremos.",
+        "Une fois que tu auras vérifié, nous publierons."
+      ],
+      [
+        "Ele provavelmente esqueceu nosso encontro.",
+        "Il aura oublié notre rendez-vous."
+      ],
+      [
+        "Ela terá chegado antes do almoço.",
+        "Elle sera arrivée avant le déjeuner."
+      ],
+      [
+        "Vamos deixar uma margem para imprevistos.",
+        "Nous garderons une marge pour les imprévus."
+      ],
+      [
+        "Vou cobrar uma resposta ainda hoje.",
+        "Je relancerai mon contact aujourd'hui même."
+      ],
+      [
+        "Na sexta, o essencial já estará pronto.",
+        "Vendredi, l'essentiel sera déjà prêt."
+      ]
+    ]
+  },
+  {
+    "title": "J'aurais dû...",
+    "goal": "Expressar arrependimentos, críticas construtivas e hipóteses sobre situações passadas com conditionnel passé e si + plus-que-parfait.",
+    "speakers": {
+      "Inès": "f",
+      "Lucas": "m"
+    },
+    "setting": "Inès e Lucas discutem uma candidatura a financiamento recusada por falta de um documento.",
+    "lines": [
+      [
+        "Inès",
+        "Tu as eu des nouvelles pour notre dossier de subvention ? La réponse devait arriver vendredi, mais je n'ai rien reçu.",
+        "Você teve notícias do pedido de financiamento? A resposta deveria chegar na sexta, mas não recebi nada."
+      ],
+      [
+        "Lucas",
+        "Oui, et ce n'est pas une bonne nouvelle. Le dossier a été rejeté : j'avais oublié de joindre le tableau du budget. J'aurais dû tout vérifier.",
+        "Sim, e não são boas notícias. Foi recusado: esqueci de anexar a planilha de orçamento. Deveria ter conferido tudo."
+      ],
+      [
+        "Inès",
+        "Ah mince... Je t'avais pourtant envoyé ce tableau jeudi. Tu n'as pas vu mon message avec la pièce jointe ?",
+        "Puxa... Mas enviei a planilha na quinta. Não viu minha mensagem com o anexo?"
+      ],
+      [
+        "Lucas",
+        "Si, mais je l'ai lu entre deux réunions. Si j'avais pris cinq minutes de plus, j'aurais remarqué que le fichier manquait.",
+        "Vi, mas li entre duas reuniões. Se tivesse dedicado cinco minutos a mais, teria notado a falta do arquivo."
+      ],
+      [
+        "Inès",
+        "Et si tu m'avais transmis la version finale avant l'envoi, j'aurais pu repérer le problème à temps.",
+        "Se você tivesse me enviado a versão final, eu poderia ter identificado o problema a tempo."
+      ],
+      [
+        "Lucas",
+        "C'est vrai. Tu aurais aussi pu me rappeler que tu attendais cette copie, mais c'était surtout à moi de l'envoyer.",
+        "Verdade. Você também poderia ter me lembrado da cópia, mas era responsabilidade minha enviar."
+      ],
+      [
+        "Inès",
+        "De mon côté, je n'aurais pas dû supposer que tout était prêt. Je m'en veux de ne pas avoir posé la question.",
+        "Eu não deveria ter presumido que tudo estava pronto. Estou chateada por não ter perguntado."
+      ],
+      [
+        "Lucas",
+        "Ne te reproche pas toute l'erreur. C'est moi qui avais promis de faire la dernière vérification avant la date limite.",
+        "Não se culpe por todo o erro. Fui eu que prometi fazer a última conferência."
+      ],
+      [
+        "Inès",
+        "On aurait peut-être obtenu cette aide si le dossier avait été complet. Les ateliers auraient pu commencer dès janvier.",
+        "Talvez tivéssemos conseguido o apoio com o pedido completo. As oficinas poderiam ter começado em janeiro."
+      ],
+      [
+        "Lucas",
+        "Peut-être, mais rien n'était garanti. Même avec un dossier impeccable, notre demande aurait pu être refusée.",
+        "Talvez, mas nada era garantido. Mesmo impecável, o pedido poderia ter sido recusado."
+      ],
+      [
+        "Inès",
+        "Tu as raison. On ferait mieux d'en tirer une leçon plutôt que de chercher un coupable. Qu'est-ce qu'on peut encore faire ?",
+        "Tem razão. Melhor aprender com isso do que procurar culpados. O que podemos fazer?"
+      ],
+      [
+        "Lucas",
+        "J'aurais préféré qu'on en parle hier, mais j'avais besoin de prendre du recul. J'ai finalement appelé le service ce matin.",
+        "Teria preferido conversar ontem, mas precisava refletir. Liguei para o setor hoje de manhã."
+      ],
+      [
+        "Inès",
+        "Et qu'est-ce qu'ils ont dit ? Si on expliquait la situation, ils accepteraient peut-être de revoir notre dossier.",
+        "O que disseram? Se explicássemos, talvez aceitassem reavaliar o pedido."
+      ],
+      [
+        "Lucas",
+        "Malheureusement non. Si nous avions signalé l'oubli avant la clôture, ils auraient accepté le document manquant.",
+        "Infelizmente não. Se tivéssemos comunicado o esquecimento antes do encerramento, teriam aceitado o documento."
+      ],
+      [
+        "Inès",
+        "C'est dommage. Pour le prochain appel à projets, on pourrait créer une liste de contrôle et prévoir deux relectures.",
+        "É uma pena. No próximo edital, poderíamos criar uma lista de controle e prever duas revisões."
+      ],
+      [
+        "Lucas",
+        "Bonne idée. Sans cette erreur, on n'aurait peut-être jamais revu notre méthode. Je t'enverrai une première liste ce soir.",
+        "Boa ideia. Sem esse erro, talvez nunca revisássemos nosso método. Enviarei uma primeira lista hoje."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Conditionnel passé: formação",
+        "p": [
+          "Forme com <b>avoir</b> ou <b>être</b> no conditionnel présent e o particípio passado. Essa forma apresenta uma hipótese contrária a algo realizado."
+        ],
+        "ex": [
+          [
+            "J'aurais vérifié le dossier plus tôt.",
+            "Teria conferido a solicitação antes."
+          ],
+          [
+            "Elle serait venue si tu l'avais invitée.",
+            "Ela teria vindo se você tivesse convidado."
+          ],
+          [
+            "Nous aurions terminé avant vendredi.",
+            "Teríamos terminado antes de sexta."
+          ]
+        ],
+        "tip": "A escolha do auxiliar segue as regras dos tempos compostos."
+      },
+      {
+        "h": "J'aurais dû e j'aurais pu",
+        "p": [
+          "<b>J'aurais dû</b> apresenta uma obrigação não cumprida; <b>j'aurais pu</b> apresenta uma possibilidade não aproveitada. Na negativa, je n'aurais pas dû exprime arrependimento por uma ação realizada."
+        ],
+        "ex": [
+          [
+            "J'aurais dû relire les pièces jointes.",
+            "Eu deveria ter relido os anexos."
+          ],
+          [
+            "Je n'aurais pas dû envoyer le dossier si vite.",
+            "Não deveria ter enviado tão rápido."
+          ],
+          [
+            "Tu aurais pu me prévenir plus tôt.",
+            "Você poderia ter me avisado antes."
+          ]
+        ],
+        "tip": "Suavize críticas para não soar acusatório."
+      },
+      {
+        "h": "Si + plus-que-parfait",
+        "p": [
+          "Na hipótese irreal sobre o passado, usamos <b>si + plus-que-parfait</b> na condição e conditionnel passé no resultado. Não use conditionnel imediatamente após si."
+        ],
+        "ex": [
+          [
+            "Si j'avais su, j'aurais attendu.",
+            "Se eu soubesse, teria esperado."
+          ],
+          [
+            "Nous aurions réussi si nous avions mieux préparé.",
+            "Teríamos conseguido se tivéssemos nos preparado melhor."
+          ],
+          [
+            "Si elle était arrivée plus tôt, elle aurait aidé.",
+            "Se chegasse mais cedo, teria ajudado."
+          ]
+        ],
+        "tip": "Si j'avais su, nunca si j'aurais su."
+      },
+      {
+        "h": "Hipóteses com nuance",
+        "p": [
+          "O conditionnel passé aparece em avaliações e conjecturas, com talvez e condições implícitas, sem apresentar resultados como garantidos."
+        ],
+        "ex": [
+          [
+            "On aurait peut-être obtenu une aide.",
+            "Talvez tivéssemos obtido apoio."
+          ],
+          [
+            "Sans ton aide, je n'aurais pas fini.",
+            "Sem sua ajuda não teria terminado."
+          ],
+          [
+            "À ta place, j'aurais demandé conseil.",
+            "No seu lugar teria pedido orientação."
+          ]
+        ],
+        "tip": "Peut-être indica incerteza sobre o resultado alternativo."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Documentos e financiamento",
+        "items": [
+          [
+            "une subvention",
+            "um subsídio"
+          ],
+          [
+            "un dossier",
+            "uma solicitação"
+          ],
+          [
+            "une pièce jointe",
+            "um anexo"
+          ],
+          [
+            "un budget",
+            "um orçamento"
+          ],
+          [
+            "un appel à projets",
+            "um edital"
+          ],
+          [
+            "une candidature",
+            "uma candidatura"
+          ],
+          [
+            "une date limite",
+            "um prazo final"
+          ],
+          [
+            "une clôture",
+            "um encerramento"
+          ]
+        ]
+      },
+      {
+        "h": "Erros e soluções",
+        "items": [
+          [
+            "oublier de",
+            "esquecer de"
+          ],
+          [
+            "joindre un fichier",
+            "anexar um arquivo"
+          ],
+          [
+            "repérer une erreur",
+            "identificar um erro"
+          ],
+          [
+            "supposer",
+            "presumir"
+          ],
+          [
+            "s'en vouloir",
+            "ficar chateado consigo"
+          ],
+          [
+            "reprocher",
+            "censurar"
+          ],
+          [
+            "prendre du recul",
+            "refletir com distanciamento"
+          ],
+          [
+            "une liste de contrôle",
+            "uma lista de conferência"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "aurais e aurait",
+        "p": "O s ou t final é mudo. As duas palavras soam aproximadamente “orè”.",
+        "w": [
+          "j'aurais dû",
+          "tu aurais pu",
+          "il aurait accepté"
+        ]
+      },
+      {
+        "h": "dû e pu",
+        "p": "O u francês tem lábios arredondados e posição de língua próxima ao i. Tente “dü” e “pü”.",
+        "w": [
+          "j'aurais dû",
+          "elle aurait pu",
+          "nous aurions dû"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Por que a solicitação de financiamento foi recusada?",
+        "o": [
+          "Faltava a planilha do orçamento",
+          "O projeto custava demais",
+          "Não havia participantes inscritos"
+        ],
+        "a": 0,
+        "e": "Oui, et ce n'est pas une bonne nouvelle. Le dossier a été rejeté : j'avais oublié de joindre le tableau du budget. J'aurais dû tout vérifier."
+      },
+      {
+        "q": "O que Inès poderia ter feito com a versão final?",
+        "o": [
+          "Alterar o prazo",
+          "Enviar um novo contrato",
+          "Identificar o problema a tempo"
+        ],
+        "a": 2,
+        "e": "Et si tu m'avais transmis la version finale avant l'envoi, j'aurais pu repérer le problème à temps."
+      },
+      {
+        "q": "A aprovação estaria garantida com o documento completo?",
+        "o": [
+          "Sim, já estava aprovada",
+          "Não, ainda poderia ser recusada",
+          "Sim, porque o orçamento era pequeno"
+        ],
+        "a": 1,
+        "e": "Peut-être, mais rien n'était garanti. Même avec un dossier impeccable, notre demande aurait pu être refusée."
+      },
+      {
+        "q": "Qual solução Inès propõe para o próximo edital?",
+        "o": [
+          "Criar lista de conferência e fazer duas revisões",
+          "Deixar para o último dia",
+          "Eliminar anexos obrigatórios"
+        ],
+        "a": 0,
+        "e": "C'est dommage. Pour le prochain appel à projets, on pourrait créer une liste de contrôle et prévoir deux relectures."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Si j'___ (vérifier, plus-que-parfait) le dossier, j'aurais vu l'erreur.",
+        "a": [
+          "avais vérifié"
+        ],
+        "h": "Se eu tivesse conferido, teria visto o erro."
+      },
+      {
+        "s": "J'___ (devoir, conditionnel passé) relire les documents.",
+        "a": [
+          "aurais dû"
+        ],
+        "h": "Eu deveria ter relido os documentos."
+      },
+      {
+        "s": "Si Inès m'avait prévenu, je l'___ (remarquer, conditionnel passé).",
+        "a": [
+          "aurais remarqué"
+        ],
+        "h": "Se Inès tivesse avisado, eu teria percebido."
+      },
+      {
+        "s": "Elle ___ (venir, conditionnel passé) si elle avait eu le temps.",
+        "a": [
+          "serait venue"
+        ],
+        "h": "Ela teria vindo se tivesse tido tempo."
+      },
+      {
+        "s": "Si nous ___ (envoyer, plus-que-parfait) le dossier à temps, ils l'auraient accepté.",
+        "a": [
+          "avions envoyé"
+        ],
+        "h": "Se tivéssemos enviado a tempo, teriam aceitado."
+      },
+      {
+        "s": "À ta place, je n'___ (pas envoyer, conditionnel passé) le dossier si vite.",
+        "a": [
+          "aurais pas envoyé"
+        ],
+        "h": "No seu lugar, não teria enviado tão rápido."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "J'aurais",
+          "dû",
+          "vérifier",
+          "la",
+          "pièce",
+          "jointe."
+        ],
+        "h": "Eu deveria ter conferido o anexo."
+      },
+      {
+        "t": [
+          "Sans",
+          "ton",
+          "aide,",
+          "je",
+          "n'y",
+          "serais",
+          "pas",
+          "arrivé."
+        ],
+        "h": "Sem sua ajuda, não teria conseguido."
+      },
+      {
+        "t": [
+          "La",
+          "réponse",
+          "aurait",
+          "peut-être",
+          "été",
+          "différente."
+        ],
+        "h": "Talvez a resposta fosse diferente."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Oui, et ce n'est pas une bonne nouvelle. Le dossier a été rejeté : j'avais oublié de joindre le tableau du budget. J'aurais dû tout vérifier."
+      },
+      {
+        "t": "Et si tu m'avais transmis la version finale avant l'envoi, j'aurais pu repérer le problème à temps."
+      },
+      {
+        "t": "Ne te reproche pas toute l'erreur. C'est moi qui avais promis de faire la dernière vérification avant la date limite."
+      },
+      {
+        "t": "Tu as raison. On ferait mieux d'en tirer une leçon plutôt que de chercher un coupable. Qu'est-ce qu'on peut encore faire ?"
+      },
+      {
+        "t": "C'est dommage. Pour le prochain appel à projets, on pourrait créer une liste de contrôle et prévoir deux relectures."
+      }
+    ],
+    "shadow": [
+      "Oui, et ce n'est pas une bonne nouvelle. Le dossier a été rejeté : j'avais oublié de joindre le tableau du budget. J'aurais dû tout vérifier.",
+      "C'est vrai. Tu aurais aussi pu me rappeler que tu attendais cette copie, mais c'était surtout à moi de l'envoyer.",
+      "Tu as raison. On ferait mieux d'en tirer une leçon plutôt que de chercher un coupable. Qu'est-ce qu'on peut encore faire ?",
+      "Bonne idée. Sans cette erreur, on n'aurait peut-être jamais revu notre méthode. Je t'enverrai une première liste ce soir."
+    ],
+    "write": {
+      "task": "Escreva seis frases sobre uma decisão passada de que se arrepende e o que teria mudado com outra escolha.",
+      "ph": "La semaine dernière, j'aurais dû … . Si j'avais …"
+    },
+    "cards": [
+      [
+        "Eu deveria ter conferido o anexo.",
+        "J'aurais dû vérifier la pièce jointe."
+      ],
+      [
+        "Eu não deveria ter esperado tanto.",
+        "Je n'aurais pas dû attendre si longtemps."
+      ],
+      [
+        "Você poderia ter me avisado.",
+        "Tu aurais pu me prévenir."
+      ],
+      [
+        "Se eu soubesse, teria ligado.",
+        "Si j'avais su, j'aurais appelé."
+      ],
+      [
+        "Sem sua ajuda, não teria conseguido.",
+        "Sans ton aide, je n'y serais pas arrivé."
+      ],
+      [
+        "Ela teria vindo mais cedo.",
+        "Elle serait venue plus tôt."
+      ],
+      [
+        "Teríamos evitado esse problema.",
+        "Nous aurions évité ce problème."
+      ],
+      [
+        "No seu lugar, eu teria pedido ajuda.",
+        "À ta place, j'aurais demandé de l'aide."
+      ],
+      [
+        "Talvez a resposta fosse diferente.",
+        "La réponse aurait peut-être été différente."
+      ],
+      [
+        "Poderíamos ter resolvido ontem.",
+        "Nous aurions pu régler ça hier."
+      ]
+    ]
+  },
+  {
+    "title": "Bien que ce soit difficile",
+    "goal": "Expressar sentimentos, dúvidas e concessões usando subjonctif depois de bien que, avoir peur que e douter que.",
+    "speakers": {
+      "Claire": "f",
+      "Antoine": "m"
+    },
+    "setting": "Em Lyon, Claire e Antoine organizam um ateliê comunitário enquanto aguardam confirmação da prefeitura.",
+    "lines": [
+      [
+        "Claire",
+        "Bien que l'atelier de réparation soit prévu samedi, la mairie n'a toujours pas confirmé la salle. Ça commence à m'inquiéter.",
+        "Embora a oficina esteja prevista para sábado, a prefeitura não confirmou a sala. Estou começando a me preocupar."
+      ],
+      [
+        "Antoine",
+        "J'ai peur qu'ils nous répondent trop tard pour prévenir les bénévoles. Tu as essayé de les joindre ce matin ?",
+        "Tenho medo de que respondam tarde demais para avisarmos os voluntários. Você tentou falar com eles?"
+      ],
+      [
+        "Claire",
+        "Oui, mais personne n'a décroché. Je doute que nous obtenions une réponse aujourd'hui si on attend sans rien faire.",
+        "Sim, mas ninguém atendeu. Duvido que tenhamos resposta hoje se ficarmos esperando."
+      ],
+      [
+        "Antoine",
+        "On pourrait passer directement à l'accueil. Même si l'employée est débordée, elle pourra peut-être nous renseigner.",
+        "Podemos passar na recepção. Mesmo sobrecarregada, talvez a funcionária consiga nos informar."
+      ],
+      [
+        "Claire",
+        "Je suis contente que tu proposes quelque chose de concret. J'avais commencé à imaginer le pire.",
+        "Fico contente que proponha algo concreto. Eu já imaginava o pior."
+      ],
+      [
+        "Antoine",
+        "Et pour les bénévoles ? Je crains que certains soient déjà pris samedi matin depuis qu'on a changé l'horaire.",
+        "E os voluntários? Receio que alguns já tenham compromissos sábado de manhã após a mudança de horário."
+      ],
+      [
+        "Claire",
+        "Bien que nous soyons moins nombreux que prévu, on peut maintenir les réparations les plus simples.",
+        "Embora sejamos menos que o previsto, podemos manter os reparos mais simples."
+      ],
+      [
+        "Antoine",
+        "Je trouve dommage que l'atelier sur les vélos soit annulé. C'était celui qui attirait le plus de monde.",
+        "Acho uma pena que a oficina de bicicletas seja cancelada. Era a mais procurada."
+      ],
+      [
+        "Claire",
+        "Il n'est pas annulé. Je doute simplement que nous ayons assez d'outils pour accueillir vingt personnes.",
+        "Não foi cancelada. Duvido apenas que tenhamos ferramentas para vinte pessoas."
+      ],
+      [
+        "Antoine",
+        "J'en apporterai quelques-uns. Ça me rassure que tu veuilles adapter le programme plutôt que renoncer.",
+        "Vou levar algumas ferramentas. Me tranquiliza que prefira adaptar a programação a desistir."
+      ],
+      [
+        "Claire",
+        "Merci. J'ai aussi peur que des visiteurs viennent avec des appareils trop dangereux à réparer sur place.",
+        "Obrigada. Também tenho medo de que tragam aparelhos perigosos demais para reparar ali."
+      ],
+      [
+        "Antoine",
+        "On précisera les règles à l'inscription. Bien que ce soit gratuit, il faut expliquer ce qu'on ne peut pas prendre en charge.",
+        "Vamos esclarecer as regras na inscrição. Embora gratuito, precisamos explicar as limitações."
+      ],
+      [
+        "Claire",
+        "Attends, la mairie vient de répondre : la petite salle est libre, mais la grande est réservée pour une réunion.",
+        "Espere, a prefeitura respondeu: a sala pequena está livre, mas a grande foi reservada."
+      ],
+      [
+        "Antoine",
+        "Je suis soulagé qu'on ait enfin une salle ! Mais je doute que tout le matériel tienne dans cet espace.",
+        "Estou aliviado por termos uma sala! Mas duvido que o material caiba."
+      ],
+      [
+        "Claire",
+        "On installera deux tables au lieu de quatre. Je suis ravie que tu sois prêt à revoir l'organisation.",
+        "Colocaremos duas mesas em vez de quatro. Estou feliz por você topar reorganizar."
+      ],
+      [
+        "Antoine",
+        "Alors je préviens les bénévoles. Même si tout n'est pas parfait, je suis sûr qu'on fera quelque chose d'utile.",
+        "Então aviso os voluntários. Mesmo que nem tudo seja perfeito, faremos algo útil."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Sentimentos com subjonctif",
+        "p": [
+          "Expressões como <b>être content que</b>, être ravi que e trouver dommage que pedem subjonctif mesmo quando o fato é real."
+        ],
+        "ex": [
+          [
+            "Je suis ravie que tu sois disponible.",
+            "Fico feliz que você esteja disponível."
+          ],
+          [
+            "Ça me rassure que vous connaissiez les règles.",
+            "Fico mais tranquilo por conhecerem as regras."
+          ],
+          [
+            "C'est dommage que cet atelier soit annulé.",
+            "É uma pena que essa oficina seja cancelada."
+          ]
+        ],
+        "tip": "O subjonctif marca uma reação emocional, não necessariamente dúvida."
+      },
+      {
+        "h": "Avoir peur que e craindre que",
+        "p": [
+          "Essas expressões de receio pedem subjonctif. Em registros formais pode aparecer ne explétif, que sozinho não expressa negação."
+        ],
+        "ex": [
+          [
+            "J'ai peur que les bénévoles arrivent tard.",
+            "Tenho medo de que os voluntários cheguem tarde."
+          ],
+          [
+            "Je crains que la salle soit trop petite.",
+            "Receio que a sala seja pequena."
+          ],
+          [
+            "Elle a peur que nous ne puissions pas terminer.",
+            "Ela teme que não consigamos terminar."
+          ]
+        ],
+        "tip": "Para negar, use ne... pas."
+      },
+      {
+        "h": "Douter que",
+        "p": [
+          "<b>Douter que</b> expressa incerteza e normalmente pede subjonctif; quando a afirmação é de certeza, como ne pas douter que, o indicatif é frequente."
+        ],
+        "ex": [
+          [
+            "Je doute qu'ils puissent venir.",
+            "Duvido que possam vir."
+          ],
+          [
+            "Nous doutons que ce budget soit suffisant.",
+            "Duvidamos que baste o orçamento."
+          ],
+          [
+            "Elle doute que nous ayons assez de temps.",
+            "Ela duvida que tenhamos tempo."
+          ]
+        ],
+        "tip": "Memorize je doute que ce soit possible."
+      },
+      {
+        "h": "Bien que x même si",
+        "p": [
+          "<b>Bien que</b> usa subjonctif para concessão; <b>même si</b> usa indicatif mesmo quando o português usa o subjuntivo."
+        ],
+        "ex": [
+          [
+            "Bien que ce soit difficile, continuons.",
+            "Embora difícil, vamos continuar."
+          ],
+          [
+            "Bien qu'il pleuve, les visiteurs arrivent.",
+            "Embora chova, os visitantes chegam."
+          ],
+          [
+            "Même s'il pleut, nous maintiendrons l'événement.",
+            "Mesmo que chova, manteremos o evento."
+          ]
+        ],
+        "tip": "Bien que ce soit, mas même si c'est."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Organização comunitária",
+        "items": [
+          [
+            "un atelier de réparation",
+            "uma oficina de reparos"
+          ],
+          [
+            "une mairie",
+            "uma prefeitura"
+          ],
+          [
+            "un bénévole",
+            "um voluntário"
+          ],
+          [
+            "une inscription",
+            "uma inscrição"
+          ],
+          [
+            "un outil",
+            "uma ferramenta"
+          ],
+          [
+            "un appareil",
+            "um aparelho"
+          ],
+          [
+            "un matériel",
+            "um equipamento"
+          ],
+          [
+            "prendre en charge",
+            "assumir responsabilidade"
+          ]
+        ]
+      },
+      {
+        "h": "Emoções e soluções",
+        "items": [
+          [
+            "être soulagé",
+            "estar aliviado"
+          ],
+          [
+            "être ravi",
+            "ficar feliz"
+          ],
+          [
+            "être débordé",
+            "estar sobrecarregado"
+          ],
+          [
+            "s'inquiéter",
+            "preocupar-se"
+          ],
+          [
+            "craindre",
+            "recear"
+          ],
+          [
+            "douter de",
+            "duvidar de"
+          ],
+          [
+            "rassurer",
+            "tranquilizar"
+          ],
+          [
+            "renoncer",
+            "desistir"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "bien que",
+        "p": "Bien tem vogal nasal, aproximadamente “biã”; evite pronunciar um n isolado.",
+        "w": [
+          "bien que",
+          "bien qu'il pleuve",
+          "bien que ce soit"
+        ]
+      },
+      {
+        "h": "soit e soient",
+        "p": "As duas formas soam igual, aproximadamente “suá”, com consoantes finais mudas.",
+        "w": [
+          "soit",
+          "soient",
+          "sois"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Por que Claire está preocupada no início?",
+        "o": [
+          "Faltam inscrições",
+          "Todos desistiram",
+          "A prefeitura não confirmou a sala"
+        ],
+        "a": 2,
+        "e": "Bien que l'atelier de réparation soit prévu samedi, la mairie n'a toujours pas confirmé la salle. Ça commence à m'inquiéter."
+      },
+      {
+        "q": "O que Antoine sugere para obter informações?",
+        "o": [
+          "Ir pessoalmente à recepção",
+          "Cancelar o evento",
+          "Procurar outra prefeitura"
+        ],
+        "a": 0,
+        "e": "On pourrait passer directement à l'accueil. Même si l'employée est débordée, elle pourra peut-être nous renseigner."
+      },
+      {
+        "q": "Por que Claire tem dúvidas sobre a oficina de bicicletas?",
+        "o": [
+          "Ninguém demonstrou interesse",
+          "Talvez não haja ferramentas suficientes",
+          "Bicicletas são proibidas"
+        ],
+        "a": 1,
+        "e": "Il n'est pas annulé. Je doute simplement que nous ayons assez d'outils pour accueillir vingt personnes."
+      },
+      {
+        "q": "Como adaptam o espaço disponível?",
+        "o": [
+          "Mudam o evento para domingo",
+          "Eliminam todas as oficinas",
+          "Usam duas mesas em vez de quatro"
+        ],
+        "a": 2,
+        "e": "On installera deux tables au lieu de quatre. Je suis ravie que tu sois prêt à revoir l'organisation."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Bien que ce ___ (être, subjonctif) difficile, nous continuerons.",
+        "a": [
+          "soit"
+        ],
+        "h": "Embora seja difícil, continuaremos."
+      },
+      {
+        "s": "J'ai peur que les bénévoles ___ (arriver, subjonctif) en retard.",
+        "a": [
+          "arrivent"
+        ],
+        "h": "Tenho medo de que cheguem atrasados."
+      },
+      {
+        "s": "Je doute que nous ___ (avoir, subjonctif) assez d'outils.",
+        "a": [
+          "ayons"
+        ],
+        "h": "Duvido que tenhamos ferramentas suficientes."
+      },
+      {
+        "s": "Je suis contente que tu ___ (proposer, subjonctif) une solution.",
+        "a": [
+          "proposes"
+        ],
+        "h": "Fico contente que proponha uma solução."
+      },
+      {
+        "s": "Bien que nous ___ (être, subjonctif) peu nombreux, l'atelier aura lieu.",
+        "a": [
+          "soyons"
+        ],
+        "h": "Embora sejamos poucos, haverá oficina."
+      },
+      {
+        "s": "Je crains qu'il ___ (pleuvoir, subjonctif) demain.",
+        "a": [
+          "pleuve"
+        ],
+        "h": "Receio que chova amanhã."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "Bien",
+          "que",
+          "ce",
+          "soit",
+          "compliqué,",
+          "nous",
+          "allons",
+          "essayer."
+        ],
+        "h": "Embora complicado, vamos tentar."
+      },
+      {
+        "t": [
+          "C'est",
+          "dommage",
+          "qu'elle",
+          "ne",
+          "puisse",
+          "pas",
+          "venir."
+        ],
+        "h": "É uma pena que ela não possa vir."
+      },
+      {
+        "t": [
+          "Je",
+          "doute",
+          "qu'ils",
+          "soient",
+          "d'accord."
+        ],
+        "h": "Duvido que eles concordem."
+      }
+    ],
+    "dict": [
+      {
+        "t": "J'ai peur qu'ils nous répondent trop tard pour prévenir les bénévoles. Tu as essayé de les joindre ce matin ?"
+      },
+      {
+        "t": "Je suis contente que tu proposes quelque chose de concret. J'avais commencé à imaginer le pire."
+      },
+      {
+        "t": "Je trouve dommage que l'atelier sur les vélos soit annulé. C'était celui qui attirait le plus de monde."
+      },
+      {
+        "t": "Merci. J'ai aussi peur que des visiteurs viennent avec des appareils trop dangereux à réparer sur place."
+      },
+      {
+        "t": "On installera deux tables au lieu de quatre. Je suis ravie que tu sois prêt à revoir l'organisation."
+      }
+    ],
+    "shadow": [
+      "J'ai peur qu'ils nous répondent trop tard pour prévenir les bénévoles. Tu as essayé de les joindre ce matin ?",
+      "Et pour les bénévoles ? Je crains que certains soient déjà pris samedi matin depuis qu'on a changé l'horaire.",
+      "Merci. J'ai aussi peur que des visiteurs viennent avec des appareils trop dangereux à réparer sur place.",
+      "Alors je préviens les bénévoles. Même si tout n'est pas parfait, je suis sûr qu'on fera quelque chose d'utile."
+    ],
+    "write": {
+      "task": "Escreva seis frases sobre imprevistos em um evento com bien que, avoir peur que, douter que e sentimentos.",
+      "ph": "Bien que notre événement soit …, j'ai peur que …"
+    },
+    "cards": [
+      [
+        "Embora complicado, vamos tentar.",
+        "Bien que ce soit compliqué, nous allons essayer."
+      ],
+      [
+        "Tenho medo de que ele se atrase.",
+        "J'ai peur qu'il soit en retard."
+      ],
+      [
+        "Duvido que isso seja suficiente.",
+        "Je doute que ce soit suffisant."
+      ],
+      [
+        "Fico feliz que esteja aqui.",
+        "Je suis heureux que tu sois là."
+      ],
+      [
+        "É uma pena que ela não possa vir.",
+        "C'est dommage qu'elle ne puisse pas venir."
+      ],
+      [
+        "Receio que tenhamos pouco tempo.",
+        "Je crains que nous ayons peu de temps."
+      ],
+      [
+        "Embora cansados, eles continuam.",
+        "Bien qu'ils soient fatigués, ils continuent."
+      ],
+      [
+        "Fico aliviado que tudo esteja pronto.",
+        "Je suis soulagé que tout soit prêt."
+      ],
+      [
+        "Duvido que eles concordem.",
+        "Je doute qu'ils soient d'accord."
+      ],
+      [
+        "Mesmo que chova, iremos.",
+        "Même s'il pleut, nous irons."
+      ]
+    ]
+  },
+  {
+    "title": "Indicatif ou subjonctif ?",
+    "goal": "Escolher entre indicatif e subjonctif em opiniões e hipóteses, e empregar subjonctif passé para ações anteriores.",
+    "speakers": {
+      "Inès": "f",
+      "Lucas": "m"
+    },
+    "setting": "Inès e Lucas analisam uma pesquisa sobre trabalho híbrido antes de apresentá-la à direção.",
+    "lines": [
+      [
+        "Inès",
+        "J'ai enfin reçu les résultats de notre enquête sur le télétravail. Je pense que l'équipe est plutôt satisfaite des deux jours à distance.",
+        "Recebi os resultados da pesquisa sobre teletrabalho. Acho que a equipe está satisfeita com os dois dias remotos."
+      ],
+      [
+        "Lucas",
+        "C'est encourageant, mais je ne pense pas que les chiffres racontent toute l'histoire. Combien de personnes ont répondu ?",
+        "É animador, mas não acho que os números contem tudo. Quantas pessoas responderam?"
+      ],
+      [
+        "Inès",
+        "Trente-deux sur quarante. Je suis certaine que les réponses ont été enregistrées correctement, mais il manque encore des commentaires.",
+        "Trinta e duas de quarenta. Tenho certeza de que foram registradas corretamente, mas faltam comentários."
+      ],
+      [
+        "Lucas",
+        "Il est possible que certaines personnes aient oublié le questionnaire. Le rappel est parti tard vendredi, non ?",
+        "É possível que algumas pessoas tenham esquecido o questionário. O lembrete saiu tarde na sexta, não?"
+      ],
+      [
+        "Inès",
+        "Oui. Je regrette que nous ayons envoyé le rappel si tard. J'espère pourtant que les derniers retours arriveront avant jeudi.",
+        "Sim. Lamento termos enviado tão tarde. Espero que as últimas respostas cheguem antes de quinta."
+      ],
+      [
+        "Lucas",
+        "À mon avis, nous pouvons déjà présenter les tendances, à condition de signaler les limites de l'enquête.",
+        "Na minha opinião, já podemos apresentar as tendências, desde que indiquemos as limitações."
+      ],
+      [
+        "Inès",
+        "Je ne crois pas que la direction veuille tirer des conclusions définitives dès maintenant. Elle veut surtout comprendre les difficultés.",
+        "Não acho que a direção queira conclusões definitivas agora. Quer entender as dificuldades."
+      ],
+      [
+        "Lucas",
+        "Je pense que plusieurs collègues ont eu du mal à réserver une salle les jours de présence. Les témoignages le confirment.",
+        "Acho que colegas tiveram dificuldade para reservar salas nos dias presenciais. Os depoimentos confirmam."
+      ],
+      [
+        "Inès",
+        "C'est vrai. Il se peut qu'on ait sous-estimé les besoins en salles de réunion. Ça expliquerait certaines critiques.",
+        "É verdade. Pode ser que tenhamos subestimado a necessidade de salas. Isso explicaria críticas."
+      ],
+      [
+        "Lucas",
+        "Tu es sûre que tout le monde a reçu la même version du formulaire ? Le lien avait changé en cours de semaine.",
+        "Tem certeza de que todos receberam a mesma versão? O link mudou durante a semana."
+      ],
+      [
+        "Inès",
+        "Oui, j'ai vérifié les envois. Je suis contente que tu aies soulevé ce point, car j'avais eu le même doute.",
+        "Sim, conferi os envios. Fico contente por levantar a questão; eu tinha a mesma dúvida."
+      ],
+      [
+        "Lucas",
+        "Tant mieux. J'espère que nous trouverons une solution simple sans revoir toute l'organisation du travail.",
+        "Que bom. Espero que encontremos solução simples sem rever toda a organização."
+      ],
+      [
+        "Inès",
+        "Je ne pense pas qu'il soit nécessaire de tout modifier. On pourrait commencer par réserver des espaces supplémentaires.",
+        "Não acho necessário mudar tudo. Poderíamos começar reservando espaços adicionais."
+      ],
+      [
+        "Lucas",
+        "D'accord. Il est possible que les responsables aient déjà proposé des ajustements. Demandons-leur avant la réunion.",
+        "Certo. É possível que gestores já tenham proposto ajustes. Vamos perguntar antes da reunião."
+      ],
+      [
+        "Inès",
+        "Bonne idée. Je sais que deux équipes ont changé leurs horaires, mais je ne suis pas sûre que les autres aient fait de même.",
+        "Boa ideia. Sei que duas equipes mudaram os horários, mas não sei se outras fizeram o mesmo."
+      ],
+      [
+        "Lucas",
+        "Alors, présentons ce qui est confirmé et distinguons clairement ce qui reste à vérifier. Ce sera plus convaincant.",
+        "Então vamos apresentar o confirmado e distinguir o que precisa ser verificado. Será mais convincente."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Penser que afirmativo",
+        "p": [
+          "Com <b>je pense que</b> e <b>je crois que</b> afirmativos, o indicatif apresenta uma opinião considerada verdadeira. Expressões de certeza também pedem indicatif."
+        ],
+        "ex": [
+          [
+            "Je pense que cette solution fonctionne.",
+            "Acho que essa solução funciona."
+          ],
+          [
+            "Je crois qu'ils ont compris le problème.",
+            "Acho que entenderam."
+          ],
+          [
+            "Je suis certaine que le rapport sera prêt.",
+            "Tenho certeza de que o relatório estará pronto."
+          ]
+        ],
+        "tip": "Uma opinião não pede automaticamente subjonctif."
+      },
+      {
+        "h": "Ne pas penser que",
+        "p": [
+          "Na negativa, penser que e croire que geralmente pedem subjonctif, expressando dúvida ou rejeição da informação."
+        ],
+        "ex": [
+          [
+            "Je ne pense pas que ce soit vrai.",
+            "Não acho que isso seja verdade."
+          ],
+          [
+            "Je ne crois pas qu'ils comprennent.",
+            "Não acredito que entendam."
+          ],
+          [
+            "Je ne suis pas sûre que tout le monde ait raison.",
+            "Não tenho certeza de que todos tenham razão."
+          ]
+        ],
+        "tip": "Compare je pense qu'il vient e je ne pense pas qu'il vienne."
+      },
+      {
+        "h": "Espérer que x il est possible que",
+        "p": [
+          "<b>Espérer que</b> costuma pedir indicatif, especialmente futur simple, enquanto <b>il est possible que</b> e <b>il se peut que</b> pedem subjonctif."
+        ],
+        "ex": [
+          [
+            "J'espère qu'il acceptera.",
+            "Espero que aceite."
+          ],
+          [
+            "Il est possible qu'elle soit absente.",
+            "É possível que esteja ausente."
+          ],
+          [
+            "Il se peut que nous devions reporter.",
+            "Pode ser que precisemos adiar."
+          ]
+        ],
+        "tip": "Il est possible qu'il vienne, mas j'espère qu'il viendra."
+      },
+      {
+        "h": "Subjonctif passé",
+        "p": [
+          "Forma-se com avoir ou être no subjonctif présent seguido do particípio passado. Apresenta ação anterior em oração que exige subjonctif."
+        ],
+        "ex": [
+          [
+            "Je regrette que nous ayons attendu.",
+            "Lamento termos esperado."
+          ],
+          [
+            "Il est possible qu'elle ait oublié.",
+            "É possível que ela tenha esquecido."
+          ],
+          [
+            "Je suis contente que tu sois venu.",
+            "Fico feliz por você ter vindo."
+          ]
+        ],
+        "tip": "Que j'aie fait e qu'elle soit partie são formas usuais."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Pesquisa e resultados",
+        "items": [
+          [
+            "une enquête",
+            "uma pesquisa"
+          ],
+          [
+            "un questionnaire",
+            "um questionário"
+          ],
+          [
+            "un résultat",
+            "um resultado"
+          ],
+          [
+            "un témoignage",
+            "um depoimento"
+          ],
+          [
+            "une tendance",
+            "uma tendência"
+          ],
+          [
+            "un échantillon",
+            "uma amostra"
+          ],
+          [
+            "une donnée",
+            "um dado"
+          ],
+          [
+            "une conclusion",
+            "uma conclusão"
+          ]
+        ]
+      },
+      {
+        "h": "Trabalho e opiniões",
+        "items": [
+          [
+            "le télétravail",
+            "trabalho remoto"
+          ],
+          [
+            "un travail hybride",
+            "trabalho híbrido"
+          ],
+          [
+            "une salle de réunion",
+            "uma sala de reunião"
+          ],
+          [
+            "un responsable",
+            "um responsável"
+          ],
+          [
+            "un ajustement",
+            "um ajuste"
+          ],
+          [
+            "un rappel",
+            "um lembrete"
+          ],
+          [
+            "sous-estimer",
+            "subestimar"
+          ],
+          [
+            "soulever un point",
+            "levantar uma questão"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "aie, ait e aient",
+        "p": "As três formas soam igual, com e aberto, aproximadamente “è”.",
+        "w": [
+          "que j'aie",
+          "qu'il ait",
+          "qu'ils aient"
+        ]
+      },
+      {
+        "h": "espère e espérer",
+        "p": "O è de espère é aberto; o -er final de espérer tem som mais fechado, como “ê”.",
+        "w": [
+          "j'espère",
+          "nous espérons",
+          "espérer une réponse"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Quantas pessoas responderam à pesquisa?",
+        "o": [
+          "Vinte e oito de quarenta",
+          "Trinta e duas de quarenta",
+          "Todas as quarenta"
+        ],
+        "a": 1,
+        "e": "Trente-deux sur quarante. Je suis certaine que les réponses ont été enregistrées correctement, mais il manque encore des commentaires."
+      },
+      {
+        "q": "Que erro Inès lamenta?",
+        "o": [
+          "Apagar resultados",
+          "Usar formulário incorreto",
+          "Enviar o lembrete tarde demais"
+        ],
+        "a": 2,
+        "e": "Oui. Je regrette que nous ayons envoyé le rappel si tard. J'espère pourtant que les derniers retours arriveront avant jeudi."
+      },
+      {
+        "q": "Que dificuldade aparece nos depoimentos?",
+        "o": [
+          "Reservar salas nos dias presenciais",
+          "Falta de computadores domésticos",
+          "Cancelamento dos dias remotos"
+        ],
+        "a": 0,
+        "e": "Je pense que plusieurs collègues ont eu du mal à réserver une salle les jours de présence. Les témoignages le confirment."
+      },
+      {
+        "q": "Como apresentarão os resultados?",
+        "o": [
+          "Apenas resultados positivos",
+          "Separando fatos confirmados do que falta verificar",
+          "Adiando um mês"
+        ],
+        "a": 1,
+        "e": "Alors, présentons ce qui est confirmé et distinguons clairement ce qui reste à vérifier. Ce sera plus convaincant."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Je pense que cette solution ___ (être, indicatif présent) efficace.",
+        "a": [
+          "est"
+        ],
+        "h": "Acho que a solução é eficaz."
+      },
+      {
+        "s": "Je ne pense pas que ce chiffre ___ (être, subjonctif présent) fiable.",
+        "a": [
+          "soit"
+        ],
+        "h": "Não acho que esse número seja confiável."
+      },
+      {
+        "s": "J'espère que la direction ___ (accepter, futur simple) notre proposition.",
+        "a": [
+          "acceptera"
+        ],
+        "h": "Espero que a direção aceite."
+      },
+      {
+        "s": "Il est possible qu'ils ___ (oublier, subjonctif passé) le questionnaire.",
+        "a": [
+          "aient oublié"
+        ],
+        "h": "É possível que tenham esquecido o questionário."
+      },
+      {
+        "s": "Je suis contente que tu ___ (soulever, subjonctif passé) cette question.",
+        "a": [
+          "aies soulevé"
+        ],
+        "h": "Fico contente que tenha levantado a questão."
+      },
+      {
+        "s": "Je ne suis pas sûr qu'elle ___ (venir, subjonctif passé) hier.",
+        "a": [
+          "soit venue"
+        ],
+        "h": "Não tenho certeza de que ela veio ontem."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "Je",
+          "pense",
+          "que",
+          "cette",
+          "information",
+          "est",
+          "fiable."
+        ],
+        "h": "Acho que essa informação é confiável."
+      },
+      {
+        "t": [
+          "Je",
+          "suis",
+          "sûr",
+          "qu'il",
+          "a",
+          "compris."
+        ],
+        "h": "Tenho certeza de que ele entendeu."
+      },
+      {
+        "t": [
+          "J'espère",
+          "que",
+          "tout",
+          "fonctionnera",
+          "bien."
+        ],
+        "h": "Espero que tudo funcione bem."
+      }
+    ],
+    "dict": [
+      {
+        "t": "C'est encourageant, mais je ne pense pas que les chiffres racontent toute l'histoire. Combien de personnes ont répondu ?"
+      },
+      {
+        "t": "Oui. Je regrette que nous ayons envoyé le rappel si tard. J'espère pourtant que les derniers retours arriveront avant jeudi."
+      },
+      {
+        "t": "Je pense que plusieurs collègues ont eu du mal à réserver une salle les jours de présence. Les témoignages le confirment."
+      },
+      {
+        "t": "Oui, j'ai vérifié les envois. Je suis contente que tu aies soulevé ce point, car j'avais eu le même doute."
+      },
+      {
+        "t": "Bonne idée. Je sais que deux équipes ont changé leurs horaires, mais je ne suis pas sûre que les autres aient fait de même."
+      }
+    ],
+    "shadow": [
+      "C'est encourageant, mais je ne pense pas que les chiffres racontent toute l'histoire. Combien de personnes ont répondu ?",
+      "À mon avis, nous pouvons déjà présenter les tendances, à condition de signaler les limites de l'enquête.",
+      "Oui, j'ai vérifié les envois. Je suis contente que tu aies soulevé ce point, car j'avais eu le même doute.",
+      "Alors, présentons ce qui est confirmé et distinguons clairement ce qui reste à vérifier. Ce sera plus convaincant."
+    ],
+    "write": {
+      "task": "Analise uma pequena pesquisa e escreva seis frases sobre opiniões, dúvidas, esperanças e fatos anteriores.",
+      "ph": "Je pense que les résultats … . Je ne crois pas que …"
+    },
+    "cards": [
+      [
+        "Acho que essa informação é confiável.",
+        "Je pense que cette information est fiable."
+      ],
+      [
+        "Não acho que seja a melhor solução.",
+        "Je ne pense pas que ce soit la meilleure solution."
+      ],
+      [
+        "Espero que eles aceitem a proposta.",
+        "J'espère qu'ils accepteront la proposition."
+      ],
+      [
+        "É possível que ela tenha esquecido.",
+        "Il est possible qu'elle ait oublié."
+      ],
+      [
+        "Tenho certeza de que ele entendeu.",
+        "Je suis sûr qu'il a compris."
+      ],
+      [
+        "Não acredito que eles saibam disso.",
+        "Je ne crois pas qu'ils le sachent."
+      ],
+      [
+        "Lamento que tenhamos esperado tanto.",
+        "Je regrette que nous ayons tant attendu."
+      ],
+      [
+        "Pode ser que ele já tenha saído.",
+        "Il se peut qu'il soit déjà parti."
+      ],
+      [
+        "Espero que tudo funcione bem.",
+        "J'espère que tout fonctionnera bien."
+      ],
+      [
+        "Não tenho certeza de que ela recebeu.",
+        "Je ne suis pas sûr qu'elle ait reçu le message."
+      ]
+    ]
+  },
+  {
+    "title": "Le projet auquel je pense",
+    "goal": "Empregar pronomes relativos compostos lequel, auquel, duquel e suas variações com preposições.",
+    "speakers": {
+      "Inès": "f",
+      "Antoine": "m"
+    },
+    "setting": "Inès e Antoine avaliam propostas para transformar um antigo cinema em Bordeaux.",
+    "lines": [
+      [
+        "Inès",
+        "J'ai relu les propositions pour l'ancien cinéma. Le projet auquel je pense permettrait d'en faire un lieu ouvert aux associations.",
+        "Reli as propostas do antigo cinema. O projeto em que penso o transformaria em espaço para associações."
+      ],
+      [
+        "Antoine",
+        "Tu parles du dossier sur lequel nous avons travaillé en juin ? Celui qui prévoit une salle polyvalente au rez-de-chaussée ?",
+        "Está falando do documento em que trabalhamos em junho? Aquele com sala multiuso no térreo?"
+      ],
+      [
+        "Inès",
+        "Exactement. La salle dans laquelle on organiserait les débats existe déjà. Il faudrait surtout refaire l'isolation.",
+        "Exato. A sala onde organizaríamos debates já existe. Precisamos refazer o isolamento."
+      ],
+      [
+        "Antoine",
+        "Et la cour à côté de laquelle se trouve l'entrée secondaire ? On pourrait l'utiliser pour les événements d'été.",
+        "E o pátio ao lado do qual fica a entrada secundária? Poderíamos usar para eventos no verão."
+      ],
+      [
+        "Inès",
+        "C'est justement l'espace auquel les habitants tiennent le plus, d'après la consultation organisée au printemps.",
+        "É justamente o espaço mais valorizado pelos moradores, segundo a consulta da primavera."
+      ],
+      [
+        "Antoine",
+        "Le comité auprès duquel nous avons déposé la demande souhaite-t-il conserver les murs d'origine ?",
+        "O comitê ao qual apresentamos o pedido quer preservar as paredes originais?"
+      ],
+      [
+        "Inès",
+        "Oui. Les architectes avec lesquels nous avons échangé proposent de garder la façade et de renforcer la structure.",
+        "Sim. Os arquitetos com quem conversamos propõem manter a fachada e reforçar a estrutura."
+      ],
+      [
+        "Antoine",
+        "Le bureau pour lequel je travaillais autrefois a rénové un bâtiment semblable. Je pourrais lui demander conseil.",
+        "O escritório para o qual trabalhava reformou um prédio semelhante. Posso pedir orientação."
+      ],
+      [
+        "Inès",
+        "Bonne idée. Et les associations auxquelles nous avons écrit ont-elles confirmé leur intérêt pour les activités ?",
+        "Boa ideia. E as associações para as quais escrevemos confirmaram interesse?"
+      ],
+      [
+        "Antoine",
+        "Trois ont répondu. Celle avec laquelle j'ai parlé hier aimerait réserver un créneau chaque mercredi après-midi.",
+        "Três responderam. A associação com que conversei ontem quer um horário às quartas à tarde."
+      ],
+      [
+        "Inès",
+        "Il reste le jardin près duquel passe une piste cyclable. L'accès serait pratique pour les familles du quartier.",
+        "Ainda resta o jardim perto do qual passa uma ciclovia. Seria prático para famílias do bairro."
+      ],
+      [
+        "Antoine",
+        "Le terrain autour duquel on voudrait installer des bancs appartient aussi à la ville. Il faudra son autorisation.",
+        "O terreno em torno do qual queremos instalar bancos também pertence à cidade. Precisaremos de autorização."
+      ],
+      [
+        "Inès",
+        "On a reçu deux devis entre lesquels il faut choisir avant la fin du mois. Tu as pu comparer les montants ?",
+        "Recebemos dois orçamentos para escolher até o fim do mês. Você comparou os valores?"
+      ],
+      [
+        "Antoine",
+        "Le premier, selon lequel les travaux dureraient six mois, est plus cher, mais il semble mieux détaillé.",
+        "O primeiro, segundo o qual a obra duraria seis meses, é mais caro, mas detalhado."
+      ],
+      [
+        "Inès",
+        "Et le second ? Il manque des précisions sur les matériaux à partir desquels les cloisons seraient fabriquées.",
+        "E o segundo? Faltam detalhes dos materiais com que seriam feitas as divisórias."
+      ],
+      [
+        "Antoine",
+        "Je vais poser ces questions aux entreprises et préparer un tableau grâce auquel nous pourrons comparer les offres.",
+        "Vou perguntar às empresas e criar uma tabela com que poderemos comparar as propostas."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Lequel: concordância",
+        "p": [
+          "O pronome relativo composto tem formas <b>lequel, laquelle, lesquels, lesquelles</b> conforme gênero e número do antecedente. Aparece após preposições."
+        ],
+        "ex": [
+          [
+            "Voici le dossier sur lequel je travaille.",
+            "Este é o documento em que trabalho."
+          ],
+          [
+            "C'est la salle dans laquelle nous nous réunissons.",
+            "É a sala onde nos reunimos."
+          ],
+          [
+            "Il y a des projets entre lesquels choisir.",
+            "Há projetos entre os quais escolher."
+          ]
+        ],
+        "tip": "Identifique o nome retomado e depois a preposição."
+      },
+      {
+        "h": "À + lequel",
+        "p": [
+          "Combine à com lequel: <b>auquel, à laquelle, auxquels, auxquelles</b>. Com pessoas, à qui também é comum."
+        ],
+        "ex": [
+          [
+            "C'est le projet auquel je pense.",
+            "É o projeto em que penso."
+          ],
+          [
+            "Voici l'association à laquelle nous participons.",
+            "Esta é a associação de que participamos."
+          ],
+          [
+            "Ce sont les personnes auxquelles nous avons écrit.",
+            "São as pessoas a quem escrevemos."
+          ]
+        ],
+        "tip": "Penser à → le projet auquel je pense."
+      },
+      {
+        "h": "De + lequel",
+        "p": [
+          "Após près de, à côté de, auprès de e outras locuções, use <b>duquel, de laquelle, desquels, desquelles</b>. Com um verbo seguido simplesmente de, dont costuma ser mais natural."
+        ],
+        "ex": [
+          [
+            "Voici le jardin près duquel je travaille.",
+            "Este é o jardim perto do qual trabalho."
+          ],
+          [
+            "La maison à côté de laquelle il habite est grande.",
+            "A casa ao lado da qual mora é grande."
+          ],
+          [
+            "Ce sont les documents à partir desquels nous travaillons.",
+            "São os documentos a partir dos quais trabalhamos."
+          ]
+        ],
+        "tip": "Le projet dont je parle, mas le bâtiment à côté duquel j'habite."
+      },
+      {
+        "h": "Outras preposições",
+        "p": [
+          "Com avec, pour, selon, entre e outras, mantenha a preposição seguida da forma adequada de lequel, sem contração."
+        ],
+        "ex": [
+          [
+            "C'est l'architecte avec lequel nous travaillons.",
+            "É o arquiteto com quem trabalhamos."
+          ],
+          [
+            "Voici l'entreprise pour laquelle elle travaille.",
+            "Esta é a empresa para a qual ela trabalha."
+          ],
+          [
+            "Selon ce document, les travaux sont terminés.",
+            "Segundo este documento, as obras terminaram."
+          ]
+        ],
+        "tip": "Para pessoas, avec qui é muito frequente."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Arquitetura e espaços",
+        "items": [
+          [
+            "un ancien cinéma",
+            "um antigo cinema"
+          ],
+          [
+            "une salle polyvalente",
+            "uma sala multiuso"
+          ],
+          [
+            "un rez-de-chaussée",
+            "um térreo"
+          ],
+          [
+            "une façade",
+            "uma fachada"
+          ],
+          [
+            "une isolation",
+            "um isolamento"
+          ],
+          [
+            "une cloison",
+            "uma divisória"
+          ],
+          [
+            "une cour",
+            "um pátio"
+          ],
+          [
+            "une piste cyclable",
+            "uma ciclovia"
+          ]
+        ]
+      },
+      {
+        "h": "Projetos e avaliação",
+        "items": [
+          [
+            "un devis",
+            "um orçamento"
+          ],
+          [
+            "une offre",
+            "uma proposta"
+          ],
+          [
+            "un comité",
+            "um comitê"
+          ],
+          [
+            "une demande",
+            "uma solicitação"
+          ],
+          [
+            "une autorisation",
+            "uma autorização"
+          ],
+          [
+            "un montant",
+            "um valor"
+          ],
+          [
+            "une consultation",
+            "uma consulta pública"
+          ],
+          [
+            "un créneau",
+            "um horário disponível"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "lequel e laquelle",
+        "p": "Lequel soa “le-kèl” e laquelle “la-kèl”; o e final de laquelle é mudo.",
+        "w": [
+          "lequel",
+          "laquelle",
+          "avec laquelle"
+        ]
+      },
+      {
+        "h": "auquel e auxquels",
+        "p": "Auquel e auxquels têm a mesma pronúncia, aproximadamente “o-kèl”.",
+        "w": [
+          "auquel",
+          "auxquels",
+          "auxquelles"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Qual proposta Inès prefere?",
+        "o": [
+          "Transformar o cinema em espaço para associações",
+          "Demolir para construir apartamentos",
+          "Construir um estacionamento"
+        ],
+        "a": 0,
+        "e": "J'ai relu les propositions pour l'ancien cinéma. Le projet auquel je pense permettrait d'en faire un lieu ouvert aux associations."
+      },
+      {
+        "q": "O que os arquitetos querem conservar?",
+        "o": [
+          "Equipamentos de projeção",
+          "Cadeiras originais",
+          "A fachada do prédio"
+        ],
+        "a": 2,
+        "e": "Oui. Les architectes avec lesquels nous avons échangé proposent de garder la façade et de renforcer la structure."
+      },
+      {
+        "q": "Quantas associações responderam?",
+        "o": [
+          "Duas",
+          "Três",
+          "Cinco"
+        ],
+        "a": 1,
+        "e": "Trois ont répondu. Celle avec laquelle j'ai parlé hier aimerait réserver un créneau chaque mercredi après-midi."
+      },
+      {
+        "q": "Como Antoine pretende facilitar a escolha dos orçamentos?",
+        "o": [
+          "Fazer tabela comparativa após consultar empresas",
+          "Aceitar o mais barato imediatamente",
+          "Deixar a prefeitura escolher sozinha"
+        ],
+        "a": 0,
+        "e": "Je vais poser ces questions aux entreprises et préparer un tableau grâce auquel nous pourrons comparer les offres."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Le projet ___ (à + lequel) je pense concerne le cinéma.",
+        "a": [
+          "auquel"
+        ],
+        "h": "O projeto em que penso diz respeito ao cinema."
+      },
+      {
+        "s": "La salle dans ___ (lequel, feminino singular) nous organiserons les débats existe déjà.",
+        "a": [
+          "laquelle"
+        ],
+        "h": "A sala onde faremos debates já existe."
+      },
+      {
+        "s": "Les associations ___ (à + lesquelles) nous avons écrit ont répondu.",
+        "a": [
+          "auxquelles"
+        ],
+        "h": "As associações a que escrevemos responderam."
+      },
+      {
+        "s": "Le jardin près ___ (de + lequel) passe la piste cyclable sera rénové.",
+        "a": [
+          "duquel"
+        ],
+        "h": "O jardim perto do qual passa a ciclovia será reformado."
+      },
+      {
+        "s": "Les architectes avec ___ (lequel, masculino plural) nous travaillons sont expérimentés.",
+        "a": [
+          "lesquels"
+        ],
+        "h": "Os arquitetos com quem trabalhamos são experientes."
+      },
+      {
+        "s": "L'entreprise pour ___ (lequel, feminino singular) elle travaille construit des bibliothèques.",
+        "a": [
+          "laquelle"
+        ],
+        "h": "A empresa para a qual ela trabalha constrói bibliotecas."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "C'est",
+          "le",
+          "projet",
+          "auquel",
+          "je",
+          "pense."
+        ],
+        "h": "É o projeto em que estou pensando."
+      },
+      {
+        "t": [
+          "Le",
+          "bâtiment",
+          "près",
+          "duquel",
+          "j'habite",
+          "est",
+          "ancien."
+        ],
+        "h": "O prédio perto do qual moro é antigo."
+      },
+      {
+        "t": [
+          "Voici",
+          "la",
+          "salle",
+          "dans",
+          "laquelle",
+          "nous",
+          "travaillons."
+        ],
+        "h": "Esta é a sala onde trabalhamos."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Tu parles du dossier sur lequel nous avons travaillé en juin ? Celui qui prévoit une salle polyvalente au rez-de-chaussée ?"
+      },
+      {
+        "t": "C'est justement l'espace auquel les habitants tiennent le plus, d'après la consultation organisée au printemps."
+      },
+      {
+        "t": "Le bureau pour lequel je travaillais autrefois a rénové un bâtiment semblable. Je pourrais lui demander conseil."
+      },
+      {
+        "t": "Il reste le jardin près duquel passe une piste cyclable. L'accès serait pratique pour les familles du quartier."
+      },
+      {
+        "t": "Et le second ? Il manque des précisions sur les matériaux à partir desquels les cloisons seraient fabriquées."
+      }
+    ],
+    "shadow": [
+      "Tu parles du dossier sur lequel nous avons travaillé en juin ? Celui qui prévoit une salle polyvalente au rez-de-chaussée ?",
+      "Le comité auprès duquel nous avons déposé la demande souhaite-t-il conserver les murs d'origine ?",
+      "Il reste le jardin près duquel passe une piste cyclable. L'accès serait pratique pour les familles du quartier.",
+      "Je vais poser ces questions aux entreprises et préparer un tableau grâce auquel nous pourrons comparer les offres."
+    ],
+    "write": {
+      "task": "Descreva um projeto em seis frases usando lequel, auquel, duquel e as formas femininas e plurais.",
+      "ph": "Le projet auquel je pense … . Les personnes avec lesquelles …"
+    },
+    "cards": [
+      [
+        "É o projeto em que estou pensando.",
+        "C'est le projet auquel je pense."
+      ],
+      [
+        "Esta é a sala onde trabalhamos.",
+        "Voici la salle dans laquelle nous travaillons."
+      ],
+      [
+        "A empresa para a qual trabalho é pequena.",
+        "L'entreprise pour laquelle je travaille est petite."
+      ],
+      [
+        "Conheço as pessoas com quem você trabalha.",
+        "Je connais les personnes avec lesquelles tu travailles."
+      ],
+      [
+        "O prédio perto do qual moro é antigo.",
+        "Le bâtiment près duquel j'habite est ancien."
+      ],
+      [
+        "Estas são as questões a que precisamos responder.",
+        "Voici les questions auxquelles nous devons répondre."
+      ],
+      [
+        "Há duas propostas entre as quais escolher.",
+        "Il y a deux propositions entre lesquelles choisir."
+      ],
+      [
+        "A ferramenta com a qual trabalho é prática.",
+        "L'outil avec lequel je travaille est pratique."
+      ],
+      [
+        "O escritório ao lado do qual estacionamos está fechado.",
+        "Le bureau à côté duquel nous nous garons est fermé."
+      ],
+      [
+        "Esta é a decisão da qual dependemos.",
+        "C'est la décision dont nous dépendons."
+      ]
+    ]
+  },
+  {
+    "title": "Il m'a assuré que...",
+    "goal": "Relatar afirmações, promessas, perguntas e críticas com discurso indireto e concordância dos tempos.",
+    "speakers": {
+      "Inès": "f",
+      "Lucas": "m"
+    },
+    "setting": "Inès e Lucas esclarecem informações contraditórias após uma reunião sobre uma conferência.",
+    "lines": [
+      [
+        "Inès",
+        "La réunion avec l'organisatrice a été plus tendue que prévu. Elle a affirmé que le programme avait été modifié sans son accord.",
+        "A reunião foi mais tensa que o previsto. Ela afirmou que a programação foi alterada sem sua aprovação."
+      ],
+      [
+        "Lucas",
+        "Pourtant, mardi, elle nous avait assuré que nous pouvions avancer. Tu lui as rappelé ce qu'elle avait écrit dans son message ?",
+        "Mas na terça ela tinha garantido que podíamos prosseguir. Lembrou a ela o que escreveu?"
+      ],
+      [
+        "Inès",
+        "Oui, mais elle a précisé qu'elle avait seulement autorisé le changement de salle, pas celui des horaires.",
+        "Sim, mas disse que tinha autorizado só a mudança da sala, não dos horários."
+      ],
+      [
+        "Lucas",
+        "Et le technicien ? Il prétendait avoir reçu la nouvelle version mercredi, alors que je la lui avais envoyée lundi.",
+        "E o técnico? Ele dizia ter recebido a nova versão na quarta, mas enviei na segunda."
+      ],
+      [
+        "Inès",
+        "Il a expliqué qu'il n'avait ouvert le fichier que le lendemain de notre envoi. Il a reconnu qu'il aurait dû le vérifier plus tôt.",
+        "Explicou que só abriu o arquivo no dia seguinte. Reconheceu que deveria tê-lo conferido antes."
+      ],
+      [
+        "Lucas",
+        "Au moins, il a reconnu son erreur. L'organisatrice t'a demandé pourquoi les horaires avaient changé ?",
+        "Pelo menos reconheceu o erro. A organizadora perguntou por que os horários mudaram?"
+      ],
+      [
+        "Inès",
+        "Exactement. Elle voulait aussi savoir si les intervenants avaient tous reçu la dernière version du programme.",
+        "Exatamente. Queria saber se todos os palestrantes tinham recebido a última versão."
+      ],
+      [
+        "Lucas",
+        "Je lui avais pourtant confirmé que les messages étaient partis la veille. Je ne comprends pas d'où vient cette confusion.",
+        "Mas confirmei que as mensagens saíram na véspera. Não entendo a confusão."
+      ],
+      [
+        "Inès",
+        "Elle nous a reproché de ne pas avoir prévenu les bénévoles assez tôt. Sur ce point, je pense qu'elle avait raison.",
+        "Ela nos criticou por avisarmos os voluntários tarde. Nesse ponto tinha razão."
+      ],
+      [
+        "Lucas",
+        "C'est vrai. Et qu'a-t-elle dit à propos de la salle principale ? Elle devait être disponible vendredi matin.",
+        "É verdade. E o que disse sobre a sala principal? Deveria estar disponível sexta."
+      ],
+      [
+        "Inès",
+        "Elle a assuré qu'elle serait libre le lendemain et que l'équipe technique pourrait commencer l'installation à huit heures.",
+        "Garantiu que estaria livre no dia seguinte e que a instalação começaria às oito."
+      ],
+      [
+        "Lucas",
+        "C'est déjà ça. Le responsable avait promis qu'il aurait terminé les vérifications avant l'arrivée des premiers invités.",
+        "Já é algo. O responsável prometera terminar as verificações antes dos convidados."
+      ],
+      [
+        "Inès",
+        "Oui, mais l'organisatrice nous a demandé d'envoyer une confirmation écrite pour éviter toute nouvelle ambiguïté.",
+        "Sim, mas pediu confirmação escrita para evitar novas ambiguidades."
+      ],
+      [
+        "Lucas",
+        "Bonne idée. Je lui expliquerai ce que nous avons modifié et pourquoi nous avons pris ces décisions.",
+        "Boa ideia. Explicarei o que mudamos e por quê."
+      ],
+      [
+        "Inès",
+        "Ajoute aussi qu'elle nous avait demandé de réduire les pauses. C'est cette consigne qui a entraîné le changement d'horaires.",
+        "Acrescente que ela pediu reduzir os intervalos. Essa instrução causou a mudança."
+      ],
+      [
+        "Lucas",
+        "D'accord. Je vais distinguer ce qu'elle a confirmé de ce que nous avons simplement supposé. Ce sera plus clair pour tout le monde.",
+        "Certo. Vou separar o que confirmou do que presumimos. Ficará mais claro."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Discurso indireto",
+        "p": [
+          "Para relatar palavras, use <b>dire que</b>, affirmer que e expliquer que. Depois de verbo introdutório no passado, o présent simultâneo passa frequentemente ao imparfait."
+        ],
+        "ex": [
+          [
+            "Il dit qu'il est disponible.",
+            "Ele diz que está disponível."
+          ],
+          [
+            "Il a dit qu'il était disponible.",
+            "Ele disse que estava disponível."
+          ],
+          [
+            "Elle a expliqué qu'elle travaillait.",
+            "Ela explicou que trabalhava."
+          ]
+        ],
+        "tip": "Ajuste também pronomes e possessivos."
+      },
+      {
+        "h": "Concordância dos tempos",
+        "p": [
+          "O passé composé passa frequentemente ao plus-que-parfait; o futur simple ao conditionnel présent; e o futur antérieur ao conditionnel passé."
+        ],
+        "ex": [
+          [
+            "Elle a affirmé qu'elle avait envoyé le dossier.",
+            "Ela afirmou que enviara o documento."
+          ],
+          [
+            "Il a assuré qu'il terminerait le lendemain.",
+            "Garantiu que terminaria no dia seguinte."
+          ],
+          [
+            "Elle avait promis qu'elle aurait tout vérifié.",
+            "Prometera que teria conferido tudo."
+          ]
+        ],
+        "tip": "Preserve a cronologia das ações."
+      },
+      {
+        "h": "Perguntas e instruções indiretas",
+        "p": [
+          "Para pergunta sim/não, use <b>demander si</b>; perguntas abertas mantêm pourquoi, quand, où, comment ou ce que sem inversão. Pedidos usam demander à quelqu'un de + infinitif."
+        ],
+        "ex": [
+          [
+            "Elle m'a demandé si la salle était libre.",
+            "Ela perguntou se a sala estava livre."
+          ],
+          [
+            "Il voulait savoir ce que nous avions décidé.",
+            "Queria saber o que decidíramos."
+          ],
+          [
+            "Elle nous a demandé de confirmer.",
+            "Ela pediu para confirmarmos."
+          ]
+        ],
+        "tip": "Não reproduza inversão da pergunta direta."
+      },
+      {
+        "h": "Verbos e referências temporais",
+        "p": [
+          "Affirmer apresenta declaração firme; assurer, garantia; prétendre, alegação por vezes posta em dúvida; reprocher à quelqu'un de, crítica. Adapte hier/demain para la veille/le lendemain."
+        ],
+        "ex": [
+          [
+            "Il prétendait avoir reçu le message la veille.",
+            "Alegava ter recebido na véspera."
+          ],
+          [
+            "Elle lui a reproché de ne pas avoir répondu.",
+            "Criticou-o por não ter respondido."
+          ],
+          [
+            "Il reviendrait le lendemain.",
+            "Voltaria no dia seguinte."
+          ]
+        ],
+        "tip": "Ne pas confundir reprocher e répéter."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Comunicação profissional",
+        "items": [
+          [
+            "une affirmation",
+            "uma afirmação"
+          ],
+          [
+            "une consigne",
+            "uma instrução"
+          ],
+          [
+            "une confirmation écrite",
+            "uma confirmação escrita"
+          ],
+          [
+            "un malentendu",
+            "um mal-entendido"
+          ],
+          [
+            "une ambiguïté",
+            "uma ambiguidade"
+          ],
+          [
+            "un intervenant",
+            "um palestrante"
+          ],
+          [
+            "une modification",
+            "uma mudança"
+          ],
+          [
+            "une vérification",
+            "uma conferência"
+          ]
+        ]
+      },
+      {
+        "h": "Relatos e prazos",
+        "items": [
+          [
+            "affirmer que",
+            "afirmar que"
+          ],
+          [
+            "assurer que",
+            "garantir que"
+          ],
+          [
+            "prétendre que",
+            "alegar que"
+          ],
+          [
+            "reprocher à quelqu'un de",
+            "criticar alguém por"
+          ],
+          [
+            "la veille",
+            "na véspera"
+          ],
+          [
+            "le lendemain",
+            "no dia seguinte"
+          ],
+          [
+            "ce jour-là",
+            "naquele dia"
+          ],
+          [
+            "à temps",
+            "a tempo"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "affirmer e assurer",
+        "p": "Affirmer termina com -er pronunciado “ê”; em assurer, o u é arredondado.",
+        "w": [
+          "affirmer",
+          "assurer",
+          "elle a assuré"
+        ]
+      },
+      {
+        "h": "reprocher e reproché",
+        "p": "As formas soam igual, aproximadamente “re-pro-chê”; ch corresponde a ch de chuva.",
+        "w": [
+          "reprocher",
+          "reproché",
+          "elle lui a reproché"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "O que a organizadora afirmou?",
+        "o": [
+          "A programação mudou sem sua autorização",
+          "Todos cancelaram",
+          "O evento foi adiado um mês"
+        ],
+        "a": 0,
+        "e": "La réunion avec l'organisatrice a été plus tendue que prévu. Elle a affirmé que le programme avait été modifié sans son accord."
+      },
+      {
+        "q": "O que o técnico reconheceu?",
+        "o": [
+          "Que perdeu o computador",
+          "Que não recebeu o arquivo",
+          "Que deveria tê-lo conferido antes"
+        ],
+        "a": 2,
+        "e": "Il a expliqué qu'il n'avait ouvert le fichier que le lendemain de notre envoi. Il a reconnu qu'il aurait dû le vérifier plus tôt."
+      },
+      {
+        "q": "Por que ela criticou a equipe?",
+        "o": [
+          "Equipamentos muito antigos",
+          "Voluntários avisados tarde demais",
+          "Inscrições encerradas"
+        ],
+        "a": 1,
+        "e": "Elle nous a reproché de ne pas avoir prévenu les bénévoles assez tôt. Sur ce point, je pense qu'elle avait raison."
+      },
+      {
+        "q": "O que ela pediu para evitar mal-entendidos?",
+        "o": [
+          "Confirmação por escrito",
+          "Uma nova empresa",
+          "Cancelamento da instalação"
+        ],
+        "a": 0,
+        "e": "Oui, mais l'organisatrice nous a demandé d'envoyer une confirmation écrite pour éviter toute nouvelle ambiguïté."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Elle a affirmé qu'elle ___ (être, imparfait) disponible.",
+        "a": [
+          "était"
+        ],
+        "h": "Ela afirmou que estava disponível."
+      },
+      {
+        "s": "Il a expliqué qu'il ___ (recevoir, plus-que-parfait) le fichier la veille.",
+        "a": [
+          "avait reçu"
+        ],
+        "h": "Ele explicou que tinha recebido o arquivo na véspera."
+      },
+      {
+        "s": "Elle a assuré qu'elle ___ (venir, conditionnel présent) le lendemain.",
+        "a": [
+          "viendrait"
+        ],
+        "h": "Ela garantiu que viria no dia seguinte."
+      },
+      {
+        "s": "Il nous a demandé ___ la réunion était confirmée.",
+        "a": [
+          "si"
+        ],
+        "h": "Ele perguntou se a reunião estava confirmada."
+      },
+      {
+        "s": "Elle leur a reproché ___ ne pas avoir répondu.",
+        "a": [
+          "de"
+        ],
+        "h": "Ela os criticou por não terem respondido."
+      },
+      {
+        "s": "Elle avait promis qu'elle ___ (avoir terminé, conditionnel passé) avant vendredi.",
+        "a": [
+          "aurait terminé"
+        ],
+        "h": "Prometera que teria terminado antes de sexta."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "Il",
+          "a",
+          "dit",
+          "qu'il",
+          "était",
+          "occupé."
+        ],
+        "h": "Ele disse que estava ocupado."
+      },
+      {
+        "t": [
+          "Il",
+          "voulait",
+          "savoir",
+          "ce",
+          "que",
+          "nous",
+          "avions",
+          "décidé."
+        ],
+        "h": "Ele queria saber o que decidimos."
+      },
+      {
+        "t": [
+          "Il",
+          "a",
+          "expliqué",
+          "qu'il",
+          "terminerait",
+          "cette",
+          "semaine-là."
+        ],
+        "h": "Ele explicou que terminaria naquela semana."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Pourtant, mardi, elle nous avait assuré que nous pouvions avancer. Tu lui as rappelé ce qu'elle avait écrit dans son message ?"
+      },
+      {
+        "t": "Il a expliqué qu'il n'avait ouvert le fichier que le lendemain de notre envoi. Il a reconnu qu'il aurait dû le vérifier plus tôt."
+      },
+      {
+        "t": "Je lui avais pourtant confirmé que les messages étaient partis la veille. Je ne comprends pas d'où vient cette confusion."
+      },
+      {
+        "t": "Elle a assuré qu'elle serait libre le lendemain et que l'équipe technique pourrait commencer l'installation à huit heures."
+      },
+      {
+        "t": "Ajoute aussi qu'elle nous avait demandé de réduire les pauses. C'est cette consigne qui a entraîné le changement d'horaires."
+      }
+    ],
+    "shadow": [
+      "Pourtant, mardi, elle nous avait assuré que nous pouvions avancer. Tu lui as rappelé ce qu'elle avait écrit dans son message ?",
+      "Au moins, il a reconnu son erreur. L'organisatrice t'a demandé pourquoi les horaires avaient changé ?",
+      "Elle a assuré qu'elle serait libre le lendemain et que l'équipe technique pourrait commencer l'installation à huit heures.",
+      "D'accord. Je vais distinguer ce qu'elle a confirmé de ce que nous avons simplement supposé. Ce sera plus clair pour tout le monde."
+    ],
+    "write": {
+      "task": "Relate seis falas e perguntas de uma reunião passada usando discurso indireto e diferentes verbos introdutórios.",
+      "ph": "Hier, pendant la réunion, mon collègue a affirmé que …"
+    },
+    "cards": [
+      [
+        "Ele disse que estava ocupado.",
+        "Il a dit qu'il était occupé."
+      ],
+      [
+        "Ela afirmou que já tinha enviado tudo.",
+        "Elle a affirmé qu'elle avait déjà tout envoyé."
+      ],
+      [
+        "Ele garantiu que voltaria no dia seguinte.",
+        "Il a assuré qu'il reviendrait le lendemain."
+      ],
+      [
+        "Ela perguntou se eu estava disponível.",
+        "Elle m'a demandé si j'étais disponible."
+      ],
+      [
+        "Ele queria saber o que decidimos.",
+        "Il voulait savoir ce que nous avions décidé."
+      ],
+      [
+        "Ela alegou que não recebeu nada.",
+        "Elle a prétendu qu'elle n'avait rien reçu."
+      ],
+      [
+        "Ele me criticou por ter chegado tarde.",
+        "Il m'a reproché d'être arrivé en retard."
+      ],
+      [
+        "Ela pediu que confirmássemos por escrito.",
+        "Elle nous a demandé de confirmer par écrit."
+      ],
+      [
+        "Ele explicou que terminaria naquela semana.",
+        "Il a expliqué qu'il terminerait cette semaine-là."
+      ],
+      [
+        "Ela reconheceu que tinha cometido um erro.",
+        "Elle a reconnu qu'elle avait commis une erreur."
+      ]
+    ]
+  },
+  {
+    "title": "Ayant terminé...",
+    "goal": "Descrever simultaneidade, causa e anterioridade usando participe présent, gérondif e participe composé.",
+    "speakers": {
+      "Inès": "f",
+      "Antoine": "m"
+    },
+    "setting": "Inès e Antoine avaliam um percurso cultural a pé e os textos de um guia digital.",
+    "lines": [
+      [
+        "Inès",
+        "Ayant testé le parcours hier après-midi, j'ai repéré plusieurs passages qui risquent de poser problème aux visiteurs.",
+        "Depois de testar o trajeto ontem, identifiquei trechos problemáticos."
+      ],
+      [
+        "Antoine",
+        "Lesquels ? En suivant le plan actuel, j'avais trouvé l'itinéraire assez simple lors de notre première visite.",
+        "Quais? Seguindo o mapa, achei o itinerário simples na primeira visita."
+      ],
+      [
+        "Inès",
+        "En traversant la place principale, on arrive devant deux rues presque identiques. Sans indication, il est facile de se tromper.",
+        "Ao atravessar a praça, chegamos a duas ruas parecidas. É fácil se confundir."
+      ],
+      [
+        "Antoine",
+        "Connaissant bien le quartier, je n'avais même pas remarqué cette difficulté. C'est justement pour ça qu'il faut tester le guide.",
+        "Como conheço o bairro, nem percebi a dificuldade. Por isso devemos testar o guia."
+      ],
+      [
+        "Inès",
+        "J'ai aussi observé plusieurs personnes consultant leur téléphone tout en marchant. Certaines ne regardaient presque pas les panneaux.",
+        "Observei pessoas olhando o celular enquanto andavam. Algumas nem viam as placas."
+      ],
+      [
+        "Antoine",
+        "On pourrait ajouter des indications audio. En écoutant les consignes, les visiteurs pourraient garder les yeux sur leur environnement.",
+        "Poderíamos acrescentar áudio. Ouvindo as instruções, poderiam prestar atenção ao entorno."
+      ],
+      [
+        "Inès",
+        "Bonne idée. Ayant déjà enregistré quelques descriptions, je peux préparer un premier exemple pour lundi.",
+        "Boa ideia. Como já gravei descrições, posso preparar um exemplo para segunda."
+      ],
+      [
+        "Antoine",
+        "Il faudra également vérifier la durée. En prenant le chemin par le jardin, on gagne dix minutes, mais on évite plusieurs bâtiments intéressants.",
+        "Precisamos conferir a duração. Pelo jardim economizamos dez minutos, mas perdemos prédios interessantes."
+      ],
+      [
+        "Inès",
+        "Tout en privilégiant un itinéraire court, je voudrais conserver les étapes qui racontent vraiment l'histoire du quartier.",
+        "Mesmo priorizando trajeto curto, quero manter paradas históricas."
+      ],
+      [
+        "Antoine",
+        "Ayant comparé les deux versions, je préfère celle qui longe la rivière. Elle est plus agréable, même si elle prend un peu plus de temps.",
+        "Depois de comparar, prefiro a versão junto ao rio. É mais agradável, embora demore mais."
+      ],
+      [
+        "Inès",
+        "Et concernant l'accessibilité ? En montant les marches près du musée, j'ai constaté qu'il n'y avait aucune indication d'un accès alternatif.",
+        "E a acessibilidade? Subindo as escadas, notei falta de informação sobre acesso alternativo."
+      ],
+      [
+        "Antoine",
+        "Étant arrivé en avance ce matin, j'ai appelé le musée. Une employée m'a confirmé qu'une rampe se trouvait à l'arrière du bâtiment.",
+        "Como cheguei cedo, liguei para o museu. Confirmaram uma rampa nos fundos."
+      ],
+      [
+        "Inès",
+        "Parfait. Sachant que certains visiteurs auront besoin de cet accès, il faudrait l'indiquer dès le début du parcours.",
+        "Perfeito. Sabendo que alguns precisarão, devemos indicar desde o início."
+      ],
+      [
+        "Antoine",
+        "D'accord. Je vais revoir les descriptions en évitant les phrases trop longues. Les informations seront plus faciles à comprendre.",
+        "Certo. Vou revisar descrições evitando frases longas. Será mais fácil compreender."
+      ],
+      [
+        "Inès",
+        "Ayant terminé mes notes, je vais rédiger une synthèse cet après-midi. Tu pourras ensuite vérifier les changements proposés.",
+        "Terminadas as notas, vou redigir um resumo à tarde. Depois você confere as mudanças."
+      ],
+      [
+        "Antoine",
+        "Parfait. En travaillant ainsi, on devrait publier un guide plus clair, tout en conservant ce qui rend le parcours intéressant.",
+        "Perfeito. Assim publicaremos um guia mais claro, preservando o interessante."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Participe présent: formação",
+        "p": [
+          "Geralmente usa a base da forma nous no presente menos -ons, mais -ant. Irregulares: ayant, étant e sachant. É invariável como verbo."
+        ],
+        "ex": [
+          [
+            "Les visiteurs consultant le plan attendent.",
+            "Os visitantes que consultam o mapa esperam."
+          ],
+          [
+            "Connaissant le quartier, elle a proposé un raccourci.",
+            "Como conhece o bairro, propôs atalho."
+          ],
+          [
+            "Sachant que la route était fermée, nous avons changé.",
+            "Sabendo que a estrada estava fechada, mudamos."
+          ]
+        ],
+        "tip": "Atenção ao sujeito de cada ação."
+      },
+      {
+        "h": "Gérondif: en + participe présent",
+        "p": [
+          "<b>En + participe présent</b> expressa simultaneidade, maneira ou meio, geralmente com o mesmo sujeito da oração principal. Tout en reforça simultaneidade ou contraste."
+        ],
+        "ex": [
+          [
+            "En suivant les panneaux, vous trouverez le musée.",
+            "Seguindo placas, encontrarão o museu."
+          ],
+          [
+            "Elle apprend en discutant.",
+            "Aprende conversando."
+          ],
+          [
+            "Il travaille tout en écoutant de la musique.",
+            "Trabalha ouvindo música."
+          ]
+        ],
+        "tip": "O sujeito de en marchant deve ser quem caminha."
+      },
+      {
+        "h": "Participe présent causal",
+        "p": [
+          "Sem en, pode resumir uma oração causal e é mais frequente em registro escrito. Use parce que quando a construção puder gerar ambiguidade."
+        ],
+        "ex": [
+          [
+            "Connaissant les risques, nous avons modifié le parcours.",
+            "Conhecendo os riscos, mudamos o percurso."
+          ],
+          [
+            "Étant disponible vendredi, je participerai.",
+            "Estando disponível sexta, participarei."
+          ],
+          [
+            "Ne sachant pas répondre, il a demandé conseil.",
+            "Sem saber responder, pediu orientação."
+          ]
+        ],
+        "tip": "A clareza é mais importante que a concisão."
+      },
+      {
+        "h": "Participe composé",
+        "p": [
+          "<b>Ayant</b> ou <b>étant</b> seguido de particípio passado indica anterioridade; com être, concorde com o sujeito."
+        ],
+        "ex": [
+          [
+            "Ayant terminé son rapport, elle est rentrée.",
+            "Após terminar o relatório, voltou."
+          ],
+          [
+            "Étant arrivés en avance, nous avons attendu.",
+            "Tendo chegado cedo, esperamos."
+          ],
+          [
+            "Ayant reçu les commentaires, j'ai corrigé.",
+            "Após receber comentários, corrigi."
+          ]
+        ],
+        "tip": "Ayant terminé indica ação já concluída."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Percursos e orientação",
+        "items": [
+          [
+            "un itinéraire",
+            "um itinerário"
+          ],
+          [
+            "un parcours",
+            "um percurso"
+          ],
+          [
+            "un raccourci",
+            "um atalho"
+          ],
+          [
+            "un passage",
+            "um trecho"
+          ],
+          [
+            "une indication",
+            "uma orientação"
+          ],
+          [
+            "un panneau",
+            "uma placa"
+          ],
+          [
+            "une rampe",
+            "uma rampa"
+          ],
+          [
+            "longer une rivière",
+            "acompanhar um rio"
+          ]
+        ]
+      },
+      {
+        "h": "Avaliação e guia",
+        "items": [
+          [
+            "repérer",
+            "identificar"
+          ],
+          [
+            "constater",
+            "constatar"
+          ],
+          [
+            "remarquer",
+            "perceber"
+          ],
+          [
+            "comparer",
+            "comparar"
+          ],
+          [
+            "privilégier",
+            "priorizar"
+          ],
+          [
+            "conserver",
+            "preservar"
+          ],
+          [
+            "une synthèse",
+            "um resumo"
+          ],
+          [
+            "un accès alternatif",
+            "um acesso alternativo"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "terminação -ant",
+        "p": "O grupo -ant tem vogal nasal, aproximadamente “ã”, e o t final é mudo.",
+        "w": [
+          "parlant",
+          "travaillant",
+          "observant"
+        ]
+      },
+      {
+        "h": "ayant e étant",
+        "p": "Ayant soa aproximadamente “è-iã”; étant soa “é-tã”, com final nasal.",
+        "w": [
+          "ayant terminé",
+          "étant arrivé",
+          "ayant reçu"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Que dificuldade Inès identificou na praça?",
+        "o": [
+          "Duas ruas muito parecidas",
+          "Ausência de transporte",
+          "Museu fechado para sempre"
+        ],
+        "a": 0,
+        "e": "En traversant la place principale, on arrive devant deux rues presque identiques. Sans indication, il est facile de se tromper."
+      },
+      {
+        "q": "Por que Antoine sugere instruções em áudio?",
+        "o": [
+          "Eliminar todas as placas",
+          "Dispensar mapas completamente",
+          "Permitir que visitantes observem o entorno"
+        ],
+        "a": 2,
+        "e": "On pourrait ajouter des indications audio. En écoutant les consignes, les visiteurs pourraient garder les yeux sur leur environnement."
+      },
+      {
+        "q": "O que Antoine descobriu ao ligar ao museu?",
+        "o": [
+          "Entrada principal fechada",
+          "Uma rampa nos fundos",
+          "Abertura somente no mês seguinte"
+        ],
+        "a": 1,
+        "e": "Étant arrivé en avance ce matin, j'ai appelé le musée. Une employée m'a confirmé qu'une rampe se trouvait à l'arrière du bâtiment."
+      },
+      {
+        "q": "O que Inès fará depois de terminar suas notas?",
+        "o": [
+          "Redigir um resumo à tarde",
+          "Cancelar o projeto",
+          "Recomeçar o guia inteiro"
+        ],
+        "a": 0,
+        "e": "Ayant terminé mes notes, je vais rédiger une synthèse cet après-midi. Tu pourras ensuite vérifier les changements proposés."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "En ___ (suivre, participe présent) les panneaux, vous trouverez le musée.",
+        "a": [
+          "suivant"
+        ],
+        "h": "Seguindo as placas, encontrarão o museu."
+      },
+      {
+        "s": "___ (connaître, participe présent) bien le quartier, Lucas a proposé un raccourci.",
+        "a": [
+          "Connaissant"
+        ],
+        "h": "Como conhece o bairro, Lucas propôs um atalho."
+      },
+      {
+        "s": "___ (terminer, participe composé) son rapport, elle a quitté le bureau.",
+        "a": [
+          "Ayant terminé"
+        ],
+        "h": "Depois de terminar o relatório, ela saiu."
+      },
+      {
+        "s": "___ (arriver, participe composé) en avance, Inès a préparé la salle.",
+        "a": [
+          "Étant arrivée"
+        ],
+        "h": "Como chegou adiantada, Inès preparou a sala."
+      },
+      {
+        "s": "Tout en ___ (discuter, gérondif) du projet, ils prennent des notes.",
+        "a": [
+          "discutant"
+        ],
+        "h": "Enquanto discutem o projeto, fazem anotações."
+      },
+      {
+        "s": "___ (savoir, participe présent) que le passage était fermé, Antoine a changé de trajet.",
+        "a": [
+          "Sachant"
+        ],
+        "h": "Sabendo da passagem fechada, Antoine mudou o trajeto."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "En",
+          "suivant",
+          "ce",
+          "chemin,",
+          "tu",
+          "arriveras",
+          "plus",
+          "vite."
+        ],
+        "h": "Seguindo esse caminho, chegará mais rápido."
+      },
+      {
+        "t": [
+          "Connaissant",
+          "le",
+          "problème,",
+          "j'ai",
+          "proposé",
+          "une",
+          "solution."
+        ],
+        "h": "Conhecendo o problema, propus uma solução."
+      },
+      {
+        "t": [
+          "Ayant",
+          "terminé,",
+          "je",
+          "suis",
+          "parti."
+        ],
+        "h": "Depois de terminar, fui embora."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Lesquels ? En suivant le plan actuel, j'avais trouvé l'itinéraire assez simple lors de notre première visite."
+      },
+      {
+        "t": "J'ai aussi observé plusieurs personnes consultant leur téléphone tout en marchant. Certaines ne regardaient presque pas les panneaux."
+      },
+      {
+        "t": "Il faudra également vérifier la durée. En prenant le chemin par le jardin, on gagne dix minutes, mais on évite plusieurs bâtiments intéressants."
+      },
+      {
+        "t": "Et concernant l'accessibilité ? En montant les marches près du musée, j'ai constaté qu'il n'y avait aucune indication d'un accès alternatif."
+      },
+      {
+        "t": "Ayant terminé mes notes, je vais rédiger une synthèse cet après-midi. Tu pourras ensuite vérifier les changements proposés."
+      }
+    ],
+    "shadow": [
+      "Lesquels ? En suivant le plan actuel, j'avais trouvé l'itinéraire assez simple lors de notre première visite.",
+      "On pourrait ajouter des indications audio. En écoutant les consignes, les visiteurs pourraient garder les yeux sur leur environnement.",
+      "Et concernant l'accessibilité ? En montant les marches près du musée, j'ai constaté qu'il n'y avait aucune indication d'un accès alternatif.",
+      "Parfait. En travaillant ainsi, on devrait publier un guide plus clair, tout en conservant ce qui rend le parcours intéressant."
+    ],
+    "write": {
+      "task": "Descreva uma tarefa recente em seis frases usando gerúndio, particípio presente e composto.",
+      "ph": "Ayant terminé …, j'ai décidé de … . En travaillant …"
+    },
+    "cards": [
+      [
+        "Seguindo esse caminho, chegará mais rápido.",
+        "En suivant ce chemin, tu arriveras plus vite."
+      ],
+      [
+        "Conhecendo o problema, propus uma solução.",
+        "Connaissant le problème, j'ai proposé une solution."
+      ],
+      [
+        "Depois de terminar, fui embora.",
+        "Ayant terminé, je suis parti."
+      ],
+      [
+        "Ela aprende praticando todos os dias.",
+        "Elle apprend en pratiquant tous les jours."
+      ],
+      [
+        "Como sabia da mudança, avisei a equipe.",
+        "Sachant qu'il y avait un changement, j'ai prévenu l'équipe."
+      ],
+      [
+        "Ele trabalha ouvindo música.",
+        "Il travaille tout en écoutant de la musique."
+      ],
+      [
+        "Depois de receber a resposta, liguei.",
+        "Ayant reçu la réponse, j'ai appelé."
+      ],
+      [
+        "Como chegou cedo, ela ajudou.",
+        "Étant arrivée tôt, elle a pu aider."
+      ],
+      [
+        "Evitando o horário de pico, você ganha tempo.",
+        "En évitant les heures de pointe, tu gagnes du temps."
+      ],
+      [
+        "Não sabendo o que dizer, fiquei em silêncio.",
+        "Ne sachant pas quoi dire, je suis resté silencieux."
+      ]
+    ]
+  },
+  {
+    "title": "Pour que tout soit prêt",
+    "goal": "Explicar finalidade, causa e consequência com pour que, afin que, de peur que, étant donné que, si bien que e tellement... que.",
+    "speakers": {
+      "Claire": "f",
+      "Lucas": "m"
+    },
+    "setting": "Claire e Lucas organizam os preparativos de um fórum de carreiras em Tours.",
+    "lines": [
+      [
+        "Claire",
+        "Les inscriptions au forum ont tellement augmenté que nous avons dû ouvrir une deuxième salle. On attend maintenant près de deux cents personnes.",
+        "As inscrições aumentaram tanto que abrimos uma segunda sala. Esperamos quase duzentas pessoas."
+      ],
+      [
+        "Lucas",
+        "C'est une bonne nouvelle, mais l'accueil risque d'être compliqué. J'ai avancé l'ouverture des portes pour que les visiteurs puissent s'installer tranquillement.",
+        "É bom, mas a recepção será complicada. Antecipei a abertura para que as pessoas se acomodem."
+      ],
+      [
+        "Claire",
+        "Très bien. Étant donné que beaucoup viennent en train, j'ai ajouté un plan depuis la gare dans le message de confirmation.",
+        "Como muitos vêm de trem, incluí um mapa a partir da estação na confirmação."
+      ],
+      [
+        "Lucas",
+        "Il faudrait aussi installer des panneaux à chaque étage afin que personne ne se trompe de salle pendant les conférences.",
+        "Precisamos pôr placas por andar para que ninguém erre a sala."
+      ],
+      [
+        "Claire",
+        "J'ai préparé des indications supplémentaires de peur que certains participants ne trouvent pas l'entrée secondaire.",
+        "Preparei orientações adicionais por receio de que não encontrem a entrada secundária."
+      ],
+      [
+        "Lucas",
+        "Bonne précaution. Les bénévoles se sont réparti les tâches hier, si bien que chacun sait déjà de quel espace il sera responsable.",
+        "Boa precaução. Os voluntários dividiram tarefas, de modo que todos sabem suas responsabilidades."
+      ],
+      [
+        "Claire",
+        "En revanche, nous avons reçu tellement de questions sur les formations à distance qu'il faudrait prolonger cette conférence.",
+        "Recebemos tantas perguntas sobre formação remota que deveríamos prolongar a palestra."
+      ],
+      [
+        "Lucas",
+        "D'accord, mais il faudra raccourcir la pause pour que les autres interventions commencent à l'heure.",
+        "Certo, mas encurtaremos o intervalo para que as próximas falas comecem no horário."
+      ],
+      [
+        "Claire",
+        "Étant donné que les participants auront des profils très différents, je préférerais qu'on évite les explications trop techniques.",
+        "Como os participantes têm perfis distintos, prefiro evitar explicações técnicas demais."
+      ],
+      [
+        "Lucas",
+        "Je vais prévenir les intervenants afin qu'ils préparent des exemples concrets et qu'ils réservent du temps aux questions.",
+        "Vou avisar os palestrantes para que preparem exemplos e reservem tempo para perguntas."
+      ],
+      [
+        "Claire",
+        "Il faudrait aussi prévoir des documents numériques. Nous avons imprimé beaucoup de brochures, mais certaines personnes préfèrent les consulter sur leur téléphone.",
+        "Precisamos de documentos digitais. Imprimimos folhetos, mas alguns preferem consultar pelo celular."
+      ],
+      [
+        "Lucas",
+        "J'ai créé une page avec les ressources, si bien que les visiteurs pourront retrouver les liens après l'événement.",
+        "Criei uma página com materiais, então poderão encontrar os links depois."
+      ],
+      [
+        "Claire",
+        "Parfait. Je vais vérifier les formulaires d'inscription de peur qu'une erreur ne bloque l'arrivée des personnes inscrites à la dernière minute.",
+        "Vou conferir formulários por receio de que um erro impeça inscritos de entrar."
+      ],
+      [
+        "Lucas",
+        "Tu as raison. Le formulaire avait été tellement utilisé hier soir que le serveur avait ralenti pendant quelques minutes.",
+        "Verdade. O formulário foi tão usado que o servidor ficou lento."
+      ],
+      [
+        "Claire",
+        "Heureusement, l'équipe technique a corrigé le problème. Pour que tout soit prêt demain, nous devons terminer les derniers tests cet après-midi.",
+        "Felizmente corrigiram. Para tudo ficar pronto amanhã, precisamos terminar os testes hoje."
+      ],
+      [
+        "Lucas",
+        "Alors, répartissons les dernières vérifications. Si chacun s'occupe de sa partie, on devrait pouvoir accueillir tout le monde dans de bonnes conditions.",
+        "Então dividamos as conferências. Se cada um fizer sua parte, receberemos todos bem."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Pour que e afin que",
+        "p": [
+          "Essas expressões apresentam um objetivo e pedem <b>subjonctif</b>. Afin que costuma ser um pouco mais formal."
+        ],
+        "ex": [
+          [
+            "J'ai ajouté un plan pour que vous trouviez le bâtiment.",
+            "Acrescentei mapa para encontrarem o prédio."
+          ],
+          [
+            "Nous expliquerons les règles afin que chacun comprenne.",
+            "Explicaremos para todos compreenderem."
+          ],
+          [
+            "Elle parle lentement pour que tout le monde puisse suivre.",
+            "Ela fala devagar para todos acompanharem."
+          ]
+        ],
+        "tip": "Para sujeitos iguais, use pour + infinitif."
+      },
+      {
+        "h": "De peur que",
+        "p": [
+          "Marca a tentativa de evitar resultado indesejado e pede subjonctif. O ne explétif pode aparecer sem valor negativo."
+        ],
+        "ex": [
+          [
+            "J'ai envoyé un rappel de peur qu'ils oublient.",
+            "Enviei lembrete por receio de esquecimento."
+          ],
+          [
+            "Elle a gardé une copie de peur que le fichier disparaisse.",
+            "Guardou cópia com medo de perder o arquivo."
+          ],
+          [
+            "Je vérifie pour éviter les erreurs.",
+            "Confiro para evitar erros."
+          ]
+        ],
+        "tip": "Contraste finalidade desejada com risco evitado."
+      },
+      {
+        "h": "Étant donné que",
+        "p": [
+          "Apresenta uma causa considerada estabelecida e utiliza indicatif. É mais formal que parce que. Puisque também introduz uma causa conhecida."
+        ],
+        "ex": [
+          [
+            "Étant donné que la salle est petite, limitons les inscriptions.",
+            "Como a sala é pequena, limitemos inscrições."
+          ],
+          [
+            "Puisque tout le monde est là, commençons.",
+            "Já que todos estão aqui, comecemos."
+          ],
+          [
+            "La réunion a été reportée parce que le responsable était absent.",
+            "Foi adiada porque ele faltou."
+          ]
+        ],
+        "tip": "Indique a causa real, não um objetivo."
+      },
+      {
+        "h": "Si bien que, tellement... que",
+        "p": [
+          "Si bien que indica consequência; tellement... que enfatiza intensidade e resultado. Em consequências reais, normalmente usam indicatif."
+        ],
+        "ex": [
+          [
+            "Les inscriptions ont augmenté, si bien que nous avons ouvert une salle.",
+            "Aumentaram, então abrimos uma sala."
+          ],
+          [
+            "Il y avait tellement de monde que nous avons attendu.",
+            "Havia tanta gente que esperamos."
+          ],
+          [
+            "Le programme était tellement chargé que la pause a été raccourcie.",
+            "Era tão cheio que encurtamos a pausa."
+          ]
+        ],
+        "tip": "Pour que é objetivo; si bien que é resultado."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Eventos e organização",
+        "items": [
+          [
+            "un forum",
+            "um fórum"
+          ],
+          [
+            "un intervenant",
+            "um palestrante"
+          ],
+          [
+            "une conférence",
+            "uma palestra"
+          ],
+          [
+            "un participant",
+            "um participante"
+          ],
+          [
+            "une inscription",
+            "uma inscrição"
+          ],
+          [
+            "un bénévole",
+            "um voluntário"
+          ],
+          [
+            "une brochure",
+            "um folheto"
+          ],
+          [
+            "un formulaire",
+            "um formulário"
+          ]
+        ]
+      },
+      {
+        "h": "Explicações e resultados",
+        "items": [
+          [
+            "pour que",
+            "para que"
+          ],
+          [
+            "afin que",
+            "a fim de que"
+          ],
+          [
+            "de peur que",
+            "por receio de que"
+          ],
+          [
+            "étant donné que",
+            "considerando que"
+          ],
+          [
+            "puisque",
+            "já que"
+          ],
+          [
+            "si bien que",
+            "de modo que"
+          ],
+          [
+            "tellement de",
+            "tanto ou tanta"
+          ],
+          [
+            "entraîner",
+            "provocar"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "pour que e afin que",
+        "p": "Em pour, ou tem som de u; afin termina com vogal nasal, aproximadamente “a-fã”.",
+        "w": [
+          "pour que",
+          "afin que",
+          "afin que chacun comprenne"
+        ]
+      },
+      {
+        "h": "tellement",
+        "p": "A terminação -ment tem vogal nasal, aproximadamente “mã”.",
+        "w": [
+          "tellement",
+          "tellement de monde",
+          "tellement compliqué"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Por que foi preciso abrir uma segunda sala?",
+        "o": [
+          "A primeira está em obras",
+          "As inscrições aumentaram muito",
+          "Os palestrantes pediram salas individuais"
+        ],
+        "a": 1,
+        "e": "Les inscriptions au forum ont tellement augmenté que nous avons dû ouvrir une deuxième salle. On attend maintenant près de deux cents personnes."
+      },
+      {
+        "q": "Por que Claire incluiu um mapa da estação?",
+        "o": [
+          "Muitos participantes virão de trem",
+          "O evento mudou de cidade",
+          "A estação está fechada"
+        ],
+        "a": 0,
+        "e": "Très bien. Étant donné que beaucoup viennent en train, j'ai ajouté un plan depuis la gare dans le message de confirmation."
+      },
+      {
+        "q": "Por que pretendem prolongar a palestra sobre ensino a distância?",
+        "o": [
+          "O palestrante se atrasará",
+          "Foi cancelada",
+          "Receberam muitas perguntas"
+        ],
+        "a": 2,
+        "e": "En revanche, nous avons reçu tellement de questions sur les formations à distance qu'il faudrait prolonger cette conférence."
+      },
+      {
+        "q": "Qual problema técnico ocorreu?",
+        "o": [
+          "Arquivos apagados",
+          "O servidor ficou lento",
+          "O site ficou fora do ar o dia inteiro"
+        ],
+        "a": 1,
+        "e": "Tu as raison. Le formulaire avait été tellement utilisé hier soir que le serveur avait ralenti pendant quelques minutes."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Nous avons installé des panneaux afin que les visiteurs ___ (trouver, subjonctif) les salles.",
+        "a": [
+          "trouvent"
+        ],
+        "h": "Instalamos placas para que encontrem as salas."
+      },
+      {
+        "s": "___ donné que le hall est petit, nous limiterons les inscriptions.",
+        "a": [
+          "Étant"
+        ],
+        "h": "Como o saguão é pequeno, limitaremos as inscrições."
+      },
+      {
+        "s": "Nous avons reçu tellement ___ questions que nous avons prolongé la conférence.",
+        "a": [
+          "de"
+        ],
+        "h": "Recebemos tantas perguntas que prolongamos a palestra."
+      },
+      {
+        "s": "Les bénévoles se sont organisés, si bien ___ l'accueil sera plus rapide.",
+        "a": [
+          "que"
+        ],
+        "h": "Os voluntários se organizaram, então a recepção será mais rápida."
+      },
+      {
+        "s": "J'ai envoyé un rappel de peur que les participants ___ (oublier, subjonctif) l'horaire.",
+        "a": [
+          "oublient"
+        ],
+        "h": "Enviei lembrete por receio de esquecimento do horário."
+      },
+      {
+        "s": "Nous avons préparé une entrée pour ___ (éviter, infinitif) les files d'attente.",
+        "a": [
+          "éviter"
+        ],
+        "h": "Preparamos uma entrada para evitar filas."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "Elle",
+          "a",
+          "tout",
+          "expliqué",
+          "pour",
+          "éviter",
+          "les",
+          "malentendus."
+        ],
+        "h": "Ela explicou tudo para evitar confusões."
+      },
+      {
+        "t": [
+          "Étant",
+          "donné",
+          "qu'il",
+          "pleut,",
+          "nous",
+          "resterons",
+          "ici."
+        ],
+        "h": "Como chove, ficaremos aqui."
+      },
+      {
+        "t": [
+          "Il",
+          "était",
+          "tellement",
+          "fatigué",
+          "qu'il",
+          "est",
+          "parti",
+          "tôt."
+        ],
+        "h": "Ele estava tão cansado que saiu cedo."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Nous avons avancé l'ouverture des portes pour que les visiteurs puissent entrer tranquillement."
+      },
+      {
+        "t": "Étant donné que beaucoup de participants viennent en train, nous avons ajouté un plan."
+      },
+      {
+        "t": "Il faudrait installer des panneaux afin que personne ne se trompe de salle."
+      },
+      {
+        "t": "Les inscriptions ont tellement augmenté que nous avons dû ouvrir une deuxième salle."
+      },
+      {
+        "t": "J'ai envoyé un rappel de peur que les participants oublient l'heure de leur conférence."
+      }
+    ],
+    "shadow": [
+      "C'est une bonne nouvelle, mais l'accueil risque d'être compliqué. J'ai avancé l'ouverture des portes pour que les visiteurs puissent s'installer tranquillement.",
+      "Bonne précaution. Les bénévoles se sont réparti les tâches hier, si bien que chacun sait déjà de quel espace il sera responsable.",
+      "Il faudrait aussi prévoir des documents numériques. Nous avons imprimé beaucoup de brochures, mais certaines personnes préfèrent les consulter sur leur téléphone.",
+      "Alors, répartissons les dernières vérifications. Si chacun s'occupe de sa partie, on devrait pouvoir accueillir tout le monde dans de bonnes conditions."
+    ],
+    "write": {
+      "task": "Escreva seis frases explicando objetivos, causas e consequências de um projeto usando conectores diferentes.",
+      "ph": "Nous avons organisé … pour que tout le monde puisse …"
+    },
+    "cards": [
+      [
+        "Falo devagar para que todos entendam.",
+        "Je parle lentement pour que tout le monde comprenne."
+      ],
+      [
+        "Enviamos um mapa para que encontre o local.",
+        "Nous avons envoyé un plan pour que tu trouves le lieu."
+      ],
+      [
+        "Como chove, ficaremos aqui.",
+        "Étant donné qu'il pleut, nous resterons ici."
+      ],
+      [
+        "Havia tanta gente que esperamos.",
+        "Il y avait tellement de monde que nous avons dû attendre."
+      ],
+      [
+        "Ela explicou tudo para evitar confusões.",
+        "Elle a tout expliqué pour éviter les malentendus."
+      ],
+      [
+        "Preparamos cópia por receio de perder o arquivo.",
+        "Nous avons préparé une copie de peur de perdre le fichier."
+      ],
+      [
+        "Ele estava tão cansado que saiu cedo.",
+        "Il était tellement fatigué qu'il est parti tôt."
+      ],
+      [
+        "O evento foi adiado, então mudamos planos.",
+        "L'événement a été reporté, si bien que nous avons changé nos plans."
+      ],
+      [
+        "Já que todos chegaram, podemos começar.",
+        "Puisque tout le monde est arrivé, nous pouvons commencer."
+      ],
+      [
+        "Vou confirmar para que não se atrase.",
+        "Je vais confirmer l'horaire pour que tu ne sois pas en retard."
+      ]
+    ]
+  },
+  {
+    "title": "Alors que, tandis que, même si",
+    "goal": "Expressar oposição, simultaneidade e concessão usando alors que, tandis que, même si, quoique e avoir beau.",
+    "speakers": {
+      "Claire": "f",
+      "Antoine": "m"
+    },
+    "setting": "Claire e Antoine discutem a organização de uma festa de bairro em Strasbourg.",
+    "lines": [
+      [
+        "Claire",
+        "On doit décider aujourd'hui si on ferme la rue pendant la fête. Alors que les habitants veulent plus d'espace, les commerçants craignent de perdre des clients.",
+        "Temos que decidir sobre o fechamento da rua. Moradores querem espaço, comerciantes temem perder clientes."
+      ],
+      [
+        "Antoine",
+        "Je les comprends. Pourtant, tandis que certains magasins dépendent des livraisons, les cafés profiteraient d'une rue piétonne.",
+        "Entendo. Enquanto lojas dependem das entregas, cafés se beneficiariam de rua de pedestres."
+      ],
+      [
+        "Claire",
+        "Même si la rue est fermée samedi, les livreurs pourront accéder aux commerces avant huit heures.",
+        "Mesmo se fecharmos sábado, as entregas poderão chegar antes das oito."
+      ],
+      [
+        "Antoine",
+        "J'ai beau expliquer cet horaire aux responsables, certains restent persuadés qu'ils seront bloqués toute la journée.",
+        "Por mais que explique, alguns acham que ficarão bloqueados o dia inteiro."
+      ],
+      [
+        "Claire",
+        "Quoique la proposition soit assez souple, elle ne convaincra pas tout le monde. On devrait rencontrer les commerçants individuellement.",
+        "Embora flexível, não convencerá todos. Devemos conversar individualmente."
+      ],
+      [
+        "Antoine",
+        "Alors que le marché attire beaucoup de visiteurs, la petite place voisine reste presque vide. On pourrait mieux utiliser cet espace.",
+        "Enquanto o mercado atrai gente, a praça vizinha fica vazia. Poderíamos aproveitá-la."
+      ],
+      [
+        "Claire",
+        "On pourrait y installer les stands d'information, tandis que les concerts auraient lieu près de la mairie.",
+        "Poderíamos colocar estandes lá, enquanto os shows seriam perto da prefeitura."
+      ],
+      [
+        "Antoine",
+        "Oui, mais même si les concerts finissent tôt, le bruit risque de gêner les voisins qui habitent au-dessus des commerces.",
+        "Sim, mas mesmo terminando cedo, o barulho pode incomodar moradores."
+      ],
+      [
+        "Claire",
+        "On a beau réduire le volume, les basses traversent les murs. Je proposerais une scène orientée vers le parc.",
+        "Por mais que baixemos o volume, graves atravessam paredes. Eu viraria o palco para o parque."
+      ],
+      [
+        "Antoine",
+        "Ça me semble raisonnable. Quoiqu'on dispose d'un budget limité, on pourrait louer quelques panneaux acoustiques.",
+        "Parece razoável. Embora o orçamento seja limitado, poderíamos alugar painéis acústicos."
+      ],
+      [
+        "Claire",
+        "Il faudrait surtout prévenir les riverains. Tandis que les bénévoles s'occuperont de l'affichage, je contacterai les immeubles concernés.",
+        "Precisamos avisar moradores. Enquanto voluntários cuidam dos cartazes, contatarei os prédios."
+      ],
+      [
+        "Antoine",
+        "Et la pluie ? Même s'il pleut, on pourra maintenir les stands couverts. En revanche, les ateliers en plein air seront plus compliqués.",
+        "E a chuva? Mesmo chovendo, manteremos estandes cobertos, mas oficinas externas ficam difíceis."
+      ],
+      [
+        "Claire",
+        "J'ai beau consulter les prévisions, elles changent sans arrêt. Prévoyons donc une salle de repli.",
+        "Por mais que consulte a previsão, ela muda sempre. Vamos reservar sala alternativa."
+      ],
+      [
+        "Antoine",
+        "Quoique ce soit compliqué de tout prévoir, il vaut mieux disposer de deux solutions que d'improviser au dernier moment.",
+        "Embora seja difícil prever tudo, melhor ter duas soluções que improvisar."
+      ],
+      [
+        "Claire",
+        "D'accord. Je présenterai les avantages et les contraintes, pendant que tu recueilleras les remarques des commerçants.",
+        "Certo. Apresentarei vantagens e limitações enquanto você recolhe opiniões dos comerciantes."
+      ],
+      [
+        "Antoine",
+        "Parfait. Même si nous ne sommes pas tous d'accord, nous pourrons prendre une décision à partir d'informations claires.",
+        "Mesmo sem unanimidade, poderemos decidir com base em informações claras."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Alors que e tandis que",
+        "p": [
+          "Esses conectores seguidos de indicatif podem expressar contraste ou simultaneidade conforme o contexto."
+        ],
+        "ex": [
+          [
+            "Elle préfère travailler seule, alors que je préfère l'équipe.",
+            "Ela prefere sozinha, eu equipe."
+          ],
+          [
+            "Certains veulent partir, tandis que d'autres restent.",
+            "Alguns querem ir, outros ficar."
+          ],
+          [
+            "Il cuisinait tandis que je mettais la table.",
+            "Ele cozinhava enquanto eu arrumava a mesa."
+          ]
+        ],
+        "tip": "Observe se as ações são contrastantes ou simultâneas."
+      },
+      {
+        "h": "Même si + indicatif",
+        "p": [
+          "Mesmo se ou mesmo que introduz condição que não muda o resultado e pede <b>indicatif</b>."
+        ],
+        "ex": [
+          [
+            "Même s'il pleut, nous sortirons.",
+            "Mesmo que chova, sairemos."
+          ],
+          [
+            "Même si tu n'es pas d'accord, écoute.",
+            "Mesmo que discorde, escute."
+          ],
+          [
+            "Même si nous avons peu de temps, essayons.",
+            "Mesmo com pouco tempo, tentemos."
+          ]
+        ],
+        "tip": "Diferente de bien que + subjonctif."
+      },
+      {
+        "h": "Quoique + subjonctif",
+        "p": [
+          "Equivale a embora e normalmente usa subjonctif, com elisão em quoiqu'il e quoiqu'on. Não confunda com quoi que (seja o que for que)."
+        ],
+        "ex": [
+          [
+            "Quoique ce soit coûteux, étudions le projet.",
+            "Embora caro, vamos analisar."
+          ],
+          [
+            "Quoiqu'elle soit fatiguée, elle continue.",
+            "Embora cansada, ela continua."
+          ],
+          [
+            "Quoique nous ayons peu de moyens, avançons.",
+            "Embora com poucos recursos, avancemos."
+          ]
+        ],
+        "tip": "Quoique é uma única palavra."
+      },
+      {
+        "h": "Avoir beau + infinitif",
+        "p": [
+          "Marca esforços que não atingem o resultado desejado. Conjugue avoir e deixe o outro verbo no infinitivo."
+        ],
+        "ex": [
+          [
+            "J'ai beau expliquer, personne ne comprend.",
+            "Por mais que explique, ninguém entende."
+          ],
+          [
+            "Nous avons beau chercher, nous ne trouvons rien.",
+            "Por mais que busquemos, nada encontramos."
+          ],
+          [
+            "Elle avait beau insister, il refusait.",
+            "Por mais que insistisse, ele recusava."
+          ]
+        ],
+        "tip": "Normalmente há uma contradição entre esforço e resultado."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Bairro e eventos",
+        "items": [
+          [
+            "une rue piétonne",
+            "uma rua de pedestres"
+          ],
+          [
+            "un commerçant",
+            "um comerciante"
+          ],
+          [
+            "un riverain",
+            "um morador próximo"
+          ],
+          [
+            "une livraison",
+            "uma entrega"
+          ],
+          [
+            "un stand",
+            "um estande"
+          ],
+          [
+            "un panneau acoustique",
+            "um painel acústico"
+          ],
+          [
+            "une salle de repli",
+            "uma sala alternativa"
+          ],
+          [
+            "un bénévole",
+            "um voluntário"
+          ]
+        ]
+      },
+      {
+        "h": "Concessão e negociação",
+        "items": [
+          [
+            "alors que",
+            "enquanto"
+          ],
+          [
+            "tandis que",
+            "enquanto"
+          ],
+          [
+            "même si",
+            "mesmo que"
+          ],
+          [
+            "quoique",
+            "embora"
+          ],
+          [
+            "avoir beau",
+            "por mais que"
+          ],
+          [
+            "pourtant",
+            "no entanto"
+          ],
+          [
+            "en revanche",
+            "em contrapartida"
+          ],
+          [
+            "un compromis",
+            "um compromisso negociado"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "quoique",
+        "p": "Quoique e quoi que soam praticamente igual, aproximadamente “kuá-ke”.",
+        "w": [
+          "quoique",
+          "quoi que",
+          "quoiqu'il soit"
+        ]
+      },
+      {
+        "h": "j'ai beau",
+        "p": "Beau é pronunciado como “bô”, sem pronunciar separadamente as três letras da vogal.",
+        "w": [
+          "j'ai beau",
+          "nous avons beau",
+          "il avait beau essayer"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Qual é o conflito sobre o fechamento da rua?",
+        "o": [
+          "Os moradores querem cancelar a festa",
+          "Os comerciantes querem ingressos pagos",
+          "Moradores querem espaço e comerciantes temem perder clientes"
+        ],
+        "a": 2,
+        "e": "On doit décider aujourd'hui si on ferme la rue pendant la fête. Alors que les habitants veulent plus d'espace, les commerçants craignent de perdre des clients."
+      },
+      {
+        "q": "Até que horas são possíveis as entregas?",
+        "o": [
+          "Antes das oito",
+          "Até meio-dia",
+          "Durante toda a tarde"
+        ],
+        "a": 0,
+        "e": "Même si la rue est fermée samedi, les livreurs pourront accéder aux commerces avant huit heures."
+      },
+      {
+        "q": "Por que Claire sugere virar o palco para o parque?",
+        "o": [
+          "Os cafés estarão fechados",
+          "O som grave atravessa as paredes",
+          "O parque terá mais comerciantes"
+        ],
+        "a": 1,
+        "e": "On a beau réduire le volume, les basses traversent les murs. Je proposerais une scène orientée vers le parc."
+      },
+      {
+        "q": "O que Claire sugere por causa da previsão do tempo?",
+        "o": [
+          "Cancelar todos os shows",
+          "Adiar a festa um mês",
+          "Reservar uma sala alternativa"
+        ],
+        "a": 2,
+        "e": "J'ai beau consulter les prévisions, elles changent sans arrêt. Prévoyons donc une salle de repli."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "___ que les habitants souhaitent le calme, les commerces veulent rester ouverts.",
+        "a": [
+          "Alors"
+        ],
+        "h": "Enquanto os moradores querem silêncio, as lojas querem abrir."
+      },
+      {
+        "s": "Même s'il ___ (pleuvoir, indicatif présent), la fête aura lieu.",
+        "a": [
+          "pleut"
+        ],
+        "h": "Mesmo que chova, haverá festa."
+      },
+      {
+        "s": "Quoique la proposition ___ (être, subjonctif) raisonnable, elle ne plaît pas à tous.",
+        "a": [
+          "soit"
+        ],
+        "h": "Embora razoável, nem todos gostam."
+      },
+      {
+        "s": "J'___ (avoir, présent) beau répéter les règles, personne ne les respecte.",
+        "a": [
+          "ai"
+        ],
+        "h": "Por mais que repita as regras, ninguém respeita."
+      },
+      {
+        "s": "Les enfants jouent tandis que leurs parents ___ (discuter, indicatif).",
+        "a": [
+          "discutent"
+        ],
+        "h": "Crianças brincam enquanto pais conversam."
+      },
+      {
+        "s": "Nous avons beau ___ (chercher, infinitif), nous ne trouvons rien.",
+        "a": [
+          "chercher"
+        ],
+        "h": "Por mais que procuremos, nada achamos."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "Alors",
+          "qu'il",
+          "préfère",
+          "rester,",
+          "je",
+          "veux",
+          "sortir."
+        ],
+        "h": "Enquanto ele fica, eu quero sair."
+      },
+      {
+        "t": [
+          "Il",
+          "cuisine",
+          "tandis",
+          "que",
+          "je",
+          "travaille."
+        ],
+        "h": "Ele cozinha enquanto trabalho."
+      },
+      {
+        "t": [
+          "Même",
+          "si",
+          "c'est",
+          "cher,",
+          "ça",
+          "vaut",
+          "la",
+          "peine."
+        ],
+        "h": "Mesmo que seja caro, vale a pena."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Je les comprends. Pourtant, tandis que certains magasins dépendent des livraisons, les cafés profiteraient d'une rue piétonne."
+      },
+      {
+        "t": "Quoique la proposition soit assez souple, elle ne convaincra pas tout le monde. On devrait rencontrer les commerçants individuellement."
+      },
+      {
+        "t": "Oui, mais même si les concerts finissent tôt, le bruit risque de gêner les voisins qui habitent au-dessus des commerces."
+      },
+      {
+        "t": "Il faudrait surtout prévenir les riverains. Tandis que les bénévoles s'occuperont de l'affichage, je contacterai les immeubles concernés."
+      },
+      {
+        "t": "D'accord. Je présenterai les avantages et les contraintes, pendant que tu recueilleras les remarques des commerçants."
+      }
+    ],
+    "shadow": [
+      "Je les comprends. Pourtant, tandis que certains magasins dépendent des livraisons, les cafés profiteraient d'une rue piétonne.",
+      "Alors que le marché attire beaucoup de visiteurs, la petite place voisine reste presque vide. On pourrait mieux utiliser cet espace.",
+      "Il faudrait surtout prévenir les riverains. Tandis que les bénévoles s'occuperont de l'affichage, je contacterai les immeubles concernés.",
+      "Parfait. Même si nous ne sommes pas tous d'accord, nous pourrons prendre une décision à partir d'informations claires."
+    ],
+    "write": {
+      "task": "Compare duas opções em seis frases usando alors que, tandis que, même si, quoique e avoir beau.",
+      "ph": "Alors que certaines personnes préfèrent …, d'autres …"
+    },
+    "cards": [
+      [
+        "Enquanto ele fica, eu quero sair.",
+        "Alors qu'il préfère rester, je veux sortir."
+      ],
+      [
+        "Mesmo que seja caro, vale a pena.",
+        "Même si c'est cher, ça vaut la peine."
+      ],
+      [
+        "Embora cansada, ela continua.",
+        "Quoiqu'elle soit fatiguée, elle continue."
+      ],
+      [
+        "Por mais que tente, não consigo.",
+        "J'ai beau essayer, je n'y arrive pas."
+      ],
+      [
+        "Ele cozinha enquanto trabalho.",
+        "Il cuisine tandis que je travaille."
+      ],
+      [
+        "Mesmo que discorde, vou explicar.",
+        "Même si tu n'es pas d'accord, je vais expliquer."
+      ],
+      [
+        "Embora com pouco tempo, tentaremos.",
+        "Quoique nous ayons peu de temps, nous allons essayer."
+      ],
+      [
+        "Por mais que procuremos, nada achamos.",
+        "Nous avons beau chercher, nous ne trouvons rien."
+      ],
+      [
+        "Ela prefere trem, ele prefere carro.",
+        "Elle préfère le train, tandis qu'il préfère la voiture."
+      ],
+      [
+        "Mesmo que chova amanhã, iremos.",
+        "Même s'il pleut demain, nous irons."
+      ]
+    ]
+  },
+  {
+    "title": "Madame, Monsieur",
+    "goal": "Redigir correspondência formal, apresentar reclamações e pedidos educados e empregar nominalização.",
+    "speakers": {
+      "Claire": "f",
+      "Lucas": "m"
+    },
+    "setting": "Claire pede ajuda a Lucas para escrever uma reclamação sobre o cancelamento de uma sala em Toulouse.",
+    "lines": [
+      [
+        "Claire",
+        "Je dois écrire au service des réservations. Ils ont annulé notre salle deux jours avant la conférence, sans nous proposer d'alternative.",
+        "Preciso escrever ao setor de reservas. Cancelaram nossa sala dois dias antes da conferência sem oferecer alternativa."
+      ],
+      [
+        "Lucas",
+        "Dans ce cas, évite un ton agressif. Un courrier formel commence par « Madame, Monsieur, » et présente les faits clairement.",
+        "Evite tom agressivo. Carta formal começa com prezados senhores e descreve fatos claramente."
+      ],
+      [
+        "Claire",
+        "Je peux écrire : « Je me permets de vous contacter au sujet de l'annulation de notre réservation du 12 novembre » ?",
+        "Posso escrever: tomo a liberdade de contatá-los sobre o cancelamento de 12 de novembro?"
+      ],
+      [
+        "Lucas",
+        "Oui. Ajoute la référence du dossier et la date de confirmation, afin que le service retrouve facilement ta demande.",
+        "Sim. Acrescente referência e data para que localizem o pedido."
+      ],
+      [
+        "Claire",
+        "Je voudrais expliquer que leur décision a perturbé toute notre organisation, mais sans paraître trop accusatrice.",
+        "Quero explicar que a decisão prejudicou a organização sem parecer acusatória."
+      ],
+      [
+        "Lucas",
+        "Formule plutôt : « Cette annulation a entraîné une modification importante de notre programme. » C'est précis et professionnel.",
+        "Prefira: esse cancelamento provocou uma alteração importante do programa. É preciso e profissional."
+      ],
+      [
+        "Claire",
+        "Ensuite, est-ce que je peux demander : « Nous exigeons une nouvelle salle immédiatement » ?",
+        "Posso pedir: exigimos uma nova sala imediatamente?"
+      ],
+      [
+        "Lucas",
+        "Ce serait trop direct. Écris : « Nous souhaiterions savoir si une salle équivalente pourrait être mise à notre disposition. »",
+        "Seria direto demais. Escreva: gostaríamos de saber se uma sala equivalente poderia ser disponibilizada."
+      ],
+      [
+        "Claire",
+        "J'hésite entre « à cause de » et « en raison de ». Le second convient mieux à un courrier officiel ?",
+        "Estou em dúvida entre por causa de e em razão de. A segunda é mais formal?"
+      ],
+      [
+        "Lucas",
+        "Oui. Par exemple : « En raison de ce changement, plusieurs intervenants ont dû modifier leur déplacement. »",
+        "Sim. Em razão da mudança, vários palestrantes precisaram alterar o deslocamento."
+      ],
+      [
+        "Claire",
+        "Je vais joindre la confirmation initiale et le message d'annulation. Comment annoncer les pièces jointes ?",
+        "Vou anexar a confirmação e o cancelamento. Como menciono os anexos?"
+      ],
+      [
+        "Lucas",
+        "Tu peux écrire : « Vous trouverez en pièces jointes les documents relatifs à notre réservation. »",
+        "Pode escrever: os documentos relativos à reserva estão anexados."
+      ],
+      [
+        "Claire",
+        "Et pour le délai : « Nous vous remercions de bien vouloir nous apporter une réponse d'ici vendredi » ?",
+        "E para o prazo: agradecemos se puderem responder até sexta?"
+      ],
+      [
+        "Lucas",
+        "Très bien. Tu peux ajouter : « Je vous remercie par avance de l'attention portée à notre demande. »",
+        "Muito bem. Acrescente: agradeço antecipadamente a atenção à solicitação."
+      ],
+      [
+        "Claire",
+        "Il me manque seulement la formule finale. Je trouve « Cordialement » un peu court pour cette première réclamation.",
+        "Só falta despedida. Acho cordialmente um pouco simples para essa reclamação."
+      ],
+      [
+        "Lucas",
+        "Alors utilise : « Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées. » Ce sera parfaitement adapté.",
+        "Use a fórmula tradicional de respeitosos cumprimentos. Será adequada."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Estrutura formal",
+        "p": [
+          "Um e-mail formal deve ter objeto, saudação, motivo, pedido e encerramento. Use vous, orações completas e tom respeitoso."
+        ],
+        "ex": [
+          [
+            "Objet : Demande de confirmation de réservation.",
+            "Assunto: pedido de confirmação de reserva."
+          ],
+          [
+            "Madame, Monsieur, je vous contacte au sujet de notre demande.",
+            "Prezados senhores, entro em contato sobre nossa solicitação."
+          ],
+          [
+            "Je vous remercie de votre réponse.",
+            "Agradeço sua resposta."
+          ]
+        ],
+        "tip": "Uma mensagem clara identifica o pedido rapidamente."
+      },
+      {
+        "h": "Conditionnel para pedidos",
+        "p": [
+          "<b>Je souhaiterais</b>, <b>nous voudrions</b> e <b>pourriez-vous</b> tornam pedidos menos impositivos."
+        ],
+        "ex": [
+          [
+            "Je souhaiterais obtenir des informations.",
+            "Gostaria de informações."
+          ],
+          [
+            "Pourriez-vous confirmer la disponibilité ?",
+            "Poderiam confirmar disponibilidade?"
+          ],
+          [
+            "Nous vous remercions de bien vouloir examiner notre demande.",
+            "Agradecemos a análise da solicitação."
+          ]
+        ],
+        "tip": "Prefira je souhaiterais a je veux."
+      },
+      {
+        "h": "Nominalisation",
+        "p": [
+          "Em registros profissionais, nominalização transforma verbos em substantivos: décider → décision, annuler → annulation, confirmer → confirmation."
+        ],
+        "ex": [
+          [
+            "L'annulation de notre réservation pose problème.",
+            "O cancelamento causa problema."
+          ],
+          [
+            "Nous attendons la confirmation de votre décision.",
+            "Aguardamos confirmação da decisão."
+          ],
+          [
+            "Cette modification a entraîné des frais.",
+            "A mudança gerou custos."
+          ]
+        ],
+        "tip": "Use sem deixar o texto artificial."
+      },
+      {
+        "h": "Conectores e despedida",
+        "p": [
+          "En raison de, à la suite de e concernant organizam argumentos. Mencione anexos e escolha despedida adequada ao grau de formalidade."
+        ],
+        "ex": [
+          [
+            "En raison de ce retard, nous avons changé le programme.",
+            "Por causa do atraso, mudamos o programa."
+          ],
+          [
+            "Vous trouverez en pièce jointe la confirmation.",
+            "A confirmação está anexa."
+          ],
+          [
+            "Dans l'attente de votre réponse, je vous remercie.",
+            "No aguardo da resposta, agradeço."
+          ]
+        ],
+        "tip": "Cordialement é comum em e-mails; salutations distinguées é mais solene."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Correspondência formal",
+        "items": [
+          [
+            "un objet",
+            "um assunto"
+          ],
+          [
+            "un destinataire",
+            "um destinatário"
+          ],
+          [
+            "une formule de politesse",
+            "uma fórmula de cortesia"
+          ],
+          [
+            "une pièce jointe",
+            "um anexo"
+          ],
+          [
+            "une référence de dossier",
+            "uma referência"
+          ],
+          [
+            "une réclamation",
+            "uma reclamação"
+          ],
+          [
+            "une demande",
+            "uma solicitação"
+          ],
+          [
+            "un courrier",
+            "uma carta"
+          ]
+        ]
+      },
+      {
+        "h": "Pedidos e nominalização",
+        "items": [
+          [
+            "je me permets de",
+            "tomo a liberdade de"
+          ],
+          [
+            "je souhaiterais",
+            "eu gostaria"
+          ],
+          [
+            "pourriez-vous",
+            "poderia"
+          ],
+          [
+            "bien vouloir",
+            "ter a gentileza de"
+          ],
+          [
+            "une décision",
+            "uma decisão"
+          ],
+          [
+            "une annulation",
+            "um cancelamento"
+          ],
+          [
+            "une confirmation",
+            "uma confirmação"
+          ],
+          [
+            "un remboursement",
+            "um reembolso"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "Madame, Monsieur",
+        "p": "Madame soa aproximadamente “ma-dam”, com e final mudo; Monsieur se aproxima de “me-siê”.",
+        "w": [
+          "Madame",
+          "Monsieur",
+          "Madame, Monsieur"
+        ]
+      },
+      {
+        "h": "souhaiterais",
+        "p": "A terminação -ais tem som de e aberto; em souhait, ou soa como u brasileiro.",
+        "w": [
+          "je souhaiterais",
+          "nous souhaiterions",
+          "souhaiter une réponse"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Por que Claire escreve a reclamação?",
+        "o": [
+          "Uma cobrança duplicada",
+          "Falta de equipamentos de som",
+          "Cancelaram a sala sem alternativa"
+        ],
+        "a": 2,
+        "e": "Je dois écrire au service des réservations. Ils ont annulé notre salle deux jours avant la conférence, sans nous proposer d'alternative."
+      },
+      {
+        "q": "Que dados Lucas pede para identificar a reserva?",
+        "o": [
+          "Referência e data de confirmação",
+          "Endereços de palestrantes",
+          "Participação em eventos anteriores"
+        ],
+        "a": 0,
+        "e": "Oui. Ajoute la référence du dossier et la date de confirmation, afin que le service retrouve facilement ta demande."
+      },
+      {
+        "q": "Como Lucas sugere pedir outra sala?",
+        "o": [
+          "Ameaçando denunciar publicamente",
+          "Solicitando educadamente uma sala equivalente",
+          "Exigindo devolução de documentos"
+        ],
+        "a": 1,
+        "e": "Ce serait trop direct. Écris : « Nous souhaiterions savoir si une salle équivalente pourrait être mise à notre disposition. »"
+      },
+      {
+        "q": "Qual encerramento Lucas considera adequado?",
+        "o": [
+          "Uma saudação informal",
+          "Nenhum encerramento",
+          "Uma fórmula tradicional de cortesia"
+        ],
+        "a": 2,
+        "e": "Alors utilise : « Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées. » Ce sera parfaitement adapté."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Je me ___ (permettre, présent) de vous contacter concernant notre réservation.",
+        "a": [
+          "permets"
+        ],
+        "h": "Entro em contato sobre nossa reserva."
+      },
+      {
+        "s": "Nous ___ (souhaiter, conditionnel présent) obtenir une confirmation.",
+        "a": [
+          "souhaiterions"
+        ],
+        "h": "Gostaríamos de uma confirmação."
+      },
+      {
+        "s": "L'___ (annuler → nom) de notre réservation entraîne des difficultés.",
+        "a": [
+          "annulation"
+        ],
+        "h": "O cancelamento provoca dificuldades."
+      },
+      {
+        "s": "Pourriez-vous transmettre votre ___ (décider → nom) avant vendredi ?",
+        "a": [
+          "décision"
+        ],
+        "h": "Poderiam transmitir sua decisão até sexta?"
+      },
+      {
+        "s": "En ___ de ce changement, plusieurs participants ont modifié leurs billets.",
+        "a": [
+          "raison"
+        ],
+        "h": "Em razão disso, participantes mudaram passagens."
+      },
+      {
+        "s": "Vous trouverez en pièce ___ la confirmation.",
+        "a": [
+          "jointe"
+        ],
+        "h": "A confirmação está anexa."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "L'annulation",
+          "a",
+          "entraîné",
+          "des",
+          "difficultés."
+        ],
+        "h": "O cancelamento causou dificuldades."
+      },
+      {
+        "t": [
+          "Nous",
+          "souhaiterions",
+          "demander",
+          "un",
+          "remboursement."
+        ],
+        "h": "Gostaríamos de solicitar um reembolso."
+      },
+      {
+        "t": [
+          "Je",
+          "souhaiterais",
+          "obtenir",
+          "des",
+          "informations",
+          "complémentaires."
+        ],
+        "h": "Gostaria de informações adicionais."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Dans ce cas, évite un ton agressif. Un courrier formel commence par « Madame, Monsieur, » et présente les faits clairement."
+      },
+      {
+        "t": "Je voudrais expliquer que leur décision a perturbé toute notre organisation, mais sans paraître trop accusatrice."
+      },
+      {
+        "t": "Ce serait trop direct. Écris : « Nous souhaiterions savoir si une salle équivalente pourrait être mise à notre disposition. »"
+      },
+      {
+        "t": "Je vais joindre la confirmation initiale et le message d'annulation. Comment annoncer les pièces jointes ?"
+      },
+      {
+        "t": "Il me manque seulement la formule finale. Je trouve « Cordialement » un peu court pour cette première réclamation."
+      }
+    ],
+    "shadow": [
+      "Dans ce cas, évite un ton agressif. Un courrier formel commence par « Madame, Monsieur, » et présente les faits clairement.",
+      "Formule plutôt : « Cette annulation a entraîné une modification importante de notre programme. » C'est précis et professionnel.",
+      "Je vais joindre la confirmation initiale et le message d'annulation. Comment annoncer les pièces jointes ?",
+      "Alors utilise : « Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées. » Ce sera parfaitement adapté."
+    ],
+    "write": {
+      "task": "Escreva carta formal de reclamação ou pedido com assunto, abertura, nominalização, anexos e encerramento.",
+      "ph": "Objet : Demande concernant … . Madame, Monsieur, je me permets de …"
+    },
+    "cards": [
+      [
+        "Entro em contato sobre minha reserva.",
+        "Je me permets de vous contacter au sujet de ma réservation."
+      ],
+      [
+        "Gostaria de informações adicionais.",
+        "Je souhaiterais obtenir des informations complémentaires."
+      ],
+      [
+        "Poderiam confirmar a data?",
+        "Pourriez-vous confirmer la date ?"
+      ],
+      [
+        "Aguardamos sua decisão.",
+        "Nous attendons votre décision."
+      ],
+      [
+        "O cancelamento causou dificuldades.",
+        "L'annulation a entraîné des difficultés."
+      ],
+      [
+        "A confirmação está anexa.",
+        "La confirmation se trouve en pièce jointe."
+      ],
+      [
+        "Em razão do atraso, mudamos os planos.",
+        "En raison du retard, nous avons modifié nos plans."
+      ],
+      [
+        "Agradeço antecipadamente sua resposta.",
+        "Je vous remercie par avance de votre réponse."
+      ],
+      [
+        "Gostaríamos de solicitar um reembolso.",
+        "Nous souhaiterions demander un remboursement."
+      ],
+      [
+        "Fico à disposição para informações adicionais.",
+        "Je reste à votre disposition pour toute information complémentaire."
+      ]
+    ]
+  },
+  {
+    "title": "Débattre",
+    "goal": "Participar de debates com argumentos equilibrados, concessões e estruturas de mise en relief.",
+    "speakers": {
+      "Inès": "f",
+      "Lucas": "m"
+    },
+    "setting": "Inès e Lucas discutem a abertura dominical de uma biblioteca pública em Rennes.",
+    "lines": [
+      [
+        "Inès",
+        "On nous demande un avis sur l'ouverture de la médiathèque le dimanche. Personnellement, je trouve l'idée intéressante, mais j'aimerais connaître le coût.",
+        "Pediram nossa opinião sobre abrir a biblioteca aos domingos. Acho interessante, mas quero saber o custo."
+      ],
+      [
+        "Lucas",
+        "Il me semble que ce serait utile aux personnes qui travaillent toute la semaine. Ce qui me plaît, c'est la possibilité de venir en famille.",
+        "Parece útil a quem trabalha a semana. O que me agrada é poder ir em família."
+      ],
+      [
+        "Inès",
+        "Certes, ce serait pratique, mais le personnel devrait accepter de changer ses horaires. Ce n'est pas un détail.",
+        "Seria prático, mas os funcionários teriam de mudar horários. Isso importa."
+      ],
+      [
+        "Lucas",
+        "Je suis d'accord. En revanche, on pourrait commencer par un dimanche par mois au lieu d'imposer une ouverture systématique.",
+        "Concordo. Poderíamos começar com um domingo por mês em vez de abrir sempre."
+      ],
+      [
+        "Inès",
+        "Ce que je crains, c'est qu'on annonce ce changement sans prévoir les moyens nécessaires. Les bonnes intentions ne suffisent pas.",
+        "Temo que anunciem sem prever recursos. Boas intenções não bastam."
+      ],
+      [
+        "Lucas",
+        "Tu marques un point. Cela dit, certaines médiathèques proposent déjà des événements ponctuels le dimanche, avec des équipes volontaires.",
+        "Você tem razão nesse ponto. Algumas bibliotecas já fazem eventos pontuais aos domingos com equipes voluntárias."
+      ],
+      [
+        "Inès",
+        "Il faudrait éviter de tout faire reposer sur le volontariat. Ce sont les salariés qui assurent l'accueil et le suivi des collections.",
+        "Devemos evitar depender só do voluntariado. Funcionários garantem atendimento e acervo."
+      ],
+      [
+        "Lucas",
+        "Bien sûr. Ce que je propose, c'est de consulter l'équipe avant de fixer les dates. On pourrait aussi demander l'avis des usagers.",
+        "Claro. Proponho consultar a equipe antes das datas e também os usuários."
+      ],
+      [
+        "Inès",
+        "D'une part, cette ouverture rendrait la culture plus accessible. D'autre part, elle entraînerait des dépenses supplémentaires.",
+        "Por um lado ampliaria acesso à cultura, por outro geraria despesas."
+      ],
+      [
+        "Lucas",
+        "Je ne nie pas les coûts. Toutefois, on pourrait mesurer la fréquentation pendant trois mois avant de décider si l'essai vaut la peine.",
+        "Não nego custos. Porém podemos medir público por três meses antes de decidir."
+      ],
+      [
+        "Inès",
+        "Ce dont nous avons besoin, c'est d'une estimation précise, pas seulement d'un chiffre approximatif.",
+        "Precisamos de uma estimativa precisa, não de número aproximado."
+      ],
+      [
+        "Lucas",
+        "Absolument. C'est la direction qui pourrait présenter un budget, et ce sont les usagers qui pourraient indiquer leurs besoins.",
+        "Exato. A direção apresentaria orçamento, e usuários indicariam necessidades."
+      ],
+      [
+        "Inès",
+        "Il me semble aussi que les étudiants auraient intérêt à disposer d'un espace calme le week-end.",
+        "Também acho que os estudantes se beneficiariam de espaço tranquilo nos fins de semana."
+      ],
+      [
+        "Lucas",
+        "En revanche, il ne faut pas supposer qu'une ouverture dominicale conviendra à tout le monde. Les horaires et les transports comptent.",
+        "Mas não devemos presumir que domingo sirva para todos. Horários e transporte importam."
+      ],
+      [
+        "Inès",
+        "Finalement, je serais favorable à un essai limité, à condition qu'il repose sur une concertation et un financement clairs.",
+        "Por fim, apoio teste limitado com diálogo e financiamento claros."
+      ],
+      [
+        "Lucas",
+        "Nous sommes donc plutôt d'accord : certes, l'idée mérite d'être testée, mais pas au détriment des conditions de travail.",
+        "Estamos quase de acordo: vale testar, mas não às custas das condições de trabalho."
+      ]
+    ],
+    "grammar": [
+      {
+        "h": "Il me semble que: opinião com nuance",
+        "p": [
+          "Apresenta opinião cautelosa; na forma afirmativa geralmente usa indicatif ou conditionnel hipotético; na negativa costuma usar subjonctif."
+        ],
+        "ex": [
+          [
+            "Il me semble que cette proposition est raisonnable.",
+            "Parece-me razoável."
+          ],
+          [
+            "Il me semble que ce serait une bonne solution.",
+            "Parece boa solução."
+          ],
+          [
+            "Il ne me semble pas que ce soit nécessaire.",
+            "Não me parece necessário."
+          ]
+        ],
+        "tip": "Nuance é melhor que certeza infundada."
+      },
+      {
+        "h": "Certes... mais e en revanche",
+        "p": [
+          "Reconheça a força de argumento antes de apresentar uma ressalva. En revanche e toutefois marcam contraste com diferentes nuances."
+        ],
+        "ex": [
+          [
+            "Certes, c'est pratique, mais cela coûte cher.",
+            "É prático, mas caro."
+          ],
+          [
+            "Le projet demande du temps. En revanche, il est utile.",
+            "Exige tempo, mas é útil."
+          ],
+          [
+            "Je comprends votre argument. Toutefois, des questions restent ouvertes.",
+            "Entendo, mas há questões."
+          ]
+        ],
+        "tip": "Reconheça argumentos contrários sem caricaturas."
+      },
+      {
+        "h": "Construir argumentos e conclusão",
+        "p": [
+          "D'une part... d'autre part apresenta dois lados. Je reconnais que aceita objeção. En somme resume uma conclusão coerente."
+        ],
+        "ex": [
+          [
+            "D'une part, c'est utile, d'autre part, c'est coûteux.",
+            "Por um lado útil, por outro caro."
+          ],
+          [
+            "Je reconnais que votre remarque est pertinente.",
+            "Reconheço que sua observação é pertinente."
+          ],
+          [
+            "En somme, testons cette solution.",
+            "Em resumo, testemos a solução."
+          ]
+        ],
+        "tip": "Diferencie argumento, ressalva e conclusão."
+      },
+      {
+        "h": "Mise en relief",
+        "p": [
+          "<b>Ce qui... c'est</b> destaca sujeito; <b>ce que... c'est</b> destaca objeto direto; <b>ce dont... c'est</b> destaca complemento com de. C'est... qui destaca sujeito."
+        ],
+        "ex": [
+          [
+            "Ce qui m'inquiète, c'est le manque de temps.",
+            "O que me preocupa é falta de tempo."
+          ],
+          [
+            "Ce que je propose, c'est de commencer progressivement.",
+            "Proponho começar gradualmente."
+          ],
+          [
+            "Ce dont nous avons besoin, c'est d'un budget précis.",
+            "Precisamos de orçamento preciso."
+          ],
+          [
+            "C'est la direction qui décidera.",
+            "É a direção que decidirá."
+          ]
+        ],
+        "tip": "Escolha qui, que ou dont pela função sintática."
+      }
+    ],
+    "vocab": [
+      {
+        "h": "Debates e opiniões",
+        "items": [
+          [
+            "un débat",
+            "um debate"
+          ],
+          [
+            "un argument",
+            "um argumento"
+          ],
+          [
+            "un point de vue",
+            "um ponto de vista"
+          ],
+          [
+            "une réserve",
+            "uma ressalva"
+          ],
+          [
+            "une objection",
+            "uma objeção"
+          ],
+          [
+            "une proposition",
+            "uma proposta"
+          ],
+          [
+            "un compromis",
+            "um acordo intermediário"
+          ],
+          [
+            "une conclusion",
+            "uma conclusão"
+          ]
+        ]
+      },
+      {
+        "h": "Conectores e projetos",
+        "items": [
+          [
+            "certes",
+            "é verdade que"
+          ],
+          [
+            "en revanche",
+            "por outro lado"
+          ],
+          [
+            "toutefois",
+            "no entanto"
+          ],
+          [
+            "cependant",
+            "entretanto"
+          ],
+          [
+            "d'une part",
+            "por um lado"
+          ],
+          [
+            "d'autre part",
+            "por outro lado"
+          ],
+          [
+            "une estimation",
+            "uma estimativa"
+          ],
+          [
+            "un financement",
+            "um financiamento"
+          ]
+        ]
+      }
+    ],
+    "pron": [
+      {
+        "h": "certes",
+        "p": "O s final é pronunciado, diferentemente de várias palavras francesas: aproximadamente “sèrtss”.",
+        "w": [
+          "certes",
+          "certes, mais",
+          "certes, cette idée"
+        ]
+      },
+      {
+        "h": "ce qui, ce que, ce dont",
+        "p": "Ce qui soa “se-ki”, ce que soa “se-ke” e ce dont termina com vogal nasal.",
+        "w": [
+          "ce qui me plaît",
+          "ce que je propose",
+          "ce dont nous avons besoin"
+        ]
+      }
+    ],
+    "mc": [
+      {
+        "q": "Qual é o tema da discussão?",
+        "o": [
+          "Construir nova universidade",
+          "Abrir a biblioteca aos domingos",
+          "Aumentar preços dos livros"
+        ],
+        "a": 1,
+        "e": "On nous demande un avis sur l'ouverture de la médiathèque le dimanche. Personnellement, je trouve l'idée intéressante, mais j'aimerais connaître le coût."
+      },
+      {
+        "q": "Qual alternativa Lucas propõe?",
+        "o": [
+          "Abrir um domingo por mês",
+          "Abrir de madrugada",
+          "Atender somente por aplicativo"
+        ],
+        "a": 0,
+        "e": "Je suis d'accord. En revanche, on pourrait commencer par un dimanche par mois au lieu d'imposer une ouverture systématique."
+      },
+      {
+        "q": "O que Inès considera necessário?",
+        "o": [
+          "Pesquisar os livros mais emprestados",
+          "Fazer campanha publicitária",
+          "Ter estimativa precisa dos recursos"
+        ],
+        "a": 2,
+        "e": "Ce dont nous avons besoin, c'est d'une estimation précise, pas seulement d'un chiffre approximatif."
+      },
+      {
+        "q": "Quando Inès apoiaria um teste limitado?",
+        "o": [
+          "Se eliminassem empréstimos",
+          "Com diálogo e financiamento claros",
+          "Com funcionários sem remuneração"
+        ],
+        "a": 1,
+        "e": "Finalement, je serais favorable à un essai limité, à condition qu'il repose sur une concertation et un financement clairs."
+      }
+    ],
+    "gaps": [
+      {
+        "s": "Il me semble que cette proposition ___ (être, indicatif présent) raisonnable.",
+        "a": [
+          "est"
+        ],
+        "h": "Parece-me que a proposta é razoável."
+      },
+      {
+        "s": "Il ne me semble pas que ce ___ (être, subjonctif) nécessaire.",
+        "a": [
+          "soit"
+        ],
+        "h": "Não me parece necessário."
+      },
+      {
+        "s": "___, cette idée est intéressante, mais elle coûterait trop cher.",
+        "a": [
+          "Certes"
+        ],
+        "h": "É verdade que é interessante, mas custaria caro."
+      },
+      {
+        "s": "Ce ___ m'inquiète, c'est le manque de personnel.",
+        "a": [
+          "qui"
+        ],
+        "h": "O que me preocupa é falta de funcionários."
+      },
+      {
+        "s": "Ce ___ je propose, c'est de commencer progressivement.",
+        "a": [
+          "que"
+        ],
+        "h": "O que proponho é começar gradualmente."
+      },
+      {
+        "s": "Ce ___ nous avons besoin, c'est d'un budget précis.",
+        "a": [
+          "dont"
+        ],
+        "h": "O que precisamos é de orçamento preciso."
+      }
+    ],
+    "order": [
+      {
+        "t": [
+          "Il",
+          "me",
+          "semble",
+          "que",
+          "c'est",
+          "une",
+          "bonne",
+          "idée."
+        ],
+        "h": "Parece-me uma boa ideia."
+      },
+      {
+        "t": [
+          "Je",
+          "reconnais",
+          "que",
+          "votre",
+          "argument",
+          "est",
+          "valable."
+        ],
+        "h": "Reconheço que o argumento é válido."
+      },
+      {
+        "t": [
+          "Certes,",
+          "c'est",
+          "utile,",
+          "mais",
+          "cela",
+          "coûte",
+          "cher."
+        ],
+        "h": "É útil, mas custa caro."
+      }
+    ],
+    "dict": [
+      {
+        "t": "Il me semble que ce serait utile aux personnes qui travaillent toute la semaine. Ce qui me plaît, c'est la possibilité de venir en famille."
+      },
+      {
+        "t": "Ce que je crains, c'est qu'on annonce ce changement sans prévoir les moyens nécessaires. Les bonnes intentions ne suffisent pas."
+      },
+      {
+        "t": "Bien sûr. Ce que je propose, c'est de consulter l'équipe avant de fixer les dates. On pourrait aussi demander l'avis des usagers."
+      },
+      {
+        "t": "Ce dont nous avons besoin, c'est d'une estimation précise, pas seulement d'un chiffre approximatif."
+      },
+      {
+        "t": "Finalement, je serais favorable à un essai limité, à condition qu'il repose sur une concertation et un financement clairs."
+      }
+    ],
+    "shadow": [
+      "Il me semble que ce serait utile aux personnes qui travaillent toute la semaine. Ce qui me plaît, c'est la possibilité de venir en famille.",
+      "Tu marques un point. Cela dit, certaines médiathèques proposent déjà des événements ponctuels le dimanche, avec des équipes volontaires.",
+      "Ce dont nous avons besoin, c'est d'une estimation précise, pas seulement d'un chiffre approximatif.",
+      "Nous sommes donc plutôt d'accord : certes, l'idée mérite d'être testée, mais pas au détriment des conditions de travail."
+    ],
+    "write": {
+      "task": "Redija um texto argumentativo de oito a dez frases com posição, contra-argumento, ressalvas, mise en relief e conclusão equilibrada.",
+      "ph": "Il me semble que … . Certes, …, mais …"
+    },
+    "cards": [
+      [
+        "Parece-me uma boa ideia.",
+        "Il me semble que c'est une bonne idée."
+      ],
+      [
+        "É útil, mas custa caro.",
+        "Certes, c'est utile, mais cela coûte cher."
+      ],
+      [
+        "Por outro lado, economizaríamos tempo.",
+        "En revanche, nous gagnerions du temps."
+      ],
+      [
+        "O que me agrada é a flexibilidade.",
+        "Ce qui me plaît, c'est la flexibilité."
+      ],
+      [
+        "Proponho fazer um teste.",
+        "Ce que je propose, c'est de faire un essai."
+      ],
+      [
+        "Precisamos de mais informações.",
+        "Ce dont nous avons besoin, c'est de plus d'informations."
+      ],
+      [
+        "É a direção que decidirá.",
+        "C'est la direction qui prendra la décision."
+      ],
+      [
+        "Por um lado é prático; por outro caro.",
+        "D'une part, c'est pratique ; d'autre part, c'est cher."
+      ],
+      [
+        "Reconheço que o argumento é válido.",
+        "Je reconnais que votre argument est valable."
+      ],
+      [
+        "Em resumo, precisamos de uma solução equilibrada.",
+        "En somme, nous avons besoin d'une solution équilibrée."
+      ]
+    ]
+  }
+]
