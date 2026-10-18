@@ -141,6 +141,11 @@ rep("    (ds.errors||[]).forEach(function(e){rows.push({id:'error-'+e.id,",
     "    (st.erros||[]).filter(function(e){return e.lang===lang;}).forEach(function(e){rows.push({id:'erro-'+e.id,kind:'Dificuldades',text:e.correta,translation:e.nota||'',topic:'Quero lembrar',source:'Minha tentativa: '+(e.dada||'—'),action:function(){ir('ecoRevisao');}});});\n    (ds.errors||[]).forEach(function(e){rows.push({id:'error-'+e.id,")
 rep("source:'Conversa de demonstração'});","source:'Conversa com o Eco'});")
 
+
+# ---- lição montada pela IA não tem unidade: dá uma unidade "virtual" para o fim de lição do design ----
+rep("  function abrirLicaoApp(u, nome, op) {\n    uxExit='hoje';\n    fecharFolha();",
+    "  function abrirLicaoApp(u, nome, op) {\n    uxExit='hoje';\n    fecharFolha();\n    if (!u) u = { id: (eu() ? eu().idioma : 'en') + '-erros', titulo: (op && op.licao && op.licao.titulo) || nome || 'Revisão', objetivo: 'Revisar o que você errou' };")
+
 # ---- imagens do Descobrir: PNG grandes viram WebP ----
 import re as _re, base64 as _b64, io as _io
 try:

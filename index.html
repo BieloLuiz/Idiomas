@@ -9153,6 +9153,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
   function abrirLicaoApp(u, nome, op) {
     uxExit='hoje';
     fecharFolha();
+    if (!u) u = { id: (eu() ? eu().idioma : 'en') + '-erros', titulo: (op && op.licao && op.licao.titulo) || nome || 'Revisão', objetivo: 'Revisar o que você errou' };
     var p = eu(), base = (op && op.licao) ? op.licao : (op && op.revisao ? LICOES['rev|' + p.idioma] : LICOES[u.id + '|' + nome]) || LICOES_DEMO[p.idioma];
     var licao = { id: (op && op.licao) ? 'erros-' + Date.now() : u.id + '-' + nome, idioma: base.idioma, unidade: (op && op.licao) ? base.titulo : (op && op.revisao) ? 'Revisão de palavras' : u.titulo + ' · ' + nome, nivel: base.nivel || '', exercicios: base.exercicios };
     IdiomasAudio.stop();
