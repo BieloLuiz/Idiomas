@@ -9999,9 +9999,12 @@ function abrirLicao(LICAO, PERFIL, ao) {
   TELAS.ecoSetup = function (sc) {
     if (!IAon()) return _ecoSetup(sc);
     var pg = studioPage('Preparar conversa', 'ecoScenarios'), corrections = 'during', captions = 'translation';
-    studioLead(pg, sc.level + ' · Por turnos', sc.title, 'Sem pressa. Segure o botão para falar, solte para enviar. Você pode pedir ajuda ou repetir.');
+    studioLead(pg, sc.level + ' · Conversa por voz', sc.title, 'Sem pressa. Você pode pedir ajuda, repetir ou interromper o Eco.');
     var opts = document.createElement('section'); opts.className = 'card studio-stack';
     function group(t, items, v, fn) { var h = document.createElement('h2'); h.textContent = t; opts.appendChild(h); opts.appendChild(segmento(items, v, fn, t)); }
+    var modo = 'live';
+    group('Modo', [{ v: 'live', t: 'Ao vivo' }, { v: 'turns', t: 'Por turnos' }], modo, function (v) { modo = v; });
+    opts.insertAdjacentHTML('beforeend', '<p class="muted">Ao vivo: fale à vontade e interrompa o Eco quando quiser. Por turnos: segure um botão para falar.</p>');
     group('Correções', [{ v: 'during', t: 'Durante a conversa' }, { v: 'end', t: 'Só no final' }], corrections, function (v) { corrections = v; });
     group('Legendas', [{ v: 'on', t: 'Ligadas' }, { v: 'off', t: 'Desligadas' }, { v: 'translation', t: 'Com tradução' }], captions, function (v) { captions = v; });
     pg.appendChild(opts);
@@ -10009,7 +10012,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
     mic.innerHTML = '<span class="studio-icon">' + svg('mic') + '</span><h2>Podemos usar seu microfone?</h2><p>O Eco precisa ouvir sua voz. A gravação só é enviada quando você solta o botão.</p><p class="studio-mic-status" role="status"></p>';
     var granted = false, start = studioButton('Começar conversa', function () {
       if (!granted) return;
-      studioSession = { scenario: sc, corrections: corrections, captions: captions, minutes: sc.minutes, seconds: 0, muted: false, mode: 'turns', transcript: [], hist: [], correcoes: [], lang: eu().idioma, real: true };
+      studioSession = { scenario: sc, corrections: corrections, captions: captions, minutes: sc.minutes, seconds: 0, muted: false, mode: modo, transcript: [], hist: [], correcoes: [], lang: eu().idioma, real: true };
       ir('ecoCall');
     }, 'primary'); start.disabled = true;
     var pedir = studioButton('Permitir microfone', function () {
@@ -10018,7 +10021,6 @@ function abrirLicao(LICAO, PERFIL, ao) {
         .catch(function () { $('.studio-mic-status', mic).textContent = 'O microfone foi bloqueado. Libere o acesso ao microfone nas configurações do navegador e tente de novo.'; });
     });
     mic.appendChild(pedir); pg.appendChild(mic); pg.appendChild(start);
-    pg.insertAdjacentHTML('beforeend', '<p class="studio-note">A conversa ao vivo, sem precisar segurar o botão, vem numa próxima versão.</p>');
   };
   var _ecoCall = TELAS.ecoCall;
   TELAS.ecoCall = function () {
@@ -10268,6 +10270,126 @@ function abrirLicao(LICAO, PERFIL, ao) {
     var c2 = document.createElement('section'); c2.className = 'card studio-feature';
     c2.innerHTML = '<span class="studio-icon">' + svg('book') + '</span><h2>Revisar meus erros' + (n ? ' · ' + n : '') + '</h2><p>Exercícios novos, criados pelo Eco, sobre o que você errou.</p>';
     c2.appendChild(studioButton(n ? 'Revisar agora' : 'Ver revisão', function () { ir('ecoRevisao'); }, 'primary')); pg.insertBefore(c2, links || null);
+  };
+  /* ---------- Conversa ao vivo (Gemini Live direto do navegador, com token temporário) ---------- */
+  function b64DePCM(i16) { var u8 = new Uint8Array(i16.buffer), s = '', CH = 0x8000; for (var i = 0; i < u8.length; i += CH) s += String.fromCharCode.apply(null, u8.subarray(i, i + CH)); return btoa(s); }
+  function pcmDeB64(b64) { var bin = atob(b64), n = bin.length >> 1, out = new Float32Array(n); for (var i = 0; i < n; i++) { var v = bin.charCodeAt(2 * i) | (bin.charCodeAt(2 * i + 1) << 8); out[i] = (v >= 32768 ? v - 65536 : v) / 32768; } return out; }
+  function sistemaAoVivo(s) {
+    var sc = s.scenario, idioma = s.lang === 'fr' ? 'francês' : 'inglês';
+    return 'Você é o Eco, parceiro de conversa por voz de um aluno brasileiro adulto que estuda ' + idioma + ', nível ' + sc.level + '. ' +
+      'Cenário: ' + sc.title + '. Contexto: ' + (sc.contexto || 'conversa do dia a dia') + '. ' + (sc.objetivo ? 'Objetivo do aluno: ' + sc.objetivo + '. ' : '') +
+      'Fale SOMENTE em ' + idioma + ', devagar e com pronúncia clara, frases curtas (1 ou 2 por vez), vocabulário do nível do aluno. Sempre devolva a vez com uma pergunta simples. ' +
+      (s.corrections === 'during' ? 'Quando o aluno errar algo importante, repita a forma certa de modo natural e gentil antes de continuar. ' : 'Não corrija durante a conversa. ') +
+      'Se o aluno falar em português, entenda e ajude em ' + idioma + ' bem simples. Se ele pedir ajuda, dê em português uma sugestão curta do que responder e depois repita sua pergunta em ' + idioma + '. ' +
+      'Comece cumprimentando e abrindo o cenário com uma pergunta.';
+  }
+  function chamadaAoVivo(s) {
+    var lang = s.lang, pg = studioPage('Conversa com o Eco', 'ecoScenarios'); pg.classList.add('studio-call');
+    pg.insertAdjacentHTML('beforeend', '<div class="studio-between"><div><span class="ui-label">' + esc(s.scenario.level) + ' · Ao vivo</span><h1>' + esc(s.scenario.title) + '</h1></div><span class="studio-timer" aria-label="Tempo de conversa">' + studioTime(s.seconds) + '</span></div>');
+    var stage = document.createElement('div'); stage.className = 'studio-stage'; var mascot = eco('thinking', 'Eco'); stage.appendChild(mascot);
+    stage.insertAdjacentHTML('beforeend', '<span class="studio-orbit" aria-hidden="true"></span><p class="studio-state" role="status"></p><div class="studio-wave" aria-hidden="true">' + Array.from({ length: 15 }, function (_, i) { return '<i style="--d:' + i * .08 + 's;--h:' + (12 + (i % 4) * 7) + 'px"></i>'; }).join('') + '</div><p class="studio-voice-label">Fale quando quiser · pode interromper</p>');
+    pg.appendChild(stage);
+    var subtitles = document.createElement('div'); subtitles.className = 'studio-subtitles'; subtitles.setAttribute('aria-live', 'polite'); pg.appendChild(subtitles);
+    var actions = document.createElement('div'); actions.className = 'studio-call-actions';
+    var LBL = { connecting: 'Conectando…', listening: 'Estou ouvindo você', speaking: 'Eco está falando', muted: 'Microfone silenciado', thinking: 'Eco está pensando…' }, state = '';
+    function setState(v) { if (state === v) return; state = v; stage.dataset.state = v; mascot.dataset.state = { connecting: 'thinking', listening: 'listening', speaking: 'speaking', muted: 'neutral', thinking: 'thinking' }[v]; $('.studio-state', stage).textContent = LBL[v]; mascot.setAttribute('aria-label', LBL[v]); }
+    var parcialEu = '', parcialEco = '';
+    function caption() { subtitles.innerHTML = ''; if (s.captions === 'off') { subtitles.innerHTML = '<p class="muted">Legendas desligadas</p>'; return; }
+      var linhas = s.transcript.slice(-2).map(function (t) { return t; });
+      if (parcialEu) linhas.push({ who: 'Você', text: parcialEu }); if (parcialEco) linhas.push({ who: 'Eco', text: parcialEco });
+      linhas.slice(-2).forEach(function (t) { var b = document.createElement('div'); b.className = 'studio-caption ' + (t.who === 'Você' ? 'is-user' : ''); b.innerHTML = '<strong>' + esc(t.who) + '</strong><p lang="' + lang + '">' + esc(t.text) + '</p>' + (s.captions === 'translation' && t.pt ? '<small>' + esc(t.pt) + '</small>' : ''); subtitles.appendChild(b); }); }
+    /* áudio: saída 24 kHz, entrada 16 kHz */
+    var AC = window.AudioContext || window.webkitAudioContext, ctx = new AC(), fontes = [], proxima = 0, ws = null, micStream = null, proc = null, fim = false;
+    try { ctx.resume(); } catch (e) {}
+    function pararFala() { fontes.forEach(function (f) { try { f.stop(); } catch (e) {} }); fontes = []; proxima = 0; }
+    function tocarPCM(b64, taxa) {
+      var dados = pcmDeB64(b64); if (!dados.length) return;
+      var buf = ctx.createBuffer(1, dados.length, taxa || 24000); buf.getChannelData(0).set(dados);
+      var src = ctx.createBufferSource(); src.buffer = buf; src.connect(ctx.destination);
+      var t = Math.max(ctx.currentTime + 0.03, proxima); src.start(t); proxima = t + buf.duration; fontes.push(src);
+      src.onended = function () { fontes = fontes.filter(function (x) { return x !== src; }); if (!fontes.length && !fim) setState(s.muted ? 'muted' : 'listening'); };
+      setState('speaking');
+    }
+    function enviar(o) { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); }
+    function ligarMic() {
+      return navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } }).then(function (st) {
+        micStream = st; var fonte = ctx.createMediaStreamSource(st); proc = ctx.createScriptProcessor(4096, 1, 1);
+        var razao = ctx.sampleRate / 16000;
+        proc.onaudioprocess = function (e) {
+          if (s.muted || !ws || ws.readyState !== 1) return;
+          var x = e.inputBuffer.getChannelData(0), n = Math.floor(x.length / razao), out = new Int16Array(n);
+          for (var i = 0; i < n; i++) { var v = x[Math.floor(i * razao)]; out[i] = Math.max(-1, Math.min(1, v)) * 0x7fff; }
+          enviar({ realtimeInput: { audio: { data: b64DePCM(out), mimeType: 'audio/pcm;rate=16000' } } });
+        };
+        var mudo = ctx.createGain(); mudo.gain.value = 0; fonte.connect(proc); proc.connect(mudo); mudo.connect(ctx.destination);
+      });
+    }
+    function encerrar(motivo) {
+      if (fim) return; fim = true; pararFala();
+      try { proc && proc.disconnect(); } catch (e) {} try { micStream && micStream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
+      try { ws && ws.close(); } catch (e) {} try { ctx.close(); } catch (e) {}
+      if (motivo === 'sair') return;
+      finalizarConversa();
+    }
+    function traduzir(entrada) {
+      if (s.captions !== 'translation' || !entrada.text) return;
+      IA.pedir('traduzir', { idioma: lang, texto: entrada.text }).then(function (r) { entrada.pt = r.texto; if (pg.isConnected) caption(); }).catch(function () {});
+    }
+    function falhou(msg) {
+      if (fim) return; encerrar('sair');
+      if (!pg.isConnected) return;
+      folha(function (sh) {
+        sh.innerHTML = '<h2>A conversa ao vivo parou</h2><p>' + esc(msg) + '</p><p>Você pode continuar no modo por turnos, que usa outra cota.</p>';
+        sh.appendChild(studioButton('Continuar por turnos', function () { fecharFolha(); s.mode = 'turns'; s.hist = s.transcript.map(function (t) { return { de: t.who === 'Eco' ? 'eco' : 'eu', texto: t.text }; }); ir('ecoCall'); }, 'primary'));
+        sh.appendChild(studioButton('Encerrar e ver resumo', function () { fecharFolha(); finalizarConversa(); }));
+      });
+    }
+    setState('connecting');
+    IA.pedir('liveToken', {}).then(function (t) {
+      if (!pg.isConnected) return;
+      ws = new WebSocket('wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContentConstrained?access_token=' + encodeURIComponent(t.token));
+      ws.onopen = function () {
+        enviar({ setup: { model: 'models/' + t.modelo, generationConfig: { responseModalities: ['AUDIO'], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Puck' } } } },
+          systemInstruction: { parts: [{ text: sistemaAoVivo(s) }] }, inputAudioTranscription: {}, outputAudioTranscription: {} } });
+      };
+      ws.onmessage = function (ev) {
+        (typeof ev.data === 'string' ? Promise.resolve(ev.data) : ev.data.text()).then(function (txt) {
+          var m; try { m = JSON.parse(txt); } catch (e) { return; }
+          if (m.setupComplete) { ligarMic().then(function () { setState('thinking'); enviar({ realtimeInput: { text: '(Comece a conversa agora.)' } }); }).catch(function () { falhou('Não consegui usar o microfone. Libere o acesso nas configurações do navegador.'); }); return; }
+          if (m.goAway) { toast('A sessão ao vivo vai terminar em instantes.'); return; }
+          var sc = m.serverContent; if (!sc) return;
+          if (sc.interrupted) { pararFala(); setState('listening'); }
+          (sc.modelTurn && sc.modelTurn.parts || []).forEach(function (p) { if (p.inlineData && p.inlineData.data) { var r = /rate=(\d+)/.exec(p.inlineData.mimeType || ''); tocarPCM(p.inlineData.data, r ? +r[1] : 24000); } });
+          if (sc.inputTranscription && sc.inputTranscription.text) { parcialEu += sc.inputTranscription.text; caption(); }
+          if (sc.outputTranscription && sc.outputTranscription.text) { if (parcialEu.trim()) { s.transcript.push({ who: 'Você', text: parcialEu.trim(), pt: '' }); parcialEu = ''; } parcialEco += sc.outputTranscription.text; caption(); }
+          if (sc.turnComplete || sc.interrupted) {
+            if (parcialEu.trim()) { s.transcript.push({ who: 'Você', text: parcialEu.trim(), pt: '' }); parcialEu = ''; }
+            if (parcialEco.trim()) { var e = { who: 'Eco', text: parcialEco.trim(), pt: '' }; s.transcript.push(e); parcialEco = ''; traduzir(e); }
+            caption();
+          }
+        });
+      };
+      ws.onerror = function () {};
+      ws.onclose = function (e) { if (!fim) falhou(e.code === 1011 ? 'O serviço ao vivo está indisponível agora.' : e.code === 1008 ? 'O acesso ao serviço ao vivo foi recusado (' + (e.reason || 'limite ou permissão') + ').' : 'A conexão caiu.'); };
+    }).catch(function (e) { falhou(IA.erroTexto(e)); });
+    var mic = studioButton('Silenciar microfone', function () { s.muted = !s.muted; mic.textContent = s.muted ? 'Ativar microfone' : 'Silenciar microfone'; mic.setAttribute('aria-pressed', String(s.muted)); if (!fontes.length) setState(s.muted ? 'muted' : 'listening'); });
+    actions.appendChild(mic);
+    actions.appendChild(studioButton('Me ajuda', function () { pararFala(); enviar({ realtimeInput: { text: '(O aluno pediu ajuda: em português, sugira em uma frase o que ele pode responder agora, e depois repita sua pergunta devagar em ' + (lang === 'fr' ? 'francês' : 'inglês') + '.)' } }); setState('thinking'); }));
+    actions.appendChild(studioButton('Repetir mais devagar', function () { pararFala(); enviar({ realtimeInput: { text: '(Repita sua última fala bem mais devagar e com palavras mais simples.)' } }); setState('thinking'); }));
+    actions.appendChild(studioButton('Encerrar', function () { encerrar(); }, 'danger'));
+    var prefs = document.createElement('details'); prefs.className = 'studio-details'; prefs.innerHTML = '<summary>Legendas</summary>';
+    prefs.appendChild(segmento([{ v: 'on', t: 'Ligadas' }, { v: 'off', t: 'Desligadas' }, { v: 'translation', t: 'Com tradução' }], s.captions, function (v) { s.captions = v; caption(); }, 'Legendas da conversa'));
+    pg.appendChild(prefs);
+    pg.insertAdjacentHTML('beforeend', '<p class="studio-note">Use fone de ouvido se puder: assim o Eco não escuta a própria voz.</p>');
+    var dock = document.createElement('div'); dock.className = 'studio-call-dock'; dock.appendChild(actions); pg.appendChild(dock);
+    var interval = setInterval(function () { if (!pg.isConnected) { clearInterval(interval); encerrar('sair'); return; } s.seconds++; $('.studio-timer', pg).textContent = studioTime(s.seconds); if (s.seconds >= 14 * 60 && !fim) { toast('Chegamos ao limite de uma sessão ao vivo.'); encerrar(); } }, 1000);
+    studioTimers.push(interval); caption();
+  }
+  var _ecoCallTurnos = TELAS.ecoCall;
+  TELAS.ecoCall = function () {
+    var s = studioSession;
+    if (s && s.real && s.mode === 'live' && IAon()) return chamadaAoVivo(s);
+    return _ecoCallTurnos();
   };
 
   TELAS.eco3D=function(){

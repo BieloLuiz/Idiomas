@@ -99,7 +99,8 @@ const ROTAS = {
   pronunciaTexto: ['groq', 'geminiLeve', 'github', 'gemini'],
   conversa:       ['groq', 'geminiLeve', 'github', 'gemini'],
   conversaResumo: ['groq', 'geminiLeve', 'github', 'gemini'],
-  revisao:        ['groq', 'geminiLeve', 'github', 'gemini']
+  revisao:        ['groq', 'geminiLeve', 'github', 'gemini'],
+  traduzir:       ['groq', 'geminiLeve', 'github', 'gemini']
 };
 const IDIOMA = { en: 'inglês', fr: 'francês' };
 
@@ -114,6 +115,7 @@ function ia_(tipo, d) {
   if (tipo === 'conversaResumo') return conversaResumo_(d);
   if (tipo === 'revisao') return revisao_(d);
   if (tipo === 'liveToken') return liveToken_(d);
+  if (tipo === 'traduzir') return chamar_('traduzir', { sistema: 'Traduza para o português do Brasil, de forma natural. Responda só com a tradução, sem aspas nem comentários.', usuario: String(d.texto || '').slice(0, 1500) });
   if (!ROTAS[tipo]) throw new Error('tipo');
   const idioma = IDIOMA[d.idioma] || 'inglês';
   let p;
