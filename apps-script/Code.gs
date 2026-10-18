@@ -96,7 +96,9 @@ const ROTAS = {
   explicar: ['groq', 'geminiLeve', 'github', 'gemini'],
   duvida:   ['groq', 'geminiLeve', 'github', 'gemini'],
   redacao:  ['gemini', 'github', 'groq', 'geminiLeve'],
-  pronunciaTexto: ['groq', 'geminiLeve', 'github', 'gemini']
+  pronunciaTexto: ['groq', 'geminiLeve', 'github', 'gemini'],
+  conversa:       ['groq', 'geminiLeve', 'github', 'gemini'],
+  conversaResumo: ['groq', 'geminiLeve', 'github', 'gemini']
 };
 const IDIOMA = { en: 'inglês', fr: 'francês' };
 
@@ -107,6 +109,8 @@ function servicosAtivos_() {
 
 function ia_(tipo, d) {
   if (tipo === 'pronuncia') return pronuncia_(d);
+  if (tipo === 'conversa') return conversa_(d);
+  if (tipo === 'conversaResumo') return conversaResumo_(d);
   if (!ROTAS[tipo]) throw new Error('tipo');
   const idioma = IDIOMA[d.idioma] || 'inglês';
   let p;
@@ -308,6 +312,88 @@ function promptPronuncia_(lang, frase, ouvido) {
     usuario: 'Frase esperada: ' + frase + '\nO reconhecimento de voz entendeu: ' + (ouvido || '(nada)') };
   return { sistema: base + 'Ouça o áudio do aluno tentando dizer a frase esperada. Responda SOMENTE com JSON: {"ouvido": "exatamente o que você entendeu no áudio, no idioma", "dica": "no máximo 2 frases de dica"}.',
     usuario: 'Frase esperada: ' + frase };
+}
+
+
+/* =====================================================================
+ * Conversa por turnos: transcreve a fala, o Eco responde no papel do cenário.
+ * ===================================================================== */
+function transcrever_(b64, mime, lang) {
+  if (!b64 || b64.length > 6000000) throw new Error('audio');
+  mime = String(mime || 'audio/webm').split(';')[0];
+  const ext = { 'audio/webm': 'webm', 'audio/mp4': 'mp4', 'audio/ogg': 'ogg', 'audio/mpeg': 'mp3', 'audio/wav': 'wav', 'audio/x-m4a': 'm4a' }[mime] || 'webm';
+  const props = PropertiesService.getScriptProperties(), falhas = [], groq = props.getProperty('GROQ_API_KEY'), gem = props.getProperty('GEMINI_API_KEY');
+  if (groq) {
+    const bytes = Utilities.base64Decode(b64);
+    for (const modelo of STT_MODELOS) {
+      const t0 = Date.now();
+      try {
+        const r = UrlFetchApp.fetch('https://api.groq.com/openai/v1/audio/transcriptions', { method: 'post', muteHttpExceptions: true, headers: { Authorization: 'Bearer ' + groq },
+          payload: { file: Utilities.newBlob(bytes, mime, 'fala.' + ext), model: modelo, language: lang, response_format: 'json', temperature: '0' } });
+        if (r.getResponseCode() !== 200) throw new Error(r.getResponseCode() + ' ' + r.getContentText().slice(0, 160));
+        registrar_('transcrever', 'groq', modelo, true, Date.now() - t0);
+        return { texto: String(JSON.parse(r.getContentText()).text || '').trim(), provedor: 'groq:' + modelo };
+      } catch (err) { const m = String(err && err.message || err); registrar_('transcrever', 'groq', modelo, false, Date.now() - t0, m); falhas.push(m.slice(0, 80)); if (/^(401|403)/.test(m)) break; }
+    }
+  }
+  if (gem) {
+    for (const modelo of SERVICOS.geminiLeve.modelos.concat(SERVICOS.gemini.modelos)) {
+      const t0 = Date.now();
+      try {
+        const corpo = { contents: [{ role: 'user', parts: [{ text: 'Transcreva exatamente o que a pessoa diz neste áudio, no idioma falado. Responda só com a transcrição.' }, { inlineData: { mimeType: mime, data: b64 } }] }], generationConfig: { temperature: 0 } };
+        const r = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(modelo) + ':generateContent',
+          { method: 'post', contentType: 'application/json', muteHttpExceptions: true, headers: { 'x-goog-api-key': gem }, payload: JSON.stringify(corpo) });
+        if (r.getResponseCode() !== 200) throw new Error(r.getResponseCode() + ' ' + r.getContentText().slice(0, 160));
+        const t = JSON.parse(r.getContentText()).candidates[0].content.parts.map(function (x) { return x.text || ''; }).join('').trim();
+        registrar_('transcrever', 'gemini', modelo, true, Date.now() - t0);
+        return { texto: t, provedor: 'gemini:' + modelo };
+      } catch (err) { const m = String(err && err.message || err); registrar_('transcrever', 'gemini', modelo, false, Date.now() - t0, m); falhas.push(m.slice(0, 80)); if (/^(401|403)/.test(m)) break; }
+    }
+  }
+  if (!groq && !gem) throw new Error('sem_chave');
+  throw new Error('limite: ' + falhas.join(' | '));
+}
+
+function jsonDe_(txt) { try { return JSON.parse(txt); } catch (e) { const m = String(txt).match(/\{[\s\S]*\}/); if (!m) throw new Error('resposta_invalida'); return JSON.parse(m[0]); } }
+
+function conversa_(d) {
+  const lang = d.idioma === 'fr' ? 'fr' : 'en', idioma = IDIOMA[lang], c = d.cenario || {};
+  let ouvido = String(d.texto || '').trim(), prov = '';
+  if (!ouvido && d.audio) { const t = transcrever_(String(d.audio), d.mime, lang); ouvido = t.texto; prov = t.provedor; }
+  if (!d.inicio && !ouvido) return { ouvido: '', vazio: true };
+  const sistema = 'Você é o Eco, parceiro de conversa num role-play em ' + idioma + ' com um aluno brasileiro adulto, nível ' + (c.nivel || 'A1') + '. ' +
+    'Cenário: ' + (c.titulo || 'conversa livre') + '. Contexto: ' + (c.contexto || 'uma conversa do dia a dia') + '. Seu papel: ' + (c.papel || 'parceiro de conversa') + '. ' +
+    (c.objetivo ? 'Objetivo do aluno nesta unidade: ' + c.objetivo + '. ' : '') +
+    'Fale SOMENTE em ' + idioma + ', de forma natural e gentil, com 1 ou 2 frases curtas (no máximo 25 palavras), vocabulário e gramática do nível do aluno. ' +
+    'Sempre deixe uma pergunta ou deixa para o aluno continuar. Se o aluno falar em português ou travar, ajude com uma pergunta mais simples. ' +
+    'Responda SOMENTE com JSON neste formato: {"fala": "sua fala no idioma", "traducao": "tradução natural em português", ' +
+    '"correcao": ' + (d.correcoes === 'end' ? 'null' : 'null, ou {"voce": "trecho exato que o aluno disse com erro importante", "melhor": "como fica certo"} só quando houver erro que atrapalhe') + ', ' +
+    '"sugestao": "uma resposta simples que o aluno poderia dar agora, no idioma", "sugestaoPt": "tradução da sugestão"}.';
+  const hist = (Array.isArray(d.historico) ? d.historico : []).slice(-12).map(function (m) { return { role: m.de === 'eco' ? 'assistant' : 'user', content: String(m.texto || '').slice(0, 600) }; });
+  const usuario = d.inicio ? '(A conversa começa agora. Cumprimente o aluno e abra o cenário com uma pergunta.)' : ouvido;
+  const r = chamar_('conversa', { sistema: sistema, historico: hist, usuario: usuario, json: true });
+  const o = jsonDe_(r.texto);
+  let corr = o.correcao && o.correcao.voce && o.correcao.melhor ? { voce: String(o.correcao.voce), melhor: String(o.correcao.melhor) } : null;
+  if (corr && corr.voce.trim().toLowerCase() === corr.melhor.trim().toLowerCase()) corr = null;
+  return { ouvido: ouvido, fala: String(o.fala || ''), traducao: String(o.traducao || ''), correcao: corr,
+    sugestao: String(o.sugestao || ''), sugestaoPt: String(o.sugestaoPt || ''), provedor: (prov ? prov + ' + ' : '') + r.provedor };
+}
+
+function conversaResumo_(d) {
+  const lang = d.idioma === 'fr' ? 'fr' : 'en', idioma = IDIOMA[lang];
+  const linhas = (Array.isArray(d.transcricao) ? d.transcricao : []).slice(-40).map(function (t) { return (t.de === 'eco' ? 'Eco: ' : 'Aluno: ') + String(t.texto || '').slice(0, 400); }).join('\n');
+  if (!/Aluno:/.test(linhas)) return { resumo: '', erros: [], palavras: [] };
+  const sistema = 'Você é o Eco, professor de ' + idioma + ' para brasileiros, nível ' + (d.nivel || 'A1') + '. Analise a conversa e responda SOMENTE com JSON: ' +
+    '{"resumo": "1 ou 2 frases em português, gentis: o que o aluno fez bem e o principal ponto a praticar", ' +
+    '"erros": [{"voce": "trecho exato que o aluno disse", "melhor": "forma correta", "explicacao": "explicação curta em português"}], ' +
+    '"palavras": [{"palavra": "palavra ou expressão útil que apareceu na conversa, no idioma", "traducao": "tradução"}]}. ' +
+    'No máximo 5 erros (só falas do aluno, ignore pequenas falhas de transcrição) e no máximo 6 palavras. Listas vazias se não houver.';
+  const r = chamar_('conversaResumo', { sistema: sistema, usuario: 'Cenário: ' + (d.cenario || '-') + '\n\n' + linhas, json: true });
+  const o = jsonDe_(r.texto);
+  return { resumo: String(o.resumo || ''),
+    erros: (o.erros || []).slice(0, 5).filter(function (e) { return e && e.voce && e.melhor; }).map(function (e) { return [String(e.voce), String(e.melhor), String(e.explicacao || '')]; }),
+    palavras: (o.palavras || []).slice(0, 6).filter(function (w) { return w && w.palavra; }).map(function (w) { return [String(w.palavra), String(w.traducao || '')]; }),
+    provedor: r.provedor };
 }
 
 /* ---------- uso por dia (aba "Uso") ---------- */

@@ -9972,6 +9972,167 @@ function abrirLicao(LICAO, PERFIL, ao) {
     card.appendChild(studioButton('Treinar', function () { ir('ecoPronuncia'); }, 'primary'));
     var links = $('.studio-actions', pg); pg.insertBefore(card, links || null);
   };
+  /* ---------- Conversa por turnos com o Eco (IA de verdade) ---------- */
+  function cenarioDe(u) {
+    var U = unidadeDe(u.id);
+    return { id: u.id, title: u.title, level: u.level, minutes: 5, objetivo: u.objective || '', contexto: (U && U.setting) || '',
+      role: U && U.setting ? 'Eco entra na situação da unidade: ' + U.setting : 'Eco é seu parceiro de conversa' };
+  }
+  var _ecoScenarios = TELAS.ecoScenarios;
+  TELAS.ecoScenarios = function () {
+    if (!IAon()) return _ecoScenarios();
+    var pg = studioPage('Escolher conversa'), units = studioUnits(), cur = studioCurrent();
+    studioLead(pg, 'Conversa por voz', 'Sobre o que vamos falar?', 'O Eco entra na situação da unidade e fala no seu nível. Você responde segurando o botão.');
+    function card(x) { var c = document.createElement('section'); c.className = 'card studio-scenario';
+      c.innerHTML = '<div class="studio-between"><h2>' + esc(x.title) + '</h2><span class="studio-tag">' + esc(x.level) + '</span></div><p>' + esc(x.role) + '</p>';
+      c.appendChild(studioButton('Escolher este cenário', function () { ir('ecoSetup', x); }, 'primary')); pg.appendChild(c); }
+    card(cenarioDe(cur));
+    card({ id: 'free', title: 'Conversa livre', level: cur.level, minutes: 10, contexto: 'conversa livre sobre o dia a dia, os interesses e a vida do aluno', objetivo: '', role: 'Eco puxa assunto sobre o seu dia, seus planos e o que você gosta.' });
+    var feitas = units.filter(function (x) { return x.done && x.id !== cur.id; }).reverse();
+    if (feitas.length) { var det = document.createElement('details'); det.className = 'card studio-details'; det.innerHTML = '<summary>Unidades já concluídas (' + feitas.length + ')</summary>';
+      feitas.forEach(function (u) { det.appendChild(studioButton(u.title + ' · ' + u.level, function () { ir('ecoSetup', cenarioDe(u)); })); }); pg.appendChild(det); }
+  };
+  var _ecoSetup = TELAS.ecoSetup;
+  TELAS.ecoSetup = function (sc) {
+    if (!IAon()) return _ecoSetup(sc);
+    var pg = studioPage('Preparar conversa', 'ecoScenarios'), corrections = 'during', captions = 'translation';
+    studioLead(pg, sc.level + ' · Por turnos', sc.title, 'Sem pressa. Segure o botão para falar, solte para enviar. Você pode pedir ajuda ou repetir.');
+    var opts = document.createElement('section'); opts.className = 'card studio-stack';
+    function group(t, items, v, fn) { var h = document.createElement('h2'); h.textContent = t; opts.appendChild(h); opts.appendChild(segmento(items, v, fn, t)); }
+    group('Correções', [{ v: 'during', t: 'Durante a conversa' }, { v: 'end', t: 'Só no final' }], corrections, function (v) { corrections = v; });
+    group('Legendas', [{ v: 'on', t: 'Ligadas' }, { v: 'off', t: 'Desligadas' }, { v: 'translation', t: 'Com tradução' }], captions, function (v) { captions = v; });
+    pg.appendChild(opts);
+    var mic = document.createElement('section'); mic.className = 'card studio-stack';
+    mic.innerHTML = '<span class="studio-icon">' + svg('mic') + '</span><h2>Podemos usar seu microfone?</h2><p>O Eco precisa ouvir sua voz. A gravação só é enviada quando você solta o botão.</p><p class="studio-mic-status" role="status"></p>';
+    var granted = false, start = studioButton('Começar conversa', function () {
+      if (!granted) return;
+      studioSession = { scenario: sc, corrections: corrections, captions: captions, minutes: sc.minutes, seconds: 0, muted: false, mode: 'turns', transcript: [], hist: [], correcoes: [], lang: eu().idioma, real: true };
+      ir('ecoCall');
+    }, 'primary'); start.disabled = true;
+    var pedir = studioButton('Permitir microfone', function () {
+      if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder)) { $('.studio-mic-status', mic).textContent = 'Este navegador não permite gravar áudio. Tente pelo Chrome ou pelo Safari atualizado.'; return; }
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(function (st) { st.getTracks().forEach(function (t) { t.stop(); }); granted = true; start.disabled = false; pedir.disabled = true; $('.studio-mic-status', mic).textContent = 'Microfone liberado. Tudo pronto!'; })
+        .catch(function () { $('.studio-mic-status', mic).textContent = 'O microfone foi bloqueado. Libere o acesso ao microfone nas configurações do navegador e tente de novo.'; });
+    });
+    mic.appendChild(pedir); pg.appendChild(mic); pg.appendChild(start);
+    pg.insertAdjacentHTML('beforeend', '<p class="studio-note">A conversa ao vivo, sem precisar segurar o botão, vem numa próxima versão.</p>');
+  };
+  var _ecoCall = TELAS.ecoCall;
+  TELAS.ecoCall = function () {
+    var s = studioSession; if (!s) { ir('ecoScenarios'); return; }
+    if (!IAon() || !s.real) return _ecoCall();
+    var lang = s.lang, voz = CURSOS[lang].voz, pg = studioPage('Conversa com o Eco', 'ecoScenarios'); pg.classList.add('studio-call');
+    pg.insertAdjacentHTML('beforeend', '<div class="studio-between"><div><span class="ui-label">' + esc(s.scenario.level) + ' · Por turnos</span><h1>' + esc(s.scenario.title) + '</h1></div><span class="studio-timer" aria-label="Tempo de conversa">' + studioTime(s.seconds) + '</span></div>');
+    var stage = document.createElement('div'); stage.className = 'studio-stage'; var mascot = eco('thinking', 'Eco'); stage.appendChild(mascot);
+    stage.insertAdjacentHTML('beforeend', '<span class="studio-orbit" aria-hidden="true"></span><p class="studio-state" role="status"></p><div class="studio-wave" aria-hidden="true">' + Array.from({ length: 15 }, function (_, i) { return '<i style="--d:' + i * .08 + 's;--h:' + (12 + (i % 4) * 7) + 'px"></i>'; }).join('') + '</div><p class="studio-voice-label">Sua voz</p>');
+    pg.appendChild(stage);
+    var correction = document.createElement('div'); correction.className = 'studio-correction'; correction.setAttribute('role', 'status'); correction.hidden = true; pg.appendChild(correction);
+    var subtitles = document.createElement('div'); subtitles.className = 'studio-subtitles'; subtitles.setAttribute('aria-live', 'polite'); pg.appendChild(subtitles);
+    var help = document.createElement('div'); help.className = 'studio-help'; help.hidden = true; pg.appendChild(help);
+    var actions = document.createElement('div'); actions.className = 'studio-call-actions';
+    var state = 'connecting', ocupado = false, chipTimer = null;
+    var LBL = { connecting: 'Conectando…', listening: 'Segure o botão para falar', recording: 'Estou ouvindo você', thinking: 'Eco está pensando…', speaking: 'Eco está falando', muted: 'Microfone silenciado' };
+    function setState(v) { state = v; stage.dataset.state = v === 'recording' ? 'listening' : v; mascot.dataset.state = { connecting: 'thinking', listening: 'listening', recording: 'listening', thinking: 'thinking', speaking: 'speaking', muted: 'neutral' }[v]; $('.studio-state', stage).textContent = LBL[v]; mascot.setAttribute('aria-label', LBL[v]); }
+    function caption() { subtitles.innerHTML = ''; if (s.captions === 'off') { subtitles.innerHTML = '<p class="muted">Legendas desligadas</p>'; return; }
+      s.transcript.slice(-2).forEach(function (t) { var b = document.createElement('div'); b.className = 'studio-caption ' + (t.who === 'Você' ? 'is-user' : ''); b.innerHTML = '<strong>' + esc(t.who) + '</strong><p lang="' + lang + '">' + esc(t.text) + '</p>' + (s.captions === 'translation' && t.pt ? '<small>' + esc(t.pt) + '</small>' : ''); subtitles.appendChild(b); }); }
+    function add(who, text, pt) { s.transcript.push({ who: who, text: text, pt: pt || '' }); caption(); }
+    function vozDoIdioma() { var vs = ('speechSynthesis' in window) ? speechSynthesis.getVoices() : []; return vs.filter(function (v) { return v.lang && v.lang.replace('_', '-').indexOf(voz) === 0; })[0] || vs.filter(function (v) { return v.lang && v.lang.slice(0, 2) === lang; })[0] || null; }
+    function falar(texto, rate) {
+      if (!pg.isConnected) return;
+      setState('speaking');
+      if (!('speechSynthesis' in window)) { setTimeout(function () { if (pg.isConnected) setState(s.muted ? 'muted' : 'listening'); }, 1500); return; }
+      speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(texto); u.lang = voz; u.rate = rate || S.cfg.voz || 0.9; var v = vozDoIdioma(); if (v) u.voice = v;
+      u.onend = u.onerror = function () { if (pg.isConnected && state === 'speaking') setState(s.muted ? 'muted' : 'listening'); };
+      speechSynthesis.speak(u);
+    }
+    function ajudar() { help.innerHTML = s.sugestao ? '<strong>Você consegue. Tente assim:</strong><p class="studio-example" lang="' + lang + '">' + esc(s.sugestao) + '</p>' + (s.sugestaoPt ? '<p>' + esc(s.sugestaoPt) + '</p>' : '') : '<p>Escute o Eco e responda com uma frase curta. Pode ser simples!</p>'; }
+    function pedirEco(dados) {
+      ocupado = true; setState('thinking');
+      var sc = s.scenario;
+      IA.pedir('conversa', Object.assign({ idioma: lang, correcoes: s.corrections, historico: s.hist,
+        cenario: { titulo: sc.title, nivel: sc.level, contexto: sc.contexto || '', objetivo: sc.objetivo || '', papel: sc.role || '' } }, dados))
+        .then(function (r) {
+          if (!pg.isConnected) return;
+          if (r.vazio) { toast('Não ouvi nada. Segure o botão e fale mais perto do microfone.'); setState(s.muted ? 'muted' : 'listening'); return; }
+          if (r.ouvido && !dados.inicio) { add('Você', r.ouvido, ''); s.hist.push({ de: 'eu', texto: r.ouvido }); }
+          if (r.correcao) { s.correcoes.push(r.correcao);
+            if (s.corrections === 'during') { correction.textContent = 'Você disse: ' + r.correcao.voce + ' → Melhor: ' + r.correcao.melhor; correction.hidden = false; clearTimeout(chipTimer); chipTimer = studioLater(function () { correction.hidden = true; }, 8000); } }
+          s.ultimo = r.fala; s.sugestao = r.sugestao; s.sugestaoPt = r.sugestaoPt; ajudar();
+          add('Eco', r.fala, r.traducao); s.hist.push({ de: 'eco', texto: r.fala }); falar(r.fala);
+        })
+        .catch(function (e) { if (!pg.isConnected) return; setState(s.muted ? 'muted' : 'listening'); toast(IA.erroTexto(e)); })
+        .then(function () { ocupado = false; });
+    }
+    /* gravação: segurar para falar */
+    var g = null, soltou = false, t0 = 0, limite = null;
+    function comecar() {
+      if (s.muted) { toast('Ative o microfone para falar.'); return; }
+      if (ocupado || g) return;
+      if ('speechSynthesis' in window) speechSynthesis.cancel();
+      soltou = false; g = gravador();
+      g.iniciar().then(function () { t0 = Date.now(); setState('recording'); stage.classList.add('user-speaking'); voice.textContent = 'Ouvindo… solte para enviar';
+        limite = setTimeout(terminar, 30000); if (soltou) terminar(); })
+        .catch(function () { g = null; toast('Não consegui usar o microfone. Libere o acesso nas configurações do navegador.'); });
+    }
+    function terminar() {
+      soltou = true; if (!g || state !== 'recording') return;
+      clearTimeout(limite); var gg = g; g = null; stage.classList.remove('user-speaking'); voice.textContent = 'Segure para falar · solte para enviar';
+      var dur = Date.now() - t0;
+      gg.parar().then(function (blob) {
+        if (!blob || blob.size < 1500 || dur < 500) { setState('listening'); toast('Muito curto. Segure o botão enquanto fala.'); return; }
+        setState('thinking'); return blobB64(blob).then(function (b64) { pedirEco({ audio: b64, mime: blob.type }); });
+      });
+    }
+    var voice = studioButton('Segure para falar · solte para enviar', function () {}, 'primary'); voice.classList.add('studio-voice-button');
+    voice.onpointerdown = function (e) { e.preventDefault(); try { voice.setPointerCapture(e.pointerId); } catch (er) {} comecar(); };
+    voice.onpointerup = voice.onpointercancel = function () { terminar(); };
+    voice.oncontextmenu = function (e) { e.preventDefault(); };
+    voice.onkeydown = function (e) { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); comecar(); } };
+    voice.onkeyup = function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); terminar(); } };
+    var mic = studioButton('Silenciar microfone', function () { s.muted = !s.muted; mic.textContent = s.muted ? 'Ativar microfone' : 'Silenciar microfone'; mic.setAttribute('aria-pressed', String(s.muted)); setState(s.muted ? 'muted' : 'listening'); });
+    actions.appendChild(mic);
+    var hint = studioButton('Me ajuda', function () { ajudar(); help.hidden = !help.hidden; hint.setAttribute('aria-expanded', String(!help.hidden)); }); hint.setAttribute('aria-expanded', 'false'); actions.appendChild(hint);
+    actions.appendChild(studioButton('Repetir mais devagar', function () { if (s.ultimo && !ocupado) falar(s.ultimo, 0.7); }));
+    actions.appendChild(studioButton('Encerrar', function () { finalizarConversa(); }, 'danger'));
+    var escrever = document.createElement('details'); escrever.className = 'studio-details'; escrever.innerHTML = '<summary>Prefere escrever esta resposta?</summary>';
+    var ta = document.createElement('textarea'); ta.rows = 2; ta.maxLength = 400; ta.lang = lang; ta.placeholder = 'Escreva no idioma…'; escrever.appendChild(ta);
+    escrever.appendChild(studioButton('Enviar texto', function () { var t = ta.value.trim(); if (!t || ocupado) return; ta.value = ''; if ('speechSynthesis' in window) speechSynthesis.cancel(); pedirEco({ texto: t }); }));
+    var prefs = document.createElement('details'); prefs.className = 'studio-details'; prefs.innerHTML = '<summary>Legendas</summary>';
+    prefs.appendChild(segmento([{ v: 'on', t: 'Ligadas' }, { v: 'off', t: 'Desligadas' }, { v: 'translation', t: 'Com tradução' }], s.captions, function (v) { s.captions = v; caption(); }, 'Legendas da conversa'));
+    pg.appendChild(escrever); pg.appendChild(prefs);
+    var dock = document.createElement('div'); dock.className = 'studio-call-dock'; dock.appendChild(actions); dock.appendChild(voice); pg.appendChild(dock);
+    var interval = setInterval(function () { if (!pg.isConnected) { clearInterval(interval); if ('speechSynthesis' in window) speechSynthesis.cancel(); if (g) g.cancelar(); return; } s.seconds++; $('.studio-timer', pg).textContent = studioTime(s.seconds); }, 1000);
+    studioTimers.push(interval); caption(); setState('connecting');
+    if (s.hist.length) { setState('listening'); ajudar(); } else pedirEco({ inicio: true });
+  };
+  function finalizarConversa() {
+    var s = studioSession; if (!s) { ir('ecoHub'); return; }
+    if ('speechSynthesis' in window) speechSynthesis.cancel();
+    var falas = s.transcript.filter(function (t) { return t.who === 'Você'; }).length, xp = Math.min(50, falas * 5);
+    var rec = { id: 'call-' + Date.now(), date: Date.now(), lang: s.lang, scenario: s.scenario.title, seconds: s.seconds, xp: xp, transcript: s.transcript.slice(),
+      errors: s.correcoes.map(function (c) { return [c.voce, c.melhor, '']; }), words: [], demo: false, analisando: falas > 0, resumo: '' };
+    var d = studioData(); d.calls.unshift(rec); if (d.calls.length > 30) d.calls.length = 30;
+    var p = eu(); if (xp) { p.xp = (p.xp || 0) + xp; }
+    salvar(); studioSession = null; ir('ecoSummary', rec.id);
+    if (!falas) return;
+    IA.pedir('conversaResumo', { idioma: rec.lang, nivel: s.scenario.level, cenario: s.scenario.title,
+      transcricao: rec.transcript.map(function (t) { return { de: t.who === 'Eco' ? 'eco' : 'eu', texto: t.text }; }) })
+      .then(function (r) { rec.resumo = r.resumo || ''; if (r.erros && r.erros.length) rec.errors = r.erros; rec.words = r.palavras || []; })
+      .catch(function () { rec.resumo = 'Não consegui analisar esta conversa agora, mas a transcrição está guardada.'; })
+      .then(function () { rec.analisando = false; salvar(); var aberto = $('.eco-studio'); if (aberto && aberto.dataset.call === rec.id) ir('ecoSummary', rec.id); });
+  }
+  var _ecoSummary = TELAS.ecoSummary;
+  TELAS.ecoSummary = function (id) {
+    _ecoSummary(id);
+    var r = studioData().calls.find(function (x) { return x.id === id; }); if (!r || r.demo) return;
+    var pg = $('.eco-studio'); if (!pg) return; pg.dataset.call = id; semDemo(pg);
+    var lab = $('.studio-heading .ui-label', pg); if (lab) lab.textContent = 'Resumo da conversa';
+    var lead = $('.studio-heading p', pg); if (lead) lead.textContent = r.analisando ? 'O Eco está analisando a sua conversa…' : (r.resumo || 'Você reservou um momento para praticar. O Eco está com você!');
+    $$('.studio-metrics span', pg).forEach(function (sp) { if (/Exemplo/.test(sp.textContent)) sp.textContent = 'Somados ao seu XP'; });
+    $$('p.muted', pg).forEach(function (m) { if (/Exemplo de 3 correções/.test(m.textContent)) m.textContent = r.analisando ? 'Analisando…' : 'Pontos da sua fala para praticar.'; if (/Exemplos da prévia/.test(m.textContent)) m.textContent = r.analisando ? 'Analisando…' : 'Palavras úteis que apareceram na conversa.'; });
+    $$('p', pg).forEach(function (m) { if (m.textContent === 'Nenhuma fala simulada enviada nesta sessão.') m.textContent = r.analisando ? '' : 'Nenhuma correção. Muito bem!'; });
+    $$('button', pg).forEach(function (b) { if (b.textContent === 'Ver palavras salvas da prévia') b.textContent = 'Ver palavras salvas'; });
+  };
 
   TELAS.eco3D=function(){
     var pg=studioPage('Laboratório do Eco 3D','config');
