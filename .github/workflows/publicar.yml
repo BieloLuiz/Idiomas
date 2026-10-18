@@ -30,6 +30,15 @@ jobs:
           printf '{"scriptId":"%s"}' "$SCRIPT_ID" > .clasp.json
           clasp pull
           cp appsscript.json "$GITHUB_WORKSPACE/apps-script/appsscript.json"
+      - name: Declarar as permissões (planilha e acesso à internet para a IA)
+        run: |
+          node -e '
+            const f=process.argv[1], fs=require("fs"), m=JSON.parse(fs.readFileSync(f,"utf8"));
+            const need=["https://www.googleapis.com/auth/spreadsheets.currentonly","https://www.googleapis.com/auth/script.external_request"];
+            m.oauthScopes=[...new Set([...(m.oauthScopes||[]),...need])];
+            m.webapp=m.webapp||{executeAs:"USER_DEPLOYING",access:"ANYONE_ANONYMOUS"};
+            fs.writeFileSync(f,JSON.stringify(m,null,2)); console.log(JSON.stringify(m));
+          ' "$GITHUB_WORKSPACE/apps-script/appsscript.json"
       - name: Enviar o código
         run: |
           printf '{"scriptId":"%s","rootDir":"apps-script"}' "$SCRIPT_ID" > .clasp.json
