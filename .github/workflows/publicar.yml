@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 concurrency: publicar
 env:
-  SCRIPT_ID: COLE_O_ID_DO_SCRIPT
+  SCRIPT_ID: 1l-Qv1Lr4UPHrM3IuugC1OHWP7gySRFVi2mwkPvmu-tCKWPs3IQpqAtiA
   DEPLOY_ID: AKfycby4kmFeeldrcw8QM8D0zHGQ9DAKox6oHoOq2L0Oj06CNjraBqtjoQ5AuXKfO5flFQBsRA
 jobs:
   publicar:
