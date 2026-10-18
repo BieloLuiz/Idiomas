@@ -95,7 +95,8 @@ const SERVICOS = {
 const ROTAS = {
   explicar: ['groq', 'geminiLeve', 'github', 'gemini'],
   duvida:   ['groq', 'geminiLeve', 'github', 'gemini'],
-  redacao:  ['gemini', 'github', 'groq', 'geminiLeve']
+  redacao:  ['gemini', 'github', 'groq', 'geminiLeve'],
+  pronunciaTexto: ['groq', 'geminiLeve', 'github', 'gemini']
 };
 const IDIOMA = { en: 'inglês', fr: 'francês' };
 
@@ -105,6 +106,7 @@ function servicosAtivos_() {
 }
 
 function ia_(tipo, d) {
+  if (tipo === 'pronuncia') return pronuncia_(d);
   if (!ROTAS[tipo]) throw new Error('tipo');
   const idioma = IDIOMA[d.idioma] || 'inglês';
   let p;
@@ -231,6 +233,81 @@ function limparRedacao_(txt, original) {
   const nota = Number(o.nota);
   return { corrigido: String(o.corrigido || original), nota: isFinite(nota) ? Math.max(0, Math.min(10, Math.round(nota * 10) / 10)) : null,
     resumo: String(o.resumo || ''), erros: erros };
+}
+
+
+/* =====================================================================
+ * Pronúncia: transcreve a gravação (Groq Whisper) e compara com a frase.
+ * Sem Groq, o Gemini ouve o áudio direto.
+ * ===================================================================== */
+const STT_MODELOS = ['whisper-large-v3-turbo', 'whisper-large-v3'];
+function pronuncia_(d) {
+  const b64 = String(d.audio || ''), frase = String(d.frase || '').slice(0, 400), lang = d.idioma === 'fr' ? 'fr' : 'en';
+  if (!b64 || b64.length > 4000000) throw new Error('audio');
+  const mime = String(d.mime || 'audio/webm').split(';')[0];
+  const ext = { 'audio/webm': 'webm', 'audio/mp4': 'mp4', 'audio/ogg': 'ogg', 'audio/mpeg': 'mp3', 'audio/wav': 'wav', 'audio/x-m4a': 'm4a' }[mime] || 'webm';
+  const bytes = Utilities.base64Decode(b64), props = PropertiesService.getScriptProperties(), falhas = [];
+  const groq = props.getProperty('GROQ_API_KEY');
+  if (groq) {
+    const modelos = (props.getProperty('GROQ_STT') || '').split(',').map(function (x) { return x.trim(); }).filter(String);
+    for (const modelo of (modelos.length ? modelos : STT_MODELOS)) {
+      const t0 = Date.now();
+      try {
+        const r = UrlFetchApp.fetch('https://api.groq.com/openai/v1/audio/transcriptions', { method: 'post', muteHttpExceptions: true,
+          headers: { Authorization: 'Bearer ' + groq },
+          payload: { file: Utilities.newBlob(bytes, mime, 'fala.' + ext), model: modelo, language: lang, response_format: 'json', temperature: '0' } });
+        const code = r.getResponseCode(), txt = r.getContentText();
+        if (code !== 200) throw new Error(code + ' ' + txt.slice(0, 160));
+        const ouvido = String(JSON.parse(txt).text || '').trim();
+        registrar_('pronuncia', 'groq', modelo, true, Date.now() - t0);
+        let dica = '', prov = 'groq:' + modelo;
+        try { const f = chamar_('pronunciaTexto', promptPronuncia_(lang, frase, ouvido)); dica = f.texto; prov += ' + ' + f.provedor; } catch (e) {}
+        return { ouvido: ouvido, dica: dica, provedor: prov };
+      } catch (err) {
+        const msg = String(err && err.message || err);
+        registrar_('pronuncia', 'groq', modelo, false, Date.now() - t0, msg); falhas.push('groq:' + modelo + ' → ' + msg.slice(0, 80));
+        if (/^(401|403)/.test(msg)) break;
+      }
+    }
+  }
+  const gem = props.getProperty('GEMINI_API_KEY');
+  if (gem) {
+    const lista = [].concat((props.getProperty('GEMINI_LEVE') || '').split(',').filter(String), SERVICOS.geminiLeve.modelos, SERVICOS.gemini.modelos);
+    for (const modelo of lista) {
+      const t0 = Date.now();
+      try {
+        const p = promptPronuncia_(lang, frase, null);
+        const corpo = { systemInstruction: { parts: [{ text: p.sistema }] },
+          contents: [{ role: 'user', parts: [{ text: p.usuario }, { inlineData: { mimeType: mime, data: b64 } }] }],
+          generationConfig: { temperature: 0.2, maxOutputTokens: 800, responseMimeType: 'application/json' } };
+        const r = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(modelo) + ':generateContent',
+          { method: 'post', contentType: 'application/json', muteHttpExceptions: true, headers: { 'x-goog-api-key': gem }, payload: JSON.stringify(corpo) });
+        const code = r.getResponseCode(), txt = r.getContentText();
+        if (code !== 200) throw new Error(code + ' ' + txt.slice(0, 160));
+        const c = JSON.parse(txt).candidates[0].content.parts.map(function (x) { return x.text || ''; }).join('');
+        const o = JSON.parse((c.match(/\{[\s\S]*\}/) || [c])[0]);
+        registrar_('pronuncia', 'gemini', modelo, true, Date.now() - t0);
+        return { ouvido: String(o.ouvido || ''), dica: String(o.dica || ''), provedor: 'gemini:' + modelo };
+      } catch (err) {
+        const msg = String(err && err.message || err);
+        registrar_('pronuncia', 'gemini', modelo, false, Date.now() - t0, msg); falhas.push('gemini:' + modelo + ' → ' + msg.slice(0, 80));
+        if (/^(401|403)/.test(msg)) break;
+      }
+    }
+  }
+  if (!groq && !gem) throw new Error('sem_chave');
+  throw new Error('limite: ' + falhas.join(' | '));
+}
+
+function promptPronuncia_(lang, frase, ouvido) {
+  const idioma = lang === 'fr' ? 'francês' : 'inglês';
+  const base = 'Você é o Eco, professor de pronúncia de ' + idioma + ' para brasileiros. Responda em português do Brasil, curto e gentil, sem títulos nem listas. ' +
+    'Use **negrito** só em palavras soltas no idioma. Dê uma dica prática (posição da boca, som parecido em português, sílaba forte). ';
+  if (ouvido !== null) return { sistema: base + 'Em no máximo 2 frases: se o reconhecimento de voz entendeu algo diferente da frase esperada, diga quais palavras provavelmente não ficaram claras e como melhorar. ' +
+    'Se for igual (ignorando pontuação e maiúsculas), elogie numa frase e sugira um detalhe de entonação ou ligação entre palavras.',
+    usuario: 'Frase esperada: ' + frase + '\nO reconhecimento de voz entendeu: ' + (ouvido || '(nada)') };
+  return { sistema: base + 'Ouça o áudio do aluno tentando dizer a frase esperada. Responda SOMENTE com JSON: {"ouvido": "exatamente o que você entendeu no áudio, no idioma", "dica": "no máximo 2 frases de dica"}.',
+    usuario: 'Frase esperada: ' + frase };
 }
 
 /* ---------- uso por dia (aba "Uso") ---------- */
