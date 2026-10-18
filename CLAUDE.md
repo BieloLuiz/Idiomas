@@ -32,4 +32,3 @@ Textos do app e conversas com o usuário: português do Brasil, linguagem simple
   `ROTAS` no Code.gs. Conversa ao vivo: Apps Script gera token temporário (`v1beta/auth_tokens`) e o navegador conecta
   ao `gemini-3.8-live`. As chaves nunca vão para o app nem para o chat.
 - Antes de publicar: rodar `fonte/testes/apptest.mjs` (todos os botões de áudio com gravação, sem erros) e os testes da IA.
-EOF
