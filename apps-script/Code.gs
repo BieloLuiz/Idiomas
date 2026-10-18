@@ -184,7 +184,7 @@ function promptExplicar_(idioma, d) {
   const sistema = 'Você é o Eco, professor de ' + idioma + ' para brasileiros adultos (nível ' + (d.nivel || 'básico') + '). ' +
     'O aluno errou um exercício. Explique em português do Brasil, em no máximo 3 frases curtas e diretas: por que a resposta dele não serve e por que a certa está certa. ' +
     'Se a resposta do aluno também estiver correta ou for aceitável, diga isso com honestidade. Cite a regra de gramática quando houver. ' +
-    'Pode usar **negrito** para palavras no idioma. Não use títulos, listas nem saudações.';
+    'Pode usar **negrito** só em palavras ou expressões curtas no idioma, nunca em frases inteiras e nunca um negrito dentro de outro. Não use títulos, tabelas, listas nem saudações.';
   const usuario = [
     'Unidade: ' + (d.unidade || '-'),
     'Enunciado: ' + (d.enunciado || '-'),
@@ -200,7 +200,7 @@ function promptDuvida_(idioma, d) {
   const sistema = 'Você é o Eco, professor de ' + idioma + ' para brasileiros adultos. O aluno está no nível ' + (d.nivel || 'A1') +
     ', na unidade "' + (d.unidade || '') + '" (objetivo: ' + (d.objetivo || '') + '). ' +
     'Responda dúvidas sobre o idioma em português do Brasil, de forma clara e curta (até 150 palavras), com 1 a 3 exemplos no idioma e a tradução. ' +
-    'Adapte a explicação ao nível do aluno. Use **negrito** para destacar palavras no idioma. Sem títulos. ' +
+    'Adapte a explicação ao nível do aluno. Use **negrito** só em palavras ou expressões curtas no idioma, nunca em frases inteiras e nunca um negrito dentro de outro. Sem títulos nem tabelas; listas simples com "- " são permitidas. ' +
     'Se a pergunta não tiver relação com estudar idiomas, diga com gentileza que só ajuda com o curso.';
   const hist = (Array.isArray(d.historico) ? d.historico : []).slice(-8)
     .map(function (m) { return { role: m.de === 'eco' ? 'assistant' : 'user', content: String(m.texto || '').slice(0, 1500) }; });
