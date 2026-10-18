@@ -7814,7 +7814,7 @@ window.IA = {
   /* texto da IA para HTML seguro: escapa tudo e só permite **negrito** e quebras de linha */
   html: function (s) {
     return String(s || '').replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; })
-      .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\n{2,}/g, '</p><p>').replace(/\n/g, '<br>');
+      .replace(/^[ \t]*[*-][ \t]+/gm, '• ').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\*([^*\n]+)\*/g, '<i>$1</i>').replace(/\n{2,}/g, '</p><p>').replace(/\n/g, '<br>');
   },
   erroTexto: function (e) {
     var m = String(e && e.message || e);
