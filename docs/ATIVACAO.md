@@ -26,13 +26,21 @@ O endpoint `/exec` pode continuar acessível por HTTP anônimo porque o próprio
 - Revisar e integrar a proposta na `main` somente depois de configurar a entrada Google. A publicação do Apps Script agora depende das verificações do aplicativo.
 - Publicar os arquivos `Code.gs`, `Security.gs` e `ProfileCore.gs` juntos. `appsscript.json` continua sendo preservado pela automação.
 - O primeiro acesso autorizado converte o PIN antigo da planilha para uma credencial de migração sem devolver o PIN em claro. Ao entrar no perfil, o aparelho atualiza essa credencial para PBKDF2 com sal aleatório.
-- A autenticação Google é validada no servidor pelo endpoint `tokeninfo`, com verificação adicional de emissor, público, expiração, endereço verificado e lista de contas. Há cache curto de resultados válidos. Para ampliar o aplicativo além desse uso privado, considerar um backend com biblioteca de verificação de assinaturas e gestão de sessões própria.
+- A autenticação Google é validada no servidor pelo endpoint `tokeninfo`, com verificação adicional de emissor, público, expiração, endereço verificado e lista de contas. Há cache curto de resultados válidos. Depois disso, o app usa a sessão própria descrita abaixo.
 - As duas pessoas devem entrar, abrir os respectivos perfis e confirmar sincronização antes de retirar as cópias de segurança. A versão usa revisões do servidor e recibos de operação para recuperar respostas perdidas sem reaplicar o mesmo envio.
 - Configurar uma regra de proteção da `main` no GitHub para exigir a verificação **Verificar aplicativo / verificar** antes de integrar alterações. Essa configuração administrativa não é feita pelo código do repositório.
 
 ## Sem internet
 
-A entrada oferece **Estudar neste aparelho sem sincronizar**. Esse modo abre a escolha de perfis e exige o PIN local. O token Google não é guardado em localStorage. Pedidos de IA e sincronização só voltam a funcionar após entrar com Google.
+A entrada oferece **Estudar neste aparelho sem sincronizar**. Esse modo abre a escolha de perfis e exige o PIN local, e o aparelho lembra a escolha. Pedidos de IA e sincronização voltam a funcionar depois de entrar com Google (Configurações → Entrar com Google).
+
+## Sessão por aparelho
+
+O Google é pedido uma vez por aparelho. Na ação `entrarGoogle`, o servidor valida a credencial Google e devolve uma sessão própria (`s1.` + 64 caracteres aleatórios) válida por 60 dias. O aparelho guarda essa sessão em `localStorage` (`idiomas-sessao`); a planilha não guarda o código, só o resumo SHA-256 dele nas propriedades do script (`SESSAO_…`). Sessões vencidas são apagadas na próxima entrada.
+
+- Todos os outros pedidos exigem a sessão; a credencial Google sozinha não lê dados.
+- Tirar um e-mail de `ALLOWED_EMAILS` corta as sessões dessa pessoa no pedido seguinte. Apagar as propriedades `SESSAO_…` encerra todas as sessões.
+- Se a sessão acabar ou for recusada, o app **não some da tela**: a lição continua, a sincronização e a IA pausam e aparece um aviso para entrar de novo. A tela inteira de entrada só aparece na primeira vez em um aparelho sem sessão e sem modo local escolhido.
 
 Nos Guias, **Baixar áudio desta unidade** guarda o MP3 no cache próprio do aplicativo. O navegador precisa concluir a instalação da PWA e ter espaço disponível. A interface distingue sincronização pendente de sincronização concluída. Históricos e notas continuam podendo ser exportados e importados.
 

@@ -23,8 +23,10 @@ function doPost(e) {
   let user;
   try {
     const raw = (e && e.postData && e.postData.contents) || '{}'; if (raw.length > 8000000) throw new Error('pedido_grande');
-    q = JSON.parse(raw); validarPedido_(q); user = autenticar_(q.token);
-    if (q.acao === 'entrarGoogle') return saida_({ ok: true });
+    q = JSON.parse(raw); validarPedido_(q);
+    if (q.acao === 'entrarGoogle') { user = autenticar_(q.token); return saida_(Object.assign({ ok: true }, criarSessao_(user))); }
+    user = sessao_(q.token);
+    if (q.acao === 'sair') { sairSessao_(q.token); return saida_({ ok: true }); }
   } catch (err) { return saida_({ erro: String(err && err.message || 'json') }); }
   if (q.acao === 'ia') {                      // IA não precisa travar a planilha
     try {

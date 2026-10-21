@@ -2,10 +2,10 @@ const { chromium }=require('playwright'),assert=require('node:assert/strict'),ht
 const root=path.resolve(__dirname,'../..');
 function profile(id,nome,lang='fr'){return{id,nome,pin:'1234',idioma:lang,idiomas:['fr','en'],desde:'out 2026',xp:0,sequencia:0,melhorSequencia:0,hojeFeito:false,ultimoDia:'',semana:[0,0,0,0,0,0,0],xpSemana:[0,0,0,0,0,0,0],minutosHoje:0,palavras:0,progresso:{fr:240,en:240},metasHoje:{licoes:0,revisadas:0},motivos:[],revisao:0};}
 const initial=()=>({versao:2,ativo:'p1',ultimo:'p1',visto:true,cfg:{tema:'claro',meta:15,voz:.9,fala:true,efeitos:false,motion:true},perfis:[profile('p1','Ana'),profile('p2','Beto')]});
-let db={},delayWriting=0;
+let db={},delayWriting=0,sessao='';
 const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://local');if(url.pathname==='/api'){
  res.setHeader('Content-Type','application/json');if(req.method==='GET'){res.end(JSON.stringify({googleClientId:'test-client'}));return;}
- let body='';req.on('data',b=>body+=b);req.on('end',()=>{let q=JSON.parse(body);if(!q.token){res.end('{"erro":"auth_required"}');return;}let r={ok:true};
+ let body='';req.on('data',b=>body+=b);req.on('end',()=>{let q=JSON.parse(body);if(q.acao==='entrarGoogle'){if(!q.token){res.end('{"erro":"auth_required"}');return;}sessao='s1.'+require('node:crypto').randomBytes(32).toString('hex');res.end(JSON.stringify({ok:true,sessao,expira:Date.now()+60*86400000}));return;}if(!sessao||q.token!==sessao){res.end('{"erro":"auth_required"}');return;}let r={ok:true};
  if(q.acao==='listar')r={perfis:Object.values(db)};
  if(q.acao==='salvar'){let perfis=[],conflitos=[];for(let p of q.perfis){if(db[p.id]&&(db[p.id].revisao||0)!==(p.revisao||0)){conflitos.push(db[p.id]);continue;}db[p.id]={...p,revisao:(p.revisao||0)+1};perfis.push(db[p.id]);}r={perfis,conflitos};}
  if(q.acao==='ia'){r=q.tipo==='liveToken'?{token:'auth_tokens/mock',modelo:'gemini-3.8-live'}:q.tipo==='redacao'?{dados:{corrigido:q.dados.texto,nota:8,resumo:'Bom texto',erros:[]}}:q.tipo==='conversa'?{fala:'Bonjour !',ouvido:q.dados.texto||'',traducao:'Olá!',sugestao:'Bonjour !'}:{resumo:'Bom trabalho',erros:[],palavras:[]};}
@@ -15,7 +15,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
  fs.readFile(file,(err,data)=>{if(err){res.writeHead(404).end();return;}res.setHeader('Content-Type',({'.html':'text/html','.js':'application/javascript','.css':'text/css','.json':'application/json','.webp':'image/webp','.mp3':'audio/mpeg','.webmanifest':'application/manifest+json'})[path.extname(file)]||'text/plain');res.end(data);});});
 (async()=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
- const browser=await chromium.launch({headless:true,args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']});const errors=[];
+ const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined,args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']});const errors=[];
  try{
   const context=await browser.newContext({viewport:{width:390,height:844},permissions:['microphone']});
   await context.route('https://**',r=>r.abort());
@@ -39,7 +39,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await page.screenshot({path:'.build/frances-mobile.png',fullPage:true});
   await context.close();console.log('PASS: curso C1 correto, Descobrir em francês e larguras 320/390/820/1280');
 
-  const online=await browser.newContext({viewport:{width:390,height:844},permissions:['microphone']});
+  const online=await browser.newContext({viewport:{width:390,height:844},permissions:['microphone'],serviceWorkers:'block'});
   await online.route('https://**',r=>r.abort());await online.route('**/config.js',r=>r.fulfill({contentType:'application/javascript',body:`window.IDIOMAS_API=${JSON.stringify(url+'/api')};`}));
   const token='e30.'+Buffer.from(JSON.stringify({exp:Math.floor(Date.now()/1000)+3600})).toString('base64url')+'.signature';
   await online.route('https://accounts.google.com/gsi/client',r=>r.fulfill({contentType:'application/javascript',body:`window.google={accounts:{id:{initialize(c){window.mockLogin=c.callback},renderButton(el){let b=document.createElement('button');b.textContent='Entrar no teste';b.onclick=()=>window.mockLogin({credential:${JSON.stringify(token)}});el.appendChild(b)}}}};`}));
@@ -60,6 +60,17 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await p.waitForFunction(()=>window.__tracks.some(t=>t.readyState==='live'));
   await p.getByRole('button',{name:'Voltar',exact:true}).first().click();assert.ok(await p.evaluate(()=>window.__tracks.every(t=>t.readyState==='ended')));assert.ok(await p.evaluate(()=>window.__sockets.every(s=>s.readyState===3)));
   console.log('PASS: sair da conversa ao vivo encerra todas as tracks e WebSockets');
+  await p.close();const p2=await online.newPage();p2.on('pageerror',e=>errors.push(e.message));await p2.goto(url);await p2.locator('.ux-greeting').waitFor();
+  assert.equal(await p2.locator('.auth-gate:not([hidden])').count(),0,'não pede Google de novo ao reabrir');
+  assert.equal(await p2.evaluate(()=>document.documentElement.dataset.auth),'ready');
+  await p2.waitForFunction(()=>window.SYNC.status==='ok');
+  console.log('PASS: ao reabrir o app, a entrada continua valendo (sem pedir Google de novo)');
+  sessao='revogada';await p2.evaluate(()=>window.SYNC.recarregar());
+  await p2.locator('.auth-gate.auth-soft').waitFor();assert.ok(await p2.locator('.ux-greeting').isVisible(),'o app continua visível');
+  assert.notEqual(await p2.evaluate(()=>document.documentElement.dataset.auth),'locked');
+  await p2.getByRole('button',{name:'Agora não',exact:true}).click();await p2.locator('.auth-gate').waitFor({state:'hidden'});
+  assert.equal(await p2.evaluate(()=>localStorage.getItem('idiomas-sessao')),null);
+  console.log('PASS: sessão encerrada no servidor mostra aviso sem esconder o app');
   await online.close();assert.deepEqual(errors,[]);console.log('PASS: nenhum erro JavaScript nos fluxos exercitados');
  }finally{await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});

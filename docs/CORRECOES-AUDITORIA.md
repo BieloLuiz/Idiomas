@@ -33,3 +33,9 @@ A tela de Descobrir foi conectada ao conteúdo real, substituindo os jogos visua
 Os testes cobrem regras e fluxos simulados. Ainda cabem verificação humana de pronúncia dos MP3, revisão linguística integral das 120 unidades, contraste por estado e avaliação com leitores de tela. Essas atividades não são substituídas por um teste automatizado ou pelo rótulo A1–C1.
 
 As contas autorizadas compartilham o espaço familiar. Se for necessário privacidade entre as duas pessoas ou abrir o serviço a outros grupos, o modelo de autorização deve evoluir para propriedade individual e convites. O PIN local não substitui esse modelo.
+
+## Revisão posterior: sessão por aparelho
+
+Na primeira versão, a credencial Google ficava só na memória da aba: era preciso entrar a cada abertura e, quando ela vencia (1 hora), a tela do app era escondida, inclusive no meio de uma lição ou conversa ao vivo. Agora o Google é pedido uma vez por aparelho e o servidor emite uma sessão própria de 60 dias (detalhes em `ATIVACAO.md`). Quando a sessão acaba, só a sincronização e a IA pausam, com um aviso que não esconde o app; a escolha do modo local fica lembrada no aparelho.
+
+Verificações: `npm test` (15, com teste da sessão: emissão, código não guardado às claras, sem consulta ao Google a cada pedido, credencial Google sozinha não lê dados, revogação por `ALLOWED_EMAILS`, saída e vencimento) e `npm run test:browser` (reabrir o app sem pedir Google; sessão recusada mostra aviso com o app visível). Para rodar o navegador com um Chromium já instalado: `CHROMIUM_PATH=/caminho/do/chromium`. Observado nos testes: com duas abas abertas ao mesmo tempo, a segunda pode deixar alterações como pendentes até voltar a ficar visível; não gera envios repetidos.

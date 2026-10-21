@@ -28,7 +28,7 @@ test('resposta perdida não duplica XP ao recuperar envio e editar em outro apar
 });
 function backend(claims={}) {
   const props={GOOGLE_CLIENT_ID:'test-client',ALLOWED_EMAILS:'allowed@example.test',GEMINI_API_KEY:'test'};const cache=new Map(), requests=[];
-  const ctx={console,Date,JSON,Math,Number,String,Array,Object,ProfileCore:P, PropertiesService:{getScriptProperties:()=>({getProperty:k=>props[k],setProperty:(k,v)=>props[k]=v})},CacheService:{getScriptCache:()=>({get:k=>cache.get(k),put:(k,v)=>cache.set(k,v)})},LockService:{getScriptLock:()=>({waitLock(){},releaseLock(){}})},Utilities:{DigestAlgorithm:{SHA_256:'sha256'},Charset:{UTF_8:'utf8'},computeDigest:(alg,s)=>[...crypto.createHash('sha256').update(s).digest()],base64EncodeWebSafe:b=>Buffer.from(b).toString('base64url'),getUuid:()=>crypto.randomUUID(),formatDate:()=> '2026-10-20'},UrlFetchApp:{fetch:(url,options)=>{requests.push({url,options});return{getResponseCode:()=>200,getContentText:()=>JSON.stringify(url.includes('tokeninfo')?{aud:'test-client',iss:'https://accounts.google.com',exp:Math.floor(Date.now()/1000)+3600,sub:'u1',email:'allowed@example.test',email_verified:true,...claims}:{name:'auth_tokens/test'})};}},ContentService:{MimeType:{JSON:'json'},createTextOutput:t=>({setMimeType:()=>JSON.parse(t)})}};
+  const ctx={console,Date,JSON,Math,Number,String,Array,Object,ProfileCore:P, PropertiesService:{getScriptProperties:()=>({getProperty:k=>props[k],setProperty:(k,v)=>props[k]=v,deleteProperty:k=>{delete props[k];},getKeys:()=>Object.keys(props)})},CacheService:{getScriptCache:()=>({get:k=>cache.get(k),put:(k,v)=>cache.set(k,v)})},LockService:{getScriptLock:()=>({waitLock(){},releaseLock(){}})},Utilities:{DigestAlgorithm:{SHA_256:'sha256'},Charset:{UTF_8:'utf8'},computeDigest:(alg,s)=>[...crypto.createHash('sha256').update(s).digest()],base64EncodeWebSafe:b=>Buffer.from(b).toString('base64url'),getUuid:()=>crypto.randomUUID(),formatDate:()=> '2026-10-20'},UrlFetchApp:{fetch:(url,options)=>{requests.push({url,options});return{getResponseCode:()=>200,getContentText:()=>JSON.stringify(url.includes('tokeninfo')?{aud:'test-client',iss:'https://accounts.google.com',exp:Math.floor(Date.now()/1000)+3600,sub:'u1',email:'allowed@example.test',email_verified:true,...claims}:{name:'auth_tokens/test'})};}},ContentService:{MimeType:{JSON:'json'},createTextOutput:t=>({setMimeType:()=>JSON.parse(t)})}};
   vm.createContext(ctx);vm.runInContext(fs.readFileSync('apps-script/Security.gs','utf8')+'\n'+fs.readFileSync('apps-script/Code.gs','utf8'),ctx);
   return{ctx,props,requests};
 }
@@ -38,6 +38,20 @@ test('Google: assinatura verificada pelo serviço, audience, expiração e conta
   const {ctx}=backend();assert.equal(ctx.autenticar_('x'.repeat(60)).sub,'u1');
 });
 test('servidor recusa acesso quando não está configurado',()=>{const {ctx,props}=backend();delete props.ALLOWED_EMAILS;assert.throws(()=>ctx.autenticar_('x'.repeat(60)),/auth_config/);});
+test('sessão do app: Google uma vez, depois código próprio de 60 dias, revogável',()=>{
+  const {ctx,props,requests}=backend();const post=q=>ctx.doPost({postData:{contents:JSON.stringify(q)}});
+  let r=post({acao:'entrarGoogle',token:'x'.repeat(60)});assert.match(r.sessao,/^s1\.[0-9a-f]{64}$/);assert.ok(r.expira-Date.now()>59*86400000);
+  assert.ok(!Object.values(props).some(v=>String(v).includes(r.sessao)),'código não fica guardado às claras');
+  const n=requests.length;const ia=t=>post({acao:'ia',tipo:'duvida',dados:{},token:t}).erro;assert.equal(ia(r.sessao),'operacao_invalida');assert.equal(requests.length,n,'sessão não consulta o Google');
+  assert.equal(post({acao:'listar',token:'x'.repeat(60)}).erro,'auth_required','token do Google sozinho não lê dados');
+  assert.equal(post({acao:'listar',token:'s1.'+'0'.repeat(64)}).erro,'auth_required');
+  props.ALLOWED_EMAILS='outra@example.test';assert.equal(ia(r.sessao),'auth_denied');
+  props.ALLOWED_EMAILS='allowed@example.test';assert.ok(post({acao:'sair',token:r.sessao}).ok);assert.equal(ia(r.sessao),'auth_required');
+  const k=Object.keys(props).find(k=>k.startsWith('SESSAO_'));assert.equal(k,undefined);
+  r=post({acao:'entrarGoogle',token:'x'.repeat(60)});const key=Object.keys(props).find(k=>k.startsWith('SESSAO_'));props[key]=JSON.stringify({...JSON.parse(props[key]),exp:Date.now()-1});
+  assert.equal(ia(r.sessao),'auth_required');assert.equal(props[key],undefined);
+  delete props.ALLOWED_EMAILS;assert.equal(ia(r.sessao),'auth_config');
+});
 test('cota é aplicada no servidor',()=>{const{ctx}=backend();for(let i=0;i<10;i++)ctx.limitarIA_({sub:'u'},'duvida');assert.throws(()=>ctx.limitarIA_({sub:'u'},'duvida'),/quota/);});
 test('token Live fixa modelo, uso único e validade curta',()=>{const {ctx,requests}=backend();ctx.liveToken_({});let body=JSON.parse(requests.at(-1).options.payload);assert.equal(body.uses,1);assert.equal(body.liveConnectConstraints.model,'models/gemini-3.8-live');assert.ok(Date.parse(body.expireTime)-Date.now()<=15*60000);});
 test('revisão da IA rejeita alternativas duplicadas e índices fracionários',()=>{const{ctx}=backend();ctx.chamar_=()=>({texto:JSON.stringify({exercicios:[{opcoes:['A','A','B','C'],correta:2},{opcoes:['A','B'],correta:.5},{opcoes:['A','B'],correta:1}]}),provedor:'mock'});let r=ctx.revisao_({erros:[{correta:'B'}]});assert.equal(r.exercicios.length,1);assert.equal(r.exercicios[0].opcoes[r.exercicios[0].correta],'B');});

@@ -48,7 +48,7 @@ function migrarPin_(p) {
 }
 
 function validarPedido_(q) {
-  if (!q || typeof q !== 'object' || !['entrarGoogle','listar','salvar','ia','iaUso'].includes(q.acao)) throw new Error('acao');
+  if (!q || typeof q !== 'object' || !['entrarGoogle','sair','listar','salvar','ia','iaUso'].includes(q.acao)) throw new Error('acao');
   if (q.acao === 'ia') {
     if (!q.dados || typeof q.dados !== 'object' || JSON.stringify(q.dados).length > 6500000) throw new Error('pedido_grande');
     if (!['explicar','duvida','redacao','pronuncia','conversa','conversaResumo','revisao','liveToken','traduzir'].includes(q.tipo)) throw new Error('tipo');
@@ -62,4 +62,39 @@ function pedidoIA_(user,q){
   try{const previous=cache.get(key);if(previous){if(previous==='pendente')throw new Error('pedido_andamento');return JSON.parse(previous);}cache.put(key,'pendente',90);}finally{lock.releaseLock();}
   try{limitarIA_(user,q.tipo);IA_PRAZO_=Date.now()+45000;const result=ia_(String(q.tipo||''),q.dados||{}),json=JSON.stringify(result);if(json.length<90000)cache.put(key,json,300);else cache.remove(key);return result;}
   catch(e){cache.remove(key);throw e;}
+}
+
+/* Sessão própria do app: o Google confirma a pessoa uma vez por aparelho (entrarGoogle) e o servidor devolve
+   um código de sessão de 60 dias. Só o resumo (hash) do código fica nas propriedades do script.
+   Tirar o e-mail de ALLOWED_EMAILS corta as sessões dessa pessoa na hora. */
+const SESSAO_DIAS = 60;
+function hashSessao_(token) { return 'SESSAO_' + Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, token)); }
+function permitidos_() {
+  const props = PropertiesService.getScriptProperties();
+  const allowed = (props.getProperty('ALLOWED_EMAILS') || '').toLowerCase().split(/[;,\s]+/).filter(Boolean);
+  if (!props.getProperty('GOOGLE_CLIENT_ID') || !allowed.length) throw new Error('auth_config');
+  return allowed;
+}
+function criarSessao_(user) {
+  const props = PropertiesService.getScriptProperties(), agora = Date.now();
+  if (typeof props.getKeys === 'function') props.getKeys().forEach(function (k) {   // limpa sessões vencidas
+    if (k.indexOf('SESSAO_') !== 0) return;
+    try { if (JSON.parse(props.getProperty(k)).exp < agora) props.deleteProperty(k); } catch (e) { props.deleteProperty(k); }
+  });
+  const token = 's1.' + (Utilities.getUuid() + Utilities.getUuid()).replace(/-/g, ''), exp = agora + SESSAO_DIAS * 86400000;
+  props.setProperty(hashSessao_(token), JSON.stringify({ sub: user.sub, email: user.email, exp: exp }));
+  return { sessao: token, expira: exp };
+}
+function sessao_(token) {
+  const allowed = permitidos_();
+  if (typeof token !== 'string' || !/^s1\.[0-9a-f]{64}$/.test(token)) throw new Error('auth_required');
+  const props = PropertiesService.getScriptProperties(), key = hashSessao_(token);
+  let s; try { s = JSON.parse(props.getProperty(key) || 'null'); } catch (e) { s = null; }
+  if (!s || !(s.exp > Date.now())) { if (s && typeof props.deleteProperty === 'function') props.deleteProperty(key); throw new Error('auth_required'); }
+  if (!allowed.includes(String(s.email || '').toLowerCase())) throw new Error('auth_denied');
+  return { sub: s.sub, email: s.email };
+}
+function sairSessao_(token) {
+  const props = PropertiesService.getScriptProperties();
+  if (typeof token === 'string' && typeof props.deleteProperty === 'function') props.deleteProperty(hashSessao_(token));
 }
