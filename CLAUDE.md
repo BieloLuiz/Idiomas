@@ -1,40 +1,40 @@
-# Idiomas — app de inglês e francês (A1 a C1) para o Gabriel e o marido
+# Idiomas — inglês e francês A1 a C1
 
-App web instalável (PWA) publicado em https://bieloluiz.github.io/Idiomas/ (GitHub Pages, branch `main`, raiz).
-Servidor: Google Apps Script sobre a planilha "Idiomas – dados" (perfis/progresso na aba Perfis, uso da IA na aba Uso).
-Textos do app e conversas com o usuário: português do Brasil, linguagem simples.
+Aplicativo pessoal para estudar a dois, publicado em GitHub Pages. Interface e explicações em português do Brasil, com linguagem simples.
 
-## O que fica onde
-- `index.html` — o app pronto (gerado; não editar à mão). `sw.js` (offline), `sync.js` (sincroniza com a planilha),
-  `config.js` (URL /exec do Apps Script), `manifest.webmanifest`, ícones, `audio/` (um MP3 por unidade, 120 arquivos).
-- `apps-script/Code.gs` — servidor. Cada push na `main` que mexe em `apps-script/` publica sozinho
-  (`.github/workflows/publicar.yml`, clasp 2.4.2, segredo `CLASPRC_JSON`, mesmo link /exec). Não versionar `appsscript.json`.
-- `fonte/` — tudo para gerar o `index.html` de novo:
-  - `design/design.html` — design atual (Claude Design / GPT). Um design novo substitui este arquivo.
-  - `src/build-app.py <design.html> <saida.html>` — injeta o curso (`COURSE`) e o áudio (`AUDIO`) no design e aplica os
-    encaixes (`rep(...)`, que param o build se o design mudar). Usa `adapter.js` (monta lições, guias, áudio),
-    `som.js` (sons), `ia.js` + `ia-telas.js` (Eco com IA: dúvidas, redação, pronúncia, ditado, revisão dos erros,
-    conversa por turnos e ao vivo). Imagens PNG grandes do módulo Descobrir viram WebP no build.
-  - `curso/<nível>/<en|fr>-<nível>.json` — unidades A2–C1 (A1 está em `src/base.json`, `src/en.js`, `src/fr.js`).
-    Formato e regras nos prompts do kit; conferência com `src/check_*.py`.
-  - `src/sprites*.json` — trecho [início, fim] de cada frase dentro do MP3 da unidade. Chave `idioma|índice` (A1 0–11,
-    A2 12–23, B1 24–35, B2 36–47, C1 48–59).
-  - `pwa/build-pwa.py` — gera a pasta do site a partir do `index` montado (manifest, sw com versão, ícones, áudio).
-  - `testes/` — Playwright com IA simulada (`mockapi.mjs` na porta 8790; site de teste na 8766).
-  - `elevenlabs/` — script PowerShell que gera o áudio no PC do usuário (a chave fica em `chave.txt` no PC; nunca pedir).
-- Kits de conteúdo e áudio ficam no PC: `Downloads\APP - IDIOMAS\` (kit-a2…kit-c1, audio-curso\elevenlabs).
+## Arquivos e contratos
 
-## Montar e publicar
-- Na raiz do repositório: `sh fonte/montar.sh` (python3 + Pillow + node). Gera `index.html` e `sw.js` a partir de `fonte/`.
-- Mudanças no app = mudar arquivos em `fonte/` (nunca só o `index.html`), rodar o montar, testar e dar `git push` na `main`.
-  O GitHub Pages publica o site e o workflow publica o Apps Script sozinhos.
-- Se um design novo quebrar um encaixe, o build para com AssertionError mostrando o trecho: ajustar o `rep(...)` em `fonte/src/build-app.py`.
+- `fonte/design/design.html`: design e telas. Nunca editar somente o artefato publicado.
+- `fonte/src/build-app.py`: incorpora conteúdo e módulos ao design. Os encaixes `rep(...)` verificam a contagem esperada e precisam ser atualizados quando um alvo muda.
+- `fonte/src/adapter.js`: descritores de curso, lições preparadas sob demanda, revisão de expressões e áudio.
+- `fonte/src/profile-core.js`: regras puras de normalização, reconciliação, dias e revisão; o build copia esse módulo para `apps-script/ProfileCore.gs`.
+- `fonte/src/discovery.js`: atividades baseadas na unidade e idioma, com eventos declarados. Não reintroduzir execução de HTML por eval/new Function.
+- `fonte/src/ia.js` e `ia-telas.js`: pedidos identificados e telas de IA. Toda operação assíncrona mantém o perfil proprietário. Toda captação precisa de uma função registrada em `studioCleanup`.
+- `fonte/curso/<nível>/`: conteúdo A2–C1. A1 fica em `src/base.json`, `en.js` e `fr.js`. `sprites*.json` mapeiam os trechos dos 120 MP3.
+- `fonte/pwa/`: autenticação, sincronização, service worker e empacotamento dos recursos.
+- `apps-script/Code.gs` e `Security.gs`: servidor sobre a planilha. A lista de contas permitidas e as chaves ficam nas propriedades privadas do script. Não pedir nem versionar as chaves.
+- `index.html`, `assets/`, `auth.js`, `sync.js`, `sw.js`, `manifest.webmanifest`: saídas geradas.
+- `fonte/testes/regression.test.cjs` e `browser.cjs`: verificações canônicas. Os demais scripts antigos são diagnósticos históricos, sem garantia de portabilidade.
 
-## Fluxos
-- Conteúdo novo: GPT escreve (3 unidades por vez) → Gemini revisa → conferir formato → manifest → áudio no PC
-  (ElevenLabs eleven_v4_turbo, mp3_24000_48; vozes em `fonte/elevenlabs/config.json`; Claire/Inès/Lucas/Antoine no
-  francês, Sarah/Emma/Lucas/Daniel no inglês) → montar sprites → build → publicar.
-- IA (Apps Script, propriedades do script): GROQ_API_KEY, GITHUB_MODELS_TOKEN, GEMINI_API_KEY. Ordem de reserva em
-  `ROTAS` no Code.gs. Conversa ao vivo: Apps Script gera token temporário (`v1beta/auth_tokens`) e o navegador conecta
-  ao `gemini-3.8-live`. As chaves nunca vão para o app nem para o chat.
-- Antes de publicar: rodar `fonte/testes/apptest.mjs` (todos os botões de áudio com gravação, sem erros) e os testes da IA.
+## Montagem e verificações
+
+Requer Python com as versões de `requirements.txt` e Node com `npm ci`.
+
+```
+python fonte/build.py
+npm test
+npx playwright install chromium
+npm run test:browser
+```
+
+`sh fonte/montar.sh` chama o mesmo build em sistemas com sh. No Linux de CI, instalar o navegador com `--with-deps`. Não usar caminhos de dependências de outra máquina nos testes.
+
+Os testes devem usar serviços simulados e dados fictícios. Não consumir cotas ou alterar perfis reais para validar mudanças.
+
+## Revisão e publicação
+
+Preparar mudanças em branch e proposta de revisão. Não integrar na `main` nem publicar sem autorização do usuário. A integração na `main` publica o site; mudanças em `apps-script/` publicam o servidor no mesmo `/exec`, depois das verificações. Não versionar `appsscript.json`, `.clasprc.json` ou segredos.
+
+Ler `docs/ATIVACAO.md` antes da implantação: a entrada Google exige `GOOGLE_CLIENT_ID` e `ALLOWED_EMAILS` privados. A ausência de configuração precisa bloquear a API, nunca habilitar acesso anônimo aos dados.
+
+Manter AGENTS.md, CLAUDE.md e GEMINI.md com o mesmo conteúdo. Registrar limites e verificações reais em `docs/CORRECOES-AUDITORIA.md`; não apresentar integração simulada como teste de produção.

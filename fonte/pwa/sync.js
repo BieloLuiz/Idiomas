@@ -1,73 +1,72 @@
-/* Idiomas: sincroniza perfis e progresso com a planilha (Apps Script).
-   O app continua salvando no aparelho; isto só copia para a planilha e traz de volta.
-   Sem endereço configurado (window.IDIOMAS_API vazio), não faz nada. */
+/* Fila persistente, revisão do servidor e reconciliação de três versões. */
 (function () {
-  var API = window.IDIOMAS_API || '', K = 'idiomas-app-v2', KR = 'idiomas-remoto';
-  var ultimo = {}, pend = {}, timer = null, enviando = false;
-  function ler() { try { return JSON.parse(localStorage.getItem(K)); } catch (e) { return null; } }
-  function chave(p) { var c = {}; for (var k in p) if (k !== 'atualizado') c[k] = p[k]; return JSON.stringify(c); }
-  function post(o, keep) {
-    return fetch(API, { method: 'POST', body: JSON.stringify(o), keepalive: !!keep, redirect: 'follow' })
-      .then(function (r) { return r.json(); })
-      .then(function (r) { if (r && r.erro) throw new Error(r.erro); return r; });
+  'use strict';
+  var K = 'idiomas-app-v2', Q = K + ':fila', B = K + ':base', F = K + ':envio';
+  function read(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch (e) { return fallback; } }
+  var queue = read(Q, {}), bases = read(B, {}), flight = read(F,null), state = null, sending = false, timer, retry = 2000, started = false, pulling = null;
+  function status(value) { SYNC.status = value; document.dispatchEvent(new CustomEvent('idiomas-sync', { detail: value })); }
+  function persist() {
+    try { localStorage.setItem(Q, JSON.stringify(queue)); localStorage.setItem(B, JSON.stringify(bases)); localStorage.setItem(F,JSON.stringify(flight)); if (state) localStorage.setItem(K, JSON.stringify(state)); }
+    catch (e) { status('armazenamento'); }
   }
-  function enviar(keep) {
-    if (!API || enviando) return;
-    var ids = Object.keys(pend); if (!ids.length) return;
-    var lote = ids.map(function (id) { return pend[id]; }); pend = {}; enviando = true;
-    post({ acao: 'salvar', perfis: lote }, keep).then(function () { enviando = false; estado('ok'); })
-      .catch(function () { enviando = false; lote.forEach(function (p) { if (!pend[p.id]) pend[p.id] = p; }); estado('erro'); });
-  }
-  function estado(s) { window.SYNC.status = s; }
-
-  window.SYNC = {
-    ativo: !!API, status: API ? 'iniciando' : 'desligado',
-    /* perfis vindos da planilha para um aparelho novo (usado na primeira abertura) */
-    remotos: function () { try { var r = JSON.parse(localStorage.getItem(KR)); localStorage.removeItem(KR); return Array.isArray(r) && r.length ? r : null; } catch (e) { return null; } },
-    /* chamado pelo app a cada salvar(): marca o que mudou e envia em seguida */
-    mudou: function (S) {
-      if (!API || !S || !S.perfis) return;
-      S.perfis.forEach(function (p) {
-        var c = chave(p);
-        if (ultimo[p.id] !== c) { ultimo[p.id] = c; p.atualizado = Date.now(); pend[p.id] = JSON.parse(JSON.stringify(p)); }
-      });
-      clearTimeout(timer); timer = setTimeout(enviar, 1500);
-    },
-    agora: function () { clearTimeout(timer); enviar(true); }
-  };
-  if (!API) return;
-
-  var L = ler(); if (L && L.perfis) L.perfis.forEach(function (p) { ultimo[p.id] = chave(p); });
-  addEventListener('online', function () { enviar(); });
-  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') window.SYNC.agora(); });
-
-  /* ao abrir: traz da planilha o que for mais novo e envia o que só existe aqui */
-  function recarregar() {
-    try { var t = +sessionStorage.getItem('idiomas-recarga') || 0; if (Date.now() - t < 15000) return; sessionStorage.setItem('idiomas-recarga', Date.now()); } catch (e) {}
-    location.reload();
-  }
-  function depoisDoApp(fn) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(fn, 0); }); else setTimeout(fn, 0); }
-  post({ acao: 'listar' }).then(function (r) { depoisDoApp(function () { aplicar(r); }); }).catch(function () { estado('erro'); });
-  function aplicar(r) {
-    estado('ok');
-    var remoto = (r && r.perfis) || [], S = ler(), mudouAqui = false;
-    if (!S || !S.perfis) {
-      if (remoto.length) { try { localStorage.setItem(KR, JSON.stringify(remoto)); localStorage.removeItem(K); } catch (e) {} recarregar(); }
-      return;
-    }
-    var porId = {}; S.perfis.forEach(function (p) { porId[p.id] = p; });
-    remoto.forEach(function (rp) {
-      var lp = porId[rp.id];
-      if (!lp) { if (S.perfis.length < 2) { S.perfis.push(rp); mudouAqui = true; } }
-      else if ((rp.atualizado || 0) > (lp.atualizado || 0)) { S.perfis[S.perfis.indexOf(lp)] = rp; mudouAqui = true; }
+  function stamp(p) { var c = ProfileCore.copy(p); delete c.atualizado; delete c.revisao; delete c._receipts; delete c._operation; return JSON.stringify(c); }
+  var last = {};
+  function apply(remote, sent) {
+    if (!state) return;
+    remote.forEach(function (rp) {
+      var p = state.perfis.find(function (x) { return x.id === rp.id; });
+      if (!p) { if (state.perfis.length < 4) { p = ProfileCore.copy(rp); state.perfis.push(p); } else return; }
+      var before = sent && sent[rp.id] || bases[rp.id], value = ProfileCore.merge(before, p, rp);
+      value.revisao = rp.revisao; value.atualizado = rp.atualizado;
+      if (rp.pinCredential) delete value.pin;
+      ProfileCore.reconcile(p, value); bases[p.id] = ProfileCore.copy(rp); last[p.id] = stamp(p);
+      if (stamp(p) === stamp(rp)) delete queue[p.id]; else queue[p.id] = ProfileCore.copy(p);
     });
-    var ids = {}; remoto.forEach(function (rp) { ids[rp.id] = rp.atualizado || 0; });
-    S.perfis.forEach(function (p) { if (!(p.id in ids) || (p.atualizado || 0) > ids[p.id]) pend[p.id] = p; });
-    enviar();
-    if (mudouAqui) {
-      try { localStorage.setItem(K, JSON.stringify(S)); } catch (e) {}
-      S.perfis.forEach(function (p) { ultimo[p.id] = chave(p); });
-      if (!document.querySelector('#acao')) recarregar();   /* fora de uma lição: recarrega já com os dados novos */
-    }
+    persist(); document.dispatchEvent(new CustomEvent('idiomas-profiles-updated'));
   }
+  function schedule(ms) { clearTimeout(timer); timer = setTimeout(send, ms == null ? 500 : ms); }
+  function send() {
+    if (!window.IDIOMAS_API || !AUTH.ready() || !started || sending || pulling || !state) return Promise.resolve();
+    var ids = Object.keys(queue); if (!ids.length && !flight) { status('ok'); return Promise.resolve(); }
+    var sent;
+    if(flight)sent=flight.sent;
+    else { sent = {}; var operation=crypto.randomUUID(); ids.forEach(function (id) { var p = state.perfis.find(function (x) { return x.id === id; }); if (p) { sent[id] = ProfileCore.copy(p); sent[id].revisao = bases[id] && bases[id].revisao || 0;sent[id]._operation=operation; } });flight={sent:sent};persist(); }
+    sending = true; status('enviando');
+    return AUTH.post({ acao: 'salvar', perfis: Object.values(sent) }).then(function (r) {
+      apply(r.perfis || [], sent); apply(r.conflitos || []); flight=null;retry = 2000; status(Object.keys(queue).length ? 'pendente' : 'ok');
+    }).catch(function (e) {
+      status(/^auth_/.test(e.message) ? 'entrar' : e.message === 'perfil_grande' ? 'limite' : 'erro');
+      retry = Math.min(60000, retry * 2);
+    }).finally(function () { sending = false; persist(); if (Object.keys(queue).length && AUTH.ready()) schedule(retry); });
+  }
+  function refresh() {
+    if (!window.IDIOMAS_API || !AUTH.ready() || !state) return Promise.resolve();
+    if(flight){if(sending)return Promise.resolve();started=true;return send().then(function(){if(!flight)return refresh();});}
+    if (pulling) return pulling;
+    pulling = AUTH.post({ acao: 'listar' }).then(function (r) {
+      apply(r.perfis || []); started = true;
+      state.perfis.forEach(function (p) { if (!bases[p.id]) queue[p.id] = ProfileCore.copy(p); });
+      persist(); schedule(); status(Object.keys(queue).length ? 'pendente' : 'ok');
+    }).catch(function (e) { status(/^auth_/.test(e.message) ? 'entrar' : 'erro'); }).finally(function () { pulling = null; });
+    return pulling;
+  }
+  window.SYNC = {
+    ativo: !!window.IDIOMAS_API, status: window.IDIOMAS_API ? 'entrar' : 'local',
+    remotos: function () { return null; },
+    bind: function (S) { state = S; S.perfis.forEach(function (p) { last[p.id] = stamp(p); }); refresh(); },
+    mudou: function (S) {
+      state = S;
+      S.perfis.forEach(function (p) { var value = stamp(p); if (last[p.id] !== value) { p.atualizado = Date.now(); queue[p.id] = ProfileCore.copy(p); last[p.id] = value; } });
+      persist(); if (window.IDIOMAS_API) { status('pendente'); schedule(); }
+    },
+    agora: send, recarregar: refresh,
+    limpar: function () { queue = {}; bases = {}; last = {}; flight=null; persist(); }
+  };
+  document.addEventListener('idiomas-auth-ready', function () { started = false; refresh(); });
+  addEventListener('online', function () { refresh().then(send); });
+  addEventListener('storage', function (e) {
+    if (e.key !== K || !state || !e.newValue) return;
+    try { var other = JSON.parse(e.newValue); (other.perfis || []).forEach(function (rp) { var p = state.perfis.find(function (x) { return x.id === rp.id; }); if (p) ProfileCore.reconcile(p, ProfileCore.merge(bases[p.id], p, rp)); else state.perfis.push(rp); }); SYNC.mudou(state); } catch (err) { status('armazenamento'); }
+  });
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') refresh(); else { persist(); send(); } });
 })();

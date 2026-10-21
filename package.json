@@ -1,0 +1,13 @@
+{
+  "name": "idiomas",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node --test fonte/testes/regression.test.cjs",
+    "test:browser": "node fonte/testes/browser.cjs",
+    "build": "python fonte/build.py"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

@@ -13,7 +13,7 @@ for(const k of ["en","fr"]){const B=base[k];out[k]={name:B.name,tts:B.tts,units:
 const au={sprites:Object.assign(JSON.parse(fs.readFileSync(path.join(d,"sprites.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-a2.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-b1.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-b2.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-c1.json"),"utf8")))};
 process.stdout.write("var COURSE="+JSON.stringify(out)+";\\nvar AUDIO="+JSON.stringify(au)+";\\n");''',D]).decode()
 data=data.replace('</script','<\\/script')
-L[i:j+1]=['<script>',open(os.path.join(D,'ia.js'),encoding='utf-8').read()+data+open(os.path.join(D,'adapter.js'),encoding='utf-8').read(),'</script>']
+L[i:j+1]=['<script>',open(os.path.join(D,'profile-core.js'),encoding='utf-8').read()+open(os.path.join(D,'discovery.js'),encoding='utf-8').read()+open(os.path.join(D,'ia.js'),encoding='utf-8').read()+data+open(os.path.join(D,'adapter.js'),encoding='utf-8').read(),'</script>']
 s='\n'.join(L)
 def rep(a,b,n=1):
     global s
@@ -23,7 +23,7 @@ rep("      if(state==='playing'){if(media)media.pause();","      if(state==='pla
 rep("    function cancel() { serial++;","    function cancel() { serial++; if(typeof source==='function'&&window.AUD)AUD.stop();")
 rep("    frasecomDicas(p, ex, pop);\n    bub.appendChild(p); bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);",
     "    if (ex.ocultar) { p.textContent = ex.ocultar; p.lang = 'pt'; } else frasecomDicas(p, ex, pop);\n    bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);")
-rep("var p = eu(), base = LICOES_DEMO[p.idioma];","var p = eu(), base = (op && op.revisao ? LICOES['rev|' + p.idioma] : LICOES[u.id + '|' + nome]) || LICOES_DEMO[p.idioma];")
+rep("var p = eu(), base = LICOES_DEMO[p.idioma];","var p = eu(), base = (op && op.revisao ? LICOES['rev|' + p.idioma] : LICOES[u.id + '|' + ((op && op.teste) || nome === 'Prática do guia' ? 'Revisão da unidade' : nome)]);")
 rep("  function falar(texto, lang) {\n","  function falar(texto, lang) {\n    if (window.AUD && AUD.say(texto, lang, null, S.cfg.voz)) return;\n")
 rep("var CHAVE = 'idiomas-app-v1';","var CHAVE = 'idiomas-app-v2';")
 # perfil inicial zerado e sem o perfil de exemplo
@@ -56,8 +56,7 @@ rep("anunciar(t); setTimeout(function () { d.remove(); }, 2400);","anunciar(t); 
 rep("    document.body.appendChild(scrim); document.body.appendChild(sh);\n","    document.body.appendChild(scrim); document.body.appendChild(sh); tocar('folha');\n")
 rep("    var a = $('.sheet'), b = $('.scrim'); if (a) a.remove();","    var a = $('.sheet'), b = $('.scrim'); if (a) { tocar('fechar'); a.remove(); }")
 rep("msg.textContent = t; msg.classList.add('err');","msg.textContent = t; msg.classList.add('err'); tocar('erro');")
-rep("    TELAS[tela](arg);","    TELAS[tela](arg); tocar('tela');")
-rep("if (v === p.pin) { S.ativo = p.id; S.ultimo = p.id; novoDia(p); salvar(); ir('hoje'); }","if (v === p.pin) { S.ativo = p.id; S.ultimo = p.id; novoDia(p); salvar(); ir('hoje'); tocar('entrou'); }")
+rep("TELAS[tela](arg);recordRoute(tela,arg);","TELAS[tela](arg);recordRoute(tela,arg); tocar('tela');")
 rep("  function tocar(t) { if (!S.cfg.silent && S.cfg.efeitos && SOM[t]) try { SOM[t](); } catch (e) {} }",
  "  function tocar(t) { if (!S.cfg.silent && S.cfg.efeitos && SOM[t]) try { SOM.vol(S.cfg.volume == null ? 1 : S.cfg.volume); SOM[t](); } catch (e) {} }\n"
  "  function botaoSom(bar) {\n"
@@ -83,7 +82,6 @@ a=s.index("      perfis: [{\n        id: 'gabriel'"); b=s.index("      }]\n    }
 s=s[:a]+"      perfis: (window.SYNC && SYNC.remotos()) || []"+s[b:]
 rep(" +\n      '<p class=\"demo-note\">Demonstração: o PIN de Gabriel é 1234</p>';",";")
 rep("    var sel = id || S.ultimo || S.perfis[0].id;","    if (!S.perfis.length) { toast('Ainda não há perfis. Toque em Começar para criar o seu.'); ir('boasvindas'); return; }\n    var sel = id || S.ultimo || S.perfis[0].id;")
-rep("function salvar() { try { localStorage.setItem(CHAVE","function salvar() { if (window.SYNC) SYNC.mudou(S); try { localStorage.setItem(CHAVE")
 
 # ---- IA: "Por que errei?", redação e dúvidas (src/ia.js e src/ia-telas.js) ----
 rep("        return { ok: ok, correta: ex.opcoes[ex.correta] };","        return { ok: ok, correta: ex.opcoes[ex.correta], dada: ex.opcoes[escolhida] };")
@@ -124,18 +122,18 @@ css=(".ia-porque{display:block;margin-top:8px;padding:6px 0;border:0;background:
 assert s.count('</style>')>=1
 
 # ---- revisão personalizada: lição montada pela IA e registro de erros/acertos ----
-rep("    var p = eu(), base = (op && op.revisao ? LICOES['rev|' + p.idioma] : LICOES[u.id + '|' + nome]) || LICOES_DEMO[p.idioma];\n    var licao = { id: u.id + '-' + nome, idioma: base.idioma, unidade: (op && op.revisao) ? 'Revisão de palavras' : u.titulo + ' · ' + nome, exercicios: base.exercicios };",
-    "    var p = eu(), base = (op && op.licao) ? op.licao : (op && op.revisao ? LICOES['rev|' + p.idioma] : LICOES[u.id + '|' + nome]) || LICOES_DEMO[p.idioma];\n    var licao = { id: (op && op.licao) ? 'erros-' + Date.now() : u.id + '-' + nome, idioma: base.idioma, unidade: (op && op.licao) ? base.titulo : (op && op.revisao) ? 'Revisão de palavras' : u.titulo + ' · ' + nome, nivel: base.nivel || '', exercicios: base.exercicios };")
-rep("        else if (!(op && (op.refazer || op.revisao))) p.progresso[p.idioma]++;","        else if (!(op && (op.refazer || op.revisao || op.licao))) p.progresso[p.idioma]++;")
+rep("    var p = eu(), base = (op && op.revisao ? LICOES['rev|' + p.idioma] : LICOES[u.id + '|' + ((op && op.teste) || nome === 'Prática do guia' ? 'Revisão da unidade' : nome)]);\n    var licao = { id: u.id + '-' + nome, idioma: base.idioma, unidade: (op && op.revisao) ? 'Revisão de palavras' : u.titulo + ' · ' + nome, exercicios: base.exercicios };",
+    "    var p = eu(), base = (op && op.licao) ? op.licao : (op && op.revisao ? LICOES['rev|' + p.idioma] : LICOES[u.id + '|' + ((op && op.teste) || nome === 'Prática do guia' ? 'Revisão da unidade' : nome)]);\n    var licao = { id: (op && op.licao) ? 'erros-' + Date.now() : u.id + '-' + nome, idioma: base.idioma, unidade: (op && op.licao) ? base.titulo : (op && op.revisao) ? 'Revisão de palavras' : u.titulo + ' · ' + nome, nivel: base.nivel || '', exercicios: base.exercicios };")
+rep("        else if (!(op && (op.refazer || op.revisao))) p.progresso[licao.idioma.slice(0,2)] = Math.min(300,Math.max(p.progresso[licao.idioma.slice(0,2)],todasLicoes(CURSOS[licao.idioma.slice(0,2)]).findIndex(function(x){return x.unidade.id===u.id&&x.nome===nome;})+1));","        else if (!(op && (op.refazer || op.revisao || op.licao))) p.progresso[licao.idioma.slice(0,2)] = Math.min(300,Math.max(p.progresso[licao.idioma.slice(0,2)],todasLicoes(CURSOS[licao.idioma.slice(0,2)]).findIndex(function(x){return x.unidade.id===u.id&&x.nome===nome;})+1));")
 rep("    if (!ok && window.IA && IA.ativo()) {\n      var ex0 = atual.ex,",
-    "    if (ok && window.registrarAcerto) registrarAcerto(atual.ex);\n    if (!ok && window.registrarErro && !atual.ex._ref) registrarErro({ fonte: 'licao', lang: LICAO.idioma, unidade: LICAO.unidade || '', frase: atual.ex.ocultar || atual.ex.frase || '', correta: correta, dada: dada || '', nota: atual.ex.enunciado || '' });\n    if (!ok && atual.ex._ref && window.registrarErro) { /* errou de novo na revisão: continua na lista */ }\n    if (!ok && window.IA && IA.ativo()) {\n      var ex0 = atual.ex,")
+    "    if(window.registrarRespostaCurso)registrarRespostaCurso(atual.ex,ok);\n    if (ok && window.registrarAcerto) registrarAcerto(atual.ex);\n    if (!ok && window.registrarErro && !atual.ex._ref) registrarErro({ fonte: 'licao', lang: LICAO.idioma, unidade: LICAO.unidade || '', frase: atual.ex.ocultar || atual.ex.frase || '', correta: correta, dada: dada || '', nota: atual.ex.enunciado || '' });\n    if (!ok && atual.ex._ref && window.registrarErro) { /* errou de novo na revisão: continua na lista */ }\n    if (!ok && window.IA && IA.ativo()) {\n      var ex0 = atual.ex,")
 i=s.rindex('</style>', 0, s.index('</head>')); s=s[:i]+css+s[i:]
 s=s.replace('Inglês · Francês · do A1 ao B2','Inglês · Francês · do A1 ao C1')
 
 
 # ---- design 3: as funções do Eco entram no Praticar e no Caderno ----
-rep("var options={entender:[['Ler uma história','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar uma cena','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Escrever um texto','ecoWrite'],",
-    "var options={entender:[['Tirar uma dúvida com o Eco','ecoDuvida'],['Fazer um ditado','ecoDitado'],['Ler uma história','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar uma cena','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Escrever um texto','ecoWrite'],['Treinar pronúncia','ecoPronuncia'],")
+rep("var options={entender:[['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Escrever um texto','ecoWrite'],",
+    "var options={entender:[['Tirar uma dúvida com o Eco','ecoDuvida'],['Fazer um ditado','ecoDitado'],['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Escrever um texto','ecoWrite'],['Treinar pronúncia','ecoPronuncia'],")
 rep("revisar:[['Revisão do curso','revisar'],","revisar:[['Revisar meus erros','ecoRevisao'],['Revisão do curso','revisar'],")
 rep("    (ds.errors||[]).forEach(function(e){rows.push({id:'error-'+e.id,",
     "    (st.erros||[]).filter(function(e){return e.lang===lang;}).forEach(function(e){rows.push({id:'erro-'+e.id,kind:'Dificuldades',text:e.correta,translation:e.nota||'',topic:'Quero lembrar',source:'Minha tentativa: '+(e.dada||'—'),action:function(){ir('ecoRevisao');}});});\n    (ds.errors||[]).forEach(function(e){rows.push({id:'error-'+e.id,")
@@ -146,21 +144,9 @@ rep("source:'Conversa de demonstração'});","source:'Conversa com o Eco'});")
 rep("  function abrirLicaoApp(u, nome, op) {\n    uxExit='hoje';\n    fecharFolha();",
     "  function abrirLicaoApp(u, nome, op) {\n    uxExit='hoje';\n    fecharFolha();\n    if (!u) u = { id: (eu() ? eu().idioma : 'en') + '-erros', titulo: (op && op.licao && op.licao.titulo) || nome || 'Revisão', objetivo: 'Revisar o que você errou' };")
 
-# ---- imagens do Descobrir: PNG grandes viram WebP ----
-import re as _re, base64 as _b64, io as _io
-try:
-    from PIL import Image as _Img
-    _a=s.find('<script type="application/json" id="discover-module">')
-    if _a>=0:
-        _i=s.index('>',_a)+1; _e=s.index('</script>',_i); _j=json.loads(s[_i:_e]); _h=_j['html']; _antes=len(_h)
-        def _webp(m):
-            raw=_b64.b64decode(m.group(1))
-            if len(raw)<150000: return m.group(0)
-            im=_Img.open(_io.BytesIO(raw)); im=im.convert('RGBA' if im.mode in ('RGBA','LA','P') else 'RGB'); im.thumbnail((1600,1600))
-            out=_io.BytesIO(); im.save(out,'WEBP',quality=78,method=6); return 'data:image/webp;base64,'+_b64.b64encode(out.getvalue()).decode()
-        _h=_re.sub(r'data:image/png;base64,([A-Za-z0-9+/=]+)',_webp,_h); _j['html']=_h
-        s=s[:_i]+json.dumps(_j,ensure_ascii=False).replace('<','\\u003c')+s[_e:]
-        print('Descobrir: imagens',_antes//1024,'KB ->',len(_h)//1024,'KB')
-except ImportError: print('PIL ausente: imagens do Descobrir sem compressão')
+# Aplicações explícitas ao contrato de reprodução e ao apoio de escuta.
+rep("    bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);", "    if(ex.escuta){var transcript=document.createElement('details'),sum=document.createElement('summary');sum.textContent='Ver transcrição';transcript.append(sum,p);bub.append(transcript,montarOuvir(ex),pop);}else{bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}")
+rep("source(function(){if(token===serial)show('idle','Áudio concluído');}, +speed.value);", "source(function(error){if(token===serial)show('idle',error?'Não foi possível ouvir. Confira a conexão ou baixe a unidade.':'Áudio concluído');}, +speed.value);")
+rep("    var play=el.querySelector('.audio-play')", "    if(!source&&window.AUD)source=AUD.fn(text,lang);\n    var play=el.querySelector('.audio-play')")
 open(out,'w',encoding='utf-8').write(s)
 print('ok',len(s)//1024,'KB')

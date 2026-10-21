@@ -9,7 +9,10 @@ env:
   SCRIPT_ID: 1l-Qv1Lr4UPHrM3IuugC1OHWP7gySRFVi2mwkPvmu-tCKWPs3IQpqAtiA
   DEPLOY_ID: AKfycby4kmFeeldrcw8QM8D0zHGQ9DAKox6oHoOq2L0Oj06CNjraBqtjoQ5AuXKfO5flFQBsRA
 jobs:
+  verificar:
+    uses: ./.github/workflows/verificar.yml
   publicar:
+    needs: verificar
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

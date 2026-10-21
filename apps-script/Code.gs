@@ -16,13 +16,20 @@ const COLS = ['id', 'nome', 'atualizado', 'atualizadoMs', 'json'];
 const MAX_PERFIS = 4;
 const PEDACO = 45000;   // limite seguro por célula; perfis maiores ocupam as colunas seguintes
 
-function doGet() { return saida_({ ok: true, app: 'Idiomas', perfis: Math.max(0, aba_().getLastRow() - 1), ia: servicosAtivos_() }); }
+function doGet() { return saida_({ ok: true, app: 'Idiomas', googleClientId: PropertiesService.getScriptProperties().getProperty('GOOGLE_CLIENT_ID') || '' }); }
 
 function doPost(e) {
   let q = {};
-  try { q = JSON.parse((e && e.postData && e.postData.contents) || '{}'); } catch (err) { return saida_({ erro: 'json' }); }
+  let user;
+  try {
+    const raw = (e && e.postData && e.postData.contents) || '{}'; if (raw.length > 8000000) throw new Error('pedido_grande');
+    q = JSON.parse(raw); validarPedido_(q); user = autenticar_(q.token);
+    if (q.acao === 'entrarGoogle') return saida_({ ok: true });
+  } catch (err) { return saida_({ erro: String(err && err.message || 'json') }); }
   if (q.acao === 'ia') {                      // IA não precisa travar a planilha
-    try { return saida_(ia_(String(q.tipo || ''), q.dados || {})); }
+    try {
+      const result=pedidoIA_(user,q);return saida_(result);
+    }
     catch (err) { return saida_({ erro: String(err && err.message || err) }); }
   }
   if (q.acao === 'iaUso') return saida_({ uso: usoHoje_(), servicos: servicosAtivos_() });
@@ -30,7 +37,18 @@ function doPost(e) {
   try {
     lock.waitLock(20000);
     if (q.acao === 'listar') return saida_({ perfis: listar_() });
-    if (q.acao === 'salvar') { (Array.isArray(q.perfis) ? q.perfis : [q.perfil]).slice(0, MAX_PERFIS).forEach(salvar_); return saida_({ ok: true }); }
+    if (q.acao === 'salvar') {
+      const saved = [], conflicts = [];
+      (Array.isArray(q.perfis) ? q.perfis : [q.perfil]).slice(0, MAX_PERFIS).forEach(function (p) {
+        const current = listar_().find(function (x) { return x.id === (p && p.id); });
+        const operation=String(p && p._operation || '');
+        if(!/^[0-9a-f-]{36}$/.test(operation))throw new Error('operacao_invalida');
+        if(current && (current._receipts||[]).includes(operation)){saved.push(current);return;}
+        if (current && Number(p.revisao || 0) !== Number(current.revisao || 0)) { conflicts.push(current); return; }
+        p = ProfileCore.normalize(migrarPin_(p)); delete p._operation;p._receipts=(current&&current._receipts||[]).concat(operation).slice(-128); p.revisao = Number(current && current.revisao || 0) + 1; p.atualizado = Date.now(); salvar_(p); saved.push(p);
+      });
+      return saida_({ ok: true, perfis: saved, conflitos: conflicts });
+    }
     return saida_({ erro: 'acao' });
   } catch (err) {
     return saida_({ erro: String(err && err.message || err) });
@@ -54,14 +72,14 @@ function listar_() {
   if (n < 1) return [];
   const larg = Math.max(COLS.length, sh.getLastColumn());
   return sh.getRange(2, 1, n, larg).getValues()
-    .map(function (r) { try { return JSON.parse(r.slice(4).join('')); } catch (e) { return null; } })
+    .map(function (r) { try { const p = JSON.parse(r.slice(4).join('')); if (p.pin) { migrarPin_(p); salvar_(p); } return ProfileCore.normalize(p); } catch (e) { return null; } })
     .filter(function (p) { return p && p.id; });
 }
 
 function salvar_(p) {
   if (!p || !/^[\w-]{1,60}$/.test(String(p.id || ''))) throw new Error('perfil inválido');
   const json = JSON.stringify(p);
-  if (json.length > PEDACO * 6) throw new Error('perfil grande demais');
+  if (json.length > PEDACO * 40) throw new Error('perfil_grande');
   const pedacos = []; for (let i = 0; i < json.length; i += PEDACO) pedacos.push(json.slice(i, i + PEDACO));
   const sh = aba_(), n = sh.getLastRow() - 1, ms = Number(p.atualizado) || Date.now();
   const linha = [String(p.id), String(p.nome || '').slice(0, 40), new Date(ms), ms].concat(pedacos);
@@ -70,7 +88,6 @@ function salvar_(p) {
     const ids = sh.getRange(2, 1, n, 4).getValues();
     for (let i = 0; i < ids.length; i++) {
       if (String(ids[i][0]) === String(p.id)) {
-        if (Number(ids[i][3]) > ms) return;          // a planilha já tem uma versão mais nova
         row = i + 2; break;
       }
     }
@@ -78,8 +95,10 @@ function salvar_(p) {
   }
   if (!row) row = sh.getLastRow() + 1;
   const larg = Math.max(sh.getLastColumn(), linha.length);
-  sh.getRange(row, 1, 1, larg).clearContent();
-  sh.getRange(row, 1, 1, linha.length).setValues([linha]);
+  // Texto livre não pode ser interpretado como fórmula da planilha.
+  linha[1] = /^[=+@-]/.test(linha[1]) ? "'" + linha[1] : linha[1];
+  while(linha.length<larg)linha.push('');
+  sh.getRange(row, 1, 1, larg).setValues([linha]);
 }
 
 /* =====================================================================
@@ -136,6 +155,8 @@ function ia_(tipo, d) {
   return r;
 }
 
+let IA_PRAZO_ = 0;
+function prazoIA_() { if (IA_PRAZO_ && Date.now() >= IA_PRAZO_) throw new Error('tempo'); }
 function chamar_(tipo, p) {
   const props = PropertiesService.getScriptProperties(), falhas = [];
   for (const nome of ROTAS[tipo]) {
@@ -143,6 +164,7 @@ function chamar_(tipo, p) {
     if (!chave) continue;
     const modelos = (props.getProperty(s.prop) || '').split(',').map(function (x) { return x.trim(); }).filter(String);
     for (const modelo of (modelos.length ? modelos : s.modelos)) {
+      prazoIA_();
       const t0 = Date.now();
       try {
         const texto = s.tipo === 'gemini' ? gemini_(chave, modelo, p) : openai_(s.url, chave, modelo, p);
@@ -157,7 +179,7 @@ function chamar_(tipo, p) {
     }
   }
   if (!falhas.length) throw new Error('sem_chave');
-  throw new Error('limite: ' + falhas.join(' | '));
+  throw new Error('indisponivel');
 }
 
 function openai_(url, chave, modelo, p) {
@@ -421,9 +443,9 @@ function revisao_(d) {
   const ex = (Array.isArray(o.exercicios) ? o.exercicios : []).map(function (x) {
     const ref = Math.max(0, Math.min(erros.length - 1, Number(x.ref) || 0));
     if (x.tipo === 'montar') return x.frase && x.traducao ? { tipo: 'montar', ref: ref, frase: String(x.frase).slice(0, 200), traducao: String(x.traducao).slice(0, 200) } : null;
-    const op = (Array.isArray(x.opcoes) ? x.opcoes : []).map(String).filter(function (v, i, a) { return v && a.indexOf(v) === i; }).slice(0, 4);
+    const op = (Array.isArray(x.opcoes) ? x.opcoes : []).map(String);
     const c = Number(x.correta);
-    if (op.length < 2 || !(c >= 0 && c < op.length)) return null;
+    if (op.length < 2 || op.length > 4 || !Number.isInteger(c) || !(c >= 0 && c < op.length) || op.some(function (v, i) { return !v.trim() || op.indexOf(v) !== i; })) return null;
     return { tipo: 'escolha', ref: ref, enunciado: String(x.enunciado || 'Escolha a opção certa').slice(0, 120), frase: String(x.frase || '').slice(0, 250), opcoes: op, correta: c, pt: !!x.pt };
   }).filter(Boolean);
   return { exercicios: ex, provedor: r.provedor };
@@ -441,7 +463,7 @@ function liveToken_(d) {
   const agora = Date.now(), iso = function (ms) { return new Date(ms).toISOString().replace(/\.\d{3}Z$/, 'Z'); };
   const t0 = Date.now();
   const r = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/auth_tokens', { method: 'post', contentType: 'application/json', muteHttpExceptions: true,
-    headers: { 'x-goog-api-key': chave }, payload: JSON.stringify({ uses: 1, expireTime: iso(agora + 30 * 60000), newSessionExpireTime: iso(agora + 2 * 60000) }) });
+    headers: { 'x-goog-api-key': chave }, payload: JSON.stringify({ uses: 1, expireTime: iso(agora + 15 * 60000), newSessionExpireTime: iso(agora + 60000), liveConnectConstraints: { model: 'models/' + modelo, generationConfig: { responseModalities: ['AUDIO'] } } }) });
   const code = r.getResponseCode(), txt = r.getContentText();
   registrar_('liveToken', 'gemini', modelo, code === 200, Date.now() - t0, code === 200 ? '' : txt.slice(0, 160));
   if (code !== 200) throw new Error('limite: token ' + code + ' ' + txt.slice(0, 120));

@@ -1,0 +1,10 @@
+node_modules/
+.build/
+test-results/
+playwright-report/
+__pycache__/
+*.pyc
+chave.txt
+.clasprc.json
+.clasp.json
+apps-script/appsscript.json

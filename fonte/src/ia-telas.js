@@ -16,7 +16,8 @@
   };
   var _ecoWritingLoading = TELAS.ecoWritingLoading;
   TELAS.ecoWritingLoading = function (payload) {
-    if (!IAon()) return _ecoWritingLoading(payload);
+    if (!IAon()) { var local=studioPage('Correção com o Eco','ecoWrite');local.appendChild(document.createTextNode('Seu texto fica no rascunho. Entre com Google para pedir a correção por IA.'));local.appendChild(studioButton('Entrar com Google',function(){AUTH.start();},'primary'));return; }
+    var owner = eu(), ownerData = studioData();
     var pg = studioPage('Eco está lendo', 'ecoWrite'), box = document.createElement('section'); box.className = 'studio-reading';
     box.appendChild(eco('thinking', 'Eco lendo seu texto'));
     box.insertAdjacentHTML('beforeend', '<span class="studio-book" aria-hidden="true">' + svg('book') + '</span><h1>Um instante. Estou lendo…</h1><p role="status" class="ia-status">Corrigindo com calma. Pode levar até meio minuto.</p><div class="studio-loading" aria-hidden="true"></div>');
@@ -28,9 +29,10 @@
         var d = r.dados || {}, rec = { id: 'write-' + Date.now(), date: Date.now(), lang: payload.lang, unit: payload.unit.id, title: payload.unit.title, text: payload.text,
           corrected: d.corrigido || payload.text, errors: (d.erros || []).map(function (e) { return [e.trecho, e.correcao, e.explicacao]; }),
           score: typeof d.nota === 'number' ? d.nota : null, resumo: d.resumo || '', demo: false };
-        var dd = studioData(); dd.writings.unshift(rec); if (dd.writings.length > 30) dd.writings.length = 30;
+        if (S.perfis.indexOf(owner) < 0) return;
+        var dd = ownerData; dd.writings.unshift(rec); if (dd.writings.length > 30) dd.writings.length = 30;
         if (dd.drafts) delete dd.drafts[payload.unit.id];
-        salvar(); if (pg.isConnected) ir('ecoWritingResult', rec.id); else toast('Sua redação foi corrigida. Veja no histórico.');
+        salvar(); if (pg.isConnected && eu() === owner) ir('ecoWritingResult', rec.id); else if (eu() === owner) toast('Sua redação foi corrigida. Veja no histórico.');
       })
       .catch(function (e) {
         if (!pg.isConnected) return;
@@ -56,7 +58,7 @@
     card.innerHTML = '<span class="studio-icon">' + svg('book') + '</span><h2>Tirar dúvida com o Eco</h2><p>Pergunte sobre gramática, palavras ou como dizer algo. A resposta vem em português, com exemplos.</p>';
     card.appendChild(studioButton('Perguntar', function () { ir('ecoDuvida'); }, 'primary'));
     var links = $('.studio-actions', pg); pg.insertBefore(card, links || null);
-    if (IAon()) { var demo = $('.studio-demo', pg); if (demo) demo.textContent = 'A conversa por voz ainda é uma prévia. Redação e dúvidas já usam a IA de verdade.'; }
+    if (IAon()) { var demo = $('.studio-demo', pg); if (demo) demo.textContent = 'Redação, dúvidas e conversa usam os serviços de IA configurados para o aplicativo.'; }
   };
   TELAS.ecoDuvida = function () {
     var pg = studioPage('Tirar dúvida'), d = studioData(), u = studioCurrent(), lang = eu().idioma;
@@ -83,7 +85,7 @@
       var hist = d.duvidas.filter(function (m) { return m.lang === lang; }).slice(-8);
       var m = { de: 'eu', texto: q, lang: lang, em: Date.now() }; d.duvidas.push(m); bolha(m);
       var esp = bolha({ de: 'eco', texto: 'Pensando…' }); esp.classList.add('ia-msg--espera');
-      esp.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      esp.scrollIntoView({ block: 'nearest', behavior: S.cfg.motion || matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
       IA.pedir('duvida', { idioma: lang, nivel: u.level, unidade: u.title, objetivo: u.objective, historico: hist, pergunta: q })
         .then(function (r) { var a = { de: 'eco', texto: r.texto, lang: lang, em: Date.now() }; d.duvidas.push(a); esp.innerHTML = '<p>' + IA.html(a.texto) + '</p>'; esp.classList.remove('ia-msg--espera'); })
         .catch(function (e) { esp.innerHTML = '<p>' + esc(IA.erroTexto(e)) + '</p>'; esp.classList.remove('ia-msg--espera'); d.duvidas.pop(); input.value = q; })
@@ -103,13 +105,14 @@
     return ok;
   }
   function gravador() {
-    var rec, chunks = [], stream;
+    var rec, chunks = [], stream, cancelled = false;
     return {
       iniciar: function () {
         return navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }).then(function (s) {
+          if (cancelled) { s.getTracks().forEach(function (t) { t.stop(); }); throw new Error('cancelado'); }
           stream = s; chunks = [];
           var mt = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg'].filter(function (t) { return window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(t); })[0];
-          rec = new MediaRecorder(s, mt ? { mimeType: mt } : undefined);
+          try { rec = new MediaRecorder(s, mt ? { mimeType: mt } : undefined); } catch (e) { s.getTracks().forEach(function (t) { t.stop(); }); throw e; }
           rec.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
           rec.start();
         });
@@ -121,7 +124,7 @@
           rec.stop();
         });
       },
-      cancelar: function () { try { rec && rec.state !== 'inactive' && rec.stop(); } catch (e) {} try { stream && stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {} }
+      cancelar: function () { cancelled = true; try { rec && rec.state !== 'inactive' && rec.stop(); } catch (e) {} try { stream && stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {} }
     };
   }
   function blobB64(b) { return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(String(r.result).split(',')[1] || ''); }; r.onerror = rej; r.readAsDataURL(b); }); }
@@ -130,7 +133,7 @@
     if (gravAtual) { gravAtual.cancelar(); gravAtual = null; }
     var pg = studioPage('Treinar pronúncia'), units = studioUnits(), unit = units.find(function (x) { return x.id === unitId; }) || studioCurrent();
     var lang = eu().idioma, voz = CURSOS[lang].voz, U = unidadeDe(unit.id), d = studioData(); d.pron = d.pron || {};
-    studioLead(pg, 'Pronúncia · ' + unit.level, 'Ouça, repita e veja o que ficou claro.', 'Toque em Ouvir, depois em Gravar e diga a frase. O Eco compara com o que entendeu.');
+    studioLead(pg, 'Pronúncia · ' + unit.level, 'Ouça, repita e compare a transcrição.', 'O percentual indica palavras reconhecidas, sem medir todos os sons ou a entonação. Falhas do reconhecimento também podem acontecer.');
     var lab = document.createElement('label'); lab.className = 'studio-field'; lab.textContent = 'Unidade'; var sel = document.createElement('select');
     units.filter(function (x) { return x.done || x.current || x.id === unit.id; }).forEach(function (x) { var op = document.createElement('option'); op.value = x.id; op.textContent = x.title; sel.appendChild(op); });
     sel.value = unit.id; sel.onchange = function () { ir('ecoPronuncia', sel.value); }; lab.appendChild(sel); pg.appendChild(lab);
@@ -150,15 +153,16 @@
       acoes.appendChild(ouvir); acoes.appendChild(gravar); card.appendChild(acoes);
       var st = document.createElement('p'); st.className = 'pron-status'; st.setAttribute('role', 'status'); card.appendChild(st);
       var res = document.createElement('div'); res.className = 'pron-res'; card.appendChild(res);
-      if (d.pron[chave] != null) st.textContent = 'Melhor resultado: ' + d.pron[chave] + '% das palavras claras.';
+      if (d.pron[chave] != null) st.textContent = 'Melhor correspondência com a transcrição: ' + d.pron[chave] + '%.';
       pg.appendChild(card);
       var g = null, timer = null, t0 = 0;
+      studioCleanup(function () { clearInterval(timer); if (g) g.cancelar(); if (gravAtual === g) gravAtual = null; g = null; });
       function alternar() {
         if (g) { parar(); return; }
         if (gravAtual) { toast('Termine a outra gravação primeiro.'); return; }
         AUD.stop(); g = gravador(); gravAtual = g;
         g.iniciar().then(function () {
-          t0 = Date.now(); gravar.textContent = 'Parar · 0s'; card.classList.add('is-gravando'); st.textContent = 'Gravando… diga a frase.';
+          if (!pg.isConnected) { if (g) g.cancelar(); return; } t0 = Date.now(); gravar.textContent = 'Parar · 0s'; card.classList.add('is-gravando'); st.textContent = 'Gravando… diga a frase.';
           timer = setInterval(function () { var s = Math.round((Date.now() - t0) / 1000); gravar.textContent = 'Parar · ' + s + 's'; if (s >= 15) parar(); }, 250);
         }).catch(function () { g = null; gravAtual = null; st.textContent = 'Não consegui usar o microfone. Permita o acesso ao microfone nas configurações do navegador.'; });
       }
@@ -171,9 +175,9 @@
         }).then(function (r) {
           var ok = alinhar(pal, r.ouvido || ''), conta = pal.map(function (w) { return normPal(w).length > 0; }), tot = conta.filter(Boolean).length || 1, n = ok.filter(function (x, i) { return x && conta[i]; }).length, pct = Math.round(100 * n / tot);
           $$('span', txt).forEach(function (s, i) { s.className = ok[i] ? 'pron-ok' : 'pron-erro'; });
-          res.innerHTML = '<div class="pron-nota"><strong>' + pct + '%</strong><span>das palavras ficaram claras</span></div>' +
-            '<p class="muted">O Eco entendeu: <span lang="' + lang + '">«' + esc(r.ouvido || '…') + '»</span></p>' + (r.dica ? '<p class="pron-dica">' + IA.html(r.dica) + '</p>' : '');
-          st.textContent = pct === 100 ? 'Perfeito! Tente de novo com mais naturalidade.' : 'Grave de novo quando quiser.';
+          res.innerHTML = '<div class="pron-nota"><strong>' + pct + '%</strong><span>das palavras esperadas foram reconhecidas</span></div>' +
+            '<p class="muted">O reconhecimento entendeu: <span lang="' + lang + '">«' + esc(r.ouvido || '…') + '»</span></p>' + (r.dica ? '<p class="pron-dica">' + IA.html(r.dica) + '</p>' : '');
+          st.textContent = pct === 100 ? 'As palavras esperadas apareceram na transcrição. Você pode praticar a entonação.' : 'Grave de novo quando quiser.';
           if (d.pron[chave] == null || pct > d.pron[chave]) { d.pron[chave] = pct; salvar(); }
           tocar(pct >= 80 ? 'acerto' : 'aviso');
         }).catch(function (e) {
@@ -199,7 +203,7 @@
   }
   var _ecoScenarios = TELAS.ecoScenarios;
   TELAS.ecoScenarios = function () {
-    if (!IAon()) return _ecoScenarios();
+    if (!IAon()) { var local=studioPage('Conversa com o Eco');local.appendChild(document.createTextNode('Entre com Google para usar a conversa por IA.'));local.appendChild(studioButton('Entrar com Google',function(){AUTH.start();},'primary'));return; }
     var pg = studioPage('Escolher conversa'), units = studioUnits(), cur = studioCurrent();
     studioLead(pg, 'Conversa por voz', 'Sobre o que vamos falar?', 'O Eco entra na situação da unidade e fala no seu nível. Você responde segurando o botão.');
     function card(x) { var c = document.createElement('section'); c.className = 'card studio-scenario';
@@ -219,18 +223,19 @@
     var opts = document.createElement('section'); opts.className = 'card studio-stack';
     function group(t, items, v, fn) { var h = document.createElement('h2'); h.textContent = t; opts.appendChild(h); opts.appendChild(segmento(items, v, fn, t)); }
     var modo = 'live';
-    group('Modo', [{ v: 'live', t: 'Ao vivo' }, { v: 'turns', t: 'Por turnos' }], modo, function (v) { modo = v; });
+    group('Modo', [{ v: 'live', t: 'Ao vivo' }, { v: 'turns', t: 'Por turnos' }], modo, function (v) { modo = v; atualizarMic(); });
     opts.insertAdjacentHTML('beforeend', '<p class="muted">Ao vivo: fale à vontade e interrompa o Eco quando quiser. Por turnos: segure um botão para falar.</p>');
     group('Correções', [{ v: 'during', t: 'Durante a conversa' }, { v: 'end', t: 'Só no final' }], corrections, function (v) { corrections = v; });
     group('Legendas', [{ v: 'on', t: 'Ligadas' }, { v: 'off', t: 'Desligadas' }, { v: 'translation', t: 'Com tradução' }], captions, function (v) { captions = v; });
     pg.appendChild(opts);
     var mic = document.createElement('section'); mic.className = 'card studio-stack';
-    mic.innerHTML = '<span class="studio-icon">' + svg('mic') + '</span><h2>Podemos usar seu microfone?</h2><p>O Eco precisa ouvir sua voz. A gravação só é enviada quando você solta o botão.</p><p class="studio-mic-status" role="status"></p>';
+    mic.innerHTML = '<span class="studio-icon">' + svg('mic') + '</span><h2>Podemos usar seu microfone?</h2><p class="studio-mic-explain"></p><p>Por turnos, você também pode responder por texto. As falas são processadas pelos serviços de IA configurados pelo responsável pelo aplicativo.</p><p class="studio-mic-status" role="status"></p>';
+    function atualizarMic() { if (!mic) return; $('.studio-mic-explain', mic).textContent = modo === 'live' ? 'Ao vivo, o microfone transmite áudio continuamente ao Gemini enquanto estiver ligado. Silencie ou encerre para parar.' : 'Por turnos, a gravação é enviada quando você solta o botão. O áudio é processado pelo servidor e pelo serviço de reconhecimento disponível.'; if (start) start.disabled = modo === 'live' && !granted; }
     var granted = false, start = studioButton('Começar conversa', function () {
-      if (!granted) return;
+      if (!granted && modo === 'live') return;
       studioSession = { scenario: sc, corrections: corrections, captions: captions, minutes: sc.minutes, seconds: 0, muted: false, mode: modo, transcript: [], hist: [], correcoes: [], lang: eu().idioma, real: true };
       ir('ecoCall');
-    }, 'primary'); start.disabled = true;
+    }, 'primary'); start.disabled = true; atualizarMic();
     var pedir = studioButton('Permitir microfone', function () {
       if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder)) { $('.studio-mic-status', mic).textContent = 'Este navegador não permite gravar áudio. Tente pelo Chrome ou pelo Safari atualizado.'; return; }
       navigator.mediaDevices.getUserMedia({ audio: true }).then(function (st) { st.getTracks().forEach(function (t) { t.stop(); }); granted = true; start.disabled = false; pedir.disabled = true; $('.studio-mic-status', mic).textContent = 'Microfone liberado. Tudo pronto!'; })
@@ -260,6 +265,7 @@
     function vozDoIdioma() { var vs = ('speechSynthesis' in window) ? speechSynthesis.getVoices() : []; return vs.filter(function (v) { return v.lang && v.lang.replace('_', '-').indexOf(voz) === 0; })[0] || vs.filter(function (v) { return v.lang && v.lang.slice(0, 2) === lang; })[0] || null; }
     function falar(texto, rate) {
       if (!pg.isConnected) return;
+      if(S.cfg.silent){setState(s.muted?'muted':'listening');return;}
       setState('speaking');
       if (!('speechSynthesis' in window)) { setTimeout(function () { if (pg.isConnected) setState(s.muted ? 'muted' : 'listening'); }, 1500); return; }
       speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(texto); u.lang = voz; u.rate = rate || S.cfg.voz || 0.9; var v = vozDoIdioma(); if (v) u.voice = v;
@@ -286,12 +292,13 @@
     }
     /* gravação: segurar para falar */
     var g = null, soltou = false, t0 = 0, limite = null;
+    studioCleanup(function () { clearTimeout(limite); if (g) g.cancelar(); g = null; });
     function comecar() {
       if (s.muted) { toast('Ative o microfone para falar.'); return; }
       if (ocupado || g) return;
       if ('speechSynthesis' in window) speechSynthesis.cancel();
       soltou = false; g = gravador();
-      g.iniciar().then(function () { t0 = Date.now(); setState('recording'); stage.classList.add('user-speaking'); voice.textContent = 'Ouvindo… solte para enviar';
+      g.iniciar().then(function () { if (!pg.isConnected) { if (g) g.cancelar(); return; } t0 = Date.now(); setState('recording'); stage.classList.add('user-speaking'); voice.textContent = 'Ouvindo… solte para enviar';
         limite = setTimeout(terminar, 30000); if (soltou) terminar(); })
         .catch(function () { g = null; toast('Não consegui usar o microfone. Libere o acesso nas configurações do navegador.'); });
     }
@@ -316,7 +323,7 @@
     actions.appendChild(studioButton('Repetir mais devagar', function () { if (s.ultimo && !ocupado) falar(s.ultimo, 0.7); }));
     actions.appendChild(studioButton('Encerrar', function () { finalizarConversa(); }, 'danger'));
     var escrever = document.createElement('details'); escrever.className = 'studio-details'; escrever.innerHTML = '<summary>Prefere escrever esta resposta?</summary>';
-    var ta = document.createElement('textarea'); ta.rows = 2; ta.maxLength = 400; ta.lang = lang; ta.placeholder = 'Escreva no idioma…'; escrever.appendChild(ta);
+    var ta = document.createElement('textarea'); ta.rows = 2; ta.maxLength = 400; ta.lang = lang; ta.placeholder = 'Escreva no idioma…'; var label = document.createElement('label'); label.className = 'studio-field'; label.textContent = 'Sua resposta por texto'; label.appendChild(ta); escrever.appendChild(label);
     escrever.appendChild(studioButton('Enviar texto', function () { var t = ta.value.trim(); if (!t || ocupado) return; ta.value = ''; if ('speechSynthesis' in window) speechSynthesis.cancel(); pedirEco({ texto: t }); }));
     var prefs = document.createElement('details'); prefs.className = 'studio-details'; prefs.innerHTML = '<summary>Legendas</summary>';
     prefs.appendChild(segmento([{ v: 'on', t: 'Ligadas' }, { v: 'off', t: 'Desligadas' }, { v: 'translation', t: 'Com tradução' }], s.captions, function (v) { s.captions = v; caption(); }, 'Legendas da conversa'));
@@ -408,7 +415,7 @@
       acoes.appendChild(studioButton('Ouvir', function () { tocarFrase(S.cfg.voz || 0.9); }, 'primary'));
       acoes.appendChild(studioButton('Mais devagar', function () { tocarFrase(0.7); }));
       card.appendChild(acoes);
-      var ta = document.createElement('textarea'); ta.rows = 2; ta.lang = lang; ta.spellcheck = false; ta.autocapitalize = 'off'; ta.setAttribute('autocorrect', 'off'); ta.placeholder = 'Escreva o que ouviu…'; ta.className = 'dit-input'; card.appendChild(ta);
+      var ta = document.createElement('textarea'); ta.rows = 2; ta.lang = lang; ta.spellcheck = false; ta.autocapitalize = 'off'; ta.setAttribute('autocorrect', 'off'); ta.placeholder = 'Escreva o que ouviu…'; ta.className = 'dit-input'; var label = document.createElement('label'); label.className = 'studio-field'; label.textContent = 'Sua transcrição · frase ' + (k + 1); label.appendChild(ta); card.appendChild(label);
       var conf = studioButton('Conferir', conferir); card.appendChild(conf);
       var res = document.createElement('div'); res.className = 'pron-res'; res.setAttribute('role', 'status'); card.appendChild(res);
       pg.appendChild(card);
@@ -457,7 +464,7 @@
               return { tipo: 'montar', enunciado: 'Traduza esta frase', frase: x.frase, dicas: [], resposta: resp, banco: banco, audio: AUD.fn(x.frase, voz), _ref: ref };
             }
             if (!x.opcoes || x.opcoes.length < 2) return null;
-            return { tipo: 'escolha', etiqueta: 'revisao', enunciado: x.enunciado || 'Escolha a opção certa', frase: x.frase || '', opcoes: x.opcoes, correta: x.correta, perguntaEmPt: !!x.pt, audio: x.pt ? undefined : AUD.fn(String(x.frase || '').replace(/_{2,}/g, '…'), voz), _ref: ref };
+            return { tipo: 'escolha', etiqueta: 'revisao', enunciado: x.enunciado || 'Escolha a opção certa', frase: x.frase || '', ocultar: x.pt ? x.frase : undefined, opcoes: x.opcoes, correta: x.correta, perguntaEmPt: !!x.pt, audio: x.pt ? undefined : AUD.fn(String(x.frase || '').replace(/_{2,}/g, '…'), voz), _ref: ref };
           }).filter(Boolean);
           if (ex.length < 3) throw new Error('poucos');
           abrirLicaoApp(null, 'Revisão dos meus erros', { licao: { idioma: voz, exercicios: ex, titulo: 'Revisão dos meus erros' } });
@@ -519,6 +526,7 @@
     try { ctx.resume(); } catch (e) {}
     function pararFala() { fontes.forEach(function (f) { try { f.stop(); } catch (e) {} }); fontes = []; proxima = 0; }
     function tocarPCM(b64, taxa) {
+      if(S.cfg.silent)return;
       var dados = pcmDeB64(b64); if (!dados.length) return;
       var buf = ctx.createBuffer(1, dados.length, taxa || 24000); buf.getChannelData(0).set(dados);
       var src = ctx.createBufferSource(); src.buffer = buf; src.connect(ctx.destination);
@@ -529,6 +537,7 @@
     function enviar(o) { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); }
     function ligarMic() {
       return navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } }).then(function (st) {
+        if (fim || !pg.isConnected) { st.getTracks().forEach(function (t) { t.stop(); }); throw new Error('cancelado'); }
         micStream = st; var fonte = ctx.createMediaStreamSource(st); proc = ctx.createScriptProcessor(4096, 1, 1);
         var razao = ctx.sampleRate / 16000;
         proc.onaudioprocess = function (e) {
@@ -547,6 +556,8 @@
       if (motivo === 'sair') return;
       finalizarConversa();
     }
+    studioCleanup(function () { encerrar('sair'); });
+    function comfort(e){if(e.detail.silent)pararFala();}window.addEventListener('idiomas-preferences',comfort);studioCleanup(function(){window.removeEventListener('idiomas-preferences',comfort);});
     function traduzir(entrada) {
       if (s.captions !== 'translation' || !entrada.text) return;
       IA.pedir('traduzir', { idioma: lang, texto: entrada.text }).then(function (r) { entrada.pt = r.texto; if (pg.isConnected) caption(); }).catch(function () {});

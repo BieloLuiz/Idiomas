@@ -1,0 +1,50 @@
+const test = require('node:test'), assert = require('node:assert/strict'), fs = require('node:fs'), vm = require('node:vm'), crypto = require('node:crypto');
+const P = require('../src/profile-core.js');
+test('reconciliação soma alterações independentes e preserva referências de lição', () => {
+  const base={id:'p',xp:10,progresso:{en:1},design:{notes:[{id:'a',text:'old'}]}};
+  const local=P.copy(base),remote=P.copy(base);local.xp+=20;remote.xp+=30;local.progresso.en=2;remote.progresso.en=3;
+  local.design.notes.push({id:'b',text:'local'});remote.design.notes.push({id:'c',text:'remote'});
+  const ref=local.design,old=local.design.notes[0],out=P.merge(base,local,remote);P.reconcile(local,out);
+  assert.equal(local.xp,60);assert.equal(local.progresso.en,3);assert.deepEqual(local.design.notes.map(x=>x.id),['a','b','c']);assert.equal(local.design,ref);assert.equal(local.design.notes[0],old);
+});
+test('exclusões de notas não ressuscitam após sincronizar',()=>{const b={notes:[{id:'a'},{id:'b'}]},l={notes:[{id:'b'}]},r={notes:[{id:'a'},{id:'b'},{id:'c'}]};assert.deepEqual(P.merge(b,l,r).notes.map(x=>x.id),['b','c']);});
+test('sequência respeita dias consecutivos, virada de ano e semana',()=>{let p={ultimoDia:'2026-12-31',sequencia:4,hojeFeito:true,semanaDe:'2026-12-28'};P.newDay(p,new Date(2027,0,1));assert.equal(p.sequencia,4);assert.equal(p.hojeFeito,false);P.newDay(p,new Date(2027,0,3));assert.equal(p.sequencia,0);});
+test('revisão usa resultado e vencimento, sem depender do progresso',()=>{const s={};P.review(s,'w',true,1000);assert.equal(s.w.due,86401000);P.review(s,'w',true,2000);assert.equal(s.w.interval,2);P.review(s,'w',false,3000);assert.equal(s.w.due,63000);assert.equal(s.w.wrong,1);});
+test('normalização remove PIN e limita progresso',()=>{let p=P.normalize({id:'p',pin:'1234',progresso:{en:900,fr:-1}});assert.equal(p.pin,undefined);assert.deepEqual(p.progresso,{en:300,fr:0});assert.equal(p.semana.length,7);});
+test('importação rejeita estrutura inválida e identificadores reservados',()=>{assert.throws(()=>P.normalize({id:'__proto__'}),/perfil_invalido/);assert.throws(()=>P.normalize({id:'p',ecoStudio:{calls:'invalid'}}),/perfil_invalido/);assert.equal(P.copy(JSON.parse('{"__proto__":{"polluted":true}}')).polluted,undefined);});
+test('resposta perdida não duplica XP ao recuperar envio e editar em outro aparelho',async()=>{
+ const K='idiomas-app-v2',base=P.normalize({id:'p',xp:10,revisao:1}),state={perfis:[P.copy(base)]},storage=new Map([[K+':base',JSON.stringify({p:base})]]);
+ let remote=P.copy(base),lose=true,posts=0;
+ const ctx={ProfileCore:P,crypto:{randomUUID:()=>crypto.randomUUID()},JSON,Promise,Date,CustomEvent:function(t,o){this.type=t;this.detail=o&&o.detail;},document:{addEventListener(){},dispatchEvent(){},visibilityState:'visible'},addEventListener(){},setTimeout:()=>1,clearTimeout(){},localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v)},IDIOMAS_API:'mock',AUTH:{ready:()=>true,post:async q=>{
+  if(q.acao==='listar')return{perfis:[P.copy(remote)]};posts++;let p=q.perfis[0];
+  if((remote._receipts||[]).includes(p._operation))return{perfis:[P.copy(remote)]};
+  if(p.revisao!==remote.revisao)return{conflitos:[P.copy(remote)]};
+  remote={...P.copy(p),revisao:remote.revisao+1,_receipts:(remote._receipts||[]).concat(p._operation)};delete remote._operation;
+  if(lose){lose=false;throw new Error('network');}return{perfis:[P.copy(remote)]};
+ }}};ctx.window=ctx;vm.createContext(ctx);vm.runInContext(fs.readFileSync('fonte/pwa/sync.js','utf8'),ctx);
+ ctx.SYNC.bind(state);await new Promise(r=>setImmediate(r));const ref=state.perfis[0];ref.xp=20;ctx.SYNC.mudou(state);await ctx.SYNC.agora();
+ assert.equal(remote.xp,20);ref.xp=25;ctx.SYNC.mudou(state);remote.xp=50;remote.revisao++;
+ await ctx.SYNC.recarregar();assert.equal(ref.xp,55);await ctx.SYNC.agora();assert.equal(remote.xp,55);assert.equal(state.perfis[0],ref);assert.ok(posts>=3);
+});
+function backend(claims={}) {
+  const props={GOOGLE_CLIENT_ID:'test-client',ALLOWED_EMAILS:'allowed@example.test',GEMINI_API_KEY:'test'};const cache=new Map(), requests=[];
+  const ctx={console,Date,JSON,Math,Number,String,Array,Object,ProfileCore:P, PropertiesService:{getScriptProperties:()=>({getProperty:k=>props[k],setProperty:(k,v)=>props[k]=v})},CacheService:{getScriptCache:()=>({get:k=>cache.get(k),put:(k,v)=>cache.set(k,v)})},LockService:{getScriptLock:()=>({waitLock(){},releaseLock(){}})},Utilities:{DigestAlgorithm:{SHA_256:'sha256'},Charset:{UTF_8:'utf8'},computeDigest:(alg,s)=>[...crypto.createHash('sha256').update(s).digest()],base64EncodeWebSafe:b=>Buffer.from(b).toString('base64url'),getUuid:()=>crypto.randomUUID(),formatDate:()=> '2026-10-20'},UrlFetchApp:{fetch:(url,options)=>{requests.push({url,options});return{getResponseCode:()=>200,getContentText:()=>JSON.stringify(url.includes('tokeninfo')?{aud:'test-client',iss:'https://accounts.google.com',exp:Math.floor(Date.now()/1000)+3600,sub:'u1',email:'allowed@example.test',email_verified:true,...claims}:{name:'auth_tokens/test'})};}},ContentService:{MimeType:{JSON:'json'},createTextOutput:t=>({setMimeType:()=>JSON.parse(t)})}};
+  vm.createContext(ctx);vm.runInContext(fs.readFileSync('apps-script/Security.gs','utf8')+'\n'+fs.readFileSync('apps-script/Code.gs','utf8'),ctx);
+  return{ctx,props,requests};
+}
+test('API nega acesso antes de ler a planilha ou chamar IA',()=>{const {ctx,requests}=backend();let r=ctx.doPost({postData:{contents:JSON.stringify({acao:'listar'})}});assert.equal(r.erro,'auth_required');assert.equal(requests.length,0);});
+test('Google: assinatura verificada pelo serviço, audience, expiração e conta restritos',()=>{
+  for(const claims of [{aud:'other'},{exp:1},{iss:'https://evil.test'},{email_verified:false},{email:'other@example.test'}]){const {ctx}=backend(claims);assert.throws(()=>ctx.autenticar_('x'.repeat(60)),/auth_required|auth_denied/);}
+  const {ctx}=backend();assert.equal(ctx.autenticar_('x'.repeat(60)).sub,'u1');
+});
+test('servidor recusa acesso quando não está configurado',()=>{const {ctx,props}=backend();delete props.ALLOWED_EMAILS;assert.throws(()=>ctx.autenticar_('x'.repeat(60)),/auth_config/);});
+test('cota é aplicada no servidor',()=>{const{ctx}=backend();for(let i=0;i<10;i++)ctx.limitarIA_({sub:'u'},'duvida');assert.throws(()=>ctx.limitarIA_({sub:'u'},'duvida'),/quota/);});
+test('token Live fixa modelo, uso único e validade curta',()=>{const {ctx,requests}=backend();ctx.liveToken_({});let body=JSON.parse(requests.at(-1).options.payload);assert.equal(body.uses,1);assert.equal(body.liveConnectConstraints.model,'models/gemini-3.8-live');assert.ok(Date.parse(body.expireTime)-Date.now()<=15*60000);});
+test('revisão da IA rejeita alternativas duplicadas e índices fracionários',()=>{const{ctx}=backend();ctx.chamar_=()=>({texto:JSON.stringify({exercicios:[{opcoes:['A','A','B','C'],correta:2},{opcoes:['A','B'],correta:.5},{opcoes:['A','B'],correta:1}]}),provedor:'mock'});let r=ctx.revisao_({erros:[{correta:'B'}]});assert.equal(r.exercicios.length,1);assert.equal(r.exercicios[0].opcoes[r.exercicios[0].correta],'B');});
+test('todas as unidades geram as cinco lições e o teste usa revisão da própria unidade',()=>{
+ const html=fs.readFileSync('index.html','utf8'),scripts=[...html.matchAll(/<script[^>]+src="(assets\/[^"]+)"/g)].map(m=>m[1]);let file=scripts.find(f=>fs.readFileSync(f,'utf8').includes('var COURSE='));
+ const ctx={document:{dispatchEvent(){}},Audio:function(){},localStorage:{getItem:()=>null},TextEncoder,CustomEvent:function(){}};ctx.window=ctx;vm.createContext(ctx);vm.runInContext(fs.readFileSync(file,'utf8'),ctx);
+ for(const k of ['en','fr']){assert.equal(ctx.COURSE[k].units.length,60);for(let i=1;i<=60;i++)for(const name of ['Palavras novas','Escuta','Montar frases','Gramática','Revisão da unidade']){let l=ctx.LICOES[k+'-u'+i+'|'+name];assert.ok(l.exercicios.length>0,k+i+name);assert.equal(l.unidade,ctx.COURSE[k].units[i-1].title);}}
+ const app=scripts.map(f=>fs.readFileSync(f,'utf8')).find(s=>s.includes('function abrirLicaoApp'));
+ assert.ok(app.includes("nome === 'Prática do guia' ? 'Revisão da unidade'"));assert.ok(!app.includes('|| LICOES_DEMO[p.idioma]'));assert.ok(app.includes("return all[p.progresso[p.idioma]] || null"));
+});

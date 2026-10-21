@@ -1,11 +1,15 @@
-/* IA do app: tudo passa pelo Apps Script (as chaves ficam lá). Sem endereço configurado, fica desligada. */
+/* Pedidos repetidos reutilizam a operação em caso de falha ou demora. */
+var IA_OPERACOES = new Map();
 window.IA = {
-  ativo: function () { return !!window.IDIOMAS_API; },
+  ativo: function () { return !!window.IDIOMAS_API && window.AUTH && AUTH.ready(); },
   pedir: function (tipo, dados) {
-    var ctrl = window.AbortController ? new AbortController() : null, t = ctrl && setTimeout(function () { ctrl.abort(); }, 60000);
-    return fetch(window.IDIOMAS_API, { method: 'POST', body: JSON.stringify({ acao: 'ia', tipo: tipo, dados: dados }), signal: ctrl && ctrl.signal })
-      .then(function (r) { return r.json(); })
-      .then(function (r) { if (t) clearTimeout(t); if (!r || r.erro) throw new Error((r && r.erro) || 'falha'); return r; });
+    var key=tipo+'|'+JSON.stringify(dados), previous=IA_OPERACOES.get(key), now=Date.now();
+    if(previous&&previous.promise)return previous.promise;
+    var operation=previous&&now-previous.at<5*60000?previous.id:crypto.randomUUID();
+    if(tipo==='liveToken')operation=crypto.randomUUID();
+    var entry={id:operation,at:now};IA_OPERACOES.set(key,entry);
+    entry.promise=AUTH.post({ acao: 'ia', tipo: tipo, dados: dados, requestId:operation }).then(function(r){IA_OPERACOES.delete(key);return r;}).catch(function(e){entry.promise=null;throw e;});
+    return entry.promise;
   },
   /* texto da IA para HTML seguro: escapa tudo e só permite **negrito** e quebras de linha */
   html: function (s) {
@@ -15,7 +19,10 @@ window.IA = {
   erroTexto: function (e) {
     var m = String(e && e.message || e);
     if (/sem_chave/.test(m)) return 'A IA ainda não foi configurada no servidor.';
-    if (/limite/.test(m)) return 'A IA atingiu o limite gratuito por agora. Tente mais tarde.';
+    if (/^auth_/.test(m)) return 'Entre novamente com sua conta Google para usar a IA.';
+    if (/quota|limite/.test(m)) return 'O limite de uso foi atingido por agora. Tente mais tarde.';
+    if (/tempo|AbortError/i.test(m)) return 'A resposta demorou mais que o esperado. Tente novamente em instantes.';
+    if (/indisponivel/.test(m)) return 'O serviço de IA está indisponível agora. Seu trabalho continua guardado.';
     if (/abort|Failed to fetch|NetworkError/i.test(m)) return 'Sem conexão com a IA agora. Confira a internet e tente de novo.';
     return 'Não consegui falar com a IA agora. Tente de novo.';
   }
