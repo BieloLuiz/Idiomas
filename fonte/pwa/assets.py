@@ -23,9 +23,7 @@ def package(s, output):
         if 'src=' in attr:return m[0]
         if 'application/octet-stream' in attr:
             return '<script'+attr+' data-src="'+put(code,'txt',False)+'"></script>'
-        optional='eco-3d-renderer' in attr
-        url=put(code,'js',not optional)
-        if optional:return '<script'+attr+' data-src="'+url+'"></script>'
+        url=put(code,'js')
         return '<script'+attr+' src="'+url+'"></script>'
     s=re.sub(r'<script([^>]*)>(.*?)</script>',script,s,flags=re.S)
     def style(m):return '<link rel="stylesheet" href="'+put(m[1].replace('assets/',''),'css')+'">'
