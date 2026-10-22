@@ -1,0 +1,31 @@
+name: Regenerar Eco SVG na branch
+on:
+  push:
+    branches: ['eco/etapa-1-neutral-hoje']
+permissions:
+  contents: write
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: python -m pip install -r requirements.txt
+      - run: python fonte/build.py
+      - run: npm test
+      - name: Commitar recursos atualizados e remover workflow temporário
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm .github/workflows/eco-regenerar-branch.yml
+          git add -A -- index.html sw.js assets apps-script/ProfileCore.gs
+          git add -u -- .github/workflows/eco-regenerar-branch.yml
+          if ! git diff --cached --quiet; then
+            git commit -m "build(eco): sincronizar recursos com biblioteca original"
+            git push origin HEAD:eco/etapa-1-neutral-hoje
+          fi
