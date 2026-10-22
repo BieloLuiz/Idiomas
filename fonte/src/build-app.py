@@ -69,7 +69,7 @@ rep(",\n      linha('sound', 'Sons de acerto e erro', 'Sons próprios, curtos e 
 rep("    bloco('Aparência', [",
  "    bloco('Sons', [\n"
  "      linha('sound', 'Sons dos toques', 'Notas de marimba bem baixas ao tocar nos botões', segmento([{ v: 'sutis', t: 'Sutis' }, { v: 'nenhum', t: 'Nenhum' }], S.cfg.toques || 'sutis', function (v) { set('toques', v); if (v === 'sutis') tocar('principal'); }, 'Sons dos toques')),\n"
- "      linha('sound', 'Música de abertura', 'Toca na primeira abertura do dia', interruptor(S.cfg.musica !== false, function (v) { set('musica', v); if (v && window.SOM) SOM.abertura(); }, 'Música de abertura')),\n"
+ "      linha('sound', 'Música de abertura', 'Toca sempre que o app abre', interruptor(S.cfg.musica !== false, function (v) { set('musica', v); if (v && window.SOM) SOM.abertura(); }, 'Música de abertura')),\n"
  "      linha('sound', 'Efeitos sonoros', 'Toques, acertos, erros e avisos', interruptor(S.cfg.efeitos, function (v) { set('efeitos', v); if (v) tocar('acerto'); }, 'Efeitos sonoros')),\n"
  "      linha('sound', 'Volume dos efeitos', 'Não muda o volume das frases gravadas', segmento([{ v: 0.4, t: 'Baixo' }, { v: 0.7, t: 'Médio' }, { v: 1, t: 'Alto' }, { v: 1.5, t: 'Máximo' }], S.cfg.volume == null ? 1 : S.cfg.volume, function (v) { set('volume', v); tocar('acerto'); }, 'Volume dos efeitos'), true)\n"
  "    ]);\n"

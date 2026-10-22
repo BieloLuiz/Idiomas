@@ -17,13 +17,14 @@ function criarEco(estado, rotulo, decorativo) {
 function ecoEstado(el, estado) { if (el && el.__eco) el.__eco.estado(ECO_MAPA[estado] || 'neutral'); }
 
 /* Abertura do app: a Eco chega e o nome "idiomas" aparece (fonte/marca/idiomas-abertura.svg).
-   Só na primeira abertura do dia; um toque pula; com "reduzir movimento", fica parada por um instante. */
+   Toda vez que o app abre; um toque pula; com "reduzir movimento", fica parada por um instante. */
 (function () {
   if (typeof document === 'undefined' || typeof document.createElement !== 'function' || typeof matchMedia !== 'function') return;
   function hoje() { var d = new Date(); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
   function mostrar() {
     if (typeof ABERTURA_SVG === 'undefined' || window.__semAbertura || /[?&]sem-abertura/.test(location.search)) return;
-    try { if (localStorage.getItem('idiomas-abertura') === hoje()) return; localStorage.setItem('idiomas-abertura', hoje()); } catch (e) { return; }
+    /* toda vez que o app abre do zero; recarregar a página (ex.: sincronização) não repete, porque a sessão continua */
+    try { if (sessionStorage.getItem('idiomas-abertura')) return; sessionStorage.setItem('idiomas-abertura', '1'); } catch (e) { return; }
     var nome = ''; try { var S = JSON.parse(localStorage.getItem('idiomas-app-v2')); var p = S && S.perfis && S.perfis.filter(function (x) { return x.id === (S.ativo || S.ultimo); })[0]; nome = p ? p.nome : ''; } catch (e) {}
     var reduz = matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'reduce';
     var cfg = {}; try { cfg = (JSON.parse(localStorage.getItem('idiomas-app-v2')) || {}).cfg || {}; } catch (e) {}
