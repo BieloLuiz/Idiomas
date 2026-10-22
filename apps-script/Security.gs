@@ -54,10 +54,10 @@ function migrarPin_(p) {
 }
 
 function validarPedido_(q) {
-  if (!q || typeof q !== 'object' || !['entrarGoogle','sair','listar','salvar','ia','iaUso','lembrete','lembretesPendentes','lembreteRemover'].includes(q.acao)) throw new Error('acao');
+  if (!q || typeof q !== 'object' || !['entrarGoogle','sair','listar','salvar','ia','iaUso','lembrete','lembretesPendentes','lembreteRemover','admin','sessao'].includes(q.acao)) throw new Error('acao');
   if (q.acao === 'ia') {
     if (!q.dados || typeof q.dados !== 'object' || JSON.stringify(q.dados).length > 6500000) throw new Error('pedido_grande');
-    if (!['explicar','duvida','redacao','pronuncia','conversa','conversaResumo','revisao','liveToken','traduzir','leitura'].includes(q.tipo)) throw new Error('tipo');
+    if (!['explicar','duvida','redacao','pronuncia','conversa','conversaResumo','revisao','liveToken','traduzir','leitura','voz'].includes(q.tipo)) throw new Error('tipo');
   }
 }
 

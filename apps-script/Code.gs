@@ -40,6 +40,7 @@ function doPost(e) {
     catch (err) { return saida_({ erro: String(err && err.message || err) }); }
   }
   if (q.acao === 'iaUso') return saida_({ uso: usoHoje_(), servicos: servicosAtivos_() });
+  if (q.acao === 'admin' || q.acao === 'sessao') { try { return saida_(q.acao === 'admin' ? admin_(user, q) : sessaoConversa_(user, q)); } catch (err) { return saida_({ erro: String(err && err.message || err) }); } }
   if (q.acao === 'lembrete') {
     const lk = LockService.getScriptLock();
     try { lk.waitLock(20000); return saida_(lembrete_(q)); } catch (err) { return saida_({ erro: String(err && err.message || err) }); } finally { try { lk.releaseLock(); } catch (e) {} }
@@ -162,6 +163,7 @@ function ia_(tipo, d) {
   if (tipo === 'conversaResumo') return conversaResumo_(d);
   if (tipo === 'revisao') return revisao_(d);
   if (tipo === 'leitura') return leitura_(d);
+  if (tipo === 'voz') return voz_(d);
   if (tipo === 'liveToken') return liveToken_(d);
   if (tipo === 'traduzir') return chamar_('traduzir', { sistema: 'Traduza para o português do Brasil, de forma natural. Responda só com a tradução, sem aspas nem comentários.', usuario: String(d.texto || '').slice(0, 1500) });
   if (!ROTAS[tipo]) throw new Error('tipo');

@@ -98,7 +98,7 @@ rep("    if (ao && ao.som) ao.som(ok ? (seguidas >= 3 ? 'combo' : 'acerto') : 'e
  "          .catch(function (e) { bt.disabled = false; bt.textContent = IA.erroTexto(e) + ' Tocar para tentar de novo.'; }); };\n"
  "      $('.ui-banner__text', bannerBox).appendChild(bt);\n"
  "    }\n  }")
-rep("  TELAS.eco3D=function(){", open(os.path.join(D,'ia-telas.js'),encoding='utf-8').read()+"\n"+open(os.path.join(D,'estudo.js'),encoding='utf-8').read()+"\n  TELAS.eco3D=function(){")
+rep("  TELAS.eco3D=function(){", open(os.path.join(D,'ia-telas.js'),encoding='utf-8').read()+"\n"+open(os.path.join(D,'estudo.js'),encoding='utf-8').read()+"\n"+open(os.path.join(D,'extras.js'),encoding='utf-8').read()+"\n  TELAS.eco3D=function(){")
 rep("String(r.score).replace('.',',')+'/10 · exemplo'","String(r.score).replace('.',',')+'/10'+(r.demo?' · exemplo':'')")
 rep("'Resultado · demonstração'","(r.demo?'Resultado · demonstração':'Resultado')")
 rep("(r.score===null?'Aguardando IA':'Nota de exemplo')","(r.score===null?'Aguardando IA':(r.demo?'Nota de exemplo':'Nota do Eco'))")

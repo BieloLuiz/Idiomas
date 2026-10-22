@@ -2,11 +2,13 @@ const { chromium }=require('playwright'),assert=require('node:assert/strict'),ht
 const root=path.resolve(__dirname,'../..');
 function profile(id,nome,lang='fr'){return{id,nome,pin:'1234',idioma:lang,idiomas:['fr','en'],desde:'out 2026',xp:0,sequencia:0,melhorSequencia:0,hojeFeito:false,ultimoDia:'',semana:[0,0,0,0,0,0,0],xpSemana:[0,0,0,0,0,0,0],minutosHoje:0,palavras:0,progresso:{fr:240,en:240},metasHoje:{licoes:0,revisadas:0},motivos:[],revisao:0};}
 const initial=()=>({versao:2,ativo:'p1',ultimo:'p1',visto:true,cfg:{tema:'claro',meta:15,voz:.9,fala:true,efeitos:false,motion:true},perfis:[profile('p1','Ana'),profile('p2','Beto')]});
-let db={},delayWriting=0,sessao='',leituraPedida=null;
+let db={},delayWriting=0,sessao='',leituraPedida=null,adminSalvo=null,sessaoAberta=null;
 const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://local');if(url.pathname==='/api'){
  res.setHeader('Content-Type','application/json');if(req.method==='GET'){res.end(JSON.stringify({googleClientId:'test-client'}));return;}
  let body='';req.on('data',b=>body+=b);req.on('end',()=>{let q=JSON.parse(body);if(q.acao==='entrarGoogle'){if(!q.token){res.end('{"erro":"auth_required"}');return;}sessao='s1.'+require('node:crypto').randomBytes(32).toString('hex');res.end(JSON.stringify({ok:true,sessao,expira:Date.now()+60*86400000}));return;}if(!sessao||q.token!==sessao){res.end('{"erro":"auth_required"}');return;}let r={ok:true};if(q.acao==='sair'){sessao='encerrada';res.end('{"ok":true}');return;}
  if(q.acao==='listar')r={perfis:Object.values(db)};
+ if(q.acao==='admin'){if(q.op==='eu')r={admin:true};else{if(q.op==='config')adminSalvo=q.config;r={orcamento:{mes:'2026-10',gasto:0.0123,reservado:0,operacional:4,reserva:1,total:5,usoPct:0.3,porServico:{openai:0.0123},alunos:{u1:{email:'ana@example.test',gasto:0.0123,texto:12,audioSeg:300,vozSeg:0,liveMin:15,dias:{'2026-10-22':{texto:12}}}},alertas:[],bloqueios:0,estimado:true},gratisHoje:{mini:{usado:20000,limite:2500000}},config:{principal:'openai',fallback:['groq','gemini'],modo:'registrar',cotas:{textoDia:60,textoMes:1200,audioMinDia:15,audioMinMes:240,vozMinDia:3,vozMinMes:45,liveMinDia:30,liveMinMes:450},usarReserva:false,whisperGratis:false,servicos:[{id:'openai',nome:'OpenAI',pago:true,ativo:true},{id:'groq',nome:'Groq',pago:false,ativo:true},{id:'gemini',nome:'Gemini',pago:false,ativo:true}]}};}}
+ if(q.acao==='sessao')r=q.op==='iniciar'&&sessaoAberta&&sessaoAberta!==q.id&&!q.assumir?{ok:false,motivo:'outra_sessao'}:(q.op==='iniciar'?(sessaoAberta=q.id,{ok:true}):q.op==='fim'?(sessaoAberta=null,{ok:true}):{ok:true});
  if(q.acao==='salvar'){let perfis=[],conflitos=[];for(let p of q.perfis){if(db[p.id]&&(db[p.id].revisao||0)!==(p.revisao||0)){conflitos.push(db[p.id]);continue;}db[p.id]={...p,revisao:(p.revisao||0)+1};perfis.push(db[p.id]);}r={perfis,conflitos};}
  if(q.acao==='ia'&&q.tipo==='leitura'){leituraPedida=q.dados;r={titulo:'Le voyage',texto:'Nous prenons le train pour Lyon.\nLe voyage est long mais beau.',traducao:'Pegamos o trem para Lyon.\nA viagem é longa mas bonita.',vocabulario:[['le train','o trem']],perguntas:[{pergunta:'Para onde vão?',opcoes:['Paris','Lyon','Nice'],correta:1},{pergunta:'A viagem é curta?',opcoes:['Sim','Non'],correta:0}]};res.end(JSON.stringify(r));return;}if(q.acao==='ia'){r=q.tipo==='liveToken'?{token:'auth_tokens/mock',modelo:'gemini-3.8-live'}:q.tipo==='redacao'?{dados:{corrigido:q.dados.texto,nota:8,resumo:'Bom texto',erros:[]}}:q.tipo==='conversa'?{fala:'Bonjour !',ouvido:q.dados.texto||'',traducao:'Olá!',sugestao:'Bonjour !'}:{resumo:'Bom trabalho',erros:[],palavras:[]};}
  setTimeout(()=>res.end(JSON.stringify(r)),q.tipo==='redacao'?delayWriting:0);});return;}
@@ -136,8 +138,27 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await p2.waitForFunction(()=>!localStorage.getItem('idiomas-sessao'));await p2.waitForTimeout(300);assert.notEqual(sessao,antes,'servidor recebeu a saída');
   assert.ok(await p2.getByRole('button',{name:/Entrar com Google/}).isVisible());assert.notEqual(await p2.evaluate(()=>document.documentElement.dataset.auth),'locked');
   console.log('PASS: entrar pelas Configurações e sair da conta Google neste aparelho');
-  await p2.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Perfil',exact:true}).click();await p2.getByRole('button',{name:/Configurações/}).first().click();
   await p2.getByRole('button',{name:/Entrar com Google/}).click();await p2.getByRole('button',{name:'Entrar no teste'}).click();await p2.locator('.auth-gate').waitFor({state:'hidden'});
+  await p2.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Perfil',exact:true}).click();await p2.getByRole('button',{name:/Configurações/}).first().click();
+  await p2.getByRole('button',{name:'Abrir painel'}).click();await p2.getByText('ana@example.test').waitFor();
+  await p2.getByLabel('Interações de texto por dia').fill('40');await p2.getByText(/Bloquear quando um aluno passar da cota/).click();await p2.getByRole('button',{name:'Salvar configuração'}).click();
+  await p2.waitForFunction(()=>true);await p2.waitForTimeout(300);assert.equal(adminSalvo.cotas.textoDia,40);assert.equal(adminSalvo.modo,'bloquear');assert.equal(adminSalvo.principal,'openai');
+  console.log('PASS: painel do administrador mostra consumo e salva provedores e cotas');
+  await p2.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Praticar',exact:true}).click();await p2.getByRole('button',{name:/Quero me expressar/}).click();await p2.getByRole('button',{name:'Treinar pronúncia',exact:true}).click();
+  await p2.getByRole('button',{name:'Mais devagar'}).first().waitFor();await p2.getByRole('button',{name:'Gravar',exact:true}).first().click();
+  await p2.getByRole('heading',{name:'O que acontece com a sua voz'}).waitFor();await p2.getByRole('button',{name:'Agora não'}).click();
+  assert.equal(await p2.evaluate(()=>localStorage.getItem('idiomas-aviso-audio')),null);
+  await p2.getByRole('button',{name:'Gravar',exact:true}).first().click();await p2.getByRole('button',{name:'Entendi, pode gravar'}).click();await p2.getByText('Gravando… diga a frase.').waitFor();
+  assert.equal(await p2.evaluate(()=>localStorage.getItem('idiomas-aviso-audio')),'1');
+  console.log('PASS: aviso de privacidade antes da primeira gravação e opção de ouvir mais devagar');
+  await p2.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Praticar',exact:true}).click();await p2.getByRole('button',{name:/Quero me expressar/}).click();await p2.getByRole('button',{name:'Conversar com o Eco',exact:true}).click();await p2.getByRole('button',{name:'Escolher este cenário',exact:true}).first().click();
+  await p2.getByRole('button',{name:'Sem botão',exact:true}).click();await p2.getByRole('button',{name:'Permitir microfone',exact:true}).click();await p2.getByRole('button',{name:'Começar conversa'}).click();
+  await p2.getByText('Fale quando quiser · faça uma pausa para enviar').waitFor();await p2.waitForFunction(()=>window.__tracks.some(t=>t.readyState==='live'));
+  assert.ok(sessaoAberta,'sessão única aberta no servidor');
+  await p2.getByRole('button',{name:'Encerrar'}).click();await p2.waitForTimeout(400);assert.ok(await p2.evaluate(()=>window.__tracks.every(t=>t.readyState==='ended')),'microfone fechado ao encerrar');
+  console.log('PASS: conversa sem botão abre o microfone, registra a sessão única e fecha tudo ao encerrar');
+  await p2.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Perfil',exact:true}).click();await p2.getByRole('button',{name:/Configurações/}).first().click();
+
   await p2.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Praticar',exact:true}).click();await p2.getByRole('button',{name:/Quero entender/}).click();await p2.getByRole('button',{name:'Leitura extra com o Eco',exact:true}).click();
   await p2.getByLabel('Tema').fill('uma viagem de trem');await p2.getByRole('button',{name:'Criar leitura'}).click();
   await p2.getByRole('heading',{name:'Le voyage'}).waitFor();assert.equal(await p2.locator('.est-leitura p[lang=fr]').count(),2);

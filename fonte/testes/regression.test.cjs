@@ -53,7 +53,7 @@ test('resposta perdida não duplica XP ao recuperar envio e editar em outro apar
 function backend(claims={}) {
   const props={GOOGLE_CLIENT_ID:'test-client',ALLOWED_EMAILS:'allowed@example.test',GEMINI_API_KEY:'test'};const cache=new Map(), requests=[];
   const ctx={console,Date,JSON,Math,Number,String,Array,Object,ProfileCore:P, PropertiesService:{getScriptProperties:()=>({getProperty:k=>props[k],setProperty:(k,v)=>props[k]=v,deleteProperty:k=>{delete props[k];},getKeys:()=>Object.keys(props)})},CacheService:{getScriptCache:()=>({get:k=>cache.get(k),put:(k,v)=>cache.set(k,v),remove:k=>cache.delete(k)})},LockService:{getScriptLock:()=>({waitLock(){},releaseLock(){}})},Utilities:{DigestAlgorithm:{SHA_256:'sha256'},Charset:{UTF_8:'utf8'},computeDigest:(alg,s)=>[...crypto.createHash('sha256').update(s).digest()],base64EncodeWebSafe:b=>Buffer.from(b).toString('base64url'),getUuid:()=>crypto.randomUUID(),formatDate:()=> '2026-10-20'},UrlFetchApp:{fetch:(url,options)=>{requests.push({url,options});return{getResponseCode:()=>200,getContentText:()=>JSON.stringify(url.includes('tokeninfo')?{aud:'test-client',iss:'https://accounts.google.com',exp:Math.floor(Date.now()/1000)+3600,sub:'u1',email:'allowed@example.test',email_verified:true,...claims}:{name:'auth_tokens/test'})};}},ContentService:{MimeType:{JSON:'json'},createTextOutput:t=>({setMimeType:()=>JSON.parse(t)})}};
-  vm.createContext(ctx);vm.runInContext(fs.readFileSync('apps-script/Security.gs','utf8')+'\n'+fs.readFileSync('apps-script/Code.gs','utf8')+'\n'+fs.readFileSync('apps-script/Orcamento.gs','utf8'),ctx);
+  vm.createContext(ctx);vm.runInContext(fs.readFileSync('apps-script/Security.gs','utf8')+'\n'+fs.readFileSync('apps-script/Code.gs','utf8')+'\n'+fs.readFileSync('apps-script/Orcamento.gs','utf8')+'\n'+fs.readFileSync('apps-script/Admin.gs','utf8'),ctx);
   return{ctx,props,requests};
 }
 test('API nega acesso antes de ler a planilha ou chamar IA',()=>{const {ctx,requests}=backend();let r=ctx.doPost({postData:{contents:JSON.stringify({acao:'listar'})}});assert.equal(r.erro,'auth_required');assert.equal(requests.length,0);});
@@ -192,6 +192,30 @@ test('provedores: chamada à OpenAI usa raciocínio baixo e no máximo 2.000 tok
   openaiFalha=false;const o=JSON.parse(props['ORC_'+ctx.mesAtual_()]);o.gasto=4;props['ORC_'+ctx.mesAtual_()]=JSON.stringify(o);chamadas.length=0;
   assert.equal(ctx.pedidoIA_(U1,q()).texto,'groq','orçamento esgotado: segue com o gratuito');assert.ok(chamadas.every(c=>!c.url.includes('openai.com')));
   delete props.GROQ_API_KEY;assert.throws(()=>ctx.pedidoIA_(U1,q()),/sem_chave|indisponivel/,'sem gratuito disponível, não chama a OpenAI');
+});
+test('admin: só a conta administradora vê e muda a configuração',()=>{
+  const {ctx,props}=orc();const ADM={sub:'a',email:'gabriel.luiz.adv@gmail.com'};
+  assert.equal(ctx.admin_(U1,{op:'eu'}).admin,false);assert.throws(()=>ctx.admin_(U1,{op:'estado'}),/nao_admin/);
+  const e=ctx.admin_(ADM,{op:'estado'});assert.equal(e.config.principal,'openai');assert.equal(e.config.modo,'registrar');assert.ok(e.orcamento.estimado);
+  ctx.admin_(ADM,{op:'config',config:{principal:'groq',fallback:['gemini','xyz'],modo:'bloquear',cotas:{textoDia:30},usarReserva:true}});
+  assert.equal(props.IA_PRINCIPAL,'groq');assert.equal(props.IA_FALLBACK,'gemini');assert.equal(props.ORCAMENTO_MODO,'bloquear');assert.equal(ctx.cotas_().textoDia,30);assert.equal(ctx.cotas_().textoMes,1200);assert.equal(ctx.tetos_().operacional,5);
+  assert.throws(()=>ctx.admin_(ADM,{op:'config',config:{principal:'naoexiste'}}),/config/);assert.throws(()=>ctx.admin_(ADM,{op:'config',config:{cotas:{textoDia:-1}}}),/config/);
+});
+test('sessão de conversa: uma por aluno, assumir em outro aparelho, fim e limite de 15 minutos',()=>{
+  const {ctx}=orc();const a=crypto.randomUUID(),b=crypto.randomUUID();
+  assert.equal(ctx.sessaoConversa_(U1,{op:'iniciar',id:a}).ok,true);
+  assert.equal(ctx.sessaoConversa_(U1,{op:'iniciar',id:b}).motivo,'outra_sessao');
+  assert.equal(ctx.sessaoConversa_(U2,{op:'iniciar',id:b}).ok,true,'o outro aluno pode conversar ao mesmo tempo');
+  assert.equal(ctx.sessaoConversa_(U1,{op:'iniciar',id:b,assumir:true}).ok,true);assert.equal(ctx.sessaoConversa_(U1,{op:'ping',id:a}).motivo,'assumida');
+  const real=Date.now;try{Date.now=()=>real()+16*60000;assert.equal(ctx.sessaoConversa_(U1,{op:'ping',id:b}).motivo,'tempo');}finally{Date.now=real;}
+  ctx.sessaoConversa_(U2,{op:'fim',id:b});assert.equal(ctx.sessaoConversa_(U2,{op:'iniciar',id:a}).ok,true);
+});
+test('voz premium: Gemini TTS gratuito conta segundos na cota e não no dinheiro',()=>{
+  const {ctx,props}=orc();props.GEMINI_API_KEY='g';let corpo;
+  ctx.UrlFetchApp.fetch=(url,o)=>{corpo=JSON.parse(o.payload);return{getResponseCode:()=>200,getContentText:()=>JSON.stringify({candidates:[{content:{parts:[{inlineData:{mimeType:'audio/L16;rate=24000',data:Buffer.alloc(48000*3).toString('base64')}}]}}]})};};
+  const r=ctx.pedidoIA_(U1,{tipo:'voz',requestId:crypto.randomUUID(),dados:{texto:'Bonjour, comment ça va ?',idioma:'fr'}});
+  assert.equal(r.segundos,3);assert.equal(corpo.generationConfig.responseModalities[0],'AUDIO');
+  const e=ctx.estadoOrcamento_();assert.equal(e.gasto,0);assert.equal(e.alunos.u1.vozSeg,3);
 });
 test('cota é aplicada no servidor',()=>{const{ctx}=backend();for(let i=0;i<10;i++)ctx.limitarIA_({sub:'u'},'duvida');assert.throws(()=>ctx.limitarIA_({sub:'u'},'duvida'),/quota/);});
 test('token Live fixa modelo, uso único e validade curta',()=>{const {ctx,requests}=backend();ctx.liveToken_({});let body=JSON.parse(requests.at(-1).options.payload);assert.equal(body.uses,1);assert.equal(body.liveConnectConstraints,undefined,'a API REST recusa esse campo (400 Unknown name)');assert.ok(Date.parse(body.expireTime)-Date.now()<=15*60000);});

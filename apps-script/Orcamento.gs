@@ -195,6 +195,7 @@ const TIPOS_TEXTO = ['explicar', 'duvida', 'redacao', 'conversa', 'conversaResum
 function estimarPedido_(tipo, dados) {
   const tamanho = JSON.stringify(dados || {}).length;
   if (tipo === 'liveToken') return { valor: precoLive_(15), uso: { liveMin: 15 } };
+  if (tipo === 'voz') { const seg = Math.ceil(segundosFala_(dados && dados.texto) * 1.5); return { valor: precoVozPremium_(seg, 300), uso: { vozSeg: seg } }; }
   if (tipo === 'pronuncia' || (tipo === 'conversa' && dados && dados.audio)) {
     const bytes = Math.floor(String(dados.audio || '').length * 3 / 4), seg = segundosDoAudio_(bytes);
     const texto = tipo === 'conversa' ? estimarTexto_('conversa', tamanho - String(dados.audio || '').length) : estimarTexto_('pronunciaTexto', 2000);
