@@ -1,0 +1,49 @@
+name: Preparar Eco SVG na branch de teste
+on:
+  push:
+    branches: ['eco/etapa-1-neutral-hoje']
+permissions:
+  contents: write
+jobs:
+  montar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: python -m pip install -r requirements.txt
+      - run: npm ci
+      - name: Retirar a Eco 3D e substituir apenas na tela Hoje
+        run: python fonte/src/migrar-eco-etapa1.py
+      - name: Regenerar arquivos publicados, sem publicar a main
+        run: python fonte/build.py
+      - name: Verificar que os recursos 3D não são mais carregados
+        run: |
+          if grep -Eq 'eco-3d-renderer|eco-glb-asset|EcoLabMount|TELAS.eco3D' index.html; then
+            echo "Ainda há referências à Eco 3D antiga"
+            exit 1
+          fi
+          grep -q 'eco-hoje-svg' index.html
+          grep -q 'eco-svg-lib' index.html
+      - name: Rodar testes de regressão
+        run: npm test
+      - name: Salvar alterações exclusivamente na branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f .github/workflows/eco-montar-branch.yml fonte/src/migrar-eco-etapa1.py
+          git add -A -- fonte/design/design.html index.html sw.js assets apps-script/ProfileCore.gs
+          git add -u -- .github/workflows/eco-montar-branch.yml fonte/src/migrar-eco-etapa1.py
+          if git diff --cached --quiet; then
+            echo "Nenhuma mudança gerada"
+          else
+            git commit -m "feat(eco): substituir Eco 3D por SVG 2.5D na tela Hoje"
+            git push origin HEAD:eco/etapa-1-neutral-hoje
+          fi
