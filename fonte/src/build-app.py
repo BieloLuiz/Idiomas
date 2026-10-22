@@ -15,6 +15,11 @@ process.stdout.write("var COURSE="+JSON.stringify(out)+";\\nvar AUDIO="+JSON.str
 data=data.replace('</script','<\\/script')
 L[i:j+1]=['<script>',open(os.path.join(D,'profile-core.js'),encoding='utf-8').read()+open(os.path.join(D,'discovery.js'),encoding='utf-8').read()+open(os.path.join(D,'ia.js'),encoding='utf-8').read()+data+open(os.path.join(D,'adapter.js'),encoding='utf-8').read(),'</script>']
 s='\n'.join(L)
+# A mesma biblioteca SVG usada no HtmlService é empacotada no PWA.
+# Não alterar o código da biblioteca; apenas incorporar seu conteúdo.
+eco_lib=open(os.path.join(D,'eco.js'),encoding='utf-8').read()
+assert '</script' not in eco_lib.lower(), 'eco.js contém fechamento de script'
+s=s.replace('</head>', '</head>\n<script id="eco-svg-lib">'+eco_lib+'</script>', 1)
 def rep(a,b,n=1):
     global s
     assert s.count(a)==n,(a,s.count(a)); s=s.replace(a,b)
@@ -98,7 +103,7 @@ rep("    if (ao && ao.som) ao.som(ok ? (seguidas >= 3 ? 'combo' : 'acerto') : 'e
  "          .catch(function (e) { bt.disabled = false; bt.textContent = IA.erroTexto(e) + ' Tocar para tentar de novo.'; }); };\n"
  "      $('.ui-banner__text', bannerBox).appendChild(bt);\n"
  "    }\n  }")
-rep("  TELAS.eco3D=function(){", open(os.path.join(D,'ia-telas.js'),encoding='utf-8').read()+"\n  TELAS.eco3D=function(){")
+rep("  TELAS.descobrir=function(context){", open(os.path.join(D,'ia-telas.js'),encoding='utf-8').read()+"\n  TELAS.descobrir=function(context){")
 rep("String(r.score).replace('.',',')+'/10 · exemplo'","String(r.score).replace('.',',')+'/10'+(r.demo?' · exemplo':'')")
 rep("'Resultado · demonstração'","(r.demo?'Resultado · demonstração':'Resultado')")
 rep("(r.score===null?'Aguardando IA':'Nota de exemplo')","(r.score===null?'Aguardando IA':(r.demo?'Nota de exemplo':'Nota do Eco'))")
