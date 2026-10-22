@@ -26,28 +26,38 @@ function ecoEstado(el, estado) { if (el && el.__eco) el.__eco.estado(ECO_MAPA[es
     try { if (localStorage.getItem('idiomas-abertura') === hoje()) return; localStorage.setItem('idiomas-abertura', hoje()); } catch (e) { return; }
     var nome = ''; try { var S = JSON.parse(localStorage.getItem('idiomas-app-v2')); var p = S && S.perfis && S.perfis.filter(function (x) { return x.id === (S.ativo || S.ultimo); })[0]; nome = p ? p.nome : ''; } catch (e) {}
     var reduz = matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'reduce';
-    var ov = document.createElement('div'); ov.className = 'abertura'; ov.setAttribute('role', 'status');
-    ov.innerHTML = '<div class="abertura-arte"><img alt="Idiomas" src="data:image/svg+xml;charset=utf-8,' + encodeURIComponent(ABERTURA_SVG).replace(/'/g, '%27') + '"></div><p class="abertura-frase"></p>';  /* como imagem: o CSS da animação não se mistura com o do app */
+    var cfg = {}; try { cfg = (JSON.parse(localStorage.getItem('idiomas-app-v2')) || {}).cfg || {}; } catch (e) {}
+    var comMusica = cfg.musica !== false && !cfg.silent && cfg.efeitos !== false, ctx = comMusica && window.SOM ? SOM.contexto() : null;
+    /* iPhone/iPad (e navegadores que bloqueiam som sem toque): a animação espera o primeiro toque, para sair junto com a música */
+    var esperar = !!ctx && ctx.state !== 'running';
+    var ov = document.createElement('div'); ov.className = 'abertura' + (esperar ? ' abertura-espera' : ''); ov.setAttribute('role', 'status');
+    ov.innerHTML = '<div class="abertura-arte"></div><p class="abertura-frase"></p>' + (esperar ? '<p class="abertura-toque">Toque para começar</p>' : '');
     ov.querySelector('.abertura-frase').textContent = window.Eco ? Eco.abertura({ nome: nome }).frase : '';
     if (reduz) ov.classList.add('abertura-parada');
-    var fechado = false, tocou = false, cfg = {};
-    try { cfg = (JSON.parse(localStorage.getItem('idiomas-app-v2')) || {}).cfg || {}; } catch (e) {}
-    var comMusica = cfg.musica !== false && !cfg.silent && cfg.efeitos !== false;
-    /* música de abertura: o navegador só deixa tocar som depois de um toque; se bloquear, toca no primeiro toque */
-    function musica(toque) {
-      if (!comMusica || tocou || !window.SOM) return; var c = SOM.contexto(); if (!c) return;
-      function vai() { if (tocou || c.state !== 'running') return; tocou = true; SOM.vol(cfg.volume == null ? 1 : cfg.volume); SOM.abertura(); }
-      if (c.state === 'running') vai(); else try { c.resume().then(function () { if (toque || !fechado) vai(); }).catch(function () {}); } catch (e) {}
-    }
+    var fechado = false, comecou = false;
     function fechar() { if (fechado) return; fechado = true; ov.classList.add('abertura-saindo'); setTimeout(function () { ov.remove(); }, 350); }
-    ov.addEventListener('pointerdown', function () { musica(true); fechar(); }); addEventListener('keydown', fechar, { once: true });
-    document.body.appendChild(ov); musica(); setTimeout(fechar, reduz ? 1400 : 3900);
+    function comecar() {
+      if (comecou) return; comecou = true; if (esperar) ov.querySelector('.abertura-frase').style.animation = 'none'; ov.classList.remove('abertura-espera'); var t = ov.querySelector('.abertura-toque'); if (t) t.remove();
+      /* como imagem: o CSS da animação não se mistura com o do app; inserir agora faz a animação começar agora */
+      ov.querySelector('.abertura-arte').innerHTML = '<img alt="Idiomas" src="data:image/svg+xml;charset=utf-8,' + encodeURIComponent(ABERTURA_SVG).replace(/'/g, '%27') + '">';
+      if (ctx) { var vai = function () { if (ctx.state === 'running') { SOM.vol(cfg.volume == null ? 1 : cfg.volume); SOM.abertura(); } }; if (ctx.state === 'running') vai(); else try { ctx.resume().then(vai).catch(function () {}); } catch (e) {} }
+      setTimeout(fechar, reduz ? 1400 : 3900);
+    }
+    if (esperar) {
+      var eco = window.criarEco ? criarEco('neutral', '', true) : null; if (eco) { eco.classList.add('abertura-eco'); ov.querySelector('.abertura-arte').appendChild(eco); }
+      ov.addEventListener('pointerdown', function () { if (!comecou) comecar(); else fechar(); });
+      addEventListener('keydown', function () { if (!comecou) comecar(); else fechar(); });
+      setTimeout(function () { if (!comecou) fechar(); }, 30000);    // ninguém tocou: abre o app
+    } else {
+      ov.addEventListener('pointerdown', fechar); addEventListener('keydown', fechar, { once: true });
+    }
+    document.body.appendChild(ov); if (!esperar) comecar();
   }
   var css = '.abertura{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#F6F4EF;transition:opacity .35s ease;cursor:pointer}' +
     '.abertura-arte{width:min(78vw,340px)}.abertura-arte img{width:100%;height:auto;display:block}' +
     '.abertura-frase{margin:0 24px;max-width:340px;text-align:center;font:500 16px/1.45 "Plus Jakarta Sans",system-ui,sans-serif;color:#4e5967;opacity:0;animation:aberturaFrase .5s 2.4s forwards}' +
     '.abertura-parada .abertura-frase{animation:none;opacity:1}' +
-    '.abertura-saindo{opacity:0}@keyframes aberturaFrase{to{opacity:1}}' +
+    '.abertura-saindo{opacity:0}.abertura-espera .abertura-frase{animation:none;opacity:1}.abertura-eco{width:34%;margin:0 auto}.abertura-toque{margin:18px 0 0;font:600 15px/1.4 "Plus Jakarta Sans",system-ui,sans-serif;color:#5366C7;animation:aberturaPulso 1.6s ease-in-out infinite}@keyframes aberturaPulso{50%{opacity:.45}}@keyframes aberturaFrase{to{opacity:1}}' +
     '@media (prefers-color-scheme:dark){.abertura{background:#0f1320}.abertura-frase{color:#c3cad6}}html[data-theme="dark"] .abertura{background:#0f1320}html[data-theme="dark"] .abertura-frase{color:#c3cad6}html[data-theme="light"] .abertura{background:#F6F4EF}';
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mostrar); else mostrar();
