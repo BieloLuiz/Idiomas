@@ -19,7 +19,7 @@ s='\n'.join(L)
 # Não alterar o código da biblioteca; apenas incorporar seu conteúdo.
 eco_lib=open(os.path.join(D,'eco.js'),encoding='utf-8').read()
 assert '</script' not in eco_lib.lower(), 'eco.js contém fechamento de script'
-s=s.replace('</head>', '</head>\n<script id="eco-svg-lib">'+eco_lib+'</script>', 1)
+s=s.replace('</head>', '<script id="eco-svg-lib">'+eco_lib+'</script>\n</head>', 1)
 def rep(a,b,n=1):
     global s
     assert s.count(a)==n,(a,s.count(a)); s=s.replace(a,b)
