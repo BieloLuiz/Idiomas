@@ -12,7 +12,7 @@ Aplicativo pessoal para estudar a dois, publicado em GitHub Pages. Interface e e
 - `fonte/src/ia.js` e `ia-telas.js`: pedidos identificados e telas de IA. Toda operação assíncrona mantém o perfil proprietário. Toda captação precisa de uma função registrada em `studioCleanup`.
 - `fonte/curso/<nível>/`: conteúdo A2–C1. A1 fica em `src/base.json`, `en.js` e `fr.js`. `sprites*.json` mapeiam os trechos dos 120 MP3.
 - `fonte/pwa/`: autenticação, sincronização, service worker e empacotamento dos recursos.
-- `apps-script/Code.gs` e `Security.gs`: servidor sobre a planilha. A lista de contas permitidas e as chaves ficam nas propriedades privadas do script. Não pedir nem versionar as chaves.
+- `apps-script/Code.gs` e `Security.gs`: servidor sobre a planilha. As chaves ficam nas propriedades privadas do script; não pedir nem versionar as chaves. O ID do cliente Google e a lista das duas contas têm padrão no código (`Security.gs`, escolha do dono) e podem ser substituídos pelas propriedades `GOOGLE_CLIENT_ID` e `ALLOWED_EMAILS`.
 - `index.html`, `assets/`, `auth.js`, `sync.js`, `sw.js`, `manifest.webmanifest`: saídas geradas.
 - `fonte/testes/regression.test.cjs` e `browser.cjs`: verificações canônicas. Os demais scripts antigos são diagnósticos históricos, sem garantia de portabilidade.
 

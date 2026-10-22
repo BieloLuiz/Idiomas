@@ -37,7 +37,7 @@ test('Google: assinatura verificada pelo serviço, audience, expiração e conta
   for(const claims of [{aud:'other'},{exp:1},{iss:'https://evil.test'},{email_verified:false},{email:'other@example.test'}]){const {ctx}=backend(claims);assert.throws(()=>ctx.autenticar_('x'.repeat(60)),/auth_required|auth_denied/);}
   const {ctx}=backend();assert.equal(ctx.autenticar_('x'.repeat(60)).sub,'u1');
 });
-test('servidor recusa acesso quando não está configurado',()=>{const {ctx,props}=backend();delete props.ALLOWED_EMAILS;assert.throws(()=>ctx.autenticar_('x'.repeat(60)),/auth_config/);});
+test('servidor recusa acesso quando não está configurado',()=>{const {ctx,props}=backend();props.ALLOWED_EMAILS='';assert.throws(()=>ctx.autenticar_('x'.repeat(60)),/auth_config/);});
 test('sessão do app: Google uma vez, depois código próprio de 60 dias, revogável',()=>{
   const {ctx,props,requests}=backend();const post=q=>ctx.doPost({postData:{contents:JSON.stringify(q)}});
   let r=post({acao:'entrarGoogle',token:'x'.repeat(60)});assert.match(r.sessao,/^s1\.[0-9a-f]{64}$/);assert.ok(r.expira-Date.now()>59*86400000);
@@ -50,7 +50,7 @@ test('sessão do app: Google uma vez, depois código próprio de 60 dias, revog�
   const k=Object.keys(props).find(k=>k.startsWith('SESSAO_'));assert.equal(k,undefined);
   r=post({acao:'entrarGoogle',token:'x'.repeat(60)});const key=Object.keys(props).find(k=>k.startsWith('SESSAO_'));props[key]=JSON.stringify({...JSON.parse(props[key]),exp:Date.now()-1});
   assert.equal(ia(r.sessao),'auth_required');assert.equal(props[key],undefined);
-  delete props.ALLOWED_EMAILS;assert.equal(ia(r.sessao),'auth_config');
+  props.ALLOWED_EMAILS='';assert.equal(ia(r.sessao),'auth_config');
 });
 test('cota é aplicada no servidor',()=>{const{ctx}=backend();for(let i=0;i<10;i++)ctx.limitarIA_({sub:'u'},'duvida');assert.throws(()=>ctx.limitarIA_({sub:'u'},'duvida'),/quota/);});
 test('token Live fixa modelo, uso único e validade curta',()=>{const {ctx,requests}=backend();ctx.liveToken_({});let body=JSON.parse(requests.at(-1).options.payload);assert.equal(body.uses,1);assert.equal(body.liveConnectConstraints.model,'models/gemini-3.8-live');assert.ok(Date.parse(body.expireTime)-Date.now()<=15*60000);});

@@ -1,11 +1,14 @@
 /* ID público do cliente OAuth (aparece no botão do Google; não é segredo). A propriedade GOOGLE_CLIENT_ID, se existir, tem prioridade. */
 const GOOGLE_CLIENT_ID_PADRAO = '215022981558-ppdrm1ekehb39ha06r4q3fsh0iu0374i.apps.googleusercontent.com';
+/* Contas que podem entrar. A propriedade ALLOWED_EMAILS, se existir, substitui esta lista (vazia = ninguém entra). */
+const ALLOWED_EMAILS_PADRAO = 'gabriel.luiz.adv@gmail.com, leonardo9464@gmail.com';
+function contasPermitidas_(props) { const v = props.getProperty('ALLOWED_EMAILS'); return String(v == null ? ALLOWED_EMAILS_PADRAO : v).toLowerCase().split(/[;,\s]+/).filter(Boolean); }
 function clienteGoogle_() { return PropertiesService.getScriptProperties().getProperty('GOOGLE_CLIENT_ID') || GOOGLE_CLIENT_ID_PADRAO; }
 /* Configurar GOOGLE_CLIENT_ID e ALLOWED_EMAILS nas propriedades privadas do script.
    Sem configuração, o servidor recusa acesso. Nunca aceitar identidade enviada pelo cliente. */
 function autenticar_(token) {
   const props = PropertiesService.getScriptProperties(), audience = clienteGoogle_();
-  const allowed = (props.getProperty('ALLOWED_EMAILS') || '').toLowerCase().split(/[;,\s]+/).filter(Boolean);
+  const allowed = contasPermitidas_(props);
   if (!audience || !allowed.length) throw new Error('auth_config');
   if (typeof token !== 'string' || token.length < 50 || token.length > 10000) throw new Error('auth_required');
   const digest = Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, token));
@@ -74,7 +77,7 @@ const SESSAO_DIAS = 60;
 function hashSessao_(token) { return 'SESSAO_' + Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, token)); }
 function permitidos_() {
   const props = PropertiesService.getScriptProperties();
-  const allowed = (props.getProperty('ALLOWED_EMAILS') || '').toLowerCase().split(/[;,\s]+/).filter(Boolean);
+  const allowed = contasPermitidas_(props);
   if (!clienteGoogle_() || !allowed.length) throw new Error('auth_config');
   return allowed;
 }

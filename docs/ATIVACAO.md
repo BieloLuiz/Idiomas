@@ -12,7 +12,7 @@ Esta versão foi preparada para um espaço compartilhado por duas pessoas. As co
 | Propriedade privada | Valor |
 |---|---|
 | `GOOGLE_CLIENT_ID` | Opcional. O ID público do cliente já está no código (`GOOGLE_CLIENT_ID_PADRAO` em `Security.gs`); a propriedade só é usada para trocar de cliente. |
-| `ALLOWED_EMAILS` | Os dois endereços autorizados, separados por vírgula. Não colocar essa lista no repositório público. |
+| `ALLOWED_EMAILS` | Opcional. A lista padrão das duas contas está no código (`ALLOWED_EMAILS_PADRAO`, escolha do dono do app). Se a propriedade existir, ela substitui a lista; vazia bloqueia todos. |
 | `IA_DAILY_LIMIT` | Opcional. Padrão: 120 pedidos por pessoa por dia UTC. |
 | `IA_GLOBAL_LIMIT` | Opcional. Padrão: 240 pedidos por dia UTC para o aplicativo. |
 
