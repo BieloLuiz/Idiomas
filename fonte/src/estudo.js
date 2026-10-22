@@ -282,6 +282,7 @@
   TELAS.hoje = function () {
     _hojeEst.apply(this, arguments);
     var pg = $('.page'); if (!pg || !eu()) return;
+    var ecoOi = $('.ux-greeting .eco', pg); if (ecoOi && ecoOi.__eco && window.Eco) { ecoOi.__eco.estado(Eco.abertura({ nome: eu().nome }).estado); ecoOi.__eco.sequencia(eu().sequencia || 0); }
     var foco = $('.ux-focus', pg), dia = cartaoRevisaoDia(); if (foco && foco.nextSibling) pg.insertBefore(dia, foco.nextSibling); else pg.appendChild(dia);
     var k = eu().idioma, feitas = eu().progresso[k] || 0, res = provasDe(eu()), pendente = null;
     EST_NIVEIS.forEach(function (n, li) { if (!pendente && feitas >= (li + 1) * 60 && !res[k + '|' + n]) pendente = n; });

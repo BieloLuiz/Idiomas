@@ -52,12 +52,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
 
   /* (o tema agora é controlado nas Configurações do app) */
   /* ---------- Eco ---------- */
-  function novoEco(estado, rotulo) {
-    var el = $('#tplEco').content.firstElementChild.cloneNode(true);
-    el.dataset.state = estado || 'neutral';
-    el.setAttribute('aria-label', rotulo || 'Lumi');
-    return el;
-  }
+  function novoEco(estado, rotulo) { return window.criarEco ? criarEco(estado, rotulo) : document.createElement('span'); }
   function pular(eco) { if (rm || !eco) return; eco.classList.remove('is-jump'); void eco.offsetWidth; eco.classList.add('is-jump'); setTimeout(function () { eco.classList.remove('is-jump'); }, 750); }
 
   /* ---------- estado da lição ---------- */
@@ -335,10 +330,10 @@ function abrirLicao(LICAO, PERFIL, ao) {
     if (fase === 'responder') {
       var r = exercicio.verificar();
       tentativas++;
-      if (r.ok) { acertos++; feitos++; seguidas++; melhorSeq = Math.max(melhorSeq, seguidas); eco.dataset.state = seguidas >= 3 ? 'proud' : 'celebrate'; pular(eco); }
+      if (r.ok) { acertos++; feitos++; seguidas++; melhorSeq = Math.max(melhorSeq, seguidas); ecoEstado(eco, seguidas >= 3 ? 'proud' : 'celebrate'); pular(eco); }
       else {
         seguidas = 0;
-        eco.dataset.state = 'sad';
+        ecoEstado(eco, 'sad');
         if (!atual.revisao) fila.push({ ex: atual.ex, idx: atual.idx, revisao: true }); else feitos++;
       }
       progresso(); combo();

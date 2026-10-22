@@ -180,13 +180,7 @@
     else tocar('clique');
   }, true);
   function sincronizarTemplate() { pintar($('#tplEco').content.firstElementChild); }
-  function eco(estado, rotulo, decorativo) {
-    var el = $('#tplEco').content.firstElementChild.cloneNode(true);
-    el.dataset.state = estado || 'neutral';
-    if (decorativo) { el.removeAttribute('role'); el.removeAttribute('aria-label'); el.setAttribute('aria-hidden', 'true'); }
-    else el.setAttribute('aria-label', rotulo || 'Lumi');
-    return el;
-  }
+  function eco(estado, rotulo, decorativo) { return criarEco(estado, rotulo, decorativo); }
   function anunciar(t) { aviso.textContent = ''; setTimeout(function () { aviso.textContent = t; }, 30); }
   function toast(t) {
     var old = $('.toast'); if (old) old.remove();
@@ -2244,6 +2238,7 @@
   TELAS.hoje = function () {
     _hojeEst.apply(this, arguments);
     var pg = $('.page'); if (!pg || !eu()) return;
+    var ecoOi = $('.ux-greeting .eco', pg); if (ecoOi && ecoOi.__eco && window.Eco) { ecoOi.__eco.estado(Eco.abertura({ nome: eu().nome }).estado); ecoOi.__eco.sequencia(eu().sequencia || 0); }
     var foco = $('.ux-focus', pg), dia = cartaoRevisaoDia(); if (foco && foco.nextSibling) pg.insertBefore(dia, foco.nextSibling); else pg.appendChild(dia);
     var k = eu().idioma, feitas = eu().progresso[k] || 0, res = provasDe(eu()), pendente = null;
     EST_NIVEIS.forEach(function (n, li) { if (!pendente && feitas >= (li + 1) * 60 && !res[k + '|' + n]) pendente = n; });

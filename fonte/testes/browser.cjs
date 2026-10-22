@@ -72,6 +72,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   st3.perfis[0].ecoStudio={erros:[{id:'e1',fonte:'licao',lang:'en',frase:'Nice to meet you.',correta:'Nice to meet you, too.',dada:"I'm from Brazil.",nota:'O que você responde?',vezes:1,acertos:0,em:1}]};
   await c3.addInitScript(state=>{HTMLMediaElement.prototype.play=function(){return Promise.resolve();};localStorage.getItem('idiomas-app-v2')||localStorage.setItem('idiomas-app-v2',JSON.stringify(state));},st3);
   const h=await c3.newPage();h.on('pageerror',e=>errors.push(e.message));await h.goto(url);await h.locator('.ux-greeting').waitFor();
+  assert.equal(await h.locator('.ux-greeting .eco-v2 svg.eco-svg').count(),1,'Eco em SVG na tela Hoje');assert.equal(await h.locator('.eco .eco-body').count(),0,'Eco antiga removida');
   const dia=h.locator('.est-dia');await dia.waitFor();assert.match(await dia.textContent(),/1 para relembrar.*1 erro para refazer.*3 frases novas/);
   assert.ok(await h.locator('.est-prova-hoje').isVisible(),'Hoje sugere a prova do A1');
   async function responderTudo(fim){for(let i=0;i<90;i++){if(await fim())return true;const op=h.locator('.u015-opt');if(await op.count()){await op.first().click();await h.click('#acao');await h.waitForTimeout(60);await h.click('#acao').catch(()=>{});await h.waitForTimeout(60);continue;}const chip=h.locator('.u019-list .u019-chip');if(await chip.count()){await chip.first().click();continue;}await h.click('#acao').catch(()=>{});await h.waitForTimeout(80);}return false;}
