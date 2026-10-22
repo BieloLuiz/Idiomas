@@ -1,5 +1,0 @@
-
-html[data-auth="locked"] #root,html[data-auth="locked"] #sync-feedback{display:none!important}
-.auth-gate{max-width:440px;margin:8vh auto;padding:24px;font:inherit}.auth-gate[hidden]{display:none}.auth-gate.auth-soft{position:fixed;left:12px;right:12px;bottom:12px;margin:0 auto;z-index:9999;background:var(--surface-200,#fff);color:var(--ink,#0e141b);border:1px solid var(--border,#dde2e8);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.25);max-height:80vh;overflow:auto}.auth-gate.auth-soft h1{font-size:20px;margin:0 0 8px}.auth-gate button[hidden]{display:none}.auth-gate button{min-height:44px;padding:10px 20px;margin-top:16px}
-#sync-feedback{position:relative;margin:0 auto;padding:8px 16px;max-width:960px;font-size:13px;line-height:1.5;text-align:center}
-.studio-field input{font:inherit;padding:12px;max-width:100%;box-sizing:border-box}.ux-options .ui-btn{margin:6px}.ux-actions{display:flex;flex-wrap:wrap;gap:8px}

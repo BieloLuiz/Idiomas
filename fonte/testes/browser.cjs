@@ -2,13 +2,13 @@ const { chromium }=require('playwright'),assert=require('node:assert/strict'),ht
 const root=path.resolve(__dirname,'../..');
 function profile(id,nome,lang='fr'){return{id,nome,pin:'1234',idioma:lang,idiomas:['fr','en'],desde:'out 2026',xp:0,sequencia:0,melhorSequencia:0,hojeFeito:false,ultimoDia:'',semana:[0,0,0,0,0,0,0],xpSemana:[0,0,0,0,0,0,0],minutosHoje:0,palavras:0,progresso:{fr:240,en:240},metasHoje:{licoes:0,revisadas:0},motivos:[],revisao:0};}
 const initial=()=>({versao:2,ativo:'p1',ultimo:'p1',visto:true,cfg:{tema:'claro',meta:15,voz:.9,fala:true,efeitos:false,motion:true},perfis:[profile('p1','Ana'),profile('p2','Beto')]});
-let db={},delayWriting=0,sessao='';
+let db={},delayWriting=0,sessao='',leituraPedida=null;
 const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://local');if(url.pathname==='/api'){
  res.setHeader('Content-Type','application/json');if(req.method==='GET'){res.end(JSON.stringify({googleClientId:'test-client'}));return;}
  let body='';req.on('data',b=>body+=b);req.on('end',()=>{let q=JSON.parse(body);if(q.acao==='entrarGoogle'){if(!q.token){res.end('{"erro":"auth_required"}');return;}sessao='s1.'+require('node:crypto').randomBytes(32).toString('hex');res.end(JSON.stringify({ok:true,sessao,expira:Date.now()+60*86400000}));return;}if(!sessao||q.token!==sessao){res.end('{"erro":"auth_required"}');return;}let r={ok:true};if(q.acao==='sair'){sessao='encerrada';res.end('{"ok":true}');return;}
  if(q.acao==='listar')r={perfis:Object.values(db)};
  if(q.acao==='salvar'){let perfis=[],conflitos=[];for(let p of q.perfis){if(db[p.id]&&(db[p.id].revisao||0)!==(p.revisao||0)){conflitos.push(db[p.id]);continue;}db[p.id]={...p,revisao:(p.revisao||0)+1};perfis.push(db[p.id]);}r={perfis,conflitos};}
- if(q.acao==='ia'){r=q.tipo==='liveToken'?{token:'auth_tokens/mock',modelo:'gemini-3.8-live'}:q.tipo==='redacao'?{dados:{corrigido:q.dados.texto,nota:8,resumo:'Bom texto',erros:[]}}:q.tipo==='conversa'?{fala:'Bonjour !',ouvido:q.dados.texto||'',traducao:'Olá!',sugestao:'Bonjour !'}:{resumo:'Bom trabalho',erros:[],palavras:[]};}
+ if(q.acao==='ia'&&q.tipo==='leitura'){leituraPedida=q.dados;r={titulo:'Le voyage',texto:'Nous prenons le train pour Lyon.\nLe voyage est long mais beau.',traducao:'Pegamos o trem para Lyon.\nA viagem é longa mas bonita.',vocabulario:[['le train','o trem']],perguntas:[{pergunta:'Para onde vão?',opcoes:['Paris','Lyon','Nice'],correta:1},{pergunta:'A viagem é curta?',opcoes:['Sim','Non'],correta:0}]};res.end(JSON.stringify(r));return;}if(q.acao==='ia'){r=q.tipo==='liveToken'?{token:'auth_tokens/mock',modelo:'gemini-3.8-live'}:q.tipo==='redacao'?{dados:{corrigido:q.dados.texto,nota:8,resumo:'Bom texto',erros:[]}}:q.tipo==='conversa'?{fala:'Bonjour !',ouvido:q.dados.texto||'',traducao:'Olá!',sugestao:'Bonjour !'}:{resumo:'Bom trabalho',erros:[],palavras:[]};}
  setTimeout(()=>res.end(JSON.stringify(r)),q.tipo==='redacao'?delayWriting:0);});return;}
  if(url.pathname==='/config.js'){res.setHeader('Content-Type','application/javascript');res.end('window.IDIOMAS_API="";');return;}
  const file=path.resolve(root,'.'+decodeURIComponent(url.pathname==='/'?'/index.html':url.pathname));if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}
@@ -64,6 +64,37 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   console.log('PASS: preferências do perfil aplicadas ao trocar de pessoa e ao reabrir');
   await c2.close();
 
+  /* revisão do dia, prova de nível e lembrete (sem servidor) */
+  const c3=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+  await c3.route('https://**',r=>r.abort());await c3.route('**/config.js',r=>r.fulfill({contentType:'application/javascript',body:'window.IDIOMAS_API="";'}));
+  const st3=initial();st3.perfis[0].idioma='en';st3.perfis[0].progresso={en:60,fr:0};
+  st3.perfis[0].reviewWords={'en|0|L|0':{interval:1,due:1,correct:1,wrong:0}};
+  st3.perfis[0].ecoStudio={erros:[{id:'e1',fonte:'licao',lang:'en',frase:'Nice to meet you.',correta:'Nice to meet you, too.',dada:"I'm from Brazil.",nota:'O que você responde?',vezes:1,acertos:0,em:1}]};
+  await c3.addInitScript(state=>{HTMLMediaElement.prototype.play=function(){return Promise.resolve();};localStorage.getItem('idiomas-app-v2')||localStorage.setItem('idiomas-app-v2',JSON.stringify(state));},st3);
+  const h=await c3.newPage();h.on('pageerror',e=>errors.push(e.message));await h.goto(url);await h.locator('.ux-greeting').waitFor();
+  const dia=h.locator('.est-dia');await dia.waitFor();assert.match(await dia.textContent(),/1 para relembrar.*1 erro para refazer.*3 frases novas/);
+  assert.ok(await h.locator('.est-prova-hoje').isVisible(),'Hoje sugere a prova do A1');
+  async function responderTudo(fim){for(let i=0;i<90;i++){if(await fim())return true;const op=h.locator('.u015-opt');if(await op.count()){await op.first().click();await h.click('#acao');await h.waitForTimeout(60);await h.click('#acao').catch(()=>{});await h.waitForTimeout(60);continue;}const chip=h.locator('.u019-list .u019-chip');if(await chip.count()){await chip.first().click();continue;}await h.click('#acao').catch(()=>{});await h.waitForTimeout(80);}return false;}
+  await dia.getByRole('button',{name:'Revisar agora'}).click();await h.locator('#acao').waitFor();
+  assert.ok(await responderTudo(async()=>await h.locator('.ux-greeting').count()>0),'revisão do dia termina');
+  const rw=await h.evaluate(()=>JSON.parse(localStorage.getItem('idiomas-app-v2')).perfis[0].reviewWords);
+  assert.ok(Object.keys(rw).filter(k=>k.includes('|L|')).length>=4,'frases entram na revisão espaçada');assert.ok(rw['en|0|L|0'].due>Date.now()-1000,'item revisado ganha nova data');
+  console.log('PASS: revisão do dia junta frases vencidas, erros e frases novas, e reagenda cada item');
+  await h.locator('.est-prova-hoje').getByRole('button',{name:'Fazer a prova'}).click();
+  await h.getByRole('button',{name:'Começar a prova'}).click();await h.locator('#acao').waitFor();
+  const ex=await h.evaluate(()=>montarProva('en',0).exercicios.map(e=>e._prova));
+  assert.deepEqual(['escuta','leitura','gramatica','vocabulario'].map(p=>ex.filter(x=>x===p).length),[5,5,5,5]);
+  assert.ok(await responderTudo(async()=>await h.locator('.est-resultado').count()>0),'prova chega ao resultado');
+  const prova=await h.evaluate(()=>JSON.parse(localStorage.getItem('idiomas-app-v2')).perfis[0].provas['en|A1']);
+  assert.deepEqual(Object.keys(prova.partes).sort(),['escuta','gramatica','leitura','vocabulario']);assert.equal(typeof prova.total,'number');
+  await h.screenshot({path:'.build/prova-resultado.png',fullPage:true});
+  console.log('PASS: prova do A1 com 20 questões em 4 partes e resultado salvo ('+prova.total+'%)');
+  await h.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Perfil',exact:true}).click();await h.getByRole('button',{name:/Configurações/}).first().click();
+  await h.getByRole('button',{name:/Lembrete diário/}).click();await h.getByRole('heading',{name:'Um lembrete por dia'}).waitFor();
+  assert.ok(await h.getByRole('button',{name:'Ligar lembrete'}).isDisabled(),'sem entrada Google o lembrete não liga');
+  console.log('PASS: tela do lembrete explica o que falta para ligar');
+  await c3.close();
+
   const online=await browser.newContext({viewport:{width:390,height:844},permissions:['microphone'],serviceWorkers:'block'});
   await online.route('https://**',r=>r.abort());await online.route('**/config.js',r=>r.fulfill({contentType:'application/javascript',body:`window.IDIOMAS_API=${JSON.stringify(url+'/api')};`}));
   const token='e30.'+Buffer.from(JSON.stringify({exp:Math.floor(Date.now()/1000)+3600})).toString('base64url')+'.signature';
@@ -104,6 +135,14 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await p2.waitForFunction(()=>!localStorage.getItem('idiomas-sessao'));await p2.waitForTimeout(300);assert.notEqual(sessao,antes,'servidor recebeu a saída');
   assert.ok(await p2.getByRole('button',{name:/Entrar com Google/}).isVisible());assert.notEqual(await p2.evaluate(()=>document.documentElement.dataset.auth),'locked');
   console.log('PASS: entrar pelas Configurações e sair da conta Google neste aparelho');
+  await p2.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Perfil',exact:true}).click();await p2.getByRole('button',{name:/Configurações/}).first().click();
+  await p2.getByRole('button',{name:/Entrar com Google/}).click();await p2.getByRole('button',{name:'Entrar no teste'}).click();await p2.locator('.auth-gate').waitFor({state:'hidden'});
+  await p2.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Praticar',exact:true}).click();await p2.getByRole('button',{name:/Quero entender/}).click();await p2.getByRole('button',{name:'Leitura extra com o Eco',exact:true}).click();
+  await p2.getByLabel('Tema').fill('uma viagem de trem');await p2.getByRole('button',{name:'Criar leitura'}).click();
+  await p2.getByRole('heading',{name:'Le voyage'}).waitFor();assert.equal(await p2.locator('.est-leitura p[lang=fr]').count(),2);
+  await p2.locator('fieldset').nth(0).getByLabel('Lyon').check();await p2.locator('fieldset').nth(1).getByLabel('Non').check();await p2.getByRole('button',{name:'Conferir respostas'}).click();
+  await p2.getByText('1 de 2 certas.').waitFor();assert.equal(leituraPedida.tema,'uma viagem de trem');
+  console.log('PASS: leitura extra criada pela IA com áudio por parágrafo, vocabulário e perguntas');
   await online.close();assert.deepEqual(errors,[]);console.log('PASS: nenhum erro JavaScript nos fluxos exercitados');
  }finally{await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,6 +1,6 @@
 /* A PWA gerencia somente os próprios caches e recursos dentro do seu escopo. */
-const PREFIX = 'idiomas-', V = PREFIX + '1cef161403', AUDIO_CACHE = PREFIX + 'audio-v1';
-const ASSETS = ["assets/c6bfe16efec91a123fcd.webp", "assets/e7245faa3817a7f27d9a.js", "assets/295efa32d0c9f5d3d971.js", "assets/80627938c9498f4b9d0c.js", "assets/c15a00c30ed01e7d3d81.js", "assets/3e4d18ba3746cddfad74.js", "assets/0fffe9886293678beb14.js", "assets/27535720bc0b15e6a541.js", "assets/b42e717cbb0db7138680.js", "assets/eca617750f7770680c27.css", "assets/12725c10c7f8e4f20e1c.css", "assets/eb8495b7e3976d66e829.css", "assets/8655ef5b06083818ff61.css", "assets/f6546f320e981c99ad3e.css"];
+const PREFIX = 'idiomas-', V = PREFIX + '78b5cc185e', AUDIO_CACHE = PREFIX + 'audio-v1';
+const ASSETS = ["assets/c6bfe16efec91a123fcd.webp", "assets/e7245faa3817a7f27d9a.js", "assets/295efa32d0c9f5d3d971.js", "assets/8ca0e31319b280f1a404.js", "assets/ace83ee6fd62bb07bbe1.js", "assets/6b8c29dcc7249d395448.js", "assets/0fffe9886293678beb14.js", "assets/27535720bc0b15e6a541.js", "assets/b42e717cbb0db7138680.js", "assets/eca617750f7770680c27.css", "assets/12725c10c7f8e4f20e1c.css", "assets/eb8495b7e3976d66e829.css", "assets/e79cb0efd6741f615eec.css", "assets/f6546f320e981c99ad3e.css"];
 const SHELL = ['./', 'index.html', 'config.js', 'auth.js', 'sync.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'].concat(ASSETS);
 self.addEventListener('install', e => e.waitUntil(caches.open(V).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith(PREFIX) && k !== V && k !== AUDIO_CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
@@ -31,5 +31,17 @@ self.addEventListener('fetch', e => {
     const cache = await caches.open(V), hit = await cache.match(e.request); if (hit) return hit;
     if (e.request.mode === 'navigate') return await cache.match('index.html') || Response.error();
     return Response.error();
+  }));
+});
+/* Lembrete diário (Web Push) */
+self.addEventListener('push', e => {
+  let d = {}; try { d = e.data ? e.data.json() : {}; } catch (x) { d = { corpo: e.data && e.data.text() }; }
+  e.waitUntil(self.registration.showNotification(d.titulo || 'Idiomas', { body: d.corpo || 'Hora de estudar um pouquinho?', icon: 'icon-192.png', badge: 'icon-192.png', tag: 'lembrete-diario', renotify: true, data: { url: './?de=lembrete' } }));
+});
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
+    for (const c of list) if ('focus' in c) return c.focus();
+    return self.clients.openWindow(e.notification.data && e.notification.data.url || './');
   }));
 });

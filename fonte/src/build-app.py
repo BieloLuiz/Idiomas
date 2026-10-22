@@ -98,7 +98,7 @@ rep("    if (ao && ao.som) ao.som(ok ? (seguidas >= 3 ? 'combo' : 'acerto') : 'e
  "          .catch(function (e) { bt.disabled = false; bt.textContent = IA.erroTexto(e) + ' Tocar para tentar de novo.'; }); };\n"
  "      $('.ui-banner__text', bannerBox).appendChild(bt);\n"
  "    }\n  }")
-rep("  TELAS.eco3D=function(){", open(os.path.join(D,'ia-telas.js'),encoding='utf-8').read()+"\n  TELAS.eco3D=function(){")
+rep("  TELAS.eco3D=function(){", open(os.path.join(D,'ia-telas.js'),encoding='utf-8').read()+"\n"+open(os.path.join(D,'estudo.js'),encoding='utf-8').read()+"\n  TELAS.eco3D=function(){")
 rep("String(r.score).replace('.',',')+'/10 · exemplo'","String(r.score).replace('.',',')+'/10'+(r.demo?' · exemplo':'')")
 rep("'Resultado · demonstração'","(r.demo?'Resultado · demonstração':'Resultado')")
 rep("(r.score===null?'Aguardando IA':'Nota de exemplo')","(r.score===null?'Aguardando IA':(r.demo?'Nota de exemplo':'Nota do Eco'))")
@@ -133,8 +133,8 @@ s=s.replace('Inglês · Francês · do A1 ao B2','Inglês · Francês · do A1 a
 
 # ---- design 3: as funções do Eco entram no Praticar e no Caderno ----
 rep("var options={entender:[['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Escrever um texto','ecoWrite'],",
-    "var options={entender:[['Tirar uma dúvida com o Eco','ecoDuvida'],['Fazer um ditado','ecoDitado'],['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Escrever um texto','ecoWrite'],['Treinar pronúncia','ecoPronuncia'],")
-rep("revisar:[['Revisão do curso','revisar'],","revisar:[['Revisar meus erros','ecoRevisao'],['Revisão do curso','revisar'],")
+    "var options={entender:[['Leitura extra com o Eco','leituras'],['Tirar uma dúvida com o Eco','ecoDuvida'],['Fazer um ditado','ecoDitado'],['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Escrever um texto','ecoWrite'],['Treinar pronúncia','ecoPronuncia'],")
+rep("revisar:[['Revisão do curso','revisar'],","revisar:[['Revisão do dia','revisaoDia'],['Prova de nível','provas'],['Revisar meus erros','ecoRevisao'],['Revisão do curso','revisar'],")
 rep("    (ds.errors||[]).forEach(function(e){rows.push({id:'error-'+e.id,",
     "    (st.erros||[]).filter(function(e){return e.lang===lang;}).forEach(function(e){rows.push({id:'erro-'+e.id,kind:'Dificuldades',text:e.correta,translation:e.nota||'',topic:'Quero lembrar',source:'Minha tentativa: '+(e.dada||'—'),action:function(){ir('ecoRevisao');}});});\n    (ds.errors||[]).forEach(function(e){rows.push({id:'error-'+e.id,")
 rep("source:'Conversa de demonstração'});","source:'Conversa com o Eco'});")
@@ -149,8 +149,13 @@ rep("    pr.appendChild(eco); pr.appendChild(bub);", "    pr.appendChild(eco); i
 rep("    anuncio.textContent = (ok ? $('.ui-banner__title', bannerBox).textContent + '. ' : 'Quase lá. Resposta correta: ' + correta + '.');",
     "    anuncio.textContent = (ok ? $('.ui-banner__title', bannerBox).textContent + '. ' : 'Quase lá. Resposta correta: ' + correta + '.');\n    if (atual && atual.ex && atual.ex.explicacao) { var xp = document.createElement('p'); xp.className = 'ui-banner__detail ui-banner__explica'; xp.textContent = atual.ex.explicacao; $('.ui-banner__text', bannerBox).appendChild(xp); anuncio.textContent += ' ' + atual.ex.explicacao; }")
 
+# Revisão do dia, prova e leituras (src/estudo.js): exercício sem áudio e aviso de fim para a prova.
+rep("        ir(uxExit); toast('Prática salva. +'+r.xp+' XP.');", "        if (op && op.aoConcluir) { op.aoConcluir(r); return; }\n        ir(uxExit); toast('Prática salva. +'+r.xp+' XP.');")
+
+rep("  var uxReview=TELAS.revisar;", "  estudoInstalarHoje();\n  var uxReview=TELAS.revisar;")
 # Aplicações explícitas ao contrato de reprodução e ao apoio de escuta.
 rep("    bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);", "    if(ex.escuta){var transcript=document.createElement('details'),sum=document.createElement('summary');sum.textContent='Ver transcrição';transcript.append(sum,p);bub.append(transcript,montarOuvir(ex),pop);}else{bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}")
+rep("if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}", "if (!ex.ocultar && !ex.semAudio) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}")
 rep("source(function(){if(token===serial)show('idle','Áudio concluído');}, +speed.value);", "source(function(error){if(token===serial)show('idle',error?'Não foi possível ouvir. Confira a conexão ou baixe a unidade.':'Áudio concluído');}, +speed.value);")
 rep("    var play=el.querySelector('.audio-play')", "    if(!source&&window.AUD)source=AUD.fn(text,lang);\n    var play=el.querySelector('.audio-play')")
 open(out,'w',encoding='utf-8').write(s)

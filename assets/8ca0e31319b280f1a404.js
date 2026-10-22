@@ -244,7 +244,7 @@ var CURSOS = {}, LICOES = {}, GUIAS = {}, PALAVRAS = {};
 
   /* ---------- montar o curso ---------- */
   ['en', 'fr'].forEach(function (k) {
-    var L = COURSE[k], vozL = L.tts, all = [];
+    var L = COURSE[k], vozL = L.tts, all = [], frasesAll = [];
     var secs = [], NIV = ['A1', 'A2', 'B1', 'B2', 'C1'];
     L.units.forEach(function (U, ui) {
       var id = k + '-u' + (ui + 1), r = rnd(ui * 31 + (k === 'en' ? 1 : 2));
@@ -297,6 +297,7 @@ var CURSOS = {}, LICOES = {}, GUIAS = {}, PALAVRAS = {};
       ex.push(mix([].concat(mix(cards, r).slice(0, 2).map(function (c) { return palavra(c); }), mix(lines, r).slice(0, 2).map(escuta), mix(curtas, r).slice(0, 2).map(conversa), mix(gaps, r).slice(0, 2).map(lacuna)), r));
       }
       LN.forEach(function (n, i) { Object.defineProperty(LICOES,id+'|'+n,{enumerable:true,get:function(){prepare();return { idioma: vozL, exercicios: ex[i], unidade: U.title, nivel: nv };}}); });
+      lines.forEach(function (l, li) { frasesAll.push({ u: ui, id: k + '|' + ui + '|L|' + li, get ex() { r = rnd(ui * 131 + li); var e = escuta(l); e._srsId = this.id; return e; } }); });
       cards.forEach(function (c,ci) { all.push({ u: ui, get ex(){r=rnd(ui*97+ci);return palavra(c);}, w: [c[1], c[0]], id:k+'|'+ui+'|'+c[1] }); });
 
       /* guia da unidade */
@@ -312,6 +313,9 @@ var CURSOS = {}, LICOES = {}, GUIAS = {}, PALAVRAS = {};
     function profile(){try{var S=JSON.parse(localStorage.getItem('idiomas-app-v2'));return S.perfis.find(function(x){return x.id===S.ativo;})||{};}catch(e){return{};}}
     function feitas() { return profile().progresso && profile().progresso[k] || 0; }
     function abertas() { var n = Math.floor(feitas() / LN.length); return all.filter(function (a) { return a.u <= n; }); }
+    /* itens da revisão espaçada (palavras e frases das unidades já abertas); usado por src/estudo.js */
+    window.SRS_ITENS = window.SRS_ITENS || {};
+    SRS_ITENS[k] = function () { var n = Math.floor(feitas() / LN.length); return { palavras: abertas(), frases: frasesAll.filter(function (a) { return a.u <= n; }), voz: vozL }; };
     Object.defineProperty(PALAVRAS, k, { enumerable: true, get: function () { var history=profile().reviewWords||{};return abertas().map(function(a){var item=history[a.id]||{};return[a.w[0],a.w[1],Math.min(5,1+Math.floor(Math.log2((item.interval||0)+1))),item.due||0,a.id];}); } });
     Object.defineProperty(LICOES, 'rev|' + k, { get: function () { var h=profile().reviewWords||{};return { idioma: vozL, exercicios: abertas().filter(function(a){return !h[a.id]||h[a.id].due<=Date.now();}).sort(function(a,b){return (h[a.id]&&h[a.id].due||0)-(h[b.id]&&h[b.id].due||0);}).slice(0,10).map(function(a){return a.ex;}) }; } });
   });

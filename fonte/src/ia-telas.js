@@ -369,7 +369,7 @@
       if (!eu() || !e || !(e.frase || e.correta)) return;
       e.lang = (e.lang || eu().idioma).slice(0, 2); var L = errosDe(), k = chaveErro(e);
       var x = L.filter(function (y) { return chaveErro(y) === k; })[0];
-      if (x) { x.vezes = (x.vezes || 1) + 1; x.acertos = 0; x.em = Date.now(); if (e.dada) x.dada = e.dada; }
+      if (x) { x.vezes = (x.vezes || 1) + 1; x.acertos = 0; x.em = Date.now(); x.due = 0; if (e.dada) x.dada = e.dada; }
       else L.unshift({ id: 'e' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), fonte: e.fonte || 'licao', lang: e.lang, unidade: String(e.unidade || '').slice(0, 80),
         frase: String(e.frase || '').slice(0, 300), correta: String(e.correta || '').slice(0, 300), dada: String(e.dada || '').slice(0, 300), nota: String(e.nota || '').slice(0, 300), vezes: 1, acertos: 0, em: Date.now() });
       if (L.length > 150) L.length = 150;
@@ -378,7 +378,7 @@
   };
   window.registrarAcerto = function (ex) {
     try { if (!ex || !ex._ref || !eu()) return; var L = errosDe(), x = L.filter(function (y) { return y.id === ex._ref; })[0]; if (!x) return;
-      x.acertos = (x.acertos || 0) + 1; if (x.acertos >= 2) L.splice(L.indexOf(x), 1); salvar(); } catch (er) {}
+      x.acertos = (x.acertos || 0) + 1; x.due = Date.now() + 2 * 86400000; /* acertou: volta em 2 dias na revisão do dia */ if (x.acertos >= 2) L.splice(L.indexOf(x), 1); salvar(); } catch (er) {}
   };
   function errosPendentes(lang) { return errosDe().filter(function (e) { return e.lang === lang; }).sort(function (a, b) { return (b.vezes - a.vezes) || (b.em - a.em); }); }
   /* erros vindos da redação e da conversa também entram no caderno */

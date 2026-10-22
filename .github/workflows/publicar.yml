@@ -42,6 +42,10 @@ jobs:
             m.webapp=m.webapp||{executeAs:"USER_DEPLOYING",access:"ANYONE_ANONYMOUS"};
             fs.writeFileSync(f,JSON.stringify(m,null,2)); console.log(JSON.stringify(m));
           ' "$GITHUB_WORKSPACE/apps-script/appsscript.json"
+      - name: Chaves do lembrete diário (derivadas de CLASPRC_JSON, não versionadas)
+        env:
+          CLASPRC: ${{ secrets.CLASPRC_JSON }}
+        run: node fonte/pwa/chaves-lembrete.cjs gs apps-script/Segredo.gs
       - name: Enviar o código
         run: |
           printf '{"scriptId":"%s","rootDir":"apps-script"}' "$SCRIPT_ID" > .clasp.json

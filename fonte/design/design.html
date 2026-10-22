@@ -2155,7 +2155,7 @@ body.has-sheet{overflow:hidden}
 .ux-intention strong{text-decoration:none}
 </style><style>
 html[data-auth="locked"] #root,html[data-auth="locked"] #sync-feedback{display:none!important}
-.auth-gate{max-width:440px;margin:8vh auto;padding:24px;font:inherit}.auth-gate[hidden]{display:none}.auth-gate.auth-soft{position:fixed;left:12px;right:12px;bottom:12px;margin:0 auto;z-index:9999;background:var(--surface-200,#fff);color:var(--ink,#0e141b);border:1px solid var(--border,#dde2e8);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.25);max-height:80vh;overflow:auto}.auth-gate.auth-soft h1{font-size:20px;margin:0 0 8px}.auth-gate button[hidden]{display:none}.auth-gate button{min-height:44px;padding:10px 20px;margin-top:16px}
+.auth-gate{max-width:440px;margin:8vh auto;padding:24px;font:inherit}.auth-gate[hidden]{display:none}.est-barra{display:grid;grid-template-columns:104px 1fr 48px;align-items:center;gap:10px;margin:8px 0}.est-barra b{text-align:right}.est-leitura p{line-height:1.6;margin:12px 0 6px}.est-vocab{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0}.est-vocab .ui-btn{margin-left:auto;padding:6px 12px;min-height:36px}.est-pergunta{border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin:10px 0}.est-pergunta label{display:block;padding:6px 0}.est-pergunta.est-certa{border-color:var(--primary)}.est-pergunta.est-errada{border-color:var(--error)}.est-gabarito{margin:6px 0 0;font-weight:600}.est-chip{min-height:36px;padding:6px 12px}.auth-gate.auth-soft{position:fixed;left:12px;right:12px;bottom:12px;margin:0 auto;z-index:9999;background:var(--surface-200,#fff);color:var(--ink,#0e141b);border:1px solid var(--border,#dde2e8);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.25);max-height:80vh;overflow:auto}.auth-gate.auth-soft h1{font-size:20px;margin:0 0 8px}.auth-gate button[hidden]{display:none}.auth-gate button{min-height:44px;padding:10px 20px;margin-top:16px}
 #sync-feedback{position:relative;margin:0 auto;padding:8px 16px;max-width:960px;font-size:13px;line-height:1.5;text-align:center}
 .studio-field input{font:inherit;padding:12px;max-width:100%;box-sizing:border-box}.ux-options .ui-btn{margin:6px}.ux-actions{display:flex;flex-wrap:wrap;gap:8px}
 </style><style>html[data-motion="reduce"] *,html[data-motion="reduce"] *::before,html[data-motion="reduce"] *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}</style></head>
@@ -8624,7 +8624,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
      ================================================================= */
   var abas = [['hoje', 'Hoje'], ['trilha', 'Trilha'], ['praticar', 'Praticar'], ['caderno', 'Caderno'], ['perfil', 'Perfil']];
   var historyBack=false;
-  var historyScreens=['hoje','trilha','praticar','caderno','perfil','config','guia','guias','revisar','progresso','ecoHub','ecoScenarios','ecoWrite','ecoPronuncia','ecoDitado','ecoRevisao','ecoHistory','ecoWritingHistory','ecoSummary','conquistas','descobrir','boasvindas','entrar'];
+  var historyScreens=['revisaoDia','provas','leituras','lembrete','hoje','trilha','praticar','caderno','perfil','config','guia','guias','revisar','progresso','ecoHub','ecoScenarios','ecoWrite','ecoPronuncia','ecoDitado','ecoRevisao','ecoHistory','ecoWritingHistory','ecoSummary','conquistas','descobrir','boasvindas','entrar'];
   function recordRoute(tela,arg){if(historyBack||historyScreens.indexOf(tela)<0)return;var data={idiomas:true,tela:tela,arg:typeof arg==='string'||typeof arg==='number'?arg:null,perfil:S.ativo};if(!history.state||!history.state.idiomas)history.replaceState(data,'');else if(history.state.tela!==tela||history.state.arg!==data.arg)history.pushState(data,'');}
   addEventListener('popstate',function(e){if(!e.state||!e.state.idiomas)return;historyBack=true;try{if(e.state.perfil!==S.ativo&&e.state.perfil){S.ativo=null;salvar();ir('entrar');}else ir(e.state.tela,e.state.arg);}finally{historyBack=false;}});
   function ir(tela, arg) {
@@ -9472,7 +9472,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
       linha('sound', 'Sons de acerto e erro', 'Sons próprios, curtos e baixos', interruptor(S.cfg.efeitos, function (v) { set('efeitos', v); if (v) tocar('acerto'); }, 'Sons de acerto e erro'))
     ]);
     bloco('Lembretes', [
-      linha('bell', 'Horário de estudo', 'Indisponível nesta versão. O app ainda não envia notificações.', indisponivel('Em breve'))
+      botaoLinha('bell', 'Lembrete diário', window.textoLembrete ? textoLembrete() : '', function () { ir('lembrete'); })
     ]);
     bloco('Acessibilidade', [
       linha('motion', 'Reduzir animações', 'O sistema do celular também é respeitado', interruptor(S.cfg.motion, function (v) { set('motion', v); aplicarTema(); }, 'Reduzir animações'))
@@ -9757,7 +9757,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
   var uxPlayer=IdiomasAudio.player;IdiomasAudio.player=function(){var player=uxPlayer.apply(IdiomasAudio,arguments);player.addEventListener('click',function(e){if(S.cfg.silent&&e.target.closest('button')){e.preventDefault();e.stopImmediatePropagation();toast('Modo silencioso ativo. Ajuste o áudio no botão de configurações.');}},true);return player;};
   uxAplicarPrefs();
 
-  window.registrarRespostaCurso = function(ex,ok) { if(!ex._wordId||!eu())return; var p=eu(); p.reviewWords=p.reviewWords||{}; ProfileCore.review(p.reviewWords,ex._wordId,ok);if(ok){p.vistas=p.vistas||{};p.vistas[ex._wordId.replace(/^(en|fr)\|\d+\|/,'$1|')]=true;p.palavras=Object.keys(p.vistas).length;}salvar(); };
+  window.registrarRespostaCurso = function(ex,ok) { if(ex&&ex._prova&&window.provaResposta)provaResposta(ex,ok); if(ex&&ex._srsId&&eu()){var ps=eu();ps.reviewWords=ps.reviewWords||{};ProfileCore.review(ps.reviewWords,ex._srsId,ok);salvar();return;} if(!ex._wordId||!eu())return; var p=eu(); p.reviewWords=p.reviewWords||{}; ProfileCore.review(p.reviewWords,ex._wordId,ok);if(ok){p.vistas=p.vistas||{};p.vistas[ex._wordId.replace(/^(en|fr)\|\d+\|/,'$1|')]=true;p.palavras=Object.keys(p.vistas).length;}salvar(); };
   document.addEventListener('idiomas-sync', function(e){ var box=document.getElementById('sync-feedback'); if(!box){box=document.createElement('p');box.id='sync-feedback';box.setAttribute('role','status');document.body.appendChild(box);} var labels={ok:'Sincronizado',enviando:'Sincronizando…',pendente:'Salvo neste aparelho; sincronização pendente',erro:'Sem sincronizar. Uma nova tentativa será feita.',entrar:'Entre com Google para sincronizar',armazenamento:'Não foi possível salvar no aparelho. Exporte seus dados.',limite:'O histórico excedeu o limite do servidor. Exporte uma cópia.'};box.textContent=labels[e.detail]||''; });
   document.addEventListener('idiomas-profiles-updated', function(){ if(!eu()&&S.perfis.length&&document.querySelector('.profiles'))ir('entrar'); if(eu()){Object.assign(S.cfg,{tema:'sistema',meta:15,voz:.9,efeitos:true,motion:false,silent:false,translations:true,textSize:100},eu().preferencias||{});cfgProfileId=eu().id;uxAplicarPrefs();} });
   if(window.SYNC) SYNC.bind(S);

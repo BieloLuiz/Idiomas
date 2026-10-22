@@ -116,7 +116,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
     var p = document.createElement('p'); p.lang = LICAO.idioma.slice(0, 2);
     var pop = document.createElement('div'); pop.className = 'hint-pop'; pop.hidden = true; pop.id = 'dica-' + atual.idx; pop.setAttribute('role', 'status');
     if (ex.ocultar) { p.textContent = ex.ocultar; p.lang = 'pt'; } else frasecomDicas(p, ex, pop);
-    if(ex.escuta){var transcript=document.createElement('details'),sum=document.createElement('summary');sum.textContent='Ver transcrição';transcript.append(sum,p);bub.append(transcript,montarOuvir(ex),pop);}else{bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}
+    if(ex.escuta){var transcript=document.createElement('details'),sum=document.createElement('summary');sum.textContent='Ver transcrição';transcript.append(sum,p);bub.append(transcript,montarOuvir(ex),pop);}else{bub.appendChild(p); if (!ex.ocultar && !ex.semAudio) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}
     pr.appendChild(eco); if (!ex.semFrase) pr.appendChild(bub);
     box.className = 'screen'; box.appendChild(ask); box.appendChild(pr);
     if (ex.dicas && !dicaVista) {

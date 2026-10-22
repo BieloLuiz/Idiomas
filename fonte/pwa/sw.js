@@ -33,3 +33,15 @@ self.addEventListener('fetch', e => {
     return Response.error();
   }));
 });
+/* Lembrete diário (Web Push) */
+self.addEventListener('push', e => {
+  let d = {}; try { d = e.data ? e.data.json() : {}; } catch (x) { d = { corpo: e.data && e.data.text() }; }
+  e.waitUntil(self.registration.showNotification(d.titulo || 'Idiomas', { body: d.corpo || 'Hora de estudar um pouquinho?', icon: 'icon-192.png', badge: 'icon-192.png', tag: 'lembrete-diario', renotify: true, data: { url: './?de=lembrete' } }));
+});
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
+    for (const c of list) if ('focus' in c) return c.focus();
+    return self.clients.openWindow(e.notification.data && e.notification.data.url || './');
+  }));
+});

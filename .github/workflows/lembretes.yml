@@ -1,0 +1,25 @@
+name: Lembretes diários
+# A cada 15 minutos pergunta ao Apps Script quem precisa de lembrete e envia a notificação (Web Push).
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+concurrency: lembretes
+permissions:
+  contents: read
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm install --no-save web-push@3.6.7
+      - name: Chaves
+        env:
+          CLASPRC: ${{ secrets.CLASPRC_JSON }}
+        run: node fonte/pwa/chaves-lembrete.cjs env
+      - name: Enviar
+        run: node fonte/pwa/enviar-lembretes.cjs
