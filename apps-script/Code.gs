@@ -502,10 +502,10 @@ function liveToken_(d) {
   const agora = Date.now(), iso = function (ms) { return new Date(ms).toISOString().replace(/\.\d{3}Z$/, 'Z'); };
   const t0 = Date.now();
   const r = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/auth_tokens', { method: 'post', contentType: 'application/json', muteHttpExceptions: true,
-    headers: { 'x-goog-api-key': chave }, payload: JSON.stringify({ uses: 1, expireTime: iso(agora + 15 * 60000), newSessionExpireTime: iso(agora + 60000), liveConnectConstraints: { model: 'models/' + modelo, generationConfig: { responseModalities: ['AUDIO'] } } }) });
+    headers: { 'x-goog-api-key': chave }, payload: JSON.stringify({ uses: 1, expireTime: iso(agora + 15 * 60000), newSessionExpireTime: iso(agora + 60000), liveConnectConstraints: { model: 'models/' + modelo } }) });
   const code = r.getResponseCode(), txt = r.getContentText();
   registrar_('liveToken', 'gemini', modelo, code === 200, Date.now() - t0, code === 200 ? '' : txt.slice(0, 160));
-  if (code !== 200) throw new Error('limite: token ' + code + ' ' + txt.slice(0, 120));
+  if (code !== 200) throw new Error(code === 429 ? 'limite' : 'indisponivel');   // o detalhe fica na aba Uso
   const o = JSON.parse(txt);
   return { token: o.name, modelo: modelo };
 }

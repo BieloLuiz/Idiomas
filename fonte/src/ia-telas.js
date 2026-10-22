@@ -597,7 +597,7 @@
         });
       };
       ws.onerror = function () {};
-      ws.onclose = function (e) { if (!fim) falhou(e.code === 1011 ? 'O serviço ao vivo está indisponível agora.' : e.code === 1008 ? 'O acesso ao serviço ao vivo foi recusado (' + (e.reason || 'limite ou permissão') + ').' : 'A conexão caiu.'); };
+      ws.onclose = function (e) { if (!fim) falhou(e.code === 1011 ? 'O serviço ao vivo está indisponível agora.' : e.code === 1008 || e.code === 1007 ? 'O serviço ao vivo recusou a conexão' + (e.reason ? ' (' + e.reason + ')' : '') + '. Tente a conversa por turnos.' : 'A conexão caiu.'); };
     }).catch(function (e) { falhou(IA.erroTexto(e)); });
     var mic = studioButton('Silenciar microfone', function () { s.muted = !s.muted; mic.textContent = s.muted ? 'Ativar microfone' : 'Silenciar microfone'; mic.setAttribute('aria-pressed', String(s.muted)); if (!fontes.length) setState(s.muted ? 'muted' : 'listening'); });
     actions.appendChild(mic);
