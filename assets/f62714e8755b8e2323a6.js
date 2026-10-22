@@ -132,11 +132,28 @@
     }
     function pop(f, t0, vol) { nota(f, t0 || 0, 0.07, vol || 0.09, 'sine', f * 1.6, [[1, 1], [2, 0.15]]); }
     var SINO = [[1, 1], [2, 0.35], [3, 0.12], [4.2, 0.05]], MAD = [[1, 1], [4, 0.18], [9.8, 0.04]];
+    var PENTA = [523.3, 587.3, 659.3, 784, 880, 1046.5], passo = 0, ultimo = 0;
+    function madeira(vol, oit) {
+      var agora = Date.now(); if (agora - ultimo < 70) return; ultimo = agora;     // toques seguidos não viram metralhadora
+      passo = (passo + 1 + Math.floor(Math.random() * 2)) % PENTA.length;
+      nota(PENTA[passo] * (oit || 1), 0, 0.12, vol, 'sine', 0, [[1, 1], [3.9, 0.08]]);
+    }
+    /* música de abertura (autoral, sintetizada aqui): ~3,6 s acompanhando a animação da Eco */
+    function abertura() {
+      var c = ac(); if (!c) return;
+      [130.8, 196, 246.9, 293.7, 329.6].forEach(function (f) { nota(f, 0, 3.4, 0.022, 'triangle'); });           // base: Dó com 7ª e 9ª, suave
+      [392, 523.3, 659.3, 784].forEach(function (f, i) { nota(f, 0.25 + i * 0.14, 0.45, 0.07, 'sine', 0, MAD); });  // chegada da Eco
+      nota(261.6, 1.45, 0.18, 0.08, 'triangle', 0, MAD); nota(196, 1.62, 0.22, 0.07, 'triangle', 0, MAD);       // quica ao frear
+      [659.3, 587.3, 784, 1046.5].forEach(function (f, i) { nota(f, 1.95 + i * 0.17, 0.5, 0.075, 'sine', 0, SINO); }); // aceno
+      nota(2093, 2.75, 0.5, 0.05, 'sine', 0, SINO); sopro(2.72, 0.35, 3000, 9000, 0.012);                          // pingo dourado
+      [523.3, 659.3, 784].forEach(function (f) { nota(f, 3.0, 1.2, 0.05, 'sine', 0, SINO); });                       // acorde final
+    }
     return {
       vol: function (v) { VOL = v; if (out) out.gain.value = 0.9 * v; },
-      clique: function () { pop(620); },
-      principal: function () { pop(520, 0, 0.1); pop(780, 0.05, 0.09); },
-      aba: function () { pop(700, 0, 0.07); nota(1050, 0.04, 0.09, 0.05, 'sine', 0, [[1, 1], [2, 0.2]]); },
+      /* toques: marimba bem baixinha, uma nota da escala pentatônica por toque (não repete o mesmo som) */
+      clique: function () { madeira(0.022); },
+      principal: function () { madeira(0.03); },
+      aba: function () { madeira(0.026, 0.5); },
       voltar: function () { nota(700, 0, 0.09, 0.07, 'sine', 420); },
       liga: function () { nota(660, 0, 0.06, 0.08, 'sine'); nota(990, 0.06, 0.1, 0.08, 'sine', 0, [[1, 1], [2, 0.2]]); },
       desliga: function () { nota(880, 0, 0.06, 0.07, 'sine'); nota(587, 0.06, 0.1, 0.07, 'sine'); },
@@ -156,9 +173,12 @@
         [1046.5, 1318.5, 1568].forEach(function (f) { nota(f, 0.42, 0.9, 0.09, 'sine', 0, SINO); });
         for (var i = 0; i < 6; i++) nota(2093 + i * 260, 0.5 + i * 0.05, 0.12, 0.03, 'sine');
       },
+      abertura: abertura,
+      contexto: function () { return ac(); },
       chama: function () { nota(330, 0, 0.45, 0.03, 'sawtooth', 990); nota(988, 0.2, 0.5, 0.12, 'sine', 0, SINO); nota(1480, 0.3, 0.6, 0.08, 'sine', 0, SINO); }
     };
   })();
+  window.SOM = SOM;
   function tocar(t) { if (!S.cfg.silent && S.cfg.efeitos && SOM[t]) try { SOM.vol(S.cfg.volume == null ? 1 : S.cfg.volume); SOM[t](); } catch (e) {} }
   function botaoSom(bar) {
     var b = document.createElement('button'); b.type = 'button'; b.className = 'icon-btn som-btn'; b.setAttribute('role', 'switch');
@@ -170,7 +190,7 @@
   /* som em todo toque da interface (a lição tem os sons próprios dela) */
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('button, a, [role=radio], [role=switch], summary, label, input[type=checkbox], input[type=radio]'); if (!b || b.disabled) return;
-    if (b.closest('.u015-opt, .u019-chip, #acao, .u019 button')) return;
+    if (b.closest('.u015-opt, .u019-chip, #acao, .u019 button') || S.cfg.toques === 'nenhum') return;
     var lab = (b.getAttribute('aria-label') || '') + ' ' + b.className;
     if (b.closest('.ui-keypad')) tocar('tecla');
     else if (b.getAttribute('role') === 'switch') tocar(b.getAttribute('aria-checked') === 'true' ? 'desliga' : 'liga');
@@ -185,7 +205,7 @@
   function toast(t) {
     var old = $('.toast'); if (old) old.remove();
     var d = document.createElement('div'); d.className = 'toast'; d.textContent = t; document.body.appendChild(d);
-    anunciar(t); setTimeout(function () { tocar('aviso'); }, 60); setTimeout(function () { d.remove(); }, 2400);
+    anunciar(t); setTimeout(function () { d.remove(); }, 2400);
   }
   function falar(texto, lang) {
     if (window.AUD && AUD.say(texto, lang, null, S.cfg.voz)) return;
@@ -282,7 +302,7 @@
     IdiomasAudio.stop(); fecharFolha(); sincronizarTemplate();
     if ('speechSynthesis' in window) speechSynthesis.cancel();
     root.innerHTML = '';
-    if(!TELAS[tela])tela='hoje';TELAS[tela](arg);recordRoute(tela,arg); tocar('tela');
+    if(!TELAS[tela])tela='hoje';TELAS[tela](arg);recordRoute(tela,arg);
     window.scrollTo(0, 0);
     var alvo = $('.page h1, .page h2, .entry h1, .step-body h1, #root h1');
     if (alvo) { alvo.setAttribute('tabindex', '-1'); alvo.focus({ preventScroll: true }); }
@@ -1112,6 +1132,8 @@
     function set(k, v, msg) { S.cfg[k] = v; p.preferencias=p.preferencias||{};p.preferencias[k]=v;salvar(); if (msg) toast(msg); /* LIGAR: google.script.run.salvarPreferencias(p.id, S.cfg); */ }
 
     bloco('Sons', [
+      linha('sound', 'Sons dos toques', 'Notas de marimba bem baixas ao tocar nos botões', segmento([{ v: 'sutis', t: 'Sutis' }, { v: 'nenhum', t: 'Nenhum' }], S.cfg.toques || 'sutis', function (v) { set('toques', v); if (v === 'sutis') tocar('principal'); }, 'Sons dos toques')),
+      linha('sound', 'Música de abertura', 'Toca na primeira abertura do dia', interruptor(S.cfg.musica !== false, function (v) { set('musica', v); if (v && window.SOM) SOM.abertura(); }, 'Música de abertura')),
       linha('sound', 'Efeitos sonoros', 'Toques, acertos, erros e avisos', interruptor(S.cfg.efeitos, function (v) { set('efeitos', v); if (v) tocar('acerto'); }, 'Efeitos sonoros')),
       linha('sound', 'Volume dos efeitos', 'Não muda o volume das frases gravadas', segmento([{ v: 0.4, t: 'Baixo' }, { v: 0.7, t: 'Médio' }, { v: 1, t: 'Alto' }, { v: 1.5, t: 'Máximo' }], S.cfg.volume == null ? 1 : S.cfg.volume, function (v) { set('volume', v); tocar('acerto'); }, 'Volume dos efeitos'), true)
     ]);

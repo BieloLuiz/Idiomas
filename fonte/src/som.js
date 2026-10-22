@@ -37,11 +37,28 @@
     }
     function pop(f, t0, vol) { nota(f, t0 || 0, 0.07, vol || 0.09, 'sine', f * 1.6, [[1, 1], [2, 0.15]]); }
     var SINO = [[1, 1], [2, 0.35], [3, 0.12], [4.2, 0.05]], MAD = [[1, 1], [4, 0.18], [9.8, 0.04]];
+    var PENTA = [523.3, 587.3, 659.3, 784, 880, 1046.5], passo = 0, ultimo = 0;
+    function madeira(vol, oit) {
+      var agora = Date.now(); if (agora - ultimo < 70) return; ultimo = agora;     // toques seguidos não viram metralhadora
+      passo = (passo + 1 + Math.floor(Math.random() * 2)) % PENTA.length;
+      nota(PENTA[passo] * (oit || 1), 0, 0.12, vol, 'sine', 0, [[1, 1], [3.9, 0.08]]);
+    }
+    /* música de abertura (autoral, sintetizada aqui): ~3,6 s acompanhando a animação da Eco */
+    function abertura() {
+      var c = ac(); if (!c) return;
+      [130.8, 196, 246.9, 293.7, 329.6].forEach(function (f) { nota(f, 0, 3.4, 0.022, 'triangle'); });           // base: Dó com 7ª e 9ª, suave
+      [392, 523.3, 659.3, 784].forEach(function (f, i) { nota(f, 0.25 + i * 0.14, 0.45, 0.07, 'sine', 0, MAD); });  // chegada da Eco
+      nota(261.6, 1.45, 0.18, 0.08, 'triangle', 0, MAD); nota(196, 1.62, 0.22, 0.07, 'triangle', 0, MAD);       // quica ao frear
+      [659.3, 587.3, 784, 1046.5].forEach(function (f, i) { nota(f, 1.95 + i * 0.17, 0.5, 0.075, 'sine', 0, SINO); }); // aceno
+      nota(2093, 2.75, 0.5, 0.05, 'sine', 0, SINO); sopro(2.72, 0.35, 3000, 9000, 0.012);                          // pingo dourado
+      [523.3, 659.3, 784].forEach(function (f) { nota(f, 3.0, 1.2, 0.05, 'sine', 0, SINO); });                       // acorde final
+    }
     return {
       vol: function (v) { VOL = v; if (out) out.gain.value = 0.9 * v; },
-      clique: function () { pop(620); },
-      principal: function () { pop(520, 0, 0.1); pop(780, 0.05, 0.09); },
-      aba: function () { pop(700, 0, 0.07); nota(1050, 0.04, 0.09, 0.05, 'sine', 0, [[1, 1], [2, 0.2]]); },
+      /* toques: marimba bem baixinha, uma nota da escala pentatônica por toque (não repete o mesmo som) */
+      clique: function () { madeira(0.022); },
+      principal: function () { madeira(0.03); },
+      aba: function () { madeira(0.026, 0.5); },
       voltar: function () { nota(700, 0, 0.09, 0.07, 'sine', 420); },
       liga: function () { nota(660, 0, 0.06, 0.08, 'sine'); nota(990, 0.06, 0.1, 0.08, 'sine', 0, [[1, 1], [2, 0.2]]); },
       desliga: function () { nota(880, 0, 0.06, 0.07, 'sine'); nota(587, 0.06, 0.1, 0.07, 'sine'); },
@@ -61,6 +78,9 @@
         [1046.5, 1318.5, 1568].forEach(function (f) { nota(f, 0.42, 0.9, 0.09, 'sine', 0, SINO); });
         for (var i = 0; i < 6; i++) nota(2093 + i * 260, 0.5 + i * 0.05, 0.12, 0.03, 'sine');
       },
+      abertura: abertura,
+      contexto: function () { return ac(); },
       chama: function () { nota(330, 0, 0.45, 0.03, 'sawtooth', 990); nota(988, 0.2, 0.5, 0.12, 'sine', 0, SINO); nota(1480, 0.3, 0.6, 0.08, 'sine', 0, SINO); }
     };
   })();
+  window.SOM = SOM;

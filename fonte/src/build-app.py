@@ -43,7 +43,7 @@ rep("  function tocar(t) { if (!S.cfg.silent && S.cfg.efeitos && SOM[t]) try { S
  "  /* som em todo toque da interface (a lição tem os sons próprios dela) */\n"
  "  document.addEventListener('click', function (e) {\n"
  "    var b = e.target.closest && e.target.closest('button, a, [role=radio], [role=switch], summary, label, input[type=checkbox], input[type=radio]'); if (!b || b.disabled) return;\n"
- "    if (b.closest('.u015-opt, .u019-chip, #acao, .u019 button')) return;\n"
+ "    if (b.closest('.u015-opt, .u019-chip, #acao, .u019 button') || S.cfg.toques === 'nenhum') return;\n"
  "    var lab = (b.getAttribute('aria-label') || '') + ' ' + b.className;\n"
  "    if (b.closest('.ui-keypad')) tocar('tecla');\n"
  "    else if (b.getAttribute('role') === 'switch') tocar(b.getAttribute('aria-checked') === 'true' ? 'desliga' : 'liga');\n"
@@ -52,11 +52,9 @@ rep("  function tocar(t) { if (!S.cfg.silent && S.cfg.efeitos && SOM[t]) try { S
  "    else if (/primary/.test(b.className)) tocar('principal');\n"
  "    else tocar('clique');\n"
  "  }, true);")
-rep("anunciar(t); setTimeout(function () { d.remove(); }, 2400);","anunciar(t); setTimeout(function () { tocar('aviso'); }, 60); setTimeout(function () { d.remove(); }, 2400);")
 rep("    document.body.appendChild(scrim); document.body.appendChild(sh);\n","    document.body.appendChild(scrim); document.body.appendChild(sh); tocar('folha');\n")
 rep("    var a = $('.sheet'), b = $('.scrim'); if (a) a.remove();","    var a = $('.sheet'), b = $('.scrim'); if (a) { tocar('fechar'); a.remove(); }")
 rep("msg.textContent = t; msg.classList.add('err');","msg.textContent = t; msg.classList.add('err'); tocar('erro');")
-rep("TELAS[tela](arg);recordRoute(tela,arg);","TELAS[tela](arg);recordRoute(tela,arg); tocar('tela');")
 rep("  function tocar(t) { if (!S.cfg.silent && S.cfg.efeitos && SOM[t]) try { SOM[t](); } catch (e) {} }",
  "  function tocar(t) { if (!S.cfg.silent && S.cfg.efeitos && SOM[t]) try { SOM.vol(S.cfg.volume == null ? 1 : S.cfg.volume); SOM[t](); } catch (e) {} }\n"
  "  function botaoSom(bar) {\n"
@@ -70,6 +68,8 @@ rep("    if (extrasTopo) extrasTopo(bar);\n","    if (extrasTopo) extrasTopo(bar
 rep(",\n      linha('sound', 'Sons de acerto e erro', 'Sons próprios, curtos e baixos', interruptor(S.cfg.efeitos, function (v) { set('efeitos', v); if (v) tocar('acerto'); }, 'Sons de acerto e erro'))\n    ]);","\n    ]);")
 rep("    bloco('Aparência', [",
  "    bloco('Sons', [\n"
+ "      linha('sound', 'Sons dos toques', 'Notas de marimba bem baixas ao tocar nos botões', segmento([{ v: 'sutis', t: 'Sutis' }, { v: 'nenhum', t: 'Nenhum' }], S.cfg.toques || 'sutis', function (v) { set('toques', v); if (v === 'sutis') tocar('principal'); }, 'Sons dos toques')),\n"
+ "      linha('sound', 'Música de abertura', 'Toca na primeira abertura do dia', interruptor(S.cfg.musica !== false, function (v) { set('musica', v); if (v && window.SOM) SOM.abertura(); }, 'Música de abertura')),\n"
  "      linha('sound', 'Efeitos sonoros', 'Toques, acertos, erros e avisos', interruptor(S.cfg.efeitos, function (v) { set('efeitos', v); if (v) tocar('acerto'); }, 'Efeitos sonoros')),\n"
  "      linha('sound', 'Volume dos efeitos', 'Não muda o volume das frases gravadas', segmento([{ v: 0.4, t: 'Baixo' }, { v: 0.7, t: 'Médio' }, { v: 1, t: 'Alto' }, { v: 1.5, t: 'Máximo' }], S.cfg.volume == null ? 1 : S.cfg.volume, function (v) { set('volume', v); tocar('acerto'); }, 'Volume dos efeitos'), true)\n"
  "    ]);\n"

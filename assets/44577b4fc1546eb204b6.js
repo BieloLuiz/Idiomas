@@ -677,10 +677,18 @@ function ecoEstado(el, estado) { if (el && el.__eco) el.__eco.estado(ECO_MAPA[es
     ov.innerHTML = '<div class="abertura-arte"><img alt="Idiomas" src="data:image/svg+xml;charset=utf-8,' + encodeURIComponent(ABERTURA_SVG).replace(/'/g, '%27') + '"></div><p class="abertura-frase"></p>';  /* como imagem: o CSS da animação não se mistura com o do app */
     ov.querySelector('.abertura-frase').textContent = window.Eco ? Eco.abertura({ nome: nome }).frase : '';
     if (reduz) ov.classList.add('abertura-parada');
-    var fechado = false;
+    var fechado = false, tocou = false, cfg = {};
+    try { cfg = (JSON.parse(localStorage.getItem('idiomas-app-v2')) || {}).cfg || {}; } catch (e) {}
+    var comMusica = cfg.musica !== false && !cfg.silent && cfg.efeitos !== false;
+    /* música de abertura: o navegador só deixa tocar som depois de um toque; se bloquear, toca no primeiro toque */
+    function musica(toque) {
+      if (!comMusica || tocou || !window.SOM) return; var c = SOM.contexto(); if (!c) return;
+      function vai() { if (tocou || c.state !== 'running') return; tocou = true; SOM.vol(cfg.volume == null ? 1 : cfg.volume); SOM.abertura(); }
+      if (c.state === 'running') vai(); else try { c.resume().then(function () { if (toque || !fechado) vai(); }).catch(function () {}); } catch (e) {}
+    }
     function fechar() { if (fechado) return; fechado = true; ov.classList.add('abertura-saindo'); setTimeout(function () { ov.remove(); }, 350); }
-    ov.addEventListener('pointerdown', fechar); addEventListener('keydown', fechar, { once: true });
-    document.body.appendChild(ov); setTimeout(fechar, reduz ? 1400 : 3900);
+    ov.addEventListener('pointerdown', function () { musica(true); fechar(); }); addEventListener('keydown', fechar, { once: true });
+    document.body.appendChild(ov); musica(); setTimeout(fechar, reduz ? 1400 : 3900);
   }
   var css = '.abertura{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#F6F4EF;transition:opacity .35s ease;cursor:pointer}' +
     '.abertura-arte{width:min(78vw,340px)}.abertura-arte img{width:100%;height:auto;display:block}' +
