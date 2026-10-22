@@ -8,6 +8,7 @@
     if(!nav || nav.querySelector('.v21-sidebar-brand'))return;
     var brand=document.createElement('div');brand.className='v21-sidebar-brand';brand.setAttribute('aria-hidden','true');
     brand.innerHTML='<span class="v21-brand-mark">✦</span><span><span class="v21-brand-name" style="display:block">Idiomas</span><span class="v21-brand-sub" style="display:block">Uma jornada por vez.</span></span>';
+    var mk=brand.querySelector('.v21-brand-mark');if(window.criarEco){mk.textContent='';mk.classList.add('v21-brand-eco');mk.appendChild(criarEco('neutral','',true));}
     nav.insertBefore(brand,nav.firstChild);
     var foot=document.createElement('div');foot.className='v21-sidebar-footer';
     foot.textContent='Aprenda no seu ritmo. Cada passo conta.';foot.setAttribute('aria-hidden','true');

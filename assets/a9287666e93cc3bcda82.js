@@ -2438,7 +2438,9 @@
   }
   function extrasInstalarHoje() {
     var _hojeX = TELAS.hoje;
-    TELAS.hoje = function () { _hojeX.apply(this, arguments); var pg = $('.page'); if (!pg || !eu()) return; var c = cartaoDupla(); if (!c) return; var ref = $('.est-dia', pg); if (ref && ref.nextSibling) pg.insertBefore(c, ref.nextSibling); else pg.appendChild(c); };
+    TELAS.hoje = function () { _hojeX.apply(this, arguments); var pg = $('.page'); if (!pg || !eu()) return; var c = cartaoDupla(); if (!c) return; var ref = $('.est-dia', pg); if (!ref) { pg.appendChild(c); return; }
+      /* tela larga (iPad, computador): revisão do dia e desafio dos dois lado a lado */
+      var par = exEl('div', 'est-par'); pg.insertBefore(par, ref); par.appendChild(ref); par.appendChild(c); };
   }
   /* diálogo em dupla, no mesmo aparelho: cada um faz um personagem do diálogo da unidade */
   TELAS.dupla = function () {
