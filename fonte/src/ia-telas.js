@@ -19,7 +19,7 @@
     if (!IAon()) { var local=studioPage('Correção com o Eco','ecoWrite');local.appendChild(document.createTextNode('Seu texto fica no rascunho. Entre com Google para pedir a correção por IA.'));local.appendChild(studioButton('Entrar com Google',function(){AUTH.start();},'primary'));return; }
     var owner = eu(), ownerData = studioData();
     var pg = studioPage('Eco está lendo', 'ecoWrite'), box = document.createElement('section'); box.className = 'studio-reading';
-    box.appendChild(eco('thinking', 'Eco lendo seu texto'));
+    box.appendChild(eco('reading', 'Eco lendo seu texto'));
     box.insertAdjacentHTML('beforeend', '<span class="studio-book" aria-hidden="true">' + svg('book') + '</span><h1>Um instante. Estou lendo…</h1><p role="status" class="ia-status">Corrigindo com calma. Pode levar até meio minuto.</p><div class="studio-loading" aria-hidden="true"></div>');
     pg.appendChild(box);
     var voltar = studioButton('Voltar ao texto', function () { ir('ecoWrite', payload.unit.id); }); pg.appendChild(voltar);
@@ -260,7 +260,7 @@
     var actions = document.createElement('div'); actions.className = 'studio-call-actions';
     var state = 'connecting', ocupado = false, chipTimer = null;
     var LBL = { connecting: 'Conectando…', listening: 'Segure o botão para falar', recording: 'Estou ouvindo você', thinking: 'Eco está pensando…', speaking: 'Eco está falando', muted: 'Microfone silenciado' };
-    function setState(v) { state = v; stage.dataset.state = v === 'recording' ? 'listening' : v; mascot.dataset.state = { connecting: 'thinking', listening: 'listening', recording: 'listening', thinking: 'thinking', speaking: 'speaking', muted: 'neutral' }[v]; $('.studio-state', stage).textContent = LBL[v]; mascot.setAttribute('aria-label', LBL[v]); }
+    function setState(v) { state = v; stage.dataset.state = v === 'recording' ? 'listening' : v; ecoEstado(mascot, { connecting: 'thinking', listening: 'listening', recording: 'listening', thinking: 'thinking', speaking: 'speaking', muted: 'neutral' }[v]); ecoVoz(mascot, v, vad && vad.st); $('.studio-state', stage).textContent = LBL[v]; mascot.setAttribute('aria-label', LBL[v]); }
     function caption() { subtitles.innerHTML = ''; if (s.captions === 'off') { subtitles.innerHTML = '<p class="muted">Legendas desligadas</p>'; return; }
       s.transcript.slice(-2).forEach(function (t) { var b = document.createElement('div'); b.className = 'studio-caption ' + (t.who === 'Você' ? 'is-user' : ''); b.innerHTML = '<strong>' + esc(t.who) + '</strong><p lang="' + lang + '">' + esc(t.text) + '</p>' + (s.captions === 'translation' && t.pt ? '<small>' + esc(t.pt) + '</small>' : ''); subtitles.appendChild(b); }); }
     function add(who, text, pt) { s.transcript.push({ who: who, text: text, pt: pt || '' }); caption(); }
@@ -591,7 +591,7 @@
     var subtitles = document.createElement('div'); subtitles.className = 'studio-subtitles'; subtitles.setAttribute('aria-live', 'polite'); pg.appendChild(subtitles);
     var actions = document.createElement('div'); actions.className = 'studio-call-actions';
     var LBL = { connecting: 'Conectando…', listening: 'Estou ouvindo você', speaking: 'Eco está falando', muted: 'Microfone silenciado', thinking: 'Eco está pensando…' }, state = '';
-    function setState(v) { if (state === v) return; state = v; stage.dataset.state = v; mascot.dataset.state = { connecting: 'thinking', listening: 'listening', speaking: 'speaking', muted: 'neutral', thinking: 'thinking' }[v]; $('.studio-state', stage).textContent = LBL[v]; mascot.setAttribute('aria-label', LBL[v]); }
+    function setState(v) { if (state === v) return; state = v; stage.dataset.state = v; ecoEstado(mascot, { connecting: 'thinking', listening: 'listening', speaking: 'speaking', muted: 'neutral', thinking: 'thinking' }[v]); ecoVoz(mascot, v, micStream); $('.studio-state', stage).textContent = LBL[v]; mascot.setAttribute('aria-label', LBL[v]); }
     var parcialEu = '', parcialEco = '';
     function caption() { subtitles.innerHTML = ''; if (s.captions === 'off') { subtitles.innerHTML = '<p class="muted">Legendas desligadas</p>'; return; }
       var linhas = s.transcript.slice(-2).map(function (t) { return t; });

@@ -1142,9 +1142,6 @@
     bloco('Aparência', [
       linha('sun', 'Tema', 'Sistema segue o modo do celular', segmento([{ v: 'sistema', t: 'Sistema' }, { v: 'claro', t: 'Claro' }, { v: 'escuro', t: 'Escuro' }], S.cfg.tema, function (v) { set('tema', v); aplicarTema(); }, 'Tema'), true)
     ]);
-    bloco('Laboratório', [
-      botaoLinha('motion', 'Eco em 3D', 'Explore o mascote e suas expressões quando quiser', function () { ir('eco3D'); })
-    ]);
     bloco('Estudo', [
       linha('target', 'Meta diária', 'Minutos por dia', segmento([{ v: 5, t: '5' }, { v: 10, t: '10' }, { v: 15, t: '15' }, { v: 30, t: '30' }], S.cfg.meta, function (v) { set('meta', v, 'Meta: ' + v + ' minutos por dia.'); }, 'Meta diária em minutos'), true),
       linha('voice', 'Velocidade da voz', 'Lições, guias e revisão · velocidade salva neste aparelho', segmento([{ v: 0.7, t: 'Lenta' }, { v: 0.9, t: 'Normal' }, { v: 1.05, t: 'Rápida' }], S.cfg.voz, function (v) { set('voz', v); falar(CURSOS[p.idioma].codigo === 'FR' ? 'Bonjour, ça va ?' : 'Hello, how are you?', CURSOS[p.idioma].voz); }, 'Velocidade da voz'), true),
@@ -1378,7 +1375,7 @@
     if (!IAon()) { var local=studioPage('Correção com o Eco','ecoWrite');local.appendChild(document.createTextNode('Seu texto fica no rascunho. Entre com Google para pedir a correção por IA.'));local.appendChild(studioButton('Entrar com Google',function(){AUTH.start();},'primary'));return; }
     var owner = eu(), ownerData = studioData();
     var pg = studioPage('Eco está lendo', 'ecoWrite'), box = document.createElement('section'); box.className = 'studio-reading';
-    box.appendChild(eco('thinking', 'Eco lendo seu texto'));
+    box.appendChild(eco('reading', 'Eco lendo seu texto'));
     box.insertAdjacentHTML('beforeend', '<span class="studio-book" aria-hidden="true">' + svg('book') + '</span><h1>Um instante. Estou lendo…</h1><p role="status" class="ia-status">Corrigindo com calma. Pode levar até meio minuto.</p><div class="studio-loading" aria-hidden="true"></div>');
     pg.appendChild(box);
     var voltar = studioButton('Voltar ao texto', function () { ir('ecoWrite', payload.unit.id); }); pg.appendChild(voltar);
@@ -1619,7 +1616,7 @@
     var actions = document.createElement('div'); actions.className = 'studio-call-actions';
     var state = 'connecting', ocupado = false, chipTimer = null;
     var LBL = { connecting: 'Conectando…', listening: 'Segure o botão para falar', recording: 'Estou ouvindo você', thinking: 'Eco está pensando…', speaking: 'Eco está falando', muted: 'Microfone silenciado' };
-    function setState(v) { state = v; stage.dataset.state = v === 'recording' ? 'listening' : v; mascot.dataset.state = { connecting: 'thinking', listening: 'listening', recording: 'listening', thinking: 'thinking', speaking: 'speaking', muted: 'neutral' }[v]; $('.studio-state', stage).textContent = LBL[v]; mascot.setAttribute('aria-label', LBL[v]); }
+    function setState(v) { state = v; stage.dataset.state = v === 'recording' ? 'listening' : v; ecoEstado(mascot, { connecting: 'thinking', listening: 'listening', recording: 'listening', thinking: 'thinking', speaking: 'speaking', muted: 'neutral' }[v]); ecoVoz(mascot, v, vad && vad.st); $('.studio-state', stage).textContent = LBL[v]; mascot.setAttribute('aria-label', LBL[v]); }
     function caption() { subtitles.innerHTML = ''; if (s.captions === 'off') { subtitles.innerHTML = '<p class="muted">Legendas desligadas</p>'; return; }
       s.transcript.slice(-2).forEach(function (t) { var b = document.createElement('div'); b.className = 'studio-caption ' + (t.who === 'Você' ? 'is-user' : ''); b.innerHTML = '<strong>' + esc(t.who) + '</strong><p lang="' + lang + '">' + esc(t.text) + '</p>' + (s.captions === 'translation' && t.pt ? '<small>' + esc(t.pt) + '</small>' : ''); subtitles.appendChild(b); }); }
     function add(who, text, pt) { s.transcript.push({ who: who, text: text, pt: pt || '' }); caption(); }
@@ -1950,7 +1947,7 @@
     var subtitles = document.createElement('div'); subtitles.className = 'studio-subtitles'; subtitles.setAttribute('aria-live', 'polite'); pg.appendChild(subtitles);
     var actions = document.createElement('div'); actions.className = 'studio-call-actions';
     var LBL = { connecting: 'Conectando…', listening: 'Estou ouvindo você', speaking: 'Eco está falando', muted: 'Microfone silenciado', thinking: 'Eco está pensando…' }, state = '';
-    function setState(v) { if (state === v) return; state = v; stage.dataset.state = v; mascot.dataset.state = { connecting: 'thinking', listening: 'listening', speaking: 'speaking', muted: 'neutral', thinking: 'thinking' }[v]; $('.studio-state', stage).textContent = LBL[v]; mascot.setAttribute('aria-label', LBL[v]); }
+    function setState(v) { if (state === v) return; state = v; stage.dataset.state = v; ecoEstado(mascot, { connecting: 'thinking', listening: 'listening', speaking: 'speaking', muted: 'neutral', thinking: 'thinking' }[v]); ecoVoz(mascot, v, micStream); $('.studio-state', stage).textContent = LBL[v]; mascot.setAttribute('aria-label', LBL[v]); }
     var parcialEu = '', parcialEco = '';
     function caption() { subtitles.innerHTML = ''; if (s.captions === 'off') { subtitles.innerHTML = '<p class="muted">Legendas desligadas</p>'; return; }
       var linhas = s.transcript.slice(-2).map(function (t) { return t; });
@@ -2520,15 +2517,7 @@
     }
   };
 
-  TELAS.eco3D=function(){
-    var pg=studioPage('Laboratório do Eco 3D','config');
-    studioLead(pg,'Prévia do mascote','Conheça o Eco em 3D','Teste as expressões e veja o personagem por outros ângulos. O mascote das outras telas continua igual.');
-    var lab=document.createElement('section');lab.className='eco-lab';
-    lab.innerHTML='<div class="eco-lab-view"><span class="eco-lab-badge">Modelo 3D real</span></div><p class="eco-lab-status" role="status">Preparando o Eco…</p><div class="eco-lab-states" role="group" aria-label="Estados do Eco">'+['Neutro','Conectando','Ouvindo','Pensando','Falando','Interrompido','Feliz','Ajudando','Lendo'].map(function(n){return '<button type="button" disabled data-eco-state="'+n+'" aria-pressed="false">'+n+'</button>';}).join('')+'</div><div class="eco-lab-settings"><label>Ângulo do personagem<input class="eco-lab-angle" type="range" min="-180" max="180" value="9"></label><label>Fundo da prévia<select class="eco-lab-theme"><option value="auto">Acompanhar o app</option><option value="light">Claro</option><option value="dark">Escuro</option></select></label><label class="eco-lab-check"><input class="eco-lab-reduce" type="checkbox"> Reduzir movimentos</label><button type="button" class="ui-btn ui-btn--secondary eco-lab-pause" aria-pressed="false">Pausar movimentos</button><button type="button" class="ui-btn ui-btn--ghost eco-lab-reset">Voltar à vista inicial</button></div>';
-    pg.appendChild(lab);pg.insertAdjacentHTML('beforeend','<p class="studio-note">Movimentos de demonstração recriados para o navegador a partir das partes do seu modelo. A onda de fala é ilustrativa; não está ligada ao microfone.</p>');
-    pg.appendChild(studioButton('Voltar às configurações',function(){ir('config');}));
-    Promise.all([new Promise(function(resolve,reject){if(window.EcoLabMount){resolve();return;}var script=document.createElement('script');script.src=document.getElementById('eco-3d-renderer').dataset.src;script.onload=resolve;script.onerror=reject;document.head.appendChild(script);}),fetch(document.getElementById('eco-glb-asset').dataset.src).then(function(r){if(!r.ok)throw new Error('modelo');return r.text();})]).then(function(result){if(lab.isConnected)window.EcoLabMount(lab,result[1]);}).catch(function(){if(lab.isConnected)lab.querySelector('[role=status]').textContent='Não foi possível abrir o modelo 3D. Confira a conexão.';});
-  };
+  TELAS.eco3D=function(){ ir('config'); };   /* Eco 3D removida: a Eco em SVG (src/eco.js) substitui */
 
   TELAS.descobrir=function(context){
     var pg=studioPage('Descobrir','praticar');

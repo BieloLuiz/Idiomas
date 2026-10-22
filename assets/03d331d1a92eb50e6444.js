@@ -713,6 +713,16 @@ function ecoEstado(el, estado) { if (el && el.__eco) el.__eco.estado(ECO_MAPA[es
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mostrar); else mostrar();
 })();
+
+/* boca e antena acompanham a conversa: falando, a boca mexe; ouvindo, o anel da antena segue o volume do microfone */
+function ecoVoz(el, estado, microfone) {
+  var api = el && el.__eco; if (!api) return;
+  try {
+    api.simularVoz(estado === 'speaking');
+    if ((estado === 'listening' || estado === 'recording') && microfone && microfone.active) { if (el.__ecoMic !== microfone) { api.conectarAudio(microfone); el.__ecoMic = microfone; } }
+    else if (el.__ecoMic) { api.desconectarAudio(); el.__ecoMic = null; }
+  } catch (e) {}
+}
 /* Regras puras compartilhadas pelo navegador e pelo Apps Script. */
 var ProfileCore = (function () {
   'use strict';

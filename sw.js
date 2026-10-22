@@ -1,6 +1,6 @@
 /* A PWA gerencia somente os próprios caches e recursos dentro do seu escopo. */
-const PREFIX = 'idiomas-', V = PREFIX + '35eac3d53c', AUDIO_CACHE = PREFIX + 'audio-v1';
-const ASSETS = ["assets/c6bfe16efec91a123fcd.webp", "assets/e7245faa3817a7f27d9a.js", "assets/295efa32d0c9f5d3d971.js", "assets/d5f7fb1c04b116c1e27e.js", "assets/07b5486bbc404de8770f.js", "assets/43e9a20e86e379ba2858.js", "assets/0fffe9886293678beb14.js", "assets/c6072e661caf285ac7c5.js", "assets/b42e717cbb0db7138680.js", "assets/eca617750f7770680c27.css", "assets/12725c10c7f8e4f20e1c.css", "assets/e884d13cc6425d81b1b4.css", "assets/c3e96738037c0aabdfd8.css", "assets/f6546f320e981c99ad3e.css"];
+const PREFIX = 'idiomas-', V = PREFIX + '855fa3fbb4', AUDIO_CACHE = PREFIX + 'audio-v1';
+const ASSETS = ["assets/c6bfe16efec91a123fcd.webp", "assets/e7245faa3817a7f27d9a.js", "assets/295efa32d0c9f5d3d971.js", "assets/03d331d1a92eb50e6444.js", "assets/07b5486bbc404de8770f.js", "assets/98177c82dffd8793a100.js", "assets/0fffe9886293678beb14.js", "assets/c6072e661caf285ac7c5.js", "assets/b42e717cbb0db7138680.js", "assets/eca617750f7770680c27.css", "assets/12725c10c7f8e4f20e1c.css", "assets/e884d13cc6425d81b1b4.css", "assets/c3e96738037c0aabdfd8.css", "assets/f6546f320e981c99ad3e.css"];
 const SHELL = ['./', 'index.html', 'config.js', 'auth.js', 'sync.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'].concat(ASSETS);
 self.addEventListener('install', e => e.waitUntil(caches.open(V).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith(PREFIX) && k !== V && k !== AUDIO_CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));

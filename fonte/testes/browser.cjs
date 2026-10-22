@@ -56,7 +56,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   assert.ok(await q.getByRole('button',{name:'viens',exact:true}).count()>0,'abre a frase da unidade 1, não da unidade atual');assert.equal(await q.getByRole('button',{name:'prit',exact:true}).count(),0);
   console.log('PASS: dificuldade antiga abre a unidade e o item de origem');
   await q.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Perfil',exact:true}).click();await q.getByRole('button',{name:/Configurações/}).first().click();
-  const cfgText=await q.locator('main').textContent();assert.ok(!cfgText.includes('Ainda não há sincronização'));assert.ok(!cfgText.includes('Em breve: avaliação da pronúncia'));assert.ok(cfgText.includes('Treino de pronúncia'));
+  const cfgText=await q.locator('main').textContent();assert.ok(!cfgText.includes('Ainda não há sincronização'));assert.ok(!cfgText.includes('Em breve: avaliação da pronúncia'));assert.ok(cfgText.includes('Treino de pronúncia'));assert.ok(!cfgText.includes('Eco em 3D'),'Eco 3D removida');
   console.log('PASS: Configurações mostram o estado real e o treino de pronúncia');
   await q.getByRole('button',{name:/Trocar de perfil/}).first().click();await q.getByRole('button',{name:/Beto/}).click();await q.keyboard.type('1234');await q.locator('.ux-greeting').waitFor();
   assert.deepEqual(await q.evaluate(()=>[document.documentElement.dataset.silent,document.documentElement.dataset.translations,getComputedStyle(document.documentElement).getPropertyValue('--ux-text-scale').trim()]),['true','hide','1.25']);
@@ -161,6 +161,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await p2.getByRole('button',{name:'Sem botão',exact:true}).click();await p2.getByRole('button',{name:'Permitir microfone',exact:true}).click();await p2.getByRole('button',{name:'Começar conversa'}).click();
   await p2.getByText('Fale quando quiser · faça uma pausa para enviar').waitFor();await p2.waitForFunction(()=>window.__tracks.some(t=>t.readyState==='live'));
   assert.ok(sessaoAberta,'sessão única aberta no servidor');
+  assert.ok(['thinking','listening','speaking'].includes(await p2.evaluate(()=>document.querySelector('.studio-stage .eco').__eco.base)),'a Eco mostra o estado da conversa');
   await p2.getByRole('button',{name:'Encerrar'}).click();await p2.waitForTimeout(400);assert.ok(await p2.evaluate(()=>window.__tracks.every(t=>t.readyState==='ended')),'microfone fechado ao encerrar');
   console.log('PASS: conversa sem botão abre o microfone, registra a sessão única e fecha tudo ao encerrar');
   await p2.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Perfil',exact:true}).click();await p2.getByRole('button',{name:/Configurações/}).first().click();
