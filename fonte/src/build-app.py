@@ -133,7 +133,7 @@ s=s.replace('Inglês · Francês · do A1 ao B2','Inglês · Francês · do A1 a
 
 # ---- design 3: as funções do Eco entram no Praticar e no Caderno ----
 rep("var options={entender:[['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Escrever um texto','ecoWrite'],",
-    "var options={entender:[['Leitura extra com o Eco','leituras'],['Tirar uma dúvida com o Eco','ecoDuvida'],['Fazer um ditado','ecoDitado'],['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Escrever um texto','ecoWrite'],['Treinar pronúncia','ecoPronuncia'],")
+    "var options={entender:[['Leitura extra com o Eco','leituras'],['Tirar uma dúvida com o Eco','ecoDuvida'],['Fazer um ditado','ecoDitado'],['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Diálogo em dupla','dupla'],['Escrever um texto','ecoWrite'],['Treinar pronúncia','ecoPronuncia'],")
 rep("revisar:[['Revisão do curso','revisar'],","revisar:[['Revisão do dia','revisaoDia'],['Prova de nível','provas'],['Revisar meus erros','ecoRevisao'],['Revisão do curso','revisar'],")
 rep("    (ds.errors||[]).forEach(function(e){rows.push({id:'error-'+e.id,",
     "    (st.erros||[]).filter(function(e){return e.lang===lang;}).forEach(function(e){rows.push({id:'erro-'+e.id,kind:'Dificuldades',text:e.correta,translation:e.nota||'',topic:'Quero lembrar',source:'Minha tentativa: '+(e.dada||'—'),action:function(){ir('ecoRevisao');}});});\n    (ds.errors||[]).forEach(function(e){rows.push({id:'error-'+e.id,")
@@ -152,7 +152,7 @@ rep("    anuncio.textContent = (ok ? $('.ui-banner__title', bannerBox).textConte
 # Revisão do dia, prova e leituras (src/estudo.js): exercício sem áudio e aviso de fim para a prova.
 rep("        ir(uxExit); toast('Prática salva. +'+r.xp+' XP.');", "        if (op && op.aoConcluir) { op.aoConcluir(r); return; }\n        ir(uxExit); toast('Prática salva. +'+r.xp+' XP.');")
 
-rep("  var uxReview=TELAS.revisar;", "  estudoInstalarHoje();\n  var uxReview=TELAS.revisar;")
+rep("  var uxReview=TELAS.revisar;", "  estudoInstalarHoje(); extrasInstalarHoje();\n  var uxReview=TELAS.revisar;")
 # Aplicações explícitas ao contrato de reprodução e ao apoio de escuta.
 rep("    bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);", "    if(ex.escuta){var transcript=document.createElement('details'),sum=document.createElement('summary');sum.textContent='Ver transcrição';transcript.append(sum,p);bub.append(transcript,montarOuvir(ex),pop);}else{bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}")
 rep("if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}", "if (!ex.ocultar && !ex.semAudio) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}")

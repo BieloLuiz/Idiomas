@@ -273,7 +273,7 @@
      ================================================================= */
   var abas = [['hoje', 'Hoje'], ['trilha', 'Trilha'], ['praticar', 'Praticar'], ['caderno', 'Caderno'], ['perfil', 'Perfil']];
   var historyBack=false;
-  var historyScreens=['revisaoDia','provas','leituras','lembrete','hoje','trilha','praticar','caderno','perfil','config','guia','guias','revisar','progresso','ecoHub','ecoScenarios','ecoWrite','ecoPronuncia','ecoDitado','ecoRevisao','ecoHistory','ecoWritingHistory','ecoSummary','conquistas','descobrir','boasvindas','entrar'];
+  var historyScreens=['dupla','admin','revisaoDia','provas','leituras','lembrete','hoje','trilha','praticar','caderno','perfil','config','guia','guias','revisar','progresso','ecoHub','ecoScenarios','ecoWrite','ecoPronuncia','ecoDitado','ecoRevisao','ecoHistory','ecoWritingHistory','ecoSummary','conquistas','descobrir','boasvindas','entrar'];
   function recordRoute(tela,arg){if(historyBack||historyScreens.indexOf(tela)<0)return;var data={idiomas:true,tela:tela,arg:typeof arg==='string'||typeof arg==='number'?arg:null,perfil:S.ativo};if(!history.state||!history.state.idiomas)history.replaceState(data,'');else if(history.state.tela!==tela||history.state.arg!==data.arg)history.pushState(data,'');}
   addEventListener('popstate',function(e){if(!e.state||!e.state.idiomas)return;historyBack=true;try{if(e.state.perfil!==S.ativo&&e.state.perfil){S.ativo=null;salvar();ir('entrar');}else ir(e.state.tela,e.state.arg);}finally{historyBack=false;}});
   function ir(tela, arg) {
@@ -2418,6 +2418,82 @@
     f.appendChild(salvarB); f.appendChild(st); pg.appendChild(f);
   }
 
+  /* ---------- modo a dois ---------- */
+  function outroPerfil() { var p = eu(); return (S.perfis || []).filter(function (x) { return x.id !== p.id; })[0] || null; }
+  function semanaAtual(p) { var hoje = new Date(), seg = new Date(hoje); seg.setDate(hoje.getDate() - (hoje.getDay() + 6) % 7); return p.semanaDe === ProfileCore.day(seg); }
+  function minutosSemana(p) { return semanaAtual(p) ? (p.semana || []).reduce(function (a, b) { return a + (Number(b) || 0); }, 0) : 0; }
+  function estudouHoje(p) { return p.ultimoDia === ProfileCore.day(new Date()) && !!p.hojeFeito; }
+  function unidadeAtual(p) { var k = p.idioma, ui = Math.min(59, Math.floor((p.progresso[k] || 0) / 5)), u = COURSE[k].units[ui]; return { k: k, ui: ui, u: u, nivel: ['A1', 'A2', 'B1', 'B2', 'C1'][Math.floor(ui / 12)] }; }
+  function cartaoDupla() {
+    var eu_ = eu(), outro = outroPerfil(); if (!outro) return null;
+    var meta = ((eu_.preferencias && eu_.preferencias.meta) || S.cfg.meta || 15) + ((outro.preferencias && outro.preferencias.meta) || 15), alvo = meta * 5;
+    var feito = minutosSemana(eu_) + minutosSemana(outro), pct = Math.min(100, Math.round(100 * feito / alvo)), ua = unidadeAtual(outro);
+    var c = exEl('section', 'card ux-small-card est-dupla'), nomeO = String(outro.nome || '').split(' ')[0], nomeE = String(eu_.nome || '').split(' ')[0];
+    var ambos = estudouHoje(eu_) && estudouHoje(outro);
+    c.innerHTML = '<span class="ui-label">Vocês dois · desafio da semana</span><h2>' + (ambos && window.Eco ? esc(Eco.frase('dupla', { nomes: [nomeE, nomeO] }).frase) : 'Juntos, ' + alvo + ' minutos nesta semana') + '</h2>' +
+      '<div class="est-barra"><span>' + feito + ' min</span><div class="ui-progress" role="img" aria-label="' + pct + '% do desafio"><div class="ui-progress__fill" style="width:' + pct + '%"></div></div><b>' + pct + '%</b></div>' +
+      '<p>' + esc(nomeO) + (estudouHoje(outro) ? ' já estudou hoje' : ' ainda não estudou hoje') + ' · ' + esc(CURSOS[ua.k].nome) + ', unidade ' + (ua.ui + 1) + ' (' + ua.nivel + '): ' + esc(ua.u.title) + '</p>';
+    c.appendChild(uxBtn('Diálogo em dupla', function () { ir('dupla'); }));
+    return c;
+  }
+  function extrasInstalarHoje() {
+    var _hojeX = TELAS.hoje;
+    TELAS.hoje = function () { _hojeX.apply(this, arguments); var pg = $('.page'); if (!pg || !eu()) return; var c = cartaoDupla(); if (!c) return; var ref = $('.est-dia', pg); if (ref && ref.nextSibling) pg.insertBefore(c, ref.nextSibling); else pg.appendChild(c); };
+  }
+  /* diálogo em dupla, no mesmo aparelho: cada um faz um personagem do diálogo da unidade */
+  TELAS.dupla = function () {
+    var eu_ = eu(), outro = outroPerfil(), pg = studioPage('Diálogo em dupla');
+    var ua = unidadeAtual(eu_), lines = (ua.u.lines || []).filter(function (l) { return l[1]; }), conta = {};
+    lines.forEach(function (l) { conta[l[0]] = (conta[l[0]] || 0) + 1; });
+    var papeis = Object.keys(conta).sort(function (a, b) { return conta[b] - conta[a]; }).slice(0, 2);
+    var nomes = [String(eu_.nome || 'Você').split(' ')[0], outro ? String(outro.nome).split(' ')[0] : 'Outra pessoa'];
+    studioLead(pg, CURSOS[ua.k].nome + ' · unidade ' + (ua.ui + 1), ua.u.title, 'Passem o celular: cada um lê as falas do seu personagem. Ouça antes, se quiser, e grave. O Eco mostra quais palavras ele reconheceu.');
+    if (papeis.length < 2) { pg.appendChild(exEl('p', null, 'Esta unidade tem só um personagem. Tente a próxima.')); return; }
+    var escolha = exEl('section', 'card studio-stack'); escolha.appendChild(exEl('h2', null, 'Quem faz cada personagem?'));
+    var troca = false, info = exEl('p');
+    function mostrar() { info.textContent = nomes[0] + ' faz ' + papeis[troca ? 1 : 0] + ' e ' + nomes[1] + ' faz ' + papeis[troca ? 0 : 1] + '.'; }
+    mostrar(); escolha.appendChild(info); escolha.appendChild(studioButton('Trocar personagens', function () { troca = !troca; mostrar(); }));
+    escolha.appendChild(studioButton('Começar', function () { escolha.remove(); rodar(); }, 'primary')); pg.appendChild(escolha);
+    function rodar() {
+      var quem = {}; quem[papeis[troca ? 1 : 0]] = 0; quem[papeis[troca ? 0 : 1]] = 1;
+      var falas = lines.filter(function (l) { return l[0] in quem; }), notas = [[], []], i = 0, voz = CURSOS[ua.k].voz;
+      var card = exEl('section', 'card pron-card'); pg.appendChild(card);
+      function passo() {
+        card.replaceChildren();
+        if (i >= falas.length) { fim(); return; }
+        var l = falas[i], n = quem[l[0]];
+        card.appendChild(exEl('span', 'ui-label', 'Fala ' + (i + 1) + ' de ' + falas.length + ' · vez de ' + nomes[n] + ' (' + l[0] + ')'));
+        var t = exEl('p', 'pron-frase', l[1]); t.lang = ua.k; card.appendChild(t);
+        var det = document.createElement('details'); det.appendChild(exEl('summary', null, 'Ver tradução')); det.appendChild(exEl('p', null, l[2] || '')); card.appendChild(det);
+        var st = exEl('p', 'pron-status'); st.setAttribute('role', 'status');
+        var acoes = exEl('div', 'pron-acoes');
+        acoes.appendChild(studioButton('Ouvir', function () { AUD.stop(); AUD.fn(l[1], voz, ua.ui)(null, S.cfg.voz || 0.9); }));
+        var g = null, grav = studioButton(IAon() ? 'Gravar' : 'Já li', function () {
+          if (!IAon()) { i++; passo(); return; }
+          if (g) { var gg = g; g = null; grav.disabled = true; grav.textContent = 'Gravar'; st.textContent = 'O Eco está ouvindo…';
+            gg.parar().then(function (blob) { if (!blob || blob.size < 1500) throw new Error('curto'); return blobB64(blob).then(function (b) { return IA.pedir('pronuncia', { idioma: ua.k, frase: l[1], audio: b, mime: blob.type }); }); })
+              .then(function (r) { var pal = l[1].split(/\s+/), ok = alinhar(pal, r.ouvido || ''), tot = pal.filter(function (w) { return normPal(w).length; }).length || 1, k = ok.filter(function (x, j) { return x && normPal(pal[j]).length; }).length, pct = Math.round(100 * k / tot);
+                notas[n].push(pct); st.textContent = pct + '% das palavras reconhecidas.'; grav.disabled = false; grav.textContent = 'Próxima fala'; grav.onclick = function () { i++; passo(); }; })
+              .catch(function (e) { grav.disabled = false; st.textContent = /curto/.test(String(e && e.message)) ? 'Ficou curto. Grave a fala inteira.' : IA.erroTexto(e); });
+            return; }
+          AUD.stop(); g = gravador(); g.iniciar().then(function () { grav.textContent = 'Parar'; st.textContent = 'Gravando… ' + nomes[n] + ', pode falar.'; }).catch(function () { g = null; st.textContent = 'Não consegui usar o microfone.'; });
+        }, 'primary');
+        studioCleanup(function () { if (g) g.cancelar(); g = null; });
+        acoes.appendChild(grav); acoes.appendChild(studioButton('Pular', function () { if (g) { g.cancelar(); g = null; } i++; passo(); }));
+        card.appendChild(acoes); card.appendChild(st);
+      }
+      function fim() {
+        var media = notas.map(function (v) { return v.length ? Math.round(v.reduce(function (a, b) { return a + b; }, 0) / v.length) : null; });
+        card.appendChild(exEl('h2', null, 'Diálogo completo!'));
+        [0, 1].forEach(function (n) { card.appendChild(exEl('p', null, nomes[n] + ': ' + (media[n] == null ? 'leitura sem gravação' : media[n] + '% das palavras reconhecidas em média'))); });
+        card.appendChild(exEl('p', 'muted', 'O percentual indica palavras que o reconhecimento entendeu; não é nota de pronúncia.'));
+        uxRecord({ kind: 'dupla', title: 'Diálogo em dupla · ' + ua.u.title, detail: nomes.join(' e ') });
+        card.appendChild(studioButton('Fazer de novo', function () { ir('dupla'); }, 'primary'));
+      }
+      passo();
+    }
+  };
+
   TELAS.eco3D=function(){
     var pg=studioPage('Laboratório do Eco 3D','config');
     studioLead(pg,'Prévia do mascote','Conheça o Eco em 3D','Teste as expressões e veja o personagem por outros ângulos. O mascote das outras telas continua igual.');
@@ -2457,7 +2533,7 @@
     var intentions=[['entender','Quero entender melhor','Leitura, escuta e explicações','ear'],['expressar','Quero me expressar','Conversa, escrita e situações reais','chat'],['revisar','Quero revisar','Palavras, expressões e novas tentativas','revisar'],['explorar','Quero explorar','Imagens, histórias e desafios','globe']];
     var menu=document.createElement('div');menu.className='ux-intentions';intentions.forEach(function(x){var b=document.createElement('button');b.className='card ux-intention'+(intent===x[0]?' selected':'');b.type='button';b.setAttribute('aria-expanded',intent===x[0]?'true':'false');b.innerHTML='<span class="ux-intention-icon">'+svg(x[3])+'</span><span><strong>'+x[1]+'</strong><small>'+x[2]+'</small></span>'+svg('chev');b.onclick=function(){var y=window.scrollY;ir('praticar',x[0]);window.scrollTo(0,y);};menu.appendChild(b);});pg.appendChild(menu);
     if(!intent){pg.appendChild(uxBtn('Explorar todas as atividades',function(){ir('descobrir');}));return;}
-    var options={entender:[['Leitura extra com o Eco','leituras'],['Tirar uma dúvida com o Eco','ecoDuvida'],['Fazer um ditado','ecoDitado'],['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Escrever um texto','ecoWrite'],['Treinar pronúncia','ecoPronuncia'],['Resolver uma missão','descobrir',{activity:10}],['Praticar com menos ajuda','descobrir',{activity:11}]],revisar:[['Revisão do dia','revisaoDia'],['Prova de nível','provas'],['Revisar meus erros','ecoRevisao'],['Revisão do curso','revisar'],['Expressões salvas','descobrir',{view:'review'}],['Meu caderno pessoal','caderno'],['Praticar dificuldades','descobrir',{view:'errors'}]],explorar:[['Uma história em sequência','descobrir',{activity:8}],['Completar uma ideia','descobrir',{activity:9}],['Montar uma frase','descobrir',{activity:3}],['Todas as descobertas','descobrir']]};
+    var options={entender:[['Leitura extra com o Eco','leituras'],['Tirar uma dúvida com o Eco','ecoDuvida'],['Fazer um ditado','ecoDitado'],['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Diálogo em dupla','dupla'],['Escrever um texto','ecoWrite'],['Treinar pronúncia','ecoPronuncia'],['Resolver uma missão','descobrir',{activity:10}],['Praticar com menos ajuda','descobrir',{activity:11}]],revisar:[['Revisão do dia','revisaoDia'],['Prova de nível','provas'],['Revisar meus erros','ecoRevisao'],['Revisão do curso','revisar'],['Expressões salvas','descobrir',{view:'review'}],['Meu caderno pessoal','caderno'],['Praticar dificuldades','descobrir',{view:'errors'}]],explorar:[['Uma história em sequência','descobrir',{activity:8}],['Completar uma ideia','descobrir',{activity:9}],['Montar uma frase','descobrir',{activity:3}],['Todas as descobertas','descobrir']]};
     var section=document.createElement('section');section.className='card ux-options';section.innerHTML='<h2>'+intentions.find(function(x){return x[0]===intent;})[1]+'</h2>';options[intent].forEach(function(x){section.appendChild(uxBtn(x[0],function(){ir(x[1],x[2]);}));});pg.appendChild(section);
     /* no celular as opções ficavam abaixo dos quatro cartões, fora da tela: abrem logo abaixo do escolhido */
     var escolhido=menu.querySelector('.ux-intention.selected');if(escolhido){escolhido.after(section);setTimeout(function(){try{section.scrollIntoView({block:'nearest',behavior:'smooth'});}catch(e){section.scrollIntoView(false);}},60);}
@@ -2494,7 +2570,7 @@
   var uxGuide=TELAS.guia;TELAS.guia=function(id){uxGuide(id);var pg=root.querySelector('.page'),u;curso().secoes.forEach(function(s){s.unidades.forEach(function(x){if(x.id===id)u=x;});});if(u)pg.prepend(uxUnitCard(u));var g=GUIAS[id];if(g)root.querySelectorAll('.vocab tbody tr').forEach(function(row,i){var cell=row.firstElementChild,b=uxBtn('Guardar',function(){uxSaveNote(g.vocab[i][0],g.vocab[i][1],'Quero lembrar',u.titulo);});b.classList.add('ux-save-small');cell.appendChild(b);});};
   var uxTrail=TELAS.trilha;TELAS.trilha=function(){uxTrail();var units=[];curso().secoes.forEach(function(s){s.unidades.forEach(function(u){units.push(u);});});root.querySelectorAll('.linha').forEach(function(section,i){if(!units[i])return;var img=uxPhoto(units[i]);img.classList.add('ux-unit-thumb');var header=section.querySelector('.linha-head');if(header)header.prepend(img);});};
   var uxProfile=TELAS.perfil;TELAS.perfil=function(){uxProfile();var pg=root.querySelector('.page'),c=document.createElement('section');c.className='card ux-options';c.innerHTML='<h2>Seu percurso</h2>';c.append(uxBtn('Minhas conquistas',function(){ir('conquistas');}),uxBtn('Progresso do curso',function(){ir('progresso');}),uxBtn('Guias das unidades',function(){ir('guias');}));pg.insertBefore(c,pg.children[1]||null);};
-  estudoInstalarHoje();
+  estudoInstalarHoje(); extrasInstalarHoje();
   var uxReview=TELAS.revisar;TELAS.revisar=function(){uxReview();var pg=root.querySelector('.page'),ds=uxDS();var c=document.createElement('section');c.className='card ux-options';c.innerHTML='<span class="ui-label">Além das palavras do curso</span><h2>Expressões que você guardou</h2><p>'+(ds.cards||[]).length+' expressões de Descobrir · '+uxItems().length+' itens no caderno.</p>';c.append(uxBtn('Revisar expressões',function(){ir('descobrir',{view:'review'});}),uxBtn('Abrir meu caderno',function(){ir('caderno');}));pg.insertBefore(c,pg.children[1]||null);};
   var uxWrite=TELAS.ecoWrite;TELAS.ecoWrite=function(id){uxWrite(id);uxHelp(root.querySelector('.page'),{unit:uxCurrent()&&uxCurrent().unidade});};
   var uxSpeak=falar;falar=function(t,l){if(S.cfg.silent){toast('Modo silencioso ativo. Você pode mudar nos ajustes rápidos.');return;}uxSpeak(t,l);};

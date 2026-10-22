@@ -8613,7 +8613,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
      ================================================================= */
   var abas = [['hoje', 'Hoje'], ['trilha', 'Trilha'], ['praticar', 'Praticar'], ['caderno', 'Caderno'], ['perfil', 'Perfil']];
   var historyBack=false;
-  var historyScreens=['revisaoDia','provas','leituras','lembrete','hoje','trilha','praticar','caderno','perfil','config','guia','guias','revisar','progresso','ecoHub','ecoScenarios','ecoWrite','ecoPronuncia','ecoDitado','ecoRevisao','ecoHistory','ecoWritingHistory','ecoSummary','conquistas','descobrir','boasvindas','entrar'];
+  var historyScreens=['dupla','admin','revisaoDia','provas','leituras','lembrete','hoje','trilha','praticar','caderno','perfil','config','guia','guias','revisar','progresso','ecoHub','ecoScenarios','ecoWrite','ecoPronuncia','ecoDitado','ecoRevisao','ecoHistory','ecoWritingHistory','ecoSummary','conquistas','descobrir','boasvindas','entrar'];
   function recordRoute(tela,arg){if(historyBack||historyScreens.indexOf(tela)<0)return;var data={idiomas:true,tela:tela,arg:typeof arg==='string'||typeof arg==='number'?arg:null,perfil:S.ativo};if(!history.state||!history.state.idiomas)history.replaceState(data,'');else if(history.state.tela!==tela||history.state.arg!==data.arg)history.pushState(data,'');}
   addEventListener('popstate',function(e){if(!e.state||!e.state.idiomas)return;historyBack=true;try{if(e.state.perfil!==S.ativo&&e.state.perfil){S.ativo=null;salvar();ir('entrar');}else ir(e.state.tela,e.state.arg);}finally{historyBack=false;}});
   function ir(tela, arg) {

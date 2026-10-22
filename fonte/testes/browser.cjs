@@ -96,6 +96,12 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await h.getByRole('button',{name:/Lembrete diário/}).click();await h.getByRole('heading',{name:'Um lembrete por dia'}).waitFor();
   assert.ok(await h.getByRole('button',{name:'Ligar lembrete'}).isDisabled(),'sem entrada Google o lembrete não liga');
   console.log('PASS: tela do lembrete explica o que falta para ligar');
+  await h.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Hoje',exact:true}).click();
+  const dupla=h.locator('.est-dupla');await dupla.waitFor();assert.match(await dupla.textContent(),/Beto ainda não estudou hoje/);
+  await dupla.getByRole('button',{name:'Diálogo em dupla'}).click();await h.getByRole('button',{name:'Trocar personagens'}).click();await h.getByRole('button',{name:'Começar',exact:true}).click();
+  for(let i=0;i<30&&!(await h.getByText('Diálogo completo!').count());i++){await h.getByRole('button',{name:'Já li'}).click();}
+  await h.getByText('Diálogo completo!').waitFor();
+  console.log('PASS: modo a dois: desafio da semana na tela Hoje e diálogo em dupla até o fim');
   await c3.close();
 
   const online=await browser.newContext({viewport:{width:390,height:844},permissions:['microphone'],serviceWorkers:'block'});await online.addInitScript(()=>{window.__semAbertura=true;});
