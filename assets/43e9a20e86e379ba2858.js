@@ -141,6 +141,8 @@
     /* música de abertura (autoral, sintetizada aqui): ~3,6 s acompanhando a animação da Eco */
     function abertura() {
       var c = ac(); if (!c) return;
+      /* a música soava baixa demais: sobe o volume geral só durante ela (o compressor segura os picos) */
+      var t = c.currentTime, g = out.gain, base = 0.9 * VOL; g.cancelScheduledValues(t); g.setValueAtTime(base * 3.6, t); g.setValueAtTime(base * 3.6, t + 4.2); g.linearRampToValueAtTime(base, t + 4.6);
       [130.8, 196, 246.9, 293.7, 329.6].forEach(function (f) { nota(f, 0, 3.4, 0.022, 'triangle'); });           // base: Dó com 7ª e 9ª, suave
       [392, 523.3, 659.3, 784].forEach(function (f, i) { nota(f, 0.25 + i * 0.14, 0.45, 0.07, 'sine', 0, MAD); });  // chegada da Eco
       nota(261.6, 1.45, 0.18, 0.08, 'triangle', 0, MAD); nota(196, 1.62, 0.22, 0.07, 'triangle', 0, MAD);       // quica ao frear

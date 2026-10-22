@@ -41,6 +41,9 @@ function ecoEstado(el, estado) { if (el && el.__eco) el.__eco.estado(ECO_MAPA[es
       if (comecou) return; comecou = true; if (esperar) ov.querySelector('.abertura-frase').style.animation = 'none'; ov.classList.remove('abertura-espera'); var t = ov.querySelector('.abertura-toque'); if (t) t.remove();
       /* como imagem: o CSS da animação não se mistura com o do app; inserir agora faz a animação começar agora */
       ov.querySelector('.abertura-arte').innerHTML = '<img alt="Idiomas" src="data:image/svg+xml;charset=utf-8,' + encodeURIComponent(ABERTURA_SVG).replace(/'/g, '%27') + '">';
+      /* iPhone/iPad: sem isto, o som do app obedece à chave de silencioso do aparelho e pode não sair */
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+      try { var mudo = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA='); mudo.play().catch(function () {}); } catch (e) {}
       if (ctx) { var vai = function () { if (ctx.state === 'running') { SOM.vol(cfg.volume == null ? 1 : cfg.volume); SOM.abertura(); } }; if (ctx.state === 'running') vai(); else try { ctx.resume().then(vai).catch(function () {}); } catch (e) {} }
       setTimeout(fechar, reduz ? 1400 : 3900);
     }
