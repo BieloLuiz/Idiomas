@@ -13,7 +13,7 @@ for(const k of ["en","fr"]){const B=base[k];out[k]={name:B.name,tts:B.tts,units:
 const au={sprites:Object.assign(JSON.parse(fs.readFileSync(path.join(d,"sprites.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-a2.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-b1.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-b2.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-c1.json"),"utf8")))};
 process.stdout.write("var COURSE="+JSON.stringify(out)+";\\nvar AUDIO="+JSON.stringify(au)+";\\n");''',D]).decode()
 data=data.replace('</script','<\\/script')
-L[i:j+1]=['<script>',open(os.path.join(D,'eco.js'),encoding='utf-8').read()+open(os.path.join(D,'eco-app.js'),encoding='utf-8').read()+open(os.path.join(D,'profile-core.js'),encoding='utf-8').read()+open(os.path.join(D,'discovery.js'),encoding='utf-8').read()+open(os.path.join(D,'ia.js'),encoding='utf-8').read()+data+open(os.path.join(D,'adapter.js'),encoding='utf-8').read(),'</script>']
+L[i:j+1]=['<script>','var ABERTURA_SVG='+json.dumps(open(os.path.join(D,'..','marca','idiomas-abertura.svg'),encoding='utf-8').read())+';\n'+open(os.path.join(D,'eco.js'),encoding='utf-8').read()+open(os.path.join(D,'eco-app.js'),encoding='utf-8').read()+open(os.path.join(D,'profile-core.js'),encoding='utf-8').read()+open(os.path.join(D,'discovery.js'),encoding='utf-8').read()+open(os.path.join(D,'ia.js'),encoding='utf-8').read()+data+open(os.path.join(D,'adapter.js'),encoding='utf-8').read(),'</script>']
 s='\n'.join(L)
 def rep(a,b,n=1):
     global s

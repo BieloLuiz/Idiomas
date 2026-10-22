@@ -17,7 +17,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
  const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined,args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']});const errors=[];
  try{
-  const context=await browser.newContext({viewport:{width:390,height:844},permissions:['microphone']});
+  const context=await browser.newContext({viewport:{width:390,height:844},permissions:['microphone']});await context.addInitScript(()=>{window.__semAbertura=true;});
   await context.route('https://**',r=>r.abort());
   await context.route('**/config.js',r=>r.fulfill({contentType:'application/javascript',body:'window.IDIOMAS_API="";'}));
   await context.addInitScript(state=>localStorage.getItem('idiomas-app-v2')||localStorage.setItem('idiomas-app-v2',JSON.stringify(state)),initial());
@@ -40,7 +40,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await context.close();console.log('PASS: curso C1 correto, Descobrir em francês e larguras 320/390/820/1280');
 
   /* revisão 2: escuta, preferências, dificuldades e configurações */
-  const c2=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+  const c2=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});await c2.addInitScript(()=>{window.__semAbertura=true;});
   await c2.route('https://**',r=>r.abort());await c2.route('**/config.js',r=>r.fulfill({contentType:'application/javascript',body:'window.IDIOMAS_API="";'}));
   const st2=initial();st2.perfis[1].preferencias={silent:true,translations:false,textSize:125};
   st2.perfis[0].discovery={fr:{cards:[],completed:[],errors:[{id:'fr|0|order',said:'viens Tu',correct:"Tu viens d'où ?",activity:3,item:0,resolved:false,explanation:'U1'}]}};
@@ -65,7 +65,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await c2.close();
 
   /* revisão do dia, prova de nível e lembrete (sem servidor) */
-  const c3=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+  const c3=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});await c3.addInitScript(()=>{window.__semAbertura=true;});
   await c3.route('https://**',r=>r.abort());await c3.route('**/config.js',r=>r.fulfill({contentType:'application/javascript',body:'window.IDIOMAS_API="";'}));
   const st3=initial();st3.perfis[0].idioma='en';st3.perfis[0].progresso={en:60,fr:0};
   st3.perfis[0].reviewWords={'en|0|L|0':{interval:1,due:1,correct:1,wrong:0}};
@@ -96,7 +96,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   console.log('PASS: tela do lembrete explica o que falta para ligar');
   await c3.close();
 
-  const online=await browser.newContext({viewport:{width:390,height:844},permissions:['microphone'],serviceWorkers:'block'});
+  const online=await browser.newContext({viewport:{width:390,height:844},permissions:['microphone'],serviceWorkers:'block'});await online.addInitScript(()=>{window.__semAbertura=true;});
   await online.route('https://**',r=>r.abort());await online.route('**/config.js',r=>r.fulfill({contentType:'application/javascript',body:`window.IDIOMAS_API=${JSON.stringify(url+'/api')};`}));
   const token='e30.'+Buffer.from(JSON.stringify({exp:Math.floor(Date.now()/1000)+3600})).toString('base64url')+'.signature';
   await online.route('https://accounts.google.com/gsi/client',r=>r.fulfill({contentType:'application/javascript',body:`window.google={accounts:{id:{initialize(c){window.mockLogin=c.callback},renderButton(el){let b=document.createElement('button');b.textContent='Entrar no teste';b.onclick=()=>window.mockLogin({credential:${JSON.stringify(token)}});el.appendChild(b)}}}};`}));

@@ -17,6 +17,7 @@
  *
  * Estados de base (ficam): neutral, thinking, reading, listening, speaking, sleepy
  * Reações (cerca de 1,5 s; surprise 0,5 s; depois voltam à base): happy, celebrate, confused, surprise, wave
+ *   eco.estado('entrada')  → abertura do app (3 s): chega da esquerda crescendo, quica, pisca e acena
  *   eco.estado('celebrate', { grande: true })  → versão maior, para fim de nível
  *
  * Cores: variáveis CSS no elemento que contém a Eco (ou em :root):
@@ -27,11 +28,11 @@
   'use strict';
 
   var BASES = ['neutral', 'thinking', 'reading', 'listening', 'speaking', 'sleepy'];
-  var REACOES = ['happy', 'celebrate', 'confused', 'surprise', 'wave'];
+  var REACOES = ['happy', 'celebrate', 'confused', 'surprise', 'wave', 'entrada'];
   var LUZ = { // cor da antena por estado (paleta do app)
     neutral: 'dourado', happy: 'verde', celebrate: 'verde', confused: 'caramelo',
     thinking: 'lilas', reading: 'leitura', listening: 'azul', speaking: 'agua', surprise: 'dourado',
-    wave: 'dourado', sleepy: 'apagada'
+    wave: 'dourado', entrada: 'dourado', sleepy: 'apagada'
   };
   var CSS = '' +
     '.eco-svg{--eco-corpo:#5B6FD2;--eco-corpo-sombra:#4153B4;--eco-borda:#8F9EE6;--eco-viseira:#18243D;' +
@@ -374,6 +375,38 @@
         mostra(el.brilhos[0], true);
         if (!animar(el.brilhos[0], [{ transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1.2) rotate(40deg)', opacity: 1, offset: .4 }, { transform: 'scale(0) rotate(80deg)', opacity: 0 }], { duration: 500, delay: 300 })) mostra(el.brilhos[0], false);
         return 1500;
+      },
+      entrada: function () {
+        // 1) chega da esquerda, crescendo como se viesse de trás da tela, e freia com um quique
+        luz('dourado'); rosto({ olhar: [5, 0] });
+        var voo = [
+          { transform: 'translate(-300px,6px) scale(.5) rotate(9deg)', easing: 'cubic-bezier(.33,.2,.4,1)' },
+          { transform: 'translate(-30px,-12px) scale(.9) rotate(7deg)', offset: .45 },
+          { transform: 'translate(8px,0) scale(1.04,.98) rotate(-4deg)', offset: .62 },
+          { transform: 'translate(6px,0) scale(1.08,.88) rotate(-2deg)', offset: .7 },
+          { transform: 'translate(-2px,0) scale(.97,1.05) rotate(1deg)', offset: .83 },
+          { transform: 'none' }];
+        animar(el.pulo, voo, { duration: 1500, easing: 'linear' });
+        animar(el.sombra, [{ transform: 'translateX(-300px) scale(.35)', easing: 'cubic-bezier(.33,.2,.4,1)' }, { transform: 'translateX(-30px) scale(.8)', offset: .45 },
+          { transform: 'translateX(8px) scale(1.05)', offset: .62 }, { transform: 'translateX(6px) scale(1.12)', offset: .7 }, { transform: 'none' }],
+          { duration: 1500, easing: 'linear' });
+        animar(el.antena, [{ transform: 'rotate(-16deg)' }, { transform: 'rotate(-16deg)', offset: .4 }, { transform: 'rotate(16deg)', offset: .56 },
+          { transform: 'rotate(-9deg)', offset: .68 }, { transform: 'rotate(4deg)', offset: .8 }, { transform: 'rotate(0)' }], { duration: 1900, easing: 'ease-out' });
+        // 2) olha para a frente e pisca
+        depois(1050, function () { if (atual === 'entrada') rosto({}); });
+        depois(1300, function () {
+          if (atual === 'entrada') animar(el.pilula, [{ transform: 'scaleY(1)' }, { transform: 'scaleY(.12)' }, { transform: 'scaleY(1)' }], { duration: 220, easing: 'ease-in-out' });
+        });
+        // 3) sorri e acena
+        depois(1560, function () {
+          if (atual !== 'entrada') return;
+          rosto({ olhos: 'feliz', bochechas: true });
+          animar(el.bracoE, [{ transform: 'rotate(0)' }, { transform: 'rotate(118deg)', offset: .2 }, { transform: 'rotate(92deg)', offset: .36 }, { transform: 'rotate(122deg)', offset: .52 },
+            { transform: 'rotate(92deg)', offset: .68 }, { transform: 'rotate(112deg)', offset: .8 }, { transform: 'rotate(0)' }], { duration: 1350, easing: 'ease-in-out' });
+          mostra(el.brilhos[0], true);
+          if (!animar(el.brilhos[0], [{ transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1.2) rotate(40deg)', opacity: 1, offset: .4 }, { transform: 'scale(0) rotate(80deg)', opacity: 0 }], { duration: 520, delay: 250 })) mostra(el.brilhos[0], false);
+        });
+        return 3000;
       }
     };
 

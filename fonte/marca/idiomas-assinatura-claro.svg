@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 659 144" width="659" height="144" role="img" aria-label="Idiomas">
+<title>Idiomas</title>
+<g transform="translate(4 4.0) scale(0.62)"><g id="eco-assin">
+<ellipse id="sombra" cx="100" cy="214" rx="54" ry="5" style="fill:var(--idiomas-eco-chao, #1F2937)" opacity=".14"/>
+<path id="antena-haste" d="M98 50 C96 36 100 26 108 18" fill="none" style="stroke:var(--idiomas-eco-corpo, #5B6FD2)" stroke-width="7" stroke-linecap="round"/>
+<circle id="antena-luz" cx="110" cy="15" r="10" style="fill:var(--idiomas-dourado, #F3C26C)"/>
+<ellipse id="braco-esquerdo" cx="34" cy="160" rx="13" ry="20" transform="rotate(28 34 160)" style="fill:var(--idiomas-eco-corpo-sombra, #4153B4)"/>
+<ellipse id="braco-direito" cx="166" cy="160" rx="13" ry="20" transform="rotate(-28 166 160)" style="fill:var(--idiomas-eco-corpo-sombra, #4153B4)"/>
+<defs><linearGradient id="eco-degrade-assin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--idiomas-eco-corpo, #5B6FD2)"/><stop offset="1" style="stop-color:var(--idiomas-eco-corpo-sombra, #4153B4)"/></linearGradient></defs>
+<path id="corpo" d="M100 44 C140 44 168 86 170 132 C172 178 142 206 100 206 C58 206 28 178 30 132 C32 86 60 44 100 44 Z" fill="url(#eco-degrade-assin)"/>
+<ellipse id="brilho" cx="72" cy="78" rx="18" ry="10" transform="rotate(-32 72 78)" fill="#fff" opacity=".22"/>
+<rect id="viseira-borda" x="48" y="88" width="104" height="70" rx="28" style="fill:var(--idiomas-eco-borda, #8F9EE6)"/>
+<rect id="viseira" x="52" y="92" width="96" height="62" rx="24" style="fill:var(--idiomas-eco-viseira, #18243D)"/>
+<path id="viseira-reflexo" d="M64 100 h22" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".16"/>
+<rect id="olho-esquerdo" x="76" y="106" width="12" height="24" rx="6" style="fill:var(--idiomas-eco-rosto, #C5F4D3)"/>
+<rect id="olho-direito" x="112" y="106" width="12" height="24" rx="6" style="fill:var(--idiomas-eco-rosto, #C5F4D3)"/>
+<path id="boca" d="M90 140 Q100 147 110 140" fill="none" style="stroke:var(--idiomas-eco-rosto, #C5F4D3)" stroke-width="3.6" stroke-linecap="round"/>
+</g></g>
+<g id="idiomas-palavra" transform="translate(146.00 107.84) scale(0.13500 -0.13500)">
+<g id="letras" style="fill:var(--idiomas-marca, #5366C7)">
+<path transform="translate(0)" d="M66 0V525H210V0Z"/>
+<path transform="translate(264)" d="M257 -14Q191 -14 141.5 20.0Q92 54 65.0 116.0Q38 178 38 263Q38 343 62.0 405.0Q86 467 133.0 502.0Q180 537 250 537Q301 537 336.0 518.0Q371 499 393.5 462.5Q416 426 429 375H452Q445 407 439.5 437.5Q434 468 431.0 496.0Q428 524 428 545V715H572V0H452V152H432Q421 96 398.0 59.0Q375 22 339.5 4.0Q304 -14 257 -14ZM305 104Q338 104 361.0 118.0Q384 132 399.0 154.5Q414 177 421.0 203.5Q428 230 428 253V272Q428 291 422.5 311.5Q417 332 407.0 352.0Q397 372 382.0 387.5Q367 403 347.0 412.0Q327 421 303 421Q267 421 242.0 401.0Q217 381 203.0 345.5Q189 310 189 263Q189 215 203.5 179.0Q218 143 244.0 123.5Q270 104 305 104Z"/>
+<path transform="translate(891)" d="M66 0V525H210V0Z"/>
+<path transform="translate(1155)" d="M304 -14Q225 -14 165.0 17.5Q105 49 71.0 110.5Q37 172 37 264Q37 356 71.5 417.0Q106 478 166.5 508.5Q227 539 304 539Q383 539 443.5 508.0Q504 477 538.5 415.5Q573 354 573 262Q573 169 537.5 107.5Q502 46 441.5 16.0Q381 -14 304 -14ZM309 93Q348 93 374.5 111.0Q401 129 414.5 165.5Q428 202 428 254Q428 309 413.5 347.5Q399 386 371.0 406.5Q343 427 300 427Q263 427 236.0 409.5Q209 392 195.0 355.5Q181 319 181 266Q181 181 215.0 137.0Q249 93 309 93Z"/>
+<path transform="translate(1752)" d="M66 0V525H181V368H200Q214 426 237.0 463.5Q260 501 292.5 520.0Q325 539 369 539Q416 539 447.0 518.0Q478 497 495.0 459.5Q512 422 517 368H533Q548 427 573.5 465.0Q599 503 634.5 521.0Q670 539 713.0 539.0Q756 539 788.5 522.0Q821 505 843.0 471.5Q865 438 876.0 387.5Q887 337 887 271V0H743V253Q743 307 734.0 343.5Q725 380 706.0 398.0Q687 416 657 416Q624 416 600.0 393.5Q576 371 562.0 332.0Q548 293 547 243V0H406V249Q406 305 396.0 341.5Q386 378 367.0 397.0Q348 416 319 416Q285 416 261.0 393.5Q237 371 224.0 331.0Q211 291 210 242V0Z"/>
+<path transform="translate(2686)" d="M189 -14Q145 -14 111.0 3.5Q77 21 58.0 54.0Q39 87 39 136Q39 179 55.5 208.0Q72 237 104.0 255.0Q136 273 183.0 285.0Q230 297 290 306Q322 311 342.5 315.5Q363 320 373.0 330.5Q383 341 383 361Q383 389 363.0 409.0Q343 429 300 429Q271 429 246.5 419.0Q222 409 204.5 389.0Q187 369 179 338L52 377Q64 418 86.5 448.0Q109 478 141.0 498.5Q173 519 214.0 529.0Q255 539 303 539Q380 539 428.5 514.5Q477 490 501.0 438.5Q525 387 525 306V216Q525 181 526.5 145.0Q528 109 530.5 72.5Q533 36 536 0H409Q405 25 401.5 57.5Q398 90 396 123H378Q364 85 338.0 54.0Q312 23 274.5 4.5Q237 -14 189 -14ZM250 90Q269 90 288.5 97.0Q308 104 326.5 116.5Q345 129 360.5 148.0Q376 167 386 191L384 257Q375 253 365 250Q341 242 315.5 238.0Q290 234 265.0 229.0Q240 224 220.5 216.0Q201 208 189.5 194.5Q178 181 178 157Q178 126 198.0 108.0Q218 90 250 90Z"/>
+<path transform="translate(3259)" d="M276 -14Q223 -14 180.0 -4.0Q137 6 106.0 25.0Q75 44 56.0 70.5Q37 97 31 130L141 175Q145 153 163.0 134.0Q181 115 211.5 103.5Q242 92 285 92Q331 92 356.0 105.5Q381 119 381 144Q381 163 367.0 174.0Q353 185 326.0 193.0Q299 201 261 208Q224 217 185.5 227.0Q147 237 114.5 255.0Q82 273 61.5 302.5Q41 332 41 378Q41 426 67.0 462.0Q93 498 143.0 518.5Q193 539 265 539Q330 539 379.0 521.5Q428 504 459.5 471.5Q491 439 502 394L385 355Q381 379 365.5 397.0Q350 415 324.5 424.0Q299 433 265 433Q222 433 198.5 419.0Q175 405 175 382Q175 363 190.5 351.0Q206 339 234.0 331.5Q262 324 300 316Q340 308 378.0 297.5Q416 287 446.5 270.0Q477 253 495.0 225.0Q513 197 513 153Q513 101 485.0 63.5Q457 26 404.0 6.0Q351 -14 276 -14Z"/>
+</g>
+<path id="pingo-1" transform="translate(0)" d="M139 604Q97 604 74.5 621.5Q52 639 52 673Q52 708 74.5 726.0Q97 744 139 744Q182 744 204.5 726.0Q227 708 227 673Q227 640 204.5 622.0Q182 604 139 604Z" style="fill:var(--idiomas-dourado, #F3C26C)"/>
+<path id="pingo-2" transform="translate(891)" d="M139 604Q97 604 74.5 621.5Q52 639 52 673Q52 708 74.5 726.0Q97 744 139 744Q182 744 204.5 726.0Q227 708 227 673Q227 640 204.5 622.0Q182 604 139 604Z" style="fill:var(--idiomas-marca, #5366C7)"/>
+</g>
+</svg>

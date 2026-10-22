@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 222" width="200" height="222" role="img" aria-label="Eco">
+<title>Eco</title>
+<g id="eco">
+<ellipse id="sombra" cx="100" cy="214" rx="54" ry="5" style="fill:var(--idiomas-eco-chao, #1F2937)" opacity=".14"/>
+<path id="antena-haste" d="M98 50 C96 36 100 26 108 18" fill="none" style="stroke:var(--idiomas-eco-corpo, #5B6FD2)" stroke-width="7" stroke-linecap="round"/>
+<circle id="antena-luz" cx="110" cy="15" r="10" style="fill:var(--idiomas-dourado, #F3C26C)"/>
+<ellipse id="braco-esquerdo" cx="34" cy="160" rx="13" ry="20" transform="rotate(28 34 160)" style="fill:var(--idiomas-eco-corpo-sombra, #4153B4)"/>
+<ellipse id="braco-direito" cx="166" cy="160" rx="13" ry="20" transform="rotate(-28 166 160)" style="fill:var(--idiomas-eco-corpo-sombra, #4153B4)"/>
+<defs><linearGradient id="eco-degrade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--idiomas-eco-corpo, #5B6FD2)"/><stop offset="1" style="stop-color:var(--idiomas-eco-corpo-sombra, #4153B4)"/></linearGradient></defs>
+<path id="corpo" d="M100 44 C140 44 168 86 170 132 C172 178 142 206 100 206 C58 206 28 178 30 132 C32 86 60 44 100 44 Z" fill="url(#eco-degrade)"/>
+<ellipse id="brilho" cx="72" cy="78" rx="18" ry="10" transform="rotate(-32 72 78)" fill="#fff" opacity=".22"/>
+<rect id="viseira-borda" x="48" y="88" width="104" height="70" rx="28" style="fill:var(--idiomas-eco-borda, #8F9EE6)"/>
+<rect id="viseira" x="52" y="92" width="96" height="62" rx="24" style="fill:var(--idiomas-eco-viseira, #18243D)"/>
+<path id="viseira-reflexo" d="M64 100 h22" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".16"/>
+<rect id="olho-esquerdo" x="76" y="106" width="12" height="24" rx="6" style="fill:var(--idiomas-eco-rosto, #C5F4D3)"/>
+<rect id="olho-direito" x="112" y="106" width="12" height="24" rx="6" style="fill:var(--idiomas-eco-rosto, #C5F4D3)"/>
+<path id="boca" d="M90 140 Q100 147 110 140" fill="none" style="stroke:var(--idiomas-eco-rosto, #C5F4D3)" stroke-width="3.6" stroke-linecap="round"/>
+</g>
+</svg>
