@@ -18,6 +18,17 @@ const PEDACO = 45000;   // limite seguro por célula; perfis maiores ocupam as c
 
 function doGet() { return saida_({ ok: true, app: 'Idiomas', googleClientId: clienteGoogle_() }); }
 
+// Usado apenas pelos templates HtmlService; doGet continua servindo a API JSON.
+function include(arquivo) {
+  if (arquivo !== 'eco') throw new Error('template_nao_permitido');
+  return HtmlService.createHtmlOutputFromFile(arquivo).getContent();
+}
+
+// Prévia opcional no editor do Apps Script, sem modificar a API publicada.
+function previsualizarEco() {
+  return HtmlService.createTemplateFromFile('eco-preview').evaluate().setTitle('Eco — prévia');
+}
+
 function doPost(e) {
   let q = {};
   let user;
