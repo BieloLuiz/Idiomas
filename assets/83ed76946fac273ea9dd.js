@@ -1123,9 +1123,6 @@
     bloco('Aparência', [
       linha('sun', 'Tema', 'Sistema segue o modo do celular', segmento([{ v: 'sistema', t: 'Sistema' }, { v: 'claro', t: 'Claro' }, { v: 'escuro', t: 'Escuro' }], S.cfg.tema, function (v) { set('tema', v); aplicarTema(); }, 'Tema'), true)
     ]);
-    bloco('Laboratório', [
-      botaoLinha('motion', 'Eco em 3D', 'Explore o mascote e suas expressões quando quiser', function () { ir('eco3D'); })
-    ]);
     bloco('Estudo', [
       linha('target', 'Meta diária', 'Minutos por dia', segmento([{ v: 5, t: '5' }, { v: 10, t: '10' }, { v: 15, t: '15' }, { v: 30, t: '30' }], S.cfg.meta, function (v) { set('meta', v, 'Meta: ' + v + ' minutos por dia.'); }, 'Meta diária em minutos'), true),
       linha('voice', 'Velocidade da voz', 'Lições, guias e revisão · velocidade salva neste aparelho', segmento([{ v: 0.7, t: 'Lenta' }, { v: 0.9, t: 'Normal' }, { v: 1.05, t: 'Rápida' }], S.cfg.voz, function (v) { set('voz', v); falar(CURSOS[p.idioma].codigo === 'FR' ? 'Bonjour, ça va ?' : 'Hello, how are you?', CURSOS[p.idioma].voz); }, 'Velocidade da voz'), true),
@@ -1959,16 +1956,6 @@
     return _ecoCallTurnos();
   };
 
-  TELAS.eco3D=function(){
-    var pg=studioPage('Laboratório do Eco 3D','config');
-    studioLead(pg,'Prévia do mascote','Conheça o Eco em 3D','Teste as expressões e veja o personagem por outros ângulos. O mascote das outras telas continua igual.');
-    var lab=document.createElement('section');lab.className='eco-lab';
-    lab.innerHTML='<div class="eco-lab-view"><span class="eco-lab-badge">Modelo 3D real</span></div><p class="eco-lab-status" role="status">Preparando o Eco…</p><div class="eco-lab-states" role="group" aria-label="Estados do Eco">'+['Neutro','Conectando','Ouvindo','Pensando','Falando','Interrompido','Feliz','Ajudando','Lendo'].map(function(n){return '<button type="button" disabled data-eco-state="'+n+'" aria-pressed="false">'+n+'</button>';}).join('')+'</div><div class="eco-lab-settings"><label>Ângulo do personagem<input class="eco-lab-angle" type="range" min="-180" max="180" value="9"></label><label>Fundo da prévia<select class="eco-lab-theme"><option value="auto">Acompanhar o app</option><option value="light">Claro</option><option value="dark">Escuro</option></select></label><label class="eco-lab-check"><input class="eco-lab-reduce" type="checkbox"> Reduzir movimentos</label><button type="button" class="ui-btn ui-btn--secondary eco-lab-pause" aria-pressed="false">Pausar movimentos</button><button type="button" class="ui-btn ui-btn--ghost eco-lab-reset">Voltar à vista inicial</button></div>';
-    pg.appendChild(lab);pg.insertAdjacentHTML('beforeend','<p class="studio-note">Movimentos de demonstração recriados para o navegador a partir das partes do seu modelo. A onda de fala é ilustrativa; não está ligada ao microfone.</p>');
-    pg.appendChild(studioButton('Voltar às configurações',function(){ir('config');}));
-    Promise.all([new Promise(function(resolve,reject){if(window.EcoLabMount){resolve();return;}var script=document.createElement('script');script.src=document.getElementById('eco-3d-renderer').dataset.src;script.onload=resolve;script.onerror=reject;document.head.appendChild(script);}),fetch(document.getElementById('eco-glb-asset').dataset.src).then(function(r){if(!r.ok)throw new Error('modelo');return r.text();})]).then(function(result){if(lab.isConnected)window.EcoLabMount(lab,result[1]);}).catch(function(){if(lab.isConnected)lab.querySelector('[role=status]').textContent='Não foi possível abrir o modelo 3D. Confira a conexão.';});
-  };
-
   TELAS.descobrir=function(context){
     var pg=studioPage('Descobrir','praticar');
     var current=uxCurrent();if(current)pg.appendChild(uxUnitCard(current.unidade));
@@ -1988,7 +1975,7 @@
   function uxUnitCard(u){var card=document.createElement('section');card.className='card ux-unit';card.appendChild(uxPhoto(u));var text=document.createElement('div');text.innerHTML='<span class="ui-label">Seu próximo contexto</span><h2>'+esc(u.titulo||u.title)+'</h2><p>'+esc(u.objetivo||u.objective||'')+'</p>';card.appendChild(text);return card;}
   function uxPage(title,tab){return casca(tab||'praticar',title);}
   TELAS.hoje=function(){var p=eu();novoDia(p);var pg=casca('hoje','',function(bar){botaoIdioma(bar);});var current=uxCurrent(),ds=uxDS(),cards=ds.cards||[],due=cards.filter(function(c){return c.due<=Date.now();}).length;
-    var greeting=document.createElement('div');greeting.className='ux-greeting';var text=document.createElement('div');text.innerHTML='<span class="ui-label">Seu tempo, seu ritmo</span><h1>'+esc(saudacao()+', '+p.nome)+'.</h1><p>Um próximo passo já é um bom começo.</p>';greeting.appendChild(text);greeting.appendChild(eco('neutral','Eco está com você'));pg.appendChild(greeting);
+    var greeting=document.createElement('div');greeting.className='ux-greeting';var text=document.createElement('div');text.innerHTML='<span class="ui-label">Seu tempo, seu ritmo</span><h1>'+esc(saudacao()+', '+p.nome)+'.</h1><p>Um próximo passo já é um bom começo.</p>';greeting.appendChild(text);var ecoHoje=document.createElement('div');ecoHoje.className='eco-hoje-svg';ecoHoje.setAttribute('role','img');ecoHoje.setAttribute('aria-label','Eco está com você');greeting.appendChild(ecoHoje);if(window.Eco){var mascoteHoje=Eco.criar(ecoHoje,{estilo:'2.5d'});mascoteHoje.estado('neutral');}pg.appendChild(greeting);
     var focus=document.createElement('section');focus.className='card ux-focus';focus.innerHTML='<span class="ui-label">Seu próximo passo · cerca de 5 min</span><h2>'+esc(current?current.nome:'Um reencontro com o idioma')+'</h2><p>'+esc(current?current.unidade.objetivo:'Revisite uma expressão que deseja lembrar.')+'</p>';focus.appendChild(uxBtn('Continuar aprendendo',function(){if(current)abrirLicaoApp(current.unidade,current.nome,{});else ir('revisar');},true));focus.insertAdjacentHTML('beforeend','<small>Você pode pausar e retomar quando precisar.</small>');pg.appendChild(focus);
     var choices=document.createElement('div');choices.className='ux-two';var rev=document.createElement('section');rev.className='card ux-small-card';rev.innerHTML='<span class="ui-label">Reencontrar</span><h2>Um pouco de revisão</h2><p>'+(due?due+' expressões salvas disponíveis.':'Revisite palavras e expressões do curso.')+'</p>';rev.appendChild(uxBtn('Revisar',function(){ir('revisar');}));var explore=document.createElement('section');explore.className='card ux-small-card';explore.innerHTML='<span class="ui-label">Experimentar</span><h2>Explorar no seu ritmo</h2><p>Pratique expressões da sua unidade, sem precisar de microfone.</p>';explore.appendChild(uxBtn('Explorar',function(){ir('descobrir',{activity:2});}));choices.append(rev,explore);pg.appendChild(choices);
     if(current){var c=uxUnitCard(current.unidade);c.appendChild(uxBtn('Ver minha trilha',function(){ir('trilha');}));pg.appendChild(c);}
