@@ -117,7 +117,7 @@ function salvar_(p) {
  * bater no limite, o próximo assume.
  * ===================================================================== */
 const SERVICOS = {
-  openai:     { tipo: 'openai', pago: true, url: 'https://api.openai.com/v1/chat/completions', chave: 'OPENAI_API_KEY', prop: 'OPENAI_MODELOS', modelos: ['gpt-6-luna'] },
+  openai:     { tipo: 'openai', pago: true, url: 'https://api.openai.com/v1/chat/completions', chave: 'OPENAI_API_KEY', prop: 'OPENAI_MODELOS', modelos: ['gpt-5.4-mini', 'gpt-6-luna'] },   // mini: grátis até o limite diário; Luna: pago
   groq:       { tipo: 'openai', url: 'https://api.groq.com/openai/v1/chat/completions', chave: 'GROQ_API_KEY', prop: 'GROQ_MODELOS', modelos: ['openai/gpt-oss-120b', 'llama-3.3-70b-versatile'] },
   github:     { tipo: 'openai', url: 'https://models.github.ai/inference/chat/completions', chave: 'GITHUB_MODELS_TOKEN', prop: 'GITHUB_MODELOS', modelos: ['openai/gpt-4o', 'openai/gpt-4.1-mini'] },
   gemini:     { tipo: 'gemini', chave: 'GEMINI_API_KEY', prop: 'GEMINI_MODELOS', modelos: ['gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3-flash-preview'] },
@@ -193,6 +193,7 @@ function chamar_(tipo, p) {
     if (!chave || (s.pago && SEM_PAGOS_)) continue;
     const modelos = (props.getProperty(s.prop) || '').split(',').map(function (x) { return x.trim(); }).filter(String);
     for (const modelo of (modelos.length ? modelos : s.modelos)) {
+      if (!gratisDisponivel_(modelo)) continue;      // passou do limite grátis do dia: vai para o próximo modelo
       prazoIA_();
       const t0 = Date.now();
       try {
@@ -564,10 +565,13 @@ function testarIA() {
 function testarOpenAI() {
   const s = SERVICOS.openai, chave = PropertiesService.getScriptProperties().getProperty(s.chave);
   if (!chave) { Logger.log('Falta a propriedade OPENAI_API_KEY'); return; }
-  const t = openai_(s.url, chave, s.modelos[0], { sistema: 'Responda em uma frase curta.', usuario: 'Diga "olá" em francês.' });
-  Logger.log(t + ' | tokens: ' + JSON.stringify(ULTIMO_USO_) + ' | custo estimado US$ ' + precoTexto_('openai', ULTIMO_USO_.entrada, ULTIMO_USO_.saida, ULTIMO_USO_.cache));
-  const j = openai_(s.url, chave, s.modelos[0], { sistema: 'Responda só com JSON {"ok": true}.', usuario: 'teste', json: true });
-  Logger.log('JSON: ' + j);
+  s.modelos.forEach(function (m) {
+    try {
+      const t = openai_(s.url, chave, m, { sistema: 'Responda em uma frase curta.', usuario: 'Diga "olá" em francês.' });
+      Logger.log(m + ': ' + t + ' | tokens: ' + JSON.stringify(ULTIMO_USO_) + ' | custo estimado US$ ' + precoTexto_('openai', ULTIMO_USO_.entrada, ULTIMO_USO_.saida, ULTIMO_USO_.cache, m));
+      Logger.log(m + ' JSON: ' + openai_(s.url, chave, m, { sistema: 'Responda só com JSON {"ok": true}.', usuario: 'teste', json: true }));
+    } catch (e) { Logger.log(m + ' ERRO: ' + e.message); }
+  });
 }
 
 function saida_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }

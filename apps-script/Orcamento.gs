@@ -19,6 +19,10 @@ const PRECOS_PADRAO = {
     gemini: { entrada: 0, cache: 0, saida: 0 },
     geminiLeve: { entrada: 0, cache: 0, saida: 0 }
   },
+  /* modelos da OpenAI grátis por dia (programa de compartilhamento de dados, ativado na organização):
+     tokens/dia somando todos os modelos do mesmo grupo. Perto do limite, o app passa para o próximo modelo (pago). */
+  gratisDiario: { 'gpt-5.4-mini': { grupo: 'mini', limite: 2500000 }, 'gpt-5-mini': { grupo: 'mini', limite: 2500000 }, 'gpt-5.4': { grupo: 'grande', limite: 250000 } },
+  margemGratis: 0.9,
   whisper: { porHora: 0.04, minimoSegundos: 10 },                 // Groq: cobra no mínimo 10 s por arquivo
   whisperGratis: false,                                            // true se a conta da Groq for do plano gratuito
   vozPremium: { textoPorMilhao: 0.50, porMinuto: 0.009, desde2027: { textoPorMilhao: 1.00, porMinuto: 0.018 } }, // Gemini 3.8 Flash-Lite TTS
@@ -47,8 +51,9 @@ function diaAtual_(agora) { return Utilities.formatDate(agora || new Date(), FUS
 function arred_(v) { return Math.round(v * 1e6) / 1e6; }
 
 /* ---------- preços de cada operação ---------- */
-function precoTexto_(servico, entrada, saida, cache) {
+function precoTexto_(servico, entrada, saida, cache, modelo) {
   const P = precos_(), t = P.texto[servico];
+  if (modelo && P.gratisDiario[modelo]) return 0;   // dentro do limite grátis diário (controlado por gratisDisponivel_)
   if (!t || (/^gemini/.test(servico) && !P.geminiPago)) return 0;
   const novos = Math.max(0, (entrada || 0) - (cache || 0));
   return arred_((novos * t.entrada + (cache || 0) * t.cache + (saida || 0) * t.saida) / 1e6);
@@ -155,7 +160,8 @@ let GASTO_ = null;
 function iniciarGasto_() { GASTO_ = { custo: 0, linhas: [], uso: { texto: 0, audioSeg: 0, vozSeg: 0, liveMin: 0 } }; }
 function anotarTexto_(servico, modelo, u) {
   if (!GASTO_) return; u = u || {};
-  const custo = precoTexto_(servico, u.entrada, u.saida, u.cache);
+  const custo = precoTexto_(servico, u.entrada, u.saida, u.cache, modelo);
+  if (precos_().gratisDiario[modelo]) somarGratis_(modelo, (u.entrada || 0) + (u.saida || 0));
   GASTO_.custo += custo; GASTO_.uso.texto += 1;
   GASTO_.linhas.push({ servico: servico, modelo: modelo, entrada: u.entrada || 0, cache: u.cache || 0, saida: u.saida || 0, custo: custo });
 }
@@ -169,6 +175,19 @@ function anotarGeminiAudio_(modelo, bytes) {           // transcrição pelo Gem
   if (!GASTO_) return;
   const seg = segundosDoAudio_(bytes); GASTO_.uso.audioSeg += seg;
   GASTO_.linhas.push({ servico: 'gemini-transcricao', modelo: modelo, segundos: seg, custo: 0 });
+}
+
+/* limite grátis diário da OpenAI (dia em UTC, como a OpenAI conta) */
+function chaveGratis_(modelo, agora) { const g = precos_().gratisDiario[modelo]; return 'GRATIS_' + Utilities.formatDate(agora || new Date(), 'UTC', 'yyyy-MM-dd') + '_' + g.grupo; }
+function gratisDisponivel_(modelo, agora) {
+  const P = precos_(), g = P.gratisDiario[modelo]; if (!g) return true;
+  const usado = Number(PropertiesService.getScriptProperties().getProperty(chaveGratis_(modelo, agora)) || 0);
+  return usado + 6000 < g.limite * P.margemGratis;          // 6.000 = pior caso de um pedido
+}
+function somarGratis_(modelo, tokens, agora) {
+  try { comLock_(function () { const props = PropertiesService.getScriptProperties(), k = chaveGratis_(modelo, agora);
+    props.setProperty(k, String(Number(props.getProperty(k) || 0) + tokens));
+    props.getKeys().forEach(function (x) { if (/^GRATIS_/.test(x) && x.slice(7, 17) < Utilities.formatDate(new Date(Date.now() - 3 * 86400000), 'UTC', 'yyyy-MM-dd')) props.deleteProperty(x); }); }); } catch (e) {}
 }
 
 /* estimativa conservadora antes da chamada (pior caso: o provedor pago mais caro da rota responde com o máximo de saída) */

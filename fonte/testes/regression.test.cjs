@@ -182,9 +182,12 @@ test('provedores: chamada à OpenAI usa raciocínio baixo e no máximo 2.000 tok
     return{getResponseCode:()=>200,getContentText:()=>JSON.stringify({choices:[{message:{content:oai?'luna':'groq'}}],usage:{prompt_tokens:100,completion_tokens:50}})};};
   const q=()=>({tipo:'duvida',requestId:crypto.randomUUID(),dados:{idioma:'fr',pergunta:'?'}});
   assert.equal(ctx.pedidoIA_(U1,q()).texto,'luna');const b=chamadas[0].b;
-  assert.equal(b.model,'gpt-6-luna');assert.equal(b.reasoning_effort,'low');assert.equal(b.max_completion_tokens,2000);assert.equal(b.temperature,undefined);assert.equal(b.max_tokens,undefined);
+  assert.equal(b.model,'gpt-5.4-mini','modelo grátis primeiro');assert.equal(ctx.estadoOrcamento_().gasto,0,'mini grátis não conta gasto');
+  assert.equal(Number(props[Object.keys(props).find(k=>k.startsWith('GRATIS_'))]),150,'tokens grátis do dia somados');
+  props[Object.keys(props).find(k=>k.startsWith('GRATIS_'))]=String(2.3e6);chamadas.length=0;
+  assert.equal(ctx.pedidoIA_(U1,q()).texto,'luna');assert.equal(chamadas[0].b.model,'gpt-6-luna','perto do limite grátis vai para o Luna');assert.equal(b.reasoning_effort,'low');assert.equal(b.max_completion_tokens,2000);assert.equal(b.temperature,undefined);assert.equal(b.max_tokens,undefined);
   assert.ok(ctx.estadoOrcamento_().gasto>0);
-  openaiFalha=true;chamadas.length=0;assert.equal(ctx.pedidoIA_(U1,q()).texto,'groq');assert.equal(chamadas.length,2,'uma tentativa na OpenAI e depois o gratuito');
+  openaiFalha=true;chamadas.length=0;assert.equal(ctx.pedidoIA_(U1,q()).texto,'groq');assert.equal(chamadas.length,2,'uma tentativa na OpenAI (mini já no limite) e depois o gratuito');
   assert.equal(chamadas[1].b.temperature,0.4);
   openaiFalha=false;const o=JSON.parse(props['ORC_'+ctx.mesAtual_()]);o.gasto=4;props['ORC_'+ctx.mesAtual_()]=JSON.stringify(o);chamadas.length=0;
   assert.equal(ctx.pedidoIA_(U1,q()).texto,'groq','orçamento esgotado: segue com o gratuito');assert.ok(chamadas.every(c=>!c.url.includes('openai.com')));
