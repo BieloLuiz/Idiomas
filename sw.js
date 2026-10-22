@@ -1,5 +1,5 @@
 /* A PWA gerencia somente os próprios caches e recursos dentro do seu escopo. */
-const PREFIX = 'idiomas-', V = PREFIX + '4a2ec42fb1', AUDIO_CACHE = PREFIX + 'audio-v1';
+const PREFIX = 'idiomas-', V = PREFIX + '74e6a966ef', AUDIO_CACHE = PREFIX + 'audio-v1';
 const ASSETS = ["assets/c6bfe16efec91a123fcd.webp", "assets/e7245faa3817a7f27d9a.js", "assets/295efa32d0c9f5d3d971.js", "assets/4192643eb0fddf5cf769.js", "assets/07b5486bbc404de8770f.js", "assets/d9afc9a58fcb307d7e03.js", "assets/0fffe9886293678beb14.js", "assets/27535720bc0b15e6a541.js", "assets/b42e717cbb0db7138680.js", "assets/eca617750f7770680c27.css", "assets/12725c10c7f8e4f20e1c.css", "assets/e884d13cc6425d81b1b4.css", "assets/5223997e75105fc7c365.css", "assets/f6546f320e981c99ad3e.css"];
 const SHELL = ['./', 'index.html', 'config.js', 'auth.js', 'sync.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'].concat(ASSETS);
 self.addEventListener('install', e => e.waitUntil(caches.open(V).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())));

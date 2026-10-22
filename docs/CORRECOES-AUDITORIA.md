@@ -92,3 +92,15 @@ Verificações (`npm test`, 26): rotas padrão e configuradas; corpo da chamada 
 ## OpenAI: modelo grátis por compartilhamento de dados (22/10/2026)
 
 O dono ativou o compartilhamento de dados com a OpenAI (até 2,5 milhões de tokens/dia grátis no grupo mini e 250 mil no grupo maior). `SERVICOS.openai.modelos` passou a `gpt-5.4-mini` (grátis) e depois `gpt-6-luna` (pago). `gratisDisponivel_` soma os tokens do dia (UTC, propriedade `GRATIS_<dia>_<grupo>`) e, ao chegar a 90% do limite, o pedido segue para o GPT-6 Luna. Dentro do limite o custo estimado é 0. Os textos enviados à OpenAI podem ser usados por ela para treinar modelos, por escolha do dono. Verificado em `npm test` (simulado); a chamada real deve ser conferida com `testarOpenAI`, que agora testa os dois modelos.
+
+## IA e voz — etapas 3 a 5, modo a dois e Eco nas lições (branch `tudo-v2`)
+
+- Painel do administrador (`apps-script/Admin.gs`, `TELAS.admin`): só a conta em `ADMIN_EMAILS` (padrão: a do dono). Mostra o consumo estimado do mês, por serviço e por aluno, os tokens grátis da OpenAI usados no dia, alertas e bloqueios; configura provedor principal, reservas, modo das cotas (registrar ou bloquear), cotas por aluno, liberação da reserva de US$ 1 e se a Groq é do plano gratuito.
+- Pronúncia: aviso de privacidade antes da primeira gravação (qualquer tela que grava) e botão "Mais devagar".
+- Conversa "Sem botão": detecção de fala pelo volume no próprio aparelho (limiar adaptado ao ruído; 150 ms de fala para começar, 1,2 s de silêncio para enviar; até 60 s por frase); não escuta enquanto o Eco fala nem logo depois; botão para interromper o Eco; encerra após 2 min sem fala e aos 15 min. Sessão única por aluno no servidor (`sessaoConversa_`) para os três modos, com opção de continuar em outro aparelho.
+- Voz premium opcional (Gemini 3.8 Flash-Lite TTS, plano gratuito: US$ 0, conta minutos na cota); a voz do aparelho continua padrão; em falha, volta para a do aparelho.
+- Modo a dois: desafio da semana conjunto (soma dos minutos dos dois perfis contra 5 × as metas diárias somadas), o que o outro estudou hoje e a unidade dele, frase da Eco quando os dois estudaram; diálogo em dupla no mesmo aparelho, com cada um num personagem.
+- Eco aparece ao lado do enunciado nas lições e reage a acerto e erro.
+- Cores: a paleta do app já usava o azul-violeta da marca (`--primary: #5366C7`), sem mudança.
+
+Verificações: `npm test` 29 (admin, sessão única, voz premium); `npm run test:browser` 20 (painel, aviso de privacidade, conversa sem botão abrindo e fechando o microfone, modo a dois). Não verificado: a detecção de fala com voz real (o navegador de teste usa um tom fixo) e a voz premium real do Gemini.
