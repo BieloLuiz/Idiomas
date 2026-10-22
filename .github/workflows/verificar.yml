@@ -1,9 +1,7 @@
 name: Verificar aplicativo
 on:
   pull_request:
-  push:
-    branches: [main]
-  workflow_call:
+  workflow_call:   # chamado por pages.yml e publicar.yml antes de publicar
 permissions:
   contents: read
 jobs:

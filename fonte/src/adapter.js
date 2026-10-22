@@ -5,6 +5,18 @@ var CURSOS = {}, LICOES = {}, GUIAS = {}, PALAVRAS = {};
   function rnd(seed) { var s = seed + 7; return function () { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
   function mix(a, r) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function uniq(a) { return a.filter(function (x, i) { return a.indexOf(x) === i; }); }
+  /* campo "e" das questões: às vezes é uma fala do diálogo, às vezes uma explicação em português.
+     Só vira escuta quando corresponde a uma fala da unidade; senão, é explicação mostrada depois da resposta. */
+  function normFala(s) { return String(s || '').toLowerCase().replace(/[’‘]/g, "'").replace(/[^\p{L}\p{N}' ]+/gu, ' ').replace(/\s+/g, ' ').trim(); }
+  function falaDoMc(u, m) {
+    var t = String(m && m.e || '').replace(/^[^:]{1,30}\b(diz|dit|says)\s*:\s*/i, ''), nt = normFala(t), lines = u.lines || [];
+    if (!nt) return null;
+    for (var i = 0; i < lines.length; i++) if (normFala(lines[i][1]) === nt) return lines[i][1];
+    for (i = 0; i < lines.length; i++) if (normFala(lines[i][1]).indexOf(nt) >= 0) return lines[i][1];
+    for (i = 0; i < lines.length; i++) if (nt.indexOf(normFala(lines[i][1])) >= 0) return t.trim();
+    return null;
+  }
+  window.falaDoMc = falaDoMc;
   function words(s) { return String(s).replace(/[.,!?;:¿¡…“”"]/g, ' ').split(/\s+/).filter(Boolean); }
 
   /* ---------- áudio: um MP3 por unidade, com o trecho de cada frase ---------- */
@@ -108,7 +120,7 @@ var CURSOS = {}, LICOES = {}, GUIAS = {}, PALAVRAS = {};
       var ex;
       function prepare(){if(ex)return;r=rnd(ui*31+(k==='en'?1:2));ex = [
         mix(cards, r).slice(0, 7).map(function (c) { return palavra(c, true); }),
-        U.mc && U.mc.length ? mix(U.mc,r).map(function(m){return{tipo:'escolha',escuta:true,enunciado:m.q,frase:m.e,opcoes:m.o.slice(),correta:m.a,audio:AUD.fn(m.e,vozL,ui)};}) : mix(lines, r).slice(0, 7).map(escuta),
+        U.mc && U.mc.length ? mix(U.mc,r).map(function(m){var fala=falaDoMc(U,m);return fala?{tipo:'escolha',escuta:true,enunciado:m.q,frase:fala,opcoes:m.o.slice(),correta:m.a,audio:AUD.fn(fala,vozL,ui)}:{tipo:'escolha',semFrase:true,enunciado:m.q,frase:'',explicacao:m.e,opcoes:m.o.slice(),correta:m.a};}) : mix(lines, r).slice(0, 7).map(escuta),
         mix(curtas, r).slice(0, 6).map(conversa),
         mix(gaps, r).slice(0, 7).map(lacuna)
       ];

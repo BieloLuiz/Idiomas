@@ -30,6 +30,33 @@ var ProfileCore = (function () {
     }
     return copy(local);
   }
+  /* Fusão de perfil: contadores do dia (minutosHoje, metasHoje, hojeFeito) e da semana (semana, xpSemana)
+     só somam entre versões do mesmo dia/semana. Valores de um dia ou semana mais antigos não entram no atual. */
+  var DIA = ['minutosHoje', 'metasHoje', 'hojeFeito'], SEMANA = ['semana', 'xpSemana'];
+  function ordem(d) { var m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(String(d || '')); return m ? (+m[1]) * 10000 + (+m[2]) * 100 + (+m[3]) : 0; }
+  function zerar(p, campos) {
+    campos.forEach(function (k) {
+      if (k === 'metasHoje') p[k] = { licoes: 0, revisadas: 0 };
+      else if (k === 'hojeFeito') p[k] = false;
+      else if (k === 'semana' || k === 'xpSemana') p[k] = [0, 0, 0, 0, 0, 0, 0];
+      else p[k] = 0;
+    });
+  }
+  function alinhar(versoes, campoData, campos) {
+    var alvo = versoes.reduce(function (m, v) { return v && ordem(v[campoData]) > ordem(m) ? v[campoData] : m; }, '');
+    if (!alvo) return;
+    versoes.forEach(function (v) { if (v && v[campoData] !== alvo) { zerar(v, campos); v[campoData] = alvo; } });
+  }
+  function mergeProfile(base, local, remote) {
+    if (!local || !remote) return merge(base, local, remote);
+    var b = base ? copy(base) : undefined, l = copy(local), r = copy(remote), feito;
+    alinhar([b, l, r], 'ultimoDia', DIA);
+    alinhar([b, l, r], 'semanaDe', SEMANA);
+    feito = !!(l.hojeFeito || r.hojeFeito);
+    var out = merge(b, l, r);
+    if (out && typeof out === 'object' && 'hojeFeito' in out) out.hojeFeito = feito;
+    return out;
+  }
   function reconcile(target, value) {
     Object.keys(target).forEach(function (k) { if (!(k in value)) delete target[k]; });
     Object.keys(value).forEach(function (k) {
@@ -69,6 +96,6 @@ var ProfileCore = (function () {
     var r = state[id]; r.interval = correct ? (r.interval ? Math.min(120, r.interval * 2) : 1) : 0;
     r[correct ? 'correct' : 'wrong']++; r.last = now; r.due = now + (correct ? r.interval * 86400000 : 60000); return r;
   }
-  return { copy: copy, equal: equal, merge: merge, reconcile: reconcile, normalize: normalize, day: day, newDay: newDay, review: review };
+  return { copy: copy, equal: equal, merge: merge, mergeProfile: mergeProfile, reconcile: reconcile, normalize: normalize, day: day, newDay: newDay, review: review };
 })();
 if (typeof module !== 'undefined' && module.exports) module.exports = ProfileCore;

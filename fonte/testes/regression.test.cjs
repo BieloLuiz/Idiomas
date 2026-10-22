@@ -12,6 +12,30 @@ test('sequência respeita dias consecutivos, virada de ano e semana',()=>{let p=
 test('revisão usa resultado e vencimento, sem depender do progresso',()=>{const s={};P.review(s,'w',true,1000);assert.equal(s.w.due,86401000);P.review(s,'w',true,2000);assert.equal(s.w.interval,2);P.review(s,'w',false,3000);assert.equal(s.w.due,63000);assert.equal(s.w.wrong,1);});
 test('normalização remove PIN e limita progresso',()=>{let p=P.normalize({id:'p',pin:'1234',progresso:{en:900,fr:-1}});assert.equal(p.pin,undefined);assert.deepEqual(p.progresso,{en:300,fr:0});assert.equal(p.semana.length,7);});
 test('importação rejeita estrutura inválida e identificadores reservados',()=>{assert.throws(()=>P.normalize({id:'__proto__'}),/perfil_invalido/);assert.throws(()=>P.normalize({id:'p',ecoStudio:{calls:'invalid'}}),/perfil_invalido/);assert.equal(P.copy(JSON.parse('{"__proto__":{"polluted":true}}')).polluted,undefined);});
+test('contadores de ontem não entram na meta de hoje e o mesmo dia soma',()=>{
+  const base={id:'p',ultimoDia:'2026-10-20',minutosHoje:20,metasHoje:{licoes:2,revisadas:1},hojeFeito:true,semanaDe:'2026-10-19',semana:[0,20,0,0,0,0,0],xpSemana:[0,30,0,0,0,0,0],xp:100};
+  const hoje={...P.copy(base),ultimoDia:'2026-10-21',minutosHoje:5,metasHoje:{licoes:1,revisadas:0},hojeFeito:false,semana:[0,20,5,0,0,0,0],xpSemana:[0,30,10,0,0,0,0],xp:110};
+  const ontemTarde={...P.copy(base),minutosHoje:30,metasHoje:{licoes:3,revisadas:1},semana:[0,30,0,0,0,0,0],xpSemana:[0,45,0,0,0,0,0],xp:115};
+  let out=P.mergeProfile(base,hoje,ontemTarde);
+  assert.equal(out.ultimoDia,'2026-10-21');assert.equal(out.minutosHoje,5);assert.deepEqual(out.metasHoje,{licoes:1,revisadas:0});assert.equal(out.hojeFeito,false);assert.equal(out.xp,125);
+  out=P.mergeProfile(base,ontemTarde,hoje);assert.equal(out.minutosHoje,5);assert.equal(out.ultimoDia,'2026-10-21');
+  const outroHoje={...P.copy(hoje),minutosHoje:8,metasHoje:{licoes:1,revisadas:2},hojeFeito:true};
+  const ambos=P.mergeProfile(base,hoje,{...outroHoje,minutosHoje:8});assert.equal(ambos.minutosHoje,13);assert.equal(ambos.hojeFeito,true);
+  const semanaNova={...P.copy(hoje),ultimoDia:'2026-10-26',semanaDe:'2026-10-26',semana:[4,0,0,0,0,0,0],xpSemana:[7,0,0,0,0,0,0],minutosHoje:4};
+  out=P.mergeProfile(base,semanaNova,ontemTarde);assert.deepEqual(out.semana,[4,0,0,0,0,0,0]);assert.deepEqual(out.xpSemana,[7,0,0,0,0,0,0]);assert.equal(out.semanaDe,'2026-10-26');
+});
+test('duas abas não contam o mesmo XP duas vezes',()=>{
+  const K='idiomas-app-v2',storage=new Map(),tabs=[];
+  const initial={versao:2,perfis:[P.normalize({id:'p',xp:10,revisao:1})]};storage.set(K,JSON.stringify(initial));storage.set(K+':base',JSON.stringify({p:initial.perfis[0]}));
+  function tab(){const listeners={};const ctx={ProfileCore:P,crypto:{randomUUID:()=>crypto.randomUUID()},JSON,Promise,Date,CustomEvent:function(t,o){this.type=t;},document:{addEventListener(){},dispatchEvent(){},visibilityState:'visible'},addEventListener(t,f){listeners[t]=f;},setTimeout:()=>1,clearTimeout(){},
+    localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>{const old=storage.get(k);storage.set(k,v);tabs.filter(t=>t!==me).forEach(t=>t.listeners.storage&&t.listeners.storage({key:k,oldValue:old,newValue:v}));}},IDIOMAS_API:'',AUTH:{ready:()=>false,post:async()=>({})}};
+    ctx.window=ctx;vm.createContext(ctx);vm.runInContext(fs.readFileSync('fonte/pwa/sync.js','utf8'),ctx);const state=JSON.parse(storage.get(K));const me={ctx,listeners,state};tabs.push(me);ctx.SYNC.bind(state);return me;}
+  const A=tab(),B=tab();
+  A.state.perfis[0].xp=30;A.ctx.SYNC.mudou(A.state);
+  assert.equal(B.state.perfis[0].xp,30);
+  B.state.perfis[0].xp+=10;B.ctx.SYNC.mudou(B.state);
+  assert.equal(A.state.perfis[0].xp,40);assert.equal(B.state.perfis[0].xp,40);assert.equal(JSON.parse(storage.get(K)).perfis[0].xp,40);
+});
 test('resposta perdida não duplica XP ao recuperar envio e editar em outro aparelho',async()=>{
  const K='idiomas-app-v2',base=P.normalize({id:'p',xp:10,revisao:1}),state={perfis:[P.copy(base)]},storage=new Map([[K+':base',JSON.stringify({p:base})]]);
  let remote=P.copy(base),lose=true,posts=0;

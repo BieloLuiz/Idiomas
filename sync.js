@@ -16,7 +16,7 @@
     remote.forEach(function (rp) {
       var p = state.perfis.find(function (x) { return x.id === rp.id; });
       if (!p) { if (state.perfis.length < 4) { p = ProfileCore.copy(rp); state.perfis.push(p); } else return; }
-      var before = sent && sent[rp.id] || bases[rp.id], value = ProfileCore.merge(before, p, rp);
+      var before = sent && sent[rp.id] || bases[rp.id], value = ProfileCore.mergeProfile(before, p, rp);
       value.revisao = rp.revisao; value.atualizado = rp.atualizado;
       if (rp.pinCredential) delete value.pin;
       ProfileCore.reconcile(p, value); bases[p.id] = ProfileCore.copy(rp); last[p.id] = stamp(p);
@@ -66,7 +66,16 @@
   addEventListener('online', function () { refresh().then(send); });
   addEventListener('storage', function (e) {
     if (e.key !== K || !state || !e.newValue) return;
-    try { var other = JSON.parse(e.newValue); (other.perfis || []).forEach(function (rp) { var p = state.perfis.find(function (x) { return x.id === rp.id; }); if (p) ProfileCore.reconcile(p, ProfileCore.merge(bases[p.id], p, rp)); else state.perfis.push(rp); }); SYNC.mudou(state); } catch (err) { status('armazenamento'); }
+    /* Outra aba gravou. A base da fusão é o que estava gravado antes dessa gravação (oldValue), não a base do servidor:
+       assim o que esta aba já recebeu da outra não é somado de novo. */
+    try {
+      var other = JSON.parse(e.newValue), before = {}, old = null;
+      try { old = JSON.parse(e.oldValue || 'null'); } catch (x) {}
+      ((old && old.perfis) || []).forEach(function (x) { if (x && x.id) before[x.id] = x; });
+      var lb = read(B, {}); Object.keys(lb).forEach(function (id) { if (lb[id] && (!bases[id] || (lb[id].revisao || 0) > (bases[id].revisao || 0))) bases[id] = lb[id]; });
+      (other.perfis || []).forEach(function (rp) { var p = state.perfis.find(function (x) { return x.id === rp.id; }); if (p) ProfileCore.reconcile(p, ProfileCore.mergeProfile(before[p.id], p, rp)); else state.perfis.push(rp); });
+      SYNC.mudou(state);
+    } catch (err) { status('armazenamento'); }
   });
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') refresh(); else { persist(); send(); } });
 })();

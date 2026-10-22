@@ -144,6 +144,11 @@ rep("source:'Conversa de demonstração'});","source:'Conversa com o Eco'});")
 rep("  function abrirLicaoApp(u, nome, op) {\n    uxExit='hoje';\n    fecharFolha();",
     "  function abrirLicaoApp(u, nome, op) {\n    uxExit='hoje';\n    fecharFolha();\n    if (!u) u = { id: (eu() ? eu().idioma : 'en') + '-erros', titulo: (op && op.licao && op.licao.titulo) || nome || 'Revisão', objetivo: 'Revisar o que você errou' };")
 
+# Questões sem fala (explicação em português): sem balão nem áudio; a explicação aparece depois da resposta.
+rep("    pr.appendChild(eco); pr.appendChild(bub);", "    pr.appendChild(eco); if (!ex.semFrase) pr.appendChild(bub);")
+rep("    anuncio.textContent = (ok ? $('.ui-banner__title', bannerBox).textContent + '. ' : 'Quase lá. Resposta correta: ' + correta + '.');",
+    "    anuncio.textContent = (ok ? $('.ui-banner__title', bannerBox).textContent + '. ' : 'Quase lá. Resposta correta: ' + correta + '.');\n    if (atual && atual.ex && atual.ex.explicacao) { var xp = document.createElement('p'); xp.className = 'ui-banner__detail ui-banner__explica'; xp.textContent = atual.ex.explicacao; $('.ui-banner__text', bannerBox).appendChild(xp); anuncio.textContent += ' ' + atual.ex.explicacao; }")
+
 # Aplicações explícitas ao contrato de reprodução e ao apoio de escuta.
 rep("    bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);", "    if(ex.escuta){var transcript=document.createElement('details'),sum=document.createElement('summary');sum.textContent='Ver transcrição';transcript.append(sum,p);bub.append(transcript,montarOuvir(ex),pop);}else{bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}")
 rep("source(function(){if(token===serial)show('idle','Áudio concluído');}, +speed.value);", "source(function(error){if(token===serial)show('idle',error?'Não foi possível ouvir. Confira a conexão ou baixe a unidade.':'Áudio concluído');}, +speed.value);")

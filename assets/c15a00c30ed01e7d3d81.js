@@ -117,7 +117,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
     var pop = document.createElement('div'); pop.className = 'hint-pop'; pop.hidden = true; pop.id = 'dica-' + atual.idx; pop.setAttribute('role', 'status');
     if (ex.ocultar) { p.textContent = ex.ocultar; p.lang = 'pt'; } else frasecomDicas(p, ex, pop);
     if(ex.escuta){var transcript=document.createElement('details'),sum=document.createElement('summary');sum.textContent='Ver transcrição';transcript.append(sum,p);bub.append(transcript,montarOuvir(ex),pop);}else{bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}
-    pr.appendChild(eco); pr.appendChild(bub);
+    pr.appendChild(eco); if (!ex.semFrase) pr.appendChild(bub);
     box.className = 'screen'; box.appendChild(ask); box.appendChild(pr);
     if (ex.dicas && !dicaVista) {
       var c = document.createElement('p'); c.className = 'coach'; c.textContent = 'Toque numa palavra sublinhada para ver o que ela significa.';
@@ -292,6 +292,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
     $('.ui-banner__title', bannerBox).textContent = ok ? (seguidas >= 3 ? seguidas + ' seguidas' : ELOGIOS[(feitos + seguidas) % ELOGIOS.length]) : 'Quase lá';
     $('.ui-banner__detail', bannerBox).textContent = ok ? (feitos < total ? 'Você acertou. Vamos para a próxima.' : 'Última do dia, concluída.') : 'Resposta correta: ' + correta + '. Ela volta no fim da lição.';
     anuncio.textContent = (ok ? $('.ui-banner__title', bannerBox).textContent + '. ' : 'Quase lá. Resposta correta: ' + correta + '.');
+    if (atual && atual.ex && atual.ex.explicacao) { var xp = document.createElement('p'); xp.className = 'ui-banner__detail ui-banner__explica'; xp.textContent = atual.ex.explicacao; $('.ui-banner__text', bannerBox).appendChild(xp); anuncio.textContent += ' ' + atual.ex.explicacao; }
     if (ao && ao.som) ao.som(ok ? (seguidas >= 3 ? 'combo' : 'acerto') : 'erro');
     if(window.registrarRespostaCurso)registrarRespostaCurso(atual.ex,ok);
     if (ok && window.registrarAcerto) registrarAcerto(atual.ex);
