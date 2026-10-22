@@ -1857,14 +1857,20 @@
       if (parcialEu) linhas.push({ who: 'Você', text: parcialEu }); if (parcialEco) linhas.push({ who: 'Eco', text: parcialEco });
       linhas.slice(-2).forEach(function (t) { var b = document.createElement('div'); b.className = 'studio-caption ' + (t.who === 'Você' ? 'is-user' : ''); b.innerHTML = '<strong>' + esc(t.who) + '</strong><p lang="' + lang + '">' + esc(t.text) + '</p>' + (s.captions === 'translation' && t.pt ? '<small>' + esc(t.pt) + '</small>' : ''); subtitles.appendChild(b); }); }
     /* áudio: saída 24 kHz, entrada 16 kHz */
-    var AC = window.AudioContext || window.webkitAudioContext, ctx = new AC(), fontes = [], proxima = 0, ws = null, micStream = null, proc = null, fim = false;
+    /* Saída e microfone em contextos separados: a saída já nasce em 24 kHz (sem reamostrar, o que no iPhone dava chiado)
+       e passa por um volume e um limitador para não estourar; o microfone abre o próprio contexto em 16 kHz. */
+    var AC = window.AudioContext || window.webkitAudioContext, ctx, ctxIn = null, fontes = [], proxima = 0, ws = null, micStream = null, proc = null, fim = false;
+    try { ctx = new AC({ sampleRate: 24000 }); } catch (e) { ctx = new AC(); }
+    var saida = ctx.createGain(); saida.gain.value = 0.8;
+    var limitador = ctx.createDynamicsCompressor(); limitador.threshold.value = -6; limitador.knee.value = 6; limitador.ratio.value = 12; limitador.attack.value = 0.003; limitador.release.value = 0.15;
+    saida.connect(limitador); limitador.connect(ctx.destination);
     try { ctx.resume(); } catch (e) {}
     function pararFala() { fontes.forEach(function (f) { try { f.stop(); } catch (e) {} }); fontes = []; proxima = 0; }
     function tocarPCM(b64, taxa) {
       if(S.cfg.silent)return;
       var dados = pcmDeB64(b64); if (!dados.length) return;
       var buf = ctx.createBuffer(1, dados.length, taxa || 24000); buf.getChannelData(0).set(dados);
-      var src = ctx.createBufferSource(); src.buffer = buf; src.connect(ctx.destination);
+      var src = ctx.createBufferSource(); src.buffer = buf; src.connect(saida);
       var t = Math.max(ctx.currentTime + 0.03, proxima); src.start(t); proxima = t + buf.duration; fontes.push(src);
       src.onended = function () { fontes = fontes.filter(function (x) { return x !== src; }); if (!fontes.length && !fim) setState(s.muted ? 'muted' : 'listening'); };
       setState('speaking');
@@ -1873,21 +1879,23 @@
     function ligarMic() {
       return navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } }).then(function (st) {
         if (fim || !pg.isConnected) { st.getTracks().forEach(function (t) { t.stop(); }); throw new Error('cancelado'); }
-        micStream = st; var fonte = ctx.createMediaStreamSource(st); proc = ctx.createScriptProcessor(4096, 1, 1);
-        var razao = ctx.sampleRate / 16000;
+        micStream = st; try { ctxIn = new AC({ sampleRate: 16000 }); } catch (e) { ctxIn = new AC(); } try { ctxIn.resume(); } catch (e) {}
+        var fonte = ctxIn.createMediaStreamSource(st); proc = ctxIn.createScriptProcessor(4096, 1, 1);
+        var razao = ctxIn.sampleRate / 16000;
         proc.onaudioprocess = function (e) {
           if (s.muted || !ws || ws.readyState !== 1) return;
+          /* reduz para 16 kHz pela média de cada bloco (evita o ruído de só pular amostras) */
           var x = e.inputBuffer.getChannelData(0), n = Math.floor(x.length / razao), out = new Int16Array(n);
-          for (var i = 0; i < n; i++) { var v = x[Math.floor(i * razao)]; out[i] = Math.max(-1, Math.min(1, v)) * 0x7fff; }
+          for (var i = 0; i < n; i++) { var a = Math.floor(i * razao), b = Math.max(a + 1, Math.floor((i + 1) * razao)), soma = 0; for (var j = a; j < b; j++) soma += x[j]; var v = soma / (b - a); out[i] = Math.max(-1, Math.min(1, v)) * 0x7fff; }
           enviar({ realtimeInput: { audio: { data: b64DePCM(out), mimeType: 'audio/pcm;rate=16000' } } });
         };
-        var mudo = ctx.createGain(); mudo.gain.value = 0; fonte.connect(proc); proc.connect(mudo); mudo.connect(ctx.destination);
+        var mudo = ctxIn.createGain(); mudo.gain.value = 0; fonte.connect(proc); proc.connect(mudo); mudo.connect(ctxIn.destination);
       });
     }
     function encerrar(motivo) {
       if (fim) return; fim = true; pararFala();
       try { proc && proc.disconnect(); } catch (e) {} try { micStream && micStream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
-      try { ws && ws.close(); } catch (e) {} try { ctx.close(); } catch (e) {}
+      try { ws && ws.close(); } catch (e) {} try { ctx.close(); } catch (e) {} try { ctxIn && ctxIn.close(); } catch (e) {}
       if (motivo === 'sair') return;
       finalizarConversa();
     }
