@@ -117,6 +117,7 @@ function salvar_(p) {
  * bater no limite, o próximo assume.
  * ===================================================================== */
 const SERVICOS = {
+  openai:     { tipo: 'openai', pago: true, url: 'https://api.openai.com/v1/chat/completions', chave: 'OPENAI_API_KEY', prop: 'OPENAI_MODELOS', modelos: ['gpt-6-luna'] },
   groq:       { tipo: 'openai', url: 'https://api.groq.com/openai/v1/chat/completions', chave: 'GROQ_API_KEY', prop: 'GROQ_MODELOS', modelos: ['openai/gpt-oss-120b', 'llama-3.3-70b-versatile'] },
   github:     { tipo: 'openai', url: 'https://models.github.ai/inference/chat/completions', chave: 'GITHUB_MODELS_TOKEN', prop: 'GITHUB_MODELOS', modelos: ['openai/gpt-4o', 'openai/gpt-4.1-mini'] },
   gemini:     { tipo: 'gemini', chave: 'GEMINI_API_KEY', prop: 'GEMINI_MODELOS', modelos: ['gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3-flash-preview'] },
@@ -134,6 +135,21 @@ const ROTAS = {
   traduzir:       ['groq', 'geminiLeve', 'github', 'gemini']
 };
 const IDIOMA = { en: 'inglês', fr: 'francês' };
+
+/* Provedor principal e reservas (administrador): propriedades IA_PRINCIPAL (um serviço) e IA_FALLBACK (lista, na ordem).
+   Padrão: GPT-6 Luna (OpenAI) primeiro e, se falhar ou o orçamento acabar, os gratuitos na ordem de cada tarefa em ROTAS.
+   Só entram serviços conhecidos; nunca entra um serviço pago que não esteja na configuração. */
+function configIA_() {
+  const props = PropertiesService.getScriptProperties();
+  const principal = props.getProperty('IA_PRINCIPAL') || 'openai';
+  const fb = props.getProperty('IA_FALLBACK');
+  return { principal: SERVICOS[principal] ? principal : 'openai', fallback: fb == null ? null : fb.split(',').map(function (x) { return x.trim(); }).filter(function (x) { return SERVICOS[x]; }) };
+}
+function rotas_(tipo) {
+  if (!ROTAS[tipo]) return [];
+  const c = configIA_(), resto = c.fallback || ROTAS[tipo].filter(function (s) { return !SERVICOS[s].pago; });
+  return [c.principal].concat(resto.filter(function (s) { return s !== c.principal; }));
+}
 
 function servicosAtivos_() {
   const props = PropertiesService.getScriptProperties();
@@ -168,13 +184,13 @@ function ia_(tipo, d) {
   return r;
 }
 
-let IA_PRAZO_ = 0, ULTIMO_USO_ = null;   // tokens da última resposta, para o orçamento
+let IA_PRAZO_ = 0, ULTIMO_USO_ = null, SEM_PAGOS_ = false;   // SEM_PAGOS_: orçamento esgotado, só serviços gratuitos   // tokens da última resposta, para o orçamento
 function prazoIA_() { if (IA_PRAZO_ && Date.now() >= IA_PRAZO_) throw new Error('tempo'); }
 function chamar_(tipo, p) {
   const props = PropertiesService.getScriptProperties(), falhas = [];
-  for (const nome of ROTAS[tipo]) {
+  for (const nome of rotas_(tipo)) {
     const s = SERVICOS[nome], chave = props.getProperty(s.chave);
-    if (!chave) continue;
+    if (!chave || (s.pago && SEM_PAGOS_)) continue;
     const modelos = (props.getProperty(s.prop) || '').split(',').map(function (x) { return x.trim(); }).filter(String);
     for (const modelo of (modelos.length ? modelos : s.modelos)) {
       prazoIA_();
@@ -197,8 +213,11 @@ function chamar_(tipo, p) {
 }
 
 function openai_(url, chave, modelo, p) {
-  const corpo = { model: modelo, temperature: p.json ? 0.2 : 0.4, max_tokens: p.json ? 3000 : 900,
-    messages: [{ role: 'system', content: p.sistema }].concat(p.historico || []).concat([{ role: 'user', content: p.usuario }]) };
+  const oficial = /api\.openai\.com/.test(url);
+  // OpenAI (GPT-6 Luna, modelo com raciocínio): esforço baixo, sem temperature e no máximo 2.000 tokens de saída (especificação)
+  const corpo = oficial ? { model: modelo, reasoning_effort: 'low', max_completion_tokens: 2000 } : { model: modelo, temperature: p.json ? 0.2 : 0.4, max_tokens: p.json ? 3000 : 900 };
+  Object.assign(corpo, {
+    messages: [{ role: 'system', content: p.sistema }].concat(p.historico || []).concat([{ role: 'user', content: p.usuario }]) });
   if (p.json) corpo.response_format = { type: 'json_object' };
   const r = UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', muteHttpExceptions: true,
     headers: { Authorization: 'Bearer ' + chave }, payload: JSON.stringify(corpo) });
@@ -294,7 +313,7 @@ function pronuncia_(d) {
   const mime = String(d.mime || 'audio/webm').split(';')[0];
   const ext = { 'audio/webm': 'webm', 'audio/mp4': 'mp4', 'audio/ogg': 'ogg', 'audio/mpeg': 'mp3', 'audio/wav': 'wav', 'audio/x-m4a': 'm4a' }[mime] || 'webm';
   const bytes = Utilities.base64Decode(b64), props = PropertiesService.getScriptProperties(), falhas = [];
-  const groq = props.getProperty('GROQ_API_KEY');
+  const groq = (SEM_PAGOS_ && !precos_().whisperGratis) ? '' : props.getProperty('GROQ_API_KEY');
   if (groq) {
     const modelos = (props.getProperty('GROQ_STT') || '').split(',').map(function (x) { return x.trim(); }).filter(String);
     for (const modelo of (modelos.length ? modelos : STT_MODELOS)) {
@@ -365,7 +384,7 @@ function transcrever_(b64, mime, lang) {
   if (!b64 || b64.length > 6000000) throw new Error('audio');
   mime = String(mime || 'audio/webm').split(';')[0];
   const ext = { 'audio/webm': 'webm', 'audio/mp4': 'mp4', 'audio/ogg': 'ogg', 'audio/mpeg': 'mp3', 'audio/wav': 'wav', 'audio/x-m4a': 'm4a' }[mime] || 'webm';
-  const props = PropertiesService.getScriptProperties(), falhas = [], groq = props.getProperty('GROQ_API_KEY'), gem = props.getProperty('GEMINI_API_KEY');
+  const props = PropertiesService.getScriptProperties(), falhas = [], groq = (SEM_PAGOS_ && !precos_().whisperGratis) ? '' : props.getProperty('GROQ_API_KEY'), gem = props.getProperty('GEMINI_API_KEY');
   if (groq) {
     const bytes = Utilities.base64Decode(b64);
     for (const modelo of STT_MODELOS) {
@@ -539,6 +558,16 @@ function usoHoje_() {
 /** Rode no editor para testar as chaves: Executar → testarIA. O resultado aparece no registro de execução. */
 function testarIA() {
   Logger.log(JSON.stringify(ia_('duvida', { idioma: 'en', nivel: 'A1', unidade: 'Hello', pergunta: 'Qual a diferença entre "I am" e "I\'m"?' })));
+}
+
+/** Rode no editor para conferir a OpenAI de verdade (uma chamada pequena, custo de frações de centavo). */
+function testarOpenAI() {
+  const s = SERVICOS.openai, chave = PropertiesService.getScriptProperties().getProperty(s.chave);
+  if (!chave) { Logger.log('Falta a propriedade OPENAI_API_KEY'); return; }
+  const t = openai_(s.url, chave, s.modelos[0], { sistema: 'Responda em uma frase curta.', usuario: 'Diga "olá" em francês.' });
+  Logger.log(t + ' | tokens: ' + JSON.stringify(ULTIMO_USO_) + ' | custo estimado US$ ' + precoTexto_('openai', ULTIMO_USO_.entrada, ULTIMO_USO_.saida, ULTIMO_USO_.cache));
+  const j = openai_(s.url, chave, s.modelos[0], { sistema: 'Responda só com JSON {"ok": true}.', usuario: 'teste', json: true });
+  Logger.log('JSON: ' + j);
 }
 
 function saida_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }

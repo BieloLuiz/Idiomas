@@ -70,7 +70,10 @@ function pedidoIA_(user,q){
   try{
     limitarIA_(user,q.tipo);
     const est=estimarPedido_(String(q.tipo||''),q.dados||{});            // orçamento: reserva o pior caso antes de chamar
-    reserva=reservar_(user,q.tipo,est.valor,est.uso);iniciarGasto_();
+    SEM_PAGOS_=false;
+    try{reserva=reservar_(user,q.tipo,est.valor,est.uso);}
+    catch(x){if(!/orcamento/.test(x.message)||est.valor<=0)throw x;SEM_PAGOS_=true;reserva=reservar_(user,q.tipo,0,est.uso);}  // orçamento acabou: segue só com os gratuitos
+    iniciarGasto_();
     IA_PRAZO_=Date.now()+45000;const result=ia_(String(q.tipo||''),q.dados||{}),json=JSON.stringify(result);
     const g=GASTO_;GASTO_=null;
     if(q.tipo==='liveToken')confirmar_(reserva,user,est.valor,est.uso,[{servico:'gemini-live',modelo:result.modelo,custo:est.valor}]);

@@ -82,3 +82,9 @@ O que foi feito: `apps-script/Orcamento.gs` (preços, teto, cotas, reserva antes
 Verificações (`npm test`, 24): preços e configuração; teto de US$ 4 com reservas em andamento; reserva travada; opcionais em 90%; cotas por aluno nos dois modos; virada do mês no fuso de São Paulo com reserva contando no mês de origem; pedido real simulado registrando tokens e custo; falha liberando a reserva. Navegador: 16 verificações sem regressão.
 
 Limites: o custo é estimado; a duração do áudio é estimada pelo tamanho do arquivo (para mais). O estado do mês fica numa propriedade do script (cerca de 6,4 KB no pior caso medido, limite de 9 KB por propriedade). A trava do orçamento pode somar perto de 1 s quando os dois pedirem ao mesmo tempo; ainda não medido no Apps Script real.
+
+## IA e voz — etapa 2: GPT-6 Luna e escolha de provedores (branch `ia-etapa2`)
+
+GPT-6 Luna entra como serviço `openai` (Chat Completions, `reasoning_effort: low`, `max_completion_tokens: 2000`, sem `temperature`, conforme a página do modelo). Groq, Gemini, GitHub Models e o Live continuam. `rotas_(tipo)` substitui o uso direto de `ROTAS`: principal em `IA_PRINCIPAL` (padrão `openai`) e reservas em `IA_FALLBACK` (padrão: os gratuitos de cada tarefa, na ordem atual). Se a OpenAI falhar, não há nova tentativa paga: segue para os gratuitos. Se o orçamento acabar, o pedido continua só com os gratuitos (`SEM_PAGOS_`); o Whisper da Groq também fica de fora nesse caso, salvo se `PRECOS.whisperGratis` for verdadeiro, e a transcrição usa o Gemini.
+
+Verificações (`npm test`, 26): rotas padrão e configuradas; corpo da chamada à OpenAI; queda para o gratuito em erro; orçamento esgotado sem chamar a OpenAI. A chamada real à OpenAI não foi feita daqui (a chave fica no servidor): depois de publicar, rodar `testarOpenAI` no editor do Apps Script.

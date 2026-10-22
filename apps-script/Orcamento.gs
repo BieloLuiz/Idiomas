@@ -186,5 +186,5 @@ function estimarPedido_(tipo, dados) {
 }
 function estimarTexto_(tipo, tamanho) {
   const entrada = Math.ceil(Math.max(0, tamanho) / 3) + 2500, saida = 4000;   // até 4.000 de saída (o maior limite usado nas chamadas)
-  return (ROTAS[tipo] || []).reduce(function (m, s) { return Math.max(m, precoTexto_(s, entrada, saida, 0)); }, 0);
+  return rotas_(tipo).reduce(function (m, s) { return Math.max(m, precoTexto_(s, entrada, saida, 0)); }, 0);
 }

@@ -169,6 +169,27 @@ test('orçamento: pedido de IA registra tokens e custo; falha libera a reserva',
   falhar=true;assert.throws(()=>ctx.pedidoIA_(U1,{...q,requestId:crypto.randomUUID()}),/indisponivel/);
   e=ctx.estadoOrcamento_();assert.equal(e.reservado,0,'falha não deixa reserva presa');assert.equal(e.gasto,0.00036);
 });
+test('provedores: GPT-6 Luna principal por padrão, gratuitos como reserva, tudo configurável',()=>{
+  const {ctx,props}=orc();const R=t=>JSON.stringify(ctx.rotas_(t));
+  assert.equal(R('conversa'),JSON.stringify(['openai','groq','geminiLeve','github','gemini']));assert.equal(R('redacao'),JSON.stringify(['openai','gemini','github','groq','geminiLeve']));
+  props.IA_PRINCIPAL='groq';props.IA_FALLBACK='gemini, inexistente, openai';assert.equal(R('conversa'),JSON.stringify(['groq','gemini','openai']));
+  props.IA_PRINCIPAL='xyz';props.IA_FALLBACK='';assert.equal(R('conversa'),JSON.stringify(['openai']));
+});
+test('provedores: chamada à OpenAI usa raciocínio baixo e no máximo 2.000 tokens; falha cai nos gratuitos; sem orçamento só gratuitos',()=>{
+  const {ctx,props}=orc();props.OPENAI_API_KEY='k1';props.GROQ_API_KEY='k2';const chamadas=[];let openaiFalha=false;
+  ctx.UrlFetchApp.fetch=(url,o)=>{const b=JSON.parse(o.payload);chamadas.push({url,b});const oai=url.includes('api.openai.com');
+    if(oai&&openaiFalha)return{getResponseCode:()=>400,getContentText:()=>'bad'};
+    return{getResponseCode:()=>200,getContentText:()=>JSON.stringify({choices:[{message:{content:oai?'luna':'groq'}}],usage:{prompt_tokens:100,completion_tokens:50}})};};
+  const q=()=>({tipo:'duvida',requestId:crypto.randomUUID(),dados:{idioma:'fr',pergunta:'?'}});
+  assert.equal(ctx.pedidoIA_(U1,q()).texto,'luna');const b=chamadas[0].b;
+  assert.equal(b.model,'gpt-6-luna');assert.equal(b.reasoning_effort,'low');assert.equal(b.max_completion_tokens,2000);assert.equal(b.temperature,undefined);assert.equal(b.max_tokens,undefined);
+  assert.ok(ctx.estadoOrcamento_().gasto>0);
+  openaiFalha=true;chamadas.length=0;assert.equal(ctx.pedidoIA_(U1,q()).texto,'groq');assert.equal(chamadas.length,2,'uma tentativa na OpenAI e depois o gratuito');
+  assert.equal(chamadas[1].b.temperature,0.4);
+  openaiFalha=false;const o=JSON.parse(props['ORC_'+ctx.mesAtual_()]);o.gasto=4;props['ORC_'+ctx.mesAtual_()]=JSON.stringify(o);chamadas.length=0;
+  assert.equal(ctx.pedidoIA_(U1,q()).texto,'groq','orçamento esgotado: segue com o gratuito');assert.ok(chamadas.every(c=>!c.url.includes('openai.com')));
+  delete props.GROQ_API_KEY;assert.throws(()=>ctx.pedidoIA_(U1,q()),/sem_chave|indisponivel/,'sem gratuito disponível, não chama a OpenAI');
+});
 test('cota é aplicada no servidor',()=>{const{ctx}=backend();for(let i=0;i<10;i++)ctx.limitarIA_({sub:'u'},'duvida');assert.throws(()=>ctx.limitarIA_({sub:'u'},'duvida'),/quota/);});
 test('token Live fixa modelo, uso único e validade curta',()=>{const {ctx,requests}=backend();ctx.liveToken_({});let body=JSON.parse(requests.at(-1).options.payload);assert.equal(body.uses,1);assert.equal(body.liveConnectConstraints.model,'models/gemini-3.8-live');assert.ok(Date.parse(body.expireTime)-Date.now()<=15*60000);});
 test('revisão da IA rejeita alternativas duplicadas e índices fracionários',()=>{const{ctx}=backend();ctx.chamar_=()=>({texto:JSON.stringify({exercicios:[{opcoes:['A','A','B','C'],correta:2},{opcoes:['A','B'],correta:.5},{opcoes:['A','B'],correta:1}]}),provedor:'mock'});let r=ctx.revisao_({erros:[{correta:'B'}]});assert.equal(r.exercicios.length,1);assert.equal(r.exercicios[0].opcoes[r.exercicios[0].correta],'B');});
