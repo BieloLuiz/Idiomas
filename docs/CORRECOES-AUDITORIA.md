@@ -55,3 +55,20 @@ Verificações: `npm test` (15, com teste da sessão: emissão, código não gua
 | 10. Variedade (parcial) | Montagem, lacuna e escuta do Descobrir sorteiam o item; "Uma história em sequência" usa um trecho diferente do diálogo; "Reencontrar palavras" virou recordação com revelação. | Navegador (fluxos sem erro). |
 
 Pendentes: item 9 (dividir o conteúdo por idioma/nível, depois de medir em celular). A fusão ainda trata como uma só duas alterações independentes que terminam no mesmo valor (por exemplo, dois aparelhos do mesmo perfil fazendo a mesma lição offline); resolver isso exige registrar atividades com identificador, e foi deixado como evolução.
+
+## Recursos de estudo (branch `recursos-estudo`)
+
+Novos: revisão do dia (revisão espaçada de palavras, frases e erros), lembrete diário por notificação, prova de fim de nível (escuta, leitura, gramática, vocabulário, escrita e fala) e leitura extra criada pela IA.
+
+Verificações feitas (com dados fictícios e serviços simulados; nada real foi enviado):
+
+| O quê | Como |
+|---|---|
+| Lembrete: horário no fuso da pessoa (São Paulo e Paris, com a troca de horário de 25/10), uma vez por dia, não avisa quem já estudou, nada depois de 23:30, volta no dia seguinte, horário e endereço inválidos recusados | `npm test` |
+| Lembrete: segredo ausente, curto ou errado recusado; app precisa de sessão; remover inscrição vencida; desligar no app remove | `npm test` |
+| Leitura: resposta que não é JSON ou com texto curto recusada; perguntas com opções repetidas ou índice inválido descartadas; vocabulário malformado descartado; nível e formato desconhecidos caem no padrão | `npm test` |
+| Chaves do lembrete: `chaves-lembrete.cjs` gera o mesmo segredo e a mesma chave pública no `Segredo.gs` e no envio; a chave VAPID derivada é aceita pelo `web-push`; `apps-script/Segredo.gs` está no `.gitignore` | execução local com valor fictício |
+| Envio: `enviar-lembretes.cjs` busca os pendentes com o segredo, envia e remove a inscrição que responde 410 | execução local com `web-push` e servidor simulados |
+| Revisão do dia, prova do A1 (20 questões, 5 por parte, resultado salvo), tela do lembrete, leitura extra com IA simulada | `npm run test:browser` (16 verificações) |
+
+Ainda não verificado: notificação real num celular (depende da publicação e de ligar o lembrete com o app instalado e entrada Google) e o primeiro disparo agendado do fluxo `lembretes.yml`. O agendamento do GitHub pode atrasar alguns minutos. Se o segredo `CLASPRC_JSON` mudar, as chaves do lembrete mudam: o Apps Script precisa ser publicado de novo e cada pessoa liga o lembrete outra vez.

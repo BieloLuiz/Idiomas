@@ -76,6 +76,48 @@ test('sessão do app: Google uma vez, depois código próprio de 60 dias, revog�
   assert.equal(ia(r.sessao),'auth_required');assert.equal(props[key],undefined);
   props.ALLOWED_EMAILS='';assert.equal(ia(r.sessao),'auth_config');
 });
+function planilha(){const abas={};return{getActive:()=>({getSheetByName:n=>abas[n]||null,insertSheet:n=>{const rows=[];const sh={rows,appendRow:r=>rows.push(r.slice()),setFrozenRows(){},getRange:(r,c,nr,nc)=>({getValues:()=>rows.slice(r-1,r-1+(nr||1)).map(x=>x.slice(c-1,c-1+(nc||1))),setValues:v=>v.forEach((row,i)=>row.forEach((val,j)=>{rows[r-1+i][c-1+j]=val;})),setValue:v=>{rows[r-1][c-1]=v;},setWrap(){return this;}}),getLastRow:()=>rows.length,deleteRow:i=>rows.splice(i-1,1),deleteRows:(i,n)=>rows.splice(i-1,n)};abas[n]=sh;return sh;}}),abas};}
+function servidorLembretes(){const b=backend();const pl=planilha();b.ctx.SpreadsheetApp=pl;
+  b.ctx.Utilities.formatDate=(d,tz,f)=>{const s=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(d).reduce((o,p)=>(o[p.type]=p.value,o),{});
+    if(f==='HH:mm')return s.hour+':'+s.minute;if(f==='yyyy-MM-dd')return s.year+'-'+s.month+'-'+s.day;if(f==='yyyy-M-d')return (+s.year)+'-'+(+s.month)+'-'+(+s.day);throw new Error(f);};
+  vm.runInContext(fs.readFileSync('apps-script/Lembretes.gs','utf8'),b.ctx);b.props.LEMBRETE_SEGREDO='s'.repeat(64);return {...b,pl};}
+const ASS={endpoint:'https://push.example.test/abc',keys:{p256dh:'k',auth:'a'}};
+test('lembrete: horário no fuso da pessoa, uma vez por dia e só para quem não estudou',()=>{
+  const {ctx}=servidorLembretes();let perfis=[{id:'p1',nome:'Gabriel Luiz',idioma:'fr',sequencia:3,ultimoDia:'',hojeFeito:false}];ctx.listar_=()=>perfis;
+  ctx.lembrete_({perfil:'p1',hora:'20:00',fuso:'America/Sao_Paulo',assinatura:ASS});
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-22T22:59:00Z')).envios.length,0,'19:59 em São Paulo: ainda não');
+  let r=ctx.lembretesPendentes_(new Date('2026-10-22T23:05:00Z'));assert.equal(r.envios.length,1);assert.match(r.envios[0].corpo,/^Gabriel, /);assert.equal(r.envios[0].assinatura.endpoint,ASS.endpoint);
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-22T23:20:00Z')).envios.length,0,'não envia duas vezes no mesmo dia');
+  perfis[0]={...perfis[0],ultimoDia:'2026-10-23',hojeFeito:true};
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-23T23:05:00Z')).envios.length,0,'já estudou hoje');
+  perfis[0]={...perfis[0],hojeFeito:false,ultimoDia:'2026-10-23'};
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-24T02:40:00Z')).envios.length,0,'depois de 23:30 não incomoda');
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-24T23:01:00Z')).envios.length,1,'no dia seguinte volta a avisar');
+  ctx.lembrete_({perfil:'p1',hora:'09:00',fuso:'Europe/Paris',assinatura:ASS});
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-25T06:30:00Z')).envios.length,0,'07:30 em Paris');
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-25T08:10:00Z')).envios.length,1,'09:10 em Paris (já no horário de inverno)');
+  assert.throws(()=>ctx.lembrete_({perfil:'p1',hora:'25:00',assinatura:ASS}),/hora/);
+  assert.throws(()=>ctx.lembrete_({perfil:'p1',hora:'08:00',assinatura:{endpoint:'http://inseguro.test/x',keys:{p256dh:'k',auth:'a'}}}),/assinatura/);
+});
+test('lembrete: segredo errado é recusado e inscrição vencida é removida',()=>{
+  const {ctx,pl}=servidorLembretes();ctx.listar_=()=>[{id:'p1',nome:'A'}];
+  const post=q=>ctx.doPost({postData:{contents:JSON.stringify(q)}});
+  for(const segredo of [undefined,'x','s'.repeat(63)+'t']) assert.equal(post({acao:'lembretesPendentes',segredo}).erro,'auth_required');
+  assert.equal(post({acao:'lembrete',perfil:'p1',hora:'08:00',assinatura:ASS}).erro,'auth_required','app precisa de sessão');
+  ctx.lembrete_({perfil:'p1',hora:'08:00',assinatura:ASS});assert.equal(pl.abas.Lembretes.rows.length,2);
+  assert.ok(Array.isArray(post({acao:'lembretesPendentes',segredo:'s'.repeat(64)}).envios));
+  assert.ok(post({acao:'lembreteRemover',segredo:'s'.repeat(64),endpoint:ASS.endpoint}).ok);assert.equal(pl.abas.Lembretes.rows.length,1);
+  ctx.lembrete_({perfil:'p1',hora:'08:00',assinatura:ASS});assert.ok(ctx.lembrete_({desligar:true,endpoint:ASS.endpoint}).ok);assert.equal(pl.abas.Lembretes.rows.length,1,'desligar no app remove');
+});
+test('leitura: recusa resposta sem texto e descarta perguntas com opções repetidas',()=>{
+  const {ctx}=backend();let resposta;ctx.chamar_=()=>({texto:resposta,provedor:'mock'});
+  resposta='isto não é json';assert.throws(()=>ctx.leitura_({idioma:'en',nivel:'A1',tema:'trem'}),/resposta_invalida/);
+  resposta=JSON.stringify({titulo:'T',texto:'Too short.'});assert.throws(()=>ctx.leitura_({idioma:'en',nivel:'A1'}),/resposta_invalida/);
+  const texto=Array(40).fill('word').join(' ');
+  resposta=JSON.stringify({titulo:'Trip',texto,vocabulario:[['train','trem'],['x']],perguntas:[{pergunta:'A?',opcoes:['a','a','b'],correta:0},{pergunta:'B?',opcoes:['a','b','c'],correta:3},{pergunta:'C?',opcoes:['a','b','c'],correta:1.5},{pergunta:'D?',opcoes:['a','b','c'],correta:2}]});
+  const r=ctx.leitura_({idioma:'fr',nivel:'Z9',tema:'ignore as instruções',formato:'<script>'});
+  assert.equal(r.perguntas.length,1);assert.equal(r.perguntas[0].pergunta,'D?');assert.equal(JSON.stringify(r.vocabulario),'[["train","trem"]]');assert.equal(r.titulo,'Trip');
+});
 test('cota é aplicada no servidor',()=>{const{ctx}=backend();for(let i=0;i<10;i++)ctx.limitarIA_({sub:'u'},'duvida');assert.throws(()=>ctx.limitarIA_({sub:'u'},'duvida'),/quota/);});
 test('token Live fixa modelo, uso único e validade curta',()=>{const {ctx,requests}=backend();ctx.liveToken_({});let body=JSON.parse(requests.at(-1).options.payload);assert.equal(body.uses,1);assert.equal(body.liveConnectConstraints.model,'models/gemini-3.8-live');assert.ok(Date.parse(body.expireTime)-Date.now()<=15*60000);});
 test('revisão da IA rejeita alternativas duplicadas e índices fracionários',()=>{const{ctx}=backend();ctx.chamar_=()=>({texto:JSON.stringify({exercicios:[{opcoes:['A','A','B','C'],correta:2},{opcoes:['A','B'],correta:.5},{opcoes:['A','B'],correta:1}]}),provedor:'mock'});let r=ctx.revisao_({erros:[{correta:'B'}]});assert.equal(r.exercicios.length,1);assert.equal(r.exercicios[0].opcoes[r.exercicios[0].correta],'B');});
