@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Eco — prévia HtmlService</title>
+  <style>body{font-family:Arial,sans-serif;background:#F6F4EF;color:#1F2937;min-height:100vh;display:grid;place-items:center;margin:0}#eco-preview{width:190px;max-width:70vw}</style>
+</head>
+<body>
+  <div id="eco-preview" aria-label="Mascote Eco em estado neutro"></div>
+  <?!= include('eco'); ?>
+  <script>
+    var eco = Eco.criar(document.getElementById('eco-preview'), { estilo: '2.5d' });
+    eco.estado('neutral');
+  </script>
+</body>
+</html>
