@@ -72,3 +72,13 @@ Verificações feitas (com dados fictícios e serviços simulados; nada real foi
 | Revisão do dia, prova do A1 (20 questões, 5 por parte, resultado salvo), tela do lembrete, leitura extra com IA simulada | `npm run test:browser` (16 verificações) |
 
 Ainda não verificado: notificação real num celular (depende da publicação e de ligar o lembrete com o app instalado e entrada Google) e o primeiro disparo agendado do fluxo `lembretes.yml`. O agendamento do GitHub pode atrasar alguns minutos. Se o segredo `CLASPRC_JSON` mudar, as chaves do lembrete mudam: o Apps Script precisa ser publicado de novo e cada pessoa liga o lembrete outra vez.
+
+## IA e voz — etapa 1: controle de orçamento (branch `orcamento-etapa1`)
+
+Preços conferidos nas páginas oficiais em 22/10/2026: GPT-6 Luna US$ 0,10 / 0,01 (cache) / 0,50 por milhão de tokens; Groq Whisper Large V3 Turbo US$ 0,04 por hora, mínimo de 10 s por arquivo; Gemini 3.8 Flash-Lite TTS US$ 6 por milhão de tokens de áudio (≈ US$ 0,009/min) e US$ 0,50 por milhão de texto até 31/12/2026, o dobro a partir de 2027; Gemini Live grátis no plano gratuito. A chave do Gemini é do plano gratuito, então tudo do Gemini entra como US$ 0 (`geminiPago: false`).
+
+O que foi feito: `apps-script/Orcamento.gs` (preços, teto, cotas, reserva antes da chamada e acerto depois, alertas 50/75/90/100%, opcionais param em 90%, mês no fuso de São Paulo, aba Custos); `pedidoIA_` reserva e confirma; `chamar_`, `openai_` e `gemini_` registram os tokens informados pela resposta; as duas transcrições pelo Whisper registram os segundos cobrados (mínimo de 10 s). As cotas por aluno começam no modo `registrar` (anotam sem bloquear); o teto financeiro sempre bloqueia.
+
+Verificações (`npm test`, 24): preços e configuração; teto de US$ 4 com reservas em andamento; reserva travada; opcionais em 90%; cotas por aluno nos dois modos; virada do mês no fuso de São Paulo com reserva contando no mês de origem; pedido real simulado registrando tokens e custo; falha liberando a reserva. Navegador: 16 verificações sem regressão.
+
+Limites: o custo é estimado; a duração do áudio é estimada pelo tamanho do arquivo (para mais). O estado do mês fica numa propriedade do script (cerca de 6,4 KB no pior caso medido, limite de 9 KB por propriedade). A trava do orçamento pode somar perto de 1 s quando os dois pedirem ao mesmo tempo; ainda não medido no Apps Script real.

@@ -66,8 +66,20 @@ function pedidoIA_(user,q){
   const cache=CacheService.getScriptCache(),key='pedido:'+user.sub+':'+q.requestId,lock=LockService.getScriptLock();
   lock.waitLock(10000);
   try{const previous=cache.get(key);if(previous){if(previous==='pendente')throw new Error('pedido_andamento');return JSON.parse(previous);}cache.put(key,'pendente',90);}finally{lock.releaseLock();}
-  try{limitarIA_(user,q.tipo);IA_PRAZO_=Date.now()+45000;const result=ia_(String(q.tipo||''),q.dados||{}),json=JSON.stringify(result);if(json.length<90000)cache.put(key,json,300);else cache.remove(key);return result;}
-  catch(e){cache.remove(key);throw e;}
+  let reserva=null;
+  try{
+    limitarIA_(user,q.tipo);
+    const est=estimarPedido_(String(q.tipo||''),q.dados||{});            // orçamento: reserva o pior caso antes de chamar
+    reserva=reservar_(user,q.tipo,est.valor,est.uso);iniciarGasto_();
+    IA_PRAZO_=Date.now()+45000;const result=ia_(String(q.tipo||''),q.dados||{}),json=JSON.stringify(result);
+    const g=GASTO_;GASTO_=null;
+    if(q.tipo==='liveToken')confirmar_(reserva,user,est.valor,est.uso,[{servico:'gemini-live',modelo:result.modelo,custo:est.valor}]);
+    else confirmar_(reserva,user,g.custo,g.uso,g.linhas);
+    reserva=null;
+    if(json.length<90000)cache.put(key,json,300);else cache.remove(key);return result;}
+  catch(e){cache.remove(key);
+    if(reserva){const g=GASTO_;GASTO_=null;try{if(g&&g.linhas.length)confirmar_(reserva,user,g.custo,g.uso,g.linhas);else liberar_(reserva);}catch(x){}}
+    throw e;}
 }
 
 /* Sessão própria do app: o Google confirma a pessoa uma vez por aparelho (entrarGoogle) e o servidor devolve

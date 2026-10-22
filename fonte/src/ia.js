@@ -19,6 +19,7 @@ window.IA = {
   erroTexto: function (e) {
     var m = String(e && e.message || e);
     if (/sem_chave/.test(m)) return 'A IA ainda não foi configurada no servidor.';
+    if (/orcamento/.test(m)) return 'O limite de uso da IA deste mês foi atingido. Os exercícios, o áudio e a revisão continuam funcionando.';
     if (/^auth_/.test(m)) return 'Entre novamente com sua conta Google para usar a IA.';
     if (/quota|limite/.test(m)) return 'O limite de uso foi atingido por agora. Tente mais tarde.';
     if (/tempo|AbortError/i.test(m)) return 'A resposta demorou mais que o esperado. Tente novamente em instantes.';

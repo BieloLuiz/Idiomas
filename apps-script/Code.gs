@@ -168,7 +168,7 @@ function ia_(tipo, d) {
   return r;
 }
 
-let IA_PRAZO_ = 0;
+let IA_PRAZO_ = 0, ULTIMO_USO_ = null;   // tokens da última resposta, para o orçamento
 function prazoIA_() { if (IA_PRAZO_ && Date.now() >= IA_PRAZO_) throw new Error('tempo'); }
 function chamar_(tipo, p) {
   const props = PropertiesService.getScriptProperties(), falhas = [];
@@ -180,8 +180,9 @@ function chamar_(tipo, p) {
       prazoIA_();
       const t0 = Date.now();
       try {
+        ULTIMO_USO_ = null;
         const texto = s.tipo === 'gemini' ? gemini_(chave, modelo, p) : openai_(s.url, chave, modelo, p);
-        registrar_(tipo, nome, modelo, true, Date.now() - t0);
+        registrar_(tipo, nome, modelo, true, Date.now() - t0); anotarTexto_(nome, modelo, ULTIMO_USO_);
         return { texto: String(texto).replace(/[\u2010\u2011]/g, '-').replace(/\u202f/g, ' '), provedor: nome + ':' + modelo };
       } catch (err) {
         const msg = String(err && err.message || err);
@@ -203,7 +204,8 @@ function openai_(url, chave, modelo, p) {
     headers: { Authorization: 'Bearer ' + chave }, payload: JSON.stringify(corpo) });
   const code = r.getResponseCode(), txt = r.getContentText();
   if (code !== 200) throw new Error(code + ' ' + txt.slice(0, 160));
-  const out = JSON.parse(txt), m = out.choices && out.choices[0] && out.choices[0].message;
+  const out = JSON.parse(txt), m = out.choices && out.choices[0] && out.choices[0].message, u = out.usage || {};
+  ULTIMO_USO_ = { entrada: u.prompt_tokens || 0, saida: u.completion_tokens || 0, cache: (u.prompt_tokens_details && u.prompt_tokens_details.cached_tokens) || 0 };
   const texto = m && (m.content || '').trim();
   if (!texto) throw new Error('vazio');
   return texto;
@@ -219,7 +221,8 @@ function gemini_(chave, modelo, p) {
     { method: 'post', contentType: 'application/json', muteHttpExceptions: true, headers: { 'x-goog-api-key': chave }, payload: JSON.stringify(corpo) });
   const code = r.getResponseCode(), txt = r.getContentText();
   if (code !== 200) throw new Error(code + ' ' + txt.slice(0, 160));
-  const out = JSON.parse(txt), c = out.candidates && out.candidates[0];
+  const out = JSON.parse(txt), c = out.candidates && out.candidates[0], u = out.usageMetadata || {};
+  ULTIMO_USO_ = { entrada: u.promptTokenCount || 0, saida: (u.candidatesTokenCount || 0) + (u.thoughtsTokenCount || 0), cache: u.cachedContentTokenCount || 0 };
   const texto = c && c.content && (c.content.parts || []).map(function (x) { return x.text || ''; }).join('').trim();
   if (!texto) throw new Error('vazio');
   return texto;
@@ -303,7 +306,7 @@ function pronuncia_(d) {
         const code = r.getResponseCode(), txt = r.getContentText();
         if (code !== 200) throw new Error(code + ' ' + txt.slice(0, 160));
         const ouvido = String(JSON.parse(txt).text || '').trim();
-        registrar_('pronuncia', 'groq', modelo, true, Date.now() - t0);
+        registrar_('pronuncia', 'groq', modelo, true, Date.now() - t0); anotarWhisper_(modelo, bytes.length);
         let dica = '', prov = 'groq:' + modelo;
         try { const f = chamar_('pronunciaTexto', promptPronuncia_(lang, frase, ouvido)); dica = f.texto; prov += ' + ' + f.provedor; } catch (e) {}
         return { ouvido: ouvido, dica: dica, provedor: prov };
@@ -371,7 +374,7 @@ function transcrever_(b64, mime, lang) {
         const r = UrlFetchApp.fetch('https://api.groq.com/openai/v1/audio/transcriptions', { method: 'post', muteHttpExceptions: true, headers: { Authorization: 'Bearer ' + groq },
           payload: { file: Utilities.newBlob(bytes, mime, 'fala.' + ext), model: modelo, language: lang, response_format: 'json', temperature: '0' } });
         if (r.getResponseCode() !== 200) throw new Error(r.getResponseCode() + ' ' + r.getContentText().slice(0, 160));
-        registrar_('transcrever', 'groq', modelo, true, Date.now() - t0);
+        registrar_('transcrever', 'groq', modelo, true, Date.now() - t0); anotarWhisper_(modelo, bytes.length);
         return { texto: String(JSON.parse(r.getContentText()).text || '').trim(), provedor: 'groq:' + modelo };
       } catch (err) { const m = String(err && err.message || err); registrar_('transcrever', 'groq', modelo, false, Date.now() - t0, m); falhas.push(m.slice(0, 80)); if (/^(401|403)/.test(m)) break; }
     }
@@ -385,7 +388,7 @@ function transcrever_(b64, mime, lang) {
           { method: 'post', contentType: 'application/json', muteHttpExceptions: true, headers: { 'x-goog-api-key': gem }, payload: JSON.stringify(corpo) });
         if (r.getResponseCode() !== 200) throw new Error(r.getResponseCode() + ' ' + r.getContentText().slice(0, 160));
         const t = JSON.parse(r.getContentText()).candidates[0].content.parts.map(function (x) { return x.text || ''; }).join('').trim();
-        registrar_('transcrever', 'gemini', modelo, true, Date.now() - t0);
+        registrar_('transcrever', 'gemini', modelo, true, Date.now() - t0); anotarGeminiAudio_(modelo, Math.floor(b64.length * 3 / 4));
         return { texto: t, provedor: 'gemini:' + modelo };
       } catch (err) { const m = String(err && err.message || err); registrar_('transcrever', 'gemini', modelo, false, Date.now() - t0, m); falhas.push(m.slice(0, 80)); if (/^(401|403)/.test(m)) break; }
     }
