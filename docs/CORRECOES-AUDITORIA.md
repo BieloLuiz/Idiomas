@@ -104,3 +104,10 @@ O dono ativou o compartilhamento de dados com a OpenAI (até 2,5 milhões de tok
 - Cores: a paleta do app já usava o azul-violeta da marca (`--primary: #5366C7`), sem mudança.
 
 Verificações: `npm test` 29 (admin, sessão única, voz premium); `npm run test:browser` 20 (painel, aviso de privacidade, conversa sem botão abrindo e fechando o microfone, modo a dois). Não verificado: a detecção de fala com voz real (o navegador de teste usa um tom fixo) e a voz premium real do Gemini.
+
+## Eco nas conversas, Eco 3D removida e revisão do conteúdo (branch `eco-conversas`)
+
+- A Eco em SVG passou a receber os estados nas conversas (pensando, ouvindo, falando) e "lendo" na correção da redação; falando, a boca se mexe; ouvindo no modo ao vivo e no "Sem botão", o anel da antena segue o microfone (`ecoVoz`).
+- Eco 3D removida: tela do laboratório, renderizador (624 KB) e modelo (698 KB) saíram do pacote. Medido depois (gzip): HTML 11 KB, CSS 34 KB, app 84 KB, personagens 281 KB, curso e mapa de áudio 629 KB — tudo guardado no aparelho depois da primeira abertura. Dividir o curso por idioma não foi feito: o ganho seria só na primeira abertura.
+- Revisão do conteúdo: varredura automática das 120 unidades (palavras do outro idioma nas traduções, português no texto estudado, tradução vazia ou igual ao original, palavras repetidas, tamanho desproporcional, apóstrofos e espaços) e leitura das 53 explicações. Corrigidos: "um point de convergência" (C1 fr), duas traduções resumidas demais (B2 fr U48) e cinco explicações (A1). Os demais avisos eram citações intencionais (ex.: explicar uma expressão francesa em português). Áudio × texto: os 5.496 textos que tocam áudio têm trecho no MP3 da unidade. Não verificado: a escuta humana dos MP3 e uma leitura linguística frase a frase de todas as unidades.
+- Não feito: o caso raro de XP com o mesmo perfil em dois aparelhos sem internet; exigiria contar XP por aparelho e migrar o progresso já salvo, com risco maior que o benefício para dois usuários.

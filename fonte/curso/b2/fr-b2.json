@@ -5209,7 +5209,7 @@
         "ex": [
           [
             "Il me semble que cette proposition est raisonnable.",
-            "Parece-me razoável."
+            "Parece-me que essa proposta é razoável."
           ],
           [
             "Il me semble que ce serait une bonne solution.",
@@ -5238,7 +5238,7 @@
           ],
           [
             "Je comprends votre argument. Toutefois, des questions restent ouvertes.",
-            "Entendo, mas há questões."
+            "Entendo seu argumento. No entanto, algumas questões continuam em aberto."
           ]
         ],
         "tip": "Reconheça argumentos contrários sem caricaturas."

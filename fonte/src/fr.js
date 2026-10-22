@@ -387,7 +387,7 @@ module.exports = [
   mc:[
     {q:"Qual é a profissão da Claire?",o:["médecin","infirmière","avocate"],a:1,e:"Je suis infirmière."},
     {q:"Onde o Lucas trabalha?",o:["Num escritório","Em casa","Num hospital"],a:1,e:"Je travaille à la maison."},
-    {q:"Como dizer “Sou médico”?",o:["Je suis un médecin.","Je suis médecin."],a:1,e:"Depois de être, sem artigo."},
+    {q:"Como dizer “Sou médico”?",o:["Je suis un médecin.","Je suis médecin."],a:1,e:"Com profissões, depois de être não se usa artigo."},
     {q:"Como dizer “vocês fazem”?",o:["vous faisez","vous faites"],a:1,e:"faites é irregular."}
   ],
   gaps:[
@@ -522,7 +522,7 @@ module.exports = [
     {q:"O que a Claire pede para beber?",o:["un thé","un café","un jus d'orange"],a:1,e:"Je voudrais un café."},
     {q:"O que o Lucas pede para comer?",o:["un croissant","un sandwich au fromage","de la tarte"],a:1,e:"un sandwich au fromage."},
     {q:"Como perguntar “Quer leite?”",o:["Vous voulez lait ?","Vous voulez du lait ?"],a:1,e:"Precisa do partitivo du."},
-    {q:"Como dizer “Sem açúcar”?",o:["Pas du sucre.","Pas de sucre."],a:1,e:"Depois da negação, tudo vira de."}
+    {q:"Como dizer “Sem açúcar”?",o:["Pas du sucre.","Pas de sucre."],a:1,e:"Depois da negação, du, de la e des viram de."}
   ],
   gaps:[
     {s:"Je ___ un café.",a:["voudrais"],h:"Eu queria um café."},
@@ -656,7 +656,7 @@ module.exports = [
   ],
   mc:[
     {q:"Por que o Lucas não pode no sábado?",o:["Tem que trabalhar","Está doente","Vai viajar"],a:0,e:"Je dois travailler."},
-    {q:"Quando eles vão ao cinema?",o:["Sábado à noite","Domingo à tarde"],a:1,e:"dimanche… l'après-midi."},
+    {q:"Quando eles vão ao cinema?",o:["Sábado à noite","Domingo à tarde"],a:1,e:"No diálogo: dimanche… l'après-midi (domingo à tarde)."},
     {q:"Como dizer “Tenho que trabalhar”?",o:["Je dois travailler.","Je dois de travailler."],a:0,e:"devoir + infinitivo, sem preposição."},
     {q:"Como pedir para repetir, de forma educada?",o:["Vous pouvez répéter ?","Vous peux répéter ?"],a:0,e:"Com vous: pouvez."}
   ],

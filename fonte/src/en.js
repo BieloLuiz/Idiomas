@@ -529,7 +529,7 @@ module.exports = [
   mc:[
     {q:"O que a Sarah pede para comer?",o:["Sanduíche de queijo","Sanduíche de frango","Salada"],a:1,e:"I'd like a chicken sandwich."},
     {q:"Quanto ela paga?",o:["$8","$18","$80"],a:0,e:"That's eight dollars."},
-    {q:"Qual pergunta está certa?",o:["Do you have some sandwiches?","Do you have any sandwiches?"],a:1,e:"Em perguntas, use any."},
+    {q:"Qual pergunta está certa?",o:["Do you have some sandwiches?","Do you have any sandwiches?"],a:1,e:"Em perguntas comuns, use any."},
     {q:"Qual pedido é mais educado?",o:["I want a coffee.","Can I have a coffee, please?"],a:1,e:"Can I have…, please? é o padrão."}
   ],
   gaps:[
@@ -732,7 +732,7 @@ module.exports = [
     {q:"O que o Lucas está fazendo?",o:["Cozinhando","Caminhando","Vendo um filme"],a:0,e:"I'm cooking dinner."},
     {q:"Como está o tempo onde a Sarah está?",o:["Ensolarado","Chuvoso","Nevando"],a:0,e:"It's sunny today!"},
     {q:"Qual frase está certa?",o:["I cooking dinner.","I'm cooking dinner."],a:1,e:"Precisa do to be: I'm."},
-    {q:"Como dizer “Está chovendo”?",o:["Is raining.","It's raining."],a:1,e:"O tempo sempre usa it."}
+    {q:"Como dizer “Está chovendo”?",o:["Is raining.","It's raining."],a:1,e:"Para falar do clima, use it: It's raining."}
   ],
   gaps:[
     {s:"What are you ___?",a:["doing"],h:"O que você está fazendo?"},
