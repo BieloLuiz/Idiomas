@@ -16,7 +16,7 @@ const COLS = ['id', 'nome', 'atualizado', 'atualizadoMs', 'json'];
 const MAX_PERFIS = 4;
 const PEDACO = 45000;   // limite seguro por célula; perfis maiores ocupam as colunas seguintes
 
-function doGet() { return saida_({ ok: true, app: 'Idiomas', googleClientId: PropertiesService.getScriptProperties().getProperty('GOOGLE_CLIENT_ID') || '' }); }
+function doGet() { return saida_({ ok: true, app: 'Idiomas', googleClientId: clienteGoogle_() }); }
 
 function doPost(e) {
   let q = {};

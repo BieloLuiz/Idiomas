@@ -1,7 +1,10 @@
+/* ID público do cliente OAuth (aparece no botão do Google; não é segredo). A propriedade GOOGLE_CLIENT_ID, se existir, tem prioridade. */
+const GOOGLE_CLIENT_ID_PADRAO = '215022981558-ppdrm1ekehb39ha06r4q3fsh0iu0374i.apps.googleusercontent.com';
+function clienteGoogle_() { return PropertiesService.getScriptProperties().getProperty('GOOGLE_CLIENT_ID') || GOOGLE_CLIENT_ID_PADRAO; }
 /* Configurar GOOGLE_CLIENT_ID e ALLOWED_EMAILS nas propriedades privadas do script.
    Sem configuração, o servidor recusa acesso. Nunca aceitar identidade enviada pelo cliente. */
 function autenticar_(token) {
-  const props = PropertiesService.getScriptProperties(), audience = props.getProperty('GOOGLE_CLIENT_ID');
+  const props = PropertiesService.getScriptProperties(), audience = clienteGoogle_();
   const allowed = (props.getProperty('ALLOWED_EMAILS') || '').toLowerCase().split(/[;,\s]+/).filter(Boolean);
   if (!audience || !allowed.length) throw new Error('auth_config');
   if (typeof token !== 'string' || token.length < 50 || token.length > 10000) throw new Error('auth_required');
@@ -72,7 +75,7 @@ function hashSessao_(token) { return 'SESSAO_' + Utilities.base64EncodeWebSafe(U
 function permitidos_() {
   const props = PropertiesService.getScriptProperties();
   const allowed = (props.getProperty('ALLOWED_EMAILS') || '').toLowerCase().split(/[;,\s]+/).filter(Boolean);
-  if (!props.getProperty('GOOGLE_CLIENT_ID') || !allowed.length) throw new Error('auth_config');
+  if (!clienteGoogle_() || !allowed.length) throw new Error('auth_config');
   return allowed;
 }
 function criarSessao_(user) {
