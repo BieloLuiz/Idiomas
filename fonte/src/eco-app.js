@@ -44,12 +44,14 @@ function ecoEstado(el, estado) { if (el && el.__eco) el.__eco.estado(ECO_MAPA[es
       /* iPhone/iPad: sem isto, o som do app obedece à chave de silencioso do aparelho e pode não sair */
       try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
       try { var mudo = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA='); mudo.play().catch(function () {}); } catch (e) {}
-      if (ctx) { var vai = function () { if (ctx.state === 'running') { SOM.vol(cfg.volume == null ? 1 : cfg.volume); SOM.abertura(); } }; if (ctx.state === 'running') vai(); else try { ctx.resume().then(vai).catch(function () {}); } catch (e) {} }
+      if (ctx) { var tocou = false, vai = function () { if (tocou || ctx.state !== 'running') return; tocou = true; SOM.vol(cfg.volume == null ? 1 : cfg.volume); SOM.abertura(); }; vai(); try { ctx.resume().then(vai).catch(function () {}); } catch (e) {} setTimeout(vai, 250); }
       setTimeout(fechar, reduz ? 1400 : 3900);
     }
     if (esperar) {
       var eco = window.criarEco ? criarEco('neutral', '', true) : null; if (eco) { eco.classList.add('abertura-eco'); ov.querySelector('.abertura-arte').appendChild(eco); }
-      ov.addEventListener('pointerdown', function () { if (!comecou) comecar(); else fechar(); });
+      /* no iPhone/iPad o som só é liberado em "touchend"/"click" (não em "pointerdown"): por isso o toque é tratado aqui */
+      var toque = function (ev) { if (ev && ev.type === 'touchend') ev.preventDefault(); if (!comecou) { if (ctx) try { ctx.resume(); } catch (e) {} comecar(); } else fechar(); };
+      ov.addEventListener('touchend', toque); ov.addEventListener('click', toque);
       addEventListener('keydown', function () { if (!comecou) comecar(); else fechar(); });
       setTimeout(function () { if (!comecou) fechar(); }, 30000);    // ninguém tocou: abre o app
     } else {
