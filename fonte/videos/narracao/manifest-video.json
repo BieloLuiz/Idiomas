@@ -1,0 +1,152 @@
+[
+ {
+  "role": "pt_narrador",
+  "text": "No primeiro dia de aula, duas pessoas se conhecem. Veja como uma delas se apresenta.",
+  "lang": "pt",
+  "f": "en-a1-u01-01.mp3"
+ },
+ {
+  "role": "en_sarah",
+  "text": "Hi! I'm Sarah.",
+  "lang": "en",
+  "f": "en-a1-u01-02.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Para dizer quem você é, usamos uma forma curta do verbo ser ou estar. Ela aparece o tempo todo nas conversas. Escute como fica ao dizer seu nome.",
+  "lang": "pt",
+  "f": "en-a1-u01-03.mp3"
+ },
+ {
+  "role": "en_sarah",
+  "text": "I'm Sarah.",
+  "lang": "en",
+  "f": "en-a1-u01-04.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "A mesma construção serve para dizer de onde você é. Repare que a primeira parte da frase não muda. Só precisamos trocar o país. Veja como os personagens fazem isso.",
+  "lang": "pt",
+  "f": "en-a1-u01-05.mp3"
+ },
+ {
+  "role": "en_lucas",
+  "text": "I'm from Brazil.",
+  "lang": "en",
+  "f": "en-a1-u01-06.mp3"
+ },
+ {
+  "role": "en_sarah",
+  "text": "I'm from Canada.",
+  "lang": "en",
+  "f": "en-a1-u01-07.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Em português, podemos esconder o sujeito e dizer apenas que somos do Brasil. Em inglês, precisamos indicar quem está falando. Veja a maneira correta.",
+  "lang": "pt",
+  "f": "en-a1-u01-08.mp3"
+ },
+ {
+  "role": "en_lucas",
+  "text": "I'm from Brazil.",
+  "lang": "en",
+  "f": "en-a1-u01-09.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Agora, um pequeno desafio. Como você diria que é a Sarah? Pense um pouquinho antes de ouvir.",
+  "lang": "pt",
+  "f": "en-a1-u01-10.mp3"
+ },
+ {
+  "role": "en_sarah",
+  "text": "I'm Sarah.",
+  "lang": "en",
+  "f": "en-a1-u01-11.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Essa é a resposta! Você já sabe começar uma apresentação.",
+  "lang": "pt",
+  "f": "en-a1-u01-12.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Muito bem! Aprender começa com pequenos passos. A Eco acompanha você.",
+  "lang": "pt",
+  "f": "en-a1-u01-13.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Em um café de Lyon, duas pessoas acabam de se conhecer. Escute.",
+  "lang": "pt",
+  "f": "fr-a1-u01-01.mp3"
+ },
+ {
+  "role": "fr_claire",
+  "text": "Bonjour ! Je m'appelle Claire.",
+  "lang": "fr",
+  "f": "fr-a1-u01-02.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Para dizer o próprio nome em francês, usamos uma expressão que significa eu me chamo. Ela tem três partes, e precisamos manter todas. Ouça com atenção.",
+  "lang": "pt",
+  "f": "fr-a1-u01-03.mp3"
+ },
+ {
+  "role": "fr_claire",
+  "text": "Je m'appelle Claire.",
+  "lang": "fr",
+  "f": "fr-a1-u01-04.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Agora vem a parte boa. Para usar essa expressão com seu próprio nome, não precisamos aprender outra estrutura. Basta trocar o nome no final. Vamos ouvir de novo, desta vez com Lucas.",
+  "lang": "pt",
+  "f": "fr-a1-u01-05.mp3"
+ },
+ {
+  "role": "fr_lucas",
+  "text": "Je m'appelle Lucas.",
+  "lang": "fr",
+  "f": "fr-a1-u01-06.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Um erro comum é esquecer a pequena parte que vem antes do verbo. Em português também dizemos eu me chamo, e não apenas eu chamo. Em francês, esse pedacinho é indispensável.",
+  "lang": "pt",
+  "f": "fr-a1-u01-07.mp3"
+ },
+ {
+  "role": "fr_claire",
+  "text": "Je m'appelle Claire.",
+  "lang": "fr",
+  "f": "fr-a1-u01-08.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Vamos experimentar? Imagine que você está no lugar do Lucas. Como ele poderia dizer seu nome usando a expressão que acabamos de aprender?",
+  "lang": "pt",
+  "f": "fr-a1-u01-09.mp3"
+ },
+ {
+  "role": "fr_lucas",
+  "text": "Je m'appelle Lucas.",
+  "lang": "fr",
+  "f": "fr-a1-u01-10.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Isso mesmo! Agora você conhece uma maneira muito natural de se apresentar.",
+  "lang": "pt",
+  "f": "fr-a1-u01-11.mp3"
+ },
+ {
+  "role": "pt_narrador",
+  "text": "Muito bem! Pratique quando quiser. A Eco continua aqui com você.",
+  "lang": "pt",
+  "f": "fr-a1-u01-12.mp3"
+ }
+]
