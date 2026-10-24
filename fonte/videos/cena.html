@@ -198,7 +198,7 @@ window.tocarAula = function (A) {
       var ecoEl = document.getElementById('eco'); ecoEl.classList.add('olha'); eco.estado('happy');
       em(f.fim, function () { ecoEl.classList.remove('olha'); eco.estado(estadoCena || 'neutral'); });
       var card = null, ws = palavras(f.texto), tot = f.texto.length, acc = 0;
-      palco.querySelectorAll('[data-texto]').forEach(function (cdt) { var a = norm(cdt.dataset.texto), b = norm(f.texto); if (!card && (a.indexOf(b) >= 0 || b.indexOf(a) >= 0)) card = cdt; });
+      var cands = palco.querySelectorAll('.conteudo:not(.sai) [data-texto]'), b0 = norm(f.texto); cands.forEach(function (cdt) { if (!card && norm(cdt.dataset.texto) === b0) card = cdt; }); if (!card) { var melhor = 0; cands.forEach(function (cdt) { var a = norm(cdt.dataset.texto); if ((a.indexOf(b0) >= 0 || b0.indexOf(a) >= 0) && a.length > melhor) { melhor = a.length; card = cdt; } }); }
       if (!card) { leg.className = 'legenda on alvo'; document.getElementById('quem').innerHTML = '<span class="av" style="background:' + cor + '">' + esc(String(f.voz)[0]) + '</span>' + esc(f.voz); document.getElementById('fala').innerHTML = esc(f.texto); return; }
       var cws = card.querySelectorAll('.alvo w'); card.classList.add('falando');
       var q = card.querySelector('.quem'); if (q) q.innerHTML = '<span class="av" style="background:' + cor + '">' + esc(String(f.voz)[0]) + '</span>' + esc(f.voz);
