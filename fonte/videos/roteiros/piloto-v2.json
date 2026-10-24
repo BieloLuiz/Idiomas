@@ -38,8 +38,8 @@
       "I am → I'm",
       "I'm Sarah.",
       "Eu sou a Sarah.",
-      "I'm Lucas.",
-      "Eu sou o Lucas."
+      "Hello, Sarah. My name's Lucas.",
+      "Olá, Sarah. Meu nome é Lucas."
      ],
      "falas": [
       {
@@ -52,7 +52,7 @@
       },
       {
        "voz": "Lucas",
-       "texto": "I'm Lucas."
+       "texto": "Hello, Sarah. My name's Lucas."
       }
      ],
      "pausa_segundos": 0
@@ -63,8 +63,8 @@
      "tela": [
       "Agora, vamos falar da origem.",
       "I'm + from + lugar",
-      "I'm from Brazil.",
-      "Eu sou do Brasil.",
+      "I'm from Brazil. And you?",
+      "Eu sou do Brasil. E você?",
       "I'm from Canada.",
       "Eu sou do Canadá.",
       "I'm from the United States.",
@@ -77,14 +77,14 @@
       },
       {
        "voz": "Lucas",
-       "texto": "I'm from Brazil."
+       "texto": "I'm from Brazil. And you?"
       },
       {
        "voz": "Sarah",
        "texto": "I'm from Canada."
       },
       {
-       "voz": "Daniel",
+       "voz": "Emma",
        "texto": "I'm from the United States."
       }
      ],
@@ -97,8 +97,8 @@
       "Uma conversa na primeira aula",
       "Sarah: Hi! I'm Sarah.",
       "Oi! Eu sou a Sarah.",
-      "Lucas: I'm Lucas.",
-      "Eu sou o Lucas.",
+      "Lucas: Hello, Sarah. My name's Lucas.",
+      "Olá, Sarah. Meu nome é Lucas.",
       "Sarah: Where are you from?",
       "De onde você é?",
       "Lucas: I'm from Brazil. And you?",
@@ -117,7 +117,7 @@
       },
       {
        "voz": "Lucas",
-       "texto": "I'm Lucas."
+       "texto": "Hello, Sarah. My name's Lucas."
       },
       {
        "voz": "Sarah",
@@ -150,7 +150,7 @@
        "texto": "Em português, podemos omitir o sujeito. Nessa frase em inglês, ele precisa aparecer."
       },
       {
-       "voz": "Lucas",
+       "voz": "Emma",
        "texto": "I'm from Brazil."
       }
      ],
@@ -228,7 +228,7 @@
      ],
      "falas": [
       {
-       "voz": "Lucas",
+       "voz": "Emma",
        "texto": "I'm from Brazil."
       },
       {
@@ -292,9 +292,7 @@
       "appelle = chamo",
       "me + appelle → m'appelle",
       "Je m'appelle Claire.",
-      "Eu me chamo Claire.",
-      "Je m'appelle Lucas.",
-      "Eu me chamo Lucas."
+      "Eu me chamo Claire."
      ],
      "falas": [
       {
@@ -304,10 +302,6 @@
       {
        "voz": "Claire",
        "texto": "Je m'appelle Claire."
-      },
-      {
-       "voz": "Lucas",
-       "texto": "Je m'appelle Lucas."
       }
      ],
      "pausa_segundos": 0
@@ -320,8 +314,8 @@
       "Je viens du + país",
       "Je viens du Brésil.",
       "Eu venho do Brasil.",
-      "Je viens du Brésil. Je suis brésilien.",
-      "Eu venho do Brasil. Eu sou brasileiro."
+      "Je viens du Brésil. Je suis brésilien. Et toi ?",
+      "Eu venho do Brasil. Eu sou brasileiro. E você?"
      ],
      "falas": [
       {
@@ -329,12 +323,12 @@
        "texto": "Para dizer de onde você vem, use esta estrutura com o nome do país."
       },
       {
-       "voz": "Lucas",
+       "voz": "Claire",
        "texto": "Je viens du Brésil."
       },
       {
        "voz": "Lucas",
-       "texto": "Je viens du Brésil. Je suis brésilien."
+       "texto": "Je viens du Brésil. Je suis brésilien. Et toi ?"
       }
      ],
      "pausa_segundos": 0
@@ -346,12 +340,12 @@
       "Uma conversa antes da aula",
       "Claire: Bonjour ! Je m'appelle Claire. Et toi ?",
       "Olá! Eu me chamo Claire. E você?",
-      "Lucas: Je m'appelle Lucas.",
-      "Eu me chamo Lucas.",
+      "Lucas: Salut, Claire ! Moi, c'est Lucas.",
+      "Oi, Claire! Eu sou o Lucas.",
       "Claire: Tu viens d'où ?",
       "De onde você vem?",
-      "Lucas: Je viens du Brésil. Je suis brésilien.",
-      "Eu venho do Brasil. Eu sou brasileiro."
+      "Lucas: Je viens du Brésil. Je suis brésilien. Et toi ?",
+      "Eu venho do Brasil. Eu sou brasileiro. E você?"
      ],
      "falas": [
       {
@@ -364,7 +358,7 @@
       },
       {
        "voz": "Lucas",
-       "texto": "Je m'appelle Lucas."
+       "texto": "Salut, Claire ! Moi, c'est Lucas."
       },
       {
        "voz": "Claire",
@@ -372,7 +366,7 @@
       },
       {
        "voz": "Lucas",
-       "texto": "Je viens du Brésil. Je suis brésilien."
+       "texto": "Je viens du Brésil. Je suis brésilien. Et toi ?"
       }
      ],
      "pausa_segundos": 0
@@ -472,7 +466,7 @@
      "falas": [
       {
        "voz": "Lucas",
-       "texto": "Je viens du Brésil."
+       "texto": "Je viens du Brésil. Je suis brésilien. Et toi ?"
       },
       {
        "voz": "narrador",

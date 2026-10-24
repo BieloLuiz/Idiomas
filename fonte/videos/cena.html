@@ -15,7 +15,7 @@ body::before{content:"";position:absolute;inset:0;background-image:radial-gradie
 .parte::before{content:"";width:26px;height:4px;border-radius:4px;background:currentColor}
 .parte.erro{color:var(--erro)}.parte.desafio{color:var(--ouro)}.parte.fechamento{color:var(--certo)}
 /* palco */
-.palco{position:absolute;top:190px;left:40px;right:40px;height:720px;transition:opacity .7s ease,filter .7s ease}
+.palco{position:absolute;top:412px;left:40px;right:40px;height:796px;transition:opacity .7s ease,filter .7s ease}
 .palco.fundo{opacity:.32;filter:saturate(.5)}
 .entra{opacity:0;transform:translateY(18px);filter:blur(3px);transition:opacity .8s ease,transform .9s cubic-bezier(.22,1,.36,1),filter .8s ease}
 .entra.on{opacity:1;transform:none;filter:none}
@@ -81,15 +81,15 @@ mark{background:linear-gradient(transparent 62%,var(--ouro-suave) 62%);color:inh
 .opcoes b{color:var(--ouro);margin-right:10px}
 .resposta{align-self:flex-start;background:var(--certo);color:#fff;font-size:30px;font-weight:800;padding:12px 22px;border-radius:16px;letter-spacing:.02em}
 /* legenda */
-.legenda{position:absolute;left:40px;right:210px;bottom:64px;background:var(--papel);border-radius:28px;padding:22px 28px 24px;box-shadow:0 18px 40px rgba(31,41,55,.09);opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease}
+.legenda{position:absolute;left:176px;right:40px;top:176px;min-height:212px;background:var(--papel);border-radius:28px;padding:22px 28px 24px;box-shadow:0 18px 40px rgba(31,41,55,.09);opacity:0;transform:translateY(-10px);transition:opacity .45s ease,transform .45s ease}
 .legenda p{transition:opacity .22s ease}
 .legenda.on{opacity:1;transform:none}
 .legenda small{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--marca);margin-bottom:8px}
 .legenda p{margin:0;font-size:34px;line-height:1.36;font-weight:700}
 .legenda p w{color:#C3C8D2;transition:color .12s}.legenda p w.dito{color:var(--tinta)}
 .legenda.alvo p{font-weight:800;font-size:36px}.legenda.alvo p w.dito{color:var(--marca)}
-.eco{position:absolute;right:16px;bottom:66px;width:190px;transition:transform .4s cubic-bezier(.3,1.4,.5,1)}
-.eco.olha{transform:translate(-8px,-14px) rotate(-6deg)}
+.eco{position:absolute;left:18px;top:186px;width:150px;transition:transform .4s cubic-bezier(.3,1.4,.5,1)}
+.eco.olha{transform:translate(6px,12px) rotate(8deg)}
 .marca{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-size:18px;font-weight:700;color:#A0A8B8;letter-spacing:.04em}
 </style></head><body>
 <div class="prog" id="prog"></div>
@@ -170,7 +170,7 @@ window.tocarAula = function (A) {
         d = por(el('cartao balao' + (lados[dg.nome] ? ' dir' : ''), '<div class="nome"><span class="av" style="background:' + cor + '">' + esc(dg.nome[0]) + '</span>' + esc(dg.nome) + '</div><div class="alvo">' + emW(dg.texto, -1) + '</div>' + (trd ? '<div class="trad">' + esc(trd) + '</div>' : '') + '<span class="quem"></span>'));
         d.dataset.texto = dg.texto; i += trd ? 2 : 1;
       } else if (ehAlvo(t, c)) {
-        var tr2 = traducao(tela[i + 1], c);
+        var tr2 = traducao(tela[i + 1], c, /\?$/.test(t));
         d = por(el('cartao', '<span class="quem"></span><div class="alvo' + (t.length > 24 ? ' longo' : '') + '">' + emW(t, corte) + '</div>' + (tr2 ? '<div class="trad">' + esc(tr2) + '</div>' : '')));
         d.dataset.texto = t; i += tr2 ? 2 : 1;
       } else { por(el(itens.length === 0 ? 'manchete' : 'nota', esc(t))); i++; }
@@ -182,7 +182,7 @@ window.tocarAula = function (A) {
   function faiscas() {
     var cores = ['#5366C7', '#E9A93B', '#2F8F5B', '#C2577A'];
     for (var k = 0; k < 22; k++) { var f = document.createElement('div'); f.className = 'faisca'; var ang = Math.random() * Math.PI * 2, r = 180 + Math.random() * 220;
-      f.style.cssText = 'left:360px;top:520px;background:' + cores[k % 4] + ';--x:' + Math.cos(ang) * r + 'px;--y:' + Math.sin(ang) * r + 'px;animation-delay:' + (Math.random() * .2) + 's';
+      f.style.cssText = 'left:360px;top:780px;background:' + cores[k % 4] + ';--x:' + Math.cos(ang) * r + 'px;--y:' + Math.sin(ang) * r + 'px;animation-delay:' + (Math.random() * .2) + 's';
       document.body.appendChild(f); }
   }
 

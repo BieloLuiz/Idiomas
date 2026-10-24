@@ -18,10 +18,22 @@ const pacote = fs.readdirSync(path.join(RAIZ, 'assets')).map(f => path.join(RAIZ
 const AUDIO = (() => { const s = fs.readFileSync(pacote, 'utf8'), m = s.slice(s.indexOf('var AUDIO=') + 10); let d = 0, j = 0;
   for (; j < m.length; j++) { const c = m[j]; if (c === '"') { j++; while (m[j] !== '"') { if (m[j] === '\\') j++; j++; } continue; } if (c === '{') d++; if (c === '}' && !--d) break; }
   return JSON.parse(m.slice(0, j + 1)).sprites; })();
-function trecho(lang, texto) { for (const k of Object.keys(AUDIO)) { if (!k.startsWith(lang + '|')) continue; const sp = AUDIO[k]; for (const [chave, c] of Object.entries(sp.clips)) if (chave.slice(chave.indexOf('|') + 1) === texto) return { arq: path.join(RAIZ, sp.file), de: c[0], dur: c[1] - c[0] }; } return null; }
+/* quem fala em cada voz gravada do curso (hash ou papel → personagem) */
+const VOZ_CURSO = { en: { a3702a6a: 'Sarah', '1ba07d76': 'Lucas', bdadd71e: 'Emma', en_sarah: 'Sarah', en_lucas: 'Lucas', en_narradora: 'Emma', en_vendedor: 'Daniel' },
+  fr: { '49d0563e': 'Claire', '8d0efd93': 'Lucas', fr_claire: 'Claire', fr_lucas: 'Lucas', fr_ines: 'Inès', fr_antoine: 'Antoine' } };
+const HOMENS = ['lucas', 'daniel', 'antoine'];
+const generoDe = n => HOMENS.includes(String(n).toLowerCase()) ? 'm' : 'f';
+/* trecho gravado: prefere a mesma pessoa, depois alguém do mesmo gênero; senão devolve outra voz e avisa */
+function trecho(lang, texto, quem) {
+  const achados = [];
+  for (const k of Object.keys(AUDIO)) { if (!k.startsWith(lang + '|')) continue; const sp = AUDIO[k];
+    for (const [chave, c] of Object.entries(sp.clips)) { const i = chave.indexOf('|'); if (chave.slice(i + 1) === texto) achados.push({ arq: path.join(RAIZ, sp.file), de: c[0], dur: c[1] - c[0], voz: VOZ_CURSO[lang][chave.slice(0, i)] || '?' }); } }
+  if (!quem) return achados[0] || null;
+  return achados.find(a => a.voz.toLowerCase() === quem.toLowerCase()) || achados.find(a => generoDe(a.voz) === generoDe(quem)) || (achados[0] && { ...achados[0], trocada: true }) || null;
+}
 if (soManifesto) {
   /* só a narração em português: as falas no idioma usam o áudio já gravado do curso */
-  const sem = [], itens = roteiro.aulas.flatMap(a => falasNumeradas(a).filter(f => { if (f.voz === 'narrador') return true; if (!trecho(a.idioma, f.texto)) sem.push(f.texto); return false; })
+  const sem = [], itens = roteiro.aulas.flatMap(a => falasNumeradas(a).filter(f => { if (f.voz === 'narrador') return true; const t = trecho(a.idioma, f.texto, f.voz); if (!t) sem.push(f.texto); else if (t.trocada) sem.push(f.texto + ' (só existe na voz de ' + t.voz + ', não de ' + f.voz + ')'); return false; })
     .map(f => ({ role: 'pt_narrador', text: f.texto, lang: 'pt', f: f.arquivo })));
   if (sem.length) throw new Error('falas no idioma sem áudio no curso (troque por frases existentes): ' + sem.join(' | '));
   fs.writeFileSync(path.join(narr, 'manifest-video.json'), JSON.stringify(itens, null, 1));
@@ -41,11 +53,11 @@ for (const a of roteiro.aulas) {
       const g = falas[k++], alvo = f.voz !== 'narrador', proprio = path.join(narr, g.arquivo);
       let som = null;
       if (fs.existsSync(proprio)) som = { arq: proprio, de: 0, dur: duracao(proprio) };
-      else if (alvo) { som = trecho(a.idioma, f.texto); if (!som) avisos.push('sem áudio: ' + f.texto); }
+      else if (alvo) { som = trecho(a.idioma, f.texto, f.voz); if (!som) avisos.push('sem áudio: ' + f.texto); else if (som.trocada) avisos.push('voz trocada: ' + f.texto + ' → ' + som.voz); }
       else avisos.push('narração ainda não gravada: ' + g.arquivo);
       const dur = som ? som.dur : Math.max(1.6, f.texto.length / 14);
       if (som) sons.push({ ...som, em: t });
-      cena.falas.push({ ini: t, fim: t + dur, voz: f.voz, texto: f.texto, alvo }); t += dur + 0.35;
+      cena.falas.push({ ini: t, fim: t + dur, voz: som && som.trocada && som.voz !== '?' ? som.voz : f.voz, texto: f.texto, alvo }); t += dur + 0.35;
     }
     if (c.pausa_segundos > 0) { cena.pausa = [t, t + c.pausa_segundos]; t += c.pausa_segundos; }
     t += 0.6; cena.fim = t; return cena;
