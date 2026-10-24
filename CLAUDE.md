@@ -43,4 +43,7 @@ Manter AGENTS.md, CLAUDE.md e GEMINI.md com o mesmo conteúdo. Registrar limites
 
 ## Videoaulas
 
-Quando o usuário mandar um roteiro de videoaula (JSON do ChatGPT, anexado ou colado) ou pedir um vídeo, siga `fonte/videos/PROMPT-CLAUDE.md` do início ao fim, sem pedir que ele copie instruções. Quando ele pedir o "pedido de roteiro" de uma unidade, gere com `node fonte/videos/pedido-roteiro.mjs <nível> <unidade>`, salve em `Downloads\APP - IDIOMAS\pedido-roteiro-<nível>-u<unidade>.txt` (quando estiver no PC dele) e diga só que é para colar no ChatGPT. O usuário não é programador: fale em passos simples e faça você mesmo tudo o que puder (inclusive rodar a narração no PC, quando estiver nele). Publicar no app (videos/ e lista.json) só com o OK dele.
+Videoaulas são feitas inteiramente pelo Claude, sem ChatGPT. Quando o usuário pedir um vídeo (por exemplo, "faz o vídeo da unidade 2"):
+1. Escreva você mesmo o roteiro de inglês e de francês daquela unidade, seguindo as regras e a lista de frases que `node fonte/videos/pedido-roteiro.mjs <nível> <unidade>` imprime (as falas dos personagens só podem usar as frases listadas, com o personagem indicado). Use `fonte/videos/roteiros/piloto-v2.json` como modelo de formato e de tom; salve em `fonte/videos/roteiros/<nível>-u<unidade>.json`.
+2. Depois siga `fonte/videos/PROMPT-CLAUDE.md` do passo 2 em diante (conferir, narração, gerar, conferir os quadros, mostrar o vídeo).
+Se o usuário mandar um roteiro pronto, use-o a partir do passo 1 do PROMPT-CLAUDE.md. O usuário não é programador: fale em passos simples, não peça que ele copie nada e faça você mesmo tudo o que puder (inclusive rodar a narração no PC, quando estiver nele). Publicar no app (videos/ e lista.json) só com o OK dele.
