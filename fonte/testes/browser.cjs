@@ -31,6 +31,11 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await page.evaluate(()=>navigator.serviceWorker.ready);await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
   assert.ok(await page.evaluate(()=>caches.has('outro-aplicativo-fixture')));
   await page.getByRole('button',{name:'Baixar áudio desta unidade para usar sem internet',exact:true}).click();await page.getByRole('button',{name:'Áudio disponível neste aparelho',exact:true}).waitFor();
+  assert.equal(await page.locator('.video-aula').count(),0,'unidade sem videoaula não mostra o cartão');
+  await page.getByRole('button',{name:'Voltar para os guias'}).click();await page.getByRole('button',{name:/Bonjour !/}).first().click();
+  await page.locator('.video-aula video').waitFor();assert.equal(await page.locator('.video-aula video').getAttribute('src'),'videos/fr-a1-u01.mp4');
+  await page.getByRole('button',{name:'Voltar para os guias'}).click();await page.getByRole('button',{name:/Il fut une époque/}).click();
+  console.log('PASS: guia da unidade mostra a videoaula quando ela existe');
   await context.setOffline(true);assert.deepEqual(await page.evaluate(async()=>{let r=await fetch('/audio/fr-c1-u01.mp3',{headers:{Range:'bytes=0-31'}});return[r.status,(await r.arrayBuffer()).byteLength];}),[206,32]);await context.setOffline(false);
   console.log('PASS: PWA preserva cache de outro aplicativo e reproduz Range do áudio baixado sem rede');
   await page.getByRole('button',{name:'Praticar esta unidade',exact:true}).click();

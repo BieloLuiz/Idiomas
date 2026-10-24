@@ -1,0 +1,496 @@
+{
+ "aulas": [
+  {
+   "id": "en-a1-u01",
+   "titulo": "Hello! Aprenda a se apresentar",
+   "idioma": "en",
+   "nivel": "A1",
+   "unidade": 1,
+   "cenas": [
+    {
+     "parte": "gancho",
+     "eco": "wave",
+     "tela": [
+      "Imagine seu primeiro dia de aula.",
+      "Alguém se aproxima e diz:",
+      "Hi! I'm Sarah.",
+      "Oi! Eu sou a Sarah."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Duas pessoas acabam de se conhecer. Escute como começa essa conversa."
+      },
+      {
+       "voz": "Sarah",
+       "texto": "Hi! I'm Sarah."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "thinking",
+     "tela": [
+      "Como dizer quem você é?",
+      "I = Eu",
+      "am = sou / estou",
+      "I am → I'm",
+      "I'm Sarah.",
+      "Eu sou a Sarah.",
+      "Hello, Sarah. My name's Lucas.",
+      "Olá, Sarah. Meu nome é Lucas."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Observe as duas peças que formam o começo. Elas podem se unir pelo apóstrofo."
+      },
+      {
+       "voz": "Sarah",
+       "texto": "I'm Sarah."
+      },
+      {
+       "voz": "Lucas",
+       "texto": "Hello, Sarah. My name's Lucas."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "speaking",
+     "tela": [
+      "Agora, vamos falar da origem.",
+      "I'm + from + lugar",
+      "I'm from Brazil. And you?",
+      "Eu sou do Brasil. E você?",
+      "I'm from Canada.",
+      "Eu sou do Canadá.",
+      "I'm from the United States.",
+      "Eu sou dos Estados Unidos."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "O começo continua igual. Acrescentamos uma palavra para indicar origem e trocamos o país."
+      },
+      {
+       "voz": "Lucas",
+       "texto": "I'm from Brazil. And you?"
+      },
+      {
+       "voz": "Sarah",
+       "texto": "I'm from Canada."
+      },
+      {
+       "voz": "Emma",
+       "texto": "I'm from the United States."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "happy",
+     "tela": [
+      "Uma conversa na primeira aula",
+      "Sarah: Hi! I'm Sarah.",
+      "Oi! Eu sou a Sarah.",
+      "Lucas: Hello, Sarah. My name's Lucas.",
+      "Olá, Sarah. Meu nome é Lucas.",
+      "Sarah: Where are you from?",
+      "De onde você é?",
+      "Lucas: I'm from Brazil. And you?",
+      "Eu sou do Brasil. E você?",
+      "Sarah: I'm from Canada.",
+      "Eu sou do Canadá."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Agora observe como as mesmas estruturas aparecem em uma conversa real."
+      },
+      {
+       "voz": "Sarah",
+       "texto": "Hi! I'm Sarah."
+      },
+      {
+       "voz": "Lucas",
+       "texto": "Hello, Sarah. My name's Lucas."
+      },
+      {
+       "voz": "Sarah",
+       "texto": "Where are you from?"
+      },
+      {
+       "voz": "Lucas",
+       "texto": "I'm from Brazil. And you?"
+      },
+      {
+       "voz": "Sarah",
+       "texto": "I'm from Canada."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "erro",
+     "eco": "confused",
+     "tela": [
+      "Cuidado com esta diferença!",
+      "Português: Sou do Brasil.",
+      "✗ Am from Brazil.",
+      "✓ I'm from Brazil.",
+      "Em inglês, não esconda o sujeito."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Em português, podemos omitir o sujeito. Nessa frase em inglês, ele precisa aparecer."
+      },
+      {
+       "voz": "Emma",
+       "texto": "I'm from Brazil."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "desafio",
+     "eco": "thinking",
+     "tela": [
+      "Desafio 1",
+      "Complete a frase:",
+      "___ from Canada.",
+      "A) Am",
+      "B) I'm",
+      "Qual opção está correta?"
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Qual opção completa a frase corretamente?"
+      }
+     ],
+     "pausa_segundos": 3
+    },
+    {
+     "parte": "desafio",
+     "eco": "happy",
+     "tela": [
+      "Resposta: B",
+      "✓ I'm from Canada.",
+      "Eu sou do Canadá.",
+      "I'm = I am",
+      "O sujeito está presente."
+     ],
+     "falas": [
+      {
+       "voz": "Sarah",
+       "texto": "I'm from Canada."
+      },
+      {
+       "voz": "narrador",
+       "texto": "O sujeito e o verbo estão juntos, formando uma contração."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "desafio",
+     "eco": "thinking",
+     "tela": [
+      "Desafio 2",
+      "Monte a apresentação.",
+      "I'm ___ Brazil.",
+      "A) am",
+      "B) from",
+      "Qual palavra está faltando?"
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Agora precisamos indicar a origem. Qual palavra encaixa?"
+      }
+     ],
+     "pausa_segundos": 3
+    },
+    {
+     "parte": "desafio",
+     "eco": "celebrate",
+     "tela": [
+      "Resposta: B",
+      "✓ I'm from Brazil.",
+      "Eu sou do Brasil.",
+      "from = de / do / da",
+      "Agora a frase está completa."
+     ],
+     "falas": [
+      {
+       "voz": "Emma",
+       "texto": "I'm from Brazil."
+      },
+      {
+       "voz": "narrador",
+       "texto": "A palavra indica de onde a pessoa vem."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "fechamento",
+     "eco": "wave",
+     "tela": [
+      "Você já consegue se apresentar.",
+      "Seu tempo, seu ritmo."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Agora experimente usar seu próprio nome e sua origem."
+      }
+     ],
+     "pausa_segundos": 0
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-u01",
+   "titulo": "Bonjour ! Sua primeira apresentação em francês",
+   "idioma": "fr",
+   "nivel": "A1",
+   "unidade": 1,
+   "cenas": [
+    {
+     "parte": "gancho",
+     "eco": "wave",
+     "tela": [
+      "Imagine conhecer alguém na França.",
+      "Bonjour ! Je m'appelle Claire.",
+      "Olá! Eu me chamo Claire."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Duas pessoas se encontram antes de uma aula de francês. Escute a apresentação."
+      },
+      {
+       "voz": "Claire",
+       "texto": "Bonjour ! Je m'appelle Claire."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "thinking",
+     "tela": [
+      "Como dizer seu nome?",
+      "Je = eu",
+      "me = me",
+      "appelle = chamo",
+      "me + appelle → m'appelle",
+      "Je m'appelle Claire.",
+      "Eu me chamo Claire."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Observe as três partes da expressão. O apóstrofo substitui a última letra da segunda."
+      },
+      {
+       "voz": "Claire",
+       "texto": "Je m'appelle Claire."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "speaking",
+     "tela": [
+      "E para dizer sua origem?",
+      "Je viens du + país",
+      "Je viens du Brésil.",
+      "Eu venho do Brasil.",
+      "Je viens du Brésil. Je suis brésilien. Et toi ?",
+      "Eu venho do Brasil. Eu sou brasileiro. E você?"
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Para dizer de onde você vem, use esta estrutura com o nome do país."
+      },
+      {
+       "voz": "Claire",
+       "texto": "Je viens du Brésil."
+      },
+      {
+       "voz": "Lucas",
+       "texto": "Je viens du Brésil. Je suis brésilien. Et toi ?"
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "happy",
+     "tela": [
+      "Uma conversa antes da aula",
+      "Claire: Bonjour ! Je m'appelle Claire. Et toi ?",
+      "Olá! Eu me chamo Claire. E você?",
+      "Lucas: Salut, Claire ! Moi, c'est Lucas.",
+      "Oi, Claire! Eu sou o Lucas.",
+      "Claire: Tu viens d'où ?",
+      "De onde você vem?",
+      "Lucas: Je viens du Brésil. Je suis brésilien. Et toi ?",
+      "Eu venho do Brasil. Eu sou brasileiro. E você?"
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Observe como Claire e Lucas combinam apresentação e origem."
+      },
+      {
+       "voz": "Claire",
+       "texto": "Bonjour ! Je m'appelle Claire. Et toi ?"
+      },
+      {
+       "voz": "Lucas",
+       "texto": "Salut, Claire ! Moi, c'est Lucas."
+      },
+      {
+       "voz": "Claire",
+       "texto": "Tu viens d'où ?"
+      },
+      {
+       "voz": "Lucas",
+       "texto": "Je viens du Brésil. Je suis brésilien. Et toi ?"
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "erro",
+     "eco": "confused",
+     "tela": [
+      "Atenção ao pequeno apóstrofo!",
+      "✗ Je appelle Claire.",
+      "✓ Je m'appelle Claire.",
+      "A palavra me não desapareceu.",
+      "Ela virou m'."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Ao dizer seu nome, mantenha a parte reflexiva. Antes da vogal, ela fica abreviada."
+      },
+      {
+       "voz": "Claire",
+       "texto": "Je m'appelle Claire."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "desafio",
+     "eco": "thinking",
+     "tela": [
+      "Desafio 1",
+      "Complete a apresentação.",
+      "Je ___ Claire.",
+      "A) appelle",
+      "B) m'appelle",
+      "Qual opção está correta?"
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Qual opção completa a apresentação sem deixar nenhuma parte de fora?"
+      }
+     ],
+     "pausa_segundos": 3
+    },
+    {
+     "parte": "desafio",
+     "eco": "happy",
+     "tela": [
+      "Resposta: B",
+      "✓ Je m'appelle Claire.",
+      "Eu me chamo Claire.",
+      "me + appelle → m'appelle",
+      "O apóstrofo faz a ligação."
+     ],
+     "falas": [
+      {
+       "voz": "Claire",
+       "texto": "Je m'appelle Claire."
+      },
+      {
+       "voz": "narrador",
+       "texto": "A forma abreviada preserva a parte reflexiva."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "desafio",
+     "eco": "thinking",
+     "tela": [
+      "Desafio 2",
+      "Agora, indique sua origem.",
+      "Je viens ___ Brésil.",
+      "A) du",
+      "B) de",
+      "Qual palavra completa a frase?"
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Observe o nome do país. Qual das duas opções usamos aqui?"
+      }
+     ],
+     "pausa_segundos": 3
+    },
+    {
+     "parte": "desafio",
+     "eco": "celebrate",
+     "tela": [
+      "Resposta: A",
+      "✓ Je viens du Brésil.",
+      "Eu venho do Brasil.",
+      "de + le → du",
+      "Brésil é um país masculino."
+     ],
+     "falas": [
+      {
+       "voz": "Lucas",
+       "texto": "Je viens du Brésil. Je suis brésilien. Et toi ?"
+      },
+      {
+       "voz": "narrador",
+       "texto": "Nesse caso, a preposição e o artigo masculino se contraem."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "fechamento",
+     "eco": "wave",
+     "tela": [
+      "Agora você pode dizer quem é.",
+      "Seu tempo, seu ritmo."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Experimente trocar o nome pelo seu e praticar em voz alta."
+      }
+     ],
+     "pausa_segundos": 0
+    }
+   ]
+  }
+ ]
+}

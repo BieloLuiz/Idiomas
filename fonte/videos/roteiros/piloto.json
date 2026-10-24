@@ -1,0 +1,289 @@
+{
+ "aulas": [
+  {
+   "id": "en-a1-u01",
+   "titulo": "Hello! Como se apresentar em inglês",
+   "idioma": "en",
+   "nivel": "A1",
+   "unidade": 1,
+   "cenas": [
+    {
+     "parte": "gancho",
+     "eco": "wave",
+     "tela": [
+      "Seu primeiro encontro em inglês",
+      "Hi! I'm Sarah.",
+      "Oi! Eu sou a Sarah."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "No primeiro dia de aula, duas pessoas se conhecem. Veja como uma delas se apresenta."
+      },
+      {
+       "voz": "Sarah",
+       "texto": "Hi! I'm Sarah."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "speaking",
+     "tela": [
+      "I'm = I am",
+      "Eu sou / Eu estou",
+      "I'm Sarah."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Para dizer quem você é, usamos uma forma curta do verbo ser ou estar. Ela aparece o tempo todo nas conversas. Escute como fica ao dizer seu nome."
+      },
+      {
+       "voz": "Sarah",
+       "texto": "I'm Sarah."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "happy",
+     "tela": [
+      "I'm from Brazil.",
+      "Eu sou do Brasil.",
+      "I'm from Canada.",
+      "Eu sou do Canadá."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "A mesma construção serve para dizer de onde você é. Repare que a primeira parte da frase não muda. Só precisamos trocar o país. Veja como os personagens fazem isso."
+      },
+      {
+       "voz": "Lucas",
+       "texto": "I'm from Brazil."
+      },
+      {
+       "voz": "Sarah",
+       "texto": "I'm from Canada."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "erro",
+     "eco": "confused",
+     "tela": [
+      "Evite este erro",
+      "✗ Am from Brazil.",
+      "✓ I'm from Brazil."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Em português, podemos esconder o sujeito e dizer apenas que somos do Brasil. Em inglês, precisamos indicar quem está falando. Veja a maneira correta."
+      },
+      {
+       "voz": "Lucas",
+       "texto": "I'm from Brazil."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "desafio",
+     "eco": "thinking",
+     "tela": [
+      "Sua vez!",
+      "Como dizer: Eu sou a Sarah?",
+      "Pense na resposta."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Agora, um pequeno desafio. Como você diria que é a Sarah? Pense um pouquinho antes de ouvir."
+      }
+     ],
+     "pausa_segundos": 3
+    },
+    {
+     "parte": "desafio",
+     "eco": "celebrate",
+     "tela": [
+      "I'm Sarah.",
+      "Eu sou a Sarah.",
+      "Você conseguiu?"
+     ],
+     "falas": [
+      {
+       "voz": "Sarah",
+       "texto": "I'm Sarah."
+      },
+      {
+       "voz": "narrador",
+       "texto": "Essa é a resposta! Você já sabe começar uma apresentação."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "fechamento",
+     "eco": "happy",
+     "tela": [
+      "Uma frase de cada vez.",
+      "Seu tempo, seu ritmo."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Muito bem! Aprender começa com pequenos passos. A Eco acompanha você."
+      }
+     ],
+     "pausa_segundos": 0
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-u01",
+   "titulo": "Bonjour ! Como se apresentar em francês",
+   "idioma": "fr",
+   "nivel": "A1",
+   "unidade": 1,
+   "cenas": [
+    {
+     "parte": "gancho",
+     "eco": "wave",
+     "tela": [
+      "Um encontro em Lyon",
+      "Bonjour ! Je m'appelle Claire.",
+      "Olá! Eu me chamo Claire."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Em um café de Lyon, duas pessoas acabam de se conhecer. Escute."
+      },
+      {
+       "voz": "Claire",
+       "texto": "Bonjour ! Je m'appelle Claire."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "speaking",
+     "tela": [
+      "Je m'appelle Claire.",
+      "Eu me chamo Claire.",
+      "Je m'appelle = Eu me chamo"
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Para dizer o próprio nome em francês, usamos uma expressão que significa eu me chamo. Ela tem três partes, e precisamos manter todas. Ouça com atenção."
+      },
+      {
+       "voz": "Claire",
+       "texto": "Je m'appelle Claire."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "happy",
+     "tela": [
+      "Je m'appelle Claire.",
+      "Je m'appelle Lucas.",
+      "Só o nome muda!"
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Agora vem a parte boa. Para usar essa expressão com seu próprio nome, não precisamos aprender outra estrutura. Basta trocar o nome no final. Vamos ouvir de novo, desta vez com Lucas."
+      },
+      {
+       "voz": "Lucas",
+       "texto": "Je m'appelle Lucas."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "erro",
+     "eco": "confused",
+     "tela": [
+      "Cuidado com este detalhe",
+      "✗ Je appelle Claire.",
+      "✓ Je m'appelle Claire."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Um erro comum é esquecer a pequena parte que vem antes do verbo. Em português também dizemos eu me chamo, e não apenas eu chamo. Em francês, esse pedacinho é indispensável."
+      },
+      {
+       "voz": "Claire",
+       "texto": "Je m'appelle Claire."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "desafio",
+     "eco": "thinking",
+     "tela": [
+      "Sua vez!",
+      "Como dizer: Eu me chamo Lucas?",
+      "Tente lembrar."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Vamos experimentar? Imagine que você está no lugar do Lucas. Como ele poderia dizer seu nome usando a expressão que acabamos de aprender?"
+      }
+     ],
+     "pausa_segundos": 3
+    },
+    {
+     "parte": "desafio",
+     "eco": "celebrate",
+     "tela": [
+      "Je m'appelle Lucas.",
+      "Eu me chamo Lucas.",
+      "Muito bem!"
+     ],
+     "falas": [
+      {
+       "voz": "Lucas",
+       "texto": "Je m'appelle Lucas."
+      },
+      {
+       "voz": "narrador",
+       "texto": "Isso mesmo! Agora você conhece uma maneira muito natural de se apresentar."
+      }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "fechamento",
+     "eco": "happy",
+     "tela": [
+      "Cada descoberta conta.",
+      "Seu tempo, seu ritmo."
+     ],
+     "falas": [
+      {
+       "voz": "narrador",
+       "texto": "Muito bem! Pratique quando quiser. A Eco continua aqui com você."
+      }
+     ],
+     "pausa_segundos": 0
+    }
+   ]
+  }
+ ]
+}
