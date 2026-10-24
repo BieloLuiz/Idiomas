@@ -35,7 +35,7 @@ for (const a of roteiro.aulas) {
   const falas = falasNumeradas(a); let t = 0.9, k = 0, avisos = [];
   const sons = [];
   const cenas = a.cenas.map(c => {
-    const cena = { ini: t, eco: c.eco, tela: c.tela, falas: [], alvos: c.falas.filter(f => f.voz !== 'narrador').map(f => f.texto) };
+    const cena = { ini: t, parte: c.parte, eco: c.eco, tela: c.tela, falas: [], alvos: c.falas.filter(f => f.voz !== 'narrador').map(f => f.texto) };
     for (const f of c.falas) {
       const g = falas[k++], alvo = f.voz !== 'narrador', proprio = path.join(narr, g.arquivo);
       let som = null;
