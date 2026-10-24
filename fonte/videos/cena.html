@@ -15,10 +15,10 @@ body::before{content:"";position:absolute;inset:0;background-image:radial-gradie
 .parte::before{content:"";width:26px;height:4px;border-radius:4px;background:currentColor}
 .parte.erro{color:var(--erro)}.parte.desafio{color:var(--ouro)}.parte.fechamento{color:var(--certo)}
 /* palco */
-.palco{position:absolute;top:190px;left:40px;right:40px;height:800px;display:flex;flex-direction:column;justify-content:center;gap:28px;transition:opacity .4s,filter .4s}
+.palco{position:absolute;top:190px;left:40px;right:40px;height:720px;transition:opacity .7s ease,filter .7s ease}
 .palco.fundo{opacity:.32;filter:saturate(.5)}
-.entra{opacity:0;transform:translateY(26px) scale(.98);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
-.entra.on{opacity:1;transform:none}
+.entra{opacity:0;transform:translateY(18px);filter:blur(3px);transition:opacity .8s ease,transform .9s cubic-bezier(.22,1,.36,1),filter .8s ease}
+.entra.on{opacity:1;transform:none;filter:none}
 .manchete{font-size:56px;font-weight:800;line-height:1.1;letter-spacing:-.02em}
 .nota{font-size:32px;font-weight:600;color:var(--suave);line-height:1.3}
 .cartao{background:var(--papel);border-radius:32px;padding:38px 38px;box-shadow:0 2px 0 var(--linha),0 18px 40px rgba(31,41,55,.07);position:relative;transition:box-shadow .3s,transform .3s}
@@ -62,7 +62,8 @@ mark{background:linear-gradient(transparent 62%,var(--ouro-suave) 62%);color:inh
 /* faíscas discretas */
 .faisca{position:absolute;width:14px;height:14px;border-radius:4px;pointer-events:none;animation:voa 1.3s cubic-bezier(.2,.7,.3,1) forwards}
 @keyframes voa{from{transform:translate(0,0) rotate(0);opacity:1}to{transform:translate(var(--x),var(--y)) rotate(200deg);opacity:0}}
-.conteudo{display:flex;flex-direction:column;gap:26px}
+.conteudo{position:absolute;top:0;left:0;right:0;min-height:100%;display:flex;flex-direction:column;justify-content:center;gap:26px;transition:opacity .55s ease,transform .6s ease}
+.conteudo.sai{opacity:0;transform:translateY(-16px)}
 .formulas{display:flex;flex-direction:column;gap:14px;background:var(--marca-suave);border-radius:28px;padding:22px 24px}
 .formulas .chip{font-size:38px;padding:8px 18px;border-width:2px;border-radius:16px;box-shadow:none}
 .formulas .igual{font-size:38px}
@@ -80,7 +81,8 @@ mark{background:linear-gradient(transparent 62%,var(--ouro-suave) 62%);color:inh
 .opcoes b{color:var(--ouro);margin-right:10px}
 .resposta{align-self:flex-start;background:var(--certo);color:#fff;font-size:30px;font-weight:800;padding:12px 22px;border-radius:16px;letter-spacing:.02em}
 /* legenda */
-.legenda{position:absolute;left:40px;right:210px;bottom:64px;background:var(--papel);border-radius:28px;padding:22px 28px 24px;box-shadow:0 18px 40px rgba(31,41,55,.09);opacity:0;transform:translateY(10px);transition:opacity .25s,transform .25s}
+.legenda{position:absolute;left:40px;right:210px;bottom:64px;background:var(--papel);border-radius:28px;padding:22px 28px 24px;box-shadow:0 18px 40px rgba(31,41,55,.09);opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease}
+.legenda p{transition:opacity .22s ease}
 .legenda.on{opacity:1;transform:none}
 .legenda small{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--marca);margin-bottom:8px}
 .legenda p{margin:0;font-size:34px;line-height:1.36;font-weight:700}
@@ -175,7 +177,7 @@ window.tocarAula = function (A) {
     }
     return itens;
   }
-  function caber() { var cont = palco.querySelector('.conteudo'); if (!cont) return; cont.style.zoom = 1; var h = cont.scrollHeight, max = palco.clientHeight; if (h > max) cont.style.zoom = (max / h).toFixed(3); }
+  function caber() { var cs = palco.querySelectorAll('.conteudo:not(.sai)'), cont = cs[cs.length - 1]; if (!cont) return; cont.style.zoom = 1; var h = cont.scrollHeight, max = palco.clientHeight; if (h > max) cont.style.zoom = (max / h).toFixed(3); }
 
   function faiscas() {
     var cores = ['#5366C7', '#E9A93B', '#2F8F5B', '#C2577A'];
@@ -184,7 +186,10 @@ window.tocarAula = function (A) {
       document.body.appendChild(f); }
   }
 
-  function frases(t) { return String(t).split(/(?<=[.!?])\s+/).filter(Boolean); }
+  function frases(t) { var out = []; String(t).split(/(?<=[.!?])\s+/).filter(Boolean).forEach(function (f) {
+    while (f.length > 72) { var meio = f.length / 2, cs = [], re = /, | e | que | mas /g, m; while ((m = re.exec(f))) cs.push(m.index + (m[0][0] === ',' ? 1 : 0));
+      if (!cs.length) break; var k = cs.reduce(function (a, b) { return Math.abs(b - meio) < Math.abs(a - meio) ? b : a; }); out.push(f.slice(0, k).trim()); f = f.slice(k).trim(); }
+    out.push(f); }); return out; }
   function legendar(f, primeira, estadoCena) {
     var dur = Math.max(.5, f.fim - f.ini), cor = CORES[String(f.voz).toLowerCase()] || '#5366C7';
     if (f.alvo) {
@@ -207,7 +212,7 @@ window.tocarAula = function (A) {
     fs.forEach(function (fr) {
       var d = dur * (fr.length + 1) / (total + 1), comeco = ini; ini += d;
       em(comeco, function () {
-        var ws = palavras(fr), p = document.getElementById('fala'); p.innerHTML = ws.map(function (w) { return '<w>' + esc(w) + '</w>'; }).join(' ');
+        var ws = palavras(fr), p = document.getElementById('fala'); p.style.opacity = 0; setTimeout(function () { p.style.opacity = 1; }, 200); p.innerHTML = ws.map(function (w) { return '<w>' + esc(w) + '</w>'; }).join(' ');
         var sp = p.querySelectorAll('w'), acc = 0; ws.forEach(function (w, i) { var t = comeco + d * (acc / fr.length) * .9; acc += w.length + 1; em(t, function () { sp[i].classList.add('dito'); }); });
       });
     });
@@ -220,10 +225,10 @@ window.tocarAula = function (A) {
       eco.estado('neutral'); eco.estado(c.eco || 'neutral');
       var nome = NOMES_PARTE[c.parte] || ''; if (c.parte === 'desafio' && !c.pausa) nome = 'Resposta';
       parteEl.className = 'parte ' + (c.parte || ''); parteEl.textContent = nome;
-      palco.innerHTML = '';
+      palco.querySelectorAll('.conteudo').forEach(function (v) { v.classList.add('sai'); setTimeout(function () { v.remove(); }, 650); });
       var itens = montar(c), n = itens.length; caber();
       var janela = Math.max(1.2, (c.falas[0] ? c.falas[0].fim - c.ini : 2));
-      itens.forEach(function (d, i) { em(c.ini + .15 + i * Math.min(1.6, janela / (n + .5)), function () { d.classList.add('on'); }); });
+      itens.forEach(function (d, i) { em(c.ini + .45 + i * Math.min(1.6, janela / (n + .5)), function () { d.classList.add('on'); }); });
       if (c.eco === 'celebrate') em(c.ini + .4, faiscas);
     });
     c.falas.forEach(function (f, fi) {
