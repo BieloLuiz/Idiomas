@@ -62,6 +62,23 @@ mark{background:linear-gradient(transparent 62%,var(--ouro-suave) 62%);color:inh
 /* faíscas discretas */
 .faisca{position:absolute;width:14px;height:14px;border-radius:4px;pointer-events:none;animation:voa 1.3s cubic-bezier(.2,.7,.3,1) forwards}
 @keyframes voa{from{transform:translate(0,0) rotate(0);opacity:1}to{transform:translate(var(--x),var(--y)) rotate(200deg);opacity:0}}
+.conteudo{display:flex;flex-direction:column;gap:26px}
+.formulas{display:flex;flex-direction:column;gap:14px;background:var(--marca-suave);border-radius:28px;padding:22px 24px}
+.formulas .chip{font-size:38px;padding:8px 18px;border-width:2px;border-radius:16px;box-shadow:none}
+.formulas .igual{font-size:38px}
+.eq .op{font-size:44px;font-weight:800;color:var(--ouro)}
+.balao{padding:22px 28px;max-width:88%;border-radius:28px 28px 28px 8px}
+.balao.dir{align-self:flex-end;border-radius:28px 28px 8px 28px}
+.balao .alvo{font-size:42px}.balao .trad{font-size:26px;margin-top:6px}
+.balao .nome{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--suave);margin-bottom:6px}
+.balao .quem{display:none}
+.pergunta .ins{font-size:28px;font-weight:600;color:#C9CFDB;margin-top:10px}
+.pergunta .q{font-size:56px}
+.lacuna{display:inline-block;width:120px;height:.9em;vertical-align:-.1em;border-bottom:6px solid var(--ouro);margin:0 6px}
+.opcoes{display:flex;gap:16px;margin-top:22px;flex-wrap:wrap}
+.opcoes span{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);border-radius:18px;padding:12px 22px;font-size:36px;font-weight:800}
+.opcoes b{color:var(--ouro);margin-right:10px}
+.resposta{align-self:flex-start;background:var(--certo);color:#fff;font-size:30px;font-weight:800;padding:12px 22px;border-radius:16px;letter-spacing:.02em}
 /* legenda */
 .legenda{position:absolute;left:40px;right:210px;bottom:64px;background:var(--papel);border-radius:28px;padding:22px 28px 24px;box-shadow:0 18px 40px rgba(31,41,55,.09);opacity:0;transform:translateY(10px);transition:opacity .25s,transform .25s}
 .legenda.on{opacity:1;transform:none}
@@ -99,53 +116,66 @@ window.tocarAula = function (A) {
   function em(s, fn) { setTimeout(fn, Math.max(0, s * 1000 - (performance.now() - t0))); }
   function ehAlvo(t, c) { var n = norm(t); return c.alvos.some(function (a) { return norm(a) === n || n.indexOf(norm(a)) >= 0 && n.length - norm(a).length < 4; }) || alvosAula.some(function (a) { return norm(a) === n; }); }
 
+  var PERSONAGENS = ['sarah', 'lucas', 'emma', 'daniel', 'claire', 'inès', 'ines', 'antoine'];
+  function dialogo(t) { var m = /^([A-ZÀ-Ý][\wÀ-ÿ]+):\s+(.+)$/.exec(t); return m && PERSONAGENS.indexOf(m[1].toLowerCase()) >= 0 ? { nome: m[1], texto: m[2] } : null; }
+  function formula(t) { return /\s(=|→|\+)\s/.test(t) && t.length < 40; }
+  function chipsDe(t) { return t.split(/\s(=|→|\+)\s/).map(function (x, i) { return i % 2 ? '<span class="' + (x === '=' ? 'igual' : 'op') + '">' + x + '</span>' : '<span class="chip' + (i ? ' b' : '') + '">' + esc(x) + '</span>'; }).join(''); }
+  function traducao(l, c) { return l && !ehAlvo(l, c) && !formula(l) && !dialogo(l) && !/^[✗✓]/.test(l) && !/!$/.test(l) && !/\?$/.test(l) && !/^(resposta|desafio)/i.test(l) && !/:/.test(l) ? l : null; }
+  function el(cls, html) { var d = document.createElement('div'); d.className = cls + ' entra'; d.innerHTML = html; return d; }
+  function resumoAula() { var vistos = {}, out = []; alvosAula.forEach(function (a) { var k = norm(a).split(' ').slice(0, -1).join(' '); if (!vistos[k] && out.length < 4) { vistos[k] = 1; out.push(a); } }); return out; }
+
   function montar(c) {
-    var itens = [], tela = c.tela.slice(), pausa = !!c.pausa;
-    /* palavra em que as frases-alvo da cena começam a diferir (o que muda) */
-    var alvosTela = tela.filter(function (t) { return ehAlvo(t, c); }), corte = -1;
-    if (alvosTela.length > 1) { var ps = alvosTela.map(palavras); corte = 0; while (ps.every(function (p) { return p[corte] && norm(p[corte]) === norm(ps[0][corte]); })) corte++; if (corte === 0 || ps.some(function (p) { return corte >= p.length; })) corte = -1; }
+    var itens = [], tela = c.tela.slice(), cont = document.createElement('div'); cont.className = 'conteudo'; palco.appendChild(cont);
+    function por(d) { cont.appendChild(d); itens.push(d); return d; }
     if (c.parte === 'fechamento') {
-      var cab = document.createElement('div'); cab.className = 'manchete entra'; cab.textContent = 'Você aprendeu'; itens.push(cab);
-      var r = document.createElement('div'); r.className = 'resumo';
-      alvosAula.slice(0, 4).forEach(function (a) { var it = document.createElement('div'); it.className = 'item entra'; it.innerHTML = '<span class="ok">✓</span>' + esc(a); r.appendChild(it); itens.push(it); });
-      palco.appendChild(cab); palco.appendChild(r);
-      tela.forEach(function (t) { var d = document.createElement('div'); d.className = 'nota entra'; d.textContent = t; palco.appendChild(d); itens.push(d); });
+      por(el('manchete', 'Você aprendeu'));
+      var r = document.createElement('div'); r.className = 'resumo'; cont.appendChild(r);
+      resumoAula().forEach(function (a) { var it = el('item', '<span class="ok">✓</span>' + esc(a)); r.appendChild(it); itens.push(it); });
+      tela.forEach(function (t) { por(el('nota', esc(t))); });
       return itens;
     }
-    if (pausa) {
-      var p = document.createElement('div'); p.className = 'pergunta entra';
-      var q = tela.filter(function (t) { return /\?$/.test(t) || /:/.test(t); })[0] || tela[1] || tela[0];
-      p.innerHTML = '<div class="k">' + esc(tela[0]) + '</div><div class="q">' + esc(q) + '</div>';
-      palco.appendChild(p); itens.push(p);
-      tela.slice(1).filter(function (t) { return t !== q; }).forEach(function (t) { var d = document.createElement('div'); d.className = 'nota entra'; d.style.textAlign = 'center'; d.textContent = t; palco.appendChild(d); itens.push(d); });
+    if (c.pausa) {
+      var k = tela[0], lac = tela.filter(function (t) { return /_{2,}/.test(t); })[0], ops = tela.filter(function (t) { return /^[A-D]\)\s/.test(t); });
+      var ins = tela.slice(1).filter(function (t) { return t !== lac && ops.indexOf(t) < 0; });
+      var q = lac ? esc(lac).replace(/_{2,}/, '<span class="lacuna"></span>') : esc(ins.shift() || '');
+      por(el('pergunta', '<div class="k">' + esc(k) + '</div>' + (lac && ins.length ? '<div class="ins">' + esc(ins.shift()) + '</div>' : '') + '<div class="q">' + q + '</div>' +
+        (ops.length ? '<div class="opcoes">' + ops.map(function (o) { return '<span><b>' + o.slice(0, 2) + '</b>' + esc(o.slice(3)) + '</span>'; }).join('') + '</div>' : '')));
+      ins.forEach(function (t) { var d = por(el('nota', esc(t))); d.style.textAlign = 'center'; });
       var rel = document.createElement('div'); rel.className = 'relogio'; rel.id = 'relogio';
       rel.innerHTML = '<svg viewBox="0 0 170 170"><circle cx="85" cy="85" r="74" fill="#fff" stroke="#E4E1D8" stroke-width="12"/><circle id="arco" cx="85" cy="85" r="74" fill="none" stroke="#E9A93B" stroke-width="12" stroke-linecap="round" stroke-dasharray="465" stroke-dashoffset="0"/></svg><span id="seg"></span>';
-      palco.appendChild(rel);
+      cont.appendChild(rel);
       return itens;
     }
-    var i = 0;
+    var alvosTela = tela.filter(function (t) { return ehAlvo(t, c) && !dialogo(t); }), corte = -1;
+    if (alvosTela.length > 1) { var ps = alvosTela.map(palavras); corte = 0; while (ps.every(function (p) { return p[corte] && norm(p[corte]) === norm(ps[0][corte]); })) corte++; if (corte === 0 || ps.some(function (p) { return corte >= p.length; })) corte = -1; }
+    var i = 0, grupo = null, lados = {};
     while (i < tela.length) {
-      var t = tela[i], d;
-      if (/^✗/.test(t) || /^✓/.test(t)) {
-        var bom = /^✓/.test(t); d = document.createElement('div'); d.className = 'cartao entra ' + (bom ? 'bom' : 'ruim');
-        d.innerHTML = '<div class="alvo' + (t.length > 24 ? ' longo' : '') + '">' + emW(t.replace(/^[✗✓]\s*/, ''), -1) + '</div><span class="marcador">' + (bom ? '✓' : '✗') + '</span>';
-        d.dataset.texto = t.replace(/^[✗✓]\s*/, ''); i++;
-      } else if (/\s=\s/.test(t)) {
-        var lados = t.split(/\s=\s/); d = document.createElement('div'); d.className = 'eq entra';
-        d.innerHTML = '<span class="chip">' + esc(lados[0]) + '</span><span class="igual">=</span><span class="chip b">' + esc(lados[1]) + '</span>'; i++;
+      var t = tela[i], d, dg = dialogo(t);
+      if (!formula(t)) grupo = null;
+      if (/^resposta\s*:/i.test(t)) { d = por(el('resposta', esc(t))); i++; }
+      else if (/^[✗✓]/.test(t)) {
+        var bom = /^✓/.test(t), txt = t.replace(/^[✗✓]\s*/, ''), tr = bom && c.parte === 'desafio' ? traducao(tela[i + 1], c) : null;
+        d = por(el('cartao ' + (bom ? 'bom' : 'ruim'), '<div class="alvo' + (txt.length > 24 ? ' longo' : '') + '">' + emW(txt, -1) + '</div>' + (tr ? '<div class="trad">' + esc(tr) + '</div>' : '') + '<span class="marcador">' + (bom ? '✓' : '✗') + '</span>'));
+        d.dataset.texto = txt; i += tr ? 2 : 1;
+      } else if (formula(t)) {
+        var f = el('eq', chipsDe(t));
+        if (!grupo && formula(tela[i + 1] || '')) { grupo = document.createElement('div'); grupo.className = 'formulas'; cont.appendChild(grupo); }
+        if (grupo) { f.className = 'eq entra'; grupo.appendChild(f); itens.push(f); } else por(f);
+        i++;
+      } else if (dg) {
+        if (!(dg.nome in lados)) lados[dg.nome] = Object.keys(lados).length % 2;
+        var cor = CORES[dg.nome.toLowerCase()] || '#5366C7', trd = traducao(tela[i + 1], c);
+        d = por(el('cartao balao' + (lados[dg.nome] ? ' dir' : ''), '<div class="nome"><span class="av" style="background:' + cor + '">' + esc(dg.nome[0]) + '</span>' + esc(dg.nome) + '</div><div class="alvo">' + emW(dg.texto, -1) + '</div>' + (trd ? '<div class="trad">' + esc(trd) + '</div>' : '') + '<span class="quem"></span>'));
+        d.dataset.texto = dg.texto; i += trd ? 2 : 1;
       } else if (ehAlvo(t, c)) {
-        d = document.createElement('div'); d.className = 'cartao entra'; d.dataset.texto = t;
-        var trad = tela[i + 1] && !ehAlvo(tela[i + 1], c) && !/[=✗✓]/.test(tela[i + 1]) && !/!$/.test(tela[i + 1]) ? tela[i + 1] : null;
-        if (trad && i + 1 === tela.length - 1 && /\?$/.test(trad)) trad = null;
-        d.innerHTML = '<span class="quem"></span><div class="alvo' + (t.length > 24 ? ' longo' : '') + '">' + emW(t, corte) + '</div>' + (trad ? '<div class="trad">' + esc(trad) + '</div>' : '');
-        i += trad ? 2 : 1;
-      } else {
-        d = document.createElement('div'); d.className = itens.length === 0 ? 'manchete entra' : 'nota entra'; d.textContent = t; i++;
-      }
-      palco.appendChild(d); itens.push(d);
+        var tr2 = traducao(tela[i + 1], c);
+        d = por(el('cartao', '<span class="quem"></span><div class="alvo' + (t.length > 24 ? ' longo' : '') + '">' + emW(t, corte) + '</div>' + (tr2 ? '<div class="trad">' + esc(tr2) + '</div>' : '')));
+        d.dataset.texto = t; i += tr2 ? 2 : 1;
+      } else { por(el(itens.length === 0 ? 'manchete' : 'nota', esc(t))); i++; }
     }
     return itens;
   }
+  function caber() { var cont = palco.querySelector('.conteudo'); if (!cont) return; cont.style.zoom = 1; var h = cont.scrollHeight, max = palco.clientHeight; if (h > max) cont.style.zoom = (max / h).toFixed(3); }
 
   function faiscas() {
     var cores = ['#5366C7', '#E9A93B', '#2F8F5B', '#C2577A'];
@@ -191,7 +221,7 @@ window.tocarAula = function (A) {
       var nome = NOMES_PARTE[c.parte] || ''; if (c.parte === 'desafio' && !c.pausa) nome = 'Resposta';
       parteEl.className = 'parte ' + (c.parte || ''); parteEl.textContent = nome;
       palco.innerHTML = '';
-      var itens = montar(c), n = itens.length;
+      var itens = montar(c), n = itens.length; caber();
       var janela = Math.max(1.2, (c.falas[0] ? c.falas[0].fim - c.ini : 2));
       itens.forEach(function (d, i) { em(c.ini + .15 + i * Math.min(1.6, janela / (n + .5)), function () { d.classList.add('on'); }); });
       if (c.eco === 'celebrate') em(c.ini + .4, faiscas);
