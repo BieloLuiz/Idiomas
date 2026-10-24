@@ -36,6 +36,12 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await page.locator('.video-aula video').waitFor();assert.equal(await page.locator('.video-aula video').getAttribute('src'),'videos/fr-a1-u01.mp4');
   await page.getByRole('button',{name:'Voltar para os guias'}).click();await page.getByRole('button',{name:/Il fut une époque/}).click();
   console.log('PASS: guia da unidade mostra a videoaula quando ela existe');
+  await page.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Trilha',exact:true}).click();
+  const est=page.getByRole('button',{name:/Assistir à videoaula da unidade/}).first();await est.waitFor();await est.click();
+  await page.locator('.video-modal video').waitFor();assert.equal(await page.locator('.video-modal video').getAttribute('src'),'videos/fr-a1-u01.mp4');
+  await page.keyboard.press('Escape');assert.equal(await page.locator('.video-modal').count(),0);
+  await page.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Perfil',exact:true}).click();await page.getByRole('button',{name:'Guias das unidades',exact:true}).click();await page.getByRole('button',{name:/Il fut une époque/}).click();
+  console.log('PASS: trilha mostra a estação da videoaula e abre o vídeo em tela cheia');
   await context.setOffline(true);assert.deepEqual(await page.evaluate(async()=>{let r=await fetch('/audio/fr-c1-u01.mp3',{headers:{Range:'bytes=0-31'}});return[r.status,(await r.arrayBuffer()).byteLength];}),[206,32]);await context.setOffline(false);
   console.log('PASS: PWA preserva cache de outro aplicativo e reproduz Range do áudio baixado sem rede');
   await page.getByRole('button',{name:'Praticar esta unidade',exact:true}).click();

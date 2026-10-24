@@ -519,7 +519,7 @@
         $('.linha-guia', sct).addEventListener('click', function () { ir('guia', u.id); });
         if (feitas < ini) sct.classList.add('bloq');
 
-        var ol = $('.estacoes', sct);
+        var ol = $('.estacoes', sct); estacaoVideo(sct, p.idioma, u);
         u.licoes.forEach(function (nome, li) {
           var idx = gi++, estado = idx < feitas ? 'feita' : idx === feitas ? 'atual' : 'bloq', chk = li === nU - 1, tipo = TIPOS[Math.min(li, TIPOS.length - 1)];
           var prevFeita = idx - 1 < feitas, eraAtual = idx - 1 === feitas;
@@ -753,12 +753,38 @@
 
   /* Videoaula da unidade (videos/lista.json); só aparece se existir */
   var LISTA_VIDEOS = null;
+  function idVideo(k, id) { var n = Number(String(id).split('-u')[1]); return n >= 1 ? k + '-' + ['a1', 'a2', 'b1', 'b2', 'c1'][Math.floor((n - 1) / 12)] + '-u' + String((n - 1) % 12 + 1).padStart(2, '0') : ''; }
+  function listaVideos() { return LISTA_VIDEOS ? Promise.resolve(LISTA_VIDEOS) : fetch('videos/lista.json').then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }).then(function (l) { LISTA_VIDEOS = l; return l; }); }
+  function duracaoVideo(seg) { var min = Math.floor(seg / 60), s = seg % 60; return (min ? min + ' min' : '') + (min && s ? ' ' : '') + (s ? s + ' s' : ''); }
+  function videoVisto(vid, marcar) { var k = 'idiomas-videos-vistos'; try { var v = JSON.parse(localStorage.getItem(k) || '{}'); if (marcar) { v[vid] = 1; localStorage.setItem(k, JSON.stringify(v)); } return !!v[vid]; } catch (e) { return false; } }
+  /* tela cheia para assistir; fecha com o botão, Esc ou ao terminar de voltar */
+  function assistirVideo(vid, titulo, aoFechar) {
+    var antes = document.activeElement, m = document.createElement('div'); m.className = 'video-modal'; m.setAttribute('role', 'dialog'); m.setAttribute('aria-modal', 'true'); m.setAttribute('aria-label', 'Videoaula: ' + titulo);
+    m.innerHTML = '<button class="icon-btn video-fechar" type="button" aria-label="Fechar videoaula">×</button><video controls playsinline autoplay preload="auto" poster="videos/' + vid + '.jpg" src="videos/' + vid + '.mp4"></video>';
+    function fechar() { var v = $('video', m); try { v.pause(); } catch (e) {} m.remove(); document.removeEventListener('keydown', tecla); if (antes && antes.focus) antes.focus(); if (aoFechar) aoFechar(); }
+    function tecla(e) { if (e.key === 'Escape') fechar(); }
+    $('.video-fechar', m).addEventListener('click', fechar); document.addEventListener('keydown', tecla);
+    m.addEventListener('click', function (e) { if (e.target === m) fechar(); });
+    $('video', m).addEventListener('ended', function () { videoVisto(vid, true); });
+    $('video', m).addEventListener('timeupdate', function () { var v = this; if (v.duration && v.currentTime / v.duration > .8) videoVisto(vid, true); });
+    document.body.appendChild(m); $('.video-fechar', m).focus();
+  }
+  /* "Videoaula" logo abaixo do título da unidade, na trilha (visível mesmo com as lições recolhidas) */
+  function estacaoVideo(sct, k, u) {
+    var vid = idVideo(k, u.id); if (!vid) return;
+    listaVideos().then(function (l) { var info = l[vid]; if (!info || !sct.isConnected) return;
+      var visto = videoVisto(vid), b = document.createElement('button'); b.type = 'button'; b.className = 'video-linha' + (visto ? ' vista' : '');
+      function pinta() { b.setAttribute('aria-label', 'Assistir à videoaula da unidade ' + u.titulo + ', ' + duracaoVideo(info.seg) + (visto ? ', já assistida' : ''));
+        b.innerHTML = '<img src="videos/' + vid + '.jpg" alt="" loading="lazy"><span class="t"><b>Videoaula</b><small>' + duracaoVideo(info.seg) + (visto ? ' · Assistida' : ' · Assista antes das lições') + '</small></span><span class="st">' + svg(visto ? 'check' : 'play') + '</span>'; }
+      pinta();
+      b.addEventListener('click', function () { assistirVideo(vid, u.titulo, function () { if (!visto && videoVisto(vid)) { visto = true; b.classList.add('vista'); pinta(); } }); });
+      var antes = $('.unit-toggle', sct) || $('.estacoes', sct); sct.insertBefore(b, antes);
+    });
+  }
   function videoaula(pg, k, id) {
-    var n = Number(id.split('-u')[1]); if (!(n >= 1)) return;
-    var vid = k + '-' + ['a1', 'a2', 'b1', 'b2', 'c1'][Math.floor((n - 1) / 12)] + '-u' + String((n - 1) % 12 + 1).padStart(2, '0');
+    var vid = idVideo(k, id); if (!vid) return;
     var lugar = document.createElement('div'); pg.appendChild(lugar);
-    (LISTA_VIDEOS ? Promise.resolve(LISTA_VIDEOS) : fetch('videos/lista.json').then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }))
-      .then(function (l) { LISTA_VIDEOS = l; var info = l[vid]; if (!info) return;
+    listaVideos().then(function (l) { var info = l[vid]; if (!info) return;
         var min = Math.floor(info.seg / 60), s = info.seg % 60;
         lugar.className = 'card video-aula';
         lugar.innerHTML = '<p class="ui-label">Videoaula · ' + (min ? min + ' min ' : '') + (s ? s + ' s' : '') + '</p>' +
