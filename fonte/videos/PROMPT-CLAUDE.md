@@ -89,10 +89,9 @@ O `id` segue o padrão `<idioma>-<nível minúsculo>-u<unidade com 2 dígitos>`.
    ```
    Repita até passar, ajustando o roteiro conforme a regra principal. Depois informe ao usuário quantas falas do narrador e quantos caracteres saíram.
 
-3. **Narração em português.** Você não grava áudio: o ElevenLabs roda **no PC do usuário**. Peça que ele rode o comando abaixo e mande os MP3 para `fonte/videos/narracao/`.
-   ```
-   .\gerar-audio-11labs.ps1 -Manifest fonte\videos\narracao\manifest-video.json
-   ```
+3. **Narração em português (ElevenLabs).**
+   - **Se você está rodando no PC do usuário (Windows):** copie `fonte\videos\narracao\manifest-video.json` para `C:\Users\biels\Downloads\APP - IDIOMAS\audio-curso\elevenlabs\` e execute o `gerar-video.bat` dessa pasta (ele usa a chave da conta 2). Quando terminar, copie os MP3 da pasta `audio-video` dali para `fonte\videos\narracao\`. **Nunca abra os arquivos de chave.**
+   - **Se você está na nuvem:** peça ao usuário para fazer esse mesmo passo e mandar os MP3.
    - A voz do narrador é o papel `pt_narrador` em `fonte/elevenlabs/config.json`. Se ela estiver vazia, peça ao usuário o **ID da voz**, nunca a chave.
    - **Nunca peça, leia ou guarde chaves de API.** Não abra `chave.txt` nem `chave-conta2.txt`.
 
