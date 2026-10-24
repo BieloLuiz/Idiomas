@@ -1,0 +1,372 @@
+{
+ "aulas": [
+  {
+   "id": "en-a1-u02",
+   "titulo": "Who's that? Países e nacionalidades",
+   "idioma": "en",
+   "nivel": "A1",
+   "unidade": 2,
+   "cenas": [
+    {
+     "parte": "gancho",
+     "eco": "wave",
+     "tela": [
+      "Primeiro dia na escola de idiomas",
+      "Who's that?",
+      "Quem é aquela?",
+      "That's Ana. She's Brazilian, too.",
+      "Aquela é a Ana. Ela também é brasileira."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "Sarah vê alguém novo na sala. Escute como ela pergunta." },
+      { "voz": "Sarah", "texto": "Who's that?" },
+      { "voz": "Lucas", "texto": "That's Ana. She's Brazilian, too." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "thinking",
+     "tela": [
+      "Falando de outras pessoas",
+      "She is → She's",
+      "They are → They're",
+      "She's Brazilian.",
+      "Ela é brasileira.",
+      "He's British.",
+      "Ele é britânico.",
+      "They're Japanese.",
+      "Eles são japoneses."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "Para falar de outra pessoa, o verbo muda. Repare nas contrações." },
+      { "voz": "Emma", "texto": "She's Brazilian." },
+      { "voz": "Emma", "texto": "He's British." },
+      { "voz": "Emma", "texto": "They're Japanese." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "speaking",
+     "tela": [
+      "País ou nacionalidade?",
+      "from + país",
+      "I'm from Mexico.",
+      "Eu sou do México.",
+      "I'm Mexican.",
+      "Eu sou mexicana.",
+      "She's from Brazil.",
+      "Ela é do Brasil.",
+      "She's Brazilian.",
+      "Ela é brasileira."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "A mesma ideia, de dois jeitos. Com o país, entra uma palavra a mais." },
+      { "voz": "Emma", "texto": "I'm from Mexico." },
+      { "voz": "Emma", "texto": "I'm Mexican." },
+      { "voz": "Emma", "texto": "She's from Brazil." },
+      { "voz": "Emma", "texto": "She's Brazilian." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "happy",
+     "tela": [
+      "Conversa na sala de aula",
+      "Sarah: And who are they?",
+      "E quem são eles?",
+      "Lucas: They're Kenji and Yuki. They're Japanese.",
+      "São o Kenji e a Yuki. Eles são japoneses.",
+      "Sarah: And who's he?",
+      "E quem é ele?",
+      "Lucas: He's Tom, the teacher. He's from London.",
+      "É o Tom, o professor. Ele é de Londres.",
+      "Sarah: Oh, he's British!",
+      "Ah, ele é britânico."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "Agora veja tudo junto numa conversa entre colegas." },
+      { "voz": "Sarah", "texto": "And who are they?" },
+      { "voz": "Lucas", "texto": "They're Kenji and Yuki. They're Japanese." },
+      { "voz": "Sarah", "texto": "And who's he?" },
+      { "voz": "Lucas", "texto": "He's Tom, the teacher. He's from London." },
+      { "voz": "Sarah", "texto": "Oh, he's British!" }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "erro",
+     "eco": "confused",
+     "tela": [
+      "Cuidado com esta mistura!",
+      "✗ She's from Brazilian.",
+      "✓ She's Brazilian.",
+      "from vem antes do país, não da nacionalidade."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "Nacionalidade vem direto depois do verbo. Não precisa de mais nada." },
+      { "voz": "Emma", "texto": "She's Brazilian." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "desafio",
+     "eco": "thinking",
+     "tela": [
+      "Desafio 1",
+      "Complete a frase:",
+      "They ___ from Japan.",
+      "A) is",
+      "B) are",
+      "Qual opção está correta?"
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "Estamos falando de mais de uma pessoa. Qual forma combina?" }
+     ],
+     "pausa_segundos": 3
+    },
+    {
+     "parte": "desafio",
+     "eco": "happy",
+     "tela": [
+      "Resposta: B",
+      "✓ They are from Japan.",
+      "Eles são do Japão.",
+      "They are → They're"
+     ],
+     "falas": [
+      { "voz": "Emma", "texto": "They are from Japan." },
+      { "voz": "narrador", "texto": "Com eles e elas, o verbo é sempre o mesmo." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "desafio",
+     "eco": "thinking",
+     "tela": [
+      "Desafio 2",
+      "Complete a frase:",
+      "He's ___ London.",
+      "A) from",
+      "B) British",
+      "Qual palavra está faltando?"
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "Londres é uma cidade. Qual palavra vem antes dela?" }
+     ],
+     "pausa_segundos": 3
+    },
+    {
+     "parte": "desafio",
+     "eco": "celebrate",
+     "tela": [
+      "Resposta: A",
+      "✓ He's from London.",
+      "Ele é de Londres.",
+      "from + cidade ou país"
+     ],
+     "falas": [
+      { "voz": "Emma", "texto": "He's from London." },
+      { "voz": "narrador", "texto": "Cidade ou país, a origem pede a mesma palavra." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "fechamento",
+     "eco": "wave",
+     "tela": [
+      "Você já apresenta outras pessoas.",
+      "Seu tempo, seu ritmo."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "Experimente falar de alguém que você conhece e de onde ele vem." }
+     ],
+     "pausa_segundos": 0
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-u02",
+   "titulo": "D'où viens-tu ? Países e nacionalidades",
+   "idioma": "fr",
+   "nivel": "A1",
+   "unidade": 2,
+   "cenas": [
+    {
+     "parte": "gancho",
+     "eco": "wave",
+     "tela": [
+      "Primeiro dia na aula de francês",
+      "Qui est-ce ?",
+      "Quem é?",
+      "C'est Marta. Elle est espagnole. Elle vient de Madrid.",
+      "É a Marta. Ela é espanhola. Ela vem de Madri."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "Lucas quer saber quem é a colega nova. Escute a resposta da Claire." },
+      { "voz": "Lucas", "texto": "Qui est-ce ?" },
+      { "voz": "Claire", "texto": "C'est Marta. Elle est espagnole. Elle vient de Madrid." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "thinking",
+     "tela": [
+      "Masculino e feminino",
+      "japonais + e → japonaise",
+      "Il est japonais.",
+      "Ele é japonês.",
+      "Elle est japonaise.",
+      "Ela é japonesa.",
+      "Ils sont japonais.",
+      "Eles são japoneses."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "No feminino, a nacionalidade ganha uma letra. Escute como o som muda." },
+      { "voz": "Claire", "texto": "Il est japonais." },
+      { "voz": "Claire", "texto": "Elle est japonaise." },
+      { "voz": "Claire", "texto": "Ils sont japonais." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "speaking",
+     "tela": [
+      "Onde a pessoa mora?",
+      "en + país feminino",
+      "à + le → au",
+      "J'habite en France.",
+      "Eu moro na França.",
+      "J'habite au Brésil.",
+      "Eu moro no Brasil.",
+      "Il habite au Canada.",
+      "Ele mora no Canadá."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "A palavra antes do país depende do gênero dele. Compare os três." },
+      { "voz": "Claire", "texto": "J'habite en France." },
+      { "voz": "Claire", "texto": "J'habite au Brésil." },
+      { "voz": "Claire", "texto": "Il habite au Canada." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "explicacao",
+     "eco": "happy",
+     "tela": [
+      "Sobre o professor",
+      "Lucas: Et le professeur ?",
+      "E o professor?",
+      "Claire: Il est canadien. Il vient du Québec.",
+      "Ele é canadense. Ele vem do Québec.",
+      "Lucas: Ah, il parle français et anglais !",
+      "Ah, ele fala francês e inglês.",
+      "Claire: Oui, mais il habite en France maintenant.",
+      "Sim, mas ele mora na França agora."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "Agora observe nacionalidade, origem e moradia na mesma conversa." },
+      { "voz": "Lucas", "texto": "Et le professeur ?" },
+      { "voz": "Claire", "texto": "Il est canadien. Il vient du Québec." },
+      { "voz": "Lucas", "texto": "Ah, il parle français et anglais !" },
+      { "voz": "Claire", "texto": "Oui, mais il habite en France maintenant." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "erro",
+     "eco": "confused",
+     "tela": [
+      "Atenção ao gênero do país!",
+      "✗ Il habite au France maintenant.",
+      "✓ Il habite en France maintenant.",
+      "France é feminino: use en."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "A França é um país feminino. Por isso, nada de au aqui." },
+      { "voz": "Claire", "texto": "Il habite en France maintenant." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "desafio",
+     "eco": "thinking",
+     "tela": [
+      "Desafio 1",
+      "Complete a frase:",
+      "Elle est ___.",
+      "A) japonais",
+      "B) japonaise",
+      "Qual opção está correta?"
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "A frase fala de uma mulher. Qual forma combina com ela?" }
+     ],
+     "pausa_segundos": 3
+    },
+    {
+     "parte": "desafio",
+     "eco": "happy",
+     "tela": [
+      "Resposta: B",
+      "✓ Elle est japonaise.",
+      "Ela é japonesa.",
+      "japonais + e → japonaise"
+     ],
+     "falas": [
+      { "voz": "Claire", "texto": "Elle est japonaise." },
+      { "voz": "narrador", "texto": "Com o e no final, a última consoante passa a soar." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "desafio",
+     "eco": "thinking",
+     "tela": [
+      "Desafio 2",
+      "Complete a frase:",
+      "Il habite ___ Canada.",
+      "A) en",
+      "B) au",
+      "Qual palavra completa a frase?"
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "O Canadá é um país masculino. Qual opção usamos?" }
+     ],
+     "pausa_segundos": 3
+    },
+    {
+     "parte": "desafio",
+     "eco": "celebrate",
+     "tela": [
+      "Resposta: B",
+      "✓ Il habite au Canada.",
+      "Ele mora no Canadá.",
+      "à + le → au"
+     ],
+     "falas": [
+      { "voz": "Claire", "texto": "Il habite au Canada." },
+      { "voz": "narrador", "texto": "Com país masculino, a preposição e o artigo se juntam." }
+     ],
+     "pausa_segundos": 0
+    },
+    {
+     "parte": "fechamento",
+     "eco": "wave",
+     "tela": [
+      "Agora você fala de origem e moradia.",
+      "Seu tempo, seu ritmo."
+     ],
+     "falas": [
+      { "voz": "narrador", "texto": "Experimente dizer onde você mora e qual é sua nacionalidade." }
+     ],
+     "pausa_segundos": 0
+    }
+   ]
+  }
+ ]
+}
