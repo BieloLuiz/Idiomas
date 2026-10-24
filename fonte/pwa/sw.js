@@ -21,6 +21,7 @@ async function rangeResponse(request, response) {
 self.addEventListener('fetch', e => {
   const u = new URL(e.request.url), scope = new URL(self.registration.scope);
   if (e.request.method !== 'GET' || u.origin !== scope.origin || !u.pathname.startsWith(scope.pathname)) return;
+  if (/\/videos\/.+\.(mp4|jpg)$/.test(u.pathname)) return;   // videoaulas: direto da rede (o navegador cuida do streaming)
   if (u.pathname.includes('/audio/')) {
     e.respondWith(caches.open(AUDIO_CACHE).then(c => c.match(new Request(e.request.url))).then(cached => cached ? rangeResponse(e.request, cached) : fetch(e.request))); return;
   }

@@ -4836,6 +4836,21 @@ function abrirLicao(LICAO, PERFIL, ao) {
     });
   };
 
+  /* Videoaula da unidade (videos/lista.json); só aparece se existir */
+  var LISTA_VIDEOS = null;
+  function videoaula(pg, k, id) {
+    var n = Number(id.split('-u')[1]); if (!(n >= 1)) return;
+    var vid = k + '-' + ['a1', 'a2', 'b1', 'b2', 'c1'][Math.floor((n - 1) / 12)] + '-u' + String((n - 1) % 12 + 1).padStart(2, '0');
+    var lugar = document.createElement('div'); pg.appendChild(lugar);
+    (LISTA_VIDEOS ? Promise.resolve(LISTA_VIDEOS) : fetch('videos/lista.json').then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }))
+      .then(function (l) { LISTA_VIDEOS = l; var info = l[vid]; if (!info) return;
+        var min = Math.floor(info.seg / 60), s = info.seg % 60;
+        lugar.className = 'card video-aula';
+        lugar.innerHTML = '<p class="ui-label">Videoaula · ' + (min ? min + ' min ' : '') + (s ? s + ' s' : '') + '</p>' +
+          '<video controls playsinline preload="none" poster="videos/' + vid + '.jpg" src="videos/' + vid + '.mp4" style="display:block;width:100%;max-width:360px;margin:10px auto 0;border-radius:16px;aspect-ratio:9/16;background:#F6F4EF"></video>';
+      });
+  }
+
   TELAS.guia = function (id) {
     var k = id.slice(0, 2), c = CURSOS[k], u = null, ui = 0;
     c.secoes.forEach(function (s) { s.unidades.forEach(function (x, i) { if (x.id === id) { u = x; ui = i; } }); });
@@ -4845,6 +4860,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
       bar.appendChild(b); bar.insertAdjacentHTML('beforeend', '<h1>Guia · ' + esc(u.titulo) + '</h1>');
     });
     pg.insertAdjacentHTML('beforeend', '<div><span class="ui-label">' + c.nome + ' · Unidade ' + (ui + 1) + '</span><h2 class="h" style="margin-top:6px">' + esc(u.objetivo) + '</h2></div>');
+    videoaula(pg, k, id);
     if (!g) { pg.insertAdjacentHTML('beforeend', '<div class="card"><p class="lead">O guia desta unidade ainda não foi escrito.</p></div>'); return; } // LIGAR: conteúdo da planilha
     var voc = document.createElement('details'); voc.className = 'card guide-section'; voc.open = true;
     voc.innerHTML = '<summary>Frases-chave</summary><table class="vocab"><thead><tr><th scope="col">' + c.nome + '</th><th scope="col">Português</th></tr></thead><tbody>' +

@@ -3,6 +3,7 @@
    - Vozes: procura fonte/videos/narracao/<aula>-<n>.mp3 (gerados no PC pelo ElevenLabs a partir do manifesto).
      Sem o arquivo, as falas no idioma usam o trecho já gravado do curso e a narração fica muda, com legenda (prévia).
    - --manifesto: confere se toda fala no idioma existe no áudio do curso e escreve só a narração em fonte/videos/narracao/manifest-video.json para o gerar-audio-11labs.ps1.
+   Saída: <id>.mp4 e <id>.jpg (capa). Para publicar no app: copie os dois para videos/ na raiz e acrescente o id em videos/lista.json.
    Requer: build feito (assets/ com var AUDIO), ffmpeg e Playwright/Chromium (CHROMIUM_PATH opcional). */
 import fs from 'node:fs'; import path from 'node:path'; import { execFileSync } from 'node:child_process'; import { fileURLToPath } from 'node:url';
 const AQUI = path.dirname(fileURLToPath(import.meta.url)), RAIZ = path.resolve(AQUI, '../..');
@@ -89,7 +90,8 @@ for (const a of roteiro.aulas) {
   if (sons.length) execFileSync('ffmpeg', ['-y', '-v', 'error', ...ent, '-filter_complex', filtros.join(';') + ';' + sons.map((_, i) => `[a${i}]`).join('') + `amix=inputs=${sons.length}:normalize=0,apad,atrim=0:${duracaoTotal.toFixed(2)}`, wav]);
   else execFileSync('ffmpeg', ['-y', '-v', 'error', '-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo', '-t', String(duracaoTotal), wav]);
   const mp4 = path.join(saida, a.id + '.mp4');
-  execFileSync('ffmpeg', ['-y', '-v', 'error', '-ss', corte.toFixed(2), '-i', webm, '-i', wav, '-t', duracaoTotal.toFixed(2), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '20', '-r', '30', '-c:a', 'aac', '-b:a', '160k', mp4]);
+  execFileSync('ffmpeg', ['-y', '-v', 'error', '-ss', corte.toFixed(2), '-i', webm, '-i', wav, '-t', duracaoTotal.toFixed(2), '-c:v', 'libx264', '-preset', 'slow', '-pix_fmt', 'yuv420p', '-crf', '27', '-r', '30', '-c:a', 'aac', '-b:a', '96k', '-movflags', '+faststart', mp4]);
+  execFileSync('ffmpeg', ['-y', '-v', 'error', '-ss', '6', '-i', mp4, '-frames:v', '1', '-vf', 'scale=360:-1', '-q:v', '4', path.join(saida, a.id + '.jpg')]);
   fs.rmSync(webm); fs.rmSync(wav);
   console.log(`${mp4} · ${duracaoTotal.toFixed(1)} s` + (avisos.length ? '\n  ' + avisos.join('\n  ') : ''));
 }
