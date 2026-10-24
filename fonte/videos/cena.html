@@ -10,7 +10,7 @@ body::before{content:"";position:absolute;inset:0;background-image:radial-gradie
 .prog i b{display:block;height:100%;width:0;background:var(--marca);border-radius:9px}
 .topo{position:absolute;top:62px;left:40px;right:40px;display:flex;align-items:center;gap:14px}
 .selo{background:var(--tinta);color:#fff;font-weight:800;font-size:20px;letter-spacing:.06em;padding:8px 14px;border-radius:12px;white-space:nowrap}
-.titulo{font-size:23px;font-weight:700;color:var(--suave);line-height:1.2}
+.titulo{font-size:22px;font-weight:700;color:var(--suave);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .parte{position:absolute;top:132px;left:40px;font-size:20px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--marca);display:flex;align-items:center;gap:10px;transition:opacity .3s}
 .parte::before{content:"";width:26px;height:4px;border-radius:4px;background:currentColor}
 .parte.erro{color:var(--erro)}.parte.desafio{color:var(--ouro)}.parte.fechamento{color:var(--certo)}
@@ -80,6 +80,19 @@ mark{background:linear-gradient(transparent 62%,var(--ouro-suave) 62%);color:inh
 .opcoes span{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);border-radius:18px;padding:12px 22px;font-size:36px;font-weight:800}
 .opcoes b{color:var(--ouro);margin-right:10px}
 .resposta{align-self:flex-start;background:var(--certo);color:#fff;font-size:30px;font-weight:800;padding:12px 22px;border-radius:16px;letter-spacing:.02em}
+strong.dest{color:var(--marca-escura);background:var(--marca-suave);border-radius:10px;padding:0 6px;font-weight:800}
+.eq{flex-wrap:nowrap!important}
+.rotulo{position:absolute;top:-18px;left:28px;background:var(--certo);color:#fff;font-size:20px;font-weight:800;padding:6px 14px;border-radius:999px}
+.balao.escondido{display:none}.balao.vai{opacity:0!important;transition:opacity .3s}
+.ouca{display:flex;align-items:center;justify-content:center;gap:12px;font-size:30px;font-weight:700;color:var(--suave)}
+.ouca i{width:14px;height:14px;border-radius:50%;background:var(--erro);box-shadow:0 0 0 0 rgba(184,70,81,.4);animation:pulsa 1.2s infinite}
+@keyframes pulsa{to{box-shadow:0 0 0 16px rgba(184,70,81,0)}}
+.fimcard{position:absolute;left:0;right:0;top:720px;text-align:center;opacity:0;transition:opacity .8s .35s}
+.fimcard b{display:block;font-size:64px;font-weight:800;letter-spacing:-.02em;color:var(--tinta)}
+.fimcard span{display:block;margin-top:8px;font-size:28px;font-weight:600;color:var(--suave)}
+body.final .fimcard{opacity:1}
+body.final .palco,body.final .legenda,body.final .parte,body.final .topo,body.final .prog,body.final .marca{opacity:0!important;transition:opacity .6s}
+body.final .eco{left:225px;top:400px;width:270px}
 /* legenda */
 .legenda{position:absolute;left:176px;right:40px;top:176px;min-height:212px;background:var(--papel);border-radius:28px;padding:22px 28px 24px;box-shadow:0 18px 40px rgba(31,41,55,.09);opacity:0;transform:translateY(-10px);transition:opacity .45s ease,transform .45s ease}
 .legenda p{transition:opacity .22s ease}
@@ -88,7 +101,7 @@ mark{background:linear-gradient(transparent 62%,var(--ouro-suave) 62%);color:inh
 .legenda p{margin:0;font-size:34px;line-height:1.36;font-weight:700}
 .legenda p w{color:#C3C8D2;transition:color .12s}.legenda p w.dito{color:var(--tinta)}
 .legenda.alvo p{font-weight:800;font-size:36px}.legenda.alvo p w.dito{color:var(--marca)}
-.eco{position:absolute;left:18px;top:186px;width:150px;transition:transform .4s cubic-bezier(.3,1.4,.5,1)}
+.eco{position:absolute;left:18px;top:186px;width:150px;transition:transform .4s cubic-bezier(.3,1.4,.5,1),left .9s cubic-bezier(.22,1,.36,1),top .9s cubic-bezier(.22,1,.36,1),width .9s cubic-bezier(.22,1,.36,1)}
 .eco.olha{transform:translate(6px,12px) rotate(8deg)}
 .marca{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-size:18px;font-weight:700;color:#A0A8B8;letter-spacing:.04em}
 </style></head><body>
@@ -99,13 +112,17 @@ mark{background:linear-gradient(transparent 62%,var(--ouro-suave) 62%);color:inh
 <div class="legenda" id="legenda"><small id="quem"></small><p id="fala"></p></div>
 <div class="eco" id="eco"></div>
 <div class="marca">idiomas · seu tempo, seu ritmo</div>
+<div class="fimcard"><b>idiomas</b><span>seu tempo, seu ritmo</span></div>
 <script>
 /* tocarAula(A): A = { titulo, idioma, nivel, cenas:[{ini, fim, parte, eco, tela:[...], alvos:[...], falas:[{ini,fim,voz,texto,alvo}], pausa:[ini,fim]}], duracao } — toca em tempo real */
 var CORES = { sarah: '#C2577A', lucas: '#2F8F8A', emma: '#8A5CC2', daniel: '#B9772F', claire: '#C2577A', 'inès': '#8A5CC2', ines: '#8A5CC2', antoine: '#B9772F' };
-var NOMES_PARTE = { gancho: 'Situação', explicacao: 'Como funciona', erro: 'Erro comum', desafio: 'Sua vez', fechamento: 'Resumo' };
+var NOMES_PARTE = { gancho: 'Situação', explicacao: 'Como funciona', erro: 'Erro comum', desafio: 'Sua vez', fechamento: 'Resumo', repita: 'Repita comigo' };
 function esc(s) { return String(s).replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
 function palavras(s) { return String(s).split(/\s+/).filter(Boolean); }
-function emW(s, marcarDe) { return palavras(s).map(function (w, i) { var h = '<w>' + esc(w) + '</w>'; return i === marcarDe ? '<mark>' + h : h; }).join(' ') + (marcarDe >= 0 && marcarDe < palavras(s).length ? '</mark>' : ''); }
+function emW(s, marcarDe, dest) {
+  var ws = palavras(s), forte = ws.map(function () { return false; });
+  (dest || []).forEach(function (d) { var dw = palavras(d).map(norm); for (var i = 0; i + dw.length <= ws.length; i++) { var ok = dw.every(function (x, j) { var w = norm(ws[i + j]); return w === x || /'$/.test(x) && w.indexOf(x) === 0; }); if (ok) for (var j = 0; j < dw.length; j++) forte[i + j] = true; } });
+  return ws.map(function (w, i) { var h = '<w>' + esc(w) + '</w>'; if (forte[i]) h = '<strong class="dest">' + h + '</strong>'; return i === marcarDe ? '<mark>' + h : h; }).join(' ') + (marcarDe >= 0 && marcarDe < ws.length ? '</mark>' : ''); }
 function norm(s) { return String(s).toLowerCase().replace(/[.!?¿¡,]/g, '').replace(/\s+/g, ' ').trim(); }
 
 window.tocarAula = function (A) {
@@ -136,6 +153,14 @@ window.tocarAula = function (A) {
       tela.forEach(function (t) { por(el('nota', esc(t))); });
       return itens;
     }
+    if (c.parte === 'repita') {
+      var cr = por(el('cartao', '<span class="quem"></span><div class="alvo' + (tela[0].length > 24 ? ' longo' : '') + '">' + emW(tela[0], -1) + '</div>' + (tela[1] ? '<div class="trad">' + esc(tela[1]) + '</div>' : '')));
+      cr.dataset.texto = tela[0];
+      por(el('ouca', '<i></i>Agora você: repita em voz alta'));
+      var rl = document.createElement('div'); rl.className = 'relogio';
+      rl.innerHTML = '<svg viewBox="0 0 170 170"><circle cx="85" cy="85" r="74" fill="#fff" stroke="#E4E1D8" stroke-width="12"/><circle class="arco" cx="85" cy="85" r="74" fill="none" stroke="#E9A93B" stroke-width="12" stroke-linecap="round" stroke-dasharray="465" stroke-dashoffset="0"/></svg><span class="seg"></span>';
+      cont.appendChild(rl); return itens;
+    }
     if (c.pausa) {
       var k = tela[0], lac = tela.filter(function (t) { return /_{2,}/.test(t); })[0], ops = tela.filter(function (t) { return /^[A-D]\)\s/.test(t); });
       var ins = tela.slice(1).filter(function (t) { return t !== lac && ops.indexOf(t) < 0; });
@@ -143,21 +168,25 @@ window.tocarAula = function (A) {
       por(el('pergunta', '<div class="k">' + esc(k) + '</div>' + (lac && ins.length ? '<div class="ins">' + esc(ins.shift()) + '</div>' : '') + '<div class="q">' + q + '</div>' +
         (ops.length ? '<div class="opcoes">' + ops.map(function (o) { return '<span><b>' + o.slice(0, 2) + '</b>' + esc(o.slice(3)) + '</span>'; }).join('') + '</div>' : '')));
       ins.forEach(function (t) { var d = por(el('nota', esc(t))); d.style.textAlign = 'center'; });
-      var rel = document.createElement('div'); rel.className = 'relogio'; rel.id = 'relogio';
-      rel.innerHTML = '<svg viewBox="0 0 170 170"><circle cx="85" cy="85" r="74" fill="#fff" stroke="#E4E1D8" stroke-width="12"/><circle id="arco" cx="85" cy="85" r="74" fill="none" stroke="#E9A93B" stroke-width="12" stroke-linecap="round" stroke-dasharray="465" stroke-dashoffset="0"/></svg><span id="seg"></span>';
+      var rel = document.createElement('div'); rel.className = 'relogio';
+      rel.innerHTML = '<svg viewBox="0 0 170 170"><circle cx="85" cy="85" r="74" fill="#fff" stroke="#E4E1D8" stroke-width="12"/><circle class="arco" cx="85" cy="85" r="74" fill="none" stroke="#E9A93B" stroke-width="12" stroke-linecap="round" stroke-dasharray="465" stroke-dashoffset="0"/></svg><span class="seg"></span>';
       cont.appendChild(rel);
       return itens;
     }
     var alvosTela = tela.filter(function (t) { return ehAlvo(t, c) && !dialogo(t); }), corte = -1;
     if (alvosTela.length > 1) { var ps = alvosTela.map(palavras); corte = 0; while (ps.every(function (p) { return p[corte] && norm(p[corte]) === norm(ps[0][corte]); })) corte++; if (corte === 0 || ps.some(function (p) { return corte >= p.length; })) corte = -1; }
-    var i = 0, grupo = null, lados = {};
+    var dest = c.destaque || [];
+    if (!c.destaque) tela.filter(formula).forEach(function (fl) { fl.split(/\s(?:=|→|\+)\s/).forEach(function (lado) { var n = norm(lado);
+      if (n && alvosTela.some(function (a) { var na = norm(a); return na !== n && (' ' + na + ' ').indexOf(' ' + n + ' ') >= 0; }) && dest.indexOf(lado) < 0) dest.push(lado); }); });
+    var i = 0, grupo = null, lados = {}, resp = null;
     while (i < tela.length) {
       var t = tela[i], d, dg = dialogo(t);
       if (!formula(t)) grupo = null;
-      if (/^resposta\s*:/i.test(t)) { d = por(el('resposta', esc(t))); i++; }
+      if (/^resposta\s*:/i.test(t) && /^✓/.test(tela[i + 1] || '')) { resp = t; i++; }
+      else if (/^resposta\s*:/i.test(t)) { d = por(el('resposta', esc(t))); i++; }
       else if (/^[✗✓]/.test(t)) {
         var bom = /^✓/.test(t), txt = t.replace(/^[✗✓]\s*/, ''), tr = bom && c.parte === 'desafio' ? traducao(tela[i + 1], c) : null;
-        d = por(el('cartao ' + (bom ? 'bom' : 'ruim'), '<div class="alvo' + (txt.length > 24 ? ' longo' : '') + '">' + emW(txt, -1) + '</div>' + (tr ? '<div class="trad">' + esc(tr) + '</div>' : '') + '<span class="marcador">' + (bom ? '✓' : '✗') + '</span>'));
+        d = por(el('cartao ' + (bom ? 'bom' : 'ruim'), (bom && resp ? '<span class="rotulo">' + esc(resp) + '</span>' : '') + '<div class="alvo' + (txt.length > 24 ? ' longo' : '') + '">' + emW(txt, -1, dest) + '</div>' + (tr ? '<div class="trad">' + esc(tr) + '</div>' : '') + '<span class="marcador">' + (bom ? '✓' : '✗') + '</span>'));
         d.dataset.texto = txt; i += tr ? 2 : 1;
       } else if (formula(t)) {
         var f = el('eq', chipsDe(t));
@@ -167,17 +196,18 @@ window.tocarAula = function (A) {
       } else if (dg) {
         if (!(dg.nome in lados)) lados[dg.nome] = Object.keys(lados).length % 2;
         var cor = CORES[dg.nome.toLowerCase()] || '#5366C7', trd = traducao(tela[i + 1], c, true);
-        d = por(el('cartao balao' + (lados[dg.nome] ? ' dir' : ''), '<div class="nome"><span class="av" style="background:' + cor + '">' + esc(dg.nome[0]) + '</span>' + esc(dg.nome) + '</div><div class="alvo">' + emW(dg.texto, -1) + '</div>' + (trd ? '<div class="trad">' + esc(trd) + '</div>' : '') + '<span class="quem"></span>'));
+        d = por(el('cartao balao escondido' + (lados[dg.nome] ? ' dir' : ''), '<div class="nome"><span class="av" style="background:' + cor + '">' + esc(dg.nome[0]) + '</span>' + esc(dg.nome) + '</div><div class="alvo">' + emW(dg.texto, -1, dest) + '</div>' + (trd ? '<div class="trad">' + esc(trd) + '</div>' : '') + '<span class="quem"></span>'));
         d.dataset.texto = dg.texto; i += trd ? 2 : 1;
       } else if (ehAlvo(t, c)) {
         var tr2 = traducao(tela[i + 1], c, /\?$/.test(t));
-        d = por(el('cartao', '<span class="quem"></span><div class="alvo' + (t.length > 24 ? ' longo' : '') + '">' + emW(t, corte) + '</div>' + (tr2 ? '<div class="trad">' + esc(tr2) + '</div>' : '')));
+        d = por(el('cartao', '<span class="quem"></span><div class="alvo' + (t.length > 24 ? ' longo' : '') + '">' + emW(t, corte, dest) + '</div>' + (tr2 ? '<div class="trad">' + esc(tr2) + '</div>' : '')));
         d.dataset.texto = t; i += tr2 ? 2 : 1;
       } else { por(el(itens.length === 0 ? 'manchete' : 'nota', esc(t))); i++; }
     }
     return itens;
   }
-  function caber() { var cs = palco.querySelectorAll('.conteudo:not(.sai)'), cont = cs[cs.length - 1]; if (!cont) return; cont.style.zoom = 1; var h = cont.scrollHeight, max = palco.clientHeight; if (h > max) cont.style.zoom = (max / h).toFixed(3); }
+  function caber() { var cs = palco.querySelectorAll('.conteudo:not(.sai)'), cont = cs[cs.length - 1]; if (!cont) return; cont.style.zoom = 1; var h = cont.scrollHeight, max = palco.clientHeight; if (h > max) cont.style.zoom = (max / h).toFixed(3);
+    cont.querySelectorAll('.eq').forEach(function (e) { e.style.zoom = 1; if (e.scrollWidth > e.clientWidth + 2) e.style.zoom = (e.clientWidth / e.scrollWidth).toFixed(3); }); }
 
   function faiscas() {
     var cores = ['#5366C7', '#E9A93B', '#2F8F5B', '#C2577A'];
@@ -200,6 +230,9 @@ window.tocarAula = function (A) {
       var card = null, ws = palavras(f.texto), tot = f.texto.length, acc = 0;
       var cands = palco.querySelectorAll('.conteudo:not(.sai) [data-texto]'), b0 = norm(f.texto); cands.forEach(function (cdt) { if (!card && norm(cdt.dataset.texto) === b0) card = cdt; }); if (!card) { var melhor = 0; cands.forEach(function (cdt) { var a = norm(cdt.dataset.texto); if ((a.indexOf(b0) >= 0 || b0.indexOf(a) >= 0) && a.length > melhor) { melhor = a.length; card = cdt; } }); }
       if (!card) { leg.className = 'legenda on alvo'; document.getElementById('quem').innerHTML = '<span class="av" style="background:' + cor + '">' + esc(String(f.voz)[0]) + '</span>' + esc(f.voz); document.getElementById('fala').innerHTML = esc(f.texto); return; }
+      if (card.classList.contains('escondido')) { card.classList.remove('escondido'); void card.offsetWidth; card.classList.add('on');
+        var vis = Array.prototype.filter.call(card.parentNode.querySelectorAll('.balao'), function (b) { return !b.classList.contains('escondido'); });
+        if (vis.length > 3) { var velho = vis[0]; velho.classList.add('vai'); setTimeout(function () { velho.classList.add('escondido'); }, 320); } }
       var cws = card.querySelectorAll('.alvo w'); card.classList.add('falando');
       var q = card.querySelector('.quem'); if (q) q.innerHTML = '<span class="av" style="background:' + cor + '">' + esc(String(f.voz)[0]) + '</span>' + esc(f.voz);
       ws.forEach(function (w, i) { var t = f.ini + dur * (acc / tot) * .92; acc += w.length + 1; em(t, function () { if (cws[i]) cws[i].classList.add('dito'); }); });
@@ -228,6 +261,7 @@ window.tocarAula = function (A) {
       palco.querySelectorAll('.conteudo').forEach(function (v) { v.classList.add('sai'); setTimeout(function () { v.remove(); }, 650); });
       var itens = montar(c), n = itens.length; caber();
       var janela = Math.max(1.2, (c.falas[0] ? c.falas[0].fim - c.ini : 2));
+      itens = itens.filter(function (d) { return !d.classList.contains('balao'); }); n = itens.length;
       itens.forEach(function (d, i) { em(c.ini + .45 + i * Math.min(1.6, janela / (n + .5)), function () { d.classList.add('on'); }); });
       if (c.eco === 'celebrate') em(c.ini + .4, faiscas);
     });
@@ -237,13 +271,14 @@ window.tocarAula = function (A) {
     });
     if (c.pausa) {
       em(c.pausa[0], function () {
-        leg.className = 'legenda'; palco.classList.remove('fundo'); var rel = document.getElementById('relogio'); if (!rel) return; rel.classList.add('on');
-        var tot = c.pausa[1] - c.pausa[0], arco = document.getElementById('arco');
+        leg.className = 'legenda'; palco.classList.remove('fundo'); var rel = palco.querySelector('.conteudo:not(.sai) .relogio'); if (!rel) return; rel.classList.add('on');
+        var tot = c.pausa[1] - c.pausa[0], arco = rel.querySelector('.arco'), seg = rel.querySelector('.seg');
         arco.style.transition = 'stroke-dashoffset ' + tot + 's linear'; requestAnimationFrame(function () { arco.style.strokeDashoffset = '465'; });
-        for (var s = 0; s < Math.ceil(tot); s++) (function (s) { em(c.pausa[0] + s, function () { document.getElementById('seg').textContent = Math.ceil(tot) - s; }); })(s);
+        for (var s = 0; s < Math.ceil(tot); s++) (function (s) { em(c.pausa[0] + s, function () { seg.textContent = Math.ceil(tot) - s; }); })(s);
       });
     }
   });
+  if (A.final) em(A.final, function () { document.body.classList.add('final'); eco.estado('neutral'); eco.estado('wave'); });
   em(A.duracao, function () { window.__fim = true; });
 };
 </script>

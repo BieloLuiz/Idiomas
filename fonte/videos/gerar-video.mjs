@@ -46,35 +46,46 @@ const { chromium } = await import('playwright');
 const eco = fs.readFileSync(path.join(RAIZ, 'fonte/src/eco.js'), 'utf8');
 for (const a of roteiro.aulas) {
   const falas = falasNumeradas(a); let t = 0.9, k = 0, avisos = [];
+  /* "Repita comigo": até 3 frases-chave, mais devagar, com pausa para repetir, antes do fechamento */
+  /* a primeira frase de cada explicação (sem diálogo), até 3 */
+  const chave = [];
+  a.cenas.forEach(c => { if (c.parte !== 'explicacao' || chave.length >= 3 || c.tela.some(l => /^[A-ZÀ-Ý][\wÀ-ÿ]+:\s/.test(l) && !/^[A-Z][a-z]+:\s*$/.test(l) && /^(Sarah|Lucas|Emma|Daniel|Claire|Inès|Antoine):/.test(l))) return;
+    const f = c.falas.find(x => x.voz !== 'narrador' && trecho(a.idioma, x.texto, x.voz)); if (f && !chave.some(k => k.texto === f.texto)) chave.push(f); });
+  const traduzir = txt => { for (const c of a.cenas) { const i = c.tela.findIndex(l => l.replace(/^([✓]\s*|[A-ZÀ-Ý][\wÀ-ÿ]+:\s+)/, '') === txt); if (i >= 0 && c.tela[i + 1] && !c.tela[i + 1].includes(txt)) return c.tela[i + 1]; } return ''; };
+  const repita = chave.map(f => ({ parte: 'repita', eco: 'speaking', tela: [f.texto, traduzir(f.texto)], falas: [{ ...f, lento: true }], pausa_segundos: 0 }));
+  const fimIdx = a.cenas.findIndex(c => c.parte === 'fechamento');
+  const todas = fimIdx < 0 ? [...a.cenas, ...repita] : [...a.cenas.slice(0, fimIdx), ...repita, ...a.cenas.slice(fimIdx)];
   const sons = [];
-  const cenas = a.cenas.map(c => {
+  const cenas = todas.map(c => {
     const cena = { ini: t, parte: c.parte, eco: c.eco, tela: c.tela, falas: [], alvos: c.falas.filter(f => f.voz !== 'narrador').map(f => f.texto) };
     for (const f of c.falas) {
-      const g = falas[k++], alvo = f.voz !== 'narrador', proprio = path.join(narr, g.arquivo);
+      const g = c.parte === 'repita' ? { arquivo: '-' } : falas[k++], alvo = f.voz !== 'narrador', proprio = path.join(narr, g.arquivo);
       let som = null;
       if (fs.existsSync(proprio)) som = { arq: proprio, de: 0, dur: duracao(proprio) };
       else if (alvo) { som = trecho(a.idioma, f.texto, f.voz); if (!som) avisos.push('sem áudio: ' + f.texto); else if (som.trocada) avisos.push('voz trocada: ' + f.texto + ' → ' + som.voz); }
       else avisos.push('narração ainda não gravada: ' + g.arquivo);
-      const dur = som ? som.dur : Math.max(1.6, f.texto.length / 14);
+      if (som && f.lento) som = { ...som, tempo: 0.8 };
+      const dur = som ? som.dur / (som.tempo || 1) : Math.max(1.6, f.texto.length / 14);
       if (som) sons.push({ ...som, em: t });
       cena.falas.push({ ini: t, fim: t + dur, voz: som && som.trocada && som.voz !== '?' ? som.voz : f.voz, texto: f.texto, alvo }); t += dur + 0.35;
     }
+    if (c.parte === 'repita') c.pausa_segundos = Math.round((cena.falas[0].fim - cena.falas[0].ini) * 1.3 + 1.5);
     if (c.pausa_segundos > 0) { cena.pausa = [t, t + c.pausa_segundos]; t += c.pausa_segundos; }
     t += 0.6; cena.fim = t; return cena;
   });
-  const duracaoTotal = t + 0.8;
+  const final = t + 0.4, duracaoTotal = t + 3.2;
   /* vídeo: toca a cena em tempo real e grava */
   const nav = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   const ctx = await nav.newContext({ viewport: { width: 720, height: 1280 }, recordVideo: { dir: saida, size: { width: 720, height: 1280 } } });
   const inicio = Date.now(), pg = await ctx.newPage();
   await pg.goto('file://' + path.join(AQUI, 'cena.html')); await pg.addScriptTag({ content: eco }); await pg.waitForTimeout(300);
   const corte = (Date.now() - inicio) / 1000;
-  await pg.evaluate(A => window.tocarAula(A), { titulo: a.titulo, idioma: a.idioma, nivel: a.nivel, cenas, duracao: duracaoTotal });
+  await pg.evaluate(A => window.tocarAula(A), { titulo: a.titulo, idioma: a.idioma, nivel: a.nivel, cenas, duracao: duracaoTotal, final });
   await pg.waitForFunction(() => window.__fim === true, null, { timeout: (duracaoTotal + 20) * 1000 });
   const webm = await pg.video().path(); await ctx.close(); await nav.close();
   /* áudio: cada fala no seu tempo */
   const wav = path.join(saida, a.id + '.wav'), ent = [], filtros = [];
-  sons.forEach((s, i) => { ent.push('-ss', String(s.de), '-t', String(s.dur), '-i', s.arq); filtros.push(`[${i}:a]aresample=48000,adelay=${Math.round(s.em * 1000)}:all=1[a${i}]`); });
+  sons.forEach((s, i) => { ent.push('-ss', String(s.de), '-t', String(s.dur), '-i', s.arq); filtros.push(`[${i}:a]aresample=48000${s.tempo ? ',atempo=' + s.tempo : ''},adelay=${Math.round(s.em * 1000)}:all=1[a${i}]`); });
   if (sons.length) execFileSync('ffmpeg', ['-y', '-v', 'error', ...ent, '-filter_complex', filtros.join(';') + ';' + sons.map((_, i) => `[a${i}]`).join('') + `amix=inputs=${sons.length}:normalize=0,apad,atrim=0:${duracaoTotal.toFixed(2)}`, wav]);
   else execFileSync('ffmpeg', ['-y', '-v', 'error', '-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo', '-t', String(duracaoTotal), wav]);
   const mp4 = path.join(saida, a.id + '.mp4');
