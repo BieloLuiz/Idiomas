@@ -39,3 +39,8 @@ Preparar mudanças em branch e proposta de revisão. Não integrar na `main` nem
 Ler `docs/ATIVACAO.md` antes da implantação: a entrada Google exige `GOOGLE_CLIENT_ID` e `ALLOWED_EMAILS` privados. A ausência de configuração precisa bloquear a API, nunca habilitar acesso anônimo aos dados.
 
 Manter AGENTS.md, CLAUDE.md e GEMINI.md com o mesmo conteúdo. Registrar limites e verificações reais em `docs/CORRECOES-AUDITORIA.md`; não apresentar integração simulada como teste de produção.
+
+
+## Videoaulas
+
+Quando o usuário mandar um roteiro de videoaula (JSON do ChatGPT, anexado ou colado) ou pedir um vídeo, siga `fonte/videos/PROMPT-CLAUDE.md` do início ao fim, sem pedir que ele copie instruções. Quando ele pedir o "pedido de roteiro" de uma unidade, gere com `node fonte/videos/pedido-roteiro.mjs <nível> <unidade>`, salve em `Downloads\APP - IDIOMAS\pedido-roteiro-<nível>-u<unidade>.txt` (quando estiver no PC dele) e diga só que é para colar no ChatGPT. O usuário não é programador: fale em passos simples e faça você mesmo tudo o que puder (inclusive rodar a narração no PC, quando estiver nele). Publicar no app (videos/ e lista.json) só com o OK dele.
