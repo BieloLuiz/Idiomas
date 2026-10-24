@@ -93,6 +93,8 @@ strong.dest{color:var(--marca-escura);background:var(--marca-suave);border-radiu
 body.final .fimcard{opacity:1}
 body.final .palco,body.final .legenda,body.final .parte,body.final .topo,body.final .prog,body.final .marca{opacity:0!important;transition:opacity .6s}
 body.final .eco{left:225px;top:400px;width:270px}
+.contexto{align-self:flex-start;display:flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:var(--suave);background:var(--papel);border:2px solid var(--linha);border-radius:999px;padding:10px 20px}
+.contexto::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--ouro)}
 /* legenda */
 .legenda{position:absolute;left:176px;right:40px;top:176px;min-height:212px;background:var(--papel);border-radius:28px;padding:22px 28px 24px;box-shadow:0 18px 40px rgba(31,41,55,.09);opacity:0;transform:translateY(-10px);transition:opacity .45s ease,transform .45s ease}
 .legenda p{transition:opacity .22s ease}
@@ -202,6 +204,10 @@ window.tocarAula = function (A) {
         var tr2 = traducao(tela[i + 1], c, /\?$/.test(t));
         d = por(el('cartao', '<span class="quem"></span><div class="alvo' + (t.length > 24 ? ' longo' : '') + '">' + emW(t, corte, dest) + '</div>' + (tr2 ? '<div class="trad">' + esc(tr2) + '</div>' : '')));
         d.dataset.texto = t; i += tr2 ? 2 : 1;
+      } else if (c.parte === 'gancho') {
+        /* abertura: o contexto vira uma etiqueta discreta; frases que só introduzem (terminam em ":") saem */
+        if (!/:$/.test(t)) por(el('contexto', esc(t.replace(/^imagine\s+(que\s+)?/i, '').replace(/^\w/, function (x) { return x.toUpperCase(); }).replace(/\.$/, ''))));
+        i++;
       } else { por(el(itens.length === 0 ? 'manchete' : 'nota', esc(t))); i++; }
     }
     return itens;
