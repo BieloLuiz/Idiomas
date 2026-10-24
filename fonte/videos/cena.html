@@ -15,7 +15,7 @@ body::before{content:"";position:absolute;inset:0;background-image:radial-gradie
 .parte::before{content:"";width:26px;height:4px;border-radius:4px;background:currentColor}
 .parte.erro{color:var(--erro)}.parte.desafio{color:var(--ouro)}.parte.fechamento{color:var(--certo)}
 /* palco */
-.palco{position:absolute;top:412px;left:40px;right:40px;height:796px;transition:opacity .7s ease,filter .7s ease}
+.palco{position:absolute;top:412px;left:40px;right:40px;height:796px;clip-path:inset(-60px -60px -24px -60px);transition:opacity .7s ease,filter .7s ease}
 .palco.fundo{opacity:.32;filter:saturate(.5)}
 .entra{opacity:0;transform:translateY(18px);filter:blur(3px);transition:opacity .8s ease,transform .9s cubic-bezier(.22,1,.36,1),filter .8s ease}
 .entra.on{opacity:1;transform:none;filter:none}
@@ -45,6 +45,7 @@ mark{background:linear-gradient(transparent 62%,var(--ouro-suave) 62%);color:inh
 .cartao.ruim.on .alvo::after{transform:scaleX(1)}
 .cartao.bom{background:var(--certo-suave);box-shadow:none;border:3px solid #B9E0C8}
 .cartao.bom .alvo{color:var(--certo)}
+.cartao.ruim,.cartao.bom{padding-right:110px}
 .marcador{position:absolute;right:26px;top:50%;margin-top:-30px;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-size:34px;font-weight:900;color:#fff}
 .ruim .marcador{background:var(--erro)}.bom .marcador{background:var(--certo)}
 /* desafio */
@@ -222,6 +223,22 @@ window.tocarAula = function (A) {
       document.body.appendChild(f); }
   }
 
+  /* diálogo: mostra o balão novo e recolhe os mais antigos (até 3 na tela e sem passar do palco), sem salto */
+  function revelar(card) {
+    var cont = card.parentNode, z = parseFloat(cont.style.zoom) || 1;
+    var vis = Array.prototype.filter.call(cont.querySelectorAll('.balao'), function (b) { return !b.classList.contains('escondido') && !b.classList.contains('vai'); });
+    card.classList.remove('escondido'); void card.offsetWidth;
+    var excesso = (card.offsetTop + card.offsetHeight) * z - palco.clientHeight, saem = 0;
+    while (vis.length && (vis.length >= 3 || excesso > 0)) { var v = vis.shift(); excesso -= (v.offsetHeight + 26) * z; recolher(v); saem++; }
+    /* o novo só aparece quando os antigos já abriram espaço */
+    if (saem) setTimeout(function () { card.classList.add('on'); }, 420); else card.classList.add('on');
+  }
+  function recolher(b) {
+    b.style.height = b.offsetHeight + 'px'; b.style.overflow = 'hidden'; void b.offsetWidth; b.classList.add('vai');
+    b.style.transition = 'height .5s cubic-bezier(.22,1,.36,1),padding .5s cubic-bezier(.22,1,.36,1),margin .5s cubic-bezier(.22,1,.36,1),opacity .25s';
+    b.style.height = '0px'; b.style.paddingTop = b.style.paddingBottom = '0px'; b.style.marginBottom = '-26px';
+    setTimeout(function () { b.classList.add('escondido'); }, 520);
+  }
   function frases(t) { var out = []; String(t).split(/(?<=[.!?])\s+/).filter(Boolean).forEach(function (f) {
     while (f.length > 72) { var meio = f.length / 2, cs = [], re = /, | e | que | mas /g, m; while ((m = re.exec(f))) cs.push(m.index + (m[0][0] === ',' ? 1 : 0));
       if (!cs.length) break; var k = cs.reduce(function (a, b) { return Math.abs(b - meio) < Math.abs(a - meio) ? b : a; }); out.push(f.slice(0, k).trim()); f = f.slice(k).trim(); }
@@ -236,9 +253,7 @@ window.tocarAula = function (A) {
       var card = null, ws = palavras(f.texto), tot = f.texto.length, acc = 0;
       var cands = palco.querySelectorAll('.conteudo:not(.sai) [data-texto]'), b0 = norm(f.texto); cands.forEach(function (cdt) { if (!card && norm(cdt.dataset.texto) === b0) card = cdt; }); if (!card) { var melhor = 0; cands.forEach(function (cdt) { var a = norm(cdt.dataset.texto); if ((a.indexOf(b0) >= 0 || b0.indexOf(a) >= 0) && a.length > melhor) { melhor = a.length; card = cdt; } }); }
       if (!card) { leg.className = 'legenda on alvo'; document.getElementById('quem').innerHTML = '<span class="av" style="background:' + cor + '">' + esc(String(f.voz)[0]) + '</span>' + esc(f.voz); document.getElementById('fala').innerHTML = esc(f.texto); return; }
-      if (card.classList.contains('escondido')) { card.classList.remove('escondido'); void card.offsetWidth; card.classList.add('on');
-        var vis = Array.prototype.filter.call(card.parentNode.querySelectorAll('.balao'), function (b) { return !b.classList.contains('escondido'); });
-        if (vis.length > 3) { var velho = vis[0]; velho.classList.add('vai'); setTimeout(function () { velho.classList.add('escondido'); }, 320); } }
+      if (card.classList.contains('escondido')) revelar(card);
       var cws = card.querySelectorAll('.alvo w'); card.classList.add('falando');
       var q = card.querySelector('.quem'); if (q) q.innerHTML = '<span class="av" style="background:' + cor + '">' + esc(String(f.voz)[0]) + '</span>' + esc(f.voz);
       ws.forEach(function (w, i) { var t = f.ini + dur * (acc / tot) * .92; acc += w.length + 1; em(t, function () { if (cws[i]) cws[i].classList.add('dito'); }); });
