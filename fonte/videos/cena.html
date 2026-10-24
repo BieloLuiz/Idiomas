@@ -15,7 +15,8 @@ body::before{content:"";position:absolute;inset:0;background-image:radial-gradie
 .parte::before{content:"";width:26px;height:4px;border-radius:4px;background:currentColor}
 .parte.erro{color:var(--erro)}.parte.desafio{color:var(--ouro)}.parte.fechamento{color:var(--certo)}
 /* palco */
-.palco{position:absolute;top:180px;left:40px;right:40px;height:680px;display:flex;flex-direction:column;justify-content:center;gap:22px}
+.palco{position:absolute;top:180px;left:40px;right:40px;height:680px;display:flex;flex-direction:column;justify-content:center;gap:22px;transition:opacity .4s,filter .4s}
+.palco.fundo{opacity:.32;filter:saturate(.5)}
 .entra{opacity:0;transform:translateY(26px) scale(.98);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
 .entra.on{opacity:1;transform:none}
 .manchete{font-size:50px;font-weight:800;line-height:1.1;letter-spacing:-.02em}
@@ -65,7 +66,7 @@ mark{background:linear-gradient(transparent 62%,var(--ouro-suave) 62%);color:inh
 .legenda{position:absolute;left:40px;right:210px;bottom:64px;background:var(--papel);border-radius:28px;padding:22px 28px 24px;box-shadow:0 18px 40px rgba(31,41,55,.09);opacity:0;transform:translateY(10px);transition:opacity .25s,transform .25s}
 .legenda.on{opacity:1;transform:none}
 .legenda small{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--marca);margin-bottom:8px}
-.legenda p{margin:0;font-size:31px;line-height:1.36;font-weight:600}
+.legenda p{margin:0;font-size:34px;line-height:1.36;font-weight:700}
 .legenda p w{color:#C3C8D2;transition:color .12s}.legenda p w.dito{color:var(--tinta)}
 .legenda.alvo p{font-weight:800;font-size:36px}.legenda.alvo p w.dito{color:var(--marca)}
 .eco{position:absolute;right:22px;bottom:70px;width:180px}
@@ -152,19 +153,32 @@ window.tocarAula = function (A) {
       document.body.appendChild(f); }
   }
 
+  function frases(t) { return String(t).split(/(?<=[.!?])\s+/).filter(Boolean); }
   function legendar(f) {
-    var ws = palavras(f.texto), dur = Math.max(.5, f.fim - f.ini), tot = f.texto.length, acc = 0;
-    var cor = CORES[String(f.voz).toLowerCase()] || '#5366C7';
-    document.getElementById('quem').innerHTML = f.alvo ? '<span class="av" style="background:' + cor + '">' + esc(String(f.voz)[0]) + '</span>' + esc(f.voz) : 'Eco explica';
-    var p = document.getElementById('fala'); p.innerHTML = ws.map(function (w) { return '<w>' + esc(w) + '</w>'; }).join(' ');
-    leg.className = 'legenda on' + (f.alvo ? ' alvo' : '');
-    var spans = p.querySelectorAll('w'), card = null;
-    if (f.alvo) palco.querySelectorAll('[data-texto]').forEach(function (cdt) { if (!card && norm(cdt.dataset.texto).indexOf(norm(f.texto)) >= 0 || !card && norm(f.texto).indexOf(norm(cdt.dataset.texto)) >= 0) card = cdt; });
-    var cws = card ? card.querySelectorAll('.alvo w') : [];
-    if (card) { card.classList.add('falando'); var q = card.querySelector('.quem'); if (q) q.innerHTML = '<span class="av" style="background:' + cor + '">' + esc(String(f.voz)[0]) + '</span>' + esc(f.voz); }
-    ws.forEach(function (w, i) { var t = f.ini + dur * (acc / tot) * .92; acc += w.length + 1;
-      em(t, function () { spans[i].classList.add('dito'); if (cws[i]) cws[i].classList.add('dito'); }); });
-    em(f.fim, function () { if (card) { card.classList.remove('falando'); cws.forEach ? cws.forEach(function (x) { x.classList.remove('dito'); }) : 0; } });
+    var dur = Math.max(.5, f.fim - f.ini), cor = CORES[String(f.voz).toLowerCase()] || '#5366C7';
+    if (f.alvo) {
+      /* fala no idioma: a legenda some, o foco é o cartão */
+      leg.className = 'legenda'; palco.classList.remove('fundo');
+      var card = null, ws = palavras(f.texto), tot = f.texto.length, acc = 0;
+      palco.querySelectorAll('[data-texto]').forEach(function (cdt) { var a = norm(cdt.dataset.texto), b = norm(f.texto); if (!card && (a.indexOf(b) >= 0 || b.indexOf(a) >= 0)) card = cdt; });
+      if (!card) { leg.className = 'legenda on alvo'; document.getElementById('quem').innerHTML = '<span class="av" style="background:' + cor + '">' + esc(String(f.voz)[0]) + '</span>' + esc(f.voz); document.getElementById('fala').innerHTML = esc(f.texto); return; }
+      var cws = card.querySelectorAll('.alvo w'); card.classList.add('falando');
+      var q = card.querySelector('.quem'); if (q) q.innerHTML = '<span class="av" style="background:' + cor + '">' + esc(String(f.voz)[0]) + '</span>' + esc(f.voz);
+      ws.forEach(function (w, i) { var t = f.ini + dur * (acc / tot) * .92; acc += w.length + 1; em(t, function () { if (cws[i]) cws[i].classList.add('dito'); }); });
+      em(f.fim, function () { card.classList.remove('falando'); cws.forEach(function (x) { x.classList.remove('dito'); }); });
+      return;
+    }
+    /* narração: uma frase por vez, palco ao fundo */
+    palco.classList.add('fundo'); document.getElementById('quem').textContent = 'Eco explica'; leg.className = 'legenda on';
+    var fs = frases(f.texto), total = f.texto.length, ini = f.ini;
+    fs.forEach(function (fr) {
+      var d = dur * (fr.length + 1) / (total + 1), comeco = ini; ini += d;
+      em(comeco, function () {
+        var ws = palavras(fr), p = document.getElementById('fala'); p.innerHTML = ws.map(function (w) { return '<w>' + esc(w) + '</w>'; }).join(' ');
+        var sp = p.querySelectorAll('w'), acc = 0; ws.forEach(function (w, i) { var t = comeco + d * (acc / fr.length) * .9; acc += w.length + 1; em(t, function () { sp[i].classList.add('dito'); }); });
+      });
+    });
+    em(f.fim, function () { palco.classList.remove('fundo'); });
   }
 
   A.cenas.forEach(function (c, ci) {
@@ -185,7 +199,7 @@ window.tocarAula = function (A) {
     });
     if (c.pausa) {
       em(c.pausa[0], function () {
-        leg.className = 'legenda'; var rel = document.getElementById('relogio'); if (!rel) return; rel.classList.add('on');
+        leg.className = 'legenda'; palco.classList.remove('fundo'); var rel = document.getElementById('relogio'); if (!rel) return; rel.classList.add('on');
         var tot = c.pausa[1] - c.pausa[0], arco = document.getElementById('arco');
         arco.style.transition = 'stroke-dashoffset ' + tot + 's linear'; requestAnimationFrame(function () { arco.style.strokeDashoffset = '465'; });
         for (var s = 0; s < Math.ceil(tot); s++) (function (s) { em(c.pausa[0] + s, function () { document.getElementById('seg').textContent = Math.ceil(tot) - s; }); })(s);
