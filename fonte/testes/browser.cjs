@@ -50,6 +50,15 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await page.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Praticar',exact:true}).click();await page.getByRole('button',{name:/Quero explorar/}).click();await page.getByRole('button',{name:'Todas as descobertas',exact:true}).click();
   await page.getByRole('button',{name:'Ler o diálogo',exact:true}).click();assert.equal(await page.locator('p[lang=fr]').count()>0,true);assert.ok(!(await page.locator('main.page').textContent()).includes('I would like a coffee'));
   await page.screenshot({path:'.build/frances-mobile.png',fullPage:true});
+  {const dx=await page.evaluate(()=>DESCOBRIR.fr[48]);
+   await page.getByRole('button',{name:'Voltar às atividades',exact:true}).click();await page.getByRole('button',{name:'Ler uma história',exact:true}).click();
+   assert.equal(await page.locator('p.descobrir-texto[lang=fr]').textContent(),dx.historia.texto);
+   const qs=page.locator('.descobrir-pergunta');for(let i=0;i<dx.historia.perguntas.length;i++){const q=dx.historia.perguntas[i];const errada=(q.correta+1)%q.opcoes.length;await qs.nth(i).getByRole('button',{name:q.opcoes[errada],exact:true}).click();await qs.nth(i).getByRole('button',{name:q.opcoes[q.correta],exact:true}).click();}
+   await page.getByText('Seu tempo valeu a pena.').waitFor();
+   await page.goto(url);await page.locator('.ux-greeting').waitFor();await page.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Praticar',exact:true}).click();await page.getByRole('button',{name:/Quero explorar/}).click();await page.getByRole('button',{name:'Todas as descobertas',exact:true}).click();
+   await page.getByRole('button',{name:'Adivinhar a palavra',exact:true}).click();await page.locator('input.studio-field').fill('mauvaise');await page.getByRole('button',{name:'Conferir',exact:true}).click();assert.equal(await page.locator('.descobrir-ok').count(),0);
+   await page.locator('input.studio-field').fill(dx.enigma.resposta.toUpperCase());await page.getByRole('button',{name:'Conferir',exact:true}).click();await page.locator('.descobrir-ok').waitFor();assert.ok((await page.locator('.descobrir-ok').textContent()).includes(dx.enigma.traducao));
+   console.log('PASS: Descobrir tem história com perguntas e enigma com conferência tolerante');}
   await context.close();console.log('PASS: curso C1 correto, Descobrir em francês e larguras 320/390/820/1280');
 
   /* revisão 2: escuta, preferências, dificuldades e configurações */
