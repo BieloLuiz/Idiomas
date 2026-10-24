@@ -6,88 +6,22 @@
   "f": "en-a1-u01-01.mp3"
  },
  {
-  "role": "en_sarah",
-  "text": "Hi! I'm Sarah.",
-  "lang": "en",
-  "f": "en-a1-u01-02.mp3"
- },
- {
   "role": "pt_narrador",
   "text": "Observe as duas peças que formam o começo. Elas podem se unir pelo apóstrofo.",
   "lang": "pt",
   "f": "en-a1-u01-03.mp3"
  },
  {
-  "role": "en_sarah",
-  "text": "I'm Sarah.",
-  "lang": "en",
-  "f": "en-a1-u01-04.mp3"
- },
- {
-  "role": "en_lucas",
-  "text": "I'm Lucas.",
-  "lang": "en",
-  "f": "en-a1-u01-05.mp3"
- },
- {
-  "role": "en_narradora",
-  "text": "I'm Emma.",
-  "lang": "en",
-  "f": "en-a1-u01-06.mp3"
- },
- {
   "role": "pt_narrador",
   "text": "O começo continua igual. Acrescentamos uma palavra para indicar origem e trocamos o país.",
   "lang": "pt",
-  "f": "en-a1-u01-07.mp3"
- },
- {
-  "role": "en_lucas",
-  "text": "I'm from Brazil.",
-  "lang": "en",
-  "f": "en-a1-u01-08.mp3"
- },
- {
-  "role": "en_sarah",
-  "text": "I'm from Canada.",
-  "lang": "en",
-  "f": "en-a1-u01-09.mp3"
- },
- {
-  "role": "en_vendedor",
-  "text": "I'm from Japan.",
-  "lang": "en",
-  "f": "en-a1-u01-10.mp3"
+  "f": "en-a1-u01-06.mp3"
  },
  {
   "role": "pt_narrador",
   "text": "Agora observe como as mesmas estruturas aparecem em uma conversa real.",
   "lang": "pt",
-  "f": "en-a1-u01-11.mp3"
- },
- {
-  "role": "en_sarah",
-  "text": "Hi, I'm Sarah.",
-  "lang": "en",
-  "f": "en-a1-u01-12.mp3"
- },
- {
-  "role": "en_lucas",
-  "text": "Hi, I'm Lucas.",
-  "lang": "en",
-  "f": "en-a1-u01-13.mp3"
- },
- {
-  "role": "en_sarah",
-  "text": "I'm from Canada.",
-  "lang": "en",
-  "f": "en-a1-u01-14.mp3"
- },
- {
-  "role": "en_lucas",
-  "text": "I'm from Brazil.",
-  "lang": "en",
-  "f": "en-a1-u01-15.mp3"
+  "f": "en-a1-u01-10.mp3"
  },
  {
   "role": "pt_narrador",
@@ -96,22 +30,10 @@
   "f": "en-a1-u01-16.mp3"
  },
  {
-  "role": "en_lucas",
-  "text": "I'm from Brazil.",
-  "lang": "en",
-  "f": "en-a1-u01-17.mp3"
- },
- {
   "role": "pt_narrador",
   "text": "Qual opção completa a frase corretamente?",
   "lang": "pt",
   "f": "en-a1-u01-18.mp3"
- },
- {
-  "role": "en_vendedor",
-  "text": "I'm from Japan.",
-  "lang": "en",
-  "f": "en-a1-u01-19.mp3"
  },
  {
   "role": "pt_narrador",
@@ -124,12 +46,6 @@
   "text": "Agora precisamos indicar a origem. Qual palavra encaixa?",
   "lang": "pt",
   "f": "en-a1-u01-21.mp3"
- },
- {
-  "role": "en_lucas",
-  "text": "I'm from Brazil.",
-  "lang": "en",
-  "f": "en-a1-u01-22.mp3"
  },
  {
   "role": "pt_narrador",
@@ -150,141 +66,57 @@
   "f": "fr-a1-u01-01.mp3"
  },
  {
-  "role": "fr_claire",
-  "text": "Bonjour ! Je m'appelle Claire.",
-  "lang": "fr",
-  "f": "fr-a1-u01-02.mp3"
- },
- {
   "role": "pt_narrador",
   "text": "Observe as três partes da expressão. O apóstrofo substitui a última letra da segunda.",
   "lang": "pt",
   "f": "fr-a1-u01-03.mp3"
  },
  {
-  "role": "fr_claire",
-  "text": "Je m'appelle Claire.",
-  "lang": "fr",
-  "f": "fr-a1-u01-04.mp3"
- },
- {
-  "role": "fr_lucas",
-  "text": "Je m'appelle Lucas.",
-  "lang": "fr",
-  "f": "fr-a1-u01-05.mp3"
- },
- {
-  "role": "fr_ines",
-  "text": "Je m'appelle Inès.",
-  "lang": "fr",
-  "f": "fr-a1-u01-06.mp3"
- },
- {
   "role": "pt_narrador",
-  "text": "Podemos usar outra estrutura para indicar origem. Observe que apenas o nome do país muda.",
+  "text": "Para dizer de onde você vem, use esta estrutura com o nome do país.",
   "lang": "pt",
-  "f": "fr-a1-u01-07.mp3"
- },
- {
-  "role": "fr_lucas",
-  "text": "Je viens du Brésil.",
-  "lang": "fr",
-  "f": "fr-a1-u01-08.mp3"
- },
- {
-  "role": "fr_claire",
-  "text": "Je viens du Canada.",
-  "lang": "fr",
-  "f": "fr-a1-u01-09.mp3"
- },
- {
-  "role": "fr_antoine",
-  "text": "Je viens du Japon.",
-  "lang": "fr",
-  "f": "fr-a1-u01-10.mp3"
+  "f": "fr-a1-u01-06.mp3"
  },
  {
   "role": "pt_narrador",
   "text": "Observe como Claire e Lucas combinam apresentação e origem.",
   "lang": "pt",
-  "f": "fr-a1-u01-11.mp3"
- },
- {
-  "role": "fr_claire",
-  "text": "Bonjour, je m'appelle Claire.",
-  "lang": "fr",
-  "f": "fr-a1-u01-12.mp3"
- },
- {
-  "role": "fr_lucas",
-  "text": "Bonjour, je m'appelle Lucas.",
-  "lang": "fr",
-  "f": "fr-a1-u01-13.mp3"
- },
- {
-  "role": "fr_claire",
-  "text": "Je viens du Canada.",
-  "lang": "fr",
-  "f": "fr-a1-u01-14.mp3"
- },
- {
-  "role": "fr_lucas",
-  "text": "Je viens du Brésil.",
-  "lang": "fr",
-  "f": "fr-a1-u01-15.mp3"
+  "f": "fr-a1-u01-09.mp3"
  },
  {
   "role": "pt_narrador",
   "text": "Ao dizer seu nome, mantenha a parte reflexiva. Antes da vogal, ela fica abreviada.",
   "lang": "pt",
-  "f": "fr-a1-u01-16.mp3"
- },
- {
-  "role": "fr_claire",
-  "text": "Je m'appelle Claire.",
-  "lang": "fr",
-  "f": "fr-a1-u01-17.mp3"
+  "f": "fr-a1-u01-14.mp3"
  },
  {
   "role": "pt_narrador",
   "text": "Qual opção completa a apresentação sem deixar nenhuma parte de fora?",
   "lang": "pt",
-  "f": "fr-a1-u01-18.mp3"
- },
- {
-  "role": "fr_claire",
-  "text": "Je m'appelle Claire.",
-  "lang": "fr",
-  "f": "fr-a1-u01-19.mp3"
+  "f": "fr-a1-u01-16.mp3"
  },
  {
   "role": "pt_narrador",
   "text": "A forma abreviada preserva a parte reflexiva.",
   "lang": "pt",
-  "f": "fr-a1-u01-20.mp3"
+  "f": "fr-a1-u01-18.mp3"
  },
  {
   "role": "pt_narrador",
   "text": "Observe o nome do país. Qual das duas opções usamos aqui?",
   "lang": "pt",
-  "f": "fr-a1-u01-21.mp3"
- },
- {
-  "role": "fr_lucas",
-  "text": "Je viens du Brésil.",
-  "lang": "fr",
-  "f": "fr-a1-u01-22.mp3"
+  "f": "fr-a1-u01-19.mp3"
  },
  {
   "role": "pt_narrador",
   "text": "Nesse caso, a preposição e o artigo masculino se contraem.",
   "lang": "pt",
-  "f": "fr-a1-u01-23.mp3"
+  "f": "fr-a1-u01-21.mp3"
  },
  {
   "role": "pt_narrador",
   "text": "Experimente trocar o nome pelo seu e praticar em voz alta.",
   "lang": "pt",
-  "f": "fr-a1-u01-24.mp3"
+  "f": "fr-a1-u01-22.mp3"
  }
 ]

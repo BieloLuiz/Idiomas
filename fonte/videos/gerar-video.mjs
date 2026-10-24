@@ -2,7 +2,7 @@
    Uso:  node fonte/videos/gerar-video.mjs <roteiro.json> [saida] [--manifesto]
    - Vozes: procura fonte/videos/narracao/<aula>-<n>.mp3 (gerados no PC pelo ElevenLabs a partir do manifesto).
      Sem o arquivo, as falas no idioma usam o trecho já gravado do curso e a narração fica muda, com legenda (prévia).
-   - --manifesto: só escreve fonte/videos/narracao/manifest-video.json para o gerar-audio-11labs.ps1.
+   - --manifesto: confere se toda fala no idioma existe no áudio do curso e escreve só a narração em fonte/videos/narracao/manifest-video.json para o gerar-audio-11labs.ps1.
    Requer: build feito (assets/ com var AUDIO), ffmpeg e Playwright/Chromium (CHROMIUM_PATH opcional). */
 import fs from 'node:fs'; import path from 'node:path'; import { execFileSync } from 'node:child_process'; import { fileURLToPath } from 'node:url';
 const AQUI = path.dirname(fileURLToPath(import.meta.url)), RAIZ = path.resolve(AQUI, '../..');
@@ -13,19 +13,20 @@ const roteiro = JSON.parse(fs.readFileSync(roteiroArq, 'utf8'));
 const narr = path.join(AQUI, 'narracao');
 
 function falasNumeradas(a) { let n = 0; return a.cenas.flatMap(c => c.falas.map(f => ({ ...f, n: ++n, arquivo: `${a.id}-${String(n).padStart(2, '0')}.mp3` }))); }
-if (soManifesto) {
-  const itens = roteiro.aulas.flatMap(a => falasNumeradas(a).map(f => ({ role: f.voz === 'narrador' ? 'pt_narrador' : PAPEL[a.idioma][f.voz.toLowerCase()], text: f.texto, lang: f.voz === 'narrador' ? 'pt' : a.idioma, f: f.arquivo })));
-  const faltam = itens.filter(i => !i.role); if (faltam.length) throw new Error('voz desconhecida: ' + faltam.map(i => i.text).join(' | '));
-  fs.writeFileSync(path.join(narr, 'manifest-video.json'), JSON.stringify(itens, null, 1));
-  console.log(itens.length, 'falas no manifesto;', itens.reduce((s, i) => s + i.text.length, 0), 'caracteres'); process.exit(0);
-}
-
 /* mapa de trechos gravados do curso (var AUDIO no pacote montado) */
 const pacote = fs.readdirSync(path.join(RAIZ, 'assets')).map(f => path.join(RAIZ, 'assets', f)).find(f => f.endsWith('.js') && fs.readFileSync(f, 'utf8').includes('var AUDIO='));
 const AUDIO = (() => { const s = fs.readFileSync(pacote, 'utf8'), m = s.slice(s.indexOf('var AUDIO=') + 10); let d = 0, j = 0;
   for (; j < m.length; j++) { const c = m[j]; if (c === '"') { j++; while (m[j] !== '"') { if (m[j] === '\\') j++; j++; } continue; } if (c === '{') d++; if (c === '}' && !--d) break; }
   return JSON.parse(m.slice(0, j + 1)).sprites; })();
 function trecho(lang, texto) { for (const k of Object.keys(AUDIO)) { if (!k.startsWith(lang + '|')) continue; const sp = AUDIO[k]; for (const [chave, c] of Object.entries(sp.clips)) if (chave.slice(chave.indexOf('|') + 1) === texto) return { arq: path.join(RAIZ, sp.file), de: c[0], dur: c[1] - c[0] }; } return null; }
+if (soManifesto) {
+  /* só a narração em português: as falas no idioma usam o áudio já gravado do curso */
+  const sem = [], itens = roteiro.aulas.flatMap(a => falasNumeradas(a).filter(f => { if (f.voz === 'narrador') return true; if (!trecho(a.idioma, f.texto)) sem.push(f.texto); return false; })
+    .map(f => ({ role: 'pt_narrador', text: f.texto, lang: 'pt', f: f.arquivo })));
+  if (sem.length) throw new Error('falas no idioma sem áudio no curso (troque por frases existentes): ' + sem.join(' | '));
+  fs.writeFileSync(path.join(narr, 'manifest-video.json'), JSON.stringify(itens, null, 1));
+  console.log(itens.length, 'falas do narrador no manifesto;', itens.reduce((s, i) => s + i.text.length, 0), 'caracteres'); process.exit(0);
+}
 function duracao(arq) { return Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', arq]).toString().trim()); }
 
 fs.mkdirSync(saida, { recursive: true });
