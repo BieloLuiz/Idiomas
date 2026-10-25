@@ -1,0 +1,1209 @@
+{
+ "gramatica": [
+  {
+   "id": "frase",
+   "titulo": "A frase básica: o sujeito sempre aparece",
+   "resumo": "Como em inglês, o francês não deixa o sujeito escondido.",
+   "unidade": 1,
+   "blocos": [
+    {
+     "h": "Sujeito obrigatório",
+     "p": "Em português dizemos “Sou brasileiro”. Em francês o sujeito aparece sempre: Je suis brésilien. Quando não há pessoa, usamos il (impessoal) ou ça.",
+     "ex": [
+      [
+       "Je suis brésilien.",
+       "Sou brasileiro."
+      ],
+      [
+       "Il pleut.",
+       "Está chovendo."
+      ],
+      [
+       "Il est tard.",
+       "É tarde."
+      ],
+      [
+       "Il y a un café ici.",
+       "Tem um café aqui."
+      ]
+     ]
+    },
+    {
+     "h": "On = a gente",
+     "p": "Na conversa, on substitui nous e usa o verbo como il.",
+     "ex": [
+      [
+       "On va au cinéma ?",
+       "A gente vai ao cinema?"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pronomes",
+   "titulo": "Pronomes sujeito e tu ou vous",
+   "resumo": "Je, tu, il, elle, on, nous, vous, ils, elles.",
+   "unidade": 1,
+   "blocos": [
+    {
+     "h": "Tabela",
+     "tabela": [
+      [
+       "Francês",
+       "Português"
+      ],
+      [
+       "je (j' antes de vogal)",
+       "eu"
+      ],
+      [
+       "tu",
+       "você (íntimo)"
+      ],
+      [
+       "il / elle",
+       "ele / ela"
+      ],
+      [
+       "on",
+       "a gente"
+      ],
+      [
+       "nous",
+       "nós"
+      ],
+      [
+       "vous",
+       "vocês; o senhor, a senhora"
+      ],
+      [
+       "ils / elles",
+       "eles / elas"
+      ]
+     ]
+    },
+    {
+     "h": "Tu ou vous?",
+     "p": "Tu com amigos, família e crianças. Vous com desconhecidos, no trabalho e com mais de uma pessoa. Na dúvida, use vous.",
+     "ex": [
+      [
+       "Tu vas bien ?",
+       "Você está bem? (informal)"
+      ],
+      [
+       "Vous êtes d'où ?",
+       "O senhor é de onde?"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etre-avoir",
+   "titulo": "Être e avoir",
+   "resumo": "Os dois verbos mais importantes, e base do passado.",
+   "unidade": 2,
+   "blocos": [
+    {
+     "h": "Presente",
+     "tabela": [
+      [
+       "Pessoa",
+       "être (ser, estar)",
+       "avoir (ter)"
+      ],
+      [
+       "je / j'",
+       "je suis",
+       "j'ai"
+      ],
+      [
+       "tu",
+       "tu es",
+       "tu as"
+      ],
+      [
+       "il, elle, on",
+       "il est",
+       "il a"
+      ],
+      [
+       "nous",
+       "nous sommes",
+       "nous avons"
+      ],
+      [
+       "vous",
+       "vous êtes",
+       "vous avez"
+      ],
+      [
+       "ils, elles",
+       "ils sont",
+       "ils ont"
+      ]
+     ]
+    },
+    {
+     "h": "Expressões com avoir",
+     "p": "Idade, fome, frio e calor usam avoir, não être.",
+     "ex": [
+      [
+       "J'ai trente ans.",
+       "Tenho trinta anos."
+      ],
+      [
+       "J'ai faim.",
+       "Estou com fome."
+      ],
+      [
+       "Tu as froid ?",
+       "Você está com frio?"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "presente",
+   "titulo": "Presente: verbos em -er e irregulares",
+   "resumo": "Os verbos em -er seguem um modelo; os mais usados são irregulares.",
+   "unidade": 6,
+   "blocos": [
+    {
+     "h": "Modelo -er: parler",
+     "p": "As formas je, tu, il e ils soam iguais: o final não se pronuncia.",
+     "tabela": [
+      [
+       "Pessoa",
+       "parler (falar)"
+      ],
+      [
+       "je",
+       "parle"
+      ],
+      [
+       "tu",
+       "parles"
+      ],
+      [
+       "il, elle, on",
+       "parle"
+      ],
+      [
+       "nous",
+       "parlons"
+      ],
+      [
+       "vous",
+       "parlez"
+      ],
+      [
+       "ils, elles",
+       "parlent"
+      ]
+     ]
+    },
+    {
+     "h": "Irregulares do dia a dia",
+     "tabela": [
+      [
+       "Verbo",
+       "je",
+       "nous",
+       "ils"
+      ],
+      [
+       "aller (ir)",
+       "je vais",
+       "nous allons",
+       "ils vont"
+      ],
+      [
+       "faire (fazer)",
+       "je fais",
+       "nous faisons",
+       "ils font"
+      ],
+      [
+       "venir (vir)",
+       "je viens",
+       "nous venons",
+       "ils viennent"
+      ],
+      [
+       "pouvoir (poder)",
+       "je peux",
+       "nous pouvons",
+       "ils peuvent"
+      ],
+      [
+       "vouloir (querer)",
+       "je veux",
+       "nous voulons",
+       "ils veulent"
+      ],
+      [
+       "prendre (pegar)",
+       "je prends",
+       "nous prenons",
+       "ils prennent"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "artigos",
+   "titulo": "Gênero, artigos e contrações",
+   "resumo": "Todo substantivo é masculino ou feminino, e o artigo mostra qual.",
+   "unidade": 4,
+   "blocos": [
+    {
+     "h": "Artigos",
+     "tabela": [
+      [
+       "",
+       "Masculino",
+       "Feminino",
+       "Plural"
+      ],
+      [
+       "definido (o, a)",
+       "le (l')",
+       "la (l')",
+       "les"
+      ],
+      [
+       "indefinido (um, uma)",
+       "un",
+       "une",
+       "des"
+      ],
+      [
+       "partitivo (um pouco de)",
+       "du (de l')",
+       "de la (de l')",
+       "des"
+      ]
+     ]
+    },
+    {
+     "h": "Contrações com à e de",
+     "p": "À e de se juntam com le e les.",
+     "tabela": [
+      [
+       "Junta",
+       "Vira",
+       "Exemplo"
+      ],
+      [
+       "à + le",
+       "au",
+       "au cinéma"
+      ],
+      [
+       "à + les",
+       "aux",
+       "aux États-Unis"
+      ],
+      [
+       "de + le",
+       "du",
+       "du Brésil"
+      ],
+      [
+       "de + les",
+       "des",
+       "des enfants"
+      ]
+     ]
+    },
+    {
+     "h": "O gênero nem sempre bate com o português",
+     "ex": [
+      [
+       "la mer",
+       "o mar"
+      ],
+      [
+       "le voyage",
+       "a viagem"
+      ],
+      [
+       "la fleur",
+       "a flor (igual)"
+      ],
+      [
+       "le lait",
+       "o leite (igual)"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "negacao",
+   "titulo": "Negação: ne… pas e companhia",
+   "resumo": "A negação abraça o verbo.",
+   "unidade": 3,
+   "blocos": [
+    {
+     "h": "As formas",
+     "tabela": [
+      [
+       "Forma",
+       "Sentido",
+       "Exemplo"
+      ],
+      [
+       "ne… pas",
+       "não",
+       "Je ne parle pas anglais."
+      ],
+      [
+       "ne… jamais",
+       "nunca",
+       "Il ne mange jamais de viande."
+      ],
+      [
+       "ne… plus",
+       "não… mais",
+       "Je n'habite plus ici."
+      ],
+      [
+       "ne… rien",
+       "nada",
+       "Je ne vois rien."
+      ],
+      [
+       "ne… personne",
+       "ninguém",
+       "Je ne connais personne."
+      ]
+     ]
+    },
+    {
+     "h": "Un, une, des viram de",
+     "p": "Depois da negação, un, une, des e du, de la viram de (d').",
+     "ex": [
+      [
+       "J'ai une voiture. → Je n'ai pas de voiture.",
+       "Tenho carro. → Não tenho carro."
+      ],
+      [
+       "Je bois du café. → Je ne bois pas de café.",
+       "Bebo café. → Não bebo café."
+      ]
+     ]
+    },
+    {
+     "h": "Na fala",
+     "p": "Na conversa informal, o ne costuma cair: J'sais pas. Na escrita, mantenha."
+    }
+   ]
+  },
+  {
+   "id": "perguntas",
+   "titulo": "Perguntas",
+   "resumo": "Três jeitos de perguntar, do mais informal ao mais formal.",
+   "unidade": 3,
+   "blocos": [
+    {
+     "h": "Três jeitos",
+     "tabela": [
+      [
+       "Jeito",
+       "Registro",
+       "Exemplo"
+      ],
+      [
+       "só a entonação",
+       "conversa",
+       "Tu viens ?"
+      ],
+      [
+       "est-ce que",
+       "neutro",
+       "Est-ce que tu viens ?"
+      ],
+      [
+       "inversão",
+       "formal",
+       "Viens-tu ?"
+      ]
+     ]
+    },
+    {
+     "h": "Palavras de pergunta",
+     "tabela": [
+      [
+       "Francês",
+       "Português"
+      ],
+      [
+       "qui",
+       "quem"
+      ],
+      [
+       "que / quoi",
+       "o que"
+      ],
+      [
+       "où",
+       "onde"
+      ],
+      [
+       "quand",
+       "quando"
+      ],
+      [
+       "comment",
+       "como"
+      ],
+      [
+       "pourquoi",
+       "por que"
+      ],
+      [
+       "combien",
+       "quanto"
+      ],
+      [
+       "quel, quelle",
+       "qual"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "passe-compose",
+   "titulo": "Passé composé: o que aconteceu",
+   "resumo": "Avoir ou être + particípio.",
+   "unidade": 13,
+   "blocos": [
+    {
+     "h": "Com avoir (a maioria)",
+     "p": "Particípio dos verbos -er termina em -é: parlé, mangé. Irregulares comuns:",
+     "tabela": [
+      [
+       "Verbo",
+       "Particípio"
+      ],
+      [
+       "faire",
+       "fait"
+      ],
+      [
+       "prendre",
+       "pris"
+      ],
+      [
+       "avoir",
+       "eu"
+      ],
+      [
+       "être",
+       "été"
+      ],
+      [
+       "voir",
+       "vu"
+      ],
+      [
+       "dire",
+       "dit"
+      ],
+      [
+       "mettre",
+       "mis"
+      ],
+      [
+       "boire",
+       "bu"
+      ]
+     ]
+    },
+    {
+     "h": "Com être",
+     "p": "Verbos de movimento ou mudança (aller, venir, partir, arriver, entrer, sortir, naître, mourir, rester, tomber…) e todos os pronominais (se lever). O particípio concorda com o sujeito.",
+     "ex": [
+      [
+       "Elle est partie à huit heures.",
+       "Ela saiu às oito."
+      ],
+      [
+       "Nous sommes allés à Paris.",
+       "Fomos a Paris."
+      ],
+      [
+       "Je me suis levé tôt.",
+       "Levantei cedo."
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "imparfait",
+   "titulo": "Imparfait ou passé composé?",
+   "resumo": "Cenário e hábito x acontecimento.",
+   "unidade": 16,
+   "blocos": [
+    {
+     "h": "A diferença",
+     "tabela": [
+      [
+       "Imparfait",
+       "Passé composé"
+      ],
+      [
+       "descrição, cenário",
+       "fato concluído"
+      ],
+      [
+       "hábito no passado (costumava)",
+       "algo que aconteceu uma vez"
+      ],
+      [
+       "ação em andamento",
+       "ação que interrompe"
+      ]
+     ]
+    },
+    {
+     "h": "Juntos na mesma frase",
+     "ex": [
+      [
+       "Il pleuvait quand je suis sorti.",
+       "Chovia quando eu saí."
+      ],
+      [
+       "Quand j'étais petit, j'allais à la plage.",
+       "Quando eu era pequeno, ia à praia."
+      ]
+     ]
+    },
+    {
+     "h": "Como formar",
+     "p": "Pegue a forma nous do presente, tire -ons e some -ais, -ais, -ait, -ions, -iez, -aient. Exceção: être → j'étais."
+    }
+   ]
+  },
+  {
+   "id": "futuro",
+   "titulo": "Futuro: aller + infinitivo e futur simple",
+   "resumo": "O futuro próximo é o mais usado na conversa.",
+   "unidade": 12,
+   "blocos": [
+    {
+     "h": "Futur proche",
+     "p": "Aller no presente + verbo no infinitivo.",
+     "ex": [
+      [
+       "Je vais travailler demain.",
+       "Vou trabalhar amanhã."
+      ],
+      [
+       "On va manger ensemble ?",
+       "A gente vai comer junto?"
+      ]
+     ]
+    },
+    {
+     "h": "Futur simple",
+     "p": "Infinitivo + -ai, -as, -a, -ons, -ez, -ont. Alguns radicais mudam.",
+     "tabela": [
+      [
+       "Verbo",
+       "je"
+      ],
+      [
+       "parler",
+       "je parlerai"
+      ],
+      [
+       "être",
+       "je serai"
+      ],
+      [
+       "avoir",
+       "j'aurai"
+      ],
+      [
+       "aller",
+       "j'irai"
+      ],
+      [
+       "faire",
+       "je ferai"
+      ],
+      [
+       "pouvoir",
+       "je pourrai"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "adjetivos",
+   "titulo": "Adjetivos: concordância e posição",
+   "resumo": "Concordam em gênero e número; quase sempre vêm depois.",
+   "unidade": 17,
+   "blocos": [
+    {
+     "h": "Concordância",
+     "p": "Feminino: + e. Plural: + s.",
+     "ex": [
+      [
+       "un ami content / une amie contente",
+       "um amigo contente / uma amiga contente"
+      ],
+      [
+       "des livres intéressants",
+       "livros interessantes"
+      ]
+     ]
+    },
+    {
+     "h": "Os que vêm antes",
+     "p": "Adjetivos curtos e comuns vêm antes do substantivo: beau, bon, grand, petit, jeune, vieux, nouveau, joli, mauvais.",
+     "ex": [
+      [
+       "un grand pays",
+       "um país grande"
+      ],
+      [
+       "une petite maison",
+       "uma casa pequena"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pronomes-obj",
+   "titulo": "Pronomes le, lui, y e en",
+   "resumo": "Substituem pessoas, coisas, lugares e quantidades, antes do verbo.",
+   "unidade": 19,
+   "blocos": [
+    {
+     "h": "Qual usar",
+     "tabela": [
+      [
+       "Pronome",
+       "Substitui",
+       "Exemplo"
+      ],
+      [
+       "le, la, les",
+       "objeto direto (o, a)",
+       "Je la vois. (Marie)"
+      ],
+      [
+       "lui, leur",
+       "pessoa com à (lhe)",
+       "Je lui parle. (à Marie)"
+      ],
+      [
+       "y",
+       "lugar; à + coisa",
+       "J'y vais. (au cinéma)"
+      ],
+      [
+       "en",
+       "de + coisa; quantidade",
+       "J'en veux deux. (des pommes)"
+      ]
+     ]
+    },
+    {
+     "h": "Posição",
+     "p": "Antes do verbo conjugado; com infinitivo, antes do infinitivo.",
+     "ex": [
+      [
+       "Je ne le connais pas.",
+       "Não o conheço."
+      ],
+      [
+       "Je vais lui téléphoner.",
+       "Vou ligar para ele."
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "condicional",
+   "titulo": "Condicional e frases com si",
+   "resumo": "Pedir com educação e imaginar.",
+   "unidade": 27,
+   "blocos": [
+    {
+     "h": "Cortesia",
+     "ex": [
+      [
+       "Je voudrais un café, s'il vous plaît.",
+       "Eu queria um café, por favor."
+      ],
+      [
+       "Pourriez-vous m'aider ?",
+       "O senhor poderia me ajudar?"
+      ]
+     ]
+    },
+    {
+     "h": "Si: as três combinações",
+     "tabela": [
+      [
+       "Situação",
+       "Estrutura",
+       "Exemplo"
+      ],
+      [
+       "possível",
+       "si + présent, futur",
+       "S'il pleut, je resterai ici."
+      ],
+      [
+       "imaginária",
+       "si + imparfait, conditionnel",
+       "Si j'avais le temps, je voyagerais."
+      ],
+      [
+       "passado irreal",
+       "si + plus-que-parfait, conditionnel passé",
+       "Si j'avais su, je serais venu."
+      ]
+     ]
+    },
+    {
+     "h": "Atenção",
+     "p": "Depois de si, nunca use futuro nem condicional: Si j'avais, não Si j'aurais."
+    }
+   ]
+  },
+  {
+   "id": "subjonctif",
+   "titulo": "Subjonctif: il faut que…",
+   "resumo": "Depois de necessidade, desejo, emoção e dúvida.",
+   "unidade": 28,
+   "blocos": [
+    {
+     "h": "Quando aparece",
+     "ex": [
+      [
+       "Il faut que tu viennes.",
+       "É preciso que você venha."
+      ],
+      [
+       "Je veux qu'il parte.",
+       "Quero que ele vá embora."
+      ],
+      [
+       "Bien qu'il soit tard, on continue.",
+       "Embora seja tarde, continuamos."
+      ]
+     ]
+    },
+    {
+     "h": "Penser que",
+     "p": "Je pense que + indicativo (certeza). Je ne pense pas que + subjonctif (dúvida).",
+     "ex": [
+      [
+       "Je pense qu'il est là.",
+       "Acho que ele está aí."
+      ],
+      [
+       "Je ne pense pas qu'il soit là.",
+       "Não acho que ele esteja aí."
+      ]
+     ]
+    },
+    {
+     "h": "Formas que mais aparecem",
+     "tabela": [
+      [
+       "Verbo",
+       "que je",
+       "que nous"
+      ],
+      [
+       "être",
+       "sois",
+       "soyons"
+      ],
+      [
+       "avoir",
+       "aie",
+       "ayons"
+      ],
+      [
+       "aller",
+       "aille",
+       "allions"
+      ],
+      [
+       "faire",
+       "fasse",
+       "fassions"
+      ],
+      [
+       "pouvoir",
+       "puisse",
+       "puissions"
+      ],
+      [
+       "venir",
+       "vienne",
+       "venions"
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "erros": [
+  {
+   "errado": "Je suis 30 ans.",
+   "certo": "J'ai 30 ans.",
+   "porque": "Idade usa avoir."
+  },
+  {
+   "errado": "Je suis faim.",
+   "certo": "J'ai faim.",
+   "porque": "Fome, sede, frio e calor usam avoir."
+  },
+  {
+   "errado": "Est tard.",
+   "certo": "Il est tard.",
+   "porque": "O sujeito impessoal il precisa aparecer."
+  },
+  {
+   "errado": "Je vais à le cinéma.",
+   "certo": "Je vais au cinéma.",
+   "porque": "À + le vira au."
+  },
+  {
+   "errado": "Je n'ai pas une voiture.",
+   "certo": "Je n'ai pas de voiture.",
+   "porque": "Na negação, un/une/des viram de."
+  },
+  {
+   "errado": "Je bois lait.",
+   "certo": "Je bois du lait.",
+   "porque": "Quantidade indefinida pede partitivo (du, de la)."
+  },
+  {
+   "errado": "Je suis allé à la France.",
+   "certo": "Je suis allé en France.",
+   "porque": "Países femininos usam en; masculinos, au."
+  },
+  {
+   "errado": "J'ai allé.",
+   "certo": "Je suis allé(e).",
+   "porque": "Aller forma o passado com être."
+  },
+  {
+   "errado": "Elle est arrivé.",
+   "certo": "Elle est arrivée.",
+   "porque": "Com être, o particípio concorda com o sujeito."
+  },
+  {
+   "errado": "Je te aime.",
+   "certo": "Je t'aime.",
+   "porque": "Te, me, le, la perdem a vogal antes de vogal."
+  },
+  {
+   "errado": "Je pense que il vient.",
+   "certo": "Je pense qu'il vient.",
+   "porque": "Que vira qu' antes de vogal."
+  },
+  {
+   "errado": "Il faut que tu vas.",
+   "certo": "Il faut que tu ailles.",
+   "porque": "Il faut que pede subjonctif."
+  },
+  {
+   "errado": "Si j'aurais le temps…",
+   "certo": "Si j'avais le temps…",
+   "porque": "Depois de si, use imparfait, não condicional."
+  },
+  {
+   "errado": "le mer, la voyage",
+   "certo": "la mer, le voyage",
+   "porque": "O gênero pode ser diferente do português; aprenda a palavra com o artigo."
+  },
+  {
+   "errado": "J'habite ici pour trois ans.",
+   "certo": "J'habite ici depuis trois ans.",
+   "porque": "Algo que começou e continua usa depuis."
+  },
+  {
+   "errado": "C'est très bon pour moi.",
+   "certo": "Ça me va. / Ça me convient.",
+   "porque": "Para dizer “para mim está bom” (combinado), use ça me va."
+  }
+ ],
+ "cognatos": [
+  {
+   "palavra": "attendre",
+   "parece": "atender",
+   "significa": "esperar",
+   "ex": [
+    "J'attends le bus.",
+    "Estou esperando o ônibus."
+   ]
+  },
+  {
+   "palavra": "entendre",
+   "parece": "entender",
+   "significa": "ouvir",
+   "ex": [
+    "Tu m'entends ?",
+    "Você está me ouvindo?"
+   ]
+  },
+  {
+   "palavra": "rester",
+   "parece": "restar",
+   "significa": "ficar",
+   "ex": [
+    "Je reste à la maison.",
+    "Fico em casa."
+   ]
+  },
+  {
+   "palavra": "une tasse",
+   "parece": "taça",
+   "significa": "xícara",
+   "ex": [
+    "Une tasse de café.",
+    "Uma xícara de café."
+   ]
+  },
+  {
+   "palavra": "prétendre",
+   "parece": "pretender",
+   "significa": "afirmar, alegar",
+   "ex": [
+    "Il prétend qu'il était malade.",
+    "Ele afirma que estava doente."
+   ]
+  },
+  {
+   "palavra": "le collège",
+   "parece": "colégio (qualquer)",
+   "significa": "escola dos 11 aos 15 anos",
+   "ex": [
+    "Mon fils est au collège.",
+    "Meu filho está no fundamental II."
+   ]
+  },
+  {
+   "palavra": "la librairie",
+   "parece": "biblioteca",
+   "significa": "livraria (biblioteca = bibliothèque)",
+   "ex": [
+    "J'achète des livres à la librairie.",
+    "Compro livros na livraria."
+   ]
+  },
+  {
+   "palavra": "déjeuner",
+   "parece": "desjejum",
+   "significa": "almoçar (café da manhã = petit-déjeuner)",
+   "ex": [
+    "On déjeune à midi.",
+    "A gente almoça ao meio-dia."
+   ]
+  },
+  {
+   "palavra": "le bureau",
+   "parece": "burocracia",
+   "significa": "escritório; mesa de trabalho",
+   "ex": [
+    "Je suis au bureau.",
+    "Estou no escritório."
+   ]
+  },
+  {
+   "palavra": "une cave",
+   "parece": "cava",
+   "significa": "porão; adega",
+   "ex": [
+    "Le vin est à la cave.",
+    "O vinho está na adega."
+   ]
+  },
+  {
+   "palavra": "exprès",
+   "parece": "expresso",
+   "significa": "de propósito",
+   "ex": [
+    "Il l'a fait exprès.",
+    "Ele fez de propósito."
+   ]
+  },
+  {
+   "palavra": "subir",
+   "parece": "subir",
+   "significa": "sofrer, passar por (subir = monter)",
+   "ex": [
+    "Ils ont subi des pertes.",
+    "Eles sofreram perdas."
+   ]
+  },
+  {
+   "palavra": "propre",
+   "parece": "próprio (só)",
+   "significa": "limpo; ou próprio, conforme a posição",
+   "ex": [
+    "Une chambre propre.",
+    "Um quarto limpo."
+   ]
+  },
+  {
+   "palavra": "la journée",
+   "parece": "jornada",
+   "significa": "o dia (duração)",
+   "ex": [
+    "Bonne journée !",
+    "Tenha um bom dia!"
+   ]
+  },
+  {
+   "palavra": "ancien",
+   "parece": "ancião",
+   "significa": "antigo; ex- (antes do substantivo)",
+   "ex": [
+    "Mon ancien chef.",
+    "Meu ex-chefe."
+   ]
+  },
+  {
+   "palavra": "la figure",
+   "parece": "figura",
+   "significa": "rosto (também figura)",
+   "ex": [
+    "Il a une figure fatiguée.",
+    "Ele está com o rosto cansado."
+   ]
+  }
+ ],
+ "sons": [
+  {
+   "som": "u francês",
+   "como": "Faça bico como para dizer “u” e, sem mexer os lábios, diga “i”. É diferente de ou.",
+   "palavras": [
+    "tu",
+    "rue",
+    "salut",
+    "bus"
+   ],
+   "frase": "Salut, tu prends le bus ?"
+  },
+  {
+   "som": "ou x u",
+   "como": "Ou soa como o nosso “u”. U é o som de bico com “i”. Trocar muda a palavra.",
+   "palavras": [
+    "tout",
+    "tu",
+    "roue",
+    "rue"
+   ],
+   "frase": "Tout est dans la rue."
+  },
+  {
+   "som": "eu / œ",
+   "como": "Lábios arredondados dizendo “ê” (deux) ou “é” aberto (peur). Não existe em português.",
+   "palavras": [
+    "deux",
+    "bleu",
+    "peur",
+    "heure"
+   ],
+   "frase": "Il est deux heures."
+  },
+  {
+   "som": "vogais nasais",
+   "como": "O ar sai pelo nariz e não se pronuncia o n ou m. São quatro: an/en, on, in, un.",
+   "palavras": [
+    "enfant",
+    "bonjour",
+    "vin",
+    "lundi"
+   ],
+   "frase": "Bonjour, un vin blanc ?"
+  },
+  {
+   "som": "r francês",
+   "como": "Sai do fundo da garganta, parecido com o “r” carioca de “carro”, mas mais suave. Nunca o “r” enrolado.",
+   "palavras": [
+    "Paris",
+    "rouge",
+    "merci",
+    "bonjour"
+   ],
+   "frase": "Merci pour le livre rouge."
+  },
+  {
+   "som": "e que some",
+   "como": "O e sem acento no meio ou no fim da palavra muitas vezes cai: samedi soa “sam'di”.",
+   "palavras": [
+    "samedi",
+    "petit",
+    "maintenant",
+    "médecin"
+   ],
+   "frase": "Je viens samedi."
+  },
+  {
+   "som": "consoante final muda",
+   "como": "A maioria das consoantes finais não se pronuncia. As que costumam soar: c, r, f, l (pense em “CaReFuL”).",
+   "palavras": [
+    "petit",
+    "grand",
+    "avec",
+    "sur"
+   ],
+   "frase": "Un petit café avec du sucre."
+  },
+  {
+   "som": "liaison",
+   "como": "Uma consoante final muda passa a soar quando a próxima palavra começa com vogal.",
+   "palavras": [
+    "les amis",
+    "vous avez",
+    "un enfant",
+    "deux heures"
+   ],
+   "frase": "Vous avez des amis ?"
+  },
+  {
+   "som": "oi",
+   "como": "Soa como “uá”.",
+   "palavras": [
+    "moi",
+    "toi",
+    "trois",
+    "voiture"
+   ],
+   "frase": "Toi et moi, on prend la voiture."
+  },
+  {
+   "som": "é, è, ê",
+   "como": "É é fechado (como em “você”). È e ê são abertos (como em “café”, mas mais longo).",
+   "palavras": [
+    "été",
+    "père",
+    "fête",
+    "mère"
+   ],
+   "frase": "Mon père fête son anniversaire en été."
+  }
+ ]
+}

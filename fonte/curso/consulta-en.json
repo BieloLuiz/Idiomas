@@ -1,0 +1,113 @@
+{
+ "gramatica": [
+  {"id": "frase", "titulo": "A frase básica: sujeito + verbo + complemento", "resumo": "Toda frase em inglês tem sujeito e verbo, nessa ordem.", "unidade": 1, "blocos": [
+   {"h": "O sujeito nunca some", "p": "Em português dizemos “Sou do Brasil” sem o “eu”. Em inglês o sujeito precisa aparecer sempre: I'm from Brazil. Quando não existe uma pessoa, usamos it ou there.", "ex": [["I'm from Brazil.", "Sou do Brasil."], ["It's raining.", "Está chovendo."], ["It's late.", "É tarde."], ["There is a bank near here.", "Tem um banco aqui perto."]]},
+   {"h": "A ordem é fixa", "p": "Quem faz + ação + o resto. Lugar e tempo costumam ir no fim.", "tabela": [["Sujeito", "Verbo", "Complemento"], ["I", "drink", "coffee every morning."], ["My sister", "lives", "in Recife."], ["They", "are", "at work now."]]}
+  ]},
+  {"id": "pronomes", "titulo": "Pronomes: I, me, my, mine", "resumo": "Cada pessoa tem uma forma para sujeito, objeto e posse.", "unidade": 4, "blocos": [
+   {"h": "Tabela dos pronomes", "p": "Use a coluna certa conforme o papel da palavra na frase.", "tabela": [["Sujeito", "Objeto", "Possessivo + coisa", "Possessivo sozinho"], ["I", "me", "my", "mine"], ["you", "you", "your", "yours"], ["he", "him", "his", "his"], ["she", "her", "her", "hers"], ["it", "it", "its", "—"], ["we", "us", "our", "ours"], ["they", "them", "their", "theirs"]]},
+   {"h": "Na prática", "p": "Sujeito antes do verbo; objeto depois do verbo ou de preposição.", "ex": [["She calls me every day.", "Ela me liga todo dia."], ["This is my phone. That one is yours.", "Este é o meu celular. Aquele é o seu."], ["I'm with them.", "Estou com eles."]]}
+  ]},
+  {"id": "be", "titulo": "Verbo to be: ser e estar", "resumo": "Um verbo só para “ser” e “estar”, no presente e no passado.", "unidade": 2, "blocos": [
+   {"h": "Presente", "p": "Na fala, quase sempre usamos a forma curta (I'm, you're, she's).", "tabela": [["Pessoa", "Afirmativa", "Negativa", "Pergunta"], ["I", "I'm", "I'm not", "Am I…?"], ["you, we, they", "you're", "you aren't", "Are you…?"], ["he, she, it", "she's", "she isn't", "Is she…?"]]},
+   {"h": "Passado", "p": "Was para I, he, she, it. Were para you, we, they.", "ex": [["I was tired yesterday.", "Eu estava cansado ontem."], ["Were they at home?", "Eles estavam em casa?"]]},
+   {"h": "Idade usa to be", "p": "Em inglês a gente “é” a idade, não “tem”.", "ex": [["I'm thirty.", "Tenho trinta anos."], ["How old are you?", "Quantos anos você tem?"]]}
+  ]},
+  {"id": "presente", "titulo": "Present simple: rotina e fatos", "resumo": "Para hábitos e verdades. Atenção ao -s com he, she, it.", "unidade": 6, "blocos": [
+   {"h": "Afirmativa", "p": "O verbo não muda, exceto com he, she, it: ganha -s (ou -es).", "tabela": [["Sujeito", "Verbo"], ["I, you, we, they", "work"], ["he, she, it", "works"], ["", "goes, watches, studies"]]},
+   {"h": "Negativa e pergunta: do e does", "p": "Do/does carregam o tempo; o verbo principal volta à forma básica (sem -s).", "ex": [["I don't eat meat.", "Eu não como carne."], ["She doesn't work on Sundays.", "Ela não trabalha aos domingos."], ["Do you like coffee?", "Você gosta de café?"], ["Does he live here?", "Ele mora aqui?"]]}
+  ]},
+  {"id": "continuo", "titulo": "Present continuous: agora", "resumo": "Am, is, are + verbo com -ing, para o que está acontecendo.", "unidade": 12, "blocos": [
+   {"h": "Como formar", "p": "Verbo to be + verbo com -ing.", "ex": [["I'm cooking now.", "Estou cozinhando agora."], ["They aren't listening.", "Eles não estão ouvindo."], ["Are you working today?", "Você está trabalhando hoje?"]]},
+   {"h": "Rotina ou agora?", "p": "Rotina usa present simple; o que está em andamento usa -ing. Também serve para compromissos já marcados.", "ex": [["I work in a bank, but today I'm working from home.", "Trabalho num banco, mas hoje estou trabalhando de casa."], ["I'm meeting Ana on Friday.", "Vou encontrar a Ana na sexta (está combinado)."]]}
+  ]},
+  {"id": "passado", "titulo": "Past simple: o que aconteceu", "resumo": "Verbos regulares com -ed, irregulares decorados e did nas perguntas.", "unidade": 13, "blocos": [
+   {"h": "Regulares e irregulares", "p": "Regulares ganham -ed (worked, played). Os irregulares mais comuns:", "tabela": [["Verbo", "Passado", "Sentido"], ["go", "went", "ir"], ["have", "had", "ter"], ["do", "did", "fazer"], ["see", "saw", "ver"], ["make", "made", "fazer, produzir"], ["get", "got", "conseguir, pegar"], ["come", "came", "vir"], ["say", "said", "dizer"], ["take", "took", "pegar, levar"], ["eat", "ate", "comer"]]},
+   {"h": "Negativa e pergunta com did", "p": "Did já mostra o passado, então o verbo principal fica na forma básica.", "ex": [["I didn't go to work.", "Eu não fui trabalhar."], ["Did you see the message?", "Você viu a mensagem?"]]}
+  ]},
+  {"id": "futuro", "titulo": "Futuro: going to, will e -ing", "resumo": "Três jeitos de falar do futuro, cada um com uma ideia.", "unidade": 18, "blocos": [
+   {"h": "Qual usar", "p": "A escolha depende de quando você decidiu e do quanto tem certeza.", "tabela": [["Forma", "Quando usar", "Exemplo"], ["going to", "plano já decidido", "I'm going to study tonight."], ["will", "decisão na hora, promessa, previsão", "I'll help you."], ["am/is/are + -ing", "compromisso marcado", "I'm flying to Lisbon on Monday."]]},
+   {"h": "Exemplos", "ex": [["It's going to rain. Look at the sky!", "Vai chover. Olha o céu!"], ["I think she'll like it.", "Acho que ela vai gostar."], ["I won't tell anyone.", "Não vou contar para ninguém."]]}
+  ]},
+  {"id": "perguntas", "titulo": "Perguntas e negativas", "resumo": "Em inglês, quem vai para a frente é o auxiliar.", "unidade": 3, "blocos": [
+   {"h": "O auxiliar manda", "p": "Com to be e com modais (can, will…), o próprio verbo vai para a frente. Com os outros verbos, entra do, does ou did.", "ex": [["Is she Brazilian?", "Ela é brasileira?"], ["Can you swim?", "Você sabe nadar?"], ["Where do you live?", "Onde você mora?"], ["Why did they leave?", "Por que eles foram embora?"]]},
+   {"h": "Palavras de pergunta", "tabela": [["Inglês", "Português"], ["what", "o que, qual"], ["where", "onde"], ["when", "quando"], ["who", "quem"], ["why", "por que"], ["how", "como"], ["how much / how many", "quanto / quantos"], ["how old", "quantos anos"]]}
+  ]},
+  {"id": "artigos", "titulo": "Artigos e plural", "resumo": "A, an, the, e quando não usar artigo.", "unidade": 5, "blocos": [
+   {"h": "A, an e the", "p": "A antes de som de consoante, an antes de som de vogal. The para algo específico. Para falar de coisas em geral, não use artigo.", "ex": [["a book, an apple, an hour", "um livro, uma maçã, uma hora"], ["The book on the table is mine.", "O livro na mesa é meu."], ["Life is short.", "A vida é curta."], ["I love dogs.", "Eu adoro cachorros."]]},
+   {"h": "Plural", "p": "Em geral +s; +es depois de s, sh, ch, x. Alguns são irregulares.", "tabela": [["Singular", "Plural"], ["car", "cars"], ["box", "boxes"], ["city", "cities"], ["man / woman", "men / women"], ["child", "children"], ["person", "people"]]}
+  ]},
+  {"id": "preposicoes", "titulo": "In, on, at: tempo e lugar", "resumo": "Do maior para o mais exato: in, on, at.", "unidade": 15, "blocos": [
+   {"h": "Tempo", "tabela": [["Preposição", "Usar com", "Exemplos"], ["in", "meses, anos, partes do dia", "in May, in 2020, in the morning"], ["on", "dias e datas", "on Monday, on May 5th"], ["at", "horas e momentos", "at 7 o'clock, at night, at the weekend (Reino Unido)"]]},
+   {"h": "Lugar", "tabela": [["Preposição", "Ideia", "Exemplos"], ["in", "dentro, cidade, país", "in the box, in São Paulo"], ["on", "em cima, rua", "on the table, on Paulista Avenue"], ["at", "ponto, endereço, evento", "at home, at work, at 25 Oak Street"]]}
+  ]},
+  {"id": "modais", "titulo": "Modais: can, should, must, have to", "resumo": "Sem to depois deles e sem -s com he, she, it.", "unidade": 11, "blocos": [
+   {"h": "Sentidos", "tabela": [["Modal", "Sentido", "Exemplo"], ["can", "saber, conseguir, poder", "I can drive."], ["could", "podia; pedido educado", "Could you help me?"], ["should", "conselho", "You should rest."], ["must", "obrigação forte, regra", "You must wear a seatbelt."], ["have to", "obrigação (externa)", "I have to work tomorrow."], ["don't have to", "não precisa", "You don't have to come."], ["mustn't", "é proibido", "You mustn't smoke here."]]},
+   {"h": "Cuidado", "p": "Diga “She can swim”, nunca “She cans swim” nem “She can to swim”."}
+  ]},
+  {"id": "perfect", "titulo": "Present perfect: have done", "resumo": "Liga o passado ao presente: experiências, resultados e duração.", "unidade": 20, "blocos": [
+   {"h": "Como formar", "p": "Have/has + particípio (worked, been, seen, done…).", "ex": [["I've been to Chile.", "Já fui ao Chile."], ["She has just arrived.", "Ela acabou de chegar."], ["Have you finished yet?", "Você já terminou?"], ["We've lived here for ten years.", "Moramos aqui há dez anos."]]},
+   {"h": "Present perfect ou past simple?", "p": "Se você diz quando aconteceu (yesterday, in 2019, last week), use o past simple.", "ex": [["I've seen this film.", "Já vi esse filme (não importa quando)."], ["I saw this film last week.", "Vi esse filme semana passada."]]},
+   {"h": "For e since", "p": "For + período (for two years); since + ponto de partida (since 2019, since Monday)."}
+  ]},
+  {"id": "comparar", "titulo": "Comparativos e superlativos", "resumo": "Mais que, o mais: -er/-est ou more/most.", "unidade": 16, "blocos": [
+   {"h": "Regra", "tabela": [["Adjetivo", "Comparativo", "Superlativo"], ["cheap (curto)", "cheaper than", "the cheapest"], ["big", "bigger than", "the biggest"], ["easy", "easier than", "the easiest"], ["expensive (longo)", "more expensive than", "the most expensive"], ["good", "better than", "the best"], ["bad", "worse than", "the worst"]]},
+   {"h": "Igualdade", "ex": [["She's as tall as her brother.", "Ela é tão alta quanto o irmão."], ["It isn't as cold as yesterday.", "Não está tão frio quanto ontem."]]}
+  ]},
+  {"id": "condicionais", "titulo": "Condicionais: if", "resumo": "Real, imaginário e passado que não aconteceu.", "unidade": 28, "blocos": [
+   {"h": "Os quatro tipos", "tabela": [["Tipo", "Estrutura", "Exemplo"], ["fato geral", "if + presente, presente", "If you heat ice, it melts."], ["possível", "if + presente, will", "If it rains, I'll stay home."], ["imaginário", "if + passado, would", "If I had time, I would travel."], ["passado irreal", "if + had + particípio, would have", "If I had known, I would have called."]]},
+   {"h": "If I were you", "p": "Para conselhos, usamos were com todas as pessoas.", "ex": [["If I were you, I'd talk to her.", "Se eu fosse você, falaria com ela."]]}
+  ]}
+ ],
+ "erros": [
+  {"errado": "I have 30 years.", "certo": "I'm 30 (years old).", "porque": "Idade usa to be, não have."},
+  {"errado": "Is raining.", "certo": "It's raining.", "porque": "O sujeito precisa aparecer, mesmo que seja it."},
+  {"errado": "Have many people here.", "certo": "There are many people here.", "porque": "“Tem” no sentido de “existe” é there is / there are."},
+  {"errado": "She don't like it.", "certo": "She doesn't like it.", "porque": "Com he, she, it, use doesn't."},
+  {"errado": "I didn't went.", "certo": "I didn't go.", "porque": "Depois de did/didn't o verbo fica na forma básica."},
+  {"errado": "I am agree.", "certo": "I agree.", "porque": "Agree já é verbo; não leva am."},
+  {"errado": "Make a question.", "certo": "Ask a question.", "porque": "Pergunta se “pede”: ask."},
+  {"errado": "I like very much pizza.", "certo": "I really like pizza.", "porque": "Very much vai no fim, ou use really antes do verbo."},
+  {"errado": "People is nice.", "certo": "People are nice.", "porque": "People é plural."},
+  {"errado": "Some informations / advices", "certo": "Some information / advice", "porque": "Essas palavras não têm plural em inglês."},
+  {"errado": "It depends of you.", "certo": "It depends on you.", "porque": "Depend pede on."},
+  {"errado": "Explain me this.", "certo": "Explain this to me.", "porque": "Explain pede to antes da pessoa."},
+  {"errado": "I live here since 2019.", "certo": "I've lived here since 2019.", "porque": "Para algo que começou e continua, use present perfect."},
+  {"errado": "The life is beautiful.", "certo": "Life is beautiful.", "porque": "Para falar de coisas em geral, não use the."},
+  {"errado": "I'm going to the home.", "certo": "I'm going home.", "porque": "Home não leva artigo nem to."},
+  {"errado": "I stayed in home.", "certo": "I stayed at home.", "porque": "Em casa é at home."},
+  {"errado": "Do a party.", "certo": "Have (throw) a party.", "porque": "Festa se “tem” ou se “dá”: have / throw."}
+ ],
+ "cognatos": [
+  {"palavra": "actually", "parece": "atualmente", "significa": "na verdade", "ex": ["Actually, I'm from Recife.", "Na verdade, sou de Recife."]},
+  {"palavra": "pretend", "parece": "pretender", "significa": "fingir", "ex": ["He pretended to be asleep.", "Ele fingiu que estava dormindo."]},
+  {"palavra": "push", "parece": "puxar", "significa": "empurrar", "ex": ["Push the door.", "Empurre a porta."]},
+  {"palavra": "parents", "parece": "parentes", "significa": "pais (pai e mãe)", "ex": ["My parents live in Bahia.", "Meus pais moram na Bahia."]},
+  {"palavra": "college", "parece": "colégio", "significa": "faculdade", "ex": ["She's in college.", "Ela está na faculdade."]},
+  {"palavra": "library", "parece": "livraria", "significa": "biblioteca", "ex": ["I study at the library.", "Estudo na biblioteca."]},
+  {"palavra": "lunch", "parece": "lanche", "significa": "almoço", "ex": ["Let's have lunch.", "Vamos almoçar."]},
+  {"palavra": "sensible", "parece": "sensível", "significa": "sensato", "ex": ["That's a sensible idea.", "É uma ideia sensata."]},
+  {"palavra": "eventually", "parece": "eventualmente", "significa": "no fim, finalmente", "ex": ["Eventually, we found the hotel.", "No fim, encontramos o hotel."]},
+  {"palavra": "attend", "parece": "atender", "significa": "comparecer, frequentar", "ex": ["I attended the meeting.", "Participei da reunião."]},
+  {"palavra": "realize", "parece": "realizar", "significa": "perceber", "ex": ["I realized I was late.", "Percebi que estava atrasado."]},
+  {"palavra": "costume", "parece": "costume", "significa": "fantasia", "ex": ["A carnival costume.", "Uma fantasia de carnaval."]},
+  {"palavra": "novel", "parece": "novela", "significa": "romance (livro)", "ex": ["I'm reading a novel.", "Estou lendo um romance."]},
+  {"palavra": "prejudice", "parece": "prejuízo", "significa": "preconceito", "ex": ["We must fight prejudice.", "Precisamos combater o preconceito."]},
+  {"palavra": "resume", "parece": "resumir", "significa": "retomar", "ex": ["We'll resume after lunch.", "Retomaremos depois do almoço."]},
+  {"palavra": "fabric", "parece": "fábrica", "significa": "tecido", "ex": ["This fabric is soft.", "Este tecido é macio."]},
+  {"palavra": "injury", "parece": "injúria", "significa": "lesão, ferimento", "ex": ["He has a knee injury.", "Ele tem uma lesão no joelho."]},
+  {"palavra": "exquisite", "parece": "esquisito", "significa": "requintado, primoroso", "ex": ["An exquisite dinner.", "Um jantar requintado."]}
+ ],
+ "sons": [
+  {"som": "th surdo", "como": "Ponha a ponta da língua entre os dentes e solte o ar, sem voz. Não é “f”, “s” nem “t”.", "palavras": ["think", "three", "thank you", "birthday"], "frase": "I think it's Thursday."},
+  {"som": "th sonoro", "como": "Mesma posição da língua, mas com a voz vibrando. Não é “d”.", "palavras": ["this", "that", "mother", "the"], "frase": "This is my mother."},
+  {"som": "r", "como": "A língua não encosta em nada: fica curvada para trás, como no “r” caipira. Nunca é o “r” da garganta.", "palavras": ["red", "right", "very", "car"], "frase": "The red car is very fast."},
+  {"som": "h no começo", "como": "É um sopro leve, como quem embaça um vidro. Não é o “r” forte do português.", "palavras": ["house", "happy", "hello", "hotel"], "frase": "Hello, how are you?"},
+  {"som": "vogal curta x longa", "como": "O “i” curto é relaxado e rápido; o longo é esticado. Mudar muda a palavra.", "palavras": ["ship", "sheep", "live", "leave"], "frase": "Did you live there or leave?"},
+  {"som": "schwa (ə)", "como": "Uma vogal fraca e neutra, como um “â” bem curto. Aparece nas sílabas sem força.", "palavras": ["about", "banana", "doctor", "the"], "frase": "The doctor is about to arrive."},
+  {"som": "l no fim", "como": "Mantenha a língua no céu da boca até o fim. Não vire “u” como em “Brasiu”.", "palavras": ["well", "people", "school", "feel"], "frase": "I feel well at school."},
+  {"som": "consoante no fim", "como": "Termine na consoante, sem acrescentar “i”: “big”, não “bigui”.", "palavras": ["big", "bad", "good", "stop"], "frase": "Stop the big bus."},
+  {"som": "-ed do passado", "como": "Três sons: t (worked), d (played), id só depois de t ou d (wanted, needed).", "palavras": ["worked", "played", "wanted", "needed"], "frase": "I worked and played, then I rested."},
+  {"som": "-s final", "como": "Três sons: s (cats), z (dogs), iz depois de s, x, ch, sh (boxes, watches).", "palavras": ["cats", "dogs", "boxes", "watches"], "frase": "She watches dogs and cats."}
+ ]
+}

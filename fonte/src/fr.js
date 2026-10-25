@@ -306,7 +306,7 @@ module.exports = [
      p:["Alguns verbos de rotina vêm com <b>me</b>, <b>te</b>, <b>se</b>, como “eu me levanto” em português: <b>je me lève</b>, <b>tu te lèves</b>, <b>il se lève</b>. Por enquanto, guarde as formas com je e tu."],
      ex:[["Je me lève à sept heures.","Eu me levanto às sete."],["Tu te couches à quelle heure ?","A que horas você vai dormir?"]]},
     {h:"Partes do dia",
-     p:["<b>le matin</b> (de manhã), <b>l'après-midi</b> (à tarde), <b>le soir</b> (à noite), <b>la nuit</b> (de madrugada). Sem preposição: <b>je travaille le matin</b>."],
+     p:["<b>le matin</b> (de manhã), <b>l'après-midi</b> (à tarde), <b>le soir</b> (à noite), <b>la nuit</b> (a noite, mais tarde). Sem preposição: <b>je travaille le matin</b>."],
      ex:[["tous les jours","todos os dias"],["le soir","à noite"]]}
   ],
   vocab:[
@@ -354,7 +354,7 @@ module.exports = [
   lines:[
     ["Lucas","Qu'est-ce que tu fais dans la vie ?","O que você faz da vida?"],
     ["Claire","Je suis infirmière. Je travaille dans un hôpital.","Sou enfermeira. Trabalho num hospital."],
-    ["Lucas","Tu travailles la nuit ?","Você trabalha de madrugada?"],
+    ["Lucas","Tu travailles la nuit ?","Você trabalha à noite?"],
     ["Claire","Oui, parfois. Et toi, tu fais quoi ?","Às vezes. E você, faz o quê?"],
     ["Lucas","Je suis développeur. Je travaille à la maison.","Sou desenvolvedor. Trabalho em casa."],
     ["Claire","Et ta sœur ?","E a sua irmã?"],
@@ -555,7 +555,7 @@ module.exports = [
     ["Lucas","Pardon, madame, il y a une pharmacie près d'ici ?","Com licença, senhora, tem uma farmácia aqui perto?"],
     ["Sophie","Oui, dans la rue Victor-Hugo.","Tem, na rua Victor-Hugo."],
     ["Lucas","Comment je vais là-bas ?","Como eu chego lá?"],
-    ["Sophie","Allez tout droit, puis tournez à gauche après la banque.","Siga reto e depois vire à esquerda depois do banco."],
+    ["Sophie","Allez tout droit, puis tournez à gauche après la banque.","Siga reto e vire à esquerda depois do banco."],
     ["Lucas","À gauche après la banque, d'accord.","À esquerda depois do banco, certo."],
     ["Sophie","La pharmacie est à côté de la boulangerie, en face du parc.","A farmácia fica ao lado da padaria, em frente ao parque."],
     ["Lucas","C'est loin ?","É longe?"],

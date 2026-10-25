@@ -1,0 +1,76 @@
+{
+ "en": [
+  {"nivel": "A1", "perguntas": [
+   {"f": "She ___ a teacher.", "o": ["is", "are", "am"], "a": 0},
+   {"f": "I ___ two brothers.", "o": ["have", "has", "am"], "a": 0},
+   {"f": "___ you like coffee?", "o": ["Do", "Does", "Are"], "a": 0},
+   {"f": "My father ___ in a bank.", "o": ["works", "work", "working"], "a": 0},
+   {"f": "There ___ three chairs in the room.", "o": ["are", "is", "have"], "a": 0}
+  ]},
+  {"nivel": "A2", "perguntas": [
+   {"f": "We ___ at home last night.", "o": ["were", "was", "are"], "a": 0},
+   {"f": "Did you ___ the film yesterday?", "o": ["see", "saw", "seen"], "a": 0},
+   {"f": "This bag is ___ than that one.", "o": ["cheaper", "more cheap", "cheapest"], "a": 0},
+   {"f": "Look at those clouds. It's ___ rain.", "o": ["going to", "will", "go to"], "a": 0},
+   {"f": "Have you ever ___ to Paris?", "o": ["been", "went", "go"], "a": 0}
+  ]},
+  {"nivel": "B1", "perguntas": [
+   {"f": "I've lived here ___ 2019.", "o": ["since", "for", "from"], "a": 0},
+   {"f": "If it rains tomorrow, we ___ at home.", "o": ["will stay", "would stay", "stayed"], "a": 0},
+   {"f": "This book ___ in 1990.", "o": ["was written", "wrote", "has write"], "a": 0},
+   {"f": "When I was a child, I used to ___ football every day.", "o": ["play", "playing", "played"], "a": 0},
+   {"f": "That's the woman ___ car was stolen.", "o": ["whose", "who", "which"], "a": 0}
+  ]},
+  {"nivel": "B2", "perguntas": [
+   {"f": "If I had known, I ___ you.", "o": ["would have told", "would tell", "had told"], "a": 0},
+   {"f": "By this time next year, I ___ my degree.", "o": ["will have finished", "finish", "am finishing"], "a": 0},
+   {"f": "I wish I ___ more free time now.", "o": ["had", "have", "will have"], "a": 0},
+   {"f": "He denied ___ the money.", "o": ["taking", "to take", "take"], "a": 0},
+   {"f": "___ the rain, we went for a walk.", "o": ["Despite", "Although", "Even though"], "a": 0}
+  ]},
+  {"nivel": "C1", "perguntas": [
+   {"f": "___ I known, I would have come earlier.", "o": ["Had", "If", "Were"], "a": 0},
+   {"f": "Not only ___ late, but he also forgot the documents.", "o": ["did he arrive", "he arrived", "arrived he"], "a": 0},
+   {"f": "It's high time we ___ a decision.", "o": ["made", "make", "will make"], "a": 0},
+   {"f": "___ you need any help, please let me know.", "o": ["Should", "Would", "Had"], "a": 0},
+   {"f": "By no means ___ an easy task.", "o": ["is it", "it is", "it was being"], "a": 0}
+  ]}
+ ],
+ "fr": [
+  {"nivel": "A1", "perguntas": [
+   {"f": "Je ___ brésilienne.", "o": ["suis", "ai", "es"], "a": 0},
+   {"f": "Tu ___ quel âge ?", "o": ["as", "es", "a"], "a": 0},
+   {"f": "Je n'ai pas ___ voiture.", "o": ["de", "une", "la"], "a": 0},
+   {"f": "Nous ___ au cinéma ce soir.", "o": ["allons", "allez", "vont"], "a": 0},
+   {"f": "Elle habite ___ France.", "o": ["en", "à", "au"], "a": 0}
+  ]},
+  {"nivel": "A2", "perguntas": [
+   {"f": "Hier soir, j'___ un film.", "o": ["ai vu", "suis vu", "vois"], "a": 0},
+   {"f": "Elle ___ partie à huit heures.", "o": ["est", "a", "était"], "a": 0},
+   {"f": "Quand j'étais petit, je ___ souvent à la plage.", "o": ["allais", "suis allé", "irai"], "a": 0},
+   {"f": "Ce pull est ___ cher que l'autre.", "o": ["plus", "le plus", "très"], "a": 0},
+   {"f": "Tu vois Marie ? Oui, je ___ vois.", "o": ["la", "lui", "le"], "a": 0}
+  ]},
+  {"nivel": "B1", "perguntas": [
+   {"f": "J'habite ici ___ trois ans.", "o": ["depuis", "pendant", "pour"], "a": 0},
+   {"f": "Si j'avais le temps, je ___ plus.", "o": ["lirais", "lirai", "lisais"], "a": 0},
+   {"f": "Il faut que tu ___ avec nous.", "o": ["viennes", "viens", "viendras"], "a": 0},
+   {"f": "C'est la ville ___ je suis né.", "o": ["où", "que", "qui"], "a": 0},
+   {"f": "Il m'a dit qu'il ___ fatigué.", "o": ["était", "a", "soit"], "a": 0}
+  ]},
+  {"nivel": "B2", "perguntas": [
+   {"f": "Quand j'___ fini, je t'appellerai.", "o": ["aurai", "ai", "avais"], "a": 0},
+   {"f": "Si j'avais su, je ___ venu.", "o": ["serais", "aurais", "suis"], "a": 0},
+   {"f": "Bien qu'il ___ tard, nous continuons.", "o": ["soit", "est", "sera"], "a": 0},
+   {"f": "Le projet ___ je pense est ambitieux.", "o": ["auquel", "duquel", "lequel"], "a": 0},
+   {"f": "___ son travail, il est sorti.", "o": ["Ayant terminé", "En terminé", "Terminant de"], "a": 0}
+  ]},
+  {"nivel": "C1", "perguntas": [
+   {"f": "Elle ouvrit la porte et ___ dans la pièce.", "o": ["entra", "entrera", "entrerait"], "a": 0},
+   {"f": "Ce ___ j'ai besoin, c'est de calme.", "o": ["dont", "que", "qui"], "a": 0},
+   {"f": "J'ai beau ___, je n'y arrive pas.", "o": ["essayer", "essaie", "essayé"], "a": 0},
+   {"f": "Nous partirons à huit heures, ___ il pleuve.", "o": ["à moins qu'", "parce qu'", "puisqu'"], "a": 0, "dica": "(a menos que chova)"},
+   {"f": "Selon la presse, le ministre ___ démissionner bientôt.", "o": ["devrait", "devra être", "a dû être"], "a": 0, "dica": "(notícia ainda não confirmada)"}
+  ]}
+ ]
+}

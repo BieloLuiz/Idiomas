@@ -12,6 +12,8 @@ const base=JSON.parse(fs.readFileSync(path.join(d,"base.json"),"utf8"));const ou
 for(const k of ["en","fr"]){const B=base[k];out[k]={name:B.name,tts:B.tts,units:[B.unit,...require(path.join(d,k+".js")),...JSON.parse(fs.readFileSync(path.join(d,"..","curso","a2",k+"-a2.json"),"utf8")),...JSON.parse(fs.readFileSync(path.join(d,"..","curso","b1",k+"-b1.json"),"utf8")),...JSON.parse(fs.readFileSync(path.join(d,"..","curso","b2",k+"-b2.json"),"utf8")),...JSON.parse(fs.readFileSync(path.join(d,"..","curso","c1",k+"-c1.json"),"utf8"))]};}
 const au={sprites:Object.assign(JSON.parse(fs.readFileSync(path.join(d,"sprites.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-a2.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-b1.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-b2.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-c1.json"),"utf8")))};
 process.stdout.write("var COURSE="+JSON.stringify(out)+";\\nvar AUDIO="+JSON.stringify(au)+";\\n");''',D]).decode()
+data+='var CONSULTA='+json.dumps({k:json.load(open(os.path.join(D,'..','curso','consulta-'+k+'.json'),encoding='utf-8')) for k in ('en','fr')},ensure_ascii=False,separators=(',',':'))+';\n'
+data+='var NIVELAMENTO='+json.dumps(json.load(open(os.path.join(D,'..','curso','nivelamento.json'),encoding='utf-8')),ensure_ascii=False,separators=(',',':'))+';\n'
 data+='var DESCOBRIR='+json.dumps(json.load(open(os.path.join(D,'..','curso','descobrir.json'),encoding='utf-8')),ensure_ascii=False,separators=(',',':'))+';\n'
 data=data.replace('</script','<\\/script')
 L[i:j+1]=['<script>','var ABERTURA_SVG='+json.dumps(open(os.path.join(D,'..','marca','idiomas-abertura.svg'),encoding='utf-8').read())+';\n'+open(os.path.join(D,'eco.js'),encoding='utf-8').read()+open(os.path.join(D,'eco-app.js'),encoding='utf-8').read()+open(os.path.join(D,'profile-core.js'),encoding='utf-8').read()+open(os.path.join(D,'discovery.js'),encoding='utf-8').read()+open(os.path.join(D,'ia.js'),encoding='utf-8').read()+data+open(os.path.join(D,'adapter.js'),encoding='utf-8').read(),'</script>']
@@ -99,7 +101,7 @@ rep("    if (ao && ao.som) ao.som(ok ? (seguidas >= 3 ? 'combo' : 'acerto') : 'e
  "          .catch(function (e) { bt.disabled = false; bt.textContent = IA.erroTexto(e) + ' Tocar para tentar de novo.'; }); };\n"
  "      $('.ui-banner__text', bannerBox).appendChild(bt);\n"
  "    }\n  }")
-rep("  TELAS.eco3D=function(){", open(os.path.join(D,'ia-telas.js'),encoding='utf-8').read()+"\n"+open(os.path.join(D,'estudo.js'),encoding='utf-8').read()+"\n"+open(os.path.join(D,'extras.js'),encoding='utf-8').read()+"\n  TELAS.eco3D=function(){")
+rep("  TELAS.eco3D=function(){", open(os.path.join(D,'ia-telas.js'),encoding='utf-8').read()+"\n"+open(os.path.join(D,'estudo.js'),encoding='utf-8').read()+"\n"+open(os.path.join(D,'extras.js'),encoding='utf-8').read()+"\n"+open(os.path.join(D,'ensino.js'),encoding='utf-8').read()+"\n  TELAS.eco3D=function(){")
 rep("String(r.score).replace('.',',')+'/10 · exemplo'","String(r.score).replace('.',',')+'/10'+(r.demo?' · exemplo':'')")
 rep("'Resultado · demonstração'","(r.demo?'Resultado · demonstração':'Resultado')")
 rep("(r.score===null?'Aguardando IA':'Nota de exemplo')","(r.score===null?'Aguardando IA':(r.demo?'Nota de exemplo':'Nota do Eco'))")
