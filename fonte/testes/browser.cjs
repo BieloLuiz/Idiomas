@@ -192,6 +192,33 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await p2.locator('fieldset').nth(0).getByLabel('Lyon').check();await p2.locator('fieldset').nth(1).getByLabel('Non').check();await p2.getByRole('button',{name:'Conferir respostas'}).click();
   await p2.getByText('1 de 2 certas.').waitFor();assert.equal(leituraPedida.tema,'uma viagem de trem');
   console.log('PASS: leitura extra criada pela IA com áudio por parágrafo, vocabulário e perguntas');
+  {const c5=await browser.newContext({viewport:{width:390,height:844}});await c5.addInitScript(()=>{window.__semAbertura=true;});await c5.route('https://**',r=>r.abort());
+   await c5.route('**/config.js',r=>r.fulfill({contentType:'application/javascript',body:'window.IDIOMAS_API="";'}));
+   const st=initial();st.perfis[0].idioma='en';st.perfis[0].progresso={fr:0,en:0};await c5.addInitScript(s=>localStorage.getItem('idiomas-app-v2')||localStorage.setItem('idiomas-app-v2',JSON.stringify(s)),st);
+   const n=await c5.newPage();n.on('pageerror',e=>errors.push(e.message));await n.goto(url);await n.locator('.ux-greeting').waitFor();
+   await n.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Trilha',exact:true}).click();await n.getByRole('button',{name:'Fazer o teste',exact:true}).click();
+   await n.getByRole('button',{name:'Começar o teste',exact:true}).click();const T=await n.evaluate(()=>NIVELAMENTO.en);
+   for(const lv of T.slice(0,2))for(const q of lv.perguntas)await n.locator('.nivel-opcoes').getByRole('button',{name:q.o[q.a],exact:true}).click();
+   for(let i=0;i<5;i++)await n.getByRole('button',{name:'Não sei',exact:true}).click();
+   await n.getByRole('heading',{name:'Sugestão: começar no B1'}).waitFor();await n.screenshot({path:'.build/nivelamento.png'});
+   await n.getByRole('button',{name:'Começar no B1',exact:true}).click();await n.getByRole('button',{name:/Confirmar: marcar o A1, A2/}).click();
+   await n.locator('.resume-card').waitFor();assert.equal(await n.evaluate(()=>JSON.parse(localStorage.getItem('idiomas-app-v2')).perfis[0].progresso.en),120);
+   assert.equal(await n.getByRole('button',{name:'Fazer o teste',exact:true}).count(),0);
+   console.log('PASS: teste de nivelamento sugere o nível e move a trilha para o início dele, com confirmação');
+   await n.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Perfil',exact:true}).click();await n.getByRole('button',{name:'Consulta: gramática, erros e sons',exact:true}).click();
+   await n.getByRole('heading',{name:'Consulta · Inglês'}).waitFor();assert.equal(await n.locator('.consulta-tema').count(),14);
+   await n.locator('.consulta-tema').nth(2).locator('summary').click();assert.ok(await n.locator('.consulta-tema').nth(2).locator('table').count()>0);await n.locator('.consulta-tema').nth(2).locator('table').first().scrollIntoViewIfNeeded();await n.screenshot({path:'.build/consulta.png',fullPage:false});
+   await n.getByRole('tab',{name:'Erros comuns'}).click();assert.equal(await n.locator('.consulta-erro').count(),17);
+   await n.getByRole('tab',{name:'Falsos amigos'}).click();assert.ok(await n.locator('.consulta-cognato').count()>10);
+   await n.getByRole('tab',{name:'Sons'}).click();assert.equal(await n.locator('.consulta-som').count(),10);await n.screenshot({path:'.build/sons.png'});
+   for(const w of [320,390,820]){await n.setViewportSize({width:w,height:844});assert.ok(await n.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Consulta overflow at '+w);}await n.setViewportSize({width:390,height:844});
+   console.log('PASS: Consulta com gramática, erros comuns, falsos amigos e sons, sem rolagem lateral');
+   await n.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Praticar',exact:true}).click();await n.getByRole('button',{name:/Quero explorar/}).click();await n.getByRole('button',{name:'Todas as descobertas',exact:true}).click();
+   await n.getByRole('button',{name:'Escuta longa: ouvir sem ler',exact:true}).click();const h=await n.evaluate(()=>DESCOBRIR.en[24].historia);
+   assert.equal(await n.locator('details p.descobrir-texto').isVisible(),false);
+   const qs=n.locator('.descobrir-pergunta');for(let i=0;i<h.perguntas.length;i++)await qs.nth(i).getByRole('button',{name:h.perguntas[i].opcoes[h.perguntas[i].correta],exact:true}).click();
+   await n.getByText('Você entendeu tudo só ouvindo!').waitFor();await n.getByRole('button',{name:'Concluir',exact:true}).click();await n.getByText('Seu tempo valeu a pena.').waitFor();
+   console.log('PASS: escuta longa esconde o texto, confere as respostas e conclui');await c5.close();}
   await online.close();assert.deepEqual(errors,[]);console.log('PASS: nenhum erro JavaScript nos fluxos exercitados');
  }finally{await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});

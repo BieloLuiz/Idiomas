@@ -589,6 +589,21 @@ button.row:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px
 .profiles { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 .demo-note { margin: 0; text-align: center; font-size: 12px; color: var(--ink-soft); font-family: var(--font-mono); }
 
+.consulta-abas{display:flex;gap:6px;overflow-x:auto;padding:2px 0 6px;margin:0 0 4px}
+.consulta-aba{flex:none;border:1px solid var(--border);background:var(--surface-200);color:var(--ink);border-radius:999px;padding:9px 16px;font:600 14px/1 var(--font-sans);cursor:pointer}
+.consulta-aba[aria-selected=true]{background:var(--ink);color:var(--surface-100,#fff);border-color:var(--ink)}
+.consulta-tema summary{display:flex;flex-direction:column;gap:3px;cursor:pointer;list-style:none}.consulta-tema summary::-webkit-details-marker{display:none}
+.consulta-tema summary b{font-size:17px}.consulta-tema summary small{color:var(--ink-soft)}
+.consulta-tema h3{font-size:16px;margin:18px 0 6px}.consulta-tema[open] summary{margin-bottom:6px}
+.consulta-tabela{overflow-x:auto;margin:8px 0}.consulta-tabela table{min-width:100%;table-layout:auto}.consulta-tabela th,.consulta-tabela td{padding-right:14px!important;white-space:normal;overflow:visible;text-overflow:clip;word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important;min-width:56px}.consulta-tabela th{font-size:11px}
+.consulta-ex{border-top:1px solid var(--border);padding:10px 0 4px}.consulta-alvo{font-size:18px;font-weight:700;margin:4px 0}
+.consulta-trad{color:var(--ink-soft);margin:2px 0 6px}
+.consulta-errado{color:var(--danger-600,#B84651);text-decoration:line-through;font-weight:600;margin:0}.consulta-certo{color:var(--success-600,#2F8F5B);font-weight:800;font-size:18px;margin:4px 0}
+.consulta-palavra{font-size:22px;font-weight:800;margin:0 0 4px}
+.consulta-palavras{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.consulta-chip{border:1px solid var(--border-strong);background:var(--surface-200);color:var(--ink);border-radius:14px;padding:10px 14px;font:700 17px/1 var(--font-sans);cursor:pointer;min-height:44px}
+.nivel-frase{font-size:24px;font-weight:800;line-height:1.35;margin:10px 0 14px}.nivel-frase .lacuna{display:inline-block;min-width:70px;border-bottom:3px solid var(--brand-500,#5366C7);color:transparent}
+.nivel-opcoes{display:flex;flex-direction:column;gap:10px}.nivel-convite h2{font-size:18px;margin:0 0 4px}
 .descobrir-texto{font-size:18px;line-height:1.7;margin:12px 0}
 .descobrir-pergunta{display:flex;flex-direction:column;gap:8px;margin-top:12px}.descobrir-pergunta .h{font-weight:700;margin:0 0 4px}
 .descobrir-pergunta .ui-btn.certa{background:var(--success-500,#2F8F5B);border-color:var(--success-500,#2F8F5B);color:#fff}

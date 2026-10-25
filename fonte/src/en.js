@@ -76,7 +76,7 @@ module.exports = [
   speakers:{"Emma":"f","Lucas":"m"},
   setting:"Lucas faz a matrícula numa academia. Emma, a recepcionista, preenche a ficha dele.",
   lines:[
-    ["Emma","Hi! Are you a new member?","Oi! Você é aluno novo?"],
+    ["Emma","Hi! Are you a new member?","Oi! Você é um membro novo?"],
     ["Lucas","Yes, I am.","Sou, sim."],
     ["Emma","What's your name?","Qual é o seu nome?"],
     ["Lucas","Lucas Silva.","Lucas Silva."],
@@ -122,7 +122,7 @@ module.exports = [
     {q:"“Are you Brazilian?” Qual resposta está certa?",o:["Yes, I'm.","Yes, I am.","Yes, I are."],a:1,e:"Na resposta curta positiva não se contrai."}
   ],
   gaps:[
-    {s:"___ you a new member?",a:["Are"],h:"Você é aluno novo?"},
+    {s:"___ you a new member?",a:["Are"],h:"Você é um membro novo?"},
     {s:"I'm ___ American.",a:["not"],h:"Não sou americano."},
     {s:"How ___ are you?",a:["old"],h:"Quantos anos você tem?"},
     {s:"She ___ British. She's Canadian.",a:["isn't","is not","'s not"],h:"Ela não é britânica. É canadense."},

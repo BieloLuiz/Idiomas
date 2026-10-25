@@ -111,3 +111,11 @@ Verificações: `npm test` 29 (admin, sessão única, voz premium); `npm run tes
 - Eco 3D removida: tela do laboratório, renderizador (624 KB) e modelo (698 KB) saíram do pacote. Medido depois (gzip): HTML 11 KB, CSS 34 KB, app 84 KB, personagens 281 KB, curso e mapa de áudio 629 KB — tudo guardado no aparelho depois da primeira abertura. Dividir o curso por idioma não foi feito: o ganho seria só na primeira abertura.
 - Revisão do conteúdo: varredura automática das 120 unidades (palavras do outro idioma nas traduções, português no texto estudado, tradução vazia ou igual ao original, palavras repetidas, tamanho desproporcional, apóstrofos e espaços) e leitura das 53 explicações. Corrigidos: "um point de convergência" (C1 fr), duas traduções resumidas demais (B2 fr U48) e cinco explicações (A1). Os demais avisos eram citações intencionais (ex.: explicar uma expressão francesa em português). Áudio × texto: os 5.496 textos que tocam áudio têm trecho no MP3 da unidade. Não verificado: a escuta humana dos MP3 e uma leitura linguística frase a frase de todas as unidades.
 - Não feito: o caso raro de XP com o mesmo perfil em dois aparelhos sem internet; exigiria contar XP por aparelho e migrar o progresso já salvo, com risco maior que o benefício para dois usuários.
+
+## Ensino: Consulta, nivelamento, escuta longa e revisão do A1 (out/2026)
+
+- Consulta (`fonte/curso/consulta-en.json`, `consulta-fr.json`): 14 temas de gramática, erros comuns, falsos amigos e guia de sons por idioma. Áudio pela voz do navegador (sem custo); a qualidade varia por aparelho.
+- Nivelamento (`fonte/curso/nivelamento.json`): 5 frases por nível; passa de nível com 4 de 5. Só avança a trilha (nunca volta) e pede confirmação. Não guarda o resultado no perfil.
+- Escuta longa: usa as histórias do Descobrir com a voz do navegador. Duração real: cerca de 30–45 s no A1 e até ~1,5 min no C1 (não chega a 2 min nos níveis iniciais).
+- Revisão do A1 (inglês e francês): checagem automática de todos os níveis (índices, opções repetidas, lacunas, traduções, espaços do francês) sem problemas; leitura do A1 com 4 traduções ajustadas. A2–C1 ainda sem leitura humana/IA linha a linha.
+- Verificado com `npm test` (29) e `npm run test:browser` (26), com dados fictícios.
