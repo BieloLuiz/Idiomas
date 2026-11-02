@@ -119,3 +119,13 @@ Verificações: `npm test` 29 (admin, sessão única, voz premium); `npm run tes
 - Escuta longa: usa as histórias do Descobrir com a voz do navegador. Duração real: cerca de 30–45 s no A1 e até ~1,5 min no C1 (não chega a 2 min nos níveis iniciais).
 - Revisão do A1 (inglês e francês): checagem automática de todos os níveis (índices, opções repetidas, lacunas, traduções, espaços do francês) sem problemas; leitura do A1 com 4 traduções ajustadas. A2–C1 ainda sem leitura humana/IA linha a linha.
 - Verificado com `npm test` (29) e `npm run test:browser` (26), com dados fictícios.
+
+## Revisão geral do app (nov/2026)
+
+- Montagem refeita do zero: o `index.html` e os recursos gerados batiam com o publicado. `npm test` 29 e `npm run test:browser` 26, sem erros de JavaScript, com dados fictícios.
+- Servidor (`apps-script/`): conferidos entrada Google, sessões de 60 dias, lista de contas, administrador, orçamento (reserva antes da chamada e acerto depois), cotas, lembretes com segredo próprio e gravação na planilha. Nenhuma falha encontrada. Por desenho, as duas contas podem ler e salvar os perfis uma da outra (modo a dois).
+- Leitura linha a linha: A2 de inglês e de francês e B1 de inglês (diálogos, perguntas, lacunas, frases para ordenar e cartões). B1 francês, B2 e C1: só a varredura automática de palavras em português no texto estudado, acentos que não existem no idioma e perguntas mal formadas.
+- Corrigidos: cinco cartões de francês com palavras em português (A2 u8 "le problema"; B1 u3 "uma excelente ocasião"; B1 u7 "le problema"; B1 u12 "une solução" e "uma période"); três pistas de enigma do Descobrir em francês (u24 "restaurante"/"horário", u27 e u31 escritas em português); duas perguntas do A2 de inglês que não batiam com o diálogo (u1: o diálogo não diz que foi domingo; u12: Daniel também responde no fim); um espaço antes do "?" num cartão em português.
+- Áudio desses cinco cartões: os MP3 foram gravados com o texto errado. Com o texto corrigido, o app não acha mais o trecho e usa a voz do aparelho. Para voltar à voz gravada, é preciso regravar esses trechos no PC (ElevenLabs).
+- Teste do navegador: se o Chromium não estiver instalado, o teste agora termina com erro em vez de ficar parado.
+- Não feito: as perguntas das histórias do Descobrir seguem um padrão fixo de resposta certa (1ª, 2ª, 3ª opção, girando), sem embaralhar. Leitura humana do B1 francês, do B2 e do C1.

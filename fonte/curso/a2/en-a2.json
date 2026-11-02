@@ -315,7 +315,7 @@
         "e": "I walked in the park with Emma."
       },
       {
-        "q": "Como estava o tempo no domingo da Sarah?",
+        "q": "Como estava o tempo quando Sarah caminhou no parque?",
         "o": [
           "Nevando",
           "Chuvoso",
@@ -5819,7 +5819,7 @@
         "e": "Yes, I've just emailed it to him."
       },
       {
-        "q": "Quem já confirmou presença?",
+        "q": "Quem já tinha confirmado presença no começo da conversa?",
         "o": [
           "Lucas",
           "Daniel",

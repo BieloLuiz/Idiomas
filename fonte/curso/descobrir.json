@@ -4110,9 +4110,9 @@
    },
    "enigma": {
     "pistas": [
-     "Je suis liée à un restaurante.",
+     "Je suis liée à un restaurant.",
      "On me fait pour garantir une place.",
-     "Je confirme à l'avance une table ou un horário."
+     "Je confirme à l'avance une table ou un horaire."
     ],
     "resposta": "une réservation",
     "traducao": "uma reserva"
@@ -4257,7 +4257,7 @@
    },
    "enigma": {
     "pistas": [
-     "Je suis un lugar onde se passa algum tempo fora de casa.",
+     "Je suis l'endroit où l'on dort quand on n'est pas chez soi.",
      "On me réserve pour dormir pendant les vacances.",
      "Je peux être un hôtel, une maison ou un appartement loué."
     ],
@@ -4453,7 +4453,7 @@
    },
    "enigma": {
     "pistas": [
-     "Je suis un objeto usado para guardar coisas.",
+     "Je suis un objet qui sert à ranger des choses.",
      "Je peux contenir beaucoup de livres.",
      "Je suis une boîte souvent utilisée pendant un déménagement."
     ],
