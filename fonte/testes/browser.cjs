@@ -17,7 +17,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
  fs.readFile(file,(err,data)=>{if(err){res.writeHead(404).end();return;}res.setHeader('Content-Type',({'.html':'text/html','.js':'application/javascript','.css':'text/css','.json':'application/json','.webp':'image/webp','.mp3':'audio/mpeg','.webmanifest':'application/manifest+json'})[path.extname(file)]||'text/plain');res.end(data);});});
 (async()=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
- const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined,args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']});const errors=[];
+ const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined,args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}).catch(async e=>{await new Promise(r=>server.close(r));throw e;});const errors=[];
  try{
   const context=await browser.newContext({viewport:{width:390,height:844},permissions:['microphone']});await context.addInitScript(()=>{window.__semAbertura=true;});
   await context.route('https://**',r=>r.abort());
