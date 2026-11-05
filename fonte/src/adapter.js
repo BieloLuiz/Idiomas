@@ -117,14 +117,41 @@ var CURSOS = {}, LICOES = {}, GUIAS = {}, PALAVRAS = {};
       var curtas = lines.filter(function (l) { return words(l[2]).length <= 8; });
       if (curtas.length < 4) curtas = curtas.concat(lines.filter(function (l) { var n = words(l[2]).length; return n > 8 && n <= 12; }));
       if (curtas.length < 4) curtas = curtas.concat((U.order || []).map(function (o) { return ['', o.t.join(' '), o.h]; }));
+      /* produzir: ler em português e escrever a frase inteira */
+      var NOME_L = k === 'fr' ? 'francês' : 'inglês';
+      function escrever(alvo, pt) { return { tipo: 'escrever', enunciado: 'Escreva em ' + NOME_L, frase: alvo, ocultar: pt, resposta: alvo, respostaIdioma: k, audio: AUD.fn(alvo, vozL, ui) }; }
+      /* aprender antes de praticar: cartões de explicação tirados do guia da unidade */
+      function paragrafos(p) { return [].concat(p || []).map(function (x) { return '<p>' + x + '</p>'; }).join(''); }
+      function cartaoGramatica(g, i, n) {
+        return { tipo: 'explicacao', etiqueta: 'Aprenda · ' + (i + 1) + ' de ' + n, titulo: g.h, html: paragrafos(g.p), dica: g.tip ? g.tip.replace(/^<b>Dica:?<\/b>\s*/i, '') : '',
+          exemplos: (g.ex || []).map(function (e) { return [e[0], e[1], AUD.fn(e[0], vozL, ui)]; }), botao: i + 1 < n ? 'Próxima explicação' : 'Entendi, vamos praticar' };
+      }
+      function cartaoPalavras() {
+        var itens = [];
+        (U.vocab || []).forEach(function (v) { (v.items || []).forEach(function (it) { if (Array.isArray(it) && itens.length < 10) itens.push([it[0], it[1], AUD.fn(it[0], vozL, ui)]); }); });
+        return { tipo: 'explicacao', etiqueta: 'Nesta unidade', titulo: U.title, html: (U.goal ? '<p><b>Objetivo:</b> ' + U.goal + '</p>' : '') + (U.setting ? '<p>' + U.setting + '</p>' : ''),
+          rotuloExemplos: 'Palavras para conhecer', exemplos: itens, botao: 'Começar' };
+      }
+      function cartaoPronuncia(p) {
+        return { tipo: 'explicacao', etiqueta: 'Pronúncia', titulo: p.h, html: paragrafos(p.p), rotuloExemplos: 'Ouça e repita',
+          exemplos: [].concat(p.w || []).map(function (w) { return [w, '', AUD.fn(w, vozL, ui)]; }), botao: 'Ouvir o diálogo' };
+      }
+      var grammar = (U.grammar || []).filter(function (g) { return g && g.h; });
+      var exemplosG = []; grammar.forEach(function (g) { (g.ex || []).forEach(function (e) { if (e[0] && e[1]) exemplosG.push(e); }); });
       var ex;
-      function prepare(){if(ex)return;r=rnd(ui*31+(k==='en'?1:2));ex = [
-        mix(cards, r).slice(0, 7).map(function (c) { return palavra(c, true); }),
-        U.mc && U.mc.length ? mix(U.mc,r).map(function(m){var fala=falaDoMc(U,m);return fala?{tipo:'escolha',escuta:true,enunciado:m.q,frase:fala,opcoes:m.o.slice(),correta:m.a,audio:AUD.fn(fala,vozL,ui)}:{tipo:'escolha',semFrase:true,enunciado:m.q,frase:'',explicacao:m.e,opcoes:m.o.slice(),correta:m.a};}) : mix(lines, r).slice(0, 7).map(escuta),
-        mix(curtas, r).slice(0, 6).map(conversa),
-        mix(gaps, r).slice(0, 7).map(lacuna)
+      function prepare(){if(ex)return;r=rnd(ui*31+(k==='en'?1:2));
+      var gs = mix(gaps, r).slice(0, 7), gram = [], porBloco = grammar.length ? Math.ceil(gs.length / grammar.length) : 0;
+      grammar.forEach(function (g, i) { gram.push(cartaoGramatica(g, i, grammar.length)); gs.slice(i * porBloco, (i + 1) * porBloco).forEach(function (x) { gram.push(lacuna(x)); }); });
+      if (!grammar.length) gram = gs.map(lacuna);
+      mix(exemplosG, r).slice(0, 2).forEach(function (e) { gram.push(escrever(e[0], e[1])); });
+      var escuta0 = U.mc && U.mc.length ? mix(U.mc,r).map(function(m){var fala=falaDoMc(U,m);return fala?{tipo:'escolha',escuta:true,enunciado:m.q,frase:fala,opcoes:m.o.slice(),correta:m.a,audio:AUD.fn(fala,vozL,ui)}:{tipo:'escolha',semFrase:true,enunciado:m.q,frase:'',explicacao:m.e,opcoes:m.o.slice(),correta:m.a};}) : mix(lines, r).slice(0, 7).map(escuta);
+      ex = [
+        [cartaoPalavras()].concat(mix(cards, r).slice(0, 7).map(function (c) { return palavra(c, true); })),
+        (U.pron && U.pron[0] ? [cartaoPronuncia(U.pron[0])] : []).concat(escuta0),
+        mix(curtas, r).slice(0, 6).map(conversa).concat(mix(cards, r).slice(0, 2).map(function (c) { return escrever(c[1], c[0]); })),
+        gram
       ];
-      ex.push(mix([].concat(mix(cards, r).slice(0, 2).map(function (c) { return palavra(c); }), mix(lines, r).slice(0, 2).map(escuta), mix(curtas, r).slice(0, 2).map(conversa), mix(gaps, r).slice(0, 2).map(lacuna)), r));
+      ex.push(mix([].concat(mix(cards, r).slice(0, 2).map(function (c) { return palavra(c); }), mix(lines, r).slice(0, 2).map(escuta), mix(curtas, r).slice(0, 2).map(conversa), mix(gaps, r).slice(0, 2).map(lacuna), mix(cards, r).slice(0, 2).map(function (c) { return escrever(c[1], c[0]); })), r));
       }
       LN.forEach(function (n, i) { Object.defineProperty(LICOES,id+'|'+n,{enumerable:true,get:function(){prepare();return { idioma: vozL, exercicios: ex[i], unidade: U.title, nivel: nv };}}); });
       lines.forEach(function (l, li) { frasesAll.push({ u: ui, id: k + '|' + ui + '|L|' + li, get ex() { r = rnd(ui * 131 + li); var e = escuta(l); e._srsId = this.id; return e; } }); });

@@ -129,3 +129,16 @@ Verificações: `npm test` 29 (admin, sessão única, voz premium); `npm run tes
 - Áudio desses cinco cartões: os MP3 foram gravados com o texto errado. Com o texto corrigido, o app não acha mais o trecho e usa a voz do aparelho. Para voltar à voz gravada, é preciso regravar esses trechos no PC (ElevenLabs).
 - Teste do navegador: se o Chromium não estiver instalado, o teste agora termina com erro em vez de ficar parado.
 - Não feito: as perguntas das histórias do Descobrir seguem um padrão fixo de resposta certa (1ª, 2ª, 3ª opção, girando), sem embaralhar. Leitura humana do B1 francês, do B2 e do C1.
+
+## Ensinar antes de praticar e escrever a frase inteira (nov/2026)
+
+- Problema: a lição "Gramática" só tinha exercícios; a explicação ficava em outra tela (Guias), então o app cobrava uma regra sem mostrá-la.
+- Agora cada lição começa ensinando (`fonte/src/licao-tipos.js`, montado em `adapter.js`):
+  - Palavras novas: cartão com o objetivo da unidade, a situação e até 10 palavras com áudio.
+  - Escuta: cartão de pronúncia da unidade, com palavras para ouvir e repetir.
+  - Gramática: um cartão por regra (texto, exemplos com tradução e áudio, dica), cada um seguido das lacunas; no fim, 2 frases para escrever.
+  - Os cartões não valem nota nem XP e contam na barra de progresso.
+- Novo exercício "Escreva em inglês/francês": a frase aparece em português e a pessoa escreve a frase inteira. Aceita maiúsculas, pontuação e apóstrofo curvo diferentes, e as contrações do inglês (I'm = I am, doesn't = does not). No francês, erro só de acento conta como certo, com aviso dos acentos. Há "Mostrar a primeira palavra" e "Ouvir a resposta". Entra 2 vezes em Montar frases, na Gramática e na Revisão da unidade.
+- Gramática do A1 (inglês e francês): era a mais curta do curso (cerca de 750 caracteres por unidade, contra 2.000 a 2.700 no A2–B1). Cada bloco ganhou um parágrafo de "como montar", comparação com o português ou tabela, e uma dica nos blocos sem dica (`fonte/curso/a1-gramatica-extra.json`). Os complementos aparecem na lição e no Guia. Sem exemplos novos com áudio: os exemplos extras ficam no texto.
+- Verificado: `npm test` 30 (novo: todas as 120 unidades começam a Gramática explicando, têm frases para escrever e a correção aceita/recusa os casos certos); `npm run test:browser` 27 (novo: a lição de gramática explica sem nota e aceita a frase escrita em minúsculas e sem ponto). Não verificado em celular real.
+- Ainda não feito: complementar a gramática do B2 de francês e do C1, que também são curtas; responder em voz alta (falar a frase) dentro da lição.

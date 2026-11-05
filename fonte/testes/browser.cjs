@@ -219,6 +219,23 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
    const qs=n.locator('.descobrir-pergunta');for(let i=0;i<h.perguntas.length;i++)await qs.nth(i).getByRole('button',{name:h.perguntas[i].opcoes[h.perguntas[i].correta],exact:true}).click();
    await n.getByText('Você entendeu tudo só ouvindo!').waitFor();await n.getByRole('button',{name:'Concluir',exact:true}).click();await n.getByText('Seu tempo valeu a pena.').waitFor();
    console.log('PASS: escuta longa esconde o texto, confere as respostas e conclui');await c5.close();}
+  {/* lição de gramática: explicação antes da prática e frase escrita */
+   const c6=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});await c6.addInitScript(()=>{window.__semAbertura=true;});
+   await c6.route('https://**',r=>r.abort());await c6.route('**/config.js',r=>r.fulfill({contentType:'application/javascript',body:'window.IDIOMAS_API="";'}));
+   const st6=initial();st6.perfis[0].idioma='en';st6.perfis[0].progresso={en:3,fr:0};
+   await c6.addInitScript(state=>localStorage.getItem('idiomas-app-v2')||localStorage.setItem('idiomas-app-v2',JSON.stringify(state)),st6);
+   const g=await c6.newPage();g.on('pageerror',e=>errors.push(e.message));await g.goto(url);await g.locator('.ux-greeting').waitFor();
+   await g.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Trilha',exact:true}).click();await g.getByRole('button',{name:/Gramática/}).first().click();
+   await g.locator('.lt-explica').waitFor();assert.ok((await g.locator('.lt-explica').textContent()).includes('Como montar'));
+   assert.equal(await g.locator('#acao').textContent(),'Próxima explicação');assert.equal(await g.locator('#acao').isDisabled(),false);
+   await g.locator('.lt-explica .lt-ouvir').first().click();
+   await g.locator('#acao').click();await g.locator('.u015-opt').first().waitFor();assert.equal(await g.locator('.ui-banner').count(),0,'explicação não vale nota');
+   for(let i=0;i<30&&!(await g.locator('textarea.dit-input').count());i++){if(await g.locator('.lt-explica').count()){await g.locator('#acao').click();continue;}await g.locator('.u015-opt').first().click();await g.locator('#acao').click();await g.locator('#acao').click();}
+   const pt=await g.locator('.bubble p').first().textContent(),U=await g.evaluate(()=>COURSE.en.units[0]),ex=U.grammar.flatMap(x=>x.ex).find(e=>e[1]===pt);assert.ok(ex,'frase do exemplo: '+pt);
+   assert.equal(await g.locator('#acao').isDisabled(),true);await g.locator('textarea.dit-input').fill(ex[0].toLowerCase().replace(/[.!?]$/,''));await g.locator('textarea.dit-input').press('Enter');
+   await g.locator('.ui-banner--correct').waitFor();await g.locator('.lt-ouvir--resp').waitFor();
+   await g.screenshot({path:'.build/escrever.png'});await c6.close();
+   console.log('PASS: lição de gramática começa explicando, sem nota, e aceita a frase escrita sem maiúsculas e pontuação');}
   await online.close();assert.deepEqual(errors,[]);console.log('PASS: nenhum erro JavaScript nos fluxos exercitados');
  }finally{await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});
