@@ -8,8 +8,10 @@ Aplicativo pessoal para estudar a dois, publicado em GitHub Pages. Interface e e
 - `fonte/src/build-app.py`: incorpora conteúdo e módulos ao design. Os encaixes `rep(...)` verificam a contagem esperada e precisam ser atualizados quando um alvo muda.
 - `fonte/src/adapter.js`: descritores de curso, lições preparadas sob demanda, revisão de expressões e áudio.
 - `fonte/src/profile-core.js`: regras puras de normalização, reconciliação, dias e revisão; o build copia esse módulo para `apps-script/ProfileCore.gs`.
+- `fonte/src/licao-tipos.js`: tipos extras de exercício da lição (`explicacao`, sem nota, e `escrever`, com correção tolerante). O `adapter.js` monta as lições: cada lição começa explicando (palavras, pronúncia ou gramática) e depois pratica.
 - `fonte/src/discovery.js`: atividades baseadas na unidade e idioma, com eventos declarados. Não reintroduzir execução de HTML por eval/new Function.
 - `fonte/src/ia.js` e `ia-telas.js`: pedidos identificados e telas de IA. Toda operação assíncrona mantém o perfil proprietário. Toda captação precisa de uma função registrada em `studioCleanup`.
+- `fonte/curso/a1-gramatica-extra.json`: complementos das explicações de gramática do A1; o build junta ao bloco de mesmo título e falha se o título não existir.
 - `fonte/curso/<nível>/`: conteúdo A2–C1. A1 fica em `src/base.json`, `en.js` e `fr.js`. `sprites*.json` mapeiam os trechos dos 120 MP3.
 - `fonte/pwa/`: autenticação, sincronização, service worker e empacotamento dos recursos.
 - `apps-script/Code.gs` e `Security.gs`: servidor sobre a planilha. As chaves ficam nas propriedades privadas do script; não pedir nem versionar as chaves. O ID do cliente Google e a lista das duas contas têm padrão no código (`Security.gs`, escolha do dono) e podem ser substituídos pelas propriedades `GOOGLE_CLIENT_ID` e `ALLOWED_EMAILS`.

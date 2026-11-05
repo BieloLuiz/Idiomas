@@ -227,3 +227,18 @@ test('todas as unidades geram as cinco lições e o teste usa revisão da própr
  const app=scripts.map(f=>fs.readFileSync(f,'utf8')).find(s=>s.includes('function abrirLicaoApp'));
  assert.ok(app.includes("nome === 'Prática do guia' ? 'Revisão da unidade'"));assert.ok(!app.includes('|| LICOES_DEMO[p.idioma]'));assert.ok(app.includes("return all[p.progresso[p.idioma]] || null"));
 });
+test('lições ensinam antes de praticar e pedem frases escritas, com correção tolerante',()=>{
+ const html=fs.readFileSync('index.html','utf8'),scripts=[...html.matchAll(/<script[^>]+src="(assets\/[^"]+)"/g)].map(m=>m[1]);let file=scripts.find(f=>fs.readFileSync(f,'utf8').includes('var COURSE='));
+ const ctx={document:{dispatchEvent(){}},Audio:function(){},localStorage:{getItem:()=>null},TextEncoder,CustomEvent:function(){}};ctx.window=ctx;vm.createContext(ctx);vm.runInContext(fs.readFileSync(file,'utf8'),ctx);
+ for(const k of ['en','fr'])for(let i=1;i<=60;i++){const U=ctx.COURSE[k].units[i-1],g=ctx.LICOES[k+'-u'+i+'|Gramática'].exercicios;
+  assert.equal(g[0].tipo,'explicacao',k+i);assert.equal(g.filter(e=>e.tipo==='explicacao').length,U.grammar.length,k+i);
+  assert.ok(g.some(e=>e.tipo==='escolha'),k+i+' lacunas');assert.ok(ctx.LICOES[k+'-u'+i+'|Palavras novas'].exercicios[0].tipo==='explicacao');
+  for(const n of ['Montar frases','Revisão da unidade']){const w=ctx.LICOES[k+'-u'+i+'|'+n].exercicios.filter(e=>e.tipo==='escrever');assert.ok(w.length>=2,k+i+n);for(const e of w){assert.ok(e.resposta&&e.ocultar,k+i+n);assert.equal(e.respostaIdioma,k);}}}
+ const T=ctx.LICAO_TIPOS;
+ assert.equal(JSON.stringify(T._confere("i'm from brazil",["I'm from Brazil."],'en')),JSON.stringify({ok:true}));
+ assert.equal(JSON.stringify(T._confere('I am from Brazil',["I'm from Brazil."],'en')),JSON.stringify({ok:true}));
+ assert.equal(JSON.stringify(T._confere("She doesn’t work",["She does not work."],'en')),JSON.stringify({ok:true}));
+ assert.equal(JSON.stringify(T._confere('Je suis bresilien',['Je suis brésilien.'],'fr')),JSON.stringify({ok:true,acentos:true}));
+ assert.equal(JSON.stringify(T._confere("J'ai vingt ans",["J'ai vingt-cinq ans."],'fr')),JSON.stringify({ok:false}));
+ const A1=ctx.COURSE.en.units[0].grammar[0].p.join(' ');assert.ok(A1.includes('Como montar'),'complemento do A1 entrou no curso');
+});

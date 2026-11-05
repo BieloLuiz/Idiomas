@@ -10,13 +10,14 @@ data=subprocess.check_output(['node','-e','''
 const fs=require("fs"),path=require("path"),d=process.argv[1];
 const base=JSON.parse(fs.readFileSync(path.join(d,"base.json"),"utf8"));const out={};
 for(const k of ["en","fr"]){const B=base[k];out[k]={name:B.name,tts:B.tts,units:[B.unit,...require(path.join(d,k+".js")),...JSON.parse(fs.readFileSync(path.join(d,"..","curso","a2",k+"-a2.json"),"utf8")),...JSON.parse(fs.readFileSync(path.join(d,"..","curso","b1",k+"-b1.json"),"utf8")),...JSON.parse(fs.readFileSync(path.join(d,"..","curso","b2",k+"-b2.json"),"utf8")),...JSON.parse(fs.readFileSync(path.join(d,"..","curso","c1",k+"-c1.json"),"utf8"))]};}
+const EX=JSON.parse(fs.readFileSync(path.join(d,"..","curso","a1-gramatica-extra.json"),"utf8"));for(const k of ["en","fr"])for(const [n,blocos] of Object.entries(EX[k]||{})){const u=out[k].units[n-1];for(const [h,x] of Object.entries(blocos)){const g=(u.grammar||[]).find(g=>g.h===h);if(!g)throw new Error("gramatica extra sem bloco: "+k+" "+n+" "+h);g.p=[].concat(g.p||[]).concat(x.mais||[]);if(x.dica&&!g.tip)g.tip=x.dica;}}
 const au={sprites:Object.assign(JSON.parse(fs.readFileSync(path.join(d,"sprites.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-a2.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-b1.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-b2.json"),"utf8")),JSON.parse(fs.readFileSync(path.join(d,"sprites-c1.json"),"utf8")))};
 process.stdout.write("var COURSE="+JSON.stringify(out)+";\\nvar AUDIO="+JSON.stringify(au)+";\\n");''',D]).decode()
 data+='var CONSULTA='+json.dumps({k:json.load(open(os.path.join(D,'..','curso','consulta-'+k+'.json'),encoding='utf-8')) for k in ('en','fr')},ensure_ascii=False,separators=(',',':'))+';\n'
 data+='var NIVELAMENTO='+json.dumps(json.load(open(os.path.join(D,'..','curso','nivelamento.json'),encoding='utf-8')),ensure_ascii=False,separators=(',',':'))+';\n'
 data+='var DESCOBRIR='+json.dumps(json.load(open(os.path.join(D,'..','curso','descobrir.json'),encoding='utf-8')),ensure_ascii=False,separators=(',',':'))+';\n'
 data=data.replace('</script','<\\/script')
-L[i:j+1]=['<script>','var ABERTURA_SVG='+json.dumps(open(os.path.join(D,'..','marca','idiomas-abertura.svg'),encoding='utf-8').read())+';\n'+open(os.path.join(D,'eco.js'),encoding='utf-8').read()+open(os.path.join(D,'eco-app.js'),encoding='utf-8').read()+open(os.path.join(D,'profile-core.js'),encoding='utf-8').read()+open(os.path.join(D,'discovery.js'),encoding='utf-8').read()+open(os.path.join(D,'ia.js'),encoding='utf-8').read()+data+open(os.path.join(D,'adapter.js'),encoding='utf-8').read(),'</script>']
+L[i:j+1]=['<script>','var ABERTURA_SVG='+json.dumps(open(os.path.join(D,'..','marca','idiomas-abertura.svg'),encoding='utf-8').read())+';\n'+open(os.path.join(D,'eco.js'),encoding='utf-8').read()+open(os.path.join(D,'eco-app.js'),encoding='utf-8').read()+open(os.path.join(D,'profile-core.js'),encoding='utf-8').read()+open(os.path.join(D,'discovery.js'),encoding='utf-8').read()+open(os.path.join(D,'ia.js'),encoding='utf-8').read()+data+open(os.path.join(D,'adapter.js'),encoding='utf-8').read()+open(os.path.join(D,'licao-tipos.js'),encoding='utf-8').read(),'</script>']
 s='\n'.join(L)
 def rep(a,b,n=1):
     global s
@@ -161,5 +162,27 @@ rep("    bub.appendChild(p); if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); 
 rep("if (!ex.ocultar) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}", "if (!ex.ocultar && !ex.semAudio) bub.appendChild(montarOuvir(ex)); bub.appendChild(pop);}")
 rep("source(function(){if(token===serial)show('idle','Áudio concluído');}, +speed.value);", "source(function(error){if(token===serial)show('idle',error?'Não foi possível ouvir. Confira a conexão ou baixe a unidade.':'Áudio concluído');}, +speed.value);")
 rep("    var play=el.querySelector('.audio-play')", "    if(!source&&window.AUD)source=AUD.fn(text,lang);\n    var play=el.querySelector('.audio-play')")
+# Tipos extras de exercício (src/licao-tipos.js): explicação antes da prática e escrever a frase inteira.
+rep("    var box = cabecalho(atual.ex);\n    exercicio = atual.ex.tipo === 'escolha' ? montarEscolha(atual.ex, box) : montarFrase(atual.ex, box);",
+    "    var TX = window.LICAO_TIPOS && LICAO_TIPOS[atual.ex.tipo];\n    var box = TX && TX.proprio ? (function () { var b = document.createElement('div'); b.className = 'screen'; return b; })() : cabecalho(atual.ex);\n    exercicio = TX ? TX.montar(atual.ex, box, { acao: acao, idioma: LICAO.idioma, unidade: LICAO.unidade }) : atual.ex.tipo === 'escolha' ? montarEscolha(atual.ex, box) : montarFrase(atual.ex, box);")
+rep("    acao.className = 'ui-btn ui-btn--primary ui-btn--block'; acao.textContent = 'Verificar'; acao.disabled = true;\n    var h = $('h1', box);",
+    "    acao.className = 'ui-btn ui-btn--primary ui-btn--block'; acao.textContent = 'Verificar'; acao.disabled = true;\n    if (exercicio.botao) { acao.textContent = exercicio.botao; acao.disabled = false; }\n    var h = $('h1', box);")
+rep("      var r = exercicio.verificar();\n      tentativas++;",
+    "      var r = exercicio.verificar();\n      if (r.semNota) { feitos++; progresso(); proximo(); return; }\n      tentativas++;")
+css2=(".tag--aprenda{background:var(--primary-soft);color:var(--primary-soft-ink)}"
+ ".lt-explica{display:flex;flex-direction:column;gap:12px;padding:16px;border:1px solid var(--border);border-radius:18px;background:var(--surface-100,var(--surface-200));margin-top:8px}"
+ ".lt-texto p{margin:0 0 10px;font-size:16px;line-height:1.6}.lt-texto p:last-child{margin-bottom:0}"
+ ".lt-sub{margin:4px 0 0;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}"
+ ".lt-exemplos{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}"
+ ".lt-exemplos li{display:flex;align-items:flex-start;gap:10px}"
+ ".lt-ex-txt{display:flex;flex-direction:column;gap:2px;min-width:0}.lt-alvo{font-size:17px;font-weight:600;overflow-wrap:anywhere}.lt-pt{font-size:14px;color:var(--ink-soft)}"
+ ".lt-ouvir{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:40px;height:40px;padding:0 10px;border-radius:999px;border:1px solid var(--border-strong);background:var(--surface-200);color:var(--ink);font:inherit;font-weight:600;cursor:pointer}"
+ ".lt-ouvir svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.lt-ouvir.is-on{border-color:var(--primary);color:var(--primary)}"
+ ".lt-ouvir--resp{align-self:flex-start;margin-top:4px}"
+ ".lt-dica{padding:10px 12px;border-radius:12px;background:var(--primary-soft);color:var(--primary-soft-ink);font-size:15px;line-height:1.55}"
+ ".lt-escrever{display:flex;flex-direction:column;gap:8px;margin-top:12px}.lt-rotulo{font-weight:700}"
+ ".lt-escrever.is-right .dit-input{border-color:var(--primary)}.lt-escrever.is-wrong .dit-input{border-color:var(--error)}"
+ ".lt-msg{margin:0;font-size:14px;color:var(--ink-soft)}.lt-msg:empty{display:none}")
+i=s.rindex('</style>', 0, s.index('</head>')); s=s[:i]+css2+s[i:]
 open(out,'w',encoding='utf-8').write(s)
 print('ok',len(s)//1024,'KB')

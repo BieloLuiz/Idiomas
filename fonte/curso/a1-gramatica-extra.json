@@ -1,0 +1,145 @@
+{
+  "_sobre": "Complementos das explicações de gramática do A1. A montagem (src/build-app.py) junta 'mais' ao fim dos parágrafos do bloco com o mesmo título e usa 'dica' só quando o bloco ainda não tem dica.",
+  "en": {
+    "1": {
+      "I'm = I am: o verbo to be": { "mais": ["<b>Como montar:</b> pessoa + verbo + resto. <b>I</b> + <b>am</b> + <b>from Brazil</b>. <b>You</b> + <b>are</b> + <b>a student</b>. Na forma curta, o apóstrofo (') toma o lugar da letra que sumiu: I<b>'</b>m = I <b>a</b>m."] },
+      "My name's… = My name is…": { "mais": ["Para perguntar o nome, use <b>What's your name?</b> (What is your name?). A resposta pode ser completa (<b>My name's Sarah.</b>) ou só o nome (<b>Sarah.</b>)."], "dica": "Não traduza “eu me chamo”: “I call me Lucas” está errado. Diga <b>I'm Lucas</b> ou <b>My name's Lucas</b>." },
+      "Where are you from? A preposição vai para o fim": { "mais": ["<b>Como montar:</b> <b>Where</b> + <b>are</b> + <b>you</b> + <b>from</b>? Resposta: <b>I'm from</b> + país ou cidade. Exemplos: <b>I'm from Brazil.</b> <b>I'm from São Paulo.</b>"] },
+      "And you? Devolvendo a pergunta": { "mais": ["Pode usar <b>And you?</b> depois de quase qualquer resposta: <b>I'm from Brazil. And you?</b> Com <b>too</b> você diz que é igual: <b>Nice to meet you, too.</b> (Prazer em te conhecer também.)"], "dica": "Em <b>Nice to meet you, too</b>, o too vai no fim da frase, nunca no começo." }
+    },
+    "2": {
+      "O verbo to be completo": { "mais": ["<b>Tabela:</b> I <b>am</b> · you <b>are</b> · he / she / it <b>is</b> · we <b>are</b> · they <b>are</b>. Repare: só existem três formas (<b>am</b>, <b>is</b>, <b>are</b>). Com nomes de pessoas, use a forma de he ou she: <b>Ana is Brazilian.</b>"] },
+      "Nacionalidade com letra maiúscula": { "mais": ["Vale também para os dias da semana e os meses: <b>Monday</b>, <b>January</b>. E o pronome <b>I</b> (eu) é sempre maiúsculo, mesmo no meio da frase."], "dica": "Brazilian (brasileiro) e Portuguese (português, o idioma) também começam com maiúscula." },
+      "País ou nacionalidade?": { "mais": ["<b>Compare:</b> <b>I'm from Japan.</b> (país, com from) e <b>I'm Japanese.</b> (nacionalidade, sem from). Muitas vezes o idioma tem o mesmo nome da nacionalidade: <b>Japanese</b> é japonês (pessoa) e japonês (língua)."] },
+      "Profissão pede a": { "mais": ["No plural o <b>a</b> some: <b>They're teachers.</b> Antes de som de vogal vira <b>an</b>: <b>She's an engineer.</b>"], "dica": "“He's teacher” é o erro mais comum aqui. Diga <b>He's a teacher</b>." }
+    },
+    "3": {
+      "Pergunta: o verbo vai para a frente": { "mais": ["<b>Compare:</b> afirmativa <b>She is Brazilian.</b> → pergunta <b>Is she Brazilian?</b> Com palavra de pergunta, ela vem primeiro: <b>Where are you from?</b> <b>How old is he?</b>"], "dica": "Em português, só a entonação muda. Em inglês, mudar só a entonação (“You are Brazilian?”) soa como surpresa, não como pergunta normal." },
+      "Negativa: not depois do verbo": { "mais": ["<b>Formas:</b> I'm not · you aren't · he / she / it isn't · we aren't · they aren't. A forma longa também existe e é mais formal: <b>I am not</b>, <b>she is not</b>."] },
+      "Respostas curtas": { "mais": ["A resposta usa o mesmo verbo da pergunta: <b>Are you</b> a student? → <b>Yes, I am.</b> <b>Is she</b> from Brazil? → <b>No, she isn't.</b> Responder só “Yes” ou “No” também é comum, mas a forma curta é mais educada."] },
+      "Idade com to be": { "mais": ["<b>Como montar:</b> pessoa + to be + número: <b>She's 30.</b> <b>My son is 8 years old.</b> Para perguntar a idade de outra pessoa: <b>How old is she?</b>"] }
+    },
+    "4": {
+      "Possessivos": { "mais": ["O possessivo vem sempre antes da coisa e não leva artigo: <b>my car</b> (o meu carro), nunca “the my car”. Para coisas e animais, use <b>its</b>: <b>The dog is in its bed.</b>"] },
+      "O 's de posse": { "mais": ["<b>Como montar:</b> dono + <b>'s</b> + coisa: <b>Sarah's phone</b> (o celular da Sarah), <b>my mom's name</b> (o nome da minha mãe). Se o dono está no plural e termina em s, acrescente só o apóstrofo: <b>my parents' house</b>."] },
+      "This is… para apresentar": { "mais": ["No plural: <b>These are my kids.</b> (Estes são meus filhos.) Para responder a uma apresentação: <b>Nice to meet you.</b>"], "dica": "Para apresentar alguém, o inglês diz <b>This is</b>, não “He is”: <b>This is my brother, Jake.</b>" }
+    },
+    "5": {
+      "a ou an": { "mais": ["<b>a</b> e <b>an</b> só aparecem com uma coisa (singular). No plural, nada ou <b>some</b>: <b>an apple</b>, <b>apples</b>, <b>some apples</b>."] },
+      "Plural": { "mais": ["Consoante + <b>y</b> vira <b>-ies</b>: <b>city → cities</b>. Vogal + y só ganha -s: <b>key → keys</b>. Algumas palavras terminadas em -f viram -ves: <b>knife → knives</b>."] },
+      "this, that, these, those": { "mais": ["Podem vir sozinhos ou antes da coisa: <b>This is my bag.</b> / <b>This bag is mine.</b> No plural, o verbo também muda: <b>These are</b>, <b>Those are</b>."], "dica": "O som de <b>this</b> é curto (“dhis”) e o de <b>these</b> é longo (“dhiiz”). Essa diferença muda o sentido." },
+      "Perguntando o preço": { "mais": ["A resposta usa o mesmo verbo: <b>It's ten dollars.</b> / <b>They're five dollars.</b> Para apontar: <b>How much is this?</b> / <b>How much are these?</b>"], "dica": "Não use <b>many</b> para preço. “How many is it?” está errado: o certo é <b>How much is it?</b>" }
+    },
+    "6": {
+      "Present simple para a rotina": { "mais": ["<b>Como montar:</b> pessoa + verbo + resto: <b>I get up at seven.</b> <b>We have lunch at noon.</b> As palavras de tempo costumam ir para o fim: <b>every day</b>, <b>on Mondays</b>."], "dica": "Com he, she e it o verbo muda (ganha -s). Isso aparece na Unidade 7." },
+      "Negativa com don't": { "mais": ["<b>Como montar:</b> pessoa + <b>don't</b> + verbo: <b>We don't eat meat.</b> <b>They don't live here.</b> Na escrita formal: <b>do not</b>."] },
+      "Pergunta com do": { "mais": ["<b>Como montar:</b> (palavra de pergunta) + <b>do</b> + pessoa + verbo: <b>Where do you work?</b> <b>Do they like coffee?</b> O <b>do</b> não tem tradução: ele só marca a pergunta."], "dica": "Não esqueça o do: “Where you work?” está errado. Diga <b>Where do you work?</b>" },
+      "Horas e partes do dia": { "mais": ["<b>Para ler as horas:</b> <b>seven o'clock</b> (7h), <b>seven fifteen</b> ou <b>quarter past seven</b> (7h15), <b>seven thirty</b> ou <b>half past seven</b> (7h30), <b>quarter to eight</b> (7h45)."] }
+    },
+    "7": {
+      "he, she, it: o verbo ganha -s": { "mais": ["<b>Compare:</b> I <b>work</b> · you <b>work</b> · he / she <b>works</b> · we <b>work</b> · they <b>work</b>. Só uma pessoa muda. Com nomes, vale a mesma regra: <b>Sarah works</b>, <b>my dad works</b>."] },
+      "Negativa com doesn't": { "mais": ["<b>Como montar:</b> he / she / it + <b>doesn't</b> + verbo sem -s: <b>She doesn't work on Sundays.</b> <b>He doesn't have a car.</b> (have, não has)."] },
+      "Pergunta com does": { "mais": ["<b>Como montar:</b> (palavra de pergunta) + <b>does</b> + he / she / it + verbo sem -s: <b>Where does she work?</b> <b>Does he like his job?</b>"], "dica": "O -s vai para o does: “Does she works?” está errado. Diga <b>Does she work?</b>" },
+      "a ou an antes da profissão": { "mais": ["Para perguntar a profissão: <b>What do you do?</b> ou <b>What does she do?</b> A resposta usa to be + a / an: <b>I'm a waiter.</b> <b>She's an architect.</b>"], "dica": "“What do you do?” não é “o que você está fazendo”, é “qual é a sua profissão”." }
+    },
+    "8": {
+      "like, love, hate + -ing": { "mais": ["<b>Escala:</b> <b>love</b> (adorar) › <b>like</b> (gostar) › <b>don't like</b> (não gostar) › <b>hate</b> (odiar). Com coisas, sem -ing: <b>I love pizza.</b> <b>She doesn't like coffee.</b>"] },
+      "Palavras de frequência": { "mais": ["<b>Posição:</b> <b>I usually get up at seven.</b> (antes do verbo) e <b>I'm usually tired.</b> (depois do to be). <b>sometimes</b> também pode abrir a frase: <b>Sometimes I cook.</b>"] },
+      "How often…?": { "mais": ["As respostas com <b>every</b>, <b>once</b> e <b>twice</b> costumam ir para o fim da frase: <b>I go to the gym twice a week.</b> Note: <b>once</b> (uma vez), <b>twice</b> (duas vezes) e, a partir de três, <b>three times</b>, <b>four times</b>."], "dica": "“Two times a week” é entendido, mas o natural é <b>twice a week</b>." },
+      "Como escrever o -ing": { "mais": ["Terminado em <b>-ie</b>, vira <b>-ying</b>: <b>lie → lying</b>. Com <b>-y</b>, só acrescente: <b>play → playing</b>, <b>study → studying</b>."], "dica": "Na dúvida, escreva primeiro sem dobrar: <b>cooking</b>, <b>reading</b>, <b>playing</b>. Dobrar é a exceção." }
+    },
+    "9": {
+      "Contáveis e incontáveis": { "mais": ["Para contar o incontável, use um recipiente ou medida: <b>a glass of water</b> (um copo de água), <b>a piece of cake</b> (um pedaço de bolo), <b>a bottle of milk</b>."], "dica": "Algumas palavras são incontáveis em inglês e contáveis em português: <b>bread</b> (pão), <b>fruit</b> (fruta), <b>advice</b> (conselho)." },
+      "some e any": { "mais": ["<b>Resumo:</b> afirmativa → <b>some</b>; negativa → <b>not … any</b>; pergunta → <b>any</b> (ou <b>some</b> para oferecer). Servem para incontáveis e para plural: <b>some milk</b>, <b>some eggs</b>."] },
+      "Pedindo com educação": { "mais": ["<b>Como montar:</b> <b>Can I have</b> + coisa + <b>, please?</b> / <b>I'd like</b> + coisa + <b>, please.</b> Para oferecer: <b>Would you like…?</b> Para responder: <b>Yes, please.</b> / <b>No, thank you.</b>"] }
+    },
+    "10": {
+      "There is e there are": { "mais": ["<b>Como montar:</b> <b>There's</b> + a / an + coisa + lugar: <b>There's a bank on Main Street.</b> <b>There are</b> + plural + lugar: <b>There are two cafés near here.</b>"] },
+      "Perguntas e negativas": { "mais": ["<b>Respostas curtas:</b> <b>Is there a bank near here?</b> → <b>Yes, there is.</b> / <b>No, there isn't.</b> <b>Are there any parks?</b> → <b>Yes, there are.</b> / <b>No, there aren't.</b>"], "dica": "Na pergunta e na negativa com plural, use <b>any</b>: <b>Are there any restaurants?</b>" },
+      "Onde fica": { "mais": ["<b>Como montar:</b> coisa + to be + lugar: <b>The bank is next to the park.</b> <b>The pharmacy is between the bank and the café.</b> Para perguntar: <b>Where is the station?</b>"], "dica": "<b>opposite</b> é “em frente a, do outro lado da rua”. Já <b>in front of</b> é “bem na frente de”." },
+      "Dando direções": { "mais": ["As direções usam o verbo na forma básica, sem pessoa: <b>Go</b>, <b>Turn</b>, <b>Take</b>. Para pedir: <b>Excuse me, where is the station?</b> ou <b>How do I get to the station?</b>"], "dica": "Comece com <b>Excuse me</b> para chamar a atenção de alguém na rua." }
+    },
+    "11": {
+      "can: saber, conseguir, poder": { "mais": ["<b>Como montar:</b> pessoa + <b>can</b> + verbo: <b>I can swim.</b> <b>She can speak French.</b> O mesmo <b>can</b> serve para todas as pessoas, sem -s."] },
+      "Negativa e pergunta": { "mais": ["<b>Pergunta:</b> <b>Can</b> + pessoa + verbo: <b>Can you drive?</b> Com palavra de pergunta: <b>What can you cook?</b> A negativa não leva don't: <b>I can't cook</b>, nunca “I don't can”."], "dica": "Pronúncia: <b>can</b> soa curto (“kən”) na afirmativa; <b>can't</b> tem o a mais aberto e longo. Preste atenção a isso ao ouvir." },
+      "Pedidos e permissão": { "mais": ["<b>Can I open the window?</b> (Posso abrir a janela?) <b>Can you help me?</b> (Você pode me ajudar?) Para ser mais educado, use <b>Could</b>: <b>Could you help me, please?</b>"], "dica": "Para responder a um pedido: <b>Sure!</b> ou <b>Of course!</b> (claro), ou <b>Sorry, I can't.</b>" }
+    },
+    "12": {
+      "Present continuous: o que acontece agora": { "mais": ["<b>Como montar:</b> pessoa + <b>am / is / are</b> + verbo-<b>ing</b>: <b>I'm reading.</b> <b>He's working.</b> <b>We're waiting.</b> É o “estou lendo”, “ele está trabalhando” do português."] },
+      "Pergunta e negativa": { "mais": ["<b>Respostas curtas:</b> <b>Are you working?</b> → <b>Yes, I am.</b> / <b>No, I'm not.</b> <b>Is it raining?</b> → <b>Yes, it is.</b> / <b>No, it isn't.</b>"], "dica": "Não use do aqui: “Do you working?” está errado. O próprio to be faz a pergunta: <b>Are you working?</b>" },
+      "Rotina ou agora?": { "mais": ["Palavras que ajudam: com <b>every day</b>, <b>usually</b> e <b>on Mondays</b>, use present simple. Com <b>now</b>, <b>right now</b>, <b>today</b> e <b>at the moment</b>, use present continuous."], "dica": "Alguns verbos quase nunca vão para o -ing, como <b>like</b>, <b>know</b> e <b>want</b>: diga <b>I want a coffee</b>, não “I'm wanting”." },
+      "Falando do tempo": { "mais": ["Para perguntar: <b>What's the weather like?</b> (Como está o tempo?) Respostas: <b>It's hot.</b> <b>It's cloudy.</b> <b>It's snowing.</b>"] }
+    }
+  },
+  "fr": {
+    "1": {
+      "Je m'appelle… e Moi, c'est…": { "mais": ["<b>Como montar:</b> <b>Je m'appelle</b> + nome. O <b>me</b> vira <b>m'</b> antes de vogal: je <b>m'</b>appelle. Resposta curta também vale: <b>Claire.</b> Para continuar: <b>Et toi ?</b>"], "dica": "O ll de <b>appelle</b> soa como um l só: “apél”." },
+      "Tu ou vous?": { "mais": ["<b>Compare:</b> <b>Tu t'appelles comment ?</b> (amigo) · <b>Vous vous appelez comment ?</b> (desconhecido ou grupo). O verbo muda junto: tu <b>es</b>, vous <b>êtes</b>."] },
+      "Je suis: o verbo être": { "mais": ["<b>Como montar:</b> <b>Je suis</b> + nacionalidade: <b>Je suis brésilien.</b> / <b>Je suis</b> + <b>de</b> + cidade: <b>Je suis de Recife.</b> Para perguntar: <b>Tu es d'où ?</b> (De onde você é?)"] },
+      "Masculino e feminino": { "mais": ["<b>Pares:</b> brésilien / brésilienne · français / française · canadien / canadienne · espagnol / espagnole. Quando já termina em -e, não muda: <b>belge</b>, <b>suisse</b>."] }
+    },
+    "2": {
+      "O verbo être completo": { "mais": ["<b>On</b> quer dizer “a gente” e é muito usado na fala no lugar de nous: <b>on est brésiliens</b> = nous sommes brésiliens. O verbo de on é igual ao de il: <b>on est</b>."], "dica": "Em <b>vous êtes</b>, o s de vous se liga à vogal com som de z: “vu-zét”." },
+      "Nacionalidade: masculino e feminino": { "mais": ["<b>Como montar:</b> <b>Il est</b> japonais. / <b>Elle est</b> japonais<b>e</b>. / <b>Ils sont</b> japonais. / <b>Elles sont</b> japonais<b>es</b>. A nacionalidade concorda com a pessoa, como em português."] },
+      "Em, no, na: países e cidades": { "mais": ["<b>Resumo:</b> feminino → <b>en</b> · masculino → <b>au</b> · plural → <b>aux</b> · cidade → <b>à</b>. Exemplos: <b>J'habite en Italie, à Rome.</b> <b>Il habite au Portugal.</b>"] },
+      "Venir de: de onde a pessoa vem": { "mais": ["<b>Formas completas:</b> je viens · tu viens · il / elle vient · nous venons · vous venez · ils / elles viennent. Para perguntar: <b>Tu viens d'où ?</b> ou <b>D'où viens-tu ?</b>"], "dica": "É a mesma lógica de en / au, mas com de: <b>de France</b>, <b>du Brésil</b>, <b>des États-Unis</b>." }
+    },
+    "3": {
+      "O verbo avoir": { "mais": ["O <b>je</b> vira <b>j'</b> antes de vogal: <b>j'ai</b>. Na fala, o s se liga à vogal: nous_avons (“nu-zavõ”), vous_avez, ils_ont (“il-zõ”)."], "dica": "Cuidado: <b>ils ont</b> (eles têm, som de z) e <b>ils sont</b> (eles são, som de s) mudam de sentido pelo som." },
+      "Idade com avoir": { "mais": ["<b>Como montar:</b> pessoa + avoir + número + <b>ans</b>: <b>Il a trente ans.</b> <b>Ma fille a huit ans.</b> Para perguntar de outra pessoa: <b>Il a quel âge ?</b>"] },
+      "Negação: ne… pas": { "mais": ["<b>Como montar:</b> <b>ne</b> + verbo + <b>pas</b>: <b>Je ne parle pas anglais.</b> <b>Elle n'est pas française.</b> Com o verbo conjugado no meio, como um sanduíche."] },
+      "Três jeitos de perguntar": { "mais": ["Os três dizem a mesma coisa; muda o tom. <b>Tu es étudiant ?</b> (informal) · <b>Est-ce que tu es étudiant ?</b> (neutro) · <b>Es-tu étudiant ?</b> (formal e escrito). Palavras de pergunta: <b>où</b> (onde), <b>quand</b> (quando), <b>comment</b> (como), <b>quel</b> (qual)."], "dica": "No começo, use <b>est-ce que</b>: serve para qualquer pergunta de sim ou não e não exige trocar a ordem." }
+    },
+    "4": {
+      "Artigos": { "mais": ["<b>Como escolher:</b> coisa conhecida ou geral → <b>le / la / les</b>: <b>le frère de Claire</b>. Coisa nova na conversa → <b>un / une / des</b>: <b>J'ai un frère.</b>"] },
+      "Possessivos": { "mais": ["Antes de palavra feminina que começa com vogal, usa-se <b>mon</b>, <b>ton</b> e <b>son</b> para evitar dois sons de vogal juntos: <b>mon amie</b>, <b>son école</b>."] },
+      "Negação com un, une, des": { "mais": ["<b>Compare:</b> <b>J'ai un frère.</b> → <b>Je n'ai pas de frère.</b> / <b>Il a des enfants.</b> → <b>Il n'a pas d'enfants.</b> Com le, la e les, nada muda: <b>Je n'aime pas le café.</b>"], "dica": "“Je n'ai pas un frère” soa estranho. Diga <b>Je n'ai pas de frère</b>." }
+    },
+    "5": {
+      "Todo substantivo tem gênero": { "mais": ["Algumas pistas ajudam: palavras terminadas em <b>-tion</b> são femininas (<b>la question</b>) e em <b>-ment</b> costumam ser masculinas (<b>le moment</b>). Mas a regra de ouro é aprender com o artigo."] },
+      "Plural: o s é mudo": { "mais": ["Palavras terminadas em <b>-eau</b> ganham <b>-x</b>: <b>un bureau</b>, <b>des bureaux</b>. Terminadas em s, x ou z não mudam: <b>un prix</b>, <b>des prix</b>."], "dica": "Como o plural quase não se ouve, preste atenção ao artigo: <b>le</b> / <b>la</b> (singular) e <b>les</b> (plural)." },
+      "Il y a: tem, há": { "mais": ["<b>Como montar:</b> <b>Il y a</b> + un / une / des + coisa + lugar: <b>Il y a une table dans la salle.</b> <b>Il y a des chaises.</b> Na negativa: <b>Il n'y a pas de chaises.</b>"] },
+      "C'est e o preço": { "mais": ["<b>C'est</b> apresenta uma coisa: <b>C'est un stylo.</b> No plural: <b>Ce sont des stylos.</b> Para o preço, a resposta é <b>C'est dix euros.</b> ou <b>Ça fait dix euros.</b>"], "dica": "Na loja, <b>Ça fait combien ?</b> pergunta o total a pagar." }
+    },
+    "6": {
+      "Verbos em -er no presente": { "mais": ["<b>Como montar:</b> tire o <b>-er</b> e acrescente <b>-e, -es, -e, -ons, -ez, -ent</b>. travailler → je travaill<b>e</b>, nous travaill<b>ons</b>. Antes de vogal, je vira j': <b>j'habite</b>, <b>j'aime</b>."] },
+      "Horas": { "mais": ["No dia a dia, também se diz o número dos minutos: <b>huit heures quinze</b> (8h15), <b>huit heures trente</b> (8h30). Em horários oficiais usa-se o relógio de 24 horas: <b>dix-huit heures</b> (18h)."] },
+      "Je me lève, je me couche": { "mais": ["<b>Formas:</b> je <b>me</b> lève · tu <b>te</b> lèves · il / elle <b>se</b> lève. Antes de vogal: je <b>m'</b>habille, tu <b>t'</b>habilles."], "dica": "Esses verbos se parecem com os do português: “eu me levanto”, “eu me deito”. Se em português tem “me”, em francês costuma ter também." },
+      "Partes do dia": { "mais": ["Para hoje, use <b>ce</b> / <b>cet</b> / <b>cette</b>: <b>ce matin</b> (hoje de manhã), <b>cet après-midi</b> (hoje à tarde), <b>ce soir</b> (hoje à noite)."], "dica": "Para cumprimentar à noite, use <b>Bonsoir</b>. <b>Bonne nuit</b> é só para quem vai dormir." }
+    },
+    "7": {
+      "O verbo faire": { "mais": ["<b>faire</b> aparece em muitas expressões: <b>faire la cuisine</b> (cozinhar), <b>faire les courses</b> (fazer compras), <b>faire du sport</b>. Para perguntar a profissão: <b>Qu'est-ce que tu fais ?</b> ou <b>Tu fais quoi dans la vie ?</b>"] },
+      "Profissão sem artigo": { "mais": ["<b>Compare:</b> <b>Il est médecin.</b> (pessoa + être + profissão) e <b>C'est un médecin.</b> (c'est + artigo + profissão). Se houver um adjetivo, o artigo volta: <b>C'est un bon médecin.</b>"] },
+      "Profissões no feminino": { "mais": ["Mais pares: <b>-en → -enne</b> (musicien, musicienne), <b>-er → -ère</b> (boulanger, boulangère), <b>-teur → -trice</b> (acteur, actrice). Terminadas em -e não mudam: <b>un ou une architecte</b>."], "dica": "Hoje é comum ver formas femininas novas, como <b>professeure</b> e <b>autrice</b>. As duas formas são aceitas." }
+    },
+    "8": {
+      "aimer, adorer, détester + infinitivo": { "mais": ["<b>Escala com coisas:</b> <b>adorer</b> (adorar) › <b>aimer</b> (gostar) › <b>aimer bien</b> (gostar, mais leve) › <b>ne pas aimer</b> › <b>détester</b> (odiar). Com pessoas, <b>aimer</b> sozinho quer dizer amar: <b>J'aime Claire.</b>"], "dica": "Para dizer que gosta de um amigo, use <b>J'aime bien Lucas</b>. Só <b>J'aime Lucas</b> soa como declaração de amor." },
+      "aimer + le, la, les": { "mais": ["<b>Compare:</b> <b>J'aime le café.</b> (gosto de café, em geral) e <b>Je bois du café.</b> (tomo café, uma quantidade). O artigo definido é o certo para gostos."], "dica": "“J'aime café”, sem artigo, está errado. Em francês quase todo substantivo pede artigo." },
+      "jouer à, jouer de, faire de": { "mais": ["<b>à</b> e <b>de</b> se juntam com le: à + le = <b>au</b> (au tennis), de + le = <b>du</b> (du piano). Com la não muda: <b>à la pétanque</b>, <b>de la flûte</b>."], "dica": "Esporte e jogo → <b>à</b>. Instrumento → <b>de</b>. Atividade em geral → <b>faire de</b>." },
+      "le samedi: aos sábados": { "mais": ["<b>Compare:</b> <b>Je fais du sport le samedi.</b> (todo sábado) e <b>Je vais au cinéma samedi.</b> (neste sábado). Vale para todos os dias: <b>le lundi</b>, <b>le dimanche</b>."], "dica": "Também se diz <b>tous les samedis</b> (todos os sábados), com o mesmo sentido de <b>le samedi</b>." }
+    },
+    "9": {
+      "Partitivos: du, de la, de l', des": { "mais": ["<b>Como escolher:</b> uma coisa inteira e contável → <b>un / une</b> (une pomme); parte de algo → <b>du / de la</b> (du pain, de la confiture); gosto em geral → <b>le / la</b> (J'aime le pain)."] },
+      "Na negativa, tudo vira de": { "mais": ["<b>Compare:</b> <b>Je bois du café.</b> → <b>Je ne bois pas de café.</b> / <b>Il y a de l'eau.</b> → <b>Il n'y a pas d'eau.</b> Também com quantidades: <b>beaucoup de</b>, <b>un peu de</b>: <b>un peu de sucre</b>."], "dica": "Depois de quantidade, sempre <b>de</b>: <b>un kilo de pommes</b>, nunca “un kilo des pommes”." },
+      "Pedindo com educação": { "mais": ["<b>Como montar:</b> <b>Je voudrais</b> + un / une / du / de la + coisa + <b>, s'il vous plaît.</b> No fim: <b>L'addition, s'il vous plaît.</b> (A conta, por favor.)"] }
+    },
+    "10": {
+      "O verbo aller": { "mais": ["<b>aller</b> + lugar usa à (au, aux): <b>Je vais au cinéma.</b> <b>Tu vas à la gare ?</b> Também serve para perguntar como a pessoa está: <b>Ça va ?</b> <b>Comment allez-vous ?</b>"], "dica": "<b>aller</b> é irregular: decore as formas como um bloco (vais, vas, va, allons, allez, vont)." },
+      "à + le = au, de + le = du": { "mais": ["<b>Tabela:</b> à + le = <b>au</b> · à + la = <b>à la</b> · à + l' = <b>à l'</b> · à + les = <b>aux</b>. Exemplos: <b>au musée</b>, <b>à la banque</b>, <b>à l'hôpital</b>, <b>aux toilettes</b>."] },
+      "Dando direções": { "mais": ["Para pedir: <b>Excusez-moi, où est la gare ?</b> ou <b>Pour aller à la gare, s'il vous plaît ?</b> Com tu, o imperativo perde o -s em -er: <b>Tourne à gauche.</b>"], "dica": "Comece sempre com <b>Excusez-moi</b> ou <b>Pardon</b> para falar com alguém na rua." },
+      "Onde fica": { "mais": ["Essas expressões terminam em <b>de</b>, que se junta ao artigo: <b>à côté du parc</b> (de + le), <b>en face de la gare</b>, <b>près de l'hôtel</b>, <b>loin des magasins</b>."], "dica": "“à côté de le parc” está errado: de + le vira <b>du</b>." }
+    },
+    "11": {
+      "pouvoir: poder": { "mais": ["<b>Como montar:</b> pouvoir + verbo no infinitivo: <b>Je peux venir.</b> <b>Tu peux m'aider ?</b> Para pedir com educação: <b>Je pourrais…?</b> ou <b>Vous pourriez…?</b>"], "dica": "<b>Tu peux…?</b> é o jeito mais comum de pedir um favor a um amigo." },
+      "vouloir: querer": { "mais": ["Para pedir em loja ou restaurante, prefira <b>je voudrais</b> (eu queria), mais educado que <b>je veux</b>. Para aceitar um convite: <b>Oui, je veux bien.</b>"], "dica": "<b>Tu veux…?</b> é o jeito natural de convidar: <b>Tu veux un café ?</b>" },
+      "devoir: ter que": { "mais": ["<b>Como montar:</b> devoir + infinitivo: <b>Je dois partir.</b> <b>On doit acheter du pain.</b> Para obrigação geral, sem pessoa: <b>Il faut</b> + infinitivo: <b>Il faut réserver.</b>"], "dica": "O s de <b>je dois</b> e <b>tu dois</b> é mudo: as duas formas soam “duá”." },
+      "Os três + infinitivo": { "mais": ["<b>Negativa:</b> o ne… pas abraça o primeiro verbo: <b>Je ne peux pas venir.</b> <b>On ne doit pas fumer.</b>"] }
+    },
+    "12": {
+      "Futur proche: aller + infinitivo": { "mais": ["<b>Como montar:</b> <b>je vais</b> / tu vas / il va / nous allons / vous allez / ils vont + infinitivo: <b>Nous allons visiter Paris.</b> <b>Ils vont partir demain.</b>"], "dica": "Palavras que ajudam: <b>demain</b> (amanhã), <b>ce week-end</b>, <b>la semaine prochaine</b> (semana que vem)." },
+      "Negativa do futuro próximo": { "mais": ["<b>Compare:</b> <b>Je vais travailler.</b> → <b>Je ne vais pas travailler.</b> O infinitivo fica fora do ne… pas."], "dica": "“Je vais ne pas travailler” está errado. O <b>ne… pas</b> fica em volta de <b>vais</b>." },
+      "Datas": { "mais": ["Para perguntar a data: <b>On est le combien ?</b> ou <b>Quelle est la date ?</b> Resposta: <b>On est le quinze mars.</b> Com o ano: <b>en 2026</b>."] },
+      "Partir e revenir": { "mais": ["<b>partir de</b> (sair de) e <b>partir pour / à</b> (ir para): <b>Je pars de Lyon.</b> <b>Je pars à Paris.</b> <b>revenir de</b>: <b>Je reviens du Brésil.</b>"], "dica": "No futur proche: <b>Je vais partir lundi et revenir dimanche.</b>" }
+    }
+  }
+}

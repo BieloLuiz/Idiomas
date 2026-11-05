@@ -318,17 +318,20 @@ function abrirLicao(LICAO, PERFIL, ao) {
     if ('speechSynthesis' in window) speechSynthesis.cancel();
     if (!fila.length) { fim(); return; }
     atual = fila.shift(); checkpoint(true);
-    var box = cabecalho(atual.ex);
-    exercicio = atual.ex.tipo === 'escolha' ? montarEscolha(atual.ex, box) : montarFrase(atual.ex, box);
+    var TX = window.LICAO_TIPOS && LICAO_TIPOS[atual.ex.tipo];
+    var box = TX && TX.proprio ? (function () { var b = document.createElement('div'); b.className = 'screen'; return b; })() : cabecalho(atual.ex);
+    exercicio = TX ? TX.montar(atual.ex, box, { acao: acao, idioma: LICAO.idioma, unidade: LICAO.unidade }) : atual.ex.tipo === 'escolha' ? montarEscolha(atual.ex, box) : montarFrase(atual.ex, box);
     if(ao.aposExercicio)ao.aposExercicio(box);
     tela.innerHTML = ''; tela.appendChild(box);
     acao.className = 'ui-btn ui-btn--primary ui-btn--block'; acao.textContent = 'Verificar'; acao.disabled = true;
+    if (exercicio.botao) { acao.textContent = exercicio.botao; acao.disabled = false; }
     var h = $('h1', box); if (h) h.focus({ preventScroll: true });
   }
 
   acao.addEventListener('click', function () {
     if (fase === 'responder') {
       var r = exercicio.verificar();
+      if (r.semNota) { feitos++; progresso(); proximo(); return; }
       tentativas++;
       if (r.ok) { acertos++; feitos++; seguidas++; melhorSeq = Math.max(melhorSeq, seguidas); ecoEstado(eco, seguidas >= 3 ? 'proud' : 'celebrate'); pular(eco); }
       else {
