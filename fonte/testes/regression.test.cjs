@@ -272,3 +272,8 @@ test('todas as unidades geram as cinco lições e o teste usa revisão da própr
  const app=scripts.map(f=>fs.readFileSync(f,'utf8')).find(s=>s.includes('function abrirLicaoApp'));
  assert.ok(app.includes("nome === 'Prática do guia' ? 'Revisão da unidade'"));assert.ok(!app.includes('|| LICOES_DEMO[p.idioma]'));assert.ok(app.includes("return all[p.progresso[p.idioma]] || null"));
 });
+test('gramática do A1 recebe os complementos (como montar e dicas) no curso montado',()=>{
+ const html=fs.readFileSync('index.html','utf8'),scripts=[...html.matchAll(/<script[^>]+src="(assets\/[^"]+)"/g)].map(m=>m[1]);const file=scripts.find(f=>fs.readFileSync(f,'utf8').includes('var COURSE='));
+ const src=fs.readFileSync(file,'utf8'),m=src.match(/var COURSE=(\{.*?\});\nvar AUDIO=/s);const C=JSON.parse(m[1]);const EX=JSON.parse(fs.readFileSync('fonte/curso/a1-gramatica-extra.json','utf8'));
+ for(const k of ['en','fr'])for(const [n,blocos] of Object.entries(EX[k]))for(const [h,x] of Object.entries(blocos)){const g=C[k].units[n-1].grammar.find(g=>g.h===h);assert.ok(g,k+n+h);const p=[].concat(g.p).join(' ');for(const t of [].concat(x.mais||[]))assert.ok(p.includes(t),k+n+h);}
+});
