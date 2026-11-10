@@ -93,8 +93,12 @@ var ProfileCore = (function () {
   }
   function review(state, id, correct, now) {
     now = now || Date.now(); state[id] = state[id] || { interval: 0, due: 0, correct: 0, wrong: 0 };
-    var r = state[id]; r.interval = correct ? (r.interval ? Math.min(120, r.interval * 2) : 1) : 0;
-    r[correct ? 'correct' : 'wrong']++; r.last = now; r.due = now + (correct ? r.interval * 86400000 : 60000); return r;
+    var r = state[id];
+    /* Acerto antes do vencimento (refazer a lição no mesmo dia, por exemplo) conta como prática, não como revisão espaçada:
+       o intervalo e a data não mudam. Antes, cada acerto dobrava o intervalo e a palavra sumia por 8 dias ou mais. */
+    var cedo = correct && r.interval > 0 && now < r.due;
+    if (!cedo) { r.interval = correct ? (r.interval ? Math.min(120, r.interval * 2) : 1) : 0; r.due = now + (correct ? r.interval * 86400000 : 60000); }
+    r[correct ? 'correct' : 'wrong']++; r.last = now; return r;
   }
   return { copy: copy, equal: equal, merge: merge, mergeProfile: mergeProfile, reconcile: reconcile, normalize: normalize, day: day, newDay: newDay, review: review };
 })();

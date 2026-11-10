@@ -15,6 +15,16 @@ const ABA = 'Perfis';
 const COLS = ['id', 'nome', 'atualizado', 'atualizadoMs', 'json'];
 const MAX_PERFIS = 4;
 const PEDACO = 45000;   // limite seguro por célula; perfis maiores ocupam as colunas seguintes
+/* Cada pedaço é gravado com esta marca na frente. Sem ela, um pedaço que começasse com "=", "+", "-" ou apóstrofo
+   seria lido pela planilha como fórmula (o perfil ficaria ilegível) ou perderia o apóstrofo.
+   Linhas antigas, sem a marca, começam com "{" e continuam sendo lidas. */
+const MARCA_PEDACO = 'j:';
+const RECUSA_DEFINITIVA = /^(perfil_invalido|perfil inválido|perfil_grande|limite de perfis|operacao_invalida)$/;
+function juntarPedacos_(celulas) {
+  const c = celulas.map(function (x) { return String(x == null ? '' : x); });
+  if (c[0].indexOf(MARCA_PEDACO) !== 0) return c.join('');
+  return c.map(function (x) { return x.indexOf(MARCA_PEDACO) === 0 ? x.slice(MARCA_PEDACO.length) : x; }).join('');
+}
 
 function doGet() { return saida_({ ok: true, app: 'Idiomas', googleClientId: clienteGoogle_(), vapid: typeof VAPID_PUBLICA !== 'undefined' ? VAPID_PUBLICA : '' }); }
 
@@ -50,16 +60,24 @@ function doPost(e) {
     lock.waitLock(20000);
     if (q.acao === 'listar') return saida_({ perfis: listar_() });
     if (q.acao === 'salvar') {
-      const saved = [], conflicts = [];
+      /* Um perfil recusado de vez (grande demais, inválido, sem vaga) não derruba o envio dos outros:
+         ele volta em "recusados" e o app para de reenviar o mesmo conteúdo. Falhas passageiras continuam sendo erro do pedido. */
+      const saved = [], conflicts = [], refused = [];
       (Array.isArray(q.perfis) ? q.perfis : [q.perfil]).slice(0, MAX_PERFIS).forEach(function (p) {
-        const current = listar_().find(function (x) { return x.id === (p && p.id); });
-        const operation=String(p && p._operation || '');
-        if(!/^[0-9a-f-]{36}$/.test(operation))throw new Error('operacao_invalida');
-        if(current && (current._receipts||[]).includes(operation)){saved.push(current);return;}
-        if (current && Number(p.revisao || 0) !== Number(current.revisao || 0)) { conflicts.push(current); return; }
-        p = ProfileCore.normalize(migrarPin_(p)); delete p._operation;p._receipts=(current&&current._receipts||[]).concat(operation).slice(-128); p.revisao = Number(current && current.revisao || 0) + 1; p.atualizado = Date.now(); salvar_(p); saved.push(p);
+        try {
+          const current = listar_().find(function (x) { return x.id === (p && p.id); });
+          const operation=String(p && p._operation || '');
+          if(!/^[0-9a-f-]{36}$/.test(operation))throw new Error('operacao_invalida');
+          if(current && (current._receipts||[]).includes(operation)){saved.push(current);return;}
+          if (current && Number(p.revisao || 0) !== Number(current.revisao || 0)) { conflicts.push(current); return; }
+          p = ProfileCore.normalize(migrarPin_(p)); delete p._operation;p._receipts=(current&&current._receipts||[]).concat(operation).slice(-128); p.revisao = Number(current && current.revisao || 0) + 1; p.atualizado = Date.now(); salvar_(p); saved.push(p);
+        } catch (err) {
+          const motivo = String(err && err.message || err);
+          if (!RECUSA_DEFINITIVA.test(motivo)) throw err;
+          refused.push({ id: String(p && p.id || ''), erro: motivo });
+        }
       });
-      return saida_({ ok: true, perfis: saved, conflitos: conflicts });
+      return saida_({ ok: true, perfis: saved, conflitos: conflicts, recusados: refused });
     }
     return saida_({ erro: 'acao' });
   } catch (err) {
@@ -84,7 +102,7 @@ function listar_() {
   if (n < 1) return [];
   const larg = Math.max(COLS.length, sh.getLastColumn());
   return sh.getRange(2, 1, n, larg).getValues()
-    .map(function (r) { try { const p = JSON.parse(r.slice(4).join('')); if (p.pin) { migrarPin_(p); salvar_(p); } return ProfileCore.normalize(p); } catch (e) { return null; } })
+    .map(function (r) { try { const p = JSON.parse(juntarPedacos_(r.slice(4))); if (p.pin) { migrarPin_(p); salvar_(p); } return ProfileCore.normalize(p); } catch (e) { return null; } })
     .filter(function (p) { return p && p.id; });
 }
 
@@ -92,7 +110,7 @@ function salvar_(p) {
   if (!p || !/^[\w-]{1,60}$/.test(String(p.id || ''))) throw new Error('perfil inválido');
   const json = JSON.stringify(p);
   if (json.length > PEDACO * 40) throw new Error('perfil_grande');
-  const pedacos = []; for (let i = 0; i < json.length; i += PEDACO) pedacos.push(json.slice(i, i + PEDACO));
+  const pedacos = []; for (let i = 0; i < json.length; i += PEDACO) pedacos.push(MARCA_PEDACO + json.slice(i, i + PEDACO));
   const sh = aba_(), n = sh.getLastRow() - 1, ms = Number(p.atualizado) || Date.now();
   const linha = [String(p.id), String(p.nome || '').slice(0, 40), new Date(ms), ms].concat(pedacos);
   let row = 0;

@@ -295,7 +295,7 @@
      ================================================================= */
   var abas = [['hoje', 'Hoje'], ['trilha', 'Trilha'], ['praticar', 'Praticar'], ['caderno', 'Caderno'], ['perfil', 'Perfil']];
   var historyBack=false;
-  var historyScreens=['dupla','admin','revisaoDia','provas','leituras','lembrete','hoje','trilha','praticar','caderno','perfil','config','guia','guias','revisar','progresso','ecoHub','ecoScenarios','ecoWrite','ecoPronuncia','ecoDitado','ecoRevisao','ecoHistory','ecoWritingHistory','ecoSummary','conquistas','descobrir','boasvindas','entrar'];
+  var historyScreens=['dupla','admin','revisaoDia','provas','leituras','lembrete','hoje','trilha','praticar','caderno','perfil','config','guia','guias','revisar','progresso','ecoHub','ecoScenarios','ecoWrite','ecoPronuncia','ecoDitado','escritaGuiada','ecoRevisao','ecoHistory','ecoWritingHistory','ecoSummary','conquistas','descobrir','boasvindas','entrar'];
   function recordRoute(tela,arg){if(historyBack||historyScreens.indexOf(tela)<0)return;var data={idiomas:true,tela:tela,arg:typeof arg==='string'||typeof arg==='number'?arg:null,perfil:S.ativo};if(!history.state||!history.state.idiomas)history.replaceState(data,'');else if(history.state.tela!==tela||history.state.arg!==data.arg)history.pushState(data,'');}
   addEventListener('popstate',function(e){if(!e.state||!e.state.idiomas)return;historyBack=true;try{if(e.state.perfil!==S.ativo&&e.state.perfil){S.ativo=null;salvar();ir('entrar');}else ir(e.state.tela,e.state.arg);}finally{historyBack=false;}});
   function ir(tela, arg) {
@@ -482,6 +482,11 @@
   /* =================================================================
      TRILHA
      ================================================================= */
+  /* "A1 · unidade 2 de 12" em vez de "Seção 1", que era igual para seis unidades seguidas */
+  function rotuloUnidade(sec, n) {
+    var nv = ['A1', 'A2', 'B1', 'B2', 'C1'].filter(function (x) { return sec.titulo.indexOf(x) >= 0; })[0];
+    return nv ? nv + ' · unidade ' + ((n - 1) % 12 + 1) + ' de 12' : sec.titulo.split(' · ')[0];
+  }
   TELAS.trilha = function () {
     var p = eu(); novoDia(p);
     var pg = casca('trilha', '', function (bar) { botaoIdioma(bar); seloStats(bar); });
@@ -514,7 +519,7 @@
         var ini = gi, nU = u.licoes.length, feitasU = Math.max(0, Math.min(nU, feitas - ini)), ln = (nUn % 3) + 1;
         nUn++;
         var sct = document.createElement('section'); sct.className = 'linha l' + ln; sct.setAttribute('aria-label', 'Unidade ' + nUn + ': ' + u.titulo);
-        sct.innerHTML = '<div class="linha-head"><span class="linha-badge" aria-hidden="true">' + nUn + '</span><div class="linha-txt"><span class="ui-label">' + esc(sec.titulo.split(' · ')[0]) + ' · ' + feitasU + ' de ' + nU + ' lições</span><h2>' + esc(u.titulo) + '</h2><p>' + esc(u.objetivo) + '</p></div>' +
+        sct.innerHTML = '<div class="linha-head"><span class="linha-badge" aria-hidden="true">' + nUn + '</span><div class="linha-txt"><span class="ui-label">' + esc(rotuloUnidade(sec, nUn)) + ' · ' + feitasU + ' de ' + nU + ' lições</span><h2>' + esc(u.titulo) + '</h2><p>' + esc(u.objetivo) + '</p></div>' +
           '<button class="linha-guia" type="button" aria-label="Abrir o guia da unidade ' + esc(u.titulo) + '">' + svg('guias') + '</button></div><ol class="estacoes"></ol>';
         $('.linha-guia', sct).addEventListener('click', function () { ir('guia', u.id); });
         if (feitas < ini) sct.classList.add('bloq');
@@ -971,7 +976,9 @@
      ================================================================= */
   TELAS.personagem = function (op) {
     var p = eu(), novo = op && op.novo;
-    var cfg = avatarNormalizar(p.avatar);
+    var cfg = avatarNormalizar(p.avatar), original = JSON.stringify(cfg);
+    /* Cada escolha já fica salva: sair da tela por qualquer caminho (voltar, abas, fechar o app) não perde o personagem. */
+    function guardar() { p.avatar = avatarNormalizar(cfg); salvar(); if (desfazer) desfazer.disabled = JSON.stringify(p.avatar) === original; }
     var pg = casca(novo ? '' : 'perfil', '', function (bar) {
       if (!novo) { var b = document.createElement('button'); b.className = 'icon-btn'; b.setAttribute('aria-label', 'Voltar para o perfil'); b.innerHTML = svg('back'); b.addEventListener('click', function () { ir('perfil'); }); bar.appendChild(b); }
       bar.insertAdjacentHTML('beforeend', '<h1>' + (novo ? 'Crie seu personagem' : 'Meu personagem') + '</h1>');
@@ -982,11 +989,13 @@
     hero.appendChild(big);
     var acts = document.createElement('div'); acts.className = 'av-actions';
     acts.innerHTML = '<button class="ui-btn ui-btn--secondary" type="button" id="avSorte"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.2" fill="currentColor"/><circle cx="15" cy="15" r="1.2" fill="currentColor"/><circle cx="15" cy="9" r="1.2" fill="currentColor"/><circle cx="9" cy="15" r="1.2" fill="currentColor"/></svg>Aleatório</button>' +
-      '<button class="ui-btn ui-btn--ghost" type="button" id="avSorriso">Sorrir</button>';
+      '<button class="ui-btn ui-btn--ghost" type="button" id="avSorriso">Sorrir</button>' +
+      '<button class="ui-btn ui-btn--ghost" type="button" id="avDesfazer" disabled>Desfazer</button>';
     hero.appendChild(acts); pg.appendChild(hero);
-    var humor = null;
+    var humor = null, desfazer = $('#avDesfazer', hero);
     function desenhar(pular) {
       big.innerHTML = avatarImg(cfg, humor);
+      if (mini) mini.innerHTML = avatarImg(cfg, humor);   /* prévia pequena na barra fixa, visível enquanto a pessoa rola as opções */
       if (pular && !S.cfg.motion) { big.classList.remove('pula'); void big.offsetWidth; big.classList.add('pula'); }
     }
     desenhar(false);
@@ -1009,7 +1018,7 @@
     }
     function escolherEstilo(i, focus) {
       if (CH[i] === cfg.estilo) return;
-      cfg.estilo = CH[i]; aba = 0; desenhar(true); marcarEstilos(); montarAbas();
+      cfg.estilo = CH[i]; aba = 0; desenhar(true); marcarEstilos(); montarAbas(); guardar();
       if (focus) row.children[i].focus();
       anunciar('Estilo ' + AV_ESTILOS[cfg.estilo].nome + '.');
     }
@@ -1034,6 +1043,7 @@
     function previa(chave, valor) {
       var c = JSON.parse(JSON.stringify(cfg)), e = c.estilo;
       if (AV_CORES[chave]) c[chave] = valor; else c.por[e][chave] = valor;
+      if (chave === 'head' && c.por[e].item) c.por[e].item = 'none'; /* miniatura do corte sem o enfeite da cabeça, que cobria o cabelo */
       if (chave === 'clothingGraphic') c.por[e].clothing = 'graphicShirt'; /* a estampa só aparece na camiseta estampada */
       return c;
     }
@@ -1056,7 +1066,7 @@
         var choose = function (i, focus) {
           if (i === cur) return; cur = i;
           sws.forEach(function (b, k) { b.setAttribute('aria-checked', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
-          if (focus) sws[i].focus(); moveRing(i); cfg[chave] = lista[i][0]; desenhar(true); atualizarMiniaturas(null); marcarEstilos();
+          if (focus) sws[i].focus(); moveRing(i); cfg[chave] = lista[i][0]; desenhar(true); atualizarMiniaturas(null); marcarEstilos(); guardar();
         };
         sws.forEach(function (b, i) {
           b.addEventListener('click', function () { choose(i); });
@@ -1081,7 +1091,7 @@
           if (chave === 'clothingGraphic') cfg.por[cfg.estilo].clothing = 'graphicShirt';
           $$('.av-opt', g).forEach(function (b, k) { b.setAttribute('aria-checked', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
           if (focus) g.children[i].focus();
-          desenhar(true); atualizarMiniaturas(chave); marcarEstilos();
+          desenhar(true); atualizarMiniaturas(chave); marcarEstilos(); guardar();
         };
         box.appendChild(g);
       }
@@ -1100,7 +1110,8 @@
       abas()[aba][1].forEach(function (gr) { panel.appendChild(grupo(gr[0], gr[1], gr[2])); });
     }
     marcarEstilos(); montarAbas();
-    $('#avSorte', hero).addEventListener('click', function () { cfg = avatarAleatorio(cfg); desenhar(true); marcarEstilos(); montarPainel(); anunciar('Personagem sorteado.'); });
+    $('#avSorte', hero).addEventListener('click', function () { cfg = avatarAleatorio(cfg); desenhar(true); marcarEstilos(); montarPainel(); guardar(); anunciar('Personagem sorteado.'); });
+    desfazer.addEventListener('click', function () { cfg = JSON.parse(original); aba = 0; desenhar(true); marcarEstilos(); montarAbas(); guardar(); anunciar('Mudanças desfeitas.'); });
     var sorriso = $('#avSorriso', hero);
     sorriso.setAttribute('aria-pressed', 'false');
     sorriso.addEventListener('click', function () { humor = humor ? null : 'feliz'; sorriso.setAttribute('aria-pressed', String(!!humor)); desenhar(true); });
@@ -1124,17 +1135,22 @@
         }
         b.setAttribute('aria-pressed', String(!on));
         if (on) motivos.splice(motivos.indexOf(m), 1); else motivos.push(m);
+        p.motivos = motivos.slice(); salvar();
       });
       lista.appendChild(b);
     });
     c3.appendChild(mv); pg.appendChild(c3);
-    var ok = document.createElement('button'); ok.className = 'ui-btn ui-btn--primary ui-btn--block'; ok.textContent = novo ? 'Começar a estudar' : 'Salvar personagem';
+    var ok = document.createElement('button'); ok.type = 'button'; ok.className = 'ui-btn ui-btn--primary'; ok.textContent = novo ? 'Começar a estudar' : 'Pronto';
     ok.addEventListener('click', function () {
-      p.avatar = avatarNormalizar(cfg); p.motivos = motivos; salvar();
+      p.avatar = avatarNormalizar(cfg); p.motivos = motivos.slice(); salvar();
       /* LIGAR: google.script.run.salvarPerfil(p) — o personagem é só um objeto pequeno (cfg), cabe numa célula da planilha. */
       if (novo) { ir('hoje'); toast('Perfil criado. Bem-vindo, ' + p.nome + '.'); } else { ir('perfil'); toast('Personagem salvo.'); }
     });
-    pg.appendChild(ok);
+    /* barra fixa no fim da tela: prévia e botão sempre à vista */
+    var barra = document.createElement('div'); barra.className = 'av-barra' + (novo ? ' av-barra--livre' : '');
+    var mini = document.createElement('span'); mini.className = 'av'; mini.setAttribute('aria-hidden', 'true'); mini.innerHTML = avatarImg(cfg, humor);
+    var nota = document.createElement('span'); nota.className = 'av-barra-nota'; nota.textContent = 'Cada escolha já fica salva.';
+    barra.appendChild(mini); barra.appendChild(nota); barra.appendChild(ok); pg.appendChild(barra);
   };
 
   /* =================================================================
@@ -1766,6 +1782,8 @@
     /* ---- uma conversa por aluno ---- */
     var sessao = abrirSessaoConversa(s.mode, function () { if (pg.isConnected) { toast('A conversa continuou em outro aparelho ou chegou aos 15 minutos.'); finalizarConversa(); } });
     studioCleanup(function () { sessao.fim(); });
+    studioCleanup(manterTelaAcesa());
+    retomarAoVoltar(pg, s, function () { toast('A conversa foi pausada enquanto o app estava fora da tela. Vamos continuar.'); ir('ecoCall'); });
     var voice = studioButton('Segure para falar · solte para enviar', function () {}, 'primary'); voice.classList.add('studio-voice-button');
     voice.onpointerdown = function (e) { e.preventDefault(); try { voice.setPointerCapture(e.pointerId); } catch (er) {} comecar(); };
     voice.onpointerup = voice.onpointercancel = function () { terminar(); };
@@ -1792,6 +1810,28 @@
     if (maos) iniciarMaos();
     var limite15 = studioLater(function () { toast('Chegamos aos 15 minutos desta conversa.'); finalizarConversa(); }, 15 * 60000);
   };
+  /* Tela acesa durante a conversa. Sem isso o celular bloqueia sozinho, a aba fica oculta e o microfone é desligado. */
+  function manterTelaAcesa() {
+    var trava = null, ativo = true;
+    try {
+      if (navigator.wakeLock && document.visibilityState === 'visible') navigator.wakeLock.request('screen').then(function (w) {
+        if (!ativo) { w.release().catch(function () {}); return; }
+        trava = w;
+      }).catch(function () {});
+    } catch (e) {}
+    return function () { ativo = false; if (trava) { try { trava.release().catch(function () {}); } catch (e) {} trava = null; } };
+  }
+  /* Quando o app sai da tela, o microfone e a sessão são encerrados (studioStop) e a tela da conversa ficaria parada.
+     Ao voltar, aoVoltar decide como retomar. O aviso é retirado quando a pessoa sai da conversa normalmente. */
+  function retomarAoVoltar(pg, s, aoVoltar) {
+    function ver() {
+      if (document.visibilityState !== 'visible') return;
+      document.removeEventListener('visibilitychange', ver);
+      if (pg.isConnected && studioSession === s) aoVoltar();
+    }
+    document.addEventListener('visibilitychange', ver);
+    studioCleanup(function () { if (document.visibilityState !== 'hidden') document.removeEventListener('visibilitychange', ver); });
+  }
   /* sessão única de conversa por aluno: avisa o servidor a cada minuto */
   function abrirSessaoConversa(modo, perdeu) {
     var id = crypto.randomUUID(), ativo = true, timer = null;
@@ -1915,7 +1955,7 @@
   };
 
   /* ---------- Revisão personalizada: a IA cria exercícios sobre os seus erros ---------- */
-  var FONTE = { licao: 'Lições', ditado: 'Ditado', redacao: 'Redação', conversa: 'Conversa', pronuncia: 'Pronúncia' };
+  var FONTE = { licao: 'Lições', ditado: 'Ditado', escrita: 'Escrita guiada', redacao: 'Redação', conversa: 'Conversa', pronuncia: 'Pronúncia' };
   TELAS.ecoRevisao = function () {
     var pg = studioPage('Revisar meus erros'), lang = eu().idioma, L = errosPendentes(lang), u = studioCurrent();
     studioLead(pg, 'Revisão personalizada', L.length ? 'O que vale reforçar?' : 'Nada pendente por aqui!', L.length ? 'O Eco cria exercícios novos sobre o que você errou nas lições, no ditado, na redação e nas conversas. Cada ponto sai da lista depois de 2 acertos.' : 'Quando você errar algo nas lições, no ditado, na redação ou na conversa, aparece aqui para revisar.');
@@ -2033,6 +2073,9 @@
     }
     function encerrar(motivo) {
       if (fim) return; fim = true; pararFala();
+      /* o que estava sendo dito no momento também entra na transcrição */
+      if (parcialEu.trim()) { s.transcript.push({ who: 'Você', text: parcialEu.trim(), pt: '' }); parcialEu = ''; }
+      if (parcialEco.trim()) { s.transcript.push({ who: 'Eco', text: parcialEco.trim(), pt: '' }); parcialEco = ''; }
       try { proc && proc.disconnect(); } catch (e) {} try { micStream && micStream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
       try { ws && ws.close(); } catch (e) {} try { ctx.close(); } catch (e) {} try { ctxIn && ctxIn.close(); } catch (e) {}
       if (motivo === 'sair') return;
@@ -2055,6 +2098,15 @@
     }
     var sessaoVivo = abrirSessaoConversa('live', function () { if (pg.isConnected) { toast('A conversa continuou em outro aparelho ou chegou ao limite de tempo.'); encerrar(); } });
     studioCleanup(function () { sessaoVivo.fim(); });
+    studioCleanup(manterTelaAcesa());
+    retomarAoVoltar(pg, s, function () {
+      folha(function (sh) {
+        sh.innerHTML = '<h2>A conversa ao vivo foi pausada</h2><p>O microfone é desligado quando o app sai da tela ou o celular bloqueia. O que já foi dito continua guardado.</p>';
+        sh.appendChild(studioButton('Recomeçar ao vivo', function () { fecharFolha(); ir('ecoCall'); }, 'primary'));
+        sh.appendChild(studioButton('Continuar por turnos', function () { fecharFolha(); s.mode = 'turns'; s.hist = s.transcript.map(function (t) { return { de: t.who === 'Eco' ? 'eco' : 'eu', texto: t.text }; }); ir('ecoCall'); }));
+        sh.appendChild(studioButton('Encerrar e ver resumo', function () { fecharFolha(); finalizarConversa(); }));
+      });
+    });
     setState('connecting');
     IA.pedir('liveToken', {}).then(function (t) {
       if (!pg.isConnected) return;
@@ -2087,7 +2139,7 @@
     actions.appendChild(mic);
     actions.appendChild(studioButton('Me ajuda', function () { pararFala(); enviar({ realtimeInput: { text: '(O aluno pediu ajuda: em português, sugira em uma frase o que ele pode responder agora, e depois repita sua pergunta devagar em ' + (lang === 'fr' ? 'francês' : 'inglês') + '.)' } }); setState('thinking'); }));
     actions.appendChild(studioButton('Repetir mais devagar', function () { pararFala(); enviar({ realtimeInput: { text: '(Repita sua última fala bem mais devagar e com palavras mais simples.)' } }); setState('thinking'); }));
-    actions.appendChild(studioButton('Encerrar', function () { encerrar(); }, 'danger'));
+    actions.appendChild(studioButton('Encerrar', function () { if (fim) finalizarConversa(); else encerrar(); }, 'danger'));
     var prefs = document.createElement('details'); prefs.className = 'studio-details'; prefs.innerHTML = '<summary>Legendas</summary>';
     prefs.appendChild(segmento([{ v: 'on', t: 'Ligadas' }, { v: 'off', t: 'Desligadas' }, { v: 'translation', t: 'Com tradução' }], s.captions, function (v) { s.captions = v; caption(); }, 'Legendas da conversa'));
     pg.appendChild(prefs);
@@ -2129,8 +2181,9 @@
     pend.forEach(function (e) { if (exErros.length < 4 && !(e.due > agora)) { var x = exercicioDeErro(e, outras); if (x) exErros.push(x); } });
     var novos = it.frases.filter(function (a) { return !h[a.id]; }).slice(0, Math.max(0, Math.min(3, 12 - vencidos.length - exErros.length)));
     var lista = vencidos.concat(novos).map(function (a) { return a.ex; }).concat(exErros);
-    if (lista.length && lista.length < 5) lista = lista.concat(it.palavras.filter(function (a) { return !h[a.id]; }).slice(0, 5 - lista.length).map(function (a) { return a.ex; }));
-    return { exercicios: estMix(lista), voz: it.voz, vencidos: vencidos.length, erros: exErros.length, novos: novos.length };
+    var extras = (lista.length && lista.length < 5) ? it.palavras.filter(function (a) { return !h[a.id]; }).slice(0, 5 - lista.length) : [];
+    lista = lista.concat(extras.map(function (a) { return a.ex; }));
+    return { exercicios: estMix(lista), voz: it.voz, vencidos: vencidos.length, erros: exErros.length, novos: novos.length + extras.length };
   }
   window.filaDoDia = filaDoDia;
   function abrirRevisaoDia() {
@@ -2140,10 +2193,13 @@
   }
   function cartaoRevisaoDia() {
     var f = filaDoDia(eu().idioma), n = f.exercicios.length, c = estEl('section', 'card ux-small-card est-dia');
-    var partes = []; if (f.vencidos) partes.push(f.vencidos + ' para relembrar'); if (f.erros) partes.push(f.erros + ' erro' + (f.erros > 1 ? 's' : '') + ' para refazer'); if (f.novos) partes.push(f.novos + ' frase' + (f.novos > 1 ? 's' : '') + ' nova' + (f.novos > 1 ? 's' : ''));
-    c.innerHTML = '<span class="ui-label">Revisão do dia' + (n ? ' · cerca de ' + Math.max(2, Math.round(n / 2)) + ' min' : '') + '</span><h2>' + (n ? n + ' itens quase esquecidos' : 'Tudo revisado por agora') + '</h2><p>' +
-      (n ? esc(partes.join(', ')) + '. O que você acerta volta cada vez mais tarde.' : 'Volte amanhã: o que você acertou reaparece em intervalos maiores.') + '</p>';
-    if (n) c.appendChild(uxBtn('Revisar agora', abrirRevisaoDia, true));
+    var partes = []; if (f.vencidos) partes.push(f.vencidos + ' para relembrar'); if (f.erros) partes.push(f.erros + ' erro' + (f.erros > 1 ? 's' : '') + ' para refazer'); if (f.novos) partes.push(f.novos + (f.novos > 1 ? ' itens novos' : ' item novo'));
+    /* só chama de revisão o que já foi estudado: perfil novo via "5 itens quase esquecidos" sem ter feito nenhuma lição */
+    var rev = f.vencidos + f.erros, resto = n - rev;
+    var tituloDia = rev ? rev + (rev > 1 ? ' itens para revisar' : ' item para revisar') + (resto > 0 ? ' e ' + resto + (resto > 1 ? ' novos' : ' novo') : '') : n + (n > 1 ? ' itens novos para praticar' : ' item novo para praticar');
+    c.innerHTML = '<span class="ui-label">Revisão do dia' + (n ? ' · cerca de ' + Math.max(2, Math.round(n / 2)) + ' min' : '') + '</span><h2>' + (n ? tituloDia : 'Tudo revisado por agora') + '</h2><p>' +
+      (n ? (rev ? esc(partes.join(', ')) + '. O que você acerta volta cada vez mais tarde.' : 'Nada vencido por enquanto. São frases e palavras das unidades que você já abriu; o que você acerta volta cada vez mais tarde.') : 'Volte amanhã: o que você acertou reaparece em intervalos maiores.') + '</p>';
+    if (n) c.appendChild(uxBtn(rev ? 'Revisar agora' : 'Praticar agora', abrirRevisaoDia, true));
     return c;
   }
 
@@ -2158,7 +2214,7 @@
     var card = estEl('section', 'card studio-stack'), st = estEl('p', 'pron-status'); st.setAttribute('role', 'status');
     var lab = estEl('label', 'studio-field', 'Horário'), hora = document.createElement('input'); hora.type = 'time'; hora.value = l.hora; hora.step = 300; lab.appendChild(hora); card.appendChild(lab);
     var ligar = studioButton(l.ligado ? 'Salvar horário' : 'Ligar lembrete', function () { ativar(); }, 'primary'), desligar = studioButton('Desligar lembrete', function () { desativar(); });
-    var testar = studioButton('Ver como chega', function () { navigator.serviceWorker.ready.then(function (reg) { return reg.showNotification('Idiomas', { body: eu().nome.split(' ')[0] + ', 5 minutinhos com a Eco?', icon: 'icon-192.png', tag: 'lembrete-teste' }); }).catch(function () { st.textContent = 'Não consegui mostrar o aviso. Confira se as notificações estão permitidas.'; }); });
+    var testar = studioButton('Ver como chega', function () { navigator.serviceWorker.ready.then(function (reg) { return reg.showNotification('Idiomas', { body: eu().nome.split(' ')[0] + ', 5 minutinhos com o Eco?', icon: 'icon-192.png', tag: 'lembrete-teste' }); }).catch(function () { st.textContent = 'Não consegui mostrar o aviso. Confira se as notificações estão permitidas.'; }); });
     card.appendChild(ligar); if (l.ligado) { card.appendChild(desligar); card.appendChild(testar); } card.appendChild(st); pg.appendChild(card);
     var ios = /iPhone|iPad/.test(navigator.userAgent), instalado = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
     var faltando = !('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window);
@@ -2700,6 +2756,224 @@
     resume.parentNode.insertBefore(c, resume.nextSibling);
   };
 
+  /* ================= Entender antes de praticar =================
+     Guia completo (mapa da unidade, diálogo com tradução, todo o vocabulário, exemplos traduzidos),
+     explicação antes de "Palavras novas" e de "Gramática", botão "Ver a regra" nos erros de lacuna
+     e escrita guiada sem IA. Usa só o conteúdo que cada unidade já tem. */
+  function enIndice(id) { var n = Number(String(id || '').split('-u')[1]); return n > 0 ? n - 1 : -1; }
+  function enUnidade(id) { var k = String(id || '').slice(0, 2), u = null; if (!CURSOS[k]) return null; CURSOS[k].secoes.forEach(function (s) { s.unidades.forEach(function (x) { if (x.id === id) u = x; }); }); return u; }
+  function enExemplos(lista, k) {
+    var ul = enEl('ul', 'guia-exemplos');
+    lista.forEach(function (e) { var li = enEl('li'), a = enEl('span', 'guia-alvo', e[0]); a.lang = k; li.appendChild(a); if (e[1]) li.appendChild(enEl('span', 'guia-pt', e[1])); ul.appendChild(li); });
+    return ul;
+  }
+  function enBloco(bl, k, aberto) {
+    var s = enEl('details', 'card prose guide-section'); s.open = !!aberto;
+    s.appendChild(enEl('summary', null, bl.titulo));
+    var c = enEl('div', 'guide-content'); c.innerHTML = bl.texto;   /* texto do curso (com negrito), não digitado por ninguém */
+    if (bl.exemplos && bl.exemplos.length) c.appendChild(enExemplos(bl.exemplos, k));
+    else if (bl.exemplo) { var x = enEl('div', 'ex-box', bl.exemplo); x.lang = k; c.appendChild(x); }
+    s.appendChild(c); return s;
+  }
+  function enOuvirMini(texto, k) {
+    var b = enEl('button', 'guia-ouvir'); b.type = 'button'; b.setAttribute('aria-label', 'Ouvir: ' + texto);
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>';
+    b.addEventListener('click', function () { IdiomasAudio.stop(); falar(texto, CURSOS[k].voz); });
+    return b;
+  }
+  function enFala(alvo, pt, k, quem) {
+    var row = enEl('div', 'guia-fala'), txt = enEl('div', 'guia-fala-txt'); if (quem) txt.appendChild(enEl('b', null, quem));
+    var a = enEl('p', 'guia-alvo', alvo); a.lang = k; txt.appendChild(a); if (pt) txt.appendChild(enEl('p', 'guia-pt', pt));
+    row.appendChild(txt); row.appendChild(enOuvirMini(alvo, k)); return row;
+  }
+  var EN_PASSOS = {
+    'Palavras novas': 'Você vê as frases novas com tradução e áudio e depois escolhe a versão certa.',
+    'Escuta': 'Você ouve falas do diálogo e responde a perguntas sobre elas.',
+    'Montar frases': 'Você monta frases do diálogo, palavra por palavra, na ordem certa.',
+    'Gramática': 'Você relê as regras e completa lacunas. Se errar, "Ver a regra" traz a explicação de volta.',
+    'Revisão da unidade': 'Uma mistura curta de tudo o que apareceu na unidade.'
+  };
+  /* mapa da unidade: o que vem, em que ordem e quanto tempo leva */
+  function enMapa(u, id, k) {
+    var p = eu(), feitas = (p && p.progresso[k]) || 0, base = enIndice(id) * u.licoes.length, U = unidadeDe(id) || {};
+    var card = enEl('section', 'card guia-mapa');
+    card.appendChild(enEl('span', 'ui-label', 'Como esta unidade funciona'));
+    card.appendChild(enEl('p', 'guia-mapa-lead', 'Primeiro você entende, depois pratica. A ordem é a mesma em todas as unidades.'));
+    var ol = enEl('ol', 'guia-passos');
+    function passo(titulo, detalhe, estado, rotulo) { var li = enEl('li', estado ? 'is-' + estado : ''); li.appendChild(enEl('b', null, titulo)); li.appendChild(enEl('span', null, detalhe)); if (rotulo) li.appendChild(enEl('em', null, rotulo)); ol.appendChild(li); }
+    passo('Entender', 'Esta página: o diálogo com tradução, as frases-chave, a gramática e a pronúncia. Cerca de 5 minutos de leitura.', 'aqui', 'Você está aqui');
+    u.licoes.forEach(function (n, i) {
+      var L = LICOES[id + '|' + n], q = L && L.exercicios ? L.exercicios.length : 0, pos = base + i;
+      passo((i + 1) + '. ' + n, (EN_PASSOS[n] || '') + (q ? ' ' + q + ' exercícios,' : '') + ' cerca de 4 minutos.', pos < feitas ? 'feito' : pos === feitas ? 'atual' : '', pos < feitas ? 'Feita' : pos === feitas ? 'Próxima lição' : '');
+    });
+    var nd = (U.dict || []).length, nc = (U.cards || []).length;
+    passo('Para ir além', 'Ditado (' + nd + ' frases) e escrita guiada (' + nc + ' frases) funcionam sem internet. Conversa, pronúncia e redação com o Eco pedem internet e entrada com Google.', '', 'Opcional');
+    card.appendChild(ol); return card;
+  }
+  TELAS.guia = function (id) {
+    var k = String(id || '').slice(0, 2), c = CURSOS[k], u = enUnidade(id), g = GUIAS[id], p = eu();
+    if (!c || !u) { ir('guias'); return; }
+    var pg = casca('guias', '', function (bar) { enVoltar(bar, 'guias', 'Voltar para os guias'); bar.appendChild(enEl('h1', null, 'Guia · ' + u.titulo)); });
+    var topo = enEl('div'); topo.appendChild(enEl('span', 'ui-label', c.nome + ' · Unidade ' + (enIndice(id) + 1)));
+    var h = enEl('h2', 'h', u.objetivo); h.style.marginTop = '6px'; topo.appendChild(h); pg.appendChild(topo);
+    videoaula(pg, k, id);
+    if (!g) { var vazio = enEl('div', 'card'); vazio.appendChild(enEl('p', 'lead', 'O guia desta unidade ainda não foi escrito.')); pg.appendChild(vazio); return; }
+    if (p) { p.guiasVistos = p.guiasVistos || {}; if (!p.guiasVistos[id]) { p.guiasVistos[id] = Date.now(); salvar(); } }
+    pg.appendChild(enMapa(u, id, k));
+    /* o diálogo inteiro, na ordem, com contexto e tradução */
+    if (g.dialogo && g.dialogo.length) {
+      var dia = enEl('details', 'card guide-section guia-dialogo'); dia.open = true; dia.appendChild(enEl('summary', null, 'O diálogo da unidade'));
+      var dc = enEl('div', 'guide-content'); if (g.contexto) dc.appendChild(enEl('p', 'guia-contexto', g.contexto));
+      g.dialogo.forEach(function (l) { dc.appendChild(enFala(l[1], l[2], k, l[0])); });
+      dia.appendChild(dc); pg.appendChild(dia);
+    }
+    /* frases-chave: todo o vocabulário da unidade (a tabela mantém a classe e a ordem usadas pelo botão "Guardar") */
+    var voc = enEl('details', 'card guide-section'); voc.open = true; voc.appendChild(enEl('summary', null, 'Frases-chave · ' + g.vocab.length));
+    var tabela = enEl('table', 'vocab'), cab = enEl('thead'), linha0 = enEl('tr'), corpo = enEl('tbody');
+    [c.nome, 'Português'].forEach(function (t) { var th = enEl('th', null, t); th.scope = 'col'; linha0.appendChild(th); }); cab.appendChild(linha0); tabela.appendChild(cab);
+    g.vocab.forEach(function (v) { var tr = enEl('tr'), a = enEl('td'), t = enEl('span', 'guia-alvo', v[0]); t.lang = k; a.appendChild(t); a.appendChild(enOuvirMini(v[0], k)); tr.appendChild(a); tr.appendChild(enEl('td', null, v[1])); corpo.appendChild(tr); });
+    tabela.appendChild(corpo); voc.appendChild(tabela); pg.appendChild(voc);
+    /* gramática e pronúncia: abertas, com exemplos traduzidos */
+    g.blocos.forEach(function (bl) { pg.appendChild(enBloco(bl, k, true)); });
+    /* o que fazer agora */
+    var feitas = (p && p.progresso[k]) || 0, base = enIndice(id) * u.licoes.length, proxima = feitas - base;
+    var acoes = enEl('div', 'guia-acoes');
+    var go = enEl('button', 'ui-btn ui-btn--primary ui-btn--block'); go.type = 'button';
+    if (proxima >= 0 && proxima < u.licoes.length) { go.textContent = 'Ir para a lição: ' + u.licoes[proxima]; go.addEventListener('click', function () { p.idioma = k; salvar(); abrirLicaoApp(u, u.licoes[proxima], {}); }); }
+    else { go.textContent = 'Praticar esta unidade'; go.addEventListener('click', function () { p.idioma = k; salvar(); abrirLicaoApp(u, 'Prática do guia', { refazer: true }); }); }
+    acoes.appendChild(go);
+    var dit = enEl('button', 'ui-btn ui-btn--secondary ui-btn--block', 'Ditado desta unidade'); dit.type = 'button'; dit.addEventListener('click', function () { p.idioma = k; salvar(); ir('ecoDitado', id); }); acoes.appendChild(dit);
+    var esc1 = enEl('button', 'ui-btn ui-btn--secondary ui-btn--block', 'Escrita guiada desta unidade'); esc1.type = 'button'; esc1.addEventListener('click', function () { p.idioma = k; salvar(); ir('escritaGuiada', id); }); acoes.appendChild(esc1);
+    var download = studioButton('Baixar áudio desta unidade para usar sem internet', function () {
+      var sw = navigator.serviceWorker && navigator.serviceWorker.controller; if (!sw) { toast('Instale ou reabra o aplicativo para baixar o áudio.'); return; }
+      download.disabled = true; download.textContent = 'Baixando áudio…';
+      var channel = new MessageChannel(), timeout = setTimeout(function () { download.disabled = false; download.textContent = 'Não foi possível baixar. Tentar novamente'; }, 60000);
+      channel.port1.onmessage = function (e) { clearTimeout(timeout); download.disabled = false; download.textContent = e.data.ok ? 'Áudio disponível neste aparelho' : 'Não foi possível baixar. Tentar novamente'; };
+      sw.postMessage({ type: 'download-unit', unit: k + '|' + enIndice(id) }, [channel.port2]);
+    });
+    download.classList.add('ui-btn--block'); acoes.appendChild(download);
+    pg.appendChild(acoes);
+  };
+
+  /* ---------- explicação antes da lição ----------
+     "Palavras novas" mostrava a pergunta antes de apresentar a frase; "Gramática" ia direto para as lacunas.
+     Agora as duas abrem com o que a lição vai cobrar. Lição em andamento (rascunho) retoma direto. */
+  var enAbrirLicao = abrirLicaoApp;
+  abrirLicaoApp = function (u, nome, op) {
+    var p = eu(), g = u && u.id && GUIAS[u.id];
+    if (!p || !g || (nome !== 'Palavras novas' && nome !== 'Gramática') || (op && (op.revisao || op.teste || op.refazer || op.licao))) return enAbrirLicao(u, nome, op);
+    if (p.rascunhos && p.rascunhos[p.idioma + ':' + u.id + '-' + nome + ':normal']) return enAbrirLicao(u, nome, op);
+    var k = u.id.slice(0, 2), L = LICOES[u.id + '|' + nome];
+    folha(function (sh) {
+      sh.classList.add('previa-licao');
+      sh.appendChild(enEl('span', 'ui-label', 'Antes de praticar · ' + u.titulo));
+      if (nome === 'Palavras novas') {
+        sh.appendChild(enEl('h2', null, 'Conheça as frases desta lição'));
+        sh.appendChild(enEl('p', null, 'Leia e ouça com calma. Na lição, você vê a frase em português e escolhe a versão em ' + CURSOS[k].nome.toLowerCase() + '.'));
+        var lista = enEl('div', 'previa-lista');
+        ((L && L.exercicios) || []).forEach(function (ex) { if (ex.frase) lista.appendChild(enFala(ex.frase, ex.ocultar || '', k)); });
+        sh.appendChild(lista);
+      } else {
+        sh.appendChild(enEl('h2', null, 'Releia as regras desta unidade'));
+        sh.appendChild(enEl('p', null, 'A lição pede para completar frases usando estas regras. Se errar uma lacuna, o botão "Ver a regra" traz a explicação de volta.'));
+        g.blocos.filter(function (b) { return !b.pron; }).forEach(function (bl, i) { sh.appendChild(enBloco(bl, k, i === 0)); });
+      }
+      var ac = enEl('div', 'guia-acoes');
+      if (nome === 'Gramática') {
+        /* escolher entre três opções ou digitar a palavra; o app lembra a última escolha */
+        var digitar = window.lacunaDigitada();
+        var comecar = function (modo) { p.preferencias = p.preferencias || {}; if (p.preferencias.lacuna !== modo) { p.preferencias.lacuna = modo; salvar(); } enAbrirLicao(u, nome, op); };
+        sh.appendChild(enEl('p', 'guia-pt', 'Escolhendo: três opções por lacuna. Digitando: você escreve a palavra que falta, e acentos contam. O app lembra a sua escolha.'));
+        var b1 = studioButton('Praticar escolhendo a resposta', function () { comecar('escolher'); }, digitar ? 'secondary' : 'primary'); b1.classList.add('ui-btn--block');
+        var b2 = studioButton('Praticar digitando a resposta', function () { comecar('digitar'); }, digitar ? 'primary' : 'secondary'); b2.classList.add('ui-btn--block');
+        ac.appendChild(digitar ? b2 : b1); ac.appendChild(digitar ? b1 : b2);
+      } else {
+        var ja = studioButton('Praticar agora', function () { enAbrirLicao(u, nome, op); }, 'primary'); ja.classList.add('ui-btn--block'); ac.appendChild(ja);
+      }
+      var guia = studioButton('Ver o guia completo da unidade', function () { fecharFolha(); ir('guia', u.id); }); guia.classList.add('ui-btn--block'); ac.appendChild(guia);
+      sh.appendChild(ac);
+    });
+  };
+
+  /* a pessoa prefere digitar a palavra da lacuna? (guardado nas preferências do perfil) */
+  window.lacunaDigitada = function () { var p = eu(); return !!(p && p.preferencias && p.preferencias.lacuna === 'digitar'); };
+
+  /* ---------- "Ver a regra" quando a pessoa erra uma lacuna ---------- */
+  window.botaoRegra = function (ex) {
+    var id = ex && ex._guia, g = id && GUIAS[id], u = id && enUnidade(id);
+    var bt = enEl('button', 'ia-porque', 'Ver a regra'); bt.type = 'button';
+    if (!g) { bt.hidden = true; return bt; }
+    bt.addEventListener('click', function () {
+      var k = id.slice(0, 2), regras = g.blocos.filter(function (b) { return !b.pron; }), alvo = String(ex._resp || '').toLowerCase(), melhor = 0, pontos = 0;
+      /* não há ligação escrita entre lacuna e regra: abre primeiro a seção que mais cita a resposta certa */
+      regras.forEach(function (b, i) {
+        var texto = (b.titulo + ' ' + b.texto + ' ' + (b.exemplos || []).map(function (e) { return e[0]; }).join(' ')).toLowerCase();
+        var n = alvo.length > 1 ? texto.split(alvo).length - 1 : 0; if (n > pontos) { pontos = n; melhor = i; }
+      });
+      folha(function (sh) {
+        sh.classList.add('previa-licao');
+        sh.appendChild(enEl('span', 'ui-label', 'Gramática · ' + (u ? u.titulo : 'unidade')));
+        sh.appendChild(enEl('h2', null, 'As regras desta unidade'));
+        sh.appendChild(enEl('p', null, 'A resposta certa era "' + (ex._resp || '') + '". A primeira regra aberta é a que mais fala dela; as outras ficam logo abaixo.'));
+        [regras[melhor]].concat(regras.filter(function (b, i) { return i !== melhor; })).forEach(function (bl, i) { if (bl) sh.appendChild(enBloco(bl, k, i === 0)); });
+        var volta = studioButton('Voltar para a lição', function () { fecharFolha(); }, 'primary'); volta.classList.add('ui-btn--block'); sh.appendChild(volta);
+      });
+    });
+    return bt;
+  };
+
+  /* ---------- escrita guiada: do português para o idioma, sem IA ---------- */
+  TELAS.escritaGuiada = function (unitId) {
+    var pg = studioPage('Escrita guiada'), units = studioUnits(), unit = units.find(function (x) { return x.id === unitId; }) || studioCurrent();
+    var lang = eu().idioma, voz = CURSOS[lang].voz, nome = CURSOS[lang].nome.toLowerCase(), U = unidadeDe(unit.id), d = studioData(); d.esc = d.esc || {};
+    studioLead(pg, 'Escrita guiada · ' + unit.level, 'Leia em português e escreva em ' + nome + '.', 'Sem pressa e sem internet. Escreva a frase, confira e compare com a resposta. Acentos e apóstrofos contam; maiúsculas e pontuação, não.');
+    var lab = enEl('label', 'studio-field', 'Unidade'), sel = document.createElement('select');
+    units.filter(function (x) { return x.done || x.current || x.id === unit.id; }).forEach(function (x) { var op = document.createElement('option'); op.value = x.id; op.textContent = x.title; sel.appendChild(op); });
+    sel.value = unit.id; sel.onchange = function () { ir('escritaGuiada', sel.value); }; lab.appendChild(sel); pg.appendChild(lab);
+    var itens = ((U && U.cards) || []).filter(function (c) { return c && c[0] && c[1]; });
+    if (!itens.length) { var v = enEl('div', 'card'); v.appendChild(enEl('p', null, 'Esta unidade não tem frases para escrever.')); pg.appendChild(v); return; }
+    itens.forEach(function (it, i) {
+      var chave = unit.id + '|' + i, card = enEl('section', 'card pron-card');
+      card.appendChild(enEl('span', 'ui-label', 'Frase ' + (i + 1) + ' de ' + itens.length + (d.esc[chave] ? ' · ✓ acertada' : '')));
+      card.appendChild(enEl('p', 'pron-frase', it[0]));
+      var ta = document.createElement('textarea'); ta.rows = 2; ta.lang = lang; ta.spellcheck = false; ta.autocapitalize = 'off'; ta.setAttribute('autocorrect', 'off'); ta.placeholder = 'Escreva em ' + nome + '…'; ta.className = 'dit-input';
+      var rot = enEl('label', 'studio-field', 'Sua frase · ' + (i + 1)); rot.appendChild(ta); card.appendChild(rot);
+      var res = enEl('div', 'pron-res'); res.setAttribute('role', 'status');
+      card.appendChild(studioButton('Conferir', function () {
+        var dado = ta.value.trim(); if (!dado) { ta.focus(); return; }
+        var certo = it[1], nd = normDit(dado), exato = normDit(certo) === nd, quase = !exato && semAcento(normDit(certo)) === semAcento(nd);
+        var esp = certo.split(' ').filter(String), ok = alinhar(esp, dado);
+        res.textContent = '';
+        var nota = enEl('div', 'pron-nota'); nota.appendChild(enEl('strong', null, exato ? 'Perfeito!' : quase ? 'Quase!' : 'Vamos ver'));
+        nota.appendChild(enEl('span', null, exato ? 'Você escreveu certinho.' : quase ? 'Só faltou acento ou apóstrofo.' : 'Compare com a frase esperada. Em verde, as palavras que você acertou.'));
+        res.appendChild(nota);
+        if (!exato) { var linha = enEl('p', 'pron-frase'); linha.lang = lang; esp.forEach(function (w, j) { if (j) linha.appendChild(document.createTextNode(' ')); linha.appendChild(enEl('span', ok[j] ? 'pron-ok' : 'pron-erro', w)); }); res.appendChild(linha);
+          res.appendChild(enEl('p', 'pron-dica', 'Outras formas corretas podem existir; esta é a frase ensinada na unidade.')); }
+        res.appendChild(studioButton('Ouvir a resposta', function () { AUD.stop(); if (!AUD.say(certo, voz, null, S.cfg.voz || 0.9) && 'speechSynthesis' in window) { var f = new SpeechSynthesisUtterance(certo); f.lang = voz; f.rate = S.cfg.voz || 0.9; speechSynthesis.speak(f); } }));
+        if (exato) { if (!d.esc[chave]) { d.esc[chave] = 1; salvar(); } tocar('acerto'); }
+        else { tocar('erro'); registrarErro({ fonte: 'escrita', lang: lang, unidade: unit.title, frase: it[0], correta: certo, dada: dado, nota: quase ? 'Atenção aos acentos e apóstrofos.' : '' }); }
+      }));
+      card.appendChild(res); pg.appendChild(card);
+    });
+  };
+
+  /* ---------- trilha: "Entender a unidade" aparece antes das lições ---------- */
+  var enTrilhaEntender = TELAS.trilha;
+  TELAS.trilha = function () {
+    enTrilhaEntender.apply(this, arguments);
+    var p = eu(); if (!p) return;
+    var k = p.idioma, unidades = []; CURSOS[k].secoes.forEach(function (s) { s.unidades.forEach(function (u) { unidades.push(u); }); });
+    var vistos = p.guiasVistos || {};
+    root.querySelectorAll('.linha').forEach(function (sec, i) {
+      var u = unidades[i], alvo = sec.querySelector('.unit-toggle'); if (!u || !alvo || !GUIAS[u.id]) return;
+      var b = enEl('button', 'video-linha entender-linha' + (vistos[u.id] ? ' vista' : '')); b.type = 'button'; b.setAttribute('aria-label', 'Entender a unidade ' + u.titulo + ': diálogo, regras e vocabulário');
+      var t = enEl('span', 't'); t.appendChild(enEl('b', null, 'Entender a unidade')); t.appendChild(enEl('small', null, vistos[u.id] ? 'Diálogo, regras e vocabulário · já aberto' : 'Diálogo, regras e vocabulário · leia antes das lições')); b.appendChild(t);
+      var st = enEl('span', 'st'); st.innerHTML = svg('book'); b.appendChild(st);
+      b.addEventListener('click', function () { ir('guia', u.id); });
+      alvo.parentNode.insertBefore(b, alvo);
+    });
+  };
+
   TELAS.eco3D=function(){ ir('config'); };   /* Eco 3D removida: a Eco em SVG (src/eco.js) substitui */
 
   TELAS.descobrir=function(context){
@@ -2731,7 +3005,7 @@
     var intentions=[['entender','Quero entender melhor','Leitura, escuta e explicações','ear'],['expressar','Quero me expressar','Conversa, escrita e situações reais','chat'],['revisar','Quero revisar','Palavras, expressões e novas tentativas','revisar'],['explorar','Quero explorar','Imagens, histórias e desafios','globe']];
     var menu=document.createElement('div');menu.className='ux-intentions';intentions.forEach(function(x){var b=document.createElement('button');b.className='card ux-intention'+(intent===x[0]?' selected':'');b.type='button';b.setAttribute('aria-expanded',intent===x[0]?'true':'false');b.innerHTML='<span class="ux-intention-icon">'+svg(x[3])+'</span><span><strong>'+x[1]+'</strong><small>'+x[2]+'</small></span>'+svg('chev');b.onclick=function(){var y=window.scrollY;ir('praticar',x[0]);window.scrollTo(0,y);};menu.appendChild(b);});pg.appendChild(menu);
     if(!intent){pg.appendChild(uxBtn('Explorar todas as atividades',function(){ir('descobrir');}));return;}
-    var options={entender:[['Leitura extra com o Eco','leituras'],['Tirar uma dúvida com o Eco','ecoDuvida'],['Fazer um ditado','ecoDitado'],['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Diálogo em dupla','dupla'],['Escrever um texto','ecoWrite'],['Treinar pronúncia','ecoPronuncia'],['Resolver uma missão','descobrir',{activity:10}],['Praticar com menos ajuda','descobrir',{activity:11}]],revisar:[['Revisão do dia','revisaoDia'],['Prova de nível','provas'],['Revisar meus erros','ecoRevisao'],['Revisão do curso','revisar'],['Expressões salvas','descobrir',{view:'review'}],['Meu caderno pessoal','caderno'],['Praticar dificuldades','descobrir',{view:'errors'}]],explorar:[['Uma história em sequência','descobrir',{activity:8}],['Completar uma ideia','descobrir',{activity:9}],['Montar uma frase','descobrir',{activity:3}],['Todas as descobertas','descobrir']]};
+    var options={entender:[['Leitura extra com o Eco','leituras'],['Tirar uma dúvida com o Eco','ecoDuvida'],['Fazer um ditado','ecoDitado'],['Ler o diálogo','descobrir',{activity:1}],['Guias da unidade','guias'],['Explorar expressões','descobrir',{activity:2}]],expressar:[['Conversar com o Eco','ecoScenarios'],['Diálogo em dupla','dupla'],['Escrever frases da unidade','escritaGuiada'],['Escrever um texto','ecoWrite'],['Treinar pronúncia','ecoPronuncia'],['Resolver uma missão','descobrir',{activity:10}],['Praticar com menos ajuda','descobrir',{activity:11}]],revisar:[['Revisão do dia','revisaoDia'],['Prova de nível','provas'],['Revisar meus erros','ecoRevisao'],['Revisão do curso','revisar'],['Expressões salvas','descobrir',{view:'review'}],['Meu caderno pessoal','caderno'],['Praticar dificuldades','descobrir',{view:'errors'}]],explorar:[['Uma história em sequência','descobrir',{activity:8}],['Completar uma ideia','descobrir',{activity:9}],['Montar uma frase','descobrir',{activity:3}],['Todas as descobertas','descobrir']]};
     var section=document.createElement('section');section.className='card ux-options';section.innerHTML='<h2>'+intentions.find(function(x){return x[0]===intent;})[1]+'</h2>';options[intent].forEach(function(x){section.appendChild(uxBtn(x[0],function(){ir(x[1],x[2]);}));});pg.appendChild(section);
     /* no celular as opções ficavam abaixo dos quatro cartões, fora da tela: abrem logo abaixo do escolhido */
     var escolhido=menu.querySelector('.ux-intention.selected');if(escolhido){escolhido.after(section);setTimeout(function(){try{section.scrollIntoView({block:'nearest',behavior:'smooth'});}catch(e){section.scrollIntoView(false);}},60);}
@@ -2776,7 +3050,7 @@
   uxAplicarPrefs();
 
   window.registrarRespostaCurso = function(ex,ok) { if(ex&&ex._prova&&window.provaResposta)provaResposta(ex,ok); if(ex&&ex._srsId&&eu()){var ps=eu();ps.reviewWords=ps.reviewWords||{};ProfileCore.review(ps.reviewWords,ex._srsId,ok);salvar();return;} if(!ex._wordId||!eu())return; var p=eu(); p.reviewWords=p.reviewWords||{}; ProfileCore.review(p.reviewWords,ex._wordId,ok);if(ok){p.vistas=p.vistas||{};p.vistas[ex._wordId.replace(/^(en|fr)\|\d+\|/,'$1|')]=true;p.palavras=Object.keys(p.vistas).length;}salvar(); };
-  document.addEventListener('idiomas-sync', function(e){ var box=document.getElementById('sync-feedback'); if(!box){box=document.createElement('p');box.id='sync-feedback';box.setAttribute('role','status');document.body.appendChild(box);} var labels={ok:'Sincronizado',enviando:'Sincronizando…',pendente:'Salvo neste aparelho; sincronização pendente',erro:'Sem sincronizar. Uma nova tentativa será feita.',entrar:'Entre com Google para sincronizar',armazenamento:'Não foi possível salvar no aparelho. Exporte seus dados.',limite:'O histórico excedeu o limite do servidor. Exporte uma cópia.'};box.textContent=labels[e.detail]||''; });
+  document.addEventListener('idiomas-sync', function(e){ var box=document.getElementById('sync-feedback'); if(!box){box=document.createElement('p');box.id='sync-feedback';box.setAttribute('role','status');document.body.appendChild(box);} var labels={ok:'Sincronizado',enviando:'Sincronizando…',pendente:'Salvo neste aparelho; sincronização pendente',erro:'Sem sincronizar. Uma nova tentativa será feita.',entrar:'Entre com Google para sincronizar',armazenamento:'Não foi possível salvar no aparelho. Exporte seus dados.',limite:'O histórico excedeu o limite do servidor. Exporte uma cópia.',recusado:'Um perfil não pôde ser sincronizado. Exporte uma cópia em Configurações.',local:''};box.textContent=labels[e.detail]||''; });
   document.addEventListener('idiomas-profiles-updated', function(){ if(!eu()&&S.perfis.length&&document.querySelector('.profiles'))ir('entrar'); if(eu()){Object.assign(S.cfg,{tema:'sistema',meta:15,voz:.9,efeitos:true,motion:false,silent:false,translations:true,textSize:100},eu().preferencias||{});cfgProfileId=eu().id;uxAplicarPrefs();} });
   if(window.SYNC) SYNC.bind(S);
   var ativo = S.ativo && eu();

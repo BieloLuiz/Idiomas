@@ -85,6 +85,14 @@ function abrirLicao(LICAO, PERFIL, ao) {
     var b = $('#barra'); b.setAttribute('aria-valuemax', total); b.setAttribute('aria-valuenow', feitos);
     b.firstElementChild.style.width = (feitos / total * 100) + '%';
   }
+  /* "3 de 7" ao lado da barra: o exercício que está na tela e quantos são ao todo.
+     Conta o que já foi mostrado; quando a pessoa erra, o exercício volta no fim e o total sobe um. */
+  function conta() {
+    var b = $('#barra'), c = $('#conta'); if (!b) return;
+    if (!c) { c = document.createElement('span'); c.id = 'conta'; c.className = 'licao-conta'; b.parentNode.insertBefore(c, b.nextSibling); }
+    var n = tentativas + 1, t = n + fila.length;
+    c.textContent = n + ' de ' + t; c.setAttribute('aria-label', 'Exercício ' + n + ' de ' + t);
+  }
 
   /* ===================================================================
      #007 adaptado — botão "Ouvir a frase"
@@ -279,13 +287,35 @@ function abrirLicao(LICAO, PERFIL, ao) {
     };
   }
 
+  /* ---------- lacuna digitada: a pessoa escreve a palavra que falta (escolha feita antes da lição de gramática) ---------- */
+  function limparResposta(t) { return String(t || '').toLowerCase().replace(/[’`´]/g, "'").replace(/[.,!?;:…]+$/g, '').replace(/\s+/g, ' ').trim(); }
+  function montarDigitar(ex, box) {
+    var wrap = document.createElement('div'); wrap.className = 'lic-digitar';
+    var lab = document.createElement('label'); lab.className = 'lic-digitar-rotulo'; lab.textContent = 'Escreva a palavra que falta';
+    var inp = document.createElement('input'); inp.type = 'text'; inp.className = 'dit-input'; inp.lang = LICAO.idioma.slice(0, 2);
+    inp.autocomplete = 'off'; inp.autocapitalize = 'off'; inp.spellcheck = false; inp.setAttribute('autocorrect', 'off');
+    lab.appendChild(inp); wrap.appendChild(lab);
+    var nota = document.createElement('p'); nota.className = 'lic-digitar-nota'; nota.textContent = 'Acentos e apóstrofos contam. Maiúsculas, não.'; wrap.appendChild(nota);
+    inp.addEventListener('input', function () { if (fase === 'responder') acao.disabled = !inp.value.trim(); });
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !acao.disabled) { e.preventDefault(); acao.click(); } });
+    box.appendChild(wrap);
+    return {
+      verificar: function () {
+        var dada = inp.value.trim(), certas = [].concat(ex.respostas || []);
+        var ok = certas.some(function (c) { return limparResposta(c) === limparResposta(dada); });
+        inp.readOnly = true; wrap.classList.add(ok ? 'is-right' : 'is-wrong');
+        return { ok: ok, correta: certas.join(' ou '), dada: dada };
+      }
+    };
+  }
+
   /* ---------- banner de resposta (Design System: FeedbackBanner) ---------- */
   function banner(ok, correta, dada) {
     bannerBox.innerHTML = '<div class="ui-banner ' + (ok ? 'ui-banner--correct' : 'ui-banner--wrong') + '"><div class="ui-banner__icon">' + (ok ? ICON_OK : ICON_X) + '</div>' +
       '<div class="ui-banner__text"><p class="ui-banner__title"></p><p class="ui-banner__detail"></p></div></div>';
     var ELOGIOS = ['Muito bem', 'Isso mesmo', 'Mandou bem', 'Perfeito', 'Certinho'];
     $('.ui-banner__title', bannerBox).textContent = ok ? (seguidas >= 3 ? seguidas + ' seguidas' : ELOGIOS[(feitos + seguidas) % ELOGIOS.length]) : 'Quase lá';
-    $('.ui-banner__detail', bannerBox).textContent = ok ? (feitos < total ? 'Você acertou. Vamos para a próxima.' : 'Última do dia, concluída.') : 'Resposta correta: ' + correta + '. Ela volta no fim da lição.';
+    $('.ui-banner__detail', bannerBox).textContent = ok ? (feitos < total ? 'Você acertou. Vamos para a próxima.' : 'Última do dia, concluída.') : 'Resposta correta: ' + correta + (/[.!?…]\s*$/.test(String(correta)) ? '' : '.') + ' Ela volta no fim da lição.';
     anuncio.textContent = (ok ? $('.ui-banner__title', bannerBox).textContent + '. ' : 'Quase lá. Resposta correta: ' + correta + '.');
     if (atual && atual.ex && atual.ex.explicacao) { var xp = document.createElement('p'); xp.className = 'ui-banner__detail ui-banner__explica'; xp.textContent = atual.ex.explicacao; $('.ui-banner__text', bannerBox).appendChild(xp); anuncio.textContent += ' ' + atual.ex.explicacao; }
     if (ao && ao.som) ao.som(ok ? (seguidas >= 3 ? 'combo' : 'acerto') : 'erro');
@@ -293,6 +323,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
     if (ok && window.registrarAcerto) registrarAcerto(atual.ex);
     if (!ok && window.registrarErro && !atual.ex._ref) registrarErro({ fonte: 'licao', lang: LICAO.idioma, unidade: LICAO.unidade || '', frase: atual.ex.ocultar || atual.ex.frase || '', correta: correta, dada: dada || '', nota: atual.ex.enunciado || '' });
     if (!ok && atual.ex._ref && window.registrarErro) { /* errou de novo na revisão: continua na lista */ }
+    if (!ok && atual.ex._guia && window.botaoRegra) $('.ui-banner__text', bannerBox).appendChild(botaoRegra(atual.ex));
     if (!ok && window.IA && IA.ativo()) {
       var ex0 = atual.ex, bt = document.createElement('button'); bt.type = 'button'; bt.className = 'ia-porque'; bt.textContent = 'Por que errei?';
       bt.onclick = function () { bt.disabled = true; bt.textContent = 'O Eco está pensando…';
@@ -317,11 +348,15 @@ function abrirLicao(LICAO, PERFIL, ao) {
     bannerBox.innerHTML = ''; atalho = null; fase = 'responder';
     if ('speechSynthesis' in window) speechSynthesis.cancel();
     if (!fila.length) { fim(); return; }
-    atual = fila.shift(); checkpoint(true);
+    atual = fila.shift(); checkpoint(true); conta();
     var box = cabecalho(atual.ex);
-    exercicio = atual.ex.tipo === 'escolha' ? montarEscolha(atual.ex, box) : montarFrase(atual.ex, box);
+    /* a mesma lacuna pode ser de escolher ou de digitar; provas continuam sempre de escolher */
+    var tipo = atual.ex.tipo;
+    if (tipo === 'escolha' && atual.ex.respostas && !atual.ex._prova && window.lacunaDigitada && window.lacunaDigitada()) tipo = 'digitar';
+    if (tipo === 'digitar') { var tocador = box.querySelector('.bubble .audio-player'); if (tocador) tocador.remove(); }   /* o áudio diria a palavra que falta */
+    exercicio = tipo === 'digitar' ? montarDigitar(atual.ex, box) : tipo === 'escolha' ? montarEscolha(atual.ex, box) : montarFrase(atual.ex, box);
     if(ao.aposExercicio)ao.aposExercicio(box);
-    tela.innerHTML = ''; tela.appendChild(box);
+    tela.innerHTML = ''; tela.appendChild(box); window.scrollTo(0, 0);
     acao.className = 'ui-btn ui-btn--primary ui-btn--block'; acao.textContent = 'Verificar'; acao.disabled = true;
     var h = $('h1', box); if (h) h.focus({ preventScroll: true });
   }

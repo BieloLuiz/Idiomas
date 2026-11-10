@@ -44,7 +44,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   console.log('PASS: trilha mostra a estação da videoaula e abre o vídeo em tela cheia');
   await context.setOffline(true);assert.deepEqual(await page.evaluate(async()=>{let r=await fetch('/audio/fr-c1-u01.mp3',{headers:{Range:'bytes=0-31'}});return[r.status,(await r.arrayBuffer()).byteLength];}),[206,32]);await context.setOffline(false);
   console.log('PASS: PWA preserva cache de outro aplicativo e reproduz Range do áudio baixado sem rede');
-  await page.getByRole('button',{name:'Praticar esta unidade',exact:true}).click();
+  await page.locator('.guia-acoes .ui-btn--primary').click();await page.getByRole('button',{name:'Praticar agora',exact:true}).click();
   assert.ok((await page.locator('.ask-top').textContent()).includes('Il fut une époque'));
   await page.getByRole('button',{name:'Sair da lição',exact:true}).click();
   await page.getByRole('navigation',{name:'Principal'}).getByRole('button',{name:'Praticar',exact:true}).click();await page.getByRole('button',{name:/Quero explorar/}).click();await page.getByRole('button',{name:'Todas as descobertas',exact:true}).click();
@@ -95,7 +95,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await c3.addInitScript(state=>{HTMLMediaElement.prototype.play=function(){return Promise.resolve();};localStorage.getItem('idiomas-app-v2')||localStorage.setItem('idiomas-app-v2',JSON.stringify(state));},st3);
   const h=await c3.newPage();h.on('pageerror',e=>errors.push(e.message));await h.goto(url);await h.locator('.ux-greeting').waitFor();
   assert.equal(await h.locator('.ux-greeting .eco-v2 svg.eco-svg').count(),1,'Eco em SVG na tela Hoje');assert.equal(await h.locator('.eco .eco-body').count(),0,'Eco antiga removida');
-  const dia=h.locator('.est-dia');await dia.waitFor();assert.match(await dia.textContent(),/1 para relembrar.*1 erro para refazer.*3 frases novas/);
+  const dia=h.locator('.est-dia');await dia.waitFor();assert.match(await dia.textContent(),/1 para relembrar.*1 erro para refazer.*3 itens novos/);
   assert.ok(await h.locator('.est-prova-hoje').isVisible(),'Hoje sugere a prova do A1');
   async function responderTudo(fim){for(let i=0;i<90;i++){if(await fim())return true;const op=h.locator('.u015-opt');if(await op.count()){await op.first().click();await h.click('#acao');await h.waitForTimeout(60);await h.click('#acao').catch(()=>{});await h.waitForTimeout(60);continue;}const chip=h.locator('.u019-list .u019-chip');if(await chip.count()){await chip.first().click();continue;}await h.click('#acao').catch(()=>{});await h.waitForTimeout(80);}return false;}
   await dia.getByRole('button',{name:'Revisar agora'}).click();await h.locator('#acao').waitFor();

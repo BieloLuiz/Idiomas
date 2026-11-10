@@ -368,6 +368,8 @@
     /* ---- uma conversa por aluno ---- */
     var sessao = abrirSessaoConversa(s.mode, function () { if (pg.isConnected) { toast('A conversa continuou em outro aparelho ou chegou aos 15 minutos.'); finalizarConversa(); } });
     studioCleanup(function () { sessao.fim(); });
+    studioCleanup(manterTelaAcesa());
+    retomarAoVoltar(pg, s, function () { toast('A conversa foi pausada enquanto o app estava fora da tela. Vamos continuar.'); ir('ecoCall'); });
     var voice = studioButton('Segure para falar · solte para enviar', function () {}, 'primary'); voice.classList.add('studio-voice-button');
     voice.onpointerdown = function (e) { e.preventDefault(); try { voice.setPointerCapture(e.pointerId); } catch (er) {} comecar(); };
     voice.onpointerup = voice.onpointercancel = function () { terminar(); };
@@ -394,6 +396,28 @@
     if (maos) iniciarMaos();
     var limite15 = studioLater(function () { toast('Chegamos aos 15 minutos desta conversa.'); finalizarConversa(); }, 15 * 60000);
   };
+  /* Tela acesa durante a conversa. Sem isso o celular bloqueia sozinho, a aba fica oculta e o microfone é desligado. */
+  function manterTelaAcesa() {
+    var trava = null, ativo = true;
+    try {
+      if (navigator.wakeLock && document.visibilityState === 'visible') navigator.wakeLock.request('screen').then(function (w) {
+        if (!ativo) { w.release().catch(function () {}); return; }
+        trava = w;
+      }).catch(function () {});
+    } catch (e) {}
+    return function () { ativo = false; if (trava) { try { trava.release().catch(function () {}); } catch (e) {} trava = null; } };
+  }
+  /* Quando o app sai da tela, o microfone e a sessão são encerrados (studioStop) e a tela da conversa ficaria parada.
+     Ao voltar, aoVoltar decide como retomar. O aviso é retirado quando a pessoa sai da conversa normalmente. */
+  function retomarAoVoltar(pg, s, aoVoltar) {
+    function ver() {
+      if (document.visibilityState !== 'visible') return;
+      document.removeEventListener('visibilitychange', ver);
+      if (pg.isConnected && studioSession === s) aoVoltar();
+    }
+    document.addEventListener('visibilitychange', ver);
+    studioCleanup(function () { if (document.visibilityState !== 'hidden') document.removeEventListener('visibilitychange', ver); });
+  }
   /* sessão única de conversa por aluno: avisa o servidor a cada minuto */
   function abrirSessaoConversa(modo, perdeu) {
     var id = crypto.randomUUID(), ativo = true, timer = null;
@@ -517,7 +541,7 @@
   };
 
   /* ---------- Revisão personalizada: a IA cria exercícios sobre os seus erros ---------- */
-  var FONTE = { licao: 'Lições', ditado: 'Ditado', redacao: 'Redação', conversa: 'Conversa', pronuncia: 'Pronúncia' };
+  var FONTE = { licao: 'Lições', ditado: 'Ditado', escrita: 'Escrita guiada', redacao: 'Redação', conversa: 'Conversa', pronuncia: 'Pronúncia' };
   TELAS.ecoRevisao = function () {
     var pg = studioPage('Revisar meus erros'), lang = eu().idioma, L = errosPendentes(lang), u = studioCurrent();
     studioLead(pg, 'Revisão personalizada', L.length ? 'O que vale reforçar?' : 'Nada pendente por aqui!', L.length ? 'O Eco cria exercícios novos sobre o que você errou nas lições, no ditado, na redação e nas conversas. Cada ponto sai da lista depois de 2 acertos.' : 'Quando você errar algo nas lições, no ditado, na redação ou na conversa, aparece aqui para revisar.');
@@ -635,6 +659,9 @@
     }
     function encerrar(motivo) {
       if (fim) return; fim = true; pararFala();
+      /* o que estava sendo dito no momento também entra na transcrição */
+      if (parcialEu.trim()) { s.transcript.push({ who: 'Você', text: parcialEu.trim(), pt: '' }); parcialEu = ''; }
+      if (parcialEco.trim()) { s.transcript.push({ who: 'Eco', text: parcialEco.trim(), pt: '' }); parcialEco = ''; }
       try { proc && proc.disconnect(); } catch (e) {} try { micStream && micStream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
       try { ws && ws.close(); } catch (e) {} try { ctx.close(); } catch (e) {} try { ctxIn && ctxIn.close(); } catch (e) {}
       if (motivo === 'sair') return;
@@ -657,6 +684,15 @@
     }
     var sessaoVivo = abrirSessaoConversa('live', function () { if (pg.isConnected) { toast('A conversa continuou em outro aparelho ou chegou ao limite de tempo.'); encerrar(); } });
     studioCleanup(function () { sessaoVivo.fim(); });
+    studioCleanup(manterTelaAcesa());
+    retomarAoVoltar(pg, s, function () {
+      folha(function (sh) {
+        sh.innerHTML = '<h2>A conversa ao vivo foi pausada</h2><p>O microfone é desligado quando o app sai da tela ou o celular bloqueia. O que já foi dito continua guardado.</p>';
+        sh.appendChild(studioButton('Recomeçar ao vivo', function () { fecharFolha(); ir('ecoCall'); }, 'primary'));
+        sh.appendChild(studioButton('Continuar por turnos', function () { fecharFolha(); s.mode = 'turns'; s.hist = s.transcript.map(function (t) { return { de: t.who === 'Eco' ? 'eco' : 'eu', texto: t.text }; }); ir('ecoCall'); }));
+        sh.appendChild(studioButton('Encerrar e ver resumo', function () { fecharFolha(); finalizarConversa(); }));
+      });
+    });
     setState('connecting');
     IA.pedir('liveToken', {}).then(function (t) {
       if (!pg.isConnected) return;
@@ -689,7 +725,7 @@
     actions.appendChild(mic);
     actions.appendChild(studioButton('Me ajuda', function () { pararFala(); enviar({ realtimeInput: { text: '(O aluno pediu ajuda: em português, sugira em uma frase o que ele pode responder agora, e depois repita sua pergunta devagar em ' + (lang === 'fr' ? 'francês' : 'inglês') + '.)' } }); setState('thinking'); }));
     actions.appendChild(studioButton('Repetir mais devagar', function () { pararFala(); enviar({ realtimeInput: { text: '(Repita sua última fala bem mais devagar e com palavras mais simples.)' } }); setState('thinking'); }));
-    actions.appendChild(studioButton('Encerrar', function () { encerrar(); }, 'danger'));
+    actions.appendChild(studioButton('Encerrar', function () { if (fim) finalizarConversa(); else encerrar(); }, 'danger'));
     var prefs = document.createElement('details'); prefs.className = 'studio-details'; prefs.innerHTML = '<summary>Legendas</summary>';
     prefs.appendChild(segmento([{ v: 'on', t: 'Ligadas' }, { v: 'off', t: 'Desligadas' }, { v: 'translation', t: 'Com tradução' }], s.captions, function (v) { s.captions = v; caption(); }, 'Legendas da conversa'));
     pg.appendChild(prefs);
