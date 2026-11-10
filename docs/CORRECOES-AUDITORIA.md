@@ -180,3 +180,10 @@ Fica para conteúdo novo: explicações do B2 e do C1 no padrão do B1 (hoje 107
 Não feito nesta branch: unir Hoje e Trilha, layout de desktop, fontes empacotadas no app, limpeza do CSS e os achados médios da revisão (resposta atrasada da IA muda de tela, áudio que falha offline, revisão espaçada no mesmo dia, enigmas, ditado, aviso de privacidade).
 
 **Teste do navegador nesta branch (rodado depois, na nuvem):** passou a rodar 26 de 26 após dois ajustes no próprio teste, que estava desatualizado em relação às mudanças pretendidas: o guia agora oferece "Ir para a lição…" (com a folha "Praticar agora") no lugar de "Praticar esta unidade", e a revisão do dia diz "itens novos" em vez de "frases novas". Nenhum erro de JavaScript.
+
+## Gramática do A1 mais completa (aproveitada da PR #18)
+
+- `fonte/curso/a1-gramatica-extra.json` (escrito na PR #18) acrescenta a cada bloco de gramática do A1 um parágrafo de "como montar", comparação com o português ou tabela, e dica onde não havia. O build junta ao bloco de mesmo título e falha se o título não existir.
+- Aparece onde a gramática já aparece: guia da unidade, folha de regras antes da lição e "Ver a regra".
+- Da PR #18 não foram trazidos os cartões dentro da lição nem o exercício "Escreva a frase" (`licao-tipos.js`), porque a revisão publicada (PR #19) já cobre as duas ideias com a folha antes da lição e a escrita guiada.
+- `npm test` 34 (novo: complementos presentes no curso montado) e `npm run test:browser` 26.
