@@ -24,8 +24,9 @@
     pend.forEach(function (e) { if (exErros.length < 4 && !(e.due > agora)) { var x = exercicioDeErro(e, outras); if (x) exErros.push(x); } });
     var novos = it.frases.filter(function (a) { return !h[a.id]; }).slice(0, Math.max(0, Math.min(3, 12 - vencidos.length - exErros.length)));
     var lista = vencidos.concat(novos).map(function (a) { return a.ex; }).concat(exErros);
-    if (lista.length && lista.length < 5) lista = lista.concat(it.palavras.filter(function (a) { return !h[a.id]; }).slice(0, 5 - lista.length).map(function (a) { return a.ex; }));
-    return { exercicios: estMix(lista), voz: it.voz, vencidos: vencidos.length, erros: exErros.length, novos: novos.length };
+    var extras = (lista.length && lista.length < 5) ? it.palavras.filter(function (a) { return !h[a.id]; }).slice(0, 5 - lista.length) : [];
+    lista = lista.concat(extras.map(function (a) { return a.ex; }));
+    return { exercicios: estMix(lista), voz: it.voz, vencidos: vencidos.length, erros: exErros.length, novos: novos.length + extras.length };
   }
   window.filaDoDia = filaDoDia;
   function abrirRevisaoDia() {
@@ -35,10 +36,13 @@
   }
   function cartaoRevisaoDia() {
     var f = filaDoDia(eu().idioma), n = f.exercicios.length, c = estEl('section', 'card ux-small-card est-dia');
-    var partes = []; if (f.vencidos) partes.push(f.vencidos + ' para relembrar'); if (f.erros) partes.push(f.erros + ' erro' + (f.erros > 1 ? 's' : '') + ' para refazer'); if (f.novos) partes.push(f.novos + ' frase' + (f.novos > 1 ? 's' : '') + ' nova' + (f.novos > 1 ? 's' : ''));
-    c.innerHTML = '<span class="ui-label">Revisão do dia' + (n ? ' · cerca de ' + Math.max(2, Math.round(n / 2)) + ' min' : '') + '</span><h2>' + (n ? n + ' itens quase esquecidos' : 'Tudo revisado por agora') + '</h2><p>' +
-      (n ? esc(partes.join(', ')) + '. O que você acerta volta cada vez mais tarde.' : 'Volte amanhã: o que você acertou reaparece em intervalos maiores.') + '</p>';
-    if (n) c.appendChild(uxBtn('Revisar agora', abrirRevisaoDia, true));
+    var partes = []; if (f.vencidos) partes.push(f.vencidos + ' para relembrar'); if (f.erros) partes.push(f.erros + ' erro' + (f.erros > 1 ? 's' : '') + ' para refazer'); if (f.novos) partes.push(f.novos + (f.novos > 1 ? ' itens novos' : ' item novo'));
+    /* só chama de revisão o que já foi estudado: perfil novo via "5 itens quase esquecidos" sem ter feito nenhuma lição */
+    var rev = f.vencidos + f.erros, resto = n - rev;
+    var tituloDia = rev ? rev + (rev > 1 ? ' itens para revisar' : ' item para revisar') + (resto > 0 ? ' e ' + resto + (resto > 1 ? ' novos' : ' novo') : '') : n + (n > 1 ? ' itens novos para praticar' : ' item novo para praticar');
+    c.innerHTML = '<span class="ui-label">Revisão do dia' + (n ? ' · cerca de ' + Math.max(2, Math.round(n / 2)) + ' min' : '') + '</span><h2>' + (n ? tituloDia : 'Tudo revisado por agora') + '</h2><p>' +
+      (n ? (rev ? esc(partes.join(', ')) + '. O que você acerta volta cada vez mais tarde.' : 'Nada vencido por enquanto. São frases e palavras das unidades que você já abriu; o que você acerta volta cada vez mais tarde.') : 'Volte amanhã: o que você acertou reaparece em intervalos maiores.') + '</p>';
+    if (n) c.appendChild(uxBtn(rev ? 'Revisar agora' : 'Praticar agora', abrirRevisaoDia, true));
     return c;
   }
 
@@ -53,7 +57,7 @@
     var card = estEl('section', 'card studio-stack'), st = estEl('p', 'pron-status'); st.setAttribute('role', 'status');
     var lab = estEl('label', 'studio-field', 'Horário'), hora = document.createElement('input'); hora.type = 'time'; hora.value = l.hora; hora.step = 300; lab.appendChild(hora); card.appendChild(lab);
     var ligar = studioButton(l.ligado ? 'Salvar horário' : 'Ligar lembrete', function () { ativar(); }, 'primary'), desligar = studioButton('Desligar lembrete', function () { desativar(); });
-    var testar = studioButton('Ver como chega', function () { navigator.serviceWorker.ready.then(function (reg) { return reg.showNotification('Idiomas', { body: eu().nome.split(' ')[0] + ', 5 minutinhos com a Eco?', icon: 'icon-192.png', tag: 'lembrete-teste' }); }).catch(function () { st.textContent = 'Não consegui mostrar o aviso. Confira se as notificações estão permitidas.'; }); });
+    var testar = studioButton('Ver como chega', function () { navigator.serviceWorker.ready.then(function (reg) { return reg.showNotification('Idiomas', { body: eu().nome.split(' ')[0] + ', 5 minutinhos com o Eco?', icon: 'icon-192.png', tag: 'lembrete-teste' }); }).catch(function () { st.textContent = 'Não consegui mostrar o aviso. Confira se as notificações estão permitidas.'; }); });
     card.appendChild(ligar); if (l.ligado) { card.appendChild(desligar); card.appendChild(testar); } card.appendChild(st); pg.appendChild(card);
     var ios = /iPhone|iPad/.test(navigator.userAgent), instalado = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
     var faltando = !('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window);

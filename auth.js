@@ -22,7 +22,9 @@
     if (bloquear) { document.documentElement.dataset.auth = 'locked'; document.dispatchEvent(new CustomEvent('idiomas-auth-locked')); }
     if (!overlay) {
       overlay = document.createElement('main'); overlay.className = 'auth-gate';
-      overlay.innerHTML = '<h1>Seu espaço de estudo</h1><p class="auth-texto">Entre com uma das contas Google autorizadas. Neste aparelho, você só precisa fazer isso uma vez.</p><p role="status"></p><div class="google-button"></div><button type="button" class="auth-retry">Tentar novamente</button><button type="button" class="auth-offline">Estudar neste aparelho sem sincronizar</button><button type="button" class="auth-fechar">Agora não</button>';
+      overlay.innerHTML = '<div class="auth-marca" aria-hidden="true"></div><h1>Seu espaço de estudo</h1><p class="auth-texto">Entre com uma das contas Google autorizadas. Neste aparelho, você só precisa fazer isso uma vez.</p><p class="auth-status" role="status"></p><div class="google-button"></div><div class="auth-acoes"><button type="button" class="ui-btn ui-btn--secondary ui-btn--block auth-retry" hidden>Tentar novamente</button><button type="button" class="ui-btn ui-btn--secondary ui-btn--block auth-offline">Estudar neste aparelho sem sincronizar</button><button type="button" class="ui-btn ui-btn--ghost ui-btn--block auth-fechar">Agora não</button></div>';
+      /* o mascote vem do app; se ainda não carregou, a tela fica só com o texto */
+      try { if (window.criarEco) overlay.querySelector('.auth-marca').appendChild(criarEco('neutral', '', true)); } catch (e) {}
       overlay.querySelector('.auth-retry').onclick = function () { boot = null; montar(); };
       overlay.querySelector('.auth-offline').onclick = function () {
         modoLocal = true; gravar(KL, true); document.documentElement.dataset.auth = 'offline'; overlay.hidden = true;
@@ -36,6 +38,7 @@
     overlay.querySelector('.auth-offline').hidden = !travado;
     overlay.querySelector('.auth-fechar').hidden = travado;
     overlay.hidden = false; overlay.querySelector('[role=status]').textContent = message || '';
+    overlay.querySelector('.auth-retry').hidden = true;   // só aparece quando a entrada falha
     montar();
   }
   function fecharPainel() { if (overlay) overlay.hidden = true; }
@@ -71,7 +74,9 @@
       document.documentElement.dataset.auth = 'ready'; fecharPainel();
       document.dispatchEvent(new CustomEvent('idiomas-auth-ready'));
     }).catch(function (e) {
-      if (overlay) overlay.querySelector('[role=status]').textContent = e.message === 'auth_denied' ? 'Esta conta não está autorizada. Escolha a conta usada para estudar.' : 'Não consegui entrar agora. Tente novamente.';
+      if (!overlay) return;
+      overlay.querySelector('[role=status]').textContent = e.message === 'auth_denied' ? 'Esta conta não está autorizada. Escolha a conta usada para estudar.' : 'Não consegui entrar agora. Tente novamente.';
+      overlay.querySelector('.auth-retry').hidden = e.message === 'auth_denied';
     });
   }
   function montar() {
@@ -85,6 +90,7 @@
       });
     }).catch(function (e) {
       boot = null;
+      if (overlay) overlay.querySelector('.auth-retry').hidden = false;
       if (overlay) overlay.querySelector('[role=status]').textContent = e.message === 'auth_config' ? 'A entrada Google precisa ser configurada pelo responsável pelo aplicativo.' : 'Sem conexão para entrar. Conecte-se à internet e tente novamente.';
     });
     return boot;
@@ -96,6 +102,7 @@
   }
   window.AUTH = {
     enabled: enabled, ready: ready, post: post,
+    local: function () { return modoLocal; },   // a pessoa escolheu estudar só neste aparelho
     start: function () { if (ready()) return Promise.resolve(); painel('', document.documentElement.dataset.auth === 'locked'); return montar(); },
     logout: function () {
       var t = token; esquecer();

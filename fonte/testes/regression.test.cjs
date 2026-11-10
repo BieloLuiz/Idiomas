@@ -9,7 +9,7 @@ test('reconciliação soma alterações independentes e preserva referências de
 });
 test('exclusões de notas não ressuscitam após sincronizar',()=>{const b={notes:[{id:'a'},{id:'b'}]},l={notes:[{id:'b'}]},r={notes:[{id:'a'},{id:'b'},{id:'c'}]};assert.deepEqual(P.merge(b,l,r).notes.map(x=>x.id),['b','c']);});
 test('sequência respeita dias consecutivos, virada de ano e semana',()=>{let p={ultimoDia:'2026-12-31',sequencia:4,hojeFeito:true,semanaDe:'2026-12-28'};P.newDay(p,new Date(2027,0,1));assert.equal(p.sequencia,4);assert.equal(p.hojeFeito,false);P.newDay(p,new Date(2027,0,3));assert.equal(p.sequencia,0);});
-test('revisão usa resultado e vencimento, sem depender do progresso',()=>{const s={};P.review(s,'w',true,1000);assert.equal(s.w.due,86401000);P.review(s,'w',true,2000);assert.equal(s.w.interval,2);P.review(s,'w',false,3000);assert.equal(s.w.due,63000);assert.equal(s.w.wrong,1);});
+test('revisão usa resultado e vencimento, sem depender do progresso',()=>{const s={};P.review(s,'w',true,1000);assert.equal(s.w.due,86401000);P.review(s,'w',true,2000);assert.equal(s.w.interval,1,'acerto antes do vencimento não aumenta o intervalo');assert.equal(s.w.due,86401000);assert.equal(s.w.correct,2);P.review(s,'w',true,86401000);assert.equal(s.w.interval,2);assert.equal(s.w.due,86401000+2*86400000);P.review(s,'w',false,3000);assert.equal(s.w.due,63000);assert.equal(s.w.wrong,1);});
 test('normalização remove PIN e limita progresso',()=>{let p=P.normalize({id:'p',pin:'1234',progresso:{en:900,fr:-1}});assert.equal(p.pin,undefined);assert.deepEqual(p.progresso,{en:300,fr:0});assert.equal(p.semana.length,7);});
 test('importação rejeita estrutura inválida e identificadores reservados',()=>{assert.throws(()=>P.normalize({id:'__proto__'}),/perfil_invalido/);assert.throws(()=>P.normalize({id:'p',ecoStudio:{calls:'invalid'}}),/perfil_invalido/);assert.equal(P.copy(JSON.parse('{"__proto__":{"polluted":true}}')).polluted,undefined);});
 test('contadores de ontem não entram na meta de hoje e o mesmo dia soma',()=>{
@@ -76,7 +76,7 @@ test('sessão do app: Google uma vez, depois código próprio de 60 dias, revog�
   assert.equal(ia(r.sessao),'auth_required');assert.equal(props[key],undefined);
   props.ALLOWED_EMAILS='';assert.equal(ia(r.sessao),'auth_config');
 });
-function planilha(){const abas={};return{getActive:()=>({getSheetByName:n=>abas[n]||null,insertSheet:n=>{const rows=[];const sh={rows,appendRow:r=>rows.push(r.slice()),setFrozenRows(){},getRange:(r,c,nr,nc)=>({getValues:()=>rows.slice(r-1,r-1+(nr||1)).map(x=>x.slice(c-1,c-1+(nc||1))),setValues:v=>v.forEach((row,i)=>row.forEach((val,j)=>{rows[r-1+i][c-1+j]=val;})),setValue:v=>{rows[r-1][c-1]=v;},setWrap(){return this;}}),getLastRow:()=>rows.length,deleteRow:i=>rows.splice(i-1,1),deleteRows:(i,n)=>rows.splice(i-1,n)};abas[n]=sh;return sh;}}),abas};}
+function planilha(){const abas={};return{getActive:()=>({getSheetByName:n=>abas[n]||null,insertSheet:n=>{const rows=[];const sh={rows,appendRow:r=>rows.push(r.slice()),setFrozenRows(){},getRange:(r,c,nr,nc)=>({getValues:()=>rows.slice(r-1,r-1+(nr||1)).map(x=>x.slice(c-1,c-1+(nc||1))),setValues:v=>v.forEach((row,i)=>row.forEach((val,j)=>{(rows[r-1+i]=rows[r-1+i]||[])[c-1+j]=val;})),setValue:v=>{rows[r-1][c-1]=v;},setWrap(){return this;}}),getLastRow:()=>rows.length,getLastColumn:()=>rows.reduce((m,x)=>Math.max(m,x.length),0),deleteRow:i=>rows.splice(i-1,1),deleteRows:(i,n)=>rows.splice(i-1,n)};abas[n]=sh;return sh;}}),abas};}
 function servidorLembretes(){const b=backend();const pl=planilha();b.ctx.SpreadsheetApp=pl;
   b.ctx.Utilities.formatDate=(d,tz,f)=>{const s=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(d).reduce((o,p)=>(o[p.type]=p.value,o),{});
     if(f==='HH:mm')return s.hour+':'+s.minute;if(f==='yyyy-MM-dd')return s.year+'-'+s.month+'-'+s.day;if(f==='yyyy-M-d')return (+s.year)+'-'+(+s.month)+'-'+(+s.day);throw new Error(f);};
@@ -108,6 +108,51 @@ test('lembrete: segredo errado é recusado e inscrição vencida é removida',()
   assert.ok(Array.isArray(post({acao:'lembretesPendentes',segredo:'s'.repeat(64)}).envios));
   assert.ok(post({acao:'lembreteRemover',segredo:'s'.repeat(64),endpoint:ASS.endpoint}).ok);assert.equal(pl.abas.Lembretes.rows.length,1);
   ctx.lembrete_({perfil:'p1',hora:'08:00',assinatura:ASS});assert.ok(ctx.lembrete_({desligar:true,endpoint:ASS.endpoint}).ok);assert.equal(pl.abas.Lembretes.rows.length,1,'desligar no app remove');
+});
+test('lembrete: horário e data continuam legíveis quando a planilha os converte em número ou data',()=>{
+  const {ctx,pl}=servidorLembretes();ctx.listar_=()=>[{id:'p1',nome:'Ana',idioma:'en',ultimoDia:'',hojeFeito:false}];
+  ctx.lembrete_({perfil:'p1',hora:'20:00',fuso:'America/Sao_Paulo',assinatura:ASS});
+  const linha=pl.abas.Lembretes.rows[1];
+  assert.equal(linha[2],"'20:00",'o apóstrofo obriga a planilha a guardar texto');
+  linha[2]=20/24;                                   // a planilha devolve a hora como fração do dia
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-22T22:59:00Z')).envios.length,0,'19:59 em São Paulo: ainda não');
+  linha[4]=new Date('2026-10-22T03:00:00Z');        // "enviado hoje" guardado como data (meia-noite em São Paulo)
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-22T23:05:00Z')).envios.length,0,'já enviado hoje');
+  linha[4]='';
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-22T23:05:00Z')).envios.length,1);
+  assert.equal(linha[4],"'2026-10-22");
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-22T23:20:00Z')).envios.length,0,'não repete no mesmo dia');
+  linha[2]='sem horário';linha[4]='';
+  assert.equal(ctx.lembretesPendentes_(new Date('2026-10-23T23:05:00Z')).envios.length,0,'horário ilegível não envia');
+});
+test('perfil grande: pedaços gravados com marca e lidos de volta; linhas antigas continuam legíveis',()=>{
+  const b=backend(),pl=planilha();b.ctx.SpreadsheetApp=pl;
+  const texto="'=+-@ l'école ".repeat(4000);          // 56 mil caracteres, com o que a planilha leria como fórmula ou apagaria
+  b.ctx.salvar_({id:'p1',nome:'Ana',rascunhos:{t:texto}});
+  const pedacos=pl.abas.Perfis.rows[1].slice(4).filter(String);
+  assert.ok(pedacos.length>1,'mais de um pedaço');assert.ok(pedacos.every(c=>c.startsWith('j:')),'todo pedaço começa com a marca');
+  assert.equal(b.ctx.listar_()[0].rascunhos.t,texto);
+  pl.abas.Perfis.rows[1]=['p2','Bia',new Date(),1,'{"id":"p2","no','me":"Bia"}'];   // linha antiga, sem marca
+  assert.equal(b.ctx.listar_()[0].nome,'Bia');
+});
+test('salvar: perfil recusado de vez não derruba o envio dos outros',()=>{
+  const b=backend(),pl=planilha();b.ctx.SpreadsheetApp=pl;const post=q=>b.ctx.doPost({postData:{contents:JSON.stringify(q)}});
+  const sessao=post({acao:'entrarGoogle',token:'x'.repeat(60)}).sessao;
+  const r=post({acao:'salvar',token:sessao,perfis:[{id:'bom',nome:'Ana',_operation:crypto.randomUUID()},{id:'ruim',nome:'Bia',ecoStudio:{calls:'x'},_operation:crypto.randomUUID()}]});
+  assert.equal(r.erro,undefined);assert.deepEqual(r.perfis.map(p=>p.id),['bom']);
+  assert.deepEqual(JSON.parse(JSON.stringify(r.recusados)),[{id:'ruim',erro:'perfil_invalido'}]);
+  assert.deepEqual(b.ctx.listar_().map(p=>p.id),['bom']);
+});
+test('sincronização: perfil recusado sai da fila e só volta quando muda',async()=>{
+  const state={perfis:[P.normalize({id:'p',xp:1})]},storage=new Map();let posts=0;
+  const ctx={ProfileCore:P,crypto:{randomUUID:()=>crypto.randomUUID()},JSON,Promise,Date,CustomEvent:function(t,o){this.type=t;this.detail=o&&o.detail;},document:{addEventListener(){},dispatchEvent(){},visibilityState:'visible'},addEventListener(){},setTimeout:()=>1,clearTimeout(){},localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v)},IDIOMAS_API:'mock',AUTH:{ready:()=>true,post:async q=>{
+    if(q.acao==='listar')return{perfis:[]};posts++;return{ok:true,perfis:[],conflitos:[],recusados:q.perfis.map(p=>({id:p.id,erro:'limite de perfis'}))};
+  }}};ctx.window=ctx;vm.createContext(ctx);vm.runInContext(fs.readFileSync('fonte/pwa/sync.js','utf8'),ctx);
+  ctx.SYNC.bind(state);await new Promise(r=>setImmediate(r));await ctx.SYNC.agora();
+  assert.equal(posts,1);assert.equal(ctx.SYNC.status,'recusado');
+  await ctx.SYNC.agora();await ctx.SYNC.recarregar();await ctx.SYNC.agora();
+  assert.equal(posts,1,'o mesmo conteúdo não é reenviado');assert.equal(ctx.SYNC.status,'recusado');
+  state.perfis[0].xp=2;ctx.SYNC.mudou(state);await ctx.SYNC.agora();assert.equal(posts,2,'depois de mudar, tenta de novo');
 });
 test('leitura: recusa resposta sem texto e descarta perguntas com opções repetidas',()=>{
   const {ctx}=backend();let resposta;ctx.chamar_=()=>({texto:resposta,provedor:'mock'});

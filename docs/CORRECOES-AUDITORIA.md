@@ -129,3 +129,54 @@ Verificações: `npm test` 29 (admin, sessão única, voz premium); `npm run tes
 - Áudio desses cinco cartões: os MP3 foram gravados com o texto errado. Com o texto corrigido, o app não acha mais o trecho e usa a voz do aparelho. Para voltar à voz gravada, é preciso regravar esses trechos no PC (ElevenLabs).
 - Teste do navegador: se o Chromium não estiver instalado, o teste agora termina com erro em vez de ficar parado.
 - Não feito: as perguntas das histórias do Descobrir seguem um padrão fixo de resposta certa (1ª, 2ª, 3ª opção, girando), sem embaralhar. Leitura humana do B1 francês, do B2 e do C1.
+
+## Revisão externa: quatro correções e ajustes de design (branch `revisao-bugs-design`, nov/2026)
+
+**Estado desta branch:** montagem refeita (`python fonte/build.py`) e arquivos gerados incluídos. `npm test`: 33 de 33 (29 anteriores e 4 novos). `npm run test:browser` não foi executado (Playwright não instalado na máquina da revisão); a verificação do GitHub roda esse teste na proposta de revisão. No navegador, com o app montado e um perfil fictício em modo local, foram vistos: tela de entrada, aviso de sincronização ausente, fundo do modo escuro, texto de resposta correta e exercício seguinte no topo. Não testado: nada no Apps Script real, a conversa por voz e os lembretes num aparelho.
+
+| Item | Correção | Como conferir |
+|---|---|---|
+| Lembretes | A planilha converte "08:00" e "2026-11-10" em hora e data; lidos de volta como `Date`, a comparação com texto nunca deixava o lembrete sair. Agora o horário e o dia do último envio são gravados como texto (apóstrofo na frente) e a leitura aceita texto, `Date` ou número (`horaPlanilha_`, `diaPlanilha_` em `Lembretes.gs`). | `npm test`: "lembrete: horário e data continuam legíveis…". No real: ligar o lembrete e ver a notificação chegar; na aba Lembretes, a coluna `hora` deve ficar alinhada à esquerda (texto). Linhas antigas com hora podem ter diferença de minutos por causa do fuso de 1899; religar o lembrete regrava como texto. |
+| Perfil em pedaços | Cada pedaço de 45.000 caracteres ganha a marca `j:` na frente (`MARCA_PEDACO` em `Code.gs`), para a planilha não ler como fórmula um pedaço que comece com `=`, `+`, `-` ou apagar um apóstrofo inicial. Linhas antigas (começam com `{`) continuam legíveis e são regravadas no formato novo no próximo salvamento. | `npm test`: "perfil grande: pedaços gravados com marca…". |
+| Fila de sincronização | Perfil recusado de vez (grande demais, inválido, sem vaga) não derruba o envio dos outros: o servidor devolve `recusados` e o app tira esse conteúdo da fila até ele mudar, com o estado "recusado" ou "limite". Com servidor antigo (erro no envio inteiro), o app para as tentativas automáticas até haver mudança. | `npm test`: "salvar: perfil recusado de vez…" e "sincronização: perfil recusado sai da fila…". |
+| Conversa por voz | A tela fica acesa durante a conversa (Wake Lock, quando o navegador tem). O microfone continua sendo desligado quando o app sai da tela; ao voltar, a conversa por turnos e a "sem botão" recomeçam de onde pararam, e a ao vivo oferece recomeçar, continuar por turnos ou ver o resumo. "Encerrar" funciona depois de uma pausa e a fala em andamento entra na transcrição. | Não testado em aparelho. Conferir no celular: deixar a tela parada 2 minutos na conversa; trocar de app e voltar nos três modos. |
+| Tela de entrada | Mascote, tipografia e botões do app; "Tentar novamente" só aparece quando a entrada falha; o fundo cobre a tela inteira. | Visto no navegador (celular e desktop). |
+| Aviso de sincronização | Quem escolheu estudar só neste aparelho não vê mais "sincronização pendente"; o aviso vazio não ocupa espaço. | Navegador. |
+| Sobras da paleta verde | Fundo do modo escuro e cor da barra do navegador (`theme-color`) passam a usar a paleta atual. As definições antigas de `--primary` em verde continuam no `design.html` (não aparecem; ficam para uma limpeza do CSS). | Fundo escuro conferido no navegador pelo `design.html`. |
+| Lição | O exercício seguinte começa no topo (o rótulo ficava escondido sob o cabeçalho); "Resposta correta: …" não repete o ponto final. | Navegador, com o app montado. |
+| Texto | "com a Eco" virou "com o Eco" no lembrete (o app usa "o Eco"). | — |
+
+### Personagem do perfil (mesma branch)
+
+- O personagem só era gravado no botão "Salvar personagem", no fim de uma tela de cerca de 2.000 px; sair pela seta de voltar ou pelas abas perdia tudo sem aviso. Agora cada escolha (peça, cor, estilo, sorteio, motivos) é gravada na hora, e "Desfazer" volta ao personagem de quando a tela foi aberta.
+- Barra fixa no fim da tela com a prévia pequena e o botão ("Pronto" ou, no cadastro, "Começar a estudar"): a pessoa vê o resultado enquanto rola as opções.
+- As abas das partes (Cabelo, Pele…) quebram em duas linhas em vez de rolar para o lado com a última cortada.
+- Nas miniaturas de corte do estilo Traço, o enfeite da cabeça sai para o cabelo aparecer.
+- Conferido no navegador com perfis fictícios (celular, claro e escuro): escolher corte e cor grava na hora, sair pela aba Hoje mantém, Aleatório e Desfazer, troca de estilo, cadastro de perfil novo. Todas as peças dos quatro estilos desenham (nenhuma vazia ou repetida). Não visto: o editor no layout de desktop.
+
+### Entender antes de praticar (mesma branch)
+
+Público: adultos que preferem tudo detalhado e explicado. Nenhum conteúdo novo foi escrito; o app passou a mostrar o que as unidades já tinham.
+
+- Guia da unidade (`TELAS.guia` em `src/ensino.js`): mapa da unidade (ordem, o que cada lição pede, número de exercícios, tempo, o que já foi feito), diálogo inteiro com contexto e tradução, todo o vocabulário (antes só os 16 primeiros itens), exemplos de gramática com tradução (antes só no idioma) e seções abertas. O áudio do guia usa um botão compacto; com o tocador completo a página do A1 passava de 13.000 px.
+- Trilha: cada unidade ganhou a linha "Entender a unidade" antes das lições.
+- "Palavras novas" abre com as frases da lição (tradução e áudio) antes das perguntas; "Gramática" abre com as regras. Lição em andamento retoma direto. Refazer, revisão, prova e teste não mostram a folha.
+- Erro em lacuna: botão "Ver a regra" abre as regras da unidade. Não existe ligação escrita entre lacuna e regra: a primeira seção aberta é a que mais cita a resposta certa (as lacunas levam `_guia` e `_resp` em `adapter.js`). Por causa desses campos, um rascunho de lição de gramática começado antes desta versão recomeça do início.
+- Escrita guiada (`TELAS.escritaGuiada`): do português para o idioma, com as frases dos cartões da unidade, sem IA. Compara ignorando maiúsculas e pontuação; acento conta. O erro entra no caderno como "Escrita guiada". Só aceita a frase ensinada; outra formulação correta aparece como diferente, e a tela avisa disso.
+- O ditado já funcionava sem IA (Praticar › Quero entender melhor); agora também aparece no guia da unidade.
+- Conferido no navegador com perfil fictício (celular, tema claro): guia da unidade 1 de francês, folha das frases, folha das regras, "Ver a regra" numa lacuna da unidade 2 (abriu a regra de países para a resposta "au"), escrita guiada com resposta errada e certa. `npm test` 33 de 33. Sem teste automatizado novo para estas telas; não vistos: tema escuro, desktop e as unidades A2 a C1.
+
+Fica para conteúdo novo: explicações do B2 e do C1 no padrão do B1 (hoje 107 a 251 palavras por unidade contra cerca de 400 no B1) e um porquê escrito para cada lacuna, com a regra correspondente.
+
+### Quatro ajustes: revisão, contagem, rótulos e lacuna digitada (mesma branch)
+
+- Revisão espaçada (`ProfileCore.review`): acerto antes do vencimento conta como prática e não muda intervalo nem data. Antes cada acerto dobrava o intervalo, e refazer a lição no mesmo dia levava a palavra a 8 dias ou mais. Teste de regressão ajustado.
+- Contagem na lição: "3 de 7" ao lado da barra. Conta o que já foi mostrado; quando a pessoa erra, o exercício volta no fim e o total sobe um (visto no navegador: de "2 de 6" até "10 de 10" numa lição de 5 lacunas com 5 erros).
+- Rótulos: a revisão do dia só chama de revisão o que já foi estudado ("4 itens para revisar e 3 novos"; sem nada vencido, "5 itens novos para praticar" e botão "Praticar agora"), e a contagem de itens novos passou a incluir as palavras que completam a fila. Na trilha, "A1 · unidade 2 de 12" no lugar de "Seção 1".
+- Lacuna digitada: a folha antes da lição de Gramática oferece praticar escolhendo ou digitando, e o app lembra a escolha (`preferencias.lacuna`). Digitando, valem todas as respostas aceitas da lacuna; acento conta, maiúscula não; o áudio da frase some, porque diria a resposta. Provas continuam de escolher. Vale também para as lacunas da Revisão da unidade.
+- Conferido no navegador (celular, tema claro, francês A1): lição de Gramática inteira digitando, com respostas erradas e certas; rótulos da trilha do A1 ao C1; cartão da revisão com e sem itens vencidos. `npm test` 33 de 33.
+- Não mexido: a foto da unidade continua a mesma em quase todas (só existem 6 fotos e os títulos não permitem casar foto e tema). Na lacuna de escolher, "Ouvir" ainda toca a frase completa, com a resposta.
+
+Não feito nesta branch: unir Hoje e Trilha, layout de desktop, fontes empacotadas no app, limpeza do CSS e os achados médios da revisão (resposta atrasada da IA muda de tela, áudio que falha offline, revisão espaçada no mesmo dia, enigmas, ditado, aviso de privacidade).
+
+**Teste do navegador nesta branch (rodado depois, na nuvem):** passou a rodar 26 de 26 após dois ajustes no próprio teste, que estava desatualizado em relação às mudanças pretendidas: o guia agora oferece "Ir para a lição…" (com a folha "Praticar agora") no lugar de "Praticar esta unidade", e a revisão do dia diz "itens novos" em vez de "frases novas". Nenhum erro de JavaScript.

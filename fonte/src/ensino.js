@@ -138,3 +138,221 @@
     var b = enEl('button', 'ui-btn ui-btn--secondary', 'Fazer o teste'); b.type = 'button'; b.addEventListener('click', function () { ir('nivelamento'); }); c.appendChild(b);
     resume.parentNode.insertBefore(c, resume.nextSibling);
   };
+
+  /* ================= Entender antes de praticar =================
+     Guia completo (mapa da unidade, diálogo com tradução, todo o vocabulário, exemplos traduzidos),
+     explicação antes de "Palavras novas" e de "Gramática", botão "Ver a regra" nos erros de lacuna
+     e escrita guiada sem IA. Usa só o conteúdo que cada unidade já tem. */
+  function enIndice(id) { var n = Number(String(id || '').split('-u')[1]); return n > 0 ? n - 1 : -1; }
+  function enUnidade(id) { var k = String(id || '').slice(0, 2), u = null; if (!CURSOS[k]) return null; CURSOS[k].secoes.forEach(function (s) { s.unidades.forEach(function (x) { if (x.id === id) u = x; }); }); return u; }
+  function enExemplos(lista, k) {
+    var ul = enEl('ul', 'guia-exemplos');
+    lista.forEach(function (e) { var li = enEl('li'), a = enEl('span', 'guia-alvo', e[0]); a.lang = k; li.appendChild(a); if (e[1]) li.appendChild(enEl('span', 'guia-pt', e[1])); ul.appendChild(li); });
+    return ul;
+  }
+  function enBloco(bl, k, aberto) {
+    var s = enEl('details', 'card prose guide-section'); s.open = !!aberto;
+    s.appendChild(enEl('summary', null, bl.titulo));
+    var c = enEl('div', 'guide-content'); c.innerHTML = bl.texto;   /* texto do curso (com negrito), não digitado por ninguém */
+    if (bl.exemplos && bl.exemplos.length) c.appendChild(enExemplos(bl.exemplos, k));
+    else if (bl.exemplo) { var x = enEl('div', 'ex-box', bl.exemplo); x.lang = k; c.appendChild(x); }
+    s.appendChild(c); return s;
+  }
+  function enOuvirMini(texto, k) {
+    var b = enEl('button', 'guia-ouvir'); b.type = 'button'; b.setAttribute('aria-label', 'Ouvir: ' + texto);
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>';
+    b.addEventListener('click', function () { IdiomasAudio.stop(); falar(texto, CURSOS[k].voz); });
+    return b;
+  }
+  function enFala(alvo, pt, k, quem) {
+    var row = enEl('div', 'guia-fala'), txt = enEl('div', 'guia-fala-txt'); if (quem) txt.appendChild(enEl('b', null, quem));
+    var a = enEl('p', 'guia-alvo', alvo); a.lang = k; txt.appendChild(a); if (pt) txt.appendChild(enEl('p', 'guia-pt', pt));
+    row.appendChild(txt); row.appendChild(enOuvirMini(alvo, k)); return row;
+  }
+  var EN_PASSOS = {
+    'Palavras novas': 'Você vê as frases novas com tradução e áudio e depois escolhe a versão certa.',
+    'Escuta': 'Você ouve falas do diálogo e responde a perguntas sobre elas.',
+    'Montar frases': 'Você monta frases do diálogo, palavra por palavra, na ordem certa.',
+    'Gramática': 'Você relê as regras e completa lacunas. Se errar, "Ver a regra" traz a explicação de volta.',
+    'Revisão da unidade': 'Uma mistura curta de tudo o que apareceu na unidade.'
+  };
+  /* mapa da unidade: o que vem, em que ordem e quanto tempo leva */
+  function enMapa(u, id, k) {
+    var p = eu(), feitas = (p && p.progresso[k]) || 0, base = enIndice(id) * u.licoes.length, U = unidadeDe(id) || {};
+    var card = enEl('section', 'card guia-mapa');
+    card.appendChild(enEl('span', 'ui-label', 'Como esta unidade funciona'));
+    card.appendChild(enEl('p', 'guia-mapa-lead', 'Primeiro você entende, depois pratica. A ordem é a mesma em todas as unidades.'));
+    var ol = enEl('ol', 'guia-passos');
+    function passo(titulo, detalhe, estado, rotulo) { var li = enEl('li', estado ? 'is-' + estado : ''); li.appendChild(enEl('b', null, titulo)); li.appendChild(enEl('span', null, detalhe)); if (rotulo) li.appendChild(enEl('em', null, rotulo)); ol.appendChild(li); }
+    passo('Entender', 'Esta página: o diálogo com tradução, as frases-chave, a gramática e a pronúncia. Cerca de 5 minutos de leitura.', 'aqui', 'Você está aqui');
+    u.licoes.forEach(function (n, i) {
+      var L = LICOES[id + '|' + n], q = L && L.exercicios ? L.exercicios.length : 0, pos = base + i;
+      passo((i + 1) + '. ' + n, (EN_PASSOS[n] || '') + (q ? ' ' + q + ' exercícios,' : '') + ' cerca de 4 minutos.', pos < feitas ? 'feito' : pos === feitas ? 'atual' : '', pos < feitas ? 'Feita' : pos === feitas ? 'Próxima lição' : '');
+    });
+    var nd = (U.dict || []).length, nc = (U.cards || []).length;
+    passo('Para ir além', 'Ditado (' + nd + ' frases) e escrita guiada (' + nc + ' frases) funcionam sem internet. Conversa, pronúncia e redação com o Eco pedem internet e entrada com Google.', '', 'Opcional');
+    card.appendChild(ol); return card;
+  }
+  TELAS.guia = function (id) {
+    var k = String(id || '').slice(0, 2), c = CURSOS[k], u = enUnidade(id), g = GUIAS[id], p = eu();
+    if (!c || !u) { ir('guias'); return; }
+    var pg = casca('guias', '', function (bar) { enVoltar(bar, 'guias', 'Voltar para os guias'); bar.appendChild(enEl('h1', null, 'Guia · ' + u.titulo)); });
+    var topo = enEl('div'); topo.appendChild(enEl('span', 'ui-label', c.nome + ' · Unidade ' + (enIndice(id) + 1)));
+    var h = enEl('h2', 'h', u.objetivo); h.style.marginTop = '6px'; topo.appendChild(h); pg.appendChild(topo);
+    videoaula(pg, k, id);
+    if (!g) { var vazio = enEl('div', 'card'); vazio.appendChild(enEl('p', 'lead', 'O guia desta unidade ainda não foi escrito.')); pg.appendChild(vazio); return; }
+    if (p) { p.guiasVistos = p.guiasVistos || {}; if (!p.guiasVistos[id]) { p.guiasVistos[id] = Date.now(); salvar(); } }
+    pg.appendChild(enMapa(u, id, k));
+    /* o diálogo inteiro, na ordem, com contexto e tradução */
+    if (g.dialogo && g.dialogo.length) {
+      var dia = enEl('details', 'card guide-section guia-dialogo'); dia.open = true; dia.appendChild(enEl('summary', null, 'O diálogo da unidade'));
+      var dc = enEl('div', 'guide-content'); if (g.contexto) dc.appendChild(enEl('p', 'guia-contexto', g.contexto));
+      g.dialogo.forEach(function (l) { dc.appendChild(enFala(l[1], l[2], k, l[0])); });
+      dia.appendChild(dc); pg.appendChild(dia);
+    }
+    /* frases-chave: todo o vocabulário da unidade (a tabela mantém a classe e a ordem usadas pelo botão "Guardar") */
+    var voc = enEl('details', 'card guide-section'); voc.open = true; voc.appendChild(enEl('summary', null, 'Frases-chave · ' + g.vocab.length));
+    var tabela = enEl('table', 'vocab'), cab = enEl('thead'), linha0 = enEl('tr'), corpo = enEl('tbody');
+    [c.nome, 'Português'].forEach(function (t) { var th = enEl('th', null, t); th.scope = 'col'; linha0.appendChild(th); }); cab.appendChild(linha0); tabela.appendChild(cab);
+    g.vocab.forEach(function (v) { var tr = enEl('tr'), a = enEl('td'), t = enEl('span', 'guia-alvo', v[0]); t.lang = k; a.appendChild(t); a.appendChild(enOuvirMini(v[0], k)); tr.appendChild(a); tr.appendChild(enEl('td', null, v[1])); corpo.appendChild(tr); });
+    tabela.appendChild(corpo); voc.appendChild(tabela); pg.appendChild(voc);
+    /* gramática e pronúncia: abertas, com exemplos traduzidos */
+    g.blocos.forEach(function (bl) { pg.appendChild(enBloco(bl, k, true)); });
+    /* o que fazer agora */
+    var feitas = (p && p.progresso[k]) || 0, base = enIndice(id) * u.licoes.length, proxima = feitas - base;
+    var acoes = enEl('div', 'guia-acoes');
+    var go = enEl('button', 'ui-btn ui-btn--primary ui-btn--block'); go.type = 'button';
+    if (proxima >= 0 && proxima < u.licoes.length) { go.textContent = 'Ir para a lição: ' + u.licoes[proxima]; go.addEventListener('click', function () { p.idioma = k; salvar(); abrirLicaoApp(u, u.licoes[proxima], {}); }); }
+    else { go.textContent = 'Praticar esta unidade'; go.addEventListener('click', function () { p.idioma = k; salvar(); abrirLicaoApp(u, 'Prática do guia', { refazer: true }); }); }
+    acoes.appendChild(go);
+    var dit = enEl('button', 'ui-btn ui-btn--secondary ui-btn--block', 'Ditado desta unidade'); dit.type = 'button'; dit.addEventListener('click', function () { p.idioma = k; salvar(); ir('ecoDitado', id); }); acoes.appendChild(dit);
+    var esc1 = enEl('button', 'ui-btn ui-btn--secondary ui-btn--block', 'Escrita guiada desta unidade'); esc1.type = 'button'; esc1.addEventListener('click', function () { p.idioma = k; salvar(); ir('escritaGuiada', id); }); acoes.appendChild(esc1);
+    var download = studioButton('Baixar áudio desta unidade para usar sem internet', function () {
+      var sw = navigator.serviceWorker && navigator.serviceWorker.controller; if (!sw) { toast('Instale ou reabra o aplicativo para baixar o áudio.'); return; }
+      download.disabled = true; download.textContent = 'Baixando áudio…';
+      var channel = new MessageChannel(), timeout = setTimeout(function () { download.disabled = false; download.textContent = 'Não foi possível baixar. Tentar novamente'; }, 60000);
+      channel.port1.onmessage = function (e) { clearTimeout(timeout); download.disabled = false; download.textContent = e.data.ok ? 'Áudio disponível neste aparelho' : 'Não foi possível baixar. Tentar novamente'; };
+      sw.postMessage({ type: 'download-unit', unit: k + '|' + enIndice(id) }, [channel.port2]);
+    });
+    download.classList.add('ui-btn--block'); acoes.appendChild(download);
+    pg.appendChild(acoes);
+  };
+
+  /* ---------- explicação antes da lição ----------
+     "Palavras novas" mostrava a pergunta antes de apresentar a frase; "Gramática" ia direto para as lacunas.
+     Agora as duas abrem com o que a lição vai cobrar. Lição em andamento (rascunho) retoma direto. */
+  var enAbrirLicao = abrirLicaoApp;
+  abrirLicaoApp = function (u, nome, op) {
+    var p = eu(), g = u && u.id && GUIAS[u.id];
+    if (!p || !g || (nome !== 'Palavras novas' && nome !== 'Gramática') || (op && (op.revisao || op.teste || op.refazer || op.licao))) return enAbrirLicao(u, nome, op);
+    if (p.rascunhos && p.rascunhos[p.idioma + ':' + u.id + '-' + nome + ':normal']) return enAbrirLicao(u, nome, op);
+    var k = u.id.slice(0, 2), L = LICOES[u.id + '|' + nome];
+    folha(function (sh) {
+      sh.classList.add('previa-licao');
+      sh.appendChild(enEl('span', 'ui-label', 'Antes de praticar · ' + u.titulo));
+      if (nome === 'Palavras novas') {
+        sh.appendChild(enEl('h2', null, 'Conheça as frases desta lição'));
+        sh.appendChild(enEl('p', null, 'Leia e ouça com calma. Na lição, você vê a frase em português e escolhe a versão em ' + CURSOS[k].nome.toLowerCase() + '.'));
+        var lista = enEl('div', 'previa-lista');
+        ((L && L.exercicios) || []).forEach(function (ex) { if (ex.frase) lista.appendChild(enFala(ex.frase, ex.ocultar || '', k)); });
+        sh.appendChild(lista);
+      } else {
+        sh.appendChild(enEl('h2', null, 'Releia as regras desta unidade'));
+        sh.appendChild(enEl('p', null, 'A lição pede para completar frases usando estas regras. Se errar uma lacuna, o botão "Ver a regra" traz a explicação de volta.'));
+        g.blocos.filter(function (b) { return !b.pron; }).forEach(function (bl, i) { sh.appendChild(enBloco(bl, k, i === 0)); });
+      }
+      var ac = enEl('div', 'guia-acoes');
+      if (nome === 'Gramática') {
+        /* escolher entre três opções ou digitar a palavra; o app lembra a última escolha */
+        var digitar = window.lacunaDigitada();
+        var comecar = function (modo) { p.preferencias = p.preferencias || {}; if (p.preferencias.lacuna !== modo) { p.preferencias.lacuna = modo; salvar(); } enAbrirLicao(u, nome, op); };
+        sh.appendChild(enEl('p', 'guia-pt', 'Escolhendo: três opções por lacuna. Digitando: você escreve a palavra que falta, e acentos contam. O app lembra a sua escolha.'));
+        var b1 = studioButton('Praticar escolhendo a resposta', function () { comecar('escolher'); }, digitar ? 'secondary' : 'primary'); b1.classList.add('ui-btn--block');
+        var b2 = studioButton('Praticar digitando a resposta', function () { comecar('digitar'); }, digitar ? 'primary' : 'secondary'); b2.classList.add('ui-btn--block');
+        ac.appendChild(digitar ? b2 : b1); ac.appendChild(digitar ? b1 : b2);
+      } else {
+        var ja = studioButton('Praticar agora', function () { enAbrirLicao(u, nome, op); }, 'primary'); ja.classList.add('ui-btn--block'); ac.appendChild(ja);
+      }
+      var guia = studioButton('Ver o guia completo da unidade', function () { fecharFolha(); ir('guia', u.id); }); guia.classList.add('ui-btn--block'); ac.appendChild(guia);
+      sh.appendChild(ac);
+    });
+  };
+
+  /* a pessoa prefere digitar a palavra da lacuna? (guardado nas preferências do perfil) */
+  window.lacunaDigitada = function () { var p = eu(); return !!(p && p.preferencias && p.preferencias.lacuna === 'digitar'); };
+
+  /* ---------- "Ver a regra" quando a pessoa erra uma lacuna ---------- */
+  window.botaoRegra = function (ex) {
+    var id = ex && ex._guia, g = id && GUIAS[id], u = id && enUnidade(id);
+    var bt = enEl('button', 'ia-porque', 'Ver a regra'); bt.type = 'button';
+    if (!g) { bt.hidden = true; return bt; }
+    bt.addEventListener('click', function () {
+      var k = id.slice(0, 2), regras = g.blocos.filter(function (b) { return !b.pron; }), alvo = String(ex._resp || '').toLowerCase(), melhor = 0, pontos = 0;
+      /* não há ligação escrita entre lacuna e regra: abre primeiro a seção que mais cita a resposta certa */
+      regras.forEach(function (b, i) {
+        var texto = (b.titulo + ' ' + b.texto + ' ' + (b.exemplos || []).map(function (e) { return e[0]; }).join(' ')).toLowerCase();
+        var n = alvo.length > 1 ? texto.split(alvo).length - 1 : 0; if (n > pontos) { pontos = n; melhor = i; }
+      });
+      folha(function (sh) {
+        sh.classList.add('previa-licao');
+        sh.appendChild(enEl('span', 'ui-label', 'Gramática · ' + (u ? u.titulo : 'unidade')));
+        sh.appendChild(enEl('h2', null, 'As regras desta unidade'));
+        sh.appendChild(enEl('p', null, 'A resposta certa era "' + (ex._resp || '') + '". A primeira regra aberta é a que mais fala dela; as outras ficam logo abaixo.'));
+        [regras[melhor]].concat(regras.filter(function (b, i) { return i !== melhor; })).forEach(function (bl, i) { if (bl) sh.appendChild(enBloco(bl, k, i === 0)); });
+        var volta = studioButton('Voltar para a lição', function () { fecharFolha(); }, 'primary'); volta.classList.add('ui-btn--block'); sh.appendChild(volta);
+      });
+    });
+    return bt;
+  };
+
+  /* ---------- escrita guiada: do português para o idioma, sem IA ---------- */
+  TELAS.escritaGuiada = function (unitId) {
+    var pg = studioPage('Escrita guiada'), units = studioUnits(), unit = units.find(function (x) { return x.id === unitId; }) || studioCurrent();
+    var lang = eu().idioma, voz = CURSOS[lang].voz, nome = CURSOS[lang].nome.toLowerCase(), U = unidadeDe(unit.id), d = studioData(); d.esc = d.esc || {};
+    studioLead(pg, 'Escrita guiada · ' + unit.level, 'Leia em português e escreva em ' + nome + '.', 'Sem pressa e sem internet. Escreva a frase, confira e compare com a resposta. Acentos e apóstrofos contam; maiúsculas e pontuação, não.');
+    var lab = enEl('label', 'studio-field', 'Unidade'), sel = document.createElement('select');
+    units.filter(function (x) { return x.done || x.current || x.id === unit.id; }).forEach(function (x) { var op = document.createElement('option'); op.value = x.id; op.textContent = x.title; sel.appendChild(op); });
+    sel.value = unit.id; sel.onchange = function () { ir('escritaGuiada', sel.value); }; lab.appendChild(sel); pg.appendChild(lab);
+    var itens = ((U && U.cards) || []).filter(function (c) { return c && c[0] && c[1]; });
+    if (!itens.length) { var v = enEl('div', 'card'); v.appendChild(enEl('p', null, 'Esta unidade não tem frases para escrever.')); pg.appendChild(v); return; }
+    itens.forEach(function (it, i) {
+      var chave = unit.id + '|' + i, card = enEl('section', 'card pron-card');
+      card.appendChild(enEl('span', 'ui-label', 'Frase ' + (i + 1) + ' de ' + itens.length + (d.esc[chave] ? ' · ✓ acertada' : '')));
+      card.appendChild(enEl('p', 'pron-frase', it[0]));
+      var ta = document.createElement('textarea'); ta.rows = 2; ta.lang = lang; ta.spellcheck = false; ta.autocapitalize = 'off'; ta.setAttribute('autocorrect', 'off'); ta.placeholder = 'Escreva em ' + nome + '…'; ta.className = 'dit-input';
+      var rot = enEl('label', 'studio-field', 'Sua frase · ' + (i + 1)); rot.appendChild(ta); card.appendChild(rot);
+      var res = enEl('div', 'pron-res'); res.setAttribute('role', 'status');
+      card.appendChild(studioButton('Conferir', function () {
+        var dado = ta.value.trim(); if (!dado) { ta.focus(); return; }
+        var certo = it[1], nd = normDit(dado), exato = normDit(certo) === nd, quase = !exato && semAcento(normDit(certo)) === semAcento(nd);
+        var esp = certo.split(' ').filter(String), ok = alinhar(esp, dado);
+        res.textContent = '';
+        var nota = enEl('div', 'pron-nota'); nota.appendChild(enEl('strong', null, exato ? 'Perfeito!' : quase ? 'Quase!' : 'Vamos ver'));
+        nota.appendChild(enEl('span', null, exato ? 'Você escreveu certinho.' : quase ? 'Só faltou acento ou apóstrofo.' : 'Compare com a frase esperada. Em verde, as palavras que você acertou.'));
+        res.appendChild(nota);
+        if (!exato) { var linha = enEl('p', 'pron-frase'); linha.lang = lang; esp.forEach(function (w, j) { if (j) linha.appendChild(document.createTextNode(' ')); linha.appendChild(enEl('span', ok[j] ? 'pron-ok' : 'pron-erro', w)); }); res.appendChild(linha);
+          res.appendChild(enEl('p', 'pron-dica', 'Outras formas corretas podem existir; esta é a frase ensinada na unidade.')); }
+        res.appendChild(studioButton('Ouvir a resposta', function () { AUD.stop(); if (!AUD.say(certo, voz, null, S.cfg.voz || 0.9) && 'speechSynthesis' in window) { var f = new SpeechSynthesisUtterance(certo); f.lang = voz; f.rate = S.cfg.voz || 0.9; speechSynthesis.speak(f); } }));
+        if (exato) { if (!d.esc[chave]) { d.esc[chave] = 1; salvar(); } tocar('acerto'); }
+        else { tocar('erro'); registrarErro({ fonte: 'escrita', lang: lang, unidade: unit.title, frase: it[0], correta: certo, dada: dado, nota: quase ? 'Atenção aos acentos e apóstrofos.' : '' }); }
+      }));
+      card.appendChild(res); pg.appendChild(card);
+    });
+  };
+
+  /* ---------- trilha: "Entender a unidade" aparece antes das lições ---------- */
+  var enTrilhaEntender = TELAS.trilha;
+  TELAS.trilha = function () {
+    enTrilhaEntender.apply(this, arguments);
+    var p = eu(); if (!p) return;
+    var k = p.idioma, unidades = []; CURSOS[k].secoes.forEach(function (s) { s.unidades.forEach(function (u) { unidades.push(u); }); });
+    var vistos = p.guiasVistos || {};
+    root.querySelectorAll('.linha').forEach(function (sec, i) {
+      var u = unidades[i], alvo = sec.querySelector('.unit-toggle'); if (!u || !alvo || !GUIAS[u.id]) return;
+      var b = enEl('button', 'video-linha entender-linha' + (vistos[u.id] ? ' vista' : '')); b.type = 'button'; b.setAttribute('aria-label', 'Entender a unidade ' + u.titulo + ': diálogo, regras e vocabulário');
+      var t = enEl('span', 't'); t.appendChild(enEl('b', null, 'Entender a unidade')); t.appendChild(enEl('small', null, vistos[u.id] ? 'Diálogo, regras e vocabulário · já aberto' : 'Diálogo, regras e vocabulário · leia antes das lições')); b.appendChild(t);
+      var st = enEl('span', 'st'); st.innerHTML = svg('book'); b.appendChild(st);
+      b.addEventListener('click', function () { ir('guia', u.id); });
+      alvo.parentNode.insertBefore(b, alvo);
+    });
+  };

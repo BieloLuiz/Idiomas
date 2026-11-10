@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#F3F7F1">
+<meta name="theme-color" content="#F6F4EF">
 <title>Idiomas 2.0 · Sua jornada de aprendizado</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='17' fill='%23115346'/%3E%3Cpath d='M32 17v-6' stroke='%239EF4D8' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='10' r='4' fill='%23FFD079'/%3E%3Crect x='13' y='19' width='38' height='34' rx='16' fill='%238EE6C7'/%3E%3Crect x='18' y='28' width='28' height='17' rx='8' fill='%2313372F'/%3E%3Cpath d='M27 33v6m10-6v6' stroke='%23C7FFEE' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <!--
@@ -2182,8 +2182,58 @@ body.has-sheet{overflow:hidden}
 .ux-intention strong{text-decoration:none}
 </style><style>
 html[data-auth="locked"] #root,html[data-auth="locked"] #sync-feedback{display:none!important}
-.auth-gate{max-width:440px;margin:8vh auto;padding:24px;font:inherit}.auth-gate[hidden]{display:none}.admin-aluno{border-top:1px solid var(--border);padding-top:10px;margin-top:10px}.admin-check{display:block;padding:6px 0}.v21-brand-mark.v21-brand-eco{background:none!important;box-shadow:none!important;color:inherit;overflow:visible}.v21-brand-eco .eco{width:100%}.est-par{display:grid;gap:16px}@media(min-width:820px){.est-par{grid-template-columns:1fr 1fr;align-items:stretch}.est-par>.card{margin:0;height:100%;box-sizing:border-box}}.est-barra{display:grid;grid-template-columns:104px 1fr 48px;align-items:center;gap:10px;margin:8px 0}.est-barra b{text-align:right}.est-leitura p{line-height:1.6;margin:12px 0 6px}.est-vocab{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0}.est-vocab .ui-btn{margin-left:auto;padding:6px 12px;min-height:36px}.est-pergunta{border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin:10px 0}.est-pergunta label{display:block;padding:6px 0}.est-pergunta.est-certa{border-color:var(--primary)}.est-pergunta.est-errada{border-color:var(--error)}.est-gabarito{margin:6px 0 0;font-weight:600}.est-chip{min-height:36px;padding:6px 12px}.eco.eco-v2{aspect-ratio:auto;height:auto;background:none}.eco.eco-v2>svg{display:block;width:100%;height:auto}.auth-gate.auth-soft{position:fixed;left:12px;right:12px;bottom:12px;margin:0 auto;z-index:9999;background:var(--surface-200,#fff);color:var(--ink,#0e141b);border:1px solid var(--border,#dde2e8);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.25);max-height:80vh;overflow:auto}.auth-gate.auth-soft h1{font-size:20px;margin:0 0 8px}.auth-gate button[hidden]{display:none}.auth-gate button{min-height:44px;padding:10px 20px;margin-top:16px}
-#sync-feedback{position:relative;margin:0 auto;padding:8px 16px;max-width:960px;font-size:13px;line-height:1.5;text-align:center}
+html[data-auth="locked"] body{min-height:100dvh;box-sizing:border-box}
+.auth-gate{max-width:440px;margin:8vh auto;padding:24px;font:inherit;color:var(--ink)}.auth-gate[hidden]{display:none}.auth-marca{width:84px;margin:0 0 20px}.auth-marca:empty{display:none}.auth-marca .eco{width:100%}.auth-gate h1{margin:0 0 10px;font-size:30px;line-height:1.12;letter-spacing:-.02em}.auth-texto{margin:0 0 20px;color:var(--ink-soft);font-size:16px;line-height:1.55}.auth-status{margin:0 0 16px;font-size:14px;line-height:1.5;font-weight:600;color:var(--ink)}.auth-status:empty{display:none}.auth-gate .google-button{min-height:44px;margin:0 0 20px}.auth-acoes{display:grid;gap:10px}.auth-acoes .ui-btn{margin:0;justify-content:center;text-align:center}.auth-gate.auth-soft{padding:20px}.auth-gate.auth-soft .auth-marca{display:none}.admin-aluno{border-top:1px solid var(--border);padding-top:10px;margin-top:10px}.admin-check{display:block;padding:6px 0}.v21-brand-mark.v21-brand-eco{background:none!important;box-shadow:none!important;color:inherit;overflow:visible}.v21-brand-eco .eco{width:100%}.est-par{display:grid;gap:16px}@media(min-width:820px){.est-par{grid-template-columns:1fr 1fr;align-items:stretch}.est-par>.card{margin:0;height:100%;box-sizing:border-box}}.est-barra{display:grid;grid-template-columns:104px 1fr 48px;align-items:center;gap:10px;margin:8px 0}.est-barra b{text-align:right}.est-leitura p{line-height:1.6;margin:12px 0 6px}.est-vocab{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0}.est-vocab .ui-btn{margin-left:auto;padding:6px 12px;min-height:36px}.est-pergunta{border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin:10px 0}.est-pergunta label{display:block;padding:6px 0}.est-pergunta.est-certa{border-color:var(--primary)}.est-pergunta.est-errada{border-color:var(--error)}.est-gabarito{margin:6px 0 0;font-weight:600}.est-chip{min-height:36px;padding:6px 12px}.eco.eco-v2{aspect-ratio:auto;height:auto;background:none}.eco.eco-v2>svg{display:block;width:100%;height:auto}.auth-gate.auth-soft{position:fixed;left:12px;right:12px;bottom:12px;margin:0 auto;z-index:9999;background:var(--surface-200,#fff);color:var(--ink,#0e141b);border:1px solid var(--border,#dde2e8);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.25);max-height:80vh;overflow:auto}.auth-gate.auth-soft h1{font-size:20px;margin:0 0 8px}.auth-gate button[hidden]{display:none}.auth-gate button{min-height:44px;padding:10px 20px;margin-top:16px}
+#sync-feedback{position:relative;margin:0 auto;padding:8px 16px;max-width:960px;font-size:13px;line-height:1.5;text-align:center}#sync-feedback:empty{display:none}
+.licao-conta{flex:none;font-size:13px;font-weight:700;color:var(--ink-soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lic-digitar{margin-top:16px}
+.lic-digitar-rotulo{display:grid;gap:8px;font-size:14px;font-weight:700;color:var(--ink)}
+.lic-digitar-nota{margin:8px 0 0;font-size:13px;line-height:1.5;color:var(--ink-soft)}
+.lic-digitar.is-right .dit-input{border-color:var(--primary);background:var(--primary-soft)}
+.lic-digitar.is-wrong .dit-input{border-color:var(--error);background:var(--error-soft)}
+.guia-mapa-lead{margin:6px 0 0;color:var(--ink-soft)}
+.guia-passos{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.guia-passos li{display:grid;gap:2px;padding:9px 12px;border:1px solid var(--border);border-radius:14px;background:var(--surface-100)}
+.guia-passos li b{font-size:15px}
+.guia-passos li span{font-size:14px;line-height:1.5;color:var(--ink-soft)}
+.guia-passos li em{font-style:normal;font-size:12px;font-weight:700;color:var(--primary-soft-ink)}
+.guia-passos li.is-atual,.guia-passos li.is-aqui{border-color:var(--primary);background:var(--primary-soft)}
+.guia-passos li.is-atual span,.guia-passos li.is-aqui span{color:var(--ink)}
+.guia-contexto{margin:0 0 12px;color:var(--ink-soft)}
+.guia-fala{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--border)}
+.guia-fala-txt{flex:1;min-width:0;display:grid;gap:3px}
+.guia-ouvir{flex:none;width:44px;height:44px;border:1px solid var(--border);border-radius:50%;background:var(--surface-200);color:var(--primary-soft-ink);display:inline-grid;place-items:center;cursor:pointer;padding:0}
+.guia-ouvir svg{width:18px;height:18px;fill:currentColor}
+.guia-ouvir:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.vocab td:first-child{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.vocab td:first-child .guia-alvo{flex:1 1 0;min-width:45%;font-size:15px}
+.vocab td:first-child .ux-save-small{min-height:32px;margin:0;padding:4px 10px;font-size:12px;box-shadow:none}
+.vocab td:first-child .guia-ouvir{width:36px;height:36px}
+.vocab td{padding-top:6px;padding-bottom:6px;vertical-align:top}
+.guia-fala:first-child,.guia-contexto+.guia-fala{border-top:0}
+.guia-fala-txt>b{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
+.guia-alvo{margin:0;font-size:16px;font-weight:650;line-height:1.45;color:var(--ink)}
+.guia-pt{margin:0;font-size:14px;line-height:1.45;color:var(--ink-soft)}
+.guia-fala .guia-alvo,.sheet .guia-fala .guia-alvo{margin:0;color:var(--ink)}
+.guia-fala .guia-pt,.sheet .guia-fala .guia-pt{margin:0}
+.guia-exemplos{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+.guia-exemplos li{display:grid;gap:2px;padding:9px 12px;border-radius:12px;background:var(--surface-300)}
+.guia-exemplos .guia-alvo{font-size:15px}
+.guia-acoes{display:grid;gap:10px;margin-top:8px}
+.guia-acoes .ui-btn{margin:0}
+.previa-lista{margin:4px 0 12px}
+.previa-licao .guide-section{margin:10px 0 0;box-shadow:none}
+.entender-linha .st{background:var(--primary-soft);color:var(--primary-soft-ink)}
+.entender-linha.vista .st{background:var(--surface-300);color:var(--ink-soft)}
+.av-actions{flex-wrap:wrap;justify-content:center}
+.av-tabs{flex-wrap:wrap;overflow:visible;margin:0;padding:2px 0 8px}
+.av-barra{position:sticky;bottom:95px;z-index:5;display:flex;align-items:center;gap:12px;margin-top:16px;padding:10px 12px;border:1px solid var(--border);border-radius:20px;background:var(--surface-200);box-shadow:var(--shadow-1)}
+.av-barra--livre{bottom:12px}
+@media(min-width:820px){.av-barra{bottom:16px}}
+.av-barra .av{--av:48px;width:48px;height:48px;margin:0;animation:none;box-shadow:0 0 0 2px var(--surface-200),0 0 0 4px var(--primary-soft)}
+.av-barra-nota{flex:1;min-width:0;font-size:13px;line-height:1.35;color:var(--ink-soft)}
+.av-barra .ui-btn{flex:none;margin:0;min-height:48px;padding:0 22px}
+[data-theme="dark"] body{background:linear-gradient(180deg,color-mix(in srgb,var(--primary) 6%,var(--surface-100)),var(--surface-100) 35%,var(--surface-100))}
 .studio-field input{font:inherit;padding:12px;max-width:100%;box-sizing:border-box}.ux-options .ui-btn{margin:6px}.ux-actions{display:flex;flex-wrap:wrap;gap:8px}
 </style><style>html[data-motion="reduce"] *,html[data-motion="reduce"] *::before,html[data-motion="reduce"] *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}</style></head>
 <body>
@@ -3764,6 +3814,14 @@ function abrirLicao(LICAO, PERFIL, ao) {
     var b = $('#barra'); b.setAttribute('aria-valuemax', total); b.setAttribute('aria-valuenow', feitos);
     b.firstElementChild.style.width = (feitos / total * 100) + '%';
   }
+  /* "3 de 7" ao lado da barra: o exercício que está na tela e quantos são ao todo.
+     Conta o que já foi mostrado; quando a pessoa erra, o exercício volta no fim e o total sobe um. */
+  function conta() {
+    var b = $('#barra'), c = $('#conta'); if (!b) return;
+    if (!c) { c = document.createElement('span'); c.id = 'conta'; c.className = 'licao-conta'; b.parentNode.insertBefore(c, b.nextSibling); }
+    var n = tentativas + 1, t = n + fila.length;
+    c.textContent = n + ' de ' + t; c.setAttribute('aria-label', 'Exercício ' + n + ' de ' + t);
+  }
 
   /* ===================================================================
      #007 adaptado — botão "Ouvir a frase"
@@ -3958,13 +4016,35 @@ function abrirLicao(LICAO, PERFIL, ao) {
     };
   }
 
+  /* ---------- lacuna digitada: a pessoa escreve a palavra que falta (escolha feita antes da lição de gramática) ---------- */
+  function limparResposta(t) { return String(t || '').toLowerCase().replace(/[’`´]/g, "'").replace(/[.,!?;:…]+$/g, '').replace(/\s+/g, ' ').trim(); }
+  function montarDigitar(ex, box) {
+    var wrap = document.createElement('div'); wrap.className = 'lic-digitar';
+    var lab = document.createElement('label'); lab.className = 'lic-digitar-rotulo'; lab.textContent = 'Escreva a palavra que falta';
+    var inp = document.createElement('input'); inp.type = 'text'; inp.className = 'dit-input'; inp.lang = LICAO.idioma.slice(0, 2);
+    inp.autocomplete = 'off'; inp.autocapitalize = 'off'; inp.spellcheck = false; inp.setAttribute('autocorrect', 'off');
+    lab.appendChild(inp); wrap.appendChild(lab);
+    var nota = document.createElement('p'); nota.className = 'lic-digitar-nota'; nota.textContent = 'Acentos e apóstrofos contam. Maiúsculas, não.'; wrap.appendChild(nota);
+    inp.addEventListener('input', function () { if (fase === 'responder') acao.disabled = !inp.value.trim(); });
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !acao.disabled) { e.preventDefault(); acao.click(); } });
+    box.appendChild(wrap);
+    return {
+      verificar: function () {
+        var dada = inp.value.trim(), certas = [].concat(ex.respostas || []);
+        var ok = certas.some(function (c) { return limparResposta(c) === limparResposta(dada); });
+        inp.readOnly = true; wrap.classList.add(ok ? 'is-right' : 'is-wrong');
+        return { ok: ok, correta: certas.join(' ou '), dada: dada };
+      }
+    };
+  }
+
   /* ---------- banner de resposta (Design System: FeedbackBanner) ---------- */
   function banner(ok, correta) {
     bannerBox.innerHTML = '<div class="ui-banner ' + (ok ? 'ui-banner--correct' : 'ui-banner--wrong') + '"><div class="ui-banner__icon">' + (ok ? ICON_OK : ICON_X) + '</div>' +
       '<div class="ui-banner__text"><p class="ui-banner__title"></p><p class="ui-banner__detail"></p></div></div>';
     var ELOGIOS = ['Muito bem', 'Isso mesmo', 'Mandou bem', 'Perfeito', 'Certinho'];
     $('.ui-banner__title', bannerBox).textContent = ok ? (seguidas >= 3 ? seguidas + ' seguidas' : ELOGIOS[(feitos + seguidas) % ELOGIOS.length]) : 'Quase lá';
-    $('.ui-banner__detail', bannerBox).textContent = ok ? (feitos < total ? 'Você acertou. Vamos para a próxima.' : 'Última do dia, concluída.') : 'Resposta correta: ' + correta + '. Ela volta no fim da lição.';
+    $('.ui-banner__detail', bannerBox).textContent = ok ? (feitos < total ? 'Você acertou. Vamos para a próxima.' : 'Última do dia, concluída.') : 'Resposta correta: ' + correta + (/[.!?…]\s*$/.test(String(correta)) ? '' : '.') + ' Ela volta no fim da lição.';
     anuncio.textContent = (ok ? $('.ui-banner__title', bannerBox).textContent + '. ' : 'Quase lá. Resposta correta: ' + correta + '.');
     if (ao && ao.som) ao.som(ok ? 'acerto' : 'erro');
   }
@@ -3983,11 +4063,15 @@ function abrirLicao(LICAO, PERFIL, ao) {
     bannerBox.innerHTML = ''; atalho = null; fase = 'responder';
     if ('speechSynthesis' in window) speechSynthesis.cancel();
     if (!fila.length) { fim(); return; }
-    atual = fila.shift(); checkpoint(true);
+    atual = fila.shift(); checkpoint(true); conta();
     var box = cabecalho(atual.ex);
-    exercicio = atual.ex.tipo === 'escolha' ? montarEscolha(atual.ex, box) : montarFrase(atual.ex, box);
+    /* a mesma lacuna pode ser de escolher ou de digitar; provas continuam sempre de escolher */
+    var tipo = atual.ex.tipo;
+    if (tipo === 'escolha' && atual.ex.respostas && !atual.ex._prova && window.lacunaDigitada && window.lacunaDigitada()) tipo = 'digitar';
+    if (tipo === 'digitar') { var tocador = box.querySelector('.bubble .audio-player'); if (tocador) tocador.remove(); }   /* o áudio diria a palavra que falta */
+    exercicio = tipo === 'digitar' ? montarDigitar(atual.ex, box) : tipo === 'escolha' ? montarEscolha(atual.ex, box) : montarFrase(atual.ex, box);
     if(ao.aposExercicio)ao.aposExercicio(box);
-    tela.innerHTML = ''; tela.appendChild(box);
+    tela.innerHTML = ''; tela.appendChild(box); window.scrollTo(0, 0);
     acao.className = 'ui-btn ui-btn--primary ui-btn--block'; acao.textContent = 'Verificar'; acao.disabled = true;
     var h = $('h1', box); if (h) h.focus({ preventScroll: true });
   }
@@ -4412,7 +4496,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
      ================================================================= */
   var abas = [['hoje', 'Hoje'], ['trilha', 'Trilha'], ['praticar', 'Praticar'], ['caderno', 'Caderno'], ['perfil', 'Perfil']];
   var historyBack=false;
-  var historyScreens=['dupla','admin','revisaoDia','provas','leituras','lembrete','hoje','trilha','praticar','caderno','perfil','config','guia','guias','revisar','progresso','ecoHub','ecoScenarios','ecoWrite','ecoPronuncia','ecoDitado','ecoRevisao','ecoHistory','ecoWritingHistory','ecoSummary','conquistas','descobrir','boasvindas','entrar'];
+  var historyScreens=['dupla','admin','revisaoDia','provas','leituras','lembrete','hoje','trilha','praticar','caderno','perfil','config','guia','guias','revisar','progresso','ecoHub','ecoScenarios','ecoWrite','ecoPronuncia','ecoDitado','escritaGuiada','ecoRevisao','ecoHistory','ecoWritingHistory','ecoSummary','conquistas','descobrir','boasvindas','entrar'];
   function recordRoute(tela,arg){if(historyBack||historyScreens.indexOf(tela)<0)return;var data={idiomas:true,tela:tela,arg:typeof arg==='string'||typeof arg==='number'?arg:null,perfil:S.ativo};if(!history.state||!history.state.idiomas)history.replaceState(data,'');else if(history.state.tela!==tela||history.state.arg!==data.arg)history.pushState(data,'');}
   addEventListener('popstate',function(e){if(!e.state||!e.state.idiomas)return;historyBack=true;try{if(e.state.perfil!==S.ativo&&e.state.perfil){S.ativo=null;salvar();ir('entrar');}else ir(e.state.tela,e.state.arg);}finally{historyBack=false;}});
   function ir(tela, arg) {
@@ -4598,6 +4682,11 @@ function abrirLicao(LICAO, PERFIL, ao) {
   /* =================================================================
      TRILHA
      ================================================================= */
+  /* "A1 · unidade 2 de 12" em vez de "Seção 1", que era igual para seis unidades seguidas */
+  function rotuloUnidade(sec, n) {
+    var nv = ['A1', 'A2', 'B1', 'B2', 'C1'].filter(function (x) { return sec.titulo.indexOf(x) >= 0; })[0];
+    return nv ? nv + ' · unidade ' + ((n - 1) % 12 + 1) + ' de 12' : sec.titulo.split(' · ')[0];
+  }
   TELAS.trilha = function () {
     var p = eu(); novoDia(p);
     var pg = casca('trilha', '', function (bar) { botaoIdioma(bar); seloStats(bar); });
@@ -4630,7 +4719,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
         var ini = gi, nU = u.licoes.length, feitasU = Math.max(0, Math.min(nU, feitas - ini)), ln = (nUn % 3) + 1;
         nUn++;
         var sct = document.createElement('section'); sct.className = 'linha l' + ln; sct.setAttribute('aria-label', 'Unidade ' + nUn + ': ' + u.titulo);
-        sct.innerHTML = '<div class="linha-head"><span class="linha-badge" aria-hidden="true">' + nUn + '</span><div class="linha-txt"><span class="ui-label">' + esc(sec.titulo.split(' · ')[0]) + ' · ' + feitasU + ' de ' + nU + ' lições</span><h2>' + esc(u.titulo) + '</h2><p>' + esc(u.objetivo) + '</p></div>' +
+        sct.innerHTML = '<div class="linha-head"><span class="linha-badge" aria-hidden="true">' + nUn + '</span><div class="linha-txt"><span class="ui-label">' + esc(rotuloUnidade(sec, nUn)) + ' · ' + feitasU + ' de ' + nU + ' lições</span><h2>' + esc(u.titulo) + '</h2><p>' + esc(u.objetivo) + '</p></div>' +
           '<button class="linha-guia" type="button" aria-label="Abrir o guia da unidade ' + esc(u.titulo) + '">' + svg('guias') + '</button></div><ol class="estacoes"></ol>';
         $('.linha-guia', sct).addEventListener('click', function () { ir('guia', u.id); });
         if (feitas < ini) sct.classList.add('bloq');
@@ -5085,7 +5174,9 @@ function abrirLicao(LICAO, PERFIL, ao) {
      ================================================================= */
   TELAS.personagem = function (op) {
     var p = eu(), novo = op && op.novo;
-    var cfg = avatarNormalizar(p.avatar);
+    var cfg = avatarNormalizar(p.avatar), original = JSON.stringify(cfg);
+    /* Cada escolha já fica salva: sair da tela por qualquer caminho (voltar, abas, fechar o app) não perde o personagem. */
+    function guardar() { p.avatar = avatarNormalizar(cfg); salvar(); if (desfazer) desfazer.disabled = JSON.stringify(p.avatar) === original; }
     var pg = casca(novo ? '' : 'perfil', '', function (bar) {
       if (!novo) { var b = document.createElement('button'); b.className = 'icon-btn'; b.setAttribute('aria-label', 'Voltar para o perfil'); b.innerHTML = svg('back'); b.addEventListener('click', function () { ir('perfil'); }); bar.appendChild(b); }
       bar.insertAdjacentHTML('beforeend', '<h1>' + (novo ? 'Crie seu personagem' : 'Meu personagem') + '</h1>');
@@ -5096,11 +5187,13 @@ function abrirLicao(LICAO, PERFIL, ao) {
     hero.appendChild(big);
     var acts = document.createElement('div'); acts.className = 'av-actions';
     acts.innerHTML = '<button class="ui-btn ui-btn--secondary" type="button" id="avSorte"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.2" fill="currentColor"/><circle cx="15" cy="15" r="1.2" fill="currentColor"/><circle cx="15" cy="9" r="1.2" fill="currentColor"/><circle cx="9" cy="15" r="1.2" fill="currentColor"/></svg>Aleatório</button>' +
-      '<button class="ui-btn ui-btn--ghost" type="button" id="avSorriso">Sorrir</button>';
+      '<button class="ui-btn ui-btn--ghost" type="button" id="avSorriso">Sorrir</button>' +
+      '<button class="ui-btn ui-btn--ghost" type="button" id="avDesfazer" disabled>Desfazer</button>';
     hero.appendChild(acts); pg.appendChild(hero);
-    var humor = null;
+    var humor = null, desfazer = $('#avDesfazer', hero);
     function desenhar(pular) {
       big.innerHTML = avatarImg(cfg, humor);
+      if (mini) mini.innerHTML = avatarImg(cfg, humor);   /* prévia pequena na barra fixa, visível enquanto a pessoa rola as opções */
       if (pular && !S.cfg.motion) { big.classList.remove('pula'); void big.offsetWidth; big.classList.add('pula'); }
     }
     desenhar(false);
@@ -5123,7 +5216,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
     }
     function escolherEstilo(i, focus) {
       if (CH[i] === cfg.estilo) return;
-      cfg.estilo = CH[i]; aba = 0; desenhar(true); marcarEstilos(); montarAbas();
+      cfg.estilo = CH[i]; aba = 0; desenhar(true); marcarEstilos(); montarAbas(); guardar();
       if (focus) row.children[i].focus();
       anunciar('Estilo ' + AV_ESTILOS[cfg.estilo].nome + '.');
     }
@@ -5148,6 +5241,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
     function previa(chave, valor) {
       var c = JSON.parse(JSON.stringify(cfg)), e = c.estilo;
       if (AV_CORES[chave]) c[chave] = valor; else c.por[e][chave] = valor;
+      if (chave === 'head' && c.por[e].item) c.por[e].item = 'none'; /* miniatura do corte sem o enfeite da cabeça, que cobria o cabelo */
       if (chave === 'clothingGraphic') c.por[e].clothing = 'graphicShirt'; /* a estampa só aparece na camiseta estampada */
       return c;
     }
@@ -5170,7 +5264,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
         var choose = function (i, focus) {
           if (i === cur) return; cur = i;
           sws.forEach(function (b, k) { b.setAttribute('aria-checked', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
-          if (focus) sws[i].focus(); moveRing(i); cfg[chave] = lista[i][0]; desenhar(true); atualizarMiniaturas(null); marcarEstilos();
+          if (focus) sws[i].focus(); moveRing(i); cfg[chave] = lista[i][0]; desenhar(true); atualizarMiniaturas(null); marcarEstilos(); guardar();
         };
         sws.forEach(function (b, i) {
           b.addEventListener('click', function () { choose(i); });
@@ -5195,7 +5289,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
           if (chave === 'clothingGraphic') cfg.por[cfg.estilo].clothing = 'graphicShirt';
           $$('.av-opt', g).forEach(function (b, k) { b.setAttribute('aria-checked', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
           if (focus) g.children[i].focus();
-          desenhar(true); atualizarMiniaturas(chave); marcarEstilos();
+          desenhar(true); atualizarMiniaturas(chave); marcarEstilos(); guardar();
         };
         box.appendChild(g);
       }
@@ -5214,7 +5308,8 @@ function abrirLicao(LICAO, PERFIL, ao) {
       abas()[aba][1].forEach(function (gr) { panel.appendChild(grupo(gr[0], gr[1], gr[2])); });
     }
     marcarEstilos(); montarAbas();
-    $('#avSorte', hero).addEventListener('click', function () { cfg = avatarAleatorio(cfg); desenhar(true); marcarEstilos(); montarPainel(); anunciar('Personagem sorteado.'); });
+    $('#avSorte', hero).addEventListener('click', function () { cfg = avatarAleatorio(cfg); desenhar(true); marcarEstilos(); montarPainel(); guardar(); anunciar('Personagem sorteado.'); });
+    desfazer.addEventListener('click', function () { cfg = JSON.parse(original); aba = 0; desenhar(true); marcarEstilos(); montarAbas(); guardar(); anunciar('Mudanças desfeitas.'); });
     var sorriso = $('#avSorriso', hero);
     sorriso.setAttribute('aria-pressed', 'false');
     sorriso.addEventListener('click', function () { humor = humor ? null : 'feliz'; sorriso.setAttribute('aria-pressed', String(!!humor)); desenhar(true); });
@@ -5238,17 +5333,22 @@ function abrirLicao(LICAO, PERFIL, ao) {
         }
         b.setAttribute('aria-pressed', String(!on));
         if (on) motivos.splice(motivos.indexOf(m), 1); else motivos.push(m);
+        p.motivos = motivos.slice(); salvar();
       });
       lista.appendChild(b);
     });
     c3.appendChild(mv); pg.appendChild(c3);
-    var ok = document.createElement('button'); ok.className = 'ui-btn ui-btn--primary ui-btn--block'; ok.textContent = novo ? 'Começar a estudar' : 'Salvar personagem';
+    var ok = document.createElement('button'); ok.type = 'button'; ok.className = 'ui-btn ui-btn--primary'; ok.textContent = novo ? 'Começar a estudar' : 'Pronto';
     ok.addEventListener('click', function () {
-      p.avatar = avatarNormalizar(cfg); p.motivos = motivos; salvar();
+      p.avatar = avatarNormalizar(cfg); p.motivos = motivos.slice(); salvar();
       /* LIGAR: google.script.run.salvarPerfil(p) — o personagem é só um objeto pequeno (cfg), cabe numa célula da planilha. */
       if (novo) { ir('hoje'); toast('Perfil criado. Bem-vindo, ' + p.nome + '.'); } else { ir('perfil'); toast('Personagem salvo.'); }
     });
-    pg.appendChild(ok);
+    /* barra fixa no fim da tela: prévia e botão sempre à vista */
+    var barra = document.createElement('div'); barra.className = 'av-barra' + (novo ? ' av-barra--livre' : '');
+    var mini = document.createElement('span'); mini.className = 'av'; mini.setAttribute('aria-hidden', 'true'); mini.innerHTML = avatarImg(cfg, humor);
+    var nota = document.createElement('span'); nota.className = 'av-barra-nota'; nota.textContent = 'Cada escolha já fica salva.';
+    barra.appendChild(mini); barra.appendChild(nota); barra.appendChild(ok); pg.appendChild(barra);
   };
 
   /* =================================================================
@@ -5579,7 +5679,7 @@ function abrirLicao(LICAO, PERFIL, ao) {
   uxAplicarPrefs();
 
   window.registrarRespostaCurso = function(ex,ok) { if(ex&&ex._prova&&window.provaResposta)provaResposta(ex,ok); if(ex&&ex._srsId&&eu()){var ps=eu();ps.reviewWords=ps.reviewWords||{};ProfileCore.review(ps.reviewWords,ex._srsId,ok);salvar();return;} if(!ex._wordId||!eu())return; var p=eu(); p.reviewWords=p.reviewWords||{}; ProfileCore.review(p.reviewWords,ex._wordId,ok);if(ok){p.vistas=p.vistas||{};p.vistas[ex._wordId.replace(/^(en|fr)\|\d+\|/,'$1|')]=true;p.palavras=Object.keys(p.vistas).length;}salvar(); };
-  document.addEventListener('idiomas-sync', function(e){ var box=document.getElementById('sync-feedback'); if(!box){box=document.createElement('p');box.id='sync-feedback';box.setAttribute('role','status');document.body.appendChild(box);} var labels={ok:'Sincronizado',enviando:'Sincronizando…',pendente:'Salvo neste aparelho; sincronização pendente',erro:'Sem sincronizar. Uma nova tentativa será feita.',entrar:'Entre com Google para sincronizar',armazenamento:'Não foi possível salvar no aparelho. Exporte seus dados.',limite:'O histórico excedeu o limite do servidor. Exporte uma cópia.'};box.textContent=labels[e.detail]||''; });
+  document.addEventListener('idiomas-sync', function(e){ var box=document.getElementById('sync-feedback'); if(!box){box=document.createElement('p');box.id='sync-feedback';box.setAttribute('role','status');document.body.appendChild(box);} var labels={ok:'Sincronizado',enviando:'Sincronizando…',pendente:'Salvo neste aparelho; sincronização pendente',erro:'Sem sincronizar. Uma nova tentativa será feita.',entrar:'Entre com Google para sincronizar',armazenamento:'Não foi possível salvar no aparelho. Exporte seus dados.',limite:'O histórico excedeu o limite do servidor. Exporte uma cópia.',recusado:'Um perfil não pôde ser sincronizado. Exporte uma cópia em Configurações.',local:''};box.textContent=labels[e.detail]||''; });
   document.addEventListener('idiomas-profiles-updated', function(){ if(!eu()&&S.perfis.length&&document.querySelector('.profiles'))ir('entrar'); if(eu()){Object.assign(S.cfg,{tema:'sistema',meta:15,voz:.9,efeitos:true,motion:false,silent:false,translations:true,textSize:100},eu().preferencias||{});cfgProfileId=eu().id;uxAplicarPrefs();} });
   if(window.SYNC) SYNC.bind(S);
   var ativo = S.ativo && eu();

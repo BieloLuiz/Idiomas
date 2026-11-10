@@ -820,8 +820,12 @@ var ProfileCore = (function () {
   }
   function review(state, id, correct, now) {
     now = now || Date.now(); state[id] = state[id] || { interval: 0, due: 0, correct: 0, wrong: 0 };
-    var r = state[id]; r.interval = correct ? (r.interval ? Math.min(120, r.interval * 2) : 1) : 0;
-    r[correct ? 'correct' : 'wrong']++; r.last = now; r.due = now + (correct ? r.interval * 86400000 : 60000); return r;
+    var r = state[id];
+    /* Acerto antes do vencimento (refazer a lição no mesmo dia, por exemplo) conta como prática, não como revisão espaçada:
+       o intervalo e a data não mudam. Antes, cada acerto dobrava o intervalo e a palavra sumia por 8 dias ou mais. */
+    var cedo = correct && r.interval > 0 && now < r.due;
+    if (!cedo) { r.interval = correct ? (r.interval ? Math.min(120, r.interval * 2) : 1) : 0; r.due = now + (correct ? r.interval * 86400000 : 60000); }
+    r[correct ? 'correct' : 'wrong']++; r.last = now; return r;
   }
   return { copy: copy, equal: equal, merge: merge, mergeProfile: mergeProfile, reconcile: reconcile, normalize: normalize, day: day, newDay: newDay, review: review };
 })();
@@ -1025,7 +1029,7 @@ var CURSOS = {}, LICOES = {}, GUIAS = {}, PALAVRAS = {};
       var gaps = U.gaps || [], resps = uniq(gaps.map(function (g) { return g.a[0]; }));
       function lacuna(g) {
         var op = mix([g.a[0]].concat(mix(resps.filter(function (a) { return g.a.indexOf(a) < 0; }), r).slice(0, 2)), r);
-        return { tipo: 'escolha', etiqueta: 'dificil', enunciado: 'Complete: ' + (g.h || ''), frase: g.s, opcoes: op, correta: op.indexOf(g.a[0]), perguntaEmPt: true, audio: AUD.fn(g.s.replace('___', g.a[0]).replace(/\s*\([^)]*\)/g, '').trim(), vozL, ui) };
+        return { tipo: 'escolha', etiqueta: 'dificil', _guia: id, _resp: g.a[0], respostas: g.a.slice(), enunciado: 'Complete: ' + (g.h || ''), frase: g.s, opcoes: op, correta: op.indexOf(g.a[0]), perguntaEmPt: true, audio: AUD.fn(g.s.replace('___', g.a[0]).replace(/\s*\([^)]*\)/g, '').trim(), vozL, ui) };
       }
       var curtas = lines.filter(function (l) { return words(l[2]).length <= 8; });
       if (curtas.length < 4) curtas = curtas.concat(lines.filter(function (l) { var n = words(l[2]).length; return n > 8 && n <= 12; }));
@@ -1046,10 +1050,12 @@ var CURSOS = {}, LICOES = {}, GUIAS = {}, PALAVRAS = {};
       /* guia da unidade */
       var blocos = (U.grammar || []).map(function (g) {
         return { titulo: g.h, texto: [].concat(g.p || []).map(function (p) { return '<p>' + p + '</p>'; }).join('') + (g.tip ? '<p><b>Dica:</b> ' + g.tip.replace(/^<b>Dica:?<\/b>\s*/i, '') + '</p>' : ''),
-          exemplo: (g.ex || []).map(function (e) { return e[0]; }).join(' · ') };
+          exemplo: (g.ex || []).map(function (e) { return e[0]; }).join(' · '),
+          exemplos: (g.ex || []).filter(function (e) { return Array.isArray(e) && e[0]; }) };   /* com a tradução, para o guia */
       });
-      (U.pron || []).forEach(function (p) { blocos.push({ titulo: 'Pronúncia · ' + p.h, texto: [].concat(p.p || []).map(function (x) { return '<p>' + x + '</p>'; }).join(''), exemplo: [].concat(p.w || []).join(' · ') }); });
-      GUIAS[id] = { vocab: lex.slice(0, 16), blocos: blocos };
+      (U.pron || []).forEach(function (p) { blocos.push({ titulo: 'Pronúncia · ' + p.h, texto: [].concat(p.p || []).map(function (x) { return '<p>' + x + '</p>'; }).join(''), exemplo: [].concat(p.w || []).join(' · '), pron: true }); });
+      /* guia completo: todo o vocabulário, o contexto e o diálogo inteiro (antes eram só os 16 primeiros itens) */
+      GUIAS[id] = { vocab: lex, blocos: blocos, contexto: U.setting || '', dialogo: lines };
     });
     CURSOS[k] = { nome: L.name, codigo: k.toUpperCase(), voz: vozL, secoes: secs };
     /* revisão de palavras: tudo o que já foi aberto */
